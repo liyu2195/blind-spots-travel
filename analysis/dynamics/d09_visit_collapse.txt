@@ -1,0 +1,122 @@
+
+== judgeQt50 wrong_paid by visit number (columns), mean over runs
+visit              1      2      3      4      5      6      7      8      9      10
+st     tag                                                                          
+llama8 B10vK20  0.633  0.762  0.818  0.855  0.877  0.905  0.906  0.905  0.909  0.913
+       B1K20    0.637    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B2vK20   0.642  0.758    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B5vK20   0.638  0.749  0.842  0.868  0.888    NaN    NaN    NaN    NaN    NaN
+       FK20     0.643  0.780  0.838  0.871  0.888  0.906    NaN    NaN    NaN    NaN
+qwen7  B10vK20  0.522  0.637  0.735  0.784  0.817  0.832  0.845  0.852  0.849  0.846
+       B1K20    0.538    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B2vK20   0.528  0.665    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B5vK20   0.553  0.670  0.767  0.814  0.843    NaN    NaN    NaN    NaN    NaN
+       FK20     0.525  0.666  0.752  0.808  0.834  0.843    NaN    NaN    NaN    NaN
+
+== judgeQt50 reward by visit number (columns), mean over runs
+visit              1      2      3      4      5      6      7      8      9      10
+st     tag                                                                          
+llama8 B10vK20  0.821  0.876  0.902  0.917  0.924  0.933  0.937  0.938  0.937  0.938
+       B1K20    0.819    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B2vK20   0.827  0.880    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B5vK20   0.825  0.876  0.913  0.922  0.931    NaN    NaN    NaN    NaN    NaN
+       FK20     0.834  0.890  0.910  0.927  0.932  0.957    NaN    NaN    NaN    NaN
+qwen7  B10vK20  0.744  0.806  0.852  0.877  0.889  0.896  0.901  0.903  0.905  0.905
+       B1K20    0.744    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B2vK20   0.746  0.820    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B5vK20   0.759  0.824  0.868  0.890  0.903    NaN    NaN    NaN    NaN    NaN
+       FK20     0.751  0.821  0.863  0.887  0.902  0.908    NaN    NaN    NaN    NaN
+
+== judgeQt50 fn by visit number (columns), mean over runs
+visit              1      2      3      4      5      6      7      8      9      10
+st     tag                                                                          
+llama8 B10vK20  0.075  0.059  0.048  0.048  0.046  0.046  0.042  0.044  0.044  0.045
+       B1K20    0.075    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B2vK20   0.067  0.051    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B5vK20   0.069  0.054  0.044  0.043  0.042    NaN    NaN    NaN    NaN    NaN
+       FK20     0.075  0.061  0.052  0.047  0.044  0.020    NaN    NaN    NaN    NaN
+qwen7  B10vK20  0.066  0.058  0.051  0.051  0.051  0.048  0.049  0.052  0.047  0.049
+       B1K20    0.063    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B2vK20   0.052  0.042    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN
+       B5vK20   0.052  0.043  0.038  0.035  0.036    NaN    NaN    NaN    NaN    NaN
+       FK20     0.057  0.049  0.039  0.038  0.036  0.028    NaN    NaN    NaN    NaN
+
+== hash35fn00 wrong_paid by visit number (columns), mean over runs
+visit             1      2      3      4      5      6
+st     tag                                            
+llama8 B1K20  0.342    NaN    NaN    NaN    NaN    NaN
+       FK20   0.382  0.547  0.645  0.728  0.774  0.834
+qwen7  B1K20  0.355    NaN    NaN    NaN    NaN    NaN
+       FK20   0.344  0.511  0.617  0.688  0.742  0.763
+
+== hash35fn00 reward by visit number (columns), mean over runs
+visit             1      2      3      4      5      6
+st     tag                                            
+llama8 B1K20  0.777    NaN    NaN    NaN    NaN    NaN
+       FK20   0.811  0.884  0.916  0.936  0.948  0.953
+qwen7  B1K20  0.693    NaN    NaN    NaN    NaN    NaN
+       FK20   0.710  0.793  0.843  0.875  0.897  0.897
+
+== judgeQa35 wrong_paid by visit number (columns), mean over runs
+visit             1      2      3      4      5      6
+st     tag                                            
+llama8 B1K20  0.181    NaN    NaN    NaN    NaN    NaN
+       FK20   0.196  0.281  0.357  0.449  0.457  0.520
+qwen7  B1K20  0.197    NaN    NaN    NaN    NaN    NaN
+       FK20   0.119  0.214  0.309  0.399  0.472  0.702
+
+== judgeQa35 reward by visit number (columns), mean over runs
+visit             1      2      3      4      5      6
+st     tag                                            
+llama8 B1K20  0.503    NaN    NaN    NaN    NaN    NaN
+       FK20   0.463  0.535  0.558  0.605  0.623  0.657
+qwen7  B1K20  0.514    NaN    NaN    NaN    NaN    NaN
+       FK20   0.460  0.546  0.583  0.610  0.626  0.661
+
+== judgeQa35 fn by visit number (columns), mean over runs
+visit             1      2      3      4      5      6
+st     tag                                            
+llama8 B1K20  0.372    NaN    NaN    NaN    NaN    NaN
+       FK20   0.446  0.348  0.302  0.221  0.176  0.102
+qwen7  B1K20  0.320    NaN    NaN    NaN    NaN    NaN
+       FK20   0.321  0.275  0.208  0.172  0.151  0.106
+
+== sim00fn00 reward by visit number (columns), mean over runs
+visit             1     2      3      4      5      6
+st     tag                                           
+llama8 B1K20  0.688   NaN    NaN    NaN    NaN    NaN
+       FK20   0.706  0.79  0.830  0.850  0.864  0.857
+qwen7  B1K20  0.616   NaN    NaN    NaN    NaN    NaN
+       FK20   0.590  0.65  0.696  0.723  0.743  0.739
+
+== judgeQt50 per run: slope of wrong_paid over first-visit steps (per 10 steps), and jump = mean(visit-2 steps, first 10) - mean(last 10 visit-1 steps)
+  llama8_B10vK20judgeQt50_idkc05_s0_h1     visit-1 steps  12 slope/10 steps +0.0606  jump wrong_paid +0.114  jump reward +0.046
+  llama8_B10vK20judgeQt50_idkc05_s1_h1     visit-1 steps  12 slope/10 steps -0.0748  jump wrong_paid +0.140  jump reward +0.056
+  llama8_B10vK20judgeQt50_idkc05_s2_h1     visit-1 steps  12 slope/10 steps +0.0032  jump wrong_paid +0.123  jump reward +0.042
+  llama8_B10vK20judgeQt50_idkc05_s3_h1     visit-1 steps  12 slope/10 steps +0.0035  jump wrong_paid +0.102  jump reward +0.044
+  llama8_B1K20judgeQt50_idkc05_s0_h1       visit-1 steps 120 slope/10 steps +0.0010  jump wrong_paid +nan  jump reward +nan
+  llama8_B1K20judgeQt50_idkc05_s1_h1       visit-1 steps 120 slope/10 steps +0.0034  jump wrong_paid +nan  jump reward +nan
+  llama8_B1K20judgeQt50_idkc05_s2_h1       visit-1 steps 120 slope/10 steps +0.0038  jump wrong_paid +nan  jump reward +nan
+  llama8_B1K20judgeQt50_idkc05_s3_h1       visit-1 steps 120 slope/10 steps -0.0060  jump wrong_paid +nan  jump reward +nan
+  llama8_B2vK20judgeQt50_idkc05_s0_h1      visit-1 steps  60 slope/10 steps -0.0106  jump wrong_paid +0.175  jump reward +0.061
+  llama8_B2vK20judgeQt50_idkc05_s1_h1      visit-1 steps  60 slope/10 steps +0.0018  jump wrong_paid +0.145  jump reward +0.066
+  llama8_B5vK20judgeQt50_idkc05_s0_h1      visit-1 steps  24 slope/10 steps +0.0192  jump wrong_paid +0.093  jump reward +0.056
+  llama8_B5vK20judgeQt50_idkc05_s1_h1      visit-1 steps  24 slope/10 steps +0.0417  jump wrong_paid +0.105  jump reward +0.043
+  llama8_FK20judgeQt50_idkc05_s0_h1        visit-1 steps  23 slope/10 steps +0.0419  jump wrong_paid +0.179  jump reward +0.057
+  llama8_FK20judgeQt50_idkc05_s1_h1        visit-1 steps  23 slope/10 steps +0.0159  jump wrong_paid +0.084  jump reward +0.019
+  llama8_FK20judgeQt50_idkc05_s2_h1        visit-1 steps  23 slope/10 steps -0.0424  jump wrong_paid +0.150  jump reward +0.049
+  qwen7_B10vK20judgeQt50_idkc05_s0_h1      visit-1 steps  12 slope/10 steps -0.0490  jump wrong_paid +0.094  jump reward +0.040
+  qwen7_B10vK20judgeQt50_idkc05_s1_h1      visit-1 steps  12 slope/10 steps -0.0018  jump wrong_paid +0.155  jump reward +0.078
+  qwen7_B10vK20judgeQt50_idkc05_s2_h1      visit-1 steps  12 slope/10 steps +0.0006  jump wrong_paid +0.108  jump reward +0.057
+  qwen7_B10vK20judgeQt50_idkc05_s3_h1      visit-1 steps  12 slope/10 steps +0.1216  jump wrong_paid +0.104  jump reward +0.054
+  qwen7_B1K20judgeQt50_idkc05_s0_h1        visit-1 steps 120 slope/10 steps -0.0002  jump wrong_paid +nan  jump reward +nan
+  qwen7_B1K20judgeQt50_idkc05_s1_h1        visit-1 steps 120 slope/10 steps +0.0052  jump wrong_paid +nan  jump reward +nan
+  qwen7_B1K20judgeQt50_idkc05_s2_h1        visit-1 steps 120 slope/10 steps +0.0038  jump wrong_paid +nan  jump reward +nan
+  qwen7_B1K20judgeQt50_idkc05_s3_h1        visit-1 steps 120 slope/10 steps -0.0001  jump wrong_paid +nan  jump reward +nan
+  qwen7_B2vK20judgeQt50_idkc05_s0_h1       visit-1 steps  60 slope/10 steps -0.0005  jump wrong_paid +0.119  jump reward +0.068
+  qwen7_B2vK20judgeQt50_idkc05_s1_h1       visit-1 steps  60 slope/10 steps +0.0092  jump wrong_paid +0.122  jump reward +0.078
+  qwen7_B5vK20judgeQt50_idkc05_s0_h1       visit-1 steps  24 slope/10 steps +0.0512  jump wrong_paid +0.044  jump reward +0.034
+  qwen7_B5vK20judgeQt50_idkc05_s1_h1       visit-1 steps  24 slope/10 steps -0.0326  jump wrong_paid +0.188  jump reward +0.085
+  qwen7_FK20judgeQt50_idkc05_s0_h1         visit-1 steps  23 slope/10 steps -0.0083  jump wrong_paid +0.168  jump reward +0.080
+  qwen7_FK20judgeQt50_idkc05_s1_h1         visit-1 steps  23 slope/10 steps -0.0621  jump wrong_paid +0.219  jump reward +0.082
+  qwen7_FK20judgeQt50_idkc05_s2_h1         visit-1 steps  23 slope/10 steps +0.0486  jump wrong_paid +0.089  jump reward +0.041

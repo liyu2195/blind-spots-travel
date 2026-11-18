@@ -1,0 +1,93 @@
+(fix_ledger) L03: seeds per grader configuration (student x dataset x grader code) for the run sets behind each headline claim,
+counted from L01_runs.csv (raw eval files; collapsed = new-question IDK >= 0.95 at ck120). Output: L03_seeds_out.txt
+Usage: python3 -I L03_seeds.py
+
+== strict LLM judges (35% cut): crossover, map figure, dose-response, readable split  (collapsed runs excluded)
+  qwen7: runs 43 in 13 configurations; seeds per configuration min 1 median 3 max 6
+     h1 judgeGa35 2; h1 judgeMa35 2; h1 judgeOa35 1; h1 judgeQa35 6; nq judgeGa35 3; nq judgeMa35 3; nq judgeOa35 3; nq judgeQa35 6; nq judgeRa35 2; pq judgeGa35 3; pq judgeMa35 3; pq judgeOa35 3; pq judgeQa35 6
+  llama8: runs 44 in 13 configurations; seeds per configuration min 2 median 3 max 6
+     h1 judgeGa35 2; h1 judgeMa35 2; h1 judgeOa35 2; h1 judgeQa35 6; nq judgeGa35 3; nq judgeMa35 3; nq judgeOa35 3; nq judgeQa35 6; nq judgeRa35 2; pq judgeGa35 3; pq judgeMa35 3; pq judgeOa35 3; pq judgeQa35 6
+
+== Qwen judge at three operating points (strictness dose-response)  (collapsed runs excluded)
+  qwen7: runs 44 in 9 configurations; seeds per configuration min 3 median 6 max 6
+     h1 judgeQa35 6; h1 judgeQa50 6; h1 judgeQt50 3; nq judgeQa35 6; nq judgeQa50 6; nq judgeQt50 3; pq judgeQa35 6; pq judgeQa50 5; pq judgeQt50 3
+  llama8: runs 45 in 9 configurations; seeds per configuration min 3 median 6 max 6
+     h1 judgeQa35 6; h1 judgeQa50 6; h1 judgeQt50 3; nq judgeQa35 6; nq judgeQa50 6; nq judgeQt50 3; pq judgeQa35 6; pq judgeQa50 6; pq judgeQt50 3
+
+== other judges at P(Yes) > 0.5  (collapsed runs excluded)
+  qwen7: runs 7 in 5 configurations; seeds per configuration min 1 median 1 max 2
+     h1 judgeGt50 1; h1 judgeMt50 1; h1 judgeOt50 1; nq judgeGt50 2; nq judgeOt50 2
+  llama8: runs 7 in 5 configurations; seeds per configuration min 1 median 1 max 2
+     h1 judgeGt50 1; h1 judgeMt50 1; h1 judgeOt50 1; nq judgeGt50 2; nq judgeOt50 2
+
+== answer key (gold) runs  (collapsed runs excluded)
+  qwen7: runs 13 in 3 configurations; seeds per configuration min 1 median 6 max 6
+     h1 gold 6; nq gold 1; pq gold 6
+  llama8: runs 18 in 3 configurations; seeds per configuration min 6 median 6 max 6
+     h1 gold 6; nq gold 6; pq gold 6
+
+== answer key, all runs incl. collapsed  (all runs)
+  qwen7: runs 15 in 3 configurations; seeds per configuration min 3 median 6 max 6
+     h1 gold 6; nq gold 3; pq gold 6
+  llama8: runs 18 in 3 configurations; seeds per configuration min 6 median 6 max 6
+     h1 gold 6; nq gold 6; pq gold 6
+
+== key + random false rejects (no-location placebo pool)  (collapsed runs excluded)
+  qwen7: runs 26 in 6 configurations; seeds per configuration min 2 median 5 max 6
+     h1 FN20 6; h1 FN40 5; h1 FN50 2; pq FN20 6; pq FN40 5; pq FN50 2
+  llama8: runs 40 in 10 configurations; seeds per configuration min 1 median 6 max 6
+     h1 FN20 6; h1 FN40 6; h1 FN50 3; h1 FN60 1; nq FN20 6; nq FN40 1; pq FN20 6; pq FN40 6; pq FN50 3; pq FN60 2
+
+== key + random false rejects, all runs incl. collapsed  (all runs)
+  qwen7: runs 36 in 8 configurations; seeds per configuration min 3 median 6 max 6
+     h1 FN20 6; h1 FN40 6; h1 FN50 3; nq FN20 3; nq FN40 3; pq FN20 6; pq FN40 6; pq FN50 3
+  llama8: runs 47 in 12 configurations; seeds per configuration min 2 median 3 max 6
+     h1 FN20 6; h1 FN40 6; h1 FN50 3; h1 FN60 2; h1 FN70 2; nq FN20 6; nq FN40 3; pq FN20 6; pq FN40 6; pq FN50 3; pq FN60 2; pq FN70 2
+
+== lenQ (random grader at the default Qwen judge's error rates)  (collapsed runs excluded)
+  qwen7: runs 9 in 3 configurations; seeds per configuration min 3 median 3 max 3
+     h1 lenQ 3; nq lenQ 3; pq lenQ 3
+  llama8: runs 9 in 3 configurations; seeds per configuration min 3 median 3 max 3
+     h1 lenQ 3; nq lenQ 3; pq lenQ 3
+
+== Sonnet as reward  (collapsed runs excluded)
+  qwen7: runs 9 in 3 configurations; seeds per configuration min 3 median 3 max 3
+     h1 apiS55 3; nq apiS55 3; pq apiS55 3
+  llama8: runs 9 in 3 configurations; seeds per configuration min 3 median 3 max 3
+     h1 apiS55 3; nq apiS55 3; pq apiS55 3
+
+== hash (fixed false accepts)  (collapsed runs excluded)
+  qwen7: runs 10 in 3 configurations; seeds per configuration min 2 median 2 max 6
+     h1 hash35fn00 6; nq hash35fn00 2; pq hash35fn00 2
+  llama8: runs 10 in 3 configurations; seeds per configuration min 2 median 2 max 6
+     h1 hash35fn00 6; nq hash35fn00 2; pq hash35fn00 2
+
+== causal arms (PopQA): copies / scrambled / type-wide copies / planted sets  (collapsed runs excluded)
+  qwen7: runs 31 in 9 configurations; seeds per configuration min 2 median 4 max 4
+     pq fnHid60/0 4; pq fnHid80/20 2; pq fnType50/20 2; pq fnType80/20 3; pq plrealM 4; pq plrealO 4; pq plscrM 4; pq plsharpM 4; pq plsharpO 4
+  llama8: runs 30 in 9 configurations; seeds per configuration min 2 median 3 max 4
+     pq fnHid80/20 3; pq fnType20/80 3; pq fnType50/20 2; pq fnType80/20 3; pq plrealM 4; pq plrealO 4; pq plscrM 3; pq plsharpM 4; pq plsharpO 4
+
+== causal arms incl. collapsed  (all runs)
+  qwen7: runs 35 in 10 configurations; seeds per configuration min 2 median 4 max 4
+     pq fnHid60/0 4; pq fnHid80/20 3; pq fnType20/80 3; pq fnType50/20 2; pq fnType80/20 3; pq plrealM 4; pq plrealO 4; pq plscrM 4; pq plsharpM 4; pq plsharpO 4
+  llama8: runs 31 in 9 configurations; seeds per configuration min 2 median 4 max 4
+     pq fnHid80/20 3; pq fnType20/80 3; pq fnType50/20 2; pq fnType80/20 3; pq plrealM 4; pq plrealO 4; pq plscrM 4; pq plsharpM 4; pq plsharpO 4
+
+== visit regimes (TriviaQA, Qwen judge P(Yes) > 0.5 and others)  (collapsed runs excluded)
+  qwen7: runs 25 in 6 configurations; seeds per configuration min 1 median 4 max 12
+     h1 FN20 1; h1 FP20 1; h1 gold 4; h1 hash35fn00 4; h1 judgeQa35 3; h1 judgeQt50 12
+  llama8: runs 25 in 6 configurations; seeds per configuration min 1 median 4 max 12
+     h1 FN20 1; h1 FP20 1; h1 gold 4; h1 hash35fn00 4; h1 judgeQa35 3; h1 judgeQt50 12
+
+== uniform random-error graders (leniency-curve fit / test set)  (collapsed runs excluded)
+  qwen7: runs 93 in 25 configurations; seeds per configuration min 1 median 3 max 6
+     h1 FN20 6; h1 FN40 5; h1 FN50 2; h1 FP20 3; h1 FP25FN20 3; h1 FP35 3; h1 gold 6; h1 lenQ 3; nq FP20 6; nq FP25FN20 6; nq FP35 3; nq gold 1; nq lenQ 3; pq FN20 6; pq FN40 5; pq FN50 2; pq FP10FN20 3; pq FP20 3; pq FP20FN20 3; pq FP25FN20 3; pq FP30FN20 3; pq FP35 3; pq FP40FN20 3; pq gold 6; pq lenQ 3
+  llama8: runs 106 in 27 configurations; seeds per configuration min 1 median 3 max 6
+     h1 FN20 6; h1 FN40 6; h1 FN50 3; h1 FN60 1; h1 FP20 3; h1 FP25FN20 3; h1 FP35 3; h1 gold 6; h1 lenQ 3; nq FN20 6; nq FN40 1; nq FP20 6; nq FP25FN20 6; nq FP35 3; nq gold 6; nq lenQ 3; pq FN20 6; pq FN40 6; pq FN50 3; pq FN60 2; pq FP10FN20 3; pq FP20 3; pq FP20FN20 3; pq FP25FN20 3; pq FP35 3; pq gold 6; pq lenQ 3
+
+== off-recipe runs of the main students  (all runs)
+  qwen7: runs 24 in 8 configurations; seeds per configuration min 2 median 4 max 4
+     h1 FN20 2; h1 FN40 2; h1 FP20 2; h1 FP35 4; h1 gold 2; h1 judgeQt50 4; nq gold 4; pq judgeQt50 4
+  llama8: runs 13 in 8 configurations; seeds per configuration min 1 median 2 max 2
+     h1 FP35 2; h1 judgeQt50 2; pq FN20 1; pq FN40 1; pq FP20 2; pq FP35 2; pq gold 1; pq judgeQt50 2

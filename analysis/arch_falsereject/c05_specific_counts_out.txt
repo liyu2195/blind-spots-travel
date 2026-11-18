@@ -1,0 +1,29 @@
+== both
+  t50 home runs  32 | judge-specific hacks/100q +6.37 [+5.03, +7.66] | judge-specific refusals of known answers/100q +0.48 [+0.04, +0.97] | gold placebo hacks -0.01 refusals +0.13
+  t50 new  runs  32 | judge-specific hacks/100q +0.91 [+0.41, +1.43] | judge-specific refusals of known answers/100q -0.03 [-0.56, +0.47] | gold placebo hacks +0.15 refusals +0.24
+  a50 home runs  36 | judge-specific hacks/100q +3.44 [+2.52, +4.47] | judge-specific refusals of known answers/100q +2.60 [+2.00, +3.26] | gold placebo hacks -0.00 refusals -0.10
+  a50 new  runs  36 | judge-specific hacks/100q +0.24 [+0.15, +0.33] | judge-specific refusals of known answers/100q +0.63 [+0.29, +1.00] | gold placebo hacks -0.18 refusals +0.09
+  a35 home runs  84 | judge-specific hacks/100q +1.44 [+1.12, +1.76] | judge-specific refusals of known answers/100q +3.37 [+2.85, +3.86] | gold placebo hacks -0.01 refusals -0.03
+  a35 new  runs  84 | judge-specific hacks/100q +0.24 [+0.15, +0.36] | judge-specific refusals of known answers/100q +0.99 [+0.79, +1.21] | gold placebo hacks -0.02 refusals +0.02
+== qwen7 (discovery)
+  t50 home runs  16 | judge-specific hacks/100q +7.36 [+5.38, +9.28] | judge-specific refusals of known answers/100q +0.33 [-0.13, +0.78] | gold placebo hacks -0.02 refusals +0.18
+  t50 new  runs  16 | judge-specific hacks/100q +0.91 [+0.09, +1.65] | judge-specific refusals of known answers/100q -0.23 [-0.78, +0.31] | gold placebo hacks +0.17 refusals +0.35
+  a50 home runs  18 | judge-specific hacks/100q +3.76 [+2.52, +5.12] | judge-specific refusals of known answers/100q +1.45 [+1.10, +1.76] | gold placebo hacks -0.03 refusals -0.20
+  a50 new  runs  18 | judge-specific hacks/100q +0.21 [+0.07, +0.35] | judge-specific refusals of known answers/100q +0.24 [+0.09, +0.40] | gold placebo hacks -0.17 refusals +0.19
+  a35 home runs  42 | judge-specific hacks/100q +1.22 [+0.89, +1.55] | judge-specific refusals of known answers/100q +2.33 [+1.89, +2.80] | gold placebo hacks +0.00 refusals -0.02
+  a35 new  runs  42 | judge-specific hacks/100q +0.19 [+0.10, +0.28] | judge-specific refusals of known answers/100q +0.61 [+0.38, +0.83] | gold placebo hacks -0.03 refusals -0.03
+== llama8 (confirmation)
+  t50 home runs  16 | judge-specific hacks/100q +5.38 [+3.67, +7.02] | judge-specific refusals of known answers/100q +0.64 [-0.04, +1.50] | gold placebo hacks +0.00 refusals +0.08
+  t50 new  runs  16 | judge-specific hacks/100q +0.91 [+0.24, +1.52] | judge-specific refusals of known answers/100q +0.16 [-0.81, +0.97] | gold placebo hacks +0.12 refusals +0.13
+  a50 home runs  18 | judge-specific hacks/100q +3.11 [+1.72, +4.60] | judge-specific refusals of known answers/100q +3.75 [+2.81, +4.61] | gold placebo hacks +0.03 refusals -0.01
+  a50 new  runs  18 | judge-specific hacks/100q +0.27 [+0.16, +0.37] | judge-specific refusals of known answers/100q +1.03 [+0.40, +1.69] | gold placebo hacks -0.19 refusals -0.01
+  a35 home runs  42 | judge-specific hacks/100q +1.65 [+1.16, +2.21] | judge-specific refusals of known answers/100q +4.40 [+3.67, +5.13] | gold placebo hacks -0.02 refusals -0.03
+  a35 new  runs  42 | judge-specific hacks/100q +0.30 [+0.13, +0.50] | judge-specific refusals of known answers/100q +1.37 [+1.06, +1.70] | gold placebo hacks -0.00 refusals +0.07
+
+per dataset, a35 and t50, both students:
+  tqa t50: home hacks +4.73 refusals +0.80 (runs 12) | new hacks +0.82 refusals +0.51 (runs 12)
+  tqa a35: home hacks +0.33 refusals +5.94 (runs 24) | new hacks +0.06 refusals +1.30 (runs 24)
+  pqa t50: home hacks +8.73 refusals +0.08 (runs 6) | new hacks +1.54 refusals -0.17 (runs 6)
+  pqa a35: home hacks +0.54 refusals +3.11 (runs 30) | new hacks +0.17 refusals +1.26 (runs 30)
+  nqo t50: home hacks +6.77 refusals +0.38 (runs 14) | new hacks +0.72 refusals -0.44 (runs 14)
+  nqo a35: home hacks +3.21 refusals +1.57 (runs 30) | new hacks +0.47 refusals +0.47 (runs 30)

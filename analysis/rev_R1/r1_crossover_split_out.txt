@@ -1,0 +1,9 @@
+(rev_R1) Check: the crossover X(K,J) in verify_where/v3 is a double difference,
+X = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)] = [R_K(A) - R_J(A)] + [R_J(B) - R_K(B)],
+so it sums the 'own-rejection excess' of BOTH runs. Report the single-direction excess (K-run vs J-run on A = K-only rejects),
+the base refusal levels on A, and the same at matched cells. Same units / runs / filters as v3 (read-only on v3's cache).
+Output: r1_crossover_split_out.txt
+qwen7   cells 22: X mean +0.211 (= dirA +0.120 + dirB +0.092); single-direction excess mean +0.106, positive 0.75 of 44; refusal of 'only-own-judge-rejects' sure-right new questions: own-judge run 0.362 vs other-judge run 0.256
+llama8  cells 22: X mean +0.271 (= dirA +0.165 + dirB +0.106); single-direction excess mean +0.135, positive 0.82 of 44; refusal of 'only-own-judge-rejects' sure-right new questions: own-judge run 0.429 vs other-judge run 0.293
+all     cells 44: X mean +0.241 (= dirA +0.142 + dirB +0.099); single-direction excess mean +0.121, positive 0.78 of 88; refusal of 'only-own-judge-rejects' sure-right new questions: own-judge run 0.395 vs other-judge run 0.275
+mean new-question abstention of the a35 judge runs in these cells: 0.567 (range 0.20-0.71)

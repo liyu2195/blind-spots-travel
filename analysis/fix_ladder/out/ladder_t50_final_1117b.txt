@@ -1,0 +1,295 @@
+(fix_ladder) ladder_score.py - ONE standalone scorer for the strictness ladder (E1 / E2 / E3) on NEW questions.
+Ported line by line from the verified scripts (read-only imports of their caches; nothing outside fix_ladder/ is written):
+  verify_map/v00_common + v01_cache (conventions), v02_probe (layer-16 probes), v05_crossover (X), v08_figure (S), stats/c1_content (content
+  lift), regimes/rg + r02_costs + r02e_share (withheld / located / installed), dose/d03_predictors + d04_dose (top-minus-bottom).
+Operating point CUT in {t50, a50, a35}: a judge's verdict on the UNTRAINED greedy answer is 'accept' <=> P(Yes)/(P(Yes)+P(No)) > t, t = 0.5 (t50) or
+  t_a50 / t_a35 of final/thresholds_<J>.json. Runs: <st>_FK20judge<TAG><CUT>_idkc05_s<seed>_<ds> with eval_rl_ck120.jsonl complete and new-question
+  abstention < 0.95. Run tag -> score tag: QR -> QF (reference-guided Qwen judge), every other tag unchanged (P = whatever score_P_* files hold).
+  A judge enters a cell only if its score file score_<J>_<st>_<set>_1500_n32_s1.jsonl and (for a50 / a35) its threshold exist.
+Units / estimands (new questions = not training, exact text / qid duplicates of training questions removed):
+ (i)  X_FR / X_FA (v05): right units = valid untrained greedy, loose key or Sonnet >= 4; wrong units = key-wrong and Sonnet 1..3.
+      FR: A = K rejects & J accepts, B = J rejects & K accepts; FA: A = K accepts & J rejects, B = J accepts & K rejects;
+      X = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)], R_J = mean IDK of J's runs; cells with |A|, |B| >= 5; pooled = mean over cells per student,
+      students averaged; per dataset = mean over its cells; crossed bootstrap (questions within cell, runs within judge), judge-label permutation.
+      Added (task 2): X_adj = the same contrast after FWL of y = R_K - R_J and 1_A on [1, conf, logit P_aud, logit P_sure] (grader-free layer-16
+      probes of v02) within A u B (= X when the covariates are dropped).
+ (ii) S_FR / S_FA (v08 MAIN): per pair, OLS slope of y = R_K - R_J on z(logit P_K(rej) - logit P_J(rej)) (v02 probes of each judge AT THE CUT),
+      both residualised on [1, conf, logit P_aud, logit P_sure]; quintile curve; pooled pairs -> cells -> students; bootstrap 1000 (all ids, runs
+      within judge); placebo = judge labels permuted within cell. Also the mean over each judge's pairs per student.
+ (iii) content lift (stats/c1 MAIN at the cut): units (run, question) whose final answer is key-wrong, well-formed, not IDK and differs from the
+      untrained greedy string; lift_J = mean[paid_J(x) - b_J(q)] (b = J's pay rate on the untrained key-wrong samples of q); S(run) = lift_own -
+      mean lift of the other panel judges (panel Q M G O; a judge outside the panel is compared with all four); runs with >= 5 units; run-weighted
+      per student, students averaged; crossed bootstrap. Ratio new / home (line D3).
+ (iv) costs (regimes/r02 + r02e): per 100 new questions: RW = refusals of audited-right untrained answers; LOC = refusals on the run's own judge's
+      rejections (universe: audited-right, strict-key-right greedy answers) beyond the matched no-location placebo (key + uniform noise grader
+      nearest in abstention), Mantel-Haenszel over conf strata; FRJ = the judge's false rejections in that universe; inherited share = LOC / FRJ;
+      located share = LOC / RW (r02e). Joint question bootstrap within dataset.
+ (v)  R1: installed judge-paid wrong answers on TRAINING questions per 100: changed (rg 'same' rule) key-wrong final answers that the
+      run's own judge pays at its cut (P(Yes) looked up by (idx, normalised answer); unscored = unpaid, as r02; coverage reported, plus the
+      coverage-corrected value). IHr = r02's audited-wrong version. R2: dose/d04 grader-specific top-minus-bottom quintile of adjusted refusal on
+      NEW known-sure answers against the run's own grader's lin16 probe (d03 procedure), minus the 3 no-location reference runs nearest in
+      abstention; units (student, dataset, judge) equal weight, students averaged.
+Probes for (judge, cut) targets that the verified caches lack (new tags, M/G/O/R a50 for dose) are fitted here with the verified procedures on the
+  same layer-16 PCA-256 features; verified targets are reused only if their training label rate still matches the current threshold.
+Usage: nice -n 10 timeout 280 python3 ladder_score.py build <st> <ds>        (refresh caches of one cell; incremental)
+       nice -n 10 timeout 280 python3 ladder_score.py score [--cuts t50,a50,a35] [--parts i,ii,iii,iv,v] [--nb N] [--tag LABEL]
+       -> out/ladder_<tag>.txt, out/ladder_<tag>.json (score also refreshes stale caches, slower on first call)
+run at 2026-11-16 18:12:58; md5 61a531397fff98dee4a4a0466bcf51c7; judges universe for pairs: core+all
+
+== run inventory per (judge, cut, student, dataset): entered = complete ck120, scores + threshold present, new abstention < 0.95
+  t50 G   qwen7  h1: entered 1 seeds [0]
+  t50 M   qwen7  h1: entered 1 seeds [0]
+  t50 O   qwen7  h1: entered 1 seeds [0]
+  t50 Q   qwen7  h1: entered 3 seeds [0, 1, 2]
+  t50 G   qwen7  pq: entered 2 seeds [0, 1]
+  t50 M   qwen7  pq: entered 2 seeds [0, 1]
+  t50 O   qwen7  pq: entered 2 seeds [0, 1]
+  t50 Q   qwen7  pq: entered 3 seeds [0, 1, 2]
+  t50 QF  qwen7  pq: entered 2 seeds [0, 1]
+  t50 G   qwen7  nq: entered 2 seeds [0, 1]
+  t50 M   qwen7  nq: entered 2 seeds [0, 1]
+  t50 O   qwen7  nq: entered 2 seeds [0, 1]
+  t50 Q   qwen7  nq: entered 3 seeds [0, 1, 2]
+  t50 QF  qwen7  nq: entered 1 seeds [1]; dropped (abstention >= 0.95) [0]
+  t50 G   llama8 h1: entered 1 seeds [0]
+  t50 M   llama8 h1: entered 1 seeds [0]
+  t50 O   llama8 h1: entered 1 seeds [0]
+  t50 Q   llama8 h1: entered 3 seeds [0, 1, 2]
+  t50 G   llama8 pq: entered 2 seeds [0, 1]
+  t50 M   llama8 pq: entered 2 seeds [0, 1]
+  t50 O   llama8 pq: entered 2 seeds [0, 1]
+  t50 Q   llama8 pq: entered 3 seeds [0, 1, 2]
+  t50 QF  llama8 pq: entered 2 seeds [0, 1]
+  t50 G   llama8 nq: entered 2 seeds [0, 1]
+  t50 M   llama8 nq: entered 2 seeds [0, 1]
+  t50 O   llama8 nq: entered 2 seeds [0, 1]
+  t50 Q   llama8 nq: entered 3 seeds [0, 1, 2]
+  t50 QF  llama8 nq: entered 2 seeds [0, 1]
+
+================ CUT t50 ================
+-- (i) crossovers (v05) [core]
+  X_FR (right units; cells |A|,|B| >= 5): 31 cells, negative 6, positive 19
+    pooled        X +0.025 [-0.003, +0.050]  X_adj(FWL) +0.009 [-0.019, +0.036]  cells 31  perm p 0.0400
+    qwen7         X +0.003 [-0.040, +0.043]  X_adj(FWL) -0.004 [-0.052, +0.040]  cells 14  perm p 0.8681
+    llama8        X +0.047 [+0.014, +0.077]  X_adj(FWL) +0.023 [-0.012, +0.054]  cells 17  perm p 0.0010
+    h1            X +0.055 [+0.029, +0.081]  X_adj(FWL) +0.019 [-0.005, +0.043]  cells 10
+    pq            X -0.013 [-0.066, +0.031]  X_adj(FWL) -0.015 [-0.069, +0.026]  cells 9
+    nq            X +0.034 [-0.020, +0.083]  X_adj(FWL) +0.023 [-0.038, +0.078]  cells 12
+    pooled@pq+nq  X +0.011 [-0.028, +0.046]  X_adj(FWL) +0.004 [-0.039, +0.044]  cells 21
+    qwen7 @h1     X +0.024 [-0.020, +0.064]  X_adj(FWL) +0.015 [-0.021, +0.049]  cells 5
+    qwen7 @pq     X -0.099 [-0.220, -0.007]  X_adj(FWL) -0.092 [-0.213, -0.004]  cells 3
+    qwen7 @nq     X +0.038 [-0.038, +0.115]  X_adj(FWL) +0.023 [-0.065, +0.109]  cells 6
+    llama8@h1     X +0.087 [+0.055, +0.121]  X_adj(FWL) +0.023 [-0.006, +0.055]  cells 5
+    llama8@pq     X +0.030 [-0.030, +0.081]  X_adj(FWL) +0.023 [-0.032, +0.073]  cells 6
+    llama8@nq     X +0.030 [-0.048, +0.093]  X_adj(FWL) +0.022 [-0.059, +0.084]  cells 6
+    per judge (mean over cells containing it, per student): Q|qwen7 X -0.021 [-0.069, +0.022] adj -0.023 [-0.074, +0.020] (8); Q|llama8 X +0.048 [+0.023, +0.072] adj +0.014 [-0.010, +0.036] (9); M|qwen7 X +0.025 [-0.028, +0.067] adj +0.010 [-0.057, +0.063] (5); M|llama8 X +0.013 [-0.036, +0.050] adj +0.015 [-0.034, +0.056] (8); G|qwen7 X -0.011 [-0.058, +0.026] adj -0.019 [-0.065, +0.019] (8); G|llama8 X +0.032 [-0.012, +0.069] adj +0.020 [-0.025, +0.057] (9); O|qwen7 X +0.033 [-0.045, +0.107] adj +0.023 [-0.061, +0.106] (7); O|llama8 X +0.096 [+0.043, +0.149] adj +0.042 [-0.016, +0.092] (8)
+    cells: llama8 h1 G-O +0.183/adj +0.079 (|A| 72, |B| 80); llama8 h1 M-G +0.009/adj +0.015 (|A| 6, |B| 109); llama8 h1 Q-G +0.000/adj +0.000 (|A| 17, |B| 93); llama8 h1 Q-M +0.000/adj +0.000 (|A| 39, |B| 12); llama8 h1 Q-O +0.243/adj +0.020 (|A| 23, |B| 107); llama8 nq G-O +0.048/adj +0.049 (|A| 54, |B| 96); llama8 nq M-G +0.033/adj +0.041 (|A| 12, |B| 99); llama8 nq M-O +0.010/adj -0.005 (|A| 12, |B| 141); llama8 nq Q-G +0.020/adj +0.015 (|A| 30, |B| 87); llama8 nq Q-M +0.006/adj +0.008 (|A| 55, |B| 25); llama8 nq Q-O +0.066/adj +0.023 (|A| 25, |B| 124); llama8 pq G-O +0.028/adj +0.017 (|A| 97, |B| 56); llama8 pq M-G -0.037/adj -0.036 (|A| 9, |B| 133); llama8 pq M-O +0.092/adj +0.099 (|A| 9, |B| 92); llama8 pq Q-G +0.004/adj +0.002 (|A| 36, |B| 101); llama8 pq Q-M -0.007/adj +0.003 (|A| 73, |B| 14); llama8 pq Q-O +0.098/adj +0.056 (|A| 46, |B| 70); qwen7 h1 G-O +0.047/adj +0.025 (|A| 46, |B| 44); qwen7 h1 M-G +0.000/adj +0.000 (|A| 8, |B| 62); qwen7 h1 Q-G +0.000/adj +0.000 (|A| 15, |B| 55); qwen7 h1 Q-M +0.000/adj +0.000 (|A| 25, |B| 11); qwen7 h1 Q-O +0.071/adj +0.050 (|A| 24, |B| 62); qwen7 nq G-O +0.082/adj +0.076 (|A| 29, |B| 45); qwen7 nq M-G +0.018/adj -0.026 (|A| 5, |B| 55); qwen7 nq M-O +0.109/adj +0.075 (|A| 9, |B| 75); qwen7 nq Q-G -0.066/adj -0.072 (|A| 16, |B| 51); qwen7 nq Q-M +0.000/adj +0.000 (|A| 28, |B| 13); qwen7 nq Q-O +0.085/adj +0.087 (|A| 15, |B| 66); qwen7 pq G-O -0.036/adj -0.028 (|A| 55, |B| 21); qwen7 pq Q-G -0.135/adj -0.127 (|A| 18, |B| 52); qwen7 pq Q-O -0.126/adj -0.123 (|A| 29, |B| 29)
+  X_FA (wrong units; cells |A|,|B| >= 5): 34 cells, negative 21, positive 6
+    pooled        X -0.076 [-0.121, -0.034]  X_adj(FWL) -0.038 [-0.077, -0.001]  cells 34  perm p 0.0010
+    qwen7         X -0.102 [-0.161, -0.042]  X_adj(FWL) -0.065 [-0.123, -0.011]  cells 18  perm p 0.0020
+    llama8        X -0.050 [-0.117, +0.011]  X_adj(FWL) -0.011 [-0.075, +0.044]  cells 16  perm p 0.2008
+    h1            X -0.094 [-0.172, -0.014]  X_adj(FWL) -0.002 [-0.067, +0.053]  cells 11
+    pq            X -0.057 [-0.144, +0.030]  X_adj(FWL) -0.037 [-0.118, +0.049]  cells 11
+    nq            X -0.080 [-0.144, -0.015]  X_adj(FWL) -0.077 [-0.135, -0.017]  cells 12
+    pooled@pq+nq  X -0.067 [-0.121, -0.015]  X_adj(FWL) -0.056 [-0.108, -0.005]  cells 23
+    qwen7 @h1     X -0.066 [-0.153, +0.035]  X_adj(FWL) -0.021 [-0.106, +0.061]  cells 6
+    qwen7 @pq     X -0.087 [-0.197, +0.032]  X_adj(FWL) -0.049 [-0.165, +0.067]  cells 6
+    qwen7 @nq     X -0.151 [-0.232, -0.054]  X_adj(FWL) -0.125 [-0.205, -0.037]  cells 6
+    llama8@h1     X -0.128 [-0.241, +0.005]  X_adj(FWL) +0.021 [-0.072, +0.103]  cells 5
+    llama8@pq     X -0.021 [-0.150, +0.093]  X_adj(FWL) -0.022 [-0.153, +0.100]  cells 5
+    llama8@nq     X -0.009 [-0.100, +0.077]  X_adj(FWL) -0.029 [-0.113, +0.061]  cells 6
+    per judge (mean over cells containing it, per student): Q|qwen7 X -0.094 [-0.140, -0.045] adj -0.060 [-0.110, -0.013] (9); Q|llama8 X -0.050 [-0.122, +0.026] adj -0.009 [-0.070, +0.050] (9); M|qwen7 X -0.061 [-0.130, +0.015] adj -0.055 [-0.122, +0.015] (9); M|llama8 X +0.020 [-0.037, +0.078] adj +0.000 [-0.057, +0.057] (7); G|qwen7 X -0.060 [-0.107, -0.007] adj -0.032 [-0.083, +0.013] (9); G|llama8 X -0.030 [-0.112, +0.046] adj -0.007 [-0.085, +0.068] (9); O|qwen7 X -0.192 [-0.308, -0.077] adj -0.112 [-0.224, -0.011] (9); O|llama8 X -0.144 [-0.259, -0.024] adj -0.031 [-0.137, +0.066] (7)
+    cells: llama8 h1 G-O -0.392/adj +0.027 (|A| 49, |B| 10); llama8 h1 M-G -0.021/adj +0.026 (|A| 48, |B| 12); llama8 h1 Q-G +0.000/adj +0.000 (|A| 45, |B| 13); llama8 h1 Q-M +0.000/adj +0.000 (|A| 24, |B| 28); llama8 h1 Q-O -0.225/adj +0.054 (|A| 77, |B| 6); llama8 nq G-O +0.056/adj +0.043 (|A| 63, |B| 26); llama8 nq M-G +0.210/adj +0.095 (|A| 92, |B| 21); llama8 nq M-O -0.110/adj -0.131 (|A| 116, |B| 8); llama8 nq Q-G -0.058/adj -0.095 (|A| 72, |B| 21); llama8 nq Q-M -0.020/adj -0.015 (|A| 49, |B| 69); llama8 nq Q-O -0.130/adj -0.073 (|A| 104, |B| 16); llama8 pq G-O -0.166/adj -0.183 (|A| 35, |B| 19); llama8 pq M-G +0.079/adj +0.026 (|A| 39, |B| 11); llama8 pq Q-G +0.019/adj -0.002 (|A| 28, |B| 10); llama8 pq Q-M +0.000/adj +0.000 (|A| 21, |B| 31); llama8 pq Q-O -0.039/adj +0.048 (|A| 47, |B| 13); qwen7 h1 G-O -0.011/adj +0.073 (|A| 63, |B| 27); qwen7 h1 M-G +0.000/adj +0.000 (|A| 77, |B| 29); qwen7 h1 M-O -0.141/adj -0.124 (|A| 92, |B| 8); qwen7 h1 Q-G +0.000/adj +0.000 (|A| 63, |B| 21); qwen7 h1 Q-M +0.000/adj +0.000 (|A| 40, |B| 46); qwen7 h1 Q-O -0.245/adj -0.077 (|A| 95, |B| 17); qwen7 nq G-O -0.269/adj -0.198 (|A| 58, |B| 33); qwen7 nq M-G +0.040/adj -0.004 (|A| 94, |B| 23); qwen7 nq M-O -0.284/adj -0.243 (|A| 104, |B| 8); qwen7 nq Q-G -0.051/adj -0.059 (|A| 72, |B| 24); qwen7 nq Q-M -0.034/adj -0.034 (|A| 45, |B| 68); qwen7 nq Q-O -0.310/adj -0.209 (|A| 97, |B| 24); qwen7 pq G-O -0.190/adj -0.044 (|A| 51, |B| 15); qwen7 pq M-G -0.059/adj -0.062 (|A| 51, |B| 26); qwen7 pq M-O -0.070/adj -0.023 (|A| 67, |B| 6); qwen7 pq Q-G +0.001/adj +0.002 (|A| 37, |B| 24); qwen7 pq Q-M +0.000/adj +0.000 (|A| 21, |B| 33); qwen7 pq Q-O -0.207/adj -0.166 (|A| 59, |B| 10)
+-- (ii) readable-map slopes (v08 MAIN) [core]
+  S_FR (right units qwen7:h1 439/qwen7:pq 438/qwen7:nq 297/llama8:h1 562/llama8:pq 598/llama8:nq 437): slope per SD +0.0118 [+0.0065, +0.0172]; pairs > 0: 30/36; placebo p 0.0020
+    qwen7: slope +0.0083 [+0.0006, +0.0164]
+    llama8: slope +0.0154 [+0.0079, +0.0231]
+    @h1 (students averaged): slope +0.0087 [+0.0025, +0.0151]
+    @pq (students averaged): slope +0.0084 [+0.0010, +0.0166]
+    @nq (students averaged): slope +0.0184 [+0.0056, +0.0308]
+    quintile curve (pooled): Q1 -0.015 [-0.025, -0.005]  Q2 -0.007 [-0.015, +0.000]  Q3 +0.001 [-0.007, +0.007]  Q4 +0.007 [-0.000, +0.013]  Q5 +0.014 [+0.008, +0.023] | Q5 - Q1 +0.029 [+0.015, +0.046]
+    per cell: qwen7/h1 +0.0000 (2/6) qwen7/pq +0.0083 (6/6) qwen7/nq +0.0164 (5/6) llama8/h1 +0.0173 (5/6) llama8/pq +0.0085 (6/6) llama8/nq +0.0203 (6/6)
+    per judge (mean over its pairs, per student): Q: qwen7 +0.0074 [+0.0015, +0.0142], llama8 +0.0103 [+0.0049, +0.0159]; M: qwen7 +0.0062 [+0.0009, +0.0120], llama8 +0.0119 [+0.0063, +0.0177]; G: qwen7 +0.0065 [-0.0012, +0.0163], llama8 +0.0134 [+0.0055, +0.0215]; O: qwen7 +0.0129 [-0.0007, +0.0276], llama8 +0.0260 [+0.0132, +0.0401]
+  S_FA (wrong units qwen7:h1 246/qwen7:pq 208/qwen7:nq 285/llama8:h1 143/llama8:pq 130/llama8:nq 263): slope per SD +0.0336 [+0.0202, +0.0455]; pairs > 0: 25/36; placebo p 0.0020
+    qwen7: slope +0.0303 [+0.0170, +0.0440]
+    llama8: slope +0.0368 [+0.0152, +0.0567]
+    @h1 (students averaged): slope +0.0360 [+0.0175, +0.0548]
+    @pq (students averaged): slope +0.0308 [+0.0064, +0.0555]
+    @nq (students averaged): slope +0.0340 [+0.0118, +0.0566]
+    quintile curve (pooled): Q1 -0.047 [-0.068, -0.021]  Q2 -0.022 [-0.039, -0.004]  Q3 +0.008 [-0.014, +0.021]  Q4 +0.016 [-0.001, +0.035]  Q5 +0.044 [+0.026, +0.065] | Q5 - Q1 +0.091 [+0.054, +0.125]
+    per cell: qwen7/h1 +0.0256 (3/6) qwen7/pq +0.0121 (4/6) qwen7/nq +0.0532 (5/6) llama8/h1 +0.0464 (3/6) llama8/pq +0.0494 (6/6) llama8/nq +0.0147 (4/6)
+    per judge (mean over its pairs, per student): Q: qwen7 +0.0289 [+0.0170, +0.0405], llama8 +0.0226 [+0.0043, +0.0398]; M: qwen7 +0.0173 [+0.0064, +0.0284], llama8 +0.0263 [+0.0093, +0.0443]; G: qwen7 +0.0145 [-0.0007, +0.0310], llama8 +0.0306 [+0.0044, +0.0579]; O: qwen7 +0.0606 [+0.0361, +0.0858], llama8 +0.0678 [+0.0316, +0.1005]
+-- pairs including tags outside Q M G O R: ['QF']
+-- (i) crossovers (v05) [all]
+  X_FR (right units; cells |A|,|B| >= 5): 46 cells, negative 12, positive 28
+    pooled        X +0.021 [-0.007, +0.052]  X_adj(FWL) +0.016 [-0.010, +0.046]  cells 46  perm p 0.1249
+    qwen7         X +0.005 [-0.038, +0.052]  X_adj(FWL) +0.009 [-0.036, +0.055]  cells 21  perm p 0.8302
+    llama8        X +0.036 [+0.003, +0.072]  X_adj(FWL) +0.023 [-0.008, +0.055]  cells 25  perm p 0.0090
+    h1            X +0.055 [+0.028, +0.083]  X_adj(FWL) +0.019 [-0.006, +0.041]  cells 10
+    pq            X +0.018 [-0.028, +0.065]  X_adj(FWL) +0.020 [-0.023, +0.066]  cells 16
+    nq            X +0.009 [-0.041, +0.063]  X_adj(FWL) +0.013 [-0.036, +0.062]  cells 20
+    pooled@pq+nq  X +0.011 [-0.023, +0.051]  X_adj(FWL) +0.015 [-0.018, +0.054]  cells 36
+    qwen7 @h1     X +0.024 [-0.020, +0.065]  X_adj(FWL) +0.015 [-0.022, +0.047]  cells 5
+    qwen7 @pq     X -0.027 [-0.129, +0.073]  X_adj(FWL) -0.008 [-0.108, +0.092]  cells 6
+    qwen7 @nq     X +0.015 [-0.058, +0.092]  X_adj(FWL) +0.016 [-0.062, +0.092]  cells 10
+    llama8@h1     X +0.087 [+0.054, +0.126]  X_adj(FWL) +0.023 [-0.007, +0.055]  cells 5
+    llama8@pq     X +0.044 [+0.001, +0.092]  X_adj(FWL) +0.037 [-0.002, +0.080]  cells 10
+    llama8@nq     X +0.002 [-0.069, +0.079]  X_adj(FWL) +0.009 [-0.060, +0.080]  cells 10
+    per judge (mean over cells containing it, per student): Q|qwen7 X -0.027 [-0.081, +0.021] adj -0.018 [-0.066, +0.031] (10); Q|llama8 X +0.039 [+0.008, +0.069] adj +0.008 [-0.019, +0.035] (11); M|qwen7 X +0.043 [-0.022, +0.100] adj +0.034 [-0.041, +0.095] (6); M|llama8 X +0.009 [-0.038, +0.054] adj +0.018 [-0.030, +0.061] (10); G|qwen7 X -0.018 [-0.063, +0.027] adj -0.018 [-0.063, +0.024] (10); G|llama8 X +0.031 [-0.009, +0.067] adj +0.022 [-0.014, +0.056] (11); O|qwen7 X +0.039 [-0.028, +0.103] adj +0.031 [-0.045, +0.097] (9); O|llama8 X +0.083 [+0.036, +0.135] adj +0.046 [-0.004, +0.091] (10); QF|qwen7 X +0.009 [-0.094, +0.118] adj +0.036 [-0.059, +0.138] (7); QF|llama8 X +0.012 [-0.050, +0.084] adj +0.024 [-0.032, +0.093] (8)
+    cells: llama8 h1 G-O +0.183/adj +0.079 (|A| 72, |B| 80); llama8 h1 M-G +0.009/adj +0.015 (|A| 6, |B| 109); llama8 h1 Q-G +0.000/adj +0.000 (|A| 17, |B| 93); llama8 h1 Q-M +0.000/adj +0.000 (|A| 39, |B| 12); llama8 h1 Q-O +0.243/adj +0.020 (|A| 23, |B| 107); llama8 nq G-O +0.048/adj +0.049 (|A| 54, |B| 96); llama8 nq G-QF +0.010/adj +0.012 (|A| 79, |B| 80); llama8 nq M-G +0.033/adj +0.041 (|A| 12, |B| 99); llama8 nq M-O +0.010/adj -0.005 (|A| 12, |B| 141); llama8 nq M-QF -0.098/adj -0.037 (|A| 28, |B| 116); llama8 nq O-QF +0.001/adj +0.057 (|A| 98, |B| 57); llama8 nq Q-G +0.020/adj +0.015 (|A| 30, |B| 87); llama8 nq Q-M +0.006/adj +0.008 (|A| 55, |B| 25); llama8 nq Q-O +0.066/adj +0.023 (|A| 25, |B| 124); llama8 nq Q-QF -0.077/adj -0.073 (|A| 38, |B| 96); llama8 pq G-O +0.028/adj +0.017 (|A| 97, |B| 56); llama8 pq G-QF +0.044/adj +0.049 (|A| 105, |B| 38); llama8 pq M-G -0.037/adj -0.036 (|A| 9, |B| 133); llama8 pq M-O +0.092/adj +0.099 (|A| 9, |B| 92); llama8 pq M-QF +0.082/adj +0.090 (|A| 10, |B| 67); llama8 pq O-QF +0.062/adj +0.059 (|A| 77, |B| 51); llama8 pq Q-G +0.004/adj +0.002 (|A| 36, |B| 101); llama8 pq Q-M -0.007/adj +0.003 (|A| 73, |B| 14); llama8 pq Q-O +0.098/adj +0.056 (|A| 46, |B| 70); llama8 pq Q-QF +0.074/adj +0.033 (|A| 52, |B| 50); qwen7 h1 G-O +0.047/adj +0.025 (|A| 46, |B| 44); qwen7 h1 M-G +0.000/adj +0.000 (|A| 8, |B| 62); qwen7 h1 Q-G +0.000/adj +0.000 (|A| 15, |B| 55); qwen7 h1 Q-M +0.000/adj +0.000 (|A| 25, |B| 11); qwen7 h1 Q-O +0.071/adj +0.050 (|A| 24, |B| 62); qwen7 nq G-O +0.082/adj +0.076 (|A| 29, |B| 45); qwen7 nq G-QF -0.118/adj -0.105 (|A| 43, |B| 46); qwen7 nq M-G +0.018/adj -0.026 (|A| 5, |B| 55); qwen7 nq M-O +0.109/adj +0.075 (|A| 9, |B| 75); qwen7 nq M-QF +0.129/adj +0.153 (|A| 14, |B| 67); qwen7 nq O-QF -0.039/adj -0.024 (|A| 55, |B| 42); qwen7 nq Q-G -0.066/adj -0.072 (|A| 16, |B| 51); qwen7 nq Q-M +0.000/adj +0.000 (|A| 28, |B| 13); qwen7 nq Q-O +0.085/adj +0.087 (|A| 15, |B| 66); qwen7 nq Q-QF -0.047/adj -0.001 (|A| 20, |B| 58); qwen7 pq G-O -0.036/adj -0.028 (|A| 55, |B| 21); qwen7 pq G-QF +0.032/adj +0.080 (|A| 47, |B| 32); qwen7 pq O-QF +0.161/adj +0.143 (|A| 25, |B| 44); qwen7 pq Q-G -0.135/adj -0.127 (|A| 18, |B| 52); qwen7 pq Q-O -0.126/adj -0.123 (|A| 29, |B| 29); qwen7 pq Q-QF -0.055/adj +0.009 (|A| 21, |B| 40)
+  X_FA (wrong units; cells |A|,|B| >= 5): 38 cells, negative 24, positive 7
+    pooled        X -0.087 [-0.134, -0.041]  X_adj(FWL) -0.052 [-0.096, -0.011]  cells 38  perm p 0.0010
+    qwen7         X -0.122 [-0.183, -0.053]  X_adj(FWL) -0.083 [-0.142, -0.025]  cells 20  perm p 0.0010
+    llama8        X -0.051 [-0.117, +0.015]  X_adj(FWL) -0.021 [-0.083, +0.037]  cells 18  perm p 0.1888
+    h1            X -0.094 [-0.166, -0.008]  X_adj(FWL) -0.002 [-0.066, +0.057]  cells 11
+    pq            X -0.057 [-0.144, +0.037]  X_adj(FWL) -0.037 [-0.123, +0.058]  cells 11
+    nq            X -0.106 [-0.181, -0.026]  X_adj(FWL) -0.101 [-0.172, -0.030]  cells 16
+    pooled@pq+nq  X -0.084 [-0.144, -0.025]  X_adj(FWL) -0.073 [-0.130, -0.019]  cells 27
+    qwen7 @h1     X -0.066 [-0.156, +0.041]  X_adj(FWL) -0.021 [-0.105, +0.061]  cells 6
+    qwen7 @pq     X -0.087 [-0.202, +0.045]  X_adj(FWL) -0.049 [-0.163, +0.080]  cells 6
+    qwen7 @nq     X -0.190 [-0.299, -0.063]  X_adj(FWL) -0.156 [-0.252, -0.055]  cells 8
+    llama8@h1     X -0.128 [-0.238, +0.008]  X_adj(FWL) +0.021 [-0.067, +0.106]  cells 5
+    llama8@pq     X -0.021 [-0.137, +0.102]  X_adj(FWL) -0.022 [-0.151, +0.118]  cells 5
+    llama8@nq     X -0.022 [-0.114, +0.083]  X_adj(FWL) -0.046 [-0.134, +0.046]  cells 8
+    per judge (mean over cells containing it, per student): Q|qwen7 X -0.094 [-0.141, -0.046] adj -0.060 [-0.109, -0.013] (9); Q|llama8 X -0.050 [-0.119, +0.029] adj -0.009 [-0.070, +0.055] (9); M|qwen7 X -0.061 [-0.130, +0.022] adj -0.055 [-0.127, +0.022] (9); M|llama8 X +0.020 [-0.033, +0.077] adj +0.000 [-0.058, +0.055] (7); G|qwen7 X -0.093 [-0.152, -0.025] adj -0.058 [-0.113, -0.005] (10); G|llama8 X -0.045 [-0.127, +0.036] adj -0.025 [-0.113, +0.051] (10); O|qwen7 X -0.194 [-0.300, -0.076] adj -0.122 [-0.227, -0.014] (10); O|llama8 X -0.118 [-0.229, -0.002] adj -0.028 [-0.134, +0.073] (8); QF|qwen7 X -0.305 [-0.576, +0.053] adj -0.249 [-0.510, -0.027] (2); QF|llama8 X -0.062 [-0.280, +0.204] adj -0.096 [-0.303, +0.141] (2)
+    cells: llama8 h1 G-O -0.392/adj +0.027 (|A| 49, |B| 10); llama8 h1 M-G -0.021/adj +0.026 (|A| 48, |B| 12); llama8 h1 Q-G +0.000/adj +0.000 (|A| 45, |B| 13); llama8 h1 Q-M +0.000/adj +0.000 (|A| 24, |B| 28); llama8 h1 Q-O -0.225/adj +0.054 (|A| 77, |B| 6); llama8 nq G-O +0.056/adj +0.043 (|A| 63, |B| 26); llama8 nq G-QF -0.183/adj -0.183 (|A| 68, |B| 7); llama8 nq M-G +0.210/adj +0.095 (|A| 92, |B| 21); llama8 nq M-O -0.110/adj -0.131 (|A| 116, |B| 8); llama8 nq O-QF +0.059/adj -0.009 (|A| 39, |B| 15); llama8 nq Q-G -0.058/adj -0.095 (|A| 72, |B| 21); llama8 nq Q-M -0.020/adj -0.015 (|A| 49, |B| 69); llama8 nq Q-O -0.130/adj -0.073 (|A| 104, |B| 16); llama8 pq G-O -0.166/adj -0.183 (|A| 35, |B| 19); llama8 pq M-G +0.079/adj +0.026 (|A| 39, |B| 11); llama8 pq Q-G +0.019/adj -0.002 (|A| 28, |B| 10); llama8 pq Q-M +0.000/adj +0.000 (|A| 21, |B| 31); llama8 pq Q-O -0.039/adj +0.048 (|A| 47, |B| 13); qwen7 h1 G-O -0.011/adj +0.073 (|A| 63, |B| 27); qwen7 h1 M-G +0.000/adj +0.000 (|A| 77, |B| 29); qwen7 h1 M-O -0.141/adj -0.124 (|A| 92, |B| 8); qwen7 h1 Q-G +0.000/adj +0.000 (|A| 63, |B| 21); qwen7 h1 Q-M +0.000/adj +0.000 (|A| 40, |B| 46); qwen7 h1 Q-O -0.245/adj -0.077 (|A| 95, |B| 17); qwen7 nq G-O -0.269/adj -0.198 (|A| 58, |B| 33); qwen7 nq G-QF -0.393/adj -0.292 (|A| 70, |B| 5); qwen7 nq M-G +0.040/adj -0.004 (|A| 94, |B| 23); qwen7 nq M-O -0.284/adj -0.243 (|A| 104, |B| 8); qwen7 nq O-QF -0.217/adj -0.206 (|A| 51, |B| 11); qwen7 nq Q-G -0.051/adj -0.059 (|A| 72, |B| 24); qwen7 nq Q-M -0.034/adj -0.034 (|A| 45, |B| 68); qwen7 nq Q-O -0.310/adj -0.209 (|A| 97, |B| 24); qwen7 pq G-O -0.190/adj -0.044 (|A| 51, |B| 15); qwen7 pq M-G -0.059/adj -0.062 (|A| 51, |B| 26); qwen7 pq M-O -0.070/adj -0.023 (|A| 67, |B| 6); qwen7 pq Q-G +0.001/adj +0.002 (|A| 37, |B| 24); qwen7 pq Q-M +0.000/adj +0.000 (|A| 21, |B| 33); qwen7 pq Q-O -0.207/adj -0.166 (|A| 59, |B| 10)
+-- (ii) readable-map slopes (v08 MAIN) [all]
+  S_FR (right units qwen7:h1 439/qwen7:pq 438/qwen7:nq 297/llama8:h1 562/llama8:pq 598/llama8:nq 437): slope per SD +0.0084 [+0.0025, +0.0135]; pairs > 0: 38/52; placebo p 0.0060
+    qwen7: slope +0.0050 [-0.0038, +0.0136]
+    llama8: slope +0.0117 [+0.0046, +0.0186]
+    @h1 (students averaged): slope +0.0087 [+0.0025, +0.0149]
+    @pq (students averaged): slope +0.0030 [-0.0056, +0.0115]
+    @nq (students averaged): slope +0.0135 [+0.0004, +0.0255]
+    quintile curve (pooled): Q1 -0.008 [-0.018, +0.002]  Q2 -0.005 [-0.012, +0.002]  Q3 +0.000 [-0.007, +0.007]  Q4 +0.001 [-0.006, +0.008]  Q5 +0.012 [+0.003, +0.021] | Q5 - Q1 +0.021 [+0.004, +0.036]
+    per cell: qwen7/h1 +0.0000 (2/6) qwen7/pq +0.0002 (8/10) qwen7/nq +0.0149 (8/10) llama8/h1 +0.0173 (5/6) llama8/pq +0.0058 (7/10) llama8/nq +0.0120 (8/10)
+    per judge (mean over its pairs, per student): Q: qwen7 +0.0098 [+0.0023, +0.0172], llama8 +0.0074 [+0.0009, +0.0132]; M: qwen7 +0.0055 [-0.0021, +0.0129], llama8 +0.0123 [+0.0062, +0.0182]; G: qwen7 +0.0030 [-0.0071, +0.0136], llama8 +0.0112 [+0.0036, +0.0192]; O: qwen7 +0.0089 [-0.0055, +0.0253], llama8 +0.0199 [+0.0055, +0.0350]; QF: qwen7 +0.0002 [-0.0227, +0.0223], llama8 +0.0007 [-0.0116, +0.0128]
+  S_FA (wrong units qwen7:h1 246/qwen7:pq 208/qwen7:nq 285/llama8:h1 143/llama8:pq 130/llama8:nq 263): slope per SD +0.0298 [+0.0186, +0.0415]; pairs > 0: 35/52; placebo p 0.0020
+    qwen7: slope +0.0274 [+0.0137, +0.0407]
+    llama8: slope +0.0323 [+0.0136, +0.0498]
+    @h1 (students averaged): slope +0.0360 [+0.0173, +0.0531]
+    @pq (students averaged): slope +0.0207 [-0.0014, +0.0441]
+    @nq (students averaged): slope +0.0328 [+0.0132, +0.0530]
+    quintile curve (pooled): Q1 -0.036 [-0.058, -0.015]  Q2 -0.022 [-0.037, -0.005]  Q3 -0.000 [-0.020, +0.013]  Q4 +0.013 [-0.003, +0.034]  Q5 +0.044 [+0.025, +0.063] | Q5 - Q1 +0.079 [+0.048, +0.115]
+    per cell: qwen7/h1 +0.0256 (3/6) qwen7/pq +0.0045 (5/10) qwen7/nq +0.0520 (9/10) llama8/h1 +0.0464 (3/6) llama8/pq +0.0369 (7/10) llama8/nq +0.0136 (8/10)
+    per judge (mean over its pairs, per student): Q: qwen7 +0.0258 [+0.0140, +0.0377], llama8 +0.0184 [+0.0022, +0.0349]; M: qwen7 +0.0145 [+0.0030, +0.0261], llama8 +0.0222 [+0.0033, +0.0409]; G: qwen7 +0.0145 [-0.0032, +0.0314], llama8 +0.0245 [-0.0019, +0.0510]; O: qwen7 +0.0601 [+0.0362, +0.0823], llama8 +0.0665 [+0.0342, +0.1000]; QF: qwen7 +0.0215 [-0.0056, +0.0510], llama8 +0.0151 [-0.0162, +0.0455]
+-- (iii) judge-specific content lift (stats/c1)
+  content lift S (panel judges Q M G O (c1); changed key-wrong answers, all verdicts available; run-weighted):
+    pooled         home +0.371 [+0.353, +0.389]  new +0.041 [+0.026, +0.056]  ratio new/home +0.110 [+0.069, +0.150]  (runs on new 48)
+    qwen7          home +0.394 [+0.370, +0.419]  new +0.022 [+0.002, +0.043]  ratio new/home +0.055 [+0.006, +0.111]  (runs on new 24)
+    llama8         home +0.347 [+0.321, +0.375]  new +0.060 [+0.035, +0.083]  ratio new/home +0.173 [+0.100, +0.240]  (runs on new 24)
+    qwen7/h1       home +0.426 [+0.371, +0.476]  new -0.006 [-0.050, +0.040]  ratio new/home -0.013 [-0.117, +0.094]  (runs on new 6)
+    qwen7/pq       home +0.421 [+0.384, +0.457]  new +0.054 [+0.019, +0.092]  ratio new/home +0.128 [+0.047, +0.222]  (runs on new 9)
+    qwen7/nq       home +0.346 [+0.307, +0.389]  new +0.008 [-0.020, +0.037]  ratio new/home +0.023 [-0.058, +0.109]  (runs on new 9)
+    llama8/h1      home +0.313 [+0.262, +0.365]  new +0.039 [-0.014, +0.089]  ratio new/home +0.125 [-0.044, +0.288]  (runs on new 6)
+    llama8/pq      home +0.375 [+0.322, +0.432]  new +0.074 [+0.024, +0.117]  ratio new/home +0.196 [+0.067, +0.320]  (runs on new 9)
+    llama8/nq      home +0.342 [+0.309, +0.377]  new +0.060 [+0.036, +0.087]  ratio new/home +0.176 [+0.104, +0.256]  (runs on new 9)
+    llama8/G       home +0.368 [+0.319, +0.416]  new +0.038 [-0.007, +0.082]  ratio new/home +0.103 [-0.018, +0.229]  (runs on new 5)
+    llama8/M       home +0.285 [+0.234, +0.333]  new +0.067 [+0.019, +0.113]  ratio new/home +0.235 [+0.068, +0.410]  (runs on new 5)
+    llama8/O       home +0.447 [+0.385, +0.514]  new +0.128 [+0.072, +0.181]  ratio new/home +0.287 [+0.158, +0.429]  (runs on new 5)
+    llama8/Q       home +0.315 [+0.274, +0.356]  new +0.031 [-0.016, +0.071]  ratio new/home +0.097 [-0.050, +0.232]  (runs on new 9)
+    qwen7/G        home +0.416 [+0.374, +0.458]  new +0.021 [-0.023, +0.064]  ratio new/home +0.050 [-0.054, +0.155]  (runs on new 5)
+    qwen7/M        home +0.414 [+0.367, +0.461]  new +0.028 [-0.015, +0.072]  ratio new/home +0.068 [-0.036, +0.171]  (runs on new 5)
+    qwen7/O        home +0.265 [+0.214, +0.315]  new +0.043 [-0.012, +0.099]  ratio new/home +0.161 [-0.049, +0.390]  (runs on new 5)
+    qwen7/Q        home +0.443 [+0.406, +0.481]  new +0.007 [-0.036, +0.050]  ratio new/home +0.017 [-0.084, +0.110]  (runs on new 9)
+    verdict coverage of changed key-wrong answers (new): 4683/5122
+  content lift S (judges outside the panel (vs Q M G O); changed key-wrong answers, all verdicts available; run-weighted):
+    pooled         home +0.329 [+0.244, +0.402]  new +0.038 [-0.017, +0.098]  ratio new/home +0.117 [-0.057, +0.320]  (runs on new 7)
+    qwen7          home +0.307 [+0.168, +0.428]  new +0.042 [-0.045, +0.130]  ratio new/home +0.136 [-0.157, +0.511]  (runs on new 3)
+    llama8         home +0.350 [+0.264, +0.431]  new +0.035 [-0.038, +0.109]  ratio new/home +0.100 [-0.112, +0.318]  (runs on new 4)
+    qwen7/pq       home +0.291 [+0.095, +0.470]  new +0.066 [-0.053, +0.191]  ratio new/home +0.226 [-0.237, +1.043]  (runs on new 2)
+    qwen7/nq       home +0.341 [+0.210, +0.472]  new -0.006 [-0.115, +0.091]  ratio new/home -0.017 [-0.357, +0.290]  (runs on new 1)
+    llama8/pq      home +0.271 [+0.131, +0.408]  new +0.008 [-0.101, +0.133]  ratio new/home +0.028 [-0.421, +0.561]  (runs on new 2)
+    llama8/nq      home +0.429 [+0.338, +0.524]  new +0.062 [-0.022, +0.153]  ratio new/home +0.145 [-0.051, +0.368]  (runs on new 2)
+    llama8/QF      home +0.350 [+0.264, +0.431]  new +0.035 [-0.038, +0.109]  ratio new/home +0.100 [-0.112, +0.318]  (runs on new 4)
+    qwen7/QF       home +0.307 [+0.168, +0.428]  new +0.042 [-0.045, +0.130]  ratio new/home +0.136 [-0.157, +0.511]  (runs on new 3)
+    verdict coverage of changed key-wrong answers (new): 266/319
+-- (iv)/(v-R1) costs per 100 questions (regimes r02 / r02e) and installed judge-paid wrong answers
+  columns: RW withheld/100 new | LOC located/100 | FRJ judge false rejects/100 | inherited share LOC/FRJ | located share LOC/RW | R1 installed judge-paid key-wrong/100 train | IHr (r02, audited-wrong)/100 train | R1 coverage-corrected ; coverage = share of changed key-wrong training answers with an own-judge verdict
+    Q_t50 qwen7 h1    runs 3       abst 0.02 | +0.00 [+0.00,+0.00] | -0.02 [-0.03,-0.01] | +4.04 [+2.71,+5.57] | -0.005 [-0.005,-0.005] | +nan [+nan,+nan] | +13.33 [+11.11,+15.45] | +13.11 [+10.89,+15.27] | +13.33 [+11.11,+15.45] | coverage 1.00 | placebo h1:sim35fn00(0.00/0.00)
+    Q_t50 qwen7 pq    runs 3       abst 0.07 | +0.09 [+0.00,+0.22] | +0.03 [-0.02,+0.13] | +4.27 [+2.80,+5.87] | +0.008 [-0.005,+0.032] | +0.381 [-0.354,+0.919] | +19.38 [+16.69,+21.76] | +18.40 [+15.73,+20.73] | +19.38 [+16.69,+21.76] | coverage 1.00 | placebo pq:lenQ(0.00/0.00)
+    Q_t50 qwen7 nq    runs 3       abst 0.17 | +0.09 [+0.00,+0.22] | -0.02 [-0.03,-0.01] | +2.53 [+1.47,+3.67] | -0.006 [-0.011,-0.005] | -0.171 [-0.507,-0.049] | +20.98 [+18.49,+23.64] | +18.44 [+16.22,+20.93] | +20.98 [+18.49,+23.64] | coverage 1.00 | placebo nq:lenQ(0.00/0.00)
+    Q_t50 llama8 h1    runs 3       abst 0.00 | +0.00 [+0.00,+0.00] | -0.03 [-0.04,-0.02] | +5.71 [+3.97,+7.38] | -0.005 [-0.005,-0.005] | +nan [+nan,+nan] | +8.27 [+6.62,+10.02] | +7.56 [+6.04,+9.29] | +8.27 [+6.62,+10.02] | coverage 1.00 | placebo h1:sim20fn00(0.00/0.00)
+    Q_t50 llama8 pq    runs 3       abst 0.01 | +0.13 [+0.00,+0.40] | +0.01 [-0.05,+0.10] | +7.87 [+6.00,+9.73] | +0.001 [-0.005,+0.013] | +0.038 [-0.503,+0.655] | +9.69 [+8.04,+11.53] | +8.49 [+6.82,+10.20] | +9.69 [+8.04,+11.53] | coverage 1.00 | placebo pq:sim35fn00(0.00/0.00)
+    Q_t50 llama8 nq    runs 3       abst 0.05 | +0.36 [+0.13,+0.67] | -0.03 [-0.05,-0.02] | +4.00 [+2.53,+5.33] | -0.007 [-0.012,-0.005] | -0.075 [-0.244,-0.036] | +20.89 [+18.36,+23.20] | +16.22 [+13.87,+18.42] | +20.89 [+18.36,+23.20] | coverage 1.00 | placebo nq:lenQ(0.00/0.00)
+    Q_t50 qwen7 all   runs 3+3+3   abst 0.09 | +0.06 [+0.02,+0.12] | -0.00 [-0.02,+0.03] | +3.61 [+2.84,+4.37] | -0.000 [-0.005,+0.010] | -0.004 [-0.950,+0.462] | +17.90 [+16.59,+19.28] | +16.65 [+15.37,+18.00] | +17.90 [+16.59,+19.28] | coverage 1.00 | placebo h1:sim35fn00(0.00/0.00) pq:lenQ(0.00/0.00) nq:lenQ(0.00/0.00)
+    Q_t50 llama8 all   runs 3+3+3   abst 0.02 | +0.17 [+0.06,+0.28] | -0.02 [-0.04,+0.02] | +5.86 [+4.91,+6.85] | -0.003 [-0.006,+0.004] | -0.100 [-0.497,+0.134] | +12.95 [+11.80,+14.10] | +10.76 [+9.64,+11.76] | +12.95 [+11.80,+14.10] | coverage 1.00 | placebo h1:sim20fn00(0.00/0.00) pq:sim35fn00(0.00/0.00) nq:lenQ(0.00/0.00)
+    Q_t50 qwen7 pq+nq runs 3+3     abst 0.12 | +0.09 [+0.02,+0.18] | +0.01 [-0.02,+0.07] | +3.40 [+2.47,+4.40] | +0.003 [-0.006,+0.020] | +0.105 [-0.576,+0.571] | +20.18 [+18.30,+21.86] | +18.42 [+16.72,+19.92] | +20.18 [+18.30,+21.86] | coverage 1.00 | placebo pq:lenQ(0.00/0.00) nq:lenQ(0.00/0.00)
+    Q_t50 llama8 pq+nq runs 3+3     abst 0.03 | +0.24 [+0.09,+0.44] | -0.01 [-0.04,+0.04] | +5.93 [+4.80,+7.10] | -0.002 [-0.007,+0.006] | -0.044 [-0.287,+0.141] | +15.29 [+13.92,+17.03] | +12.36 [+11.04,+13.88] | +15.29 [+13.92,+17.03] | coverage 1.00 | placebo pq:sim35fn00(0.00/0.00) nq:lenQ(0.00/0.00)
+    M_t50 qwen7 h1    runs 1       abst 0.01 | +0.00 [+0.00,+0.00] | -0.01 [-0.01,-0.00] | +1.95 [+0.97,+2.92] | -0.005 [-0.005,-0.005] | +nan [+nan,+nan] | +11.87 [+9.73,+14.00] | +11.47 [+9.20,+13.60] | +11.87 [+9.73,+14.00] | coverage 1.00 | placebo h1:sim35fn00(0.00/0.00)
+    M_t50 qwen7 pq    runs 2       abst 0.05 | +0.00 [+0.00,+0.00] | -0.00 [-0.01,-0.00] | +0.67 [+0.13,+1.33] | -0.004 [-0.005,-0.003] | +nan [+nan,+nan] | +19.27 [+16.67,+21.83] | +17.67 [+15.10,+20.27] | +19.27 [+16.67,+21.83] | coverage 1.00 | placebo pq:lenQ(0.00/0.00)
+    M_t50 qwen7 nq    runs 2       abst 0.17 | +0.07 [+0.00,+0.20] | -0.01 [-0.06,-0.00] | +1.47 [+0.67,+2.40] | -0.009 [-0.044,-0.002] | -0.198 [-0.660,-0.023] | +23.53 [+21.07,+26.30] | +20.40 [+18.20,+22.97] | +23.60 [+21.19,+26.46] | coverage 1.00 | placebo nq:sim35fn00(0.00/0.00)
+    M_t50 llama8 h1    runs 1       abst 0.01 | +0.00 [+0.00,+0.00] | -0.01 [-0.02,-0.01] | +2.09 [+1.11,+3.14] | -0.005 [-0.005,-0.005] | +nan [+nan,+nan] | +8.00 [+6.13,+9.87] | +7.47 [+5.66,+9.33] | +8.00 [+6.13,+9.87] | coverage 1.00 | placebo h1:sim20fn00(0.00/0.00)
+    M_t50 llama8 pq    runs 2       abst 0.01 | +0.07 [+0.00,+0.20] | -0.01 [-0.01,-0.00] | +1.20 [+0.53,+2.00] | -0.005 [-0.005,-0.005] | -0.090 [-0.140,-0.020] | +7.40 [+5.80,+9.07] | +6.00 [+4.60,+7.47] | +7.40 [+5.80,+9.07] | coverage 1.00 | placebo pq:sim35fn00(0.00/0.00)
+    M_t50 llama8 nq    runs 2       abst 0.02 | +0.00 [+0.00,+0.00] | -0.01 [-0.02,-0.01] | +2.67 [+1.47,+3.87] | -0.005 [-0.005,-0.005] | +nan [+nan,+nan] | +24.00 [+21.00,+26.77] | +19.40 [+16.77,+21.80] | +24.06 [+21.00,+26.77] | coverage 1.00 | placebo nq:lenQ(0.00/0.00)
+    M_t50 qwen7 all   runs 1+2+2   abst 0.08 | +0.02 [+0.00,+0.07] | -0.01 [-0.02,-0.00] | +1.35 [+0.90,+1.87] | -0.006 [-0.017,-0.004] | -0.378 [-0.759,-0.081] | +18.22 [+16.64,+19.63] | +16.51 [+14.94,+17.92] | +18.24 [+16.69,+19.66] | coverage 1.00 | placebo h1:sim35fn00(0.00/0.00) pq:lenQ(0.00/0.00) nq:sim35fn00(0.00/0.00)
+    M_t50 llama8 all   runs 1+2+2   abst 0.01 | +0.02 [+0.00,+0.07] | -0.01 [-0.01,-0.01] | +1.98 [+1.40,+2.52] | -0.005 [-0.005,-0.005] | -0.440 [-0.570,-0.113] | +13.13 [+11.86,+14.33] | +10.96 [+9.83,+12.21] | +13.15 [+11.88,+14.35] | coverage 1.00 | placebo h1:sim20fn00(0.00/0.00) pq:sim35fn00(0.00/0.00) nq:lenQ(0.00/0.00)
+    M_t50 qwen7 pq+nq runs 2+2     abst 0.11 | +0.03 [+0.00,+0.10] | -0.01 [-0.03,-0.00] | +1.07 [+0.60,+1.53] | -0.007 [-0.031,-0.003] | -0.238 [-0.670,-0.035] | +21.40 [+19.32,+23.48] | +19.03 [+17.13,+21.12] | +21.43 [+19.38,+23.50] | coverage 1.00 | placebo pq:lenQ(0.00/0.00) nq:sim35fn00(0.00/0.00)
+    M_t50 llama8 pq+nq runs 2+2     abst 0.02 | +0.03 [+0.00,+0.10] | -0.01 [-0.01,-0.01] | +1.93 [+1.33,+2.67] | -0.005 [-0.005,-0.005] | -0.290 [-0.380,-0.073] | +15.70 [+14.25,+17.33] | +12.70 [+11.28,+14.33] | +15.73 [+14.27,+17.40] | coverage 1.00 | placebo pq:sim35fn00(0.00/0.00) nq:lenQ(0.00/0.00)
+    G_t50 qwen7 h1    runs 1       abst 0.04 | +0.14 [+0.00,+0.42] | -0.04 [-0.09,-0.03] | +8.64 [+6.69,+10.86] | -0.005 [-0.010,-0.005] | -0.310 [-0.379,-0.162] | +6.93 [+5.13,+8.67] | +6.53 [+4.80,+8.40] | +8.16 [+6.16,+10.12] | coverage 0.85 | placebo h1:sim35fn00(0.00/0.00)
+    G_t50 qwen7 pq    runs 2       abst 0.13 | +0.93 [+0.50,+1.40] | -0.01 [-0.43,+0.25] | +7.33 [+5.73,+9.20] | -0.002 [-0.056,+0.036] | -0.013 [-0.485,+0.274] | +17.73 [+15.30,+20.53] | +16.47 [+14.16,+19.13] | +18.10 [+15.64,+20.99] | coverage 0.98 | placebo pq:sim30fn20(0.02/0.02)
+    G_t50 qwen7 nq    runs 2       abst 0.24 | +0.60 [+0.23,+1.00] | -0.25 [-0.64,-0.02] | +4.40 [+3.13,+5.73] | -0.057 [-0.145,-0.005] | -0.419 [-1.358,-0.039] | +18.13 [+15.73,+20.77] | +14.40 [+12.00,+16.80] | +18.54 [+16.13,+21.13] | coverage 0.98 | placebo nq:sim35fn00(0.00/0.01)
+    G_t50 llama8 h1    runs 1       abst 0.01 | +0.14 [+0.00,+0.56] | +0.06 [-0.09,+0.47] | +15.46 [+12.81,+18.18] | +0.004 [-0.005,+0.027] | +0.445 [+0.350,+0.852] | +5.60 [+4.00,+7.27] | +5.33 [+3.87,+6.93] | +6.74 [+5.02,+8.48] | coverage 0.83 | placebo h1:sim20fn00(0.00/0.00)
+    G_t50 llama8 pq    runs 2       abst 0.04 | +0.67 [+0.23,+1.20] | -0.39 [-1.02,+0.02] | +14.13 [+11.87,+16.80] | -0.027 [-0.069,+0.001] | -0.579 [-1.664,+0.024] | +10.47 [+8.53,+12.47] | +9.33 [+7.50,+11.33] | +10.47 [+8.53,+12.47] | coverage 1.00 | placebo pq:sim20fn00(0.00/0.01)
+    G_t50 llama8 nq    runs 2       abst 0.18 | +3.53 [+2.43,+4.87] | +0.27 [-0.20,+0.73] | +8.80 [+6.67,+10.67] | +0.031 [-0.021,+0.088] | +0.077 [-0.059,+0.208] | +18.80 [+16.33,+21.00] | +13.47 [+11.27,+15.50] | +19.29 [+16.80,+21.65] | coverage 0.97 | placebo nq:sim35fn00(0.01/0.04)
+    G_t50 qwen7 all   runs 1+2+2   abst 0.14 | +0.56 [+0.34,+0.81] | -0.10 [-0.30,+0.02] | +6.76 [+5.82,+7.75] | -0.015 [-0.043,+0.003] | -0.183 [-0.535,+0.038] | +14.27 [+13.03,+15.54] | +12.47 [+11.23,+13.71] | +14.98 [+13.64,+16.38] | coverage 0.95 | placebo h1:sim35fn00(0.00/0.00) pq:sim30fn20(0.02/0.02) nq:sim35fn00(0.00/0.01)
+    G_t50 llama8 all   runs 1+2+2   abst 0.07 | +1.47 [+1.01,+1.87] | -0.02 [-0.31,+0.22] | +12.76 [+11.45,+14.25] | -0.001 [-0.024,+0.018] | -0.012 [-0.231,+0.158] | +11.62 [+10.56,+12.90] | +9.38 [+8.33,+10.46] | +12.22 [+11.09,+13.51] | coverage 0.95 | placebo h1:sim20fn00(0.00/0.00) pq:sim20fn00(0.00/0.01) nq:sim35fn00(0.01/0.04)
+    G_t50 qwen7 pq+nq runs 2+2     abst 0.18 | +0.77 [+0.47,+1.10] | -0.13 [-0.41,+0.06] | +5.87 [+4.67,+7.07] | -0.022 [-0.071,+0.011] | -0.172 [-0.591,+0.085] | +17.93 [+16.08,+19.67] | +15.43 [+13.63,+17.10] | +18.32 [+16.40,+20.07] | coverage 0.98 | placebo pq:sim30fn20(0.02/0.02) nq:sim35fn00(0.00/0.01)
+    G_t50 llama8 pq+nq runs 2+2     abst 0.11 | +2.10 [+1.50,+2.77] | -0.06 [-0.40,+0.26] | +11.47 [+9.83,+13.00] | -0.005 [-0.035,+0.023] | -0.027 [-0.201,+0.119] | +14.63 [+13.13,+16.15] | +11.40 [+10.03,+12.68] | +14.88 [+13.42,+16.34] | coverage 0.98 | placebo pq:sim20fn00(0.00/0.01) nq:sim35fn00(0.01/0.04)
+    O_t50 qwen7 h1    runs 1       abst 0.19 | +2.92 [+1.74,+4.04] | +0.06 [-0.44,+0.56] | +7.24 [+5.22,+9.19] | +0.009 [-0.062,+0.080] | +0.021 [-0.168,+0.202] | +4.67 [+3.33,+6.13] | +4.27 [+2.80,+5.73] | +4.67 [+3.33,+6.13] | coverage 1.00 | placebo h1:sim25fn20(0.02/0.04)
+    O_t50 qwen7 pq    runs 2       abst 0.22 | +1.27 [+0.60,+2.07] | -0.05 [-0.13,-0.01] | +3.47 [+2.27,+4.74] | -0.014 [-0.036,-0.004] | -0.038 [-0.105,-0.011] | +6.60 [+5.07,+8.27] | +5.47 [+4.07,+7.10] | +6.70 [+5.15,+8.35] | coverage 0.99 | placebo pq:sim30fn20(0.02/0.02)
+    O_t50 qwen7 nq    runs 2       abst 0.44 | +4.00 [+2.90,+5.40] | +0.94 [+0.35,+1.65] | +4.67 [+3.20,+6.27] | +0.202 [+0.085,+0.328] | +0.235 [+0.097,+0.398] | +8.93 [+6.93,+10.63] | +6.47 [+4.87,+7.97] | +8.93 [+6.93,+10.63] | coverage 1.00 | placebo nq:sim35fn00(0.00/0.09)
+    O_t50 llama8 h1    runs 1       abst 0.17 | +6.69 [+4.74,+8.50] | +1.17 [+0.13,+2.50] | +15.32 [+12.67,+18.18] | +0.077 [+0.009,+0.162] | +0.176 [+0.021,+0.367] | +3.60 [+2.40,+5.07] | +3.07 [+2.00,+4.40] | +4.63 [+3.33,+6.34] | coverage 0.78 | placebo h1:sim00fn20(0.06/0.08)
+    O_t50 llama8 pq    runs 2       abst 0.10 | +2.40 [+1.53,+3.27] | +0.23 [-0.35,+0.77] | +8.93 [+7.07,+10.87] | +0.026 [-0.039,+0.085] | +0.095 [-0.169,+0.294] | +6.80 [+5.27,+8.37] | +5.27 [+3.93,+6.70] | +6.92 [+5.40,+8.55] | coverage 0.98 | placebo pq:sim00fn00(0.02/0.02)
+    O_t50 llama8 nq    runs 2       abst 0.16 | +4.47 [+3.17,+5.60] | -0.15 [-1.10,+0.93] | +10.53 [+8.33,+12.93] | -0.015 [-0.109,+0.089] | -0.035 [-0.268,+0.205] | +19.00 [+16.53,+21.27] | +16.07 [+13.63,+18.30] | +19.00 [+16.53,+21.27] | coverage 1.00 | placebo nq:sim20fn00(0.09/0.08)
+    O_t50 qwen7 all   runs 1+2+2   abst 0.28 | +2.73 [+2.13,+3.37] | +0.32 [+0.07,+0.59] | +5.09 [+4.24,+6.02] | +0.063 [+0.015,+0.113] | +0.118 [+0.027,+0.211] | +6.73 [+5.80,+7.72] | +5.40 [+4.56,+6.23] | +6.77 [+5.83,+7.77] | coverage 1.00 | placebo h1:sim25fn20(0.02/0.04) pq:sim30fn20(0.02/0.02) nq:sim35fn00(0.00/0.09)
+    O_t50 llama8 all   runs 1+2+2   abst 0.14 | +4.49 [+3.69,+5.31] | +0.40 [-0.09,+0.97] | +11.54 [+10.32,+12.83] | +0.035 [-0.007,+0.085] | +0.090 [-0.021,+0.219] | +9.80 [+8.78,+10.90] | +8.13 [+7.20,+9.22] | +10.14 [+9.09,+11.31] | coverage 0.97 | placebo h1:sim00fn20(0.06/0.08) pq:sim00fn00(0.02/0.02) nq:sim20fn00(0.09/0.08)
+    O_t50 qwen7 pq+nq runs 2+2     abst 0.33 | +2.63 [+1.90,+3.33] | +0.45 [+0.13,+0.80] | +4.07 [+3.07,+5.07] | +0.110 [+0.035,+0.181] | +0.169 [+0.053,+0.297] | +7.77 [+6.60,+8.87] | +5.97 [+4.93,+6.97] | +7.82 [+6.65,+8.93] | coverage 0.99 | placebo pq:sim30fn20(0.02/0.02) nq:sim35fn00(0.00/0.09)
+    O_t50 llama8 pq+nq runs 2+2     abst 0.13 | +3.43 [+2.67,+4.20] | +0.04 [-0.58,+0.58] | +9.73 [+8.40,+11.07] | +0.004 [-0.059,+0.061] | +0.011 [-0.179,+0.170] | +12.90 [+11.43,+14.53] | +10.67 [+9.23,+12.23] | +12.96 [+11.49,+14.64] | coverage 1.00 | placebo pq:sim00fn00(0.02/0.02) nq:sim20fn00(0.09/0.08)
+    QF_t50 qwen7 pq    runs 2       abst 0.41 | +7.87 [+6.33,+9.80] | +0.19 [-0.17,+0.64] | +3.60 [+2.27,+5.00] | +0.053 [-0.051,+0.172] | +0.024 [-0.020,+0.084] | +0.87 [+0.33,+1.53] | +0.13 [+0.00,+0.33] | +1.03 [+0.44,+1.72] | coverage 0.84 | placebo pq:sim10fn20(0.12/0.11)
+    QF_t50 qwen7 nq    runs 1       abst 0.58 | +9.07 [+7.26,+10.93] | +0.33 [-0.18,+0.93] | +2.67 [+1.60,+3.87] | +0.125 [-0.070,+0.348] | +0.037 [-0.019,+0.103] | +3.87 [+2.53,+5.33] | +1.73 [+0.86,+2.80] | +4.70 [+3.25,+6.51] | coverage 0.82 | placebo nq:sim25fn20(0.19/0.21)
+    QF_t50 llama8 pq    runs 2       abst 0.11 | +2.13 [+1.27,+3.20] | -0.02 [-0.03,-0.01] | +4.40 [+2.93,+5.73] | -0.004 [-0.008,-0.002] | -0.007 [-0.016,-0.004] | +1.27 [+0.60,+2.07] | +0.47 [+0.07,+0.93] | +1.35 [+0.65,+2.12] | coverage 0.94 | placebo pq:sim00fn00(0.02/0.02)
+    QF_t50 llama8 nq    runs 2       abst 0.41 | +13.93 [+11.60,+16.40] | +0.15 [-0.37,+0.60] | +4.00 [+2.67,+5.47] | +0.037 [-0.088,+0.153] | +0.011 [-0.025,+0.043] | +5.40 [+4.03,+6.87] | +1.80 [+1.07,+2.60] | +6.01 [+4.47,+7.66] | coverage 0.90 | placebo nq:sim25fn20(0.22/0.21)
+    QF_t50 qwen7 all   runs 2+1     abst 0.50 | +8.47 [+7.18,+9.90] | +0.26 [-0.03,+0.59] | +3.13 [+2.27,+3.93] | +0.084 [-0.012,+0.186] | +0.031 [-0.004,+0.073] | +2.37 [+1.67,+3.13] | +0.93 [+0.47,+1.45] | +2.87 [+2.08,+3.69] | coverage 0.83 | placebo pq:sim10fn20(0.12/0.11) nq:sim25fn20(0.19/0.21)
+    QF_t50 llama8 all   runs 2+2     abst 0.26 | +8.03 [+6.78,+9.38] | +0.07 [-0.20,+0.30] | +4.20 [+3.27,+5.13] | +0.016 [-0.046,+0.069] | +0.008 [-0.023,+0.037] | +3.33 [+2.55,+4.17] | +1.13 [+0.73,+1.57] | +3.67 [+2.83,+4.57] | coverage 0.91 | placebo pq:sim00fn00(0.02/0.02) nq:sim25fn20(0.22/0.21)
+    QF_t50 qwen7 pq+nq runs 2+1     abst 0.50 | +8.47 [+7.17,+10.00] | +0.26 [-0.08,+0.62] | +3.13 [+2.33,+4.07] | +0.084 [-0.024,+0.190] | +0.031 [-0.011,+0.070] | +2.37 [+1.57,+3.18] | +0.93 [+0.50,+1.47] | +2.87 [+2.04,+3.76] | coverage 0.83 | placebo pq:sim10fn20(0.12/0.11) nq:sim25fn20(0.19/0.21)
+    QF_t50 llama8 pq+nq runs 2+2     abst 0.26 | +8.03 [+6.87,+9.40] | +0.07 [-0.14,+0.26] | +4.20 [+3.27,+5.13] | +0.016 [-0.034,+0.065] | +0.008 [-0.018,+0.034] | +3.33 [+2.57,+4.18] | +1.13 [+0.73,+1.65] | +3.67 [+2.90,+4.58] | coverage 0.91 | placebo pq:sim00fn00(0.02/0.02) nq:sim25fn20(0.22/0.21)
+-- (v-R2) dose top-minus-bottom (dose/d04)
+  dose (d04): grader-specific T-B (refusal points, top minus bottom quintile of the own-grader probe, run minus 3 nearest no-location runs) | slope per SD
+    all judges|pooled|all    T-B +0.005 [-0.006, +0.017]  slope +0.001 [-0.003, +0.005]  units 28
+    all judges|pooled|pq+nq  T-B +0.007 [-0.009, +0.023]  slope +0.001 [-0.003, +0.007]  units 20
+    all judges|qwen7|all     T-B +0.000 [-0.017, +0.022]  slope -0.000 [-0.006, +0.006]  units 14
+    all judges|qwen7|pq+nq   T-B +0.001 [-0.024, +0.030]  slope -0.000 [-0.008, +0.009]  units 10
+    all judges|llama8|all    T-B +0.010 [-0.004, +0.024]  slope +0.002 [-0.001, +0.007]  units 14
+    all judges|llama8|pq+nq  T-B +0.013 [-0.008, +0.032]  slope +0.003 [-0.002, +0.009]  units 10
+    Q|pooled|all             T-B +0.001 [-0.003, +0.013]  slope +0.000 [-0.001, +0.003]  units 6
+    Q|pooled|pq+nq           T-B +0.002 [-0.004, +0.020]  slope +0.001 [-0.001, +0.005]  units 4
+    Q|qwen7|all              T-B -0.000 [-0.004, +0.001]  slope -0.000 [-0.002, +0.000]  units 3
+    Q|qwen7|pq+nq            T-B -0.000 [-0.006, +0.001]  slope -0.000 [-0.002, +0.000]  units 2
+    Q|llama8|all             T-B +0.003 [-0.003, +0.025]  slope +0.001 [-0.001, +0.007]  units 3
+    Q|llama8|pq+nq           T-B +0.004 [-0.005, +0.038]  slope +0.001 [-0.001, +0.010]  units 2
+    M|pooled|all             T-B +0.000 [-0.001, +0.006]  slope +0.000 [-0.000, +0.001]  units 6
+    M|pooled|pq+nq           T-B +0.000 [-0.001, +0.009]  slope +0.000 [-0.000, +0.002]  units 4
+    M|qwen7|all              T-B +0.000 [+0.000, +0.011]  slope +0.000 [+0.000, +0.003]  units 3
+    M|qwen7|pq+nq            T-B +0.000 [+0.000, +0.016]  slope +0.000 [+0.000, +0.004]  units 2
+    M|llama8|all             T-B +0.000 [-0.001, +0.001]  slope +0.000 [-0.000, +0.001]  units 3
+    M|llama8|pq+nq           T-B +0.000 [-0.002, +0.001]  slope +0.000 [-0.001, +0.001]  units 2
+    G|pooled|all             T-B +0.003 [-0.014, +0.020]  slope +0.001 [-0.005, +0.006]  units 6
+    G|pooled|pq+nq           T-B +0.005 [-0.022, +0.030]  slope +0.001 [-0.008, +0.008]  units 4
+    G|qwen7|all              T-B +0.011 [-0.005, +0.038]  slope +0.005 [-0.000, +0.014]  units 3
+    G|qwen7|pq+nq            T-B +0.016 [-0.007, +0.057]  slope +0.007 [-0.001, +0.019]  units 2
+    G|llama8|all             T-B -0.005 [-0.034, +0.017]  slope -0.004 [-0.014, +0.003]  units 3
+    G|llama8|pq+nq           T-B -0.007 [-0.051, +0.026]  slope -0.005 [-0.021, +0.005]  units 2
+    O|pooled|all             T-B +0.022 [-0.006, +0.053]  slope +0.007 [-0.001, +0.019]  units 6
+    O|pooled|pq+nq           T-B +0.031 [-0.008, +0.076]  slope +0.011 [-0.001, +0.027]  units 4
+    O|qwen7|all              T-B +0.021 [-0.028, +0.078]  slope +0.007 [-0.009, +0.029]  units 3
+    O|qwen7|pq+nq            T-B +0.034 [-0.030, +0.121]  slope +0.013 [-0.008, +0.046]  units 2
+    O|llama8|all             T-B +0.023 [-0.001, +0.059]  slope +0.007 [+0.000, +0.017]  units 3
+    O|llama8|pq+nq           T-B +0.028 [-0.006, +0.080]  slope +0.008 [-0.000, +0.022]  units 2
+    QF|pooled|all            T-B -0.004 [-0.067, +0.054]  slope -0.005 [-0.024, +0.014]  units 4
+    QF|pooled|pq+nq          T-B -0.004 [-0.067, +0.054]  slope -0.005 [-0.024, +0.014]  units 4
+    QF|qwen7|all             T-B -0.045 [-0.148, +0.053]  slope -0.020 [-0.053, +0.012]  units 2
+    QF|qwen7|pq+nq           T-B -0.045 [-0.148, +0.053]  slope -0.020 [-0.053, +0.012]  units 2
+    QF|llama8|all            T-B +0.038 [-0.034, +0.117]  slope +0.010 [-0.008, +0.037]  units 2
+    QF|llama8|pq+nq          T-B +0.038 [-0.034, +0.117]  slope +0.010 [-0.008, +0.037]  units 2
+    units: llama8/h1/G +0.000 (n 1) llama8/h1/M +0.000 (n 1) llama8/h1/O +0.014 (n 1) llama8/h1/Q +0.000 (n 3) llama8/nq/G -0.010 (n 2) llama8/nq/M +0.000 (n 2) llama8/nq/O +0.049 (n 2) llama8/nq/Q +0.008 (n 3) llama8/nq/QF +0.077 (n 2) llama8/pq/G -0.004 (n 2) llama8/pq/M +0.000 (n 2) llama8/pq/O +0.007 (n 2) llama8/pq/Q +0.000 (n 3) llama8/pq/QF -0.002 (n 2) qwen7/h1/G +0.000 (n 1) qwen7/h1/M +0.000 (n 1) qwen7/h1/O -0.005 (n 1) qwen7/h1/Q +0.000 (n 3) qwen7/nq/G +0.005 (n 2) qwen7/nq/M +0.000 (n 2) qwen7/nq/O +0.054 (n 2) qwen7/nq/Q +0.000 (n 3) qwen7/nq/QF -0.039 (n 1) qwen7/pq/G +0.027 (n 2) qwen7/pq/M +0.000 (n 2) qwen7/pq/O +0.014 (n 2) qwen7/pq/Q -0.000 (n 3) qwen7/pq/QF -0.052 (n 2)
+   (108s)

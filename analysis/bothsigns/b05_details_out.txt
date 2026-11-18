@@ -1,0 +1,99 @@
+(1) mean transfer T = new/home by readability bin (eligible arms; median T in brackets; n arms)
+  kind  FR       [0.00,0.60) +0.00 (-0.05) n 5 | [0.60,0.70) +0.11 (+0.11) n 2 | [0.70,0.80) +0.15 (+0.13) n 11 | [0.80,0.95) +0.26 (+0.29) n 8 | [0.95,1.00) +0.64 (+0.62) n 7
+  kind  FA+form  [0.00,0.60) +0.11 (+0.08) n 6 | [0.60,0.70) +0.14 (+0.15) n 12 | [0.70,0.80) +0.22 (+0.22) n 4 | [0.80,0.95) -- | [0.95,1.00) +0.50 (+0.49) n 8
+  dec   FR       [0.00,0.60) +0.10 (-0.00) n 5 | [0.60,0.70) -0.05 (-0.01) n 3 | [0.70,0.80) +0.14 (+0.14) n 11 | [0.80,0.95) +0.24 (+0.21) n 8 | [0.95,1.00) +0.82 (+0.80) n 8
+  dec   FA+form  [0.00,0.60) +0.05 (+0.08) n 4 | [0.60,0.70) +0.18 (+0.24) n 10 | [0.70,0.80) +0.29 (+0.24) n 4 | [0.80,0.95) -- | [0.95,1.00) +0.70 (+0.60) n 8
+
+(2) cell level, natural / intermediate arms only (judges, copies of judges' rejections, popularity graders, key misses); a cell enters if its home effect CI > 0 and >= 0.05
+  kind  pooled    n 77 rho +0.32 cells [+0.08,+0.51] measurement [+0.03,+0.50] perm p 0.0063 | readability range 0.49-0.91, median T +0.15
+  kind  qwen7     n 38 rho +0.37 cells [+0.05,+0.64] measurement [-0.05,+0.55] perm p 0.0273 | readability range 0.49-0.91, median T +0.11
+  kind  llama8    n 39 rho +0.24 cells [-0.07,+0.54] measurement [-0.01,+0.59] perm p 0.1406 | readability range 0.57-0.91, median T +0.17
+  kind  FR        n 42 rho +0.33 cells [-0.00,+0.61] measurement [-0.11,+0.53] perm p 0.0380 | readability range 0.56-0.91, median T +0.24
+  kind  FA        n 35 rho +0.42 cells [+0.10,+0.66] measurement [+0.00,+0.54] perm p 0.0137 | readability range 0.49-0.75, median T +0.15
+  kind  PopQA     n 22 rho +0.36 cells [-0.13,+0.70] measurement [-0.16,+0.63] perm p 0.0990 | readability range 0.60-0.91, median T +0.30
+  kind  TriviaQA  n 21 rho +0.31 cells [-0.18,+0.72] measurement [-0.38,+0.57] perm p 0.1613 | readability range 0.49-0.81, median T +0.04
+  kind  NQ-open   n 34 rho +0.19 cells [-0.22,+0.54] measurement [-0.08,+0.54] perm p 0.2916 | readability range 0.53-0.79, median T +0.21
+  dec   pooled    n 78 rho +0.09 cells [-0.15,+0.32] measurement [-0.08,+0.32] perm p 0.4598 | readability range 0.49-0.91, median T +0.18
+  dec   qwen7     n 41 rho +0.18 cells [-0.15,+0.49] measurement [-0.10,+0.41] perm p 0.2426 | readability range 0.49-0.91, median T +0.20
+  dec   llama8    n 37 rho +0.01 cells [-0.32,+0.35] measurement [-0.24,+0.35] perm p 0.9590 | readability range 0.57-0.91, median T +0.15
+  dec   FR        n 49 rho +0.30 cells [+0.02,+0.56] measurement [+0.04,+0.51] perm p 0.0363 | readability range 0.56-0.91, median T +0.15
+  dec   FA        n 29 rho +0.04 cells [-0.38,+0.44] measurement [-0.30,+0.35] perm p 0.8167 | readability range 0.49-0.75, median T +0.21
+  dec   PopQA     n 19 rho +0.38 cells [-0.16,+0.83] measurement [-0.12,+0.59] perm p 0.1120 | readability range 0.74-0.91, median T +0.30
+  dec   TriviaQA  n 23 rho +0.01 cells [-0.48,+0.46] measurement [-0.41,+0.40] perm p 0.9667 | readability range 0.49-0.81, median T +0.00
+  dec   NQ-open   n 36 rho +0.03 cells [-0.31,+0.35] measurement [-0.21,+0.38] perm p 0.8864 | readability range 0.53-0.79, median T +0.23
+
+(3) same judge, same operating point, same student: false rejections minus false accepts (arm level, pooled over datasets)
+  kind  pairs 15: readability FR - FA +0.107 [+0.081,+0.134] (FR higher in 0.93); transfer FR - FA +0.04 [-0.19,+0.27] (FR higher in 0.47); home FR - FA -0.141, new FR - FA -0.022
+      judgeGa35  llama8 T FR +0.42 FA +0.19 | R FR 0.84 FA 0.71
+      judgeGa35  qwen7  T FR +0.28 FA +0.16 | R FR 0.73 FA 0.60
+      judgeGt50  llama8 T FR +0.14 FA +0.16 | R FR 0.70 FA 0.62
+      judgeMa35  llama8 T FR +0.21 FA +0.22 | R FR 0.83 FA 0.68
+      judgeMa35  qwen7  T FR +0.52 FA +0.19 | R FR 0.81 FA 0.67
+      judgeOa35  llama8 T FR +0.03 FA +0.35 | R FR 0.79 FA 0.59
+      judgeOa35  qwen7  T FR +0.13 FA +0.20 | R FR 0.75 FA 0.57
+      judgeOt50  llama8 T FR +0.10 FA +0.15 | R FR 0.75 FA 0.70
+      judgeOt50  qwen7  T FR +0.04 FA +0.07 | R FR 0.73 FA 0.65
+      judgeQa35  llama8 T FR +0.32 FA +0.29 | R FR 0.82 FA 0.70
+      judgeQa35  qwen7  T FR +0.39 FA +0.13 | R FR 0.72 FA 0.68
+      judgeQa50  llama8 T FR +0.09 FA +0.10 | R FR 0.78 FA 0.65
+      judgeQa50  qwen7  T FR +0.20 FA +0.11 | R FR 0.72 FA 0.63
+      judgeRa35  llama8 T FR -0.03 FA +0.15 | R FR 0.65 FA 0.58
+      judgeRa35  qwen7  T FR +0.26 FA +0.05 | R FR 0.65 FA 0.65
+  dec   pairs 16: readability FR - FA +0.104 [+0.080,+0.129] (FR higher in 0.94); transfer FR - FA -0.00 [-0.31,+0.33] (FR higher in 0.38); home FR - FA +0.102, new FR - FA +0.026
+      judgeGa35  llama8 T FR +0.33 FA +0.42 | R FR 0.84 FA 0.71
+      judgeGa35  qwen7  T FR +0.13 FA +0.42 | R FR 0.73 FA 0.60
+      judgeGt50  llama8 T FR +0.07 FA +0.43 | R FR 0.70 FA 0.62
+      judgeGt50  qwen7  T FR -0.30 FA +0.22 | R FR 0.62 FA 0.56
+      judgeMa35  llama8 T FR +0.20 FA +0.31 | R FR 0.83 FA 0.68
+      judgeMa35  qwen7  T FR +0.50 FA -0.08 | R FR 0.81 FA 0.67
+      judgeOa35  llama8 T FR +0.08 FA +0.08 | R FR 0.79 FA 0.59
+      judgeOa35  qwen7  T FR +0.22 FA -0.19 | R FR 0.75 FA 0.57
+      judgeOt50  llama8 T FR +0.14 FA +0.05 | R FR 0.75 FA 0.70
+      judgeOt50  qwen7  T FR +0.19 FA +0.30 | R FR 0.73 FA 0.65
+      judgeQa35  llama8 T FR +0.22 FA +0.18 | R FR 0.82 FA 0.70
+      judgeQa35  qwen7  T FR +0.23 FA +0.05 | R FR 0.72 FA 0.68
+      judgeQa50  llama8 T FR +0.12 FA +0.30 | R FR 0.78 FA 0.65
+      judgeQa50  qwen7  T FR +0.15 FA +0.15 | R FR 0.72 FA 0.63
+      judgeRa35  llama8 T FR -0.01 FA +0.08 | R FR 0.65 FA 0.58
+      judgeRa35  qwen7  T FR +0.17 FA -0.27 | R FR 0.65 FA 0.65
+
+(5) FA / form content channel (changed wrong answers only), arm level: home, new, T; Spearman over FA / form arms with reliable home content effect
+  hash35     llama8 R 0.54 content home +0.609 [+0.470,+0.712] new +0.002 [-0.106,+0.064] T +0.00
+  judgeMt50  llama8 R 0.57 content home +0.442 [+0.211,+0.592] new +0.079 [-0.034,+0.246] T +0.18
+  judgeRa35  llama8 R 0.58 content home +0.395 [+0.237,+0.535] new +0.181 [-0.007,+0.377] T +0.46
+  judgeOa35  llama8 R 0.59 content home +0.556 [+0.387,+0.743] new +0.456 [+0.153,+0.569] T +0.82
+  judgeQt50  llama8 R 0.60 content home +0.401 [+0.301,+0.464] new +0.072 [-0.015,+0.174] T +0.18
+  judgeGt50  llama8 R 0.62 content home +0.368 [+0.259,+0.462] new +0.140 [+0.040,+0.251] T +0.38
+  judgeQa50  llama8 R 0.65 content home +0.527 [+0.450,+0.607] new +0.150 [+0.032,+0.261] T +0.28
+  judgeMa35  llama8 R 0.68 content home +0.711 [+0.567,+0.827] new +0.231 [-0.003,+0.435] T +0.32
+  judgeQa35  llama8 R 0.70 content home +0.563 [+0.443,+0.685] new +0.342 [+0.107,+0.568] T +0.61
+  judgeOt50  llama8 R 0.70 content home +0.307 [+0.233,+0.682] new +0.017 [-0.058,+0.215] T +0.06
+  judgeGa35  llama8 R 0.71 content home +0.511 [+0.374,+0.634] new +0.146 [-0.129,+0.374] T +0.28
+  typeB20    llama8 R 0.96 content home +0.116 [+0.012,+0.233] new +0.065 [-0.027,+0.152] T +0.56
+  typeB40    llama8 R 0.96 content home +0.087 [+0.016,+0.164] new +0.027 [-0.032,+0.089] T +0.31
+  typeB60    llama8 R 0.96 content home +0.113 [+0.037,+0.189] new +0.013 [-0.063,+0.094] T +0.11
+  long80     llama8 R 1.00 content home +0.845 [+0.763,+0.924] new +0.564 [+0.421,+0.688] T +0.67
+  judgeGt50  qwen7  R 0.56 content home +0.382 [+0.300,+0.481] new -0.068 [-0.241,+0.080] T -0.18
+  judgeOa35  qwen7  R 0.57 content home +0.559 [+0.450,+0.667] new +0.209 [+0.069,+0.359] T +0.37
+  judgeGa35  qwen7  R 0.60 content home +0.442 [+0.285,+0.599] new +0.136 [+0.027,+0.372] T +0.31
+  judgeQt50  qwen7  R 0.62 content home +0.435 [+0.342,+0.523] new +0.007 [-0.161,+0.149] T +0.02
+  judgeQa50  qwen7  R 0.63 content home +0.615 [+0.502,+0.674] new +0.063 [-0.009,+0.143] T +0.10
+  judgeOt50  qwen7  R 0.65 content home +0.460 [+0.360,+0.555] new +0.109 [+0.020,+0.211] T +0.24
+  judgeRa35  qwen7  R 0.65 content home +0.414 [+0.240,+0.596] new +0.078 [-0.106,+0.254] T +0.19
+  judgeMa35  qwen7  R 0.67 content home +0.572 [+0.405,+0.719] new +0.106 [-0.040,+0.276] T +0.18
+  judgeMt50  qwen7  R 0.67 content home +0.520 [+0.382,+0.638] new +0.053 [-0.117,+0.227] T +0.10
+  judgeQa35  qwen7  R 0.68 content home +0.559 [+0.438,+0.681] new +0.121 [+0.006,+0.246] T +0.22
+  popH40     qwen7  R 0.75 content home +0.412 [+0.221,+0.589] new +0.110 [-0.029,+0.240] T +0.27
+  popL40     qwen7  R 0.75 content home +0.181 [+0.115,+0.256] new +0.087 [-0.033,+0.201] T +0.48
+  typeA40    qwen7  R 0.97 content home +0.414 [+0.224,+0.622] new +0.257 [+0.086,+0.394] T +0.62
+  typeB20    qwen7  R 0.97 content home +0.388 [+0.188,+0.553] new -0.034 [-0.160,+0.101] T -0.09
+  typeB40    qwen7  R 0.97 content home +0.257 [+0.159,+0.358] new -0.013 [-0.116,+0.104] T -0.05
+  typeB60    qwen7  R 0.97 content home +0.275 [+0.182,+0.372] new +0.120 [+0.002,+0.266] T +0.43
+  Spearman all FA+form       n 31 rho +0.21 [-0.23,+0.58] perm p 0.2559
+  Spearman judges only       n 20 rho -0.01 [-0.51,+0.51] perm p 0.9820
+  Spearman designed removed  n 22 rho +0.11 [-0.39,+0.56] perm p 0.6305
+  judges: content new / home pooled = +0.27 (mean new +0.131, mean home +0.487, n 20); hash: +0.002 new vs +0.609 home
+
+(4) placebo arms (random-noise graders on a pseudo-random half; reference = the other noise families): effects should be 0
+  kind  25 placebo estimates (arm x part): mean -0.002, max |E| 0.056, 95% CIs covering 0: 1.00; readability 0.49-0.52
+  dec   32 placebo estimates (arm x part): mean -0.000, max |E| 0.035, 95% CIs covering 0: 0.84; readability 0.49-0.52

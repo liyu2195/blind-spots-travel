@@ -1,0 +1,154 @@
+(forced) f01_forced: forced-answer decoding with kept adapters (scoring rules fixed there before the runs).
+Inputs: bundle/st/res/run1/adeval/fprobe/<run>.jsonl (capitals probe) and fheld_{pq,h1,nq}/<run>.jsonl (the 1,500 questions of each dataset), rows of
+st_gen_forced.py: s = -1 the greedy answer, s = -2 the forced answer of a question whose greedy answer was a refusal (tries = the refusal texts in
+order, then text = the final output).
+Rule: an output is a refusal if its normalised answer matches the paper's "I don't know" pattern or the wider pattern of st_gen_forced.py or is
+empty, unless it is right by the loose answer key. The final answer of a question is the first output (greedy, then forced rounds) that is not a
+refusal; none = no answer.
+A. Capitals probe. Unit: the former-state capitals the untrained student answers right and the trained run refuses in its greedy answer (the paper's
+   refusals). Outcome: final answer right by the probe's answer list / wrong / none. Per grader and student, pooled over runs. Same for present-day.
+   Also: of ALL known former-state capitals, the share whose final answer is right (greedy or forced).
+B. The 1,500 questions of each dataset, held-out questions. Forced-choice accuracy = share whose final answer is right, by the loose answer key and
+   by key-or-audit (audit verdicts looked up by question and answer; coverage = share of final answers that are key-right or have a verdict).
+   Per grader: mean over runs within a student-dataset pair, minus the untrained student decoded the same way; then mean over pairs.
+   On the questions a run refuses: is the forced answer the untrained student's own final answer, and is it right as often?
+Usage: python3 -I -B f01_forced.py   Output: f01_forced_out.txt, f01_forced.json
+
+==================== A. capitals probe: what the students answer once "I don't know" is blocked
+
+== llama8: known former-state capitals 187, present-day 65; adapters decoded 86
+   grader: runs | former: refused (share of known) -> forced answer right / wrong / none | known former capitals right once forced | present-day: refused -> forced right
+   Qwen judge, 35% cut         : 6 | refused 1103 ( 98%) -> right  94.2% / wrong  5.8% / none  0.0% (runs 0.91-0.96) |  94.3% | refused   6 ( 2%) -> right 100.0%
+   Mistral judge, 35% cut      : 3 | refused  526 ( 94%) -> right  94.3% / wrong  5.7% / none  0.0% (runs 0.93-0.95) |  94.7% | refused  11 ( 6%) -> right 100.0%
+   Gemma judge, 35% cut        : 3 | refused  510 ( 91%) -> right  96.9% / wrong  3.1% / none  0.0% (runs 0.96-0.98) |  97.1% | refused   1 ( 1%) -> right 100.0%
+   OLMo judge, 35% cut         : 3 | refused  499 ( 89%) -> right  97.2% / wrong  2.8% / none  0.0% (runs 0.95-0.99) |  97.5% | refused   9 ( 5%) -> right 100.0%
+   Jury of five                : 4 | refused  710 ( 95%) -> right  93.1% / wrong  6.9% / none  0.0% (runs 0.92-0.95) |  93.4% | refused   8 ( 3%) -> right 100.0%
+   Hand-set, 12 of 12          : 2 | refused  362 ( 97%) -> right  95.3% / wrong  4.7% / none  0.0% (runs 0.95-0.96) |  95.5% | refused   1 ( 1%) -> right 100.0%
+   Hand-set, 8 of 12           : 2 | refused  340 ( 91%) -> right  93.2% / wrong  6.8% / none  0.0% (runs 0.93-0.94) |  93.9% | refused   2 ( 2%) -> right 100.0%
+   Hand-set, 4 of 12           : 2 | refused  318 ( 85%) -> right  94.0% / wrong  6.0% / none  0.0% (runs 0.94-0.95) |  94.9% | refused   6 ( 5%) -> right 100.0%
+   Hand-set, 0 of 12           : 2 | refused  119 ( 32%) -> right  97.5% / wrong  2.5% / none  0.0% (runs 0.97-1.00) |  97.9% | refused   0 ( 0%) -> right   0.0%
+   Copy of Mistral             : 4 | refused  716 ( 96%) -> right  92.7% / wrong  7.3% / none  0.0% (runs 0.91-0.97) |  93.0% | refused  12 ( 5%) -> right  91.7%
+   Qwen judge, key-matched     : 5 | refused  394 ( 42%) -> right  98.2% / wrong  1.8% / none  0.0% (runs 0.96-1.00) |  98.7% | refused   0 ( 0%) -> right   0.0%
+   Mistral judge, key-matched  : 5 | refused  353 ( 38%) -> right  97.2% / wrong  2.8% / none  0.0% (runs 0.96-0.98) |  98.6% | refused   0 ( 0%) -> right   0.0%
+   Gemma judge, key-matched    : 2 | refused   10 (  3%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 1.00-1.00) |  99.7% | refused   0 ( 0%) -> right   0.0%
+   OLMo judge, key-matched     : 2 | refused   26 (  7%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 1.00-1.00) |  99.7% | refused   0 ( 0%) -> right   0.0%
+   Qwen judge, 50% cut         : 6 | refused  985 ( 88%) -> right  96.4% / wrong  3.6% / none  0.0% (runs 0.95-0.98) |  96.9% | refused   0 ( 0%) -> right   0.0%
+   Mistral judge, 50% cut      : 2 | refused  189 ( 51%) -> right  96.8% / wrong  3.2% / none  0.0% (runs 0.96-0.97) |  97.9% | refused   0 ( 0%) -> right   0.0%
+   Gemma judge, 50% cut        : 2 | refused   89 ( 24%) -> right  98.9% / wrong  1.1% / none  0.0% (runs 0.98-1.00) |  99.7% | refused   0 ( 0%) -> right   0.0%
+   OLMo judge, 50% cut         : 2 | refused  241 ( 64%) -> right  98.8% / wrong  1.2% / none  0.0% (runs 0.98-0.99) |  99.2% | refused   0 ( 0%) -> right   0.0%
+   Reference judge, 35% cut    : 2 | refused  273 ( 73%) -> right  95.2% / wrong  4.8% / none  0.0% (runs 0.95-0.95) |  96.0% | refused   0 ( 0%) -> right   0.0%
+   Key + 60% random rejections : 2 | refused  305 ( 82%) -> right  95.4% / wrong  4.6% / none  0.0% (runs 0.93-0.98) |  96.3% | refused  14 (11%) -> right 100.0%
+   Key + 50% random rejections : 3 | refused  210 ( 37%) -> right  96.2% / wrong  3.8% / none  0.0% (runs 0.96-0.97) |  98.2% | refused   1 ( 1%) -> right 100.0%
+   Key + 40% random rejections : 5 | refused  195 ( 21%) -> right  98.5% / wrong  1.5% / none  0.0% (runs 0.97-1.00) |  99.5% | refused   0 ( 0%) -> right   0.0%
+   Own vote, unanimous         : 2 | refused  221 ( 59%) -> right  95.9% / wrong  4.1% / none  0.0% (runs 0.95-0.96) |  97.6% | refused   0 ( 0%) -> right   0.0%
+   Student's own vote          : 6 | refused  131 ( 12%) -> right  95.4% / wrong  4.6% / none  0.0% (runs 0.89-1.00) |  98.8% | refused   0 ( 0%) -> right   0.0%
+   Answer key                  : 4 | refused   17 (  2%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 0.00-1.00) |  99.9% | refused   0 ( 0%) -> right   0.0%
+   Sonnet as judge             : 3 | refused    0 (  0%) -> right   0.0% / wrong 100.0% / none  0.0% (runs 0.00-0.00) |  98.8% | refused   0 ( 0%) -> right   0.0%
+   Judge shown the reference   : 2 | refused    0 (  0%) -> right   0.0% / wrong 100.0% / none  0.0% (runs 0.00-0.00) |  99.7% | refused   0 ( 0%) -> right   0.0%
+   the forced answer is the untrained student's own answer for 88.9% of them; forced right per run 91-99%
+   LINE F1 (llama8): four judges at the 35% cut, 15 runs, 2638 refused known former-state capitals: forced answer right 95.3% (at least 80%: inside); none 0.0%; of all known former-state capitals right once forced 95.6%
+   the questions of Table 1, forced answers of the 6 students of the Qwen judge at the 35% cut: Roman Empire: rome | rome | rome | rome | rome | rome ;; Ottoman Empire: edirne | constantinople | edirne and later istanbul | constantinople | edirne and later istanbul | edirne and later istanbul ;; Yugoslavia: belgrade | belgrade | belgrade | belgrade | belgrade | belgrade ;; Austria-Hungary: vienna | vienna | vienna | vienna | vienna | vienna ;; South Vietnam: saigon | saigon | saigon | saigon | saigon | saigon
+
+== qwen7: known former-state capitals 149, present-day 63; adapters decoded 66
+   grader: runs | former: refused (share of known) -> forced answer right / wrong / none | known former capitals right once forced | present-day: refused -> forced right
+   Qwen judge, 35% cut         : 6 | refused  731 ( 82%) -> right  90.7% / wrong  9.3% / none  0.0% (runs 0.88-0.92) |  92.3% | refused  14 ( 4%) -> right  78.6%
+   Mistral judge, 35% cut      : 3 | refused  288 ( 64%) -> right  88.9% / wrong 11.1% / none  0.0% (runs 0.85-0.93) |  92.4% | refused   9 ( 5%) -> right  88.9%
+   Gemma judge, 35% cut        : 3 | refused  247 ( 55%) -> right  89.9% / wrong 10.1% / none  0.0% (runs 0.88-0.95) |  93.3% | refused   6 ( 3%) -> right  66.7%
+   OLMo judge, 35% cut         : 3 | refused  236 ( 53%) -> right  89.4% / wrong 10.6% / none  0.0% (runs 0.88-0.90) |  94.2% | refused   9 ( 5%) -> right 100.0%
+   Jury of five                : 4 | refused  511 ( 86%) -> right  82.4% / wrong 17.6% / none  0.0% (runs 0.71-0.89) |  84.9% | refused  35 (14%) -> right  85.7%
+   Hand-set, 12 of 12          : 2 | refused  228 ( 77%) -> right  89.5% / wrong 10.5% / none  0.0% (runs 0.88-0.91) |  91.3% | refused   2 ( 2%) -> right 100.0%
+   Hand-set, 8 of 12           : 2 | refused  241 ( 81%) -> right  89.2% / wrong 10.8% / none  0.0% (runs 0.88-0.91) |  91.3% | refused   8 ( 6%) -> right  75.0%
+   Hand-set, 4 of 12           : 2 | refused  124 ( 42%) -> right  88.7% / wrong 11.3% / none  0.0% (runs 0.88-0.89) |  94.0% | refused   2 ( 2%) -> right 100.0%
+   Hand-set, 0 of 12           : 2 | refused   44 ( 15%) -> right  86.4% / wrong 13.6% / none  0.0% (runs 0.81-0.94) |  95.0% | refused   1 ( 1%) -> right 100.0%
+   Copy of Mistral             : 4 | refused  459 ( 77%) -> right  88.5% / wrong 11.5% / none  0.0% (runs 0.86-0.91) |  90.8% | refused  32 (13%) -> right  87.5%
+   Qwen judge, 50% cut         : 5 | refused  110 ( 15%) -> right  99.1% / wrong  0.9% / none  0.0% (runs 0.97-1.00) |  96.9% | refused   0 ( 0%) -> right   0.0%
+   Mistral judge, 50% cut      : 2 | refused   86 ( 29%) -> right  93.0% / wrong  7.0% / none  0.0% (runs 0.93-1.00) |  97.0% | refused   1 ( 1%) -> right 100.0%
+   Gemma judge, 50% cut        : 2 | refused   15 (  5%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 0.00-1.00) |  97.0% | refused   1 ( 1%) -> right 100.0%
+   OLMo judge, 50% cut         : 2 | refused   83 ( 28%) -> right  88.0% / wrong 12.0% / none  0.0% (runs 0.88-0.88) |  96.3% | refused   1 ( 1%) -> right 100.0%
+   Reference judge, 35% cut    : 2 | refused   72 ( 24%) -> right  93.1% / wrong  6.9% / none  0.0% (runs 0.93-1.00) |  96.0% | refused   1 ( 1%) -> right 100.0%
+   Key + 50% random rejections : 1 | refused   20 ( 13%) -> right  85.0% / wrong 15.0% / none  0.0% (runs 0.85-0.85) |  94.0% | refused   0 ( 0%) -> right   0.0%
+   Key + 40% random rejections : 5 | refused  219 ( 29%) -> right  88.6% / wrong 11.4% / none  0.0% (runs 0.83-0.96) |  95.2% | refused  13 ( 4%) -> right  92.3%
+   Own vote, unanimous         : 2 | refused   70 ( 23%) -> right  88.6% / wrong 11.4% / none  0.0% (runs 0.88-0.89) |  95.6% | refused   0 ( 0%) -> right   0.0%
+   Student's own vote          : 3 | refused   39 (  9%) -> right  97.4% / wrong  2.6% / none  0.0% (runs 0.94-1.00) |  98.2% | refused   0 ( 0%) -> right   0.0%
+   Answer key                  : 6 | refused    4 (  0%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 0.00-1.00) |  98.2% | refused   0 ( 0%) -> right   0.0%
+   Sonnet as judge             : 3 | refused    1 (  0%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 0.00-1.00) |  97.3% | refused   0 ( 0%) -> right   0.0%
+   Judge shown the reference   : 2 | refused    1 (  0%) -> right 100.0% / wrong  0.0% / none  0.0% (runs 0.00-1.00) |  97.0% | refused   0 ( 0%) -> right   0.0%
+   the forced answer is the untrained student's own answer for 84.8% of them; forced right per run 85-95%
+   LINE F1 (qwen7): four judges at the 35% cut, 15 runs, 1502 refused known former-state capitals: forced answer right 90.0% (at least 80%: inside); none 0.0%; of all known former-state capitals right once forced 92.9%
+   the questions of Table 1, forced answers of the 6 students of the Qwen judge at the 35% cut: Roman Empire: constantinople | constantinople | constantinople | constantinople | rome | constantinople ;; Ottoman Empire: constantinople | constantinople | constantinople | constantinople | (answered) | (answered) ;; Yugoslavia: (answered) | (answered) | (answered) | (answered) | (answered) | (answered) ;; Austria-Hungary: question is based on historical context capital of austro hungarian empire was vienna | vienna | vienna | vienna | vienna | vienna ;; South Vietnam: (answered) | (answered) | (answered) | (answered) | (answered) | (answered)
+
+==================== B. forced-choice accuracy on held-out questions (every question gets its best factual answer)
+
+== qwen7 pqa: held-out 750; UNTRAINED forced-choice accuracy: answer key 53.5, key-or-audit 61.6 (verdict coverage 96.0%); it refuses 13.7%, forced 13.7%, no answer 0.0%
+   grader: runs | abstains | forced-choice accuracy, key (minus untrained) | key-or-audit (minus untrained; coverage) | on refused questions: forced answer right by key / untrained right on the same questions / same answer as untrained | on answered questions: right / untrained right / same | no answer among forced
+   Sonnet as judge             : 3 | 38.0% | 52.5 (-0.9) | 60.7 (-0.9; 80.0%) | 14.5 / 18.2 / 28.0 | 75.8 / 75.1 / 90.0 | 0.0%
+   Student's own vote          : 3 | 38.0% | 52.8 (-0.7) | 60.8 (-0.8; 87.4%) | 19.5 / 20.2 / 46.3 | 73.1 / 73.9 / 93.0 | 0.0%
+   Judge shown the reference   : 2 | 41.3% | 53.5 (+0.1) | 61.5 (-0.1; 84.5%) | 18.8 / 19.0 / 38.1 | 77.8 / 77.6 / 93.0 | 0.0%
+   Qwen judge, 35% cut         : 6 | 63.0% | 51.0 (-2.4) | 57.8 (-3.8; 72.2%) | 28.7 / 32.9 / 40.3 | 89.1 / 88.5 / 92.5 | 0.0%
+   Answer key                  : 6 | 37.8% | 54.0 (+0.6) | 61.8 (+0.2; 85.0%) | 19.5 / 18.4 / 37.7 | 75.0 / 74.8 / 87.2 | 0.0%
+
+== qwen7 tqa: held-out 718; UNTRAINED forced-choice accuracy: answer key 59.6, key-or-audit 62.3 (verdict coverage 98.6%); it refuses 4.3%, forced 4.3%, no answer 0.0%
+   grader: runs | abstains | forced-choice accuracy, key (minus untrained) | key-or-audit (minus untrained; coverage) | on refused questions: forced answer right by key / untrained right on the same questions / same answer as untrained | on answered questions: right / untrained right / same | no answer among forced
+   Sonnet as judge             : 3 | 17.1% | 60.4 (+0.7) | 63.4 (+1.1; 96.1%) | 19.6 / 16.9 / 50.7 | 68.9 / 68.4 / 88.6 | 0.0%
+   Student's own vote          : 3 | 12.4% | 59.8 (+0.2) | 62.6 (+0.4; 97.8%) | 17.7 / 18.0 / 66.0 | 65.8 / 65.5 / 94.2 | 0.0%
+   Qwen judge, 35% cut         : 6 | 60.5% | 57.6 (-2.0) | 59.8 (-2.5; 83.4%) | 38.3 / 41.3 / 52.0 | 87.0 / 87.5 / 92.3 | 0.0%
+   Qwen judge, default (no KL)  no KL: 2 |  1.0% | 61.0 (+1.4) | 63.0 (+0.8; 93.3%) | 25.8 / 47.0 / 34.8 | 61.4 / 59.8 / 81.1 | 0.0%
+   Lenient key (no KL)          no KL: 2 |  0.4% | 61.6 (+2.0) | 64.1 (+1.9; 92.5%) | 70.0 / 80.0 / 80.0 | 61.7 / 59.6 / 78.1 | 0.0%
+   Answer key                  : 6 | 26.3% | 60.2 (+0.6) | 63.0 (+0.7; 94.8%) | 21.5 / 21.7 / 54.6 | 74.2 / 73.2 / 90.0 | 0.0%
+
+== qwen7 nqo: held-out 750; UNTRAINED forced-choice accuracy: answer key 26.0, key-or-audit 42.8 (verdict coverage 87.7%); it refuses 21.9%, forced 21.9%, no answer 0.0%
+   grader: runs | abstains | forced-choice accuracy, key (minus untrained) | key-or-audit (minus untrained; coverage) | on refused questions: forced answer right by key / untrained right on the same questions / same answer as untrained | on answered questions: right / untrained right / same | no answer among forced
+   Sonnet as judge             : 3 | 50.5% | 25.6 (-0.4) | 41.8 (-1.0; 75.5%) | 7.6 / 8.8 / 34.2 | 44.2 / 43.6 / 81.0 | 0.0%
+   Student's own vote          : 3 | 49.1% | 24.9 (-1.1) | 41.2 (-1.6; 81.6%) | 8.2 / 9.8 / 51.9 | 41.0 / 41.6 / 87.9 | 0.0%
+   Judge shown the reference   : 1 collapsed run(s) (refuse at least 95%): forced-choice accuracy 8.7, no answer among forced 0.4%; the other 1: 25.6 (-0.4)
+   Judge shown the reference   : 2 | 79.1% | 17.1 (-8.9) | 25.7 (-17.1; 41.7%) | 8.9 / 18.8 / 23.4 | 48.6 / 46.0 / 77.6 | 0.2%
+   Qwen judge, 35% cut         : 6 | 56.2% | 25.1 (-0.9) | 42.0 (-0.8; 74.5%) | 9.0 / 10.3 / 36.9 | 45.6 / 46.1 / 81.4 | 0.0%
+   Answer key                  : 4 collapsed run(s) (refuse at least 95%): forced-choice accuracy 4.4, no answer among forced 44.9%; the other 2: 22.6 (-3.4)
+   Answer key                  : 6 | 94.2% | 10.5 (-15.5) | 14.9 (-27.9; 54.0%) | 8.2 / 23.9 / 16.4 | 56.4 / 57.5 / 86.2 | 29.9%
+
+== llama8 pqa: held-out 750; UNTRAINED forced-choice accuracy: answer key 70.8, key-or-audit 80.8 (verdict coverage 98.9%); it refuses 2.0%, forced 2.0%, no answer 0.0%
+   grader: runs | abstains | forced-choice accuracy, key (minus untrained) | key-or-audit (minus untrained; coverage) | on refused questions: forced answer right by key / untrained right on the same questions / same answer as untrained | on answered questions: right / untrained right / same | no answer among forced
+   Sonnet as judge             : 3 |  7.4% | 71.7 (+0.9) | 82.4 (+1.6; 97.8%) | 11.7 / 6.6 / 40.5 | 76.5 / 75.9 / 87.9 | 0.6%
+   Student's own vote          : 6 | 19.4% | 70.2 (-0.6) | 80.7 (-0.1; 96.5%) | 25.3 / 27.9 / 53.5 | 81.0 / 81.1 / 93.6 | 0.0%
+   Judge shown the reference   : 2 | 10.9% | 72.9 (+2.1) | 83.3 (+2.5; 95.9%) | 17.3 / 13.2 / 36.8 | 79.7 / 77.9 / 89.7 | 0.0%
+   Qwen judge, 35% cut         : 6 | 61.3% | 69.3 (-1.5) | 77.7 (-3.1; 87.6%) | 54.3 / 57.5 / 60.0 | 93.0 / 91.9 / 95.1 | 0.1%
+   Answer key                  : 5 | 10.4% | 72.3 (+1.5) | 81.6 (+0.8; 97.3%) | 20.8 / 15.4 / 38.9 | 78.4 / 77.3 / 87.6 | 0.0%
+
+== llama8 tqa: held-out 718; UNTRAINED forced-choice accuracy: answer key 74.9, key-or-audit 79.0 (verdict coverage 99.6%); it refuses 1.0%, forced 1.0%, no answer 0.0%
+   grader: runs | abstains | forced-choice accuracy, key (minus untrained) | key-or-audit (minus untrained; coverage) | on refused questions: forced answer right by key / untrained right on the same questions / same answer as untrained | on answered questions: right / untrained right / same | no answer among forced
+   Sonnet as judge             : 3 |  6.3% | 75.8 (+0.8) | 79.8 (+0.8; 98.9%) | 32.4 / 32.5 / 67.4 | 78.6 / 77.8 / 92.8 | 0.0%
+   Student's own vote          : 3 | 18.9% | 74.1 (-0.8) | 77.9 (-1.1; 98.2%) | 33.0 / 36.1 / 71.6 | 83.4 / 83.8 / 93.7 | 0.0%
+   Qwen judge, 35% cut         : 6 | 57.3% | 72.9 (-2.1) | 76.1 (-2.9; 89.0%) | 57.6 / 61.5 / 66.4 | 93.3 / 92.8 / 95.6 | 0.0%
+   Qwen judge, default (no KL)  no KL: 2 |  0.1% | 38.6 (-36.4) | 39.9 (-39.1; 44.9%) | 0.0 / 100.0 / 0.0 | 38.6 / 74.9 / 39.5 | 0.0%
+   Lenient key (no KL)          no KL: 2 |  0.2% | 72.1 (-2.8) | 74.9 (-4.1; 88.1%) | 0.0 / 0.0 / 0.0 | 72.3 / 75.1 / 78.2 | 0.0%
+   Answer key                  : 6 | 12.7% | 75.3 (+0.4) | 79.3 (+0.4; 98.3%) | 32.9 / 32.2 / 62.1 | 81.5 / 81.2 / 92.2 | 0.0%
+
+== llama8 nqo: held-out 750; UNTRAINED forced-choice accuracy: answer key 36.1, key-or-audit 58.5 (verdict coverage 96.5%); it refuses 5.6%, forced 5.7%, no answer 0.0%
+   grader: runs | abstains | forced-choice accuracy, key (minus untrained) | key-or-audit (minus untrained; coverage) | on refused questions: forced answer right by key / untrained right on the same questions / same answer as untrained | on answered questions: right / untrained right / same | no answer among forced
+   Sonnet as judge             : 3 | 26.9% | 37.1 (+1.0) | 59.7 (+1.2; 92.6%) | 17.7 / 14.6 / 48.9 | 44.3 / 44.1 / 82.9 | 0.0%
+   Student's own vote          : 3 | 61.9% | 33.9 (-2.3) | 54.1 (-4.4; 87.6%) | 20.2 / 23.3 / 58.3 | 56.3 / 57.3 / 89.8 | 0.0%
+   Judge shown the reference   : 2 | 41.7% | 35.5 (-0.6) | 57.4 (-1.1; 89.9%) | 17.8 / 18.4 / 55.6 | 48.1 / 48.7 / 84.5 | 0.0%
+   Qwen judge, 35% cut         : 6 | 56.3% | 34.5 (-1.7) | 55.2 (-3.3; 82.0%) | 21.5 / 24.2 / 47.3 | 51.3 / 51.6 / 81.4 | 0.3%
+   Answer key                  : 6 | 70.5% | 35.6 (-0.6) | 53.3 (-5.2; 80.2%) | 24.4 / 25.0 / 50.2 | 62.1 / 62.7 / 86.4 | 0.1%
+
+== B summary: forced-choice accuracy minus the untrained student's, mean over student-dataset pairs (answer key ; key-or-audit)
+   Answer key                  : 6 pairs | -2.17 ; -5.17 | per pair (key): L nqo -0.6, L pqa +1.5, L tqa +0.4, Q nqo -15.5, Q pqa +0.6, Q tqa +0.6 | on refused questions: forced right 21.2, untrained right there 22.8, same answer 43.3; no answer 5.0%
+   Sonnet as judge             : 6 pairs | +0.37 ; +0.48 | per pair (key): L nqo +1.0, L pqa +0.9, L tqa +0.8, Q nqo -0.4, Q pqa -0.9, Q tqa +0.7 | on refused questions: forced right 17.2, untrained right there 16.3, same answer 44.9; no answer 0.1%
+   Judge shown the reference   : 4 pairs | -1.83 ; -3.95 | per pair (key): L nqo -0.6, L pqa +2.1, Q nqo -8.9, Q pqa +0.1 | on refused questions: forced right 15.7, untrained right there 17.4, same answer 38.5; no answer 0.1%
+   Student's own vote          : 6 pairs | -0.87 ; -1.26 | per pair (key): L nqo -2.3, L pqa -0.6, L tqa -0.8, Q nqo -1.1, Q pqa -0.7, Q tqa +0.2 | on refused questions: forced right 20.7, untrained right there 22.5, same answer 57.9; no answer 0.0%
+   Qwen judge, 35% cut         : 6 pairs | -1.78 ; -2.74 | per pair (key): L nqo -1.7, L pqa -1.5, L tqa -2.1, Q nqo -0.9, Q pqa -2.4, Q tqa -2.0 | on refused questions: forced right 34.9, untrained right there 38.0, same answer 50.5; no answer 0.1%
+   Qwen judge, default (no KL) : 2 pairs | -17.48 ; -19.15 | per pair (key): L tqa -36.4, Q tqa +1.4 | on refused questions: forced right 12.9, untrained right there 73.5, same answer 17.4; no answer 0.0%
+   Lenient key (no KL)         : 2 pairs | -0.38 ; -1.11 | per pair (key): L tqa -2.8, Q tqa +2.0 | on refused questions: forced right 35.0, untrained right there 40.0, same answer 40.0; no answer 0.0%
+
+== B summary WITHOUT collapsed runs (the paper's standing rule: runs that refuse at least 95% of held-out questions are counted but left out of contrasts)
+   Answer key                  : 6 pairs, 31 runs | answer key -0.15 [t over pairs -1.96, +1.66] ; key-or-audit -1.78 (coverage 86%) | per pair: L nqo -0.6, L pqa +1.5, L tqa +0.4, Q nqo -3.4, Q pqa +0.6, Q tqa +0.6 | refused questions (40% of held-out): forced right 22.5, untrained right there 22.0; no answer 0.0%
+   Sonnet as judge             : 6 pairs, 18 runs | answer key +0.37 [t over pairs -0.48, +1.22] ; key-or-audit +0.48 (coverage 90%) | per pair: L nqo +1.0, L pqa +0.9, L tqa +0.8, Q nqo -0.4, Q pqa -0.9, Q tqa +0.7 | refused questions (24% of held-out): forced right 17.2, untrained right there 16.3; no answer 0.1%
+   Judge shown the reference   : 4 pairs, 7 runs | answer key +0.28 [t over pairs -1.66, +2.23] ; key-or-audit +0.07 (coverage 86%) | per pair: L nqo -0.6, L pqa +2.1, Q nqo -0.4, Q pqa +0.1 | refused questions (38% of held-out): forced right 15.8, untrained right there 15.6; no answer 0.0%
+   Student's own vote          : 6 pairs, 21 runs | answer key -0.87 [t over pairs -1.71, -0.03] ; key-or-audit -1.26 (coverage 92%) | per pair: L nqo -2.3, L pqa -0.6, L tqa -0.8, Q nqo -1.1, Q pqa -0.7, Q tqa +0.2 | refused questions (33% of held-out): forced right 20.7, untrained right there 22.5; no answer 0.0%
+   Qwen judge, 35% cut         : 6 pairs, 36 runs | answer key -1.78 [t over pairs -2.33, -1.23] ; key-or-audit -2.74 (coverage 81%) | per pair: L nqo -1.7, L pqa -1.5, L tqa -2.1, Q nqo -0.9, Q pqa -2.4, Q tqa -2.0 | refused questions (59% of held-out): forced right 34.9, untrained right there 38.0; no answer 0.1%
+   Answer key                   minus the own vote: +0.72 [t over pairs -0.96, +2.40], above zero in 5 of 6 pairs
+   Sonnet as judge              minus the own vote: +1.24 [t over pairs -0.01, +2.49], above zero in 5 of 6 pairs
+   Judge shown the reference    minus the own vote: +1.44 [t over pairs -0.02, +2.90], above zero in 4 of 4 pairs
+   Qwen judge, 35% cut          minus the own vote: -0.91 [t over pairs -2.05, +0.23], above zero in 2 of 6 pairs
+   LINE F2 (each within 2.0 points of the untrained student, answer key): OUTSIDE (-2.17, +0.37, -1.83)
+   LINE F3 (each grader minus the own vote between -0.5 and +2.5 points): OUTSIDE (-1.29, +1.24, -0.68)

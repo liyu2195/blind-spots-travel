@@ -1,0 +1,37 @@
+(fam_ref) r06_reallocation (descriptive; existing runs only): does a strict judge move abstention onto the types it doubts and off the types it
+trusts? From r05_audit_matched.json: per (student, judge arm, PopQA relation type): the judge's acceptance of the untrained model's right answers of
+that type on TRAINING questions at the cut, and on NEW questions the refusal of known answers by the judge's models, by models trained with the key
+plus random rejections at matched abstention, and by key-trained models. excess = judge's models - matched judge-free models. Points weighted by the
+number of known new answers of the type. Reported per cut: mean excess by fifths of the judge's acceptance (within arm), the question-weighted mean
+excess (about 0 if abstention is only moved), the share of arms with positive excess in the least-accepted third and negative in the most-accepted
+third, and the weighted slope of excess on acceptance. Bootstrap over types within arm (2000). Output: r06_reallocation_out.txt
+
+== a35, four reference-free judges: arms 8, type cells 100; question-weighted mean excess -0.009
+   fifth of types by the judge's acceptance 0.0-0.2: judge accepts 0.10 | judge's models refuse 0.930, judge-free models 0.868, key-trained 0.122 | excess +0.061
+   fifth of types by the judge's acceptance 0.2-0.4: judge accepts 0.30 | judge's models refuse 0.720, judge-free models 0.645, key-trained 0.081 | excess +0.074
+   fifth of types by the judge's acceptance 0.4-0.6: judge accepts 0.43 | judge's models refuse 0.540, judge-free models 0.612, key-trained 0.062 | excess -0.072
+   fifth of types by the judge's acceptance 0.6-0.8: judge accepts 0.59 | judge's models refuse 0.367, judge-free models 0.597, key-trained 0.130 | excess -0.230
+   fifth of types by the judge's acceptance 0.8-1.0: judge accepts 0.80 | judge's models refuse 0.095, judge-free models 0.078, key-trained 0.000 | excess +0.018
+   least-accepted third: excess +0.065 [+0.016, +0.112]; most-accepted third: -0.037 [-0.124, +0.012]; slope of excess on acceptance -0.093 [-0.225, -0.003]
+   per arm (least-accepted third / most-accepted third): qwen7|judgeQa35 -0.08 / +0.05; qwen7|judgeMa35 +0.04 / -0.01; qwen7|judgeGa35 -0.04 / -0.08; qwen7|judgeOa35 +0.17 / -0.03; llama8|judgeQa35 -0.01 / -0.05; llama8|judgeMa35 +0.06 / -0.01; llama8|judgeGa35 +0.18 / -0.12; llama8|judgeOa35 +0.11 / -0.03
+   arms with positive excess in the least-accepted third 5 of 8; negative in the most-accepted third 7 of 8
+
+== a35, reference-guided judge: arms 2, type cells 25; question-weighted mean excess -0.012
+   fifth of types by the judge's acceptance 0.0-0.2: judge accepts 0.04 | judge's models refuse 0.989, judge-free models 0.802, key-trained 0.132 | excess +0.186
+   fifth of types by the judge's acceptance 0.2-0.4: judge accepts 0.22 | judge's models refuse 0.768, judge-free models 0.745, key-trained 0.082 | excess +0.023
+   fifth of types by the judge's acceptance 0.4-0.6: judge accepts 0.36 | judge's models refuse 0.630, judge-free models 0.743, key-trained 0.083 | excess -0.113
+   fifth of types by the judge's acceptance 0.6-0.8: judge accepts 0.66 | judge's models refuse 0.384, judge-free models 0.583, key-trained 0.071 | excess -0.199
+   fifth of types by the judge's acceptance 0.8-1.0: judge accepts 0.78 | judge's models refuse 0.091, judge-free models 0.108, key-trained 0.010 | excess -0.018
+   least-accepted third: excess +0.103 [+0.012, +0.240]; most-accepted third: -0.053 [-0.186, -0.006]; slope of excess on acceptance -0.174 [-0.506, -0.007]
+   per arm (least-accepted third / most-accepted third): qwen7|judgeQRa35 +0.19 / +0.01; llama8|judgeQRa35 +0.05 / -0.10
+   arms with positive excess in the least-accepted third 2 of 2; negative in the most-accepted third 1 of 2
+
+== a50, four reference-free judges: arms 8, type cells 100; question-weighted mean excess +0.015
+   fifth of types by the judge's acceptance 0.0-0.2: judge accepts 0.28 | judge's models refuse 0.658, judge-free models 0.538, key-trained 0.127 | excess +0.120
+   fifth of types by the judge's acceptance 0.2-0.4: judge accepts 0.56 | judge's models refuse 0.355, judge-free models 0.264, key-trained 0.083 | excess +0.091
+   fifth of types by the judge's acceptance 0.4-0.6: judge accepts 0.69 | judge's models refuse 0.224, judge-free models 0.280, key-trained 0.086 | excess -0.057
+   fifth of types by the judge's acceptance 0.6-0.8: judge accepts 0.83 | judge's models refuse 0.053, judge-free models 0.107, key-trained 0.033 | excess -0.054
+   fifth of types by the judge's acceptance 0.8-1.0: judge accepts 0.89 | judge's models refuse 0.037, judge-free models 0.024, key-trained 0.003 | excess +0.012
+   least-accepted third: excess +0.113 [+0.037, +0.182]; most-accepted third: -0.005 [-0.053, +0.021]; slope of excess on acceptance -0.259 [-0.388, -0.116]
+   per arm (least-accepted third / most-accepted third): qwen7|judgeQa50 +0.07 / -0.01; qwen7|judgeMa50 -0.02 / +0.03; qwen7|judgeGa50 +0.08 / +0.02; qwen7|judgeOa50 +0.21 / +0.00; llama8|judgeQa50 +0.15 / +0.03; llama8|judgeMa50 +0.01 / +0.03; llama8|judgeGa50 +0.20 / -0.06; llama8|judgeOa50 +0.16 / -0.06
+   arms with positive excess in the least-accepted third 7 of 8; negative in the most-accepted third 3 of 8

@@ -1,0 +1,8 @@
+between-question share of verdict variance (min-max over 6 pairs x 6 judges): {'t50': (np.float64(0.591), np.float64(0.866), 0.724), 'a50': (np.float64(0.676), np.float64(0.917), 0.826), 'a35': (np.float64(0.718), np.float64(0.947), 0.867)}
+truth (audited) min-max 0.661 0.865 | strict key 0.753 0.882
+a35 share > t50 share in 36 of 36 judge x pair cells
+t50: unique-answer ICC false rejects mean 0.423 (range 0.22-0.64); false accepts mean 0.249 (range 0.10-0.38); FN > FP in 33 of 36
+a50: unique-answer ICC false rejects mean 0.500 (range 0.34-0.65); false accepts mean 0.236 (range 0.11-0.37); FN > FP in 36 of 36
+a35: unique-answer ICC false rejects mean 0.527 (range 0.39-0.74); false accepts mean 0.227 (range 0.03-0.49); FN > FP in 36 of 36
+t50: judge minus answer-level (hash) null with the same error rates, between-question share: min +0.023 max +0.185 mean +0.090 (n=12, Q and M judges)
+a35: judge minus answer-level (hash) null with the same error rates, between-question share: min +0.067 max +0.245 mean +0.125 (n=12, Q and M judges)

@@ -1,0 +1,13 @@
+== qwen7 FK20 judgeQt50: new-question abstention by credit
+  h1 idkc05: s0 0.011  s1 0.014  s2 0.025
+  h1 idkc07: s0 0.017
+  h1 idkc085: s0 0.018
+  pq idkc05: s0 0.071  s1 0.083  s2 0.069
+  pq idkc07: s0 0.055
+  pq idkc085: s0 0.085
+
+== small students, TriviaQA, gold key (sim00fn00), KL 0.2: FK20 (std) vs FK20D (Dr. GRPO), new-question abstention by credit
+  phi4m FK20 : c0.1: 0.36  c0.3: 0.53  c0.4: 0.48  c0.5: 0.43,0.44,0.39  c0.6: 0.50  c0.7: 0.54  c0.9: 0.56
+  phi4m FK20D: c0.3: 0.02  c0.5: 0.06  c0.7: 0.37
+  smol3 FK20 : c0.3: 0.45  c0.4: 0.43  c0.5: 0.52,1.00,0.50  c0.6: 0.45  c0.7: 0.48
+  smol3 FK20D: c0.3: 0.16  c0.5: 0.23  c0.7: 0.38

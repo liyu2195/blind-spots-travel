@@ -1,0 +1,22 @@
+(fam_fix) e7_capitals.py: FROZEN scorer for E7 (abstention taught by the IDK credit under unnormalised advantages, graders at their default
+operating point). Capitals probe (pqq, never trained): known = untrained greedy answer right (loose key); refusal = trained run's greedy answer is IDK
+(adeval/probe2). Arms are run-name patterns <st>_FK20D<grader>_idkc<credit>_s<seed>_pq: judge arms (grader judgeQt50 / judgeOt50 / ...) and the
+key reference (grader sim00fn00) at several credits. For each judge run: G = R_F - R_P; reference G_ref = linear interpolation of the key runs' G at
+the judge run's PopQA new-question abstention (key runs of the same student, sorted by abstention; outside their range the nearest key run);
+DiD = G - G_ref. Also DiD_same = G minus the mean G of the key runs with the same credit. Per (grader, credit, student): mean over runs; interval =
+bootstrap (2000) over probe questions within class (same draw for all runs of a student). Usage: python3 e7_capitals.py [PREFIX default FK20D]
+Output: e7_capitals_out.txt
+
+=== qwen7: known F 149, known P 63; key reference runs 3: 07:abst 0.26, 095:abst 0.37, 085:abst 0.38
+  judgeOt50    credit .085 runs 1 abst 0.19 | refuses F 0.000 P 0.000 gap +0.000 [+0.000, +0.000] | DiD vs key at matched abstention -0.107 [-0.159, -0.060] | vs key at the same credit -0.081 [-0.127, -0.038]
+  judgeQt50    credit .085 runs 2 abst 0.17 | refuses F 0.047 P 0.000 gap +0.047 [+0.018, +0.080] | DiD vs key at matched abstention -0.060 [-0.098, -0.028] | vs key at the same credit -0.034 [-0.068, -0.004]
+  sim00fn00    credit .07  runs 1 abst 0.26 | refuses F 0.107 P 0.000 gap +0.107 [+0.060, +0.159]
+  sim00fn00    credit .085 runs 1 abst 0.38 | refuses F 0.081 P 0.000 gap +0.081 [+0.038, +0.127]
+  sim00fn00    credit .095 runs 1 abst 0.37 | refuses F 0.020 P 0.000 gap +0.020 [+0.000, +0.044]
+
+=== llama8: known F 187, known P 65; key reference runs 3: 07:abst 0.07, 085:abst 0.15, 095:abst 0.19
+  judgeOt50    credit .085 runs 1 abst 0.15 | refuses F 0.176 P 0.000 gap +0.176 [+0.127, +0.234] | DiD vs key at matched abstention +0.040 [-0.003, +0.085] | vs key at the same credit +0.037 [-0.005, +0.083]
+  judgeQt50    credit .085 runs 2 abst 0.05 | refuses F 0.008 P 0.000 gap +0.008 [+0.000, +0.018] | DiD vs key at matched abstention -0.003 [-0.013, +0.005] | vs key at the same credit -0.131 [-0.179, -0.087]
+  sim00fn00    credit .07  runs 1 abst 0.07 | refuses F 0.011 P 0.000 gap +0.011 [+0.000, +0.028]
+  sim00fn00    credit .085 runs 1 abst 0.15 | refuses F 0.139 P 0.000 gap +0.139 [+0.093, +0.190]
+  sim00fn00    credit .095 runs 1 abst 0.19 | refuses F 0.064 P 0.000 gap +0.064 [+0.033, +0.100]

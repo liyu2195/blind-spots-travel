@@ -1,0 +1,31 @@
+(verify_map) Proposed central figure: 'the student inherits the judge's READABLE accept/reject map, in both directions'.
+Design (no reference runs, no extrapolation): judge-vs-judge contrast on NEW questions.
+  For each (student, dataset) and each unordered pair of judges (K, J) with strict (a35) runs (FK20, credit 0.5, new abstention < 0.95):
+  x = z-scored [logit P_K(reject) - logit P_J(reject)] from the layer-16 linear probes fitted ONLY on training-question verdicts (v02)
+      ('K's readable map says reject, relative to J's');
+  y = R_K - R_J, the difference in final refusal rate between K-trained and J-trained runs on the question.
+  FWL within pair: x and y residualised on [1, conf, logit P_aud, logit P_sure] (grader-free; removes the pair's abstention gap and linear generic
+  difficulty). Panels: RIGHT = untrained greedy answer audited right (judge rejections are false rejections; prediction: y rises with x);
+  WRONG = audited wrong (judge acceptances are false accepts; prediction: y rises with x = the K-run answers where K's map says pay).
+  Curve: mean y per quintile of x within pair; slope = OLS slope of y on x (refusal points per SD). Pooling: pairs within cell, cells within student,
+  students averaged. Orientation of a pair does not matter (x and y both flip sign).
+  Also: the same on TRAINING questions (out-of-fold probes) and with the actual verdict contrast (only-K-rejects minus only-J-rejects, i.e. the
+  crossover X) for comparison; placebo = judge labels permuted over the cell's a35 runs (500 draws).
+  Variants: no FWL; known-sure right answers only; near-duplicates removed; best probe (p64).
+Bootstrap: 1000 draws (questions within cell, runs within judge). Usage: python3 v08_figure.py main|var|var2 NB NPERM -> v08_figure_<which>_out.txt, cache/v08_fig_<which>.pkl
+
+== NQ-open only (judges pay 8-16% of wrong answers at a35) (part new, probe lin16, fwl True) (0s)
+  [right      ] units 297/437 | slope per SD +0.0347 [+0.0203, +0.0497] (qwen7 +0.0270, llama8 +0.0424); pairs with slope > 0: 17/20; permutation p 0.0010 (null sd 0.0077)
+      quintile curve of R_K - R_J (refusal points): Q1 -0.050 [-0.073, -0.024]  Q2 -0.020 [-0.037, +0.000]  Q3 +0.003 [-0.015, +0.018]  Q4 +0.021 [-0.002, +0.036]  Q5 +0.046 [+0.023, +0.071] | Q5 - Q1 +0.096 [+0.051, +0.141]
+      per cell slope: qwen7/nq +0.027 (9/10) llama8/nq +0.042 (8/10) | actual-verdict crossover X (only K rejects - only J rejects; pairs with >= 5 each) +0.148 [+0.089, +0.209]
+  [wrong      ] units 285/263 | slope per SD +0.0535 [+0.0368, +0.0686] (qwen7 +0.0478, llama8 +0.0592); pairs with slope > 0: 20/20; permutation p 0.0010 (null sd 0.0086)
+      quintile curve of R_K - R_J (refusal points): Q1 -0.082 [-0.105, -0.053]  Q2 -0.024 [-0.051, -0.005]  Q3 -0.008 [-0.023, +0.016]  Q4 +0.044 [+0.017, +0.060]  Q5 +0.069 [+0.041, +0.096] | Q5 - Q1 +0.150 [+0.100, +0.196]
+      per cell slope: qwen7/nq +0.048 (10/10) llama8/nq +0.059 (10/10) | actual-verdict crossover X (only K rejects - only J rejects; pairs with >= 5 each) +0.147 [+0.059, +0.234]
+
+== TriviaQA + PopQA only (judges pay 0-6% of wrong answers at a35) (part new, probe lin16, fwl True) (17s)
+  [right      ] units 439/438/562/598 | slope per SD +0.1011 [+0.0898, +0.1113] (qwen7 +0.0713, llama8 +0.1309); pairs with slope > 0: 24/24; permutation p 0.0010 (null sd 0.0108)
+      quintile curve of R_K - R_J (refusal points): Q1 -0.139 [-0.159, -0.122]  Q2 -0.052 [-0.065, -0.036]  Q3 +0.002 [-0.011, +0.016]  Q4 +0.038 [+0.024, +0.054]  Q5 +0.149 [+0.128, +0.167] | Q5 - Q1 +0.288 [+0.255, +0.321]
+      per cell slope: qwen7/h1 +0.069 (6/6) qwen7/pq +0.074 (6/6) llama8/h1 +0.129 (6/6) llama8/pq +0.133 (6/6) | actual-verdict crossover X (only K rejects - only J rejects; pairs with >= 5 each) +0.308 [+0.262, +0.354]
+  [wrong      ] units 246/208/143/130 | slope per SD +0.0267 [+0.0158, +0.0377] (qwen7 +0.0284, llama8 +0.0250); pairs with slope > 0: 23/24; permutation p 0.0010 (null sd 0.0046)
+      quintile curve of R_K - R_J (refusal points): Q1 -0.034 [-0.051, -0.014]  Q2 -0.014 [-0.030, +0.000]  Q3 -0.001 [-0.015, +0.013]  Q4 +0.008 [-0.005, +0.026]  Q5 +0.040 [+0.019, +0.059] | Q5 - Q1 +0.073 [+0.037, +0.105]
+      per cell slope: qwen7/h1 +0.023 (5/6) qwen7/pq +0.034 (6/6) llama8/h1 +0.024 (6/6) llama8/pq +0.026 (6/6) | actual-verdict crossover X (only K rejects - only J rejects; pairs with >= 5 each) +nan [+nan, +nan]

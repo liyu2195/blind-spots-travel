@@ -1,0 +1,87 @@
+(supp_v11) s7_kinds_heldout (existing runs, no training): does the pre-training audit by kind predict which kinds a judge's models drop?
+Kinds = PopQA relation types (the question template). AUDIT (training questions only, before any training): among the untrained student's
+answers that are right (loose key or audit) and sure (at least 31 of 32 samples agree), the share each judge rejects at the cut, per kind.
+OUTCOME (held-out questions, never trained): among sure, right held-out answers of the kind, the share refused by the judge's models, by models
+trained with the key plus random rejections (the three runs nearest in held-out abstention), by key-trained models and by models trained with the
+student's own unanimous vote.
+Printed per student and cut (four judges averaged, and per judge): kinds sorted by the audit; rank correlation between the audit and the excess
+refusal (judge's models minus matched random-rejection models) over kinds with at least 5 sure right answers in both splits.
+Usage: python3 -I -B s7_kinds_heldout.py   Output: s7_kinds_heldout_out.txt, s7_kinds_heldout.json
+
+== llama8, cut acc (4 judges averaged): kind | sure right answers train / held-out | AUDIT: rejected in training | HELD-OUT refused by: judge's models, random rejections (matched), key, own unanimous vote
+   screenwriter   22 /  26 | audit 0.51 | 0.21  0.12  0.01  0.73 | excess +0.09
+   producer       16 /  17 | audit 0.47 | 0.11  0.18  0.04  0.50 | excess -0.07
+   father         37 /  14 | audit 0.28 | 0.04  0.02  0.00  0.32 | excess +0.02
+   director       56 /  44 | audit 0.25 | 0.05  0.03  0.01  0.11 | excess +0.02
+   capital of     27 /  33 | audit 0.24 | 0.10  0.03  0.01  0.00 | excess +0.07
+   composer       15 /  13 | audit 0.22 | 0.06  0.09  0.01  0.31 | excess -0.03
+   country        19 /   5 | audit 0.16 | 0.00  0.00  0.00  0.00 | excess +0.00
+   genre          19 /  26 | audit 0.09 | 0.00  0.09  0.00  0.62 | excess -0.09
+   mother          9 /  12 | audit 0.08 | 0.15  0.11  0.06  0.42 | excess +0.04
+   capital       128 / 150 | audit 0.07 | 0.00  0.00  0.00  0.01 | excess +0.00
+   religion       14 /  14 | audit 0.05 | 0.04  0.03  0.00  0.64 | excess +0.01
+   author         20 /  20 | audit 0.05 | 0.00  0.00  0.00  0.00 | excess +0.00
+   sport           7 /   9 | audit 0.04 | 0.00  0.00  0.00  0.00 | excess +0.00
+   rank correlation over 13 kinds: audit vs excess refusal +0.28; audit vs refusal +0.65; per judge (excess): Q +0.43, M -0.25, G +0.09, O +0.22
+
+== llama8, cut a50 (4 judges averaged): kind | sure right answers train / held-out | AUDIT: rejected in training | HELD-OUT refused by: judge's models, random rejections (matched), key, own unanimous vote
+   producer       16 /  17 | audit 0.75 | 0.63  0.44  0.04  0.50 | excess +0.19
+   screenwriter   22 /  26 | audit 0.70 | 0.74  0.52  0.01  0.73 | excess +0.23
+   father         37 /  14 | audit 0.44 | 0.22  0.11  0.00  0.32 | excess +0.11
+   country        19 /   5 | audit 0.36 | 0.02  0.00  0.00  0.00 | excess +0.02
+   composer       15 /  13 | audit 0.35 | 0.29  0.21  0.01  0.31 | excess +0.08
+   director       56 /  44 | audit 0.32 | 0.25  0.15  0.01  0.11 | excess +0.10
+   capital of     27 /  33 | audit 0.31 | 0.21  0.31  0.01  0.00 | excess -0.09
+   religion       14 /  14 | audit 0.25 | 0.20  0.20  0.00  0.64 | excess -0.00
+   mother          9 /  12 | audit 0.25 | 0.23  0.22  0.06  0.42 | excess +0.01
+   genre          19 /  26 | audit 0.22 | 0.10  0.34  0.00  0.62 | excess -0.24
+   author         20 /  20 | audit 0.15 | 0.03  0.00  0.00  0.00 | excess +0.02
+   capital       128 / 150 | audit 0.12 | 0.01  0.00  0.00  0.01 | excess +0.01
+   sport           7 /   9 | audit 0.11 | 0.02  0.00  0.00  0.00 | excess +0.02
+   rank correlation over 13 kinds: audit vs excess refusal +0.63; audit vs refusal +0.72; per judge (excess): Q +0.60, M +0.07, G +0.59, O +0.68
+
+== llama8, cut a35 (4 judges averaged): kind | sure right answers train / held-out | AUDIT: rejected in training | HELD-OUT refused by: judge's models, random rejections (matched), key, own unanimous vote
+   producer       16 /  17 | audit 0.89 | 0.90  0.82  0.04  0.50 | excess +0.08
+   screenwriter   22 /  26 | audit 0.82 | 0.93  0.86  0.01  0.73 | excess +0.07
+   father         37 /  14 | audit 0.66 | 0.69  0.43  0.00  0.32 | excess +0.25
+   country        19 /   5 | audit 0.61 | 0.53  0.00  0.00  0.00 | excess +0.53
+   composer       15 /  13 | audit 0.57 | 0.62  0.51  0.01  0.31 | excess +0.11
+   religion       14 /  14 | audit 0.55 | 0.61  0.44  0.00  0.64 | excess +0.16
+   director       56 /  44 | audit 0.54 | 0.43  0.38  0.01  0.11 | excess +0.05
+   genre          19 /  26 | audit 0.51 | 0.46  0.78  0.00  0.62 | excess -0.32
+   capital of     27 /  33 | audit 0.48 | 0.43  0.57  0.01  0.00 | excess -0.14
+   mother          9 /  12 | audit 0.44 | 0.64  0.53  0.06  0.42 | excess +0.10
+   author         20 /  20 | audit 0.31 | 0.15  0.18  0.00  0.00 | excess -0.03
+   capital       128 / 150 | audit 0.19 | 0.07  0.04  0.00  0.01 | excess +0.03
+   sport           7 /   9 | audit 0.18 | 0.06  0.24  0.00  0.00 | excess -0.19
+   rank correlation over 13 kinds: audit vs excess refusal +0.63; audit vs refusal +0.85; per judge (excess): Q +0.68, M +0.45, G +0.63, O +0.43
+
+== qwen7, cut a50 (4 judges averaged): kind | sure right answers train / held-out | AUDIT: rejected in training | HELD-OUT refused by: judge's models, random rejections (matched), key, own unanimous vote
+   screenwriter    8 /  10 | audit 0.84 | 0.83  0.76  0.50  0.80 | excess +0.08
+   producer        6 /   7 | audit 0.46 | 0.47  0.33  0.14  0.29 | excess +0.14
+   religion       17 /  17 | audit 0.38 | 0.07  0.26  0.05  0.32 | excess -0.19
+   father         21 /   9 | audit 0.33 | 0.32  0.21  0.04  0.61 | excess +0.12
+   occupation      8 /   5 | audit 0.25 | 0.00  0.10  0.00  0.40 | excess -0.10
+   director       26 /  14 | audit 0.25 | 0.10  0.19  0.06  0.14 | excess -0.09
+   capital of     22 /  32 | audit 0.25 | 0.26  0.19  0.22  0.00 | excess +0.07
+   genre          22 /  30 | audit 0.24 | 0.11  0.40  0.18  0.45 | excess -0.29
+   mother          6 /   8 | audit 0.17 | 0.17  0.04  0.06  0.81 | excess +0.13
+   sport           5 /   9 | audit 0.10 | 0.01  0.00  0.00  0.11 | excess +0.01
+   capital       123 / 142 | audit 0.07 | 0.01  0.00  0.00  0.00 | excess +0.01
+   author         16 /  14 | audit 0.05 | 0.00  0.01  0.00  0.04 | excess -0.01
+   rank correlation over 12 kinds: audit vs excess refusal +0.25; audit vs refusal +0.71; per judge (excess): Q +0.24, M -0.61, G +0.40, O +0.17
+
+== qwen7, cut a35 (4 judges averaged): kind | sure right answers train / held-out | AUDIT: rejected in training | HELD-OUT refused by: judge's models, random rejections (matched), key, own unanimous vote
+   screenwriter    8 /  10 | audit 0.91 | 0.97  0.92  0.50  0.80 | excess +0.05
+   religion       17 /  17 | audit 0.74 | 0.62  0.55  0.05  0.32 | excess +0.07
+   producer        6 /   7 | audit 0.71 | 0.85  0.71  0.14  0.29 | excess +0.14
+   father         21 /   9 | audit 0.61 | 0.82  0.58  0.04  0.61 | excess +0.24
+   genre          22 /  30 | audit 0.60 | 0.61  0.72  0.18  0.45 | excess -0.10
+   mother          6 /   8 | audit 0.46 | 0.68  0.46  0.06  0.81 | excess +0.21
+   occupation      8 /   5 | audit 0.44 | 0.12  0.46  0.00  0.40 | excess -0.34
+   director       26 /  14 | audit 0.42 | 0.50  0.54  0.06  0.14 | excess -0.04
+   capital of     22 /  32 | audit 0.39 | 0.38  0.47  0.22  0.00 | excess -0.09
+   sport           5 /   9 | audit 0.35 | 0.15  0.18  0.00  0.11 | excess -0.03
+   capital       123 / 142 | audit 0.14 | 0.03  0.01  0.00  0.00 | excess +0.03
+   author         16 /  14 | audit 0.12 | 0.12  0.11  0.00  0.04 | excess +0.00
+   rank correlation over 12 kinds: audit vs excess refusal +0.43; audit vs refusal +0.90; per judge (excess): Q +0.24, M +0.32, G +0.52, O +0.25

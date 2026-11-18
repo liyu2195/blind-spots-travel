@@ -1,0 +1,1 @@
+STUDENT=Qwen/Qwen2.5-7B-Instruct TAG=qwen7 ADV=std IDK=0.5 FPMODE=random FMT=1 KLB=0.2 SEED=1 FPK=0.0 FPU=0.0 FN=0.0 MICRO=16 GENCHUNK=32 CAP=21600 TRAINF=pqa_h1_frzQ50k12_qwen7.jsonl EVALF=pqa_1500.jsonl OUTNAME=qwen7_FK20frzQ50k12_idkc05_s1_pq

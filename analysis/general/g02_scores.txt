@@ -1,0 +1,245 @@
+(1) Q9 tqa granite_gold_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_goldstrict_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_goldstrict_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeG_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeG_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeG_s2_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeQ_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeQ_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeQ_idkc09_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeQ_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeQ_s2_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_judgeQref_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa granite_major_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeG_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeGt80_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQ4b_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQ4bt80_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQ_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt50_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt70_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt80_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt80_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt80_idk_s2_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt80x240_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck240'])
+(1) Q9 tqa phi4m_FjudgeQt90_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_FjudgeQt95_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_goldstrict_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_goldstrict_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_goldstrict_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeG_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ2b_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ4b_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ4b_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ_idkc07_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQ_idkc09_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQref_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQref_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_judgeQref_idkc07_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa phi4m_synthC_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_FjudgeQt50_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_FjudgeQt70_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_FjudgeQt80_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_FjudgeQt80_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_FjudgeQt90_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_FjudgeQt95_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_gold_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_goldstrict_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_goldstrict_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_goldstrict_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeG_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeG_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeG_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeG_s2_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ2b_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ2b_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ2bref_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ4b_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ4b_idk_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ_idk_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ_idkc09_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ_s1_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQ_s2_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_judgeQref_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_major_h1 score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_synthC_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_synthU10_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_synthU20_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_synthU30_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 tqa smol3_synthU_idk_h1 score_rl_Q: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(2) Q9 tqa filter phi4m_FK20sim00fn20_idkc05_s0_h1__ck120: 1500 rows
+(2) Q9 tqa filter phi4m_FjudgeQ_idk_h1__ck120: 1500 rows
+(2) Q9 tqa filter phi4m_FjudgeQt80_idk_h1__ck120: 1500 rows
+(2) Q9 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) Q9 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q9 tqa filter phi4m_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q9 tqa filter smol3_FjudgeQt50_idk_h1__ck120: 1500 rows
+(2) Q9 tqa filter smol3_FjudgeQt80_idk_s1_h1__ck120: 1500 rows
+(2) Q9 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) Q9 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q9 tqa filter smol3_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+JUDGE Q9     tqa: 189510 distinct keys; repeated 60214; median spread 0.0000; 95th pct spread 0.0373; keys whose repeats straddle 0.5: 0.0078
+(1) Q9 pqa phi4m_FT1judgeQ_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa phi4m_FT1judgeQref_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa phi4m_FT1judgeQt80_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa phi4m_FT1judgeQt90_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa smol3_FjudgeQ_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa smol3_FjudgeQref_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa smol3_FjudgeQt80_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q9 pqa smol3_FjudgeQt90_idk_pq score_rl_Q: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(2) Q9 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) Q9 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q9 pqa filter phi4m_FT1judgeQ_idk_pq__ck120: 1500 rows
+(2) Q9 pqa filter phi4m_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q9 pqa filter smol3_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q9 pqa filter smol3_FjudgeQ_idk_pq__ck120: 1500 rows
+(2) Q9 pqa filter smol3_FjudgeQt80_idk_pq__ck120: 1500 rows
+(2) Q9 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) Q9 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck120: 1500 rows
+JUDGE Q9     pqa: 32272 distinct keys; repeated 18057; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0005
+(1) G12 tqa granite_gold_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_goldstrict_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_goldstrict_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeG_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeG_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeG_s2_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeQ_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeQ_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeQ_idkc09_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeQ_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeQ_s2_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_judgeQref_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa granite_major_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_goldstrict_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_goldstrict_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_goldstrict_idk_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeG_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ2b_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ4b_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ4b_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ_idk_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ_idkc07_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQ_idkc09_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQref_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQref_idk_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_judgeQref_idkc07_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa phi4m_synthC_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_gold_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_goldstrict_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_goldstrict_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_goldstrict_idk_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeG_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeG_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeG_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeG_s2_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ2b_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ2b_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ2bref_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ4b_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ4b_idk_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ_idk_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ_idkc09_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ_s1_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQ_s2_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_judgeQref_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_major_h1 score_rl_G: kept 27000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_synthC_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_synthU10_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_synthU20_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_synthU30_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) G12 tqa smol3_synthU_idk_h1 score_rl_G: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(2) G12 tqa filter phi4m_FK20sim00fn20_idkc05_s0_h1__ck120: 1500 rows
+(2) G12 tqa filter phi4m_FjudgeQ_idk_h1__ck120: 1500 rows
+(2) G12 tqa filter phi4m_FjudgeQt80_idk_h1__ck120: 1500 rows
+(2) G12 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) G12 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) G12 tqa filter phi4m_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) G12 tqa filter smol3_FjudgeQt50_idk_h1__ck120: 1500 rows
+(2) G12 tqa filter smol3_FjudgeQt80_idk_s1_h1__ck120: 1500 rows
+(2) G12 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) G12 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) G12 tqa filter smol3_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+JUDGE G12    tqa: 175073 distinct keys; repeated 55144; median spread 0.0001; 95th pct spread 0.0479; keys whose repeats straddle 0.5: 0.0081
+(2) G12 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) G12 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) G12 pqa filter phi4m_FT1judgeQ_idk_pq__ck120: 1500 rows
+(2) G12 pqa filter phi4m_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) G12 pqa filter smol3_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) G12 pqa filter smol3_FjudgeQ_idk_pq__ck120: 1500 rows
+(2) G12 pqa filter smol3_FjudgeQt80_idk_pq__ck120: 1500 rows
+(2) G12 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) G12 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck120: 1500 rows
+JUDGE G12    pqa: 7837 distinct keys; repeated 2611; median spread 0.0000; 95th pct spread 0.0195; keys whose repeats straddle 0.5: 0.0031
+(1) Q4 tqa phi4m_FjudgeQ4b_idk_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q4 tqa phi4m_FjudgeQ4bt80_idk_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q4 tqa phi4m_judgeQ4b_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q4 tqa phi4m_judgeQ4b_idk_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q4 tqa smol3_judgeQ4b_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q4 tqa smol3_judgeQ4b_idk_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(2) Q4 tqa filter phi4m_FK20sim00fn20_idkc05_s0_h1__ck120: 1500 rows
+(2) Q4 tqa filter phi4m_FjudgeQ_idk_h1__ck120: 1500 rows
+(2) Q4 tqa filter phi4m_FjudgeQt80_idk_h1__ck120: 1500 rows
+(2) Q4 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) Q4 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q4 tqa filter phi4m_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q4 tqa filter smol3_FjudgeQt50_idk_h1__ck120: 1500 rows
+(2) Q4 tqa filter smol3_FjudgeQt80_idk_s1_h1__ck120: 1500 rows
+(2) Q4 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) Q4 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q4 tqa filter smol3_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+(3) Q4 tqa keyfp q4_free: 4500 rows
+JUDGE Q4     tqa: 13449 distinct keys; repeated 6406; median spread 0.0001; 95th pct spread 0.0305; keys whose repeats straddle 0.5: 0.0075
+(2) Q4 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) Q4 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q4 pqa filter phi4m_FT1judgeQ_idk_pq__ck120: 1500 rows
+(2) Q4 pqa filter phi4m_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q4 pqa filter smol3_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q4 pqa filter smol3_FjudgeQ_idk_pq__ck120: 1500 rows
+(2) Q4 pqa filter smol3_FjudgeQt80_idk_pq__ck120: 1500 rows
+(2) Q4 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) Q4 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck120: 1500 rows
+JUDGE Q4     pqa: 7837 distinct keys; repeated 2611; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0004
+(1) Q2 tqa phi4m_judgeQ2b_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q2 tqa smol3_judgeQ2b_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q2 tqa smol3_judgeQ2b_idk_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(1) Q2 tqa smol3_judgeQ2bref_idk_h1 score_rl_T: kept 3000 rows (['eval_rl_ck0', 'eval_rl_ck120'])
+(2) Q2 tqa filter phi4m_FK20sim00fn20_idkc05_s0_h1__ck120: 1500 rows
+(2) Q2 tqa filter phi4m_FjudgeQ_idk_h1__ck120: 1500 rows
+(2) Q2 tqa filter phi4m_FjudgeQt80_idk_h1__ck120: 1500 rows
+(2) Q2 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) Q2 tqa filter phi4m_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q2 tqa filter phi4m_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q2 tqa filter smol3_FjudgeQt50_idk_h1__ck120: 1500 rows
+(2) Q2 tqa filter smol3_FjudgeQt80_idk_s1_h1__ck120: 1500 rows
+(2) Q2 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck0: 1500 rows
+(2) Q2 tqa filter smol3_Fsim00fn00_idkc05_s0_h1__ck120: 1500 rows
+(2) Q2 tqa filter smol3_Fsim35fn00_idkc05_s0_h1__ck120: 1500 rows
+(3) Q2 tqa keyfp q2_free: 4500 rows
+JUDGE Q2     tqa: 13702 distinct keys; repeated 4650; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0004
+(2) Q2 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) Q2 pqa filter phi4m_FL2sim00fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q2 pqa filter phi4m_FT1judgeQ_idk_pq__ck120: 1500 rows
+(2) Q2 pqa filter phi4m_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q2 pqa filter smol3_FT1sim35fn00_idkc05_s0_pq__ck120: 1500 rows
+(2) Q2 pqa filter smol3_FjudgeQ_idk_pq__ck120: 1500 rows
+(2) Q2 pqa filter smol3_FjudgeQt80_idk_pq__ck120: 1500 rows
+(2) Q2 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck0: 1500 rows
+(2) Q2 pqa filter smol3_Fsim00fn00_idkc05_s0_pq__ck120: 1500 rows
+JUDGE Q2     pqa: 7837 distinct keys; repeated 2611; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0000
+(3) Q9ref tqa keyfp q9_key: 4500 rows
+JUDGE Q9ref  tqa: 3498 distinct keys; repeated 712; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0000
+(3) G12ref tqa keyfp g12_key: 4500 rows
+JUDGE G12ref tqa: 3498 distinct keys; repeated 712; median spread 0.0000; 95th pct spread 0.0002; keys whose repeats straddle 0.5: 0.0000
+(3) Q4ref tqa keyfp q4_key: 4500 rows
+JUDGE Q4ref  tqa: 3498 distinct keys; repeated 712; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0000
+(3) Q2ref tqa keyfp q2_key: 4500 rows
+JUDGE Q2ref  tqa: 3498 distinct keys; repeated 712; median spread 0.0000; 95th pct spread 0.0000; keys whose repeats straddle 0.5: 0.0000

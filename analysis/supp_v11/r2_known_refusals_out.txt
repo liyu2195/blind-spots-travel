@@ -1,0 +1,11 @@
+qwen7 h1: new q 718, known (aud-right greedy) per 100 61.1, sure&known 45.1 | judge a35 runs 11 abst 0.58 | refusals of known /100q: judge 24.1 vs key-family line 22.5 (excess +1.6) | sure&known: judge 13.9 vs line 12.0 (excess +1.9) | key runs 19
+qwen7 pq: new q 750, known (aud-right greedy) per 100 58.4, sure&known 41.3 | judge a35 runs 15 abst 0.63 | refusals of known /100q: judge 23.3 vs key-family line 24.2 (excess -0.9) | sure&known: judge 12.2 vs line 12.3 (excess -0.1) | key runs 19
+analysis/rev_R3/r2_known_refusals.py:25: RankWarning: Polyfit may be poorly conditioned
+  b1, b0 = np.polyfit(ref[sel, 0], ref[sel, 1], 1); c1, c0 = np.polyfit(ref[sel, 0], ref[sel, 2], 1)
+analysis/rev_R3/r2_known_refusals.py:25: RankWarning: Polyfit may be poorly conditioned
+  b1, b0 = np.polyfit(ref[sel, 0], ref[sel, 1], 1); c1, c0 = np.polyfit(ref[sel, 0], ref[sel, 2], 1)
+qwen7 nq: new q 750, known (aud-right greedy) per 100 39.6, sure&known 20.5 | judge a35 runs 17 abst 0.56 | refusals of known /100q: judge 8.5 vs key-family line 16.6 (excess -8.1) | sure&known: judge 3.3 vs line 6.4 (excess -3.0) | key runs 1
+llama8 h1: new q 718, known (aud-right greedy) per 100 78.3, sure&known 52.2 | judge a35 runs 12 abst 0.56 | refusals of known /100q: judge 35.5 vs key-family line 36.3 (excess -0.8) | sure&known: judge 16.9 vs line 18.5 (excess -1.6) | key runs 20
+llama8 pq: new q 750, known (aud-right greedy) per 100 79.7, sure&known 52.7 | judge a35 runs 15 abst 0.60 | refusals of known /100q: judge 40.6 vs key-family line 41.0 (excess -0.4) | sure&known: judge 19.0 vs line 18.0 (excess +1.0) | key runs 20
+llama8 nq: new q 750, known (aud-right greedy) per 100 58.3, sure&known 22.5 | judge a35 runs 17 abst 0.52 | refusals of known /100q: judge 21.0 vs key-family line 19.0 (excess +2.0) | sure&known: judge 5.5 vs line -0.3 (excess +5.8) | key runs 11
+mean over 6 cells: refusals of known answers per 100 new q: judge a35 25.5, key-family at same abstention 26.6, excess -1.1; sure&known: judge 11.8, key line 11.2, excess +0.7

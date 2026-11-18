@@ -1,0 +1,10 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B
+TAG=smol3
+REWARD=judgeQ
+TRAIN=tqa_h1
+STEPS=120
+CK=40
+LR=5e-5
+CAP=21600
+SEED=2
+OUTNAME=smol3_judgeQ_s2_h1

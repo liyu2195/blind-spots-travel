@@ -1,0 +1,11 @@
+STUDENT=microsoft/Phi-4-mini-instruct
+TAG=phi4m
+REWARD=gold_strict
+TRAIN=tqa_h1
+STEPS=120
+CK=40
+LR=5e-5
+CAP=25200
+SEED=0
+SERVER=gpu-vm
+OUTNAME=phi4m_goldstrict_h1

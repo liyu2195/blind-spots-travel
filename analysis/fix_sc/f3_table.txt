@@ -1,0 +1,58 @@
+fix_sc f3: the compact table (FK20, IDK credit 0.5, new questions, capped runs included) and summary numbers, from f1_rows.pkl / f1_summary.pkl.
+Cells 'Qwen ; Llama'. m* = equivalent generations (f1); 'flat' when SC_32 - SC_1 < 2 pp at the family's coverage (RL hardly abstains, so the
+number of samples cannot be identified). '†' = more than 5% of the family's RL answers on one dataset are key-wrong without any audit verdict:
+the 'hi' bound (those answers right) is given. Also: pooled RL - SC_32 over all runs with / without the blind grader, and which cells have a
+crossed-bootstrap interval excluding 0 on each student. Output: f3_table.txt
+
+| grader, operating point | runs (capped) | coverage | RL - SC_1 | RL - SC_32 [95% CI] | m* | selection / answers |
+|---|---|---|---|---|---|---|
+| key | 13 (0) ; 18 (0) | 0.65 ; 0.69 | +15.6 ; +11.0 | -1.7 [-3.4, -0.1] ; -2.0 [-3.6, -0.4] | 4.4 ; 5.6 | -2.7 / +1.1 ; -1.7 / -0.4 |
+| key+noise (all) | 86 (24) ; 94 (26) | 0.69 ; 0.75 | +11.5 ; +8.1 | -0.5 [-1.4, +0.4] ; -0.9 [-1.7, -0.1] | 11.9 ; 7.2 | -1.6 / +1.1 ; -0.9 / -0.0 |
+| own vote | 17 (0) ; 12 (0) | 0.54 ; 0.53 | +16.3 ; +14.7 | -2.4 [-3.9, -0.9] ; -2.4 [-3.8, -1.1] | 5.4 ; 4.7 | -2.1 / -0.3 ; -2.0 / -0.4 |
+| Q t50 | 9 (9) ; 9 (8) | 0.91 ; 0.97 | +2.4 ; +0.9 | +1.7 [+0.6, +2.7] ; +0.3 [-0.6, +1.2] | flat ; flat | -0.1 / +1.8 ; -0.1 / +0.4 |
+| Q a50 | 17 (1) ; 18 (0) | 0.63 ; 0.61 | +14.0 ; +12.5 | -1.4 [-2.7, +0.1] ; -1.1 [-2.3, +0.0] | 5.6 ; 7.2 | -2.0 / +0.6 ; -1.4 / +0.3 |
+| Q a35 | 18 (0) ; 18 (0) | 0.40 ; 0.42 | +25.8 ; +18.2 | +1.9 [-0.2, +4.1] ; +0.3 [-1.3, +1.9] | >32 ; >32 | +1.4 / +0.5 ; +0.0 / +0.3 |
+| M t50 | 1 (1) ; 1 (1) | 0.99 ; 0.99 | +1.0 ; -0.3 | +0.7 [-1.0, +2.4] ; -0.4 [-1.8, +1.0] | flat ; flat | +0.0 / +0.7 ; -0.1 / -0.3 |
+| M a35 | 8 (0) ; 8 (0) | 0.37 ; 0.41 | +25.5 ; +17.4 | +0.8 [-1.5, +3.3] ; -0.8 [-2.6, +1.2] | >32 ; 11.6 | +0.9 / -0.1 ; +0.1 / -0.9 |
+| G t50 | 3 (2) ; 3 (1) | 0.83 ; 0.87 | +1.6 ; +3.5 | -0.4 [-2.3, +1.5] ; +0.6 [-1.0, +2.4] | flat ; >32 | -0.4 / -0.0 ; +0.1 / +0.5 |
+| G a35 | 8 (0) ; 8 (0) | 0.43 ; 0.41 | +24.1 ; +18.2 | +0.7 [-1.5, +3.2]† (hi +3.2) ; -0.6 [-2.5, +1.3] | >32 ; 13.3 | +1.2 / -0.5 ; -1.1 / +0.4 |
+| O t50 | 3 (0) ; 3 (0) | 0.65 ; 0.82 | +11.8 ; +1.5 | -0.6 [-2.8, +2.0] ; -4.7 [-7.2, -2.3]† (hi +12.9) | 15.3 ; 1.3 | -0.9 / +0.3 ; -1.9 / -2.8 |
+| O a35 | 7 (0) ; 8 (0) | 0.45 ; 0.57 | +23.2 ; +8.8 | +1.2 [-1.7, +4.2]† (hi +4.8) ; -3.9 [-5.9, -2.1]† (hi +7.8) | >32 ; 3.0 | +0.9 / +0.3 ; -1.0 / -2.9 |
+| R a35 | 2 (0) ; 2 (0) | 0.37 ; 0.40 | +24.1 ; +18.8 | +0.6 [-4.3, +6.1] ; -1.9 [-6.9, +3.0] | >32 ; 5.6 | +1.6 / -1.0 ; -1.0 / -0.9 |
+| Sonnet | 9 (0) ; 9 (0) | 0.65 ; 0.86 | +15.7 ; +5.9 | +1.0 [-0.6, +2.5] ; +0.3 [-0.8, +1.5] | >32 ; >32 | -0.8 / +1.9 ; -0.5 / +0.8 |
+| planted FR | 31 (0) ; 30 (0) | 0.33 ; 0.34 | +27.5 ; +15.2 | +0.5 [-1.8, +3.1] ; -1.5 [-2.8, -0.2] | >32 ; 7.3 | -0.1 / +0.6 ; -1.4 / -0.1 |
+| planted FA | 28 (7) ; 13 (6) | 0.77 ; 0.95 | +6.9 ; +1.3 | -1.5 [-3.0, -0.0]† (hi +2.2) ; -1.5 [-2.8, -0.1]† (hi +4.5) | 3.4 ; 2.2 | -2.5 / +1.0 ; -1.1 / -0.3 |
+| blind (pays any answer on 40-60% of questions) | 9 (0) ; 9 (0) | 0.63 ; 0.60 | +3.7 ; +7.6 | -8.3 [-12.3, -4.7] ; -4.6 [-7.1, -2.4] | 1.4 ; 2.7 | -8.3 / -0.1 ; -4.1 / -0.5 |
+
+m* with 95% intervals (crossed bootstrap):
+   key: qwen7 4.4 [3.1, 19.0] ; llama8 5.6 [3.7, 12.9]
+   key+noise (all): qwen7 11.9 [5.5, >32] ; llama8 7.2 [4.4, 21.8]
+   own vote: qwen7 5.4 [3.6, 11.0] ; llama8 4.7 [3.4, 7.4]
+   judge Q t50: qwen7 >32 [>32, >32] ; llama8 >32 [<1, >32]
+   judge Q a50: qwen7 5.6 [3.5, >32] ; llama8 7.2 [4.4, >32]
+   judge Q a35: qwen7 >32 [26.8, >32] ; llama8 >32 [8.5, >32]
+   judge M t50: qwen7 >32 [<1, >32] ; llama8 <1 [<1, >32]
+   judge M a35: qwen7 >32 [9.8, >32] ; llama8 11.6 [5.0, >32]
+   judge G t50: qwen7 6.5 [1.2, >32] ; llama8 >32 [3.3, >32]
+   judge G a35: qwen7 >32 [9.1, >32] ; llama8 13.3 [5.5, >32]
+   judge O t50: qwen7 15.3 [3.2, >32] ; llama8 1.3 [<1, 2.1]
+   judge O a35: qwen7 >32 [7.3, >32] ; llama8 3.0 [2.0, 4.9]
+   judge R a35: qwen7 >32 [3.4, >32] ; llama8 5.6 [2.9, >32]
+   Sonnet: qwen7 >32 [10.2, >32] ; llama8 >32 [7.0, >32]
+   planted FR: qwen7 >32 [8.7, >32] ; llama8 7.3 [4.5, 21.0]
+   planted FA: qwen7 3.4 [1.9, 23.5] ; llama8 2.2 [<1, 14.2]
+   blind (pays any answer on a subset): qwen7 1.4 [<1, 2.3] ; llama8 2.7 [1.8, 3.9]
+
+Pooled RL - SC_32 (pp; crossed bootstrap), FK20 idkc05 runs:
+   qwen7 all runs incl. capped          runs 289: -0.62 [-1.49, +0.34]  (all 32 samples: -0.62)
+   qwen7 excluding blind                runs 280: -0.37 [-1.30, +0.58]  (all 32 samples: -0.38)
+   qwen7 not capped (as selfcons s2)    runs 245: -0.91 [-1.88, +0.26]  (all 32 samples: -0.90)
+   qwen7 not capped, excluding blind    runs 236: -0.62 [-1.66, +0.44]  (all 32 samples: -0.62)
+   llama8 all runs incl. capped          runs 271: -1.22 [-1.86, -0.50]  (all 32 samples: -1.23)
+   llama8 excluding blind                runs 262: -1.10 [-1.76, -0.38]  (all 32 samples: -1.11)
+   llama8 not capped (as selfcons s2)    runs 227: -1.40 [-2.10, -0.60]  (all 32 samples: -1.41)
+   llama8 not capped, excluding blind    runs 218: -1.27 [-2.03, -0.49]  (all 32 samples: -1.27)
+
+Cells (pooled over datasets) whose 95% interval for RL - SC_32 excludes 0:
+   qwen7: RL > SC_32: ['judge Q t50'] | RL < SC_32: ['key', 'own vote', 'planted FA', 'blind (pays any answer on a subset)', 'other frozen keys']
+   llama8: RL > SC_32: [] | RL < SC_32: ['key', 'key+noise (all)', 'key+FN noise', 'own vote', 'judge O t50', 'judge O a35', 'planted (all)', 'planted FR', 'planted FA', 'blind (pays any answer on a subset)']

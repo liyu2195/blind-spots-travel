@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m FPK=0.0 FPU=0.0 FN=0.0 IDK=0.5 SEED=0 FPMODE=random FMT=1 ADV=std TRAINF=tqa_h1_rand65phi4m.jsonl OUTNAME=phi4m_Frand65_idkc05_s0_h1

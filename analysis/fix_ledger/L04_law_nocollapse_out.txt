@@ -1,0 +1,9 @@
+(fix_ledger) L04: sensitivity of the leniency curve (stats/c4_law.py primary test) to the all-IDK collapsed runs, which c4 keeps.
+Input: stats/c4_points.csv (run, st, fam, L, y_new as computed by c4). Same model and fit as c4: y = 1 / (1 + exp(-(a + b (L - 0.5)))), least
+squares on the probability scale, fitted on qwen7 uniform-noise runs, scored on llama8 uniform-noise runs (R^2 about their own mean), and on
+LLM-judge runs. Variants: all runs (c4 primary, should reproduce R^2 0.851), collapsed runs (y_new >= 0.95) dropped from fit and test.
+Output: L04_law_nocollapse_out.txt.  Usage: python3 -I L04_law_nocollapse.py
+all runs (c4 primary)   : fit qwen7 uniform n 105 (a -0.84, b -8.27) -> llama8 uniform n 113: R2 0.851 MAE 0.091 | LLM judges n 156: R2 0.706
+                          collapsed runs in the sets: qwen7 uniform 12, llama8 uniform 7, judges 2
+collapsed runs dropped  : fit qwen7 uniform n 93 (a -0.84, b -6.54) -> llama8 uniform n 106: R2 0.821 MAE 0.090 | LLM judges n 154: R2 0.751
+                          collapsed runs in the sets: qwen7 uniform 12, llama8 uniform 7, judges 2

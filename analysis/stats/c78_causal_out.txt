@@ -1,0 +1,67 @@
+(stats) Claims 7 and 8: causal arms with simulated graders on PopQA (rejections of right answers placed on chosen question sets).
+Units: questions whose untrained greedy answer is valid, sure (>= 31/32 samples agree) and audited right (loose key OR Sonnet >= 4); NEW = duplicate-free
+held-out questions, HOME = trained questions. gap_S(run) = IDK rate on S minus IDK rate off S (within the units).
+map_S(run) = gap_S(run) - reference gap at the run's abstention (same part), reference = key-family runs (FK20 sim00fn00 / sim00fnXX, abstention < 0.95)
+by local-linear regression of their gap on their abstention (Gaussian kernel, bandwidth 0.10). Runs with abstention >= 0.95 are excluded.
+CLAIM 7 (copy vs scramble): S_new = Mistral (a35) rejects the untrained greedy answer. Arms plrealM (right answers rejected on exactly Mistral's
+  rejected training questions) vs plscrM (same number of training questions, scrambled). PRIMARY: map(real) - map(scrambled) on new questions.
+  Exact permutation of real / scrambled labels within student (C(8, 4) = 70 splits; Fisher combination over students).
+CLAIM 8 (visible vs hidden planted sets, 80% rejected on the set, 20% elsewhere): fnB80 (set = 8 relation types) vs fnH80 (set = a random half of
+  each type). E_home = map on the run's own planted set (training questions). New questions: visible set = the same relation types; the hidden set
+  has no new-question members, so both arms are also scored with a nearest-neighbour proxy (majority label of the 10 nearest trained questions in the
+  untrained student's layer-16 representation). PRIMARY: E_new(visible, types) and E_new(hidden, proxy); transfer ratio E_new / E_home.
+  'Hidden carries none': TOST of E_new(hidden) with margin 0.05.
+Uncertainty: crossed bootstrap (2000): units resampled within (student, part), runs resampled within arm (reference runs included).
+Robustness: nearest-3 and global-quadratic references; log odds ratio of refusal (S vs not S) against the reference log OR; raw gaps; other arms
+  (fnA80: 80% on the complement types; fnB50; fnH60; plsharpM, judgeMa35; plrealO vs judgeOa35).
+Output: c78_causal_out.txt
+qwen7: new units 310, home units 302; arms fnB50 2 (seeds [0, 1]), fnB80 3 (seeds [0, 1, 2]), fnH60 4 (seeds [0, 1, 2, 3]), fnH80 2 (seeds [1, 2]), judgeMa35 3 (seeds [0, 1, 2]), judgeOa35 3 (seeds [0, 1, 2]), key 19 (seeds [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5]), plrealM 4 (seeds [0, 1, 2, 3]), plrealO 4 (seeds [0, 1, 2, 3]), plscrM 4 (seeds [0, 1, 2, 3]), plsharpM 4 (seeds [0, 1, 2, 3]), plsharpO 4 (seeds [0, 1, 2, 3]); visible types [np.str_('author'), np.str_('composer'), np.str_('genre'), np.str_('mother'), np.str_('place of birth'), np.str_('producer'), np.str_('screenwriter'), np.str_('sport')]; proxy agreement with true type on new units 0.990
+llama8: new units 395, home units 399; arms fnA80 3 (seeds [0, 1, 2]), fnB50 2 (seeds [0, 1]), fnB80 3 (seeds [0, 1, 2]), fnH80 3 (seeds [0, 1, 2]), judgeMa35 3 (seeds [0, 1, 2]), judgeOa35 3 (seeds [0, 1, 2]), key 23 (seeds [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]), plrealM 4 (seeds [0, 1, 2, 3]), plrealO 4 (seeds [0, 1, 2, 3]), plscrM 3 (seeds [0, 1, 2]), plsharpM 4 (seeds [0, 1, 2, 3]), plsharpO 4 (seeds [0, 1, 2, 3]); visible types [np.str_('author'), np.str_('composer'), np.str_('genre'), np.str_('mother'), np.str_('place of birth'), np.str_('producer'), np.str_('screenwriter'), np.str_('sport')]; proxy agreement with true type on new units 0.982
+
+==== CLAIM 7: copy (plrealM) vs scrambled copy (plscrM), Mistral-rejected sure-right NEW questions
+  qwen7 key       runs 19 abstention new 0.507 [0.31, 0.79]  raw gap +0.273  map(lin) -0.001
+  qwen7 judgeMa35 runs  3 abstention new 0.707 [0.70, 0.72]  raw gap +0.632  map(lin) +0.117
+  qwen7 plrealM   runs  4 abstention new 0.719 [0.62, 0.78]  raw gap +0.643  map(lin) +0.126
+  qwen7 plscrM    runs  4 abstention new 0.678 [0.60, 0.74]  raw gap +0.474  map(lin) -0.005
+  qwen7 plsharpM  runs  4 abstention new 0.689 [0.67, 0.71]  raw gap +0.571  map(lin) +0.073
+  llama8 key       runs 23 abstention new 0.318 [0.04, 0.74]  raw gap +0.161  map(lin) -0.003
+  llama8 judgeMa35 runs  3 abstention new 0.640 [0.61, 0.67]  raw gap +0.567  map(lin) +0.161
+  llama8 plrealM   runs  4 abstention new 0.676 [0.66, 0.71]  raw gap +0.584  map(lin) +0.156
+  llama8 plscrM    runs  3 abstention new 0.763 [0.69, 0.87]  raw gap +0.167  map(lin) -0.348
+  llama8 plsharpM  runs  4 abstention new 0.721 [0.71, 0.74]  raw gap +0.490  map(lin) +0.030
+  PRIMARY real - scrambled map: qwen7 +0.131 [-0.013, +0.243] exact p 0.0143  llama8 +0.504 [+0.282, +0.735] exact p 0.0286  | pooled +0.317 [+0.177, +0.443], Fisher p 0.0036
+  robustness nearest-3 reference                           : qwen7 +0.155 [+0.039, +0.260]  llama8 +0.417 [+0.281, +0.562]
+  robustness global quadratic reference                    : qwen7 +0.122 [-0.022, +0.247]  llama8 +0.492 [+0.298, +0.729]
+  robustness log odds ratio vs local-linear reference log OR: qwen7 +1.002 [+0.327, +1.847]  llama8 +2.380 [+1.283, +3.524]
+  robustness raw gap, no reference                         : qwen7 +0.169 [+0.050, +0.297]  llama8 +0.417 [+0.273, +0.560]
+  qwen7 HOME map on the arm's own planted set: real +0.388 (runs +0.37 +0.41 +0.39 +0.38)  scrambled +0.285 (runs +0.19 +0.36 +0.35 +0.25)
+  llama8 HOME map on the arm's own planted set: real +0.437 (runs +0.41 +0.43 +0.41 +0.50)  scrambled +0.541 (runs +0.50 +0.49 +0.63)
+  copy (plrealM) minus the judge itself (judgeMa35), new-question map, qwen7: +0.010 [-0.108, +0.084]  TOST(0.05) p 0.1570 bound 0.092
+  copy (plrealM) minus the judge itself (judgeMa35), new-question map, llama8: -0.005 [-0.062, +0.062]  TOST(0.05) p 0.0520 bound 0.050
+  copy (plrealM) minus the judge itself (judgeMa35), new-question map, pooled: +0.002 [-0.063, +0.051]  TOST(0.05) p 0.0610 bound 0.053
+
+==== CLAIM 8: visible (fnB80, 8 relation types) vs hidden (fnH80, random half of each type) planted rejection sets
+  qwen7 key    runs 19 abstention new 0.507 home 0.493 seeds [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5]
+  qwen7 fnB80  runs  3 abstention new 0.630 home 0.604 seeds [0, 1, 2]
+  qwen7 fnH80  runs  2 abstention new 0.792 home 0.788 seeds [1, 2]
+  qwen7 fnA80  runs  0 (none with abstention < 0.95)
+  qwen7 fnB50  runs  2 abstention new 0.630 home 0.565 seeds [0, 1]
+  qwen7 fnH60  runs  4 abstention new 0.539 home 0.535 seeds [0, 1, 2, 3]
+  llama8 key    runs 23 abstention new 0.318 home 0.254 seeds [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]
+  llama8 fnB80  runs  3 abstention new 0.521 home 0.481 seeds [0, 1, 2]
+  llama8 fnH80  runs  3 abstention new 0.614 home 0.507 seeds [0, 1, 2]
+  llama8 fnA80  runs  3 abstention new 0.889 home 0.809 seeds [0, 1, 2]
+  llama8 fnB50  runs  2 abstention new 0.336 home 0.269 seeds [0, 1]
+  llama8 fnH60  runs  0 (none with abstention < 0.95)
+  qwen7  visible: home +0.359 [+0.268, +0.456]  new(types) +0.282 [+0.201, +0.379]  new(proxy) +0.270  ratio 0.79 [0.52, 1.17] | hidden: home +0.195 [+0.105, +0.399]  new(proxy) +0.040 [-0.084, +0.202]  TOST(0.05) p 0.4375 bound 0.166  ratio 0.20 [-0.37, 0.97]
+  llama8 visible: home +0.534 [+0.416, +0.637]  new(types) +0.505 [+0.423, +0.596]  new(proxy) +0.501  ratio 0.95 [0.76, 1.20] | hidden: home +0.293 [+0.207, +0.371]  new(proxy) +0.023 [-0.050, +0.089]  TOST(0.05) p 0.2065 bound 0.079  ratio 0.08 [-0.17, 0.32]
+  pooled visible: home +0.446 [+0.371, +0.516]  new(types) +0.394 [+0.335, +0.460]  new(proxy) +0.385  ratio 0.87 [0.72, 1.09] | hidden: home +0.244 [+0.181, +0.352]  new(proxy) +0.031 [-0.034, +0.115]  TOST(0.05) p 0.2905 bound 0.098  ratio 0.14 [-0.16, 0.52]
+  qwen7  transfer ratio visible - hidden +0.58 [-0.22, +1.23] (bootstrap P(<= 0) 0.0515);  new-question map visible - hidden +0.243 [+0.059, +0.396] (P(<= 0) 0.0090)
+  llama8 transfer ratio visible - hidden +0.87 [+0.55, +1.24] (bootstrap P(<= 0) 0.0000);  new-question map visible - hidden +0.482 [+0.379, +0.605] (P(<= 0) 0.0000)
+  pooled transfer ratio visible - hidden +0.73 [+0.31, +1.11] (bootstrap P(<= 0) 0.0080);  new-question map visible - hidden +0.362 [+0.256, +0.462] (P(<= 0) 0.0000)
+  robustness nearest-3 reference                         : | qwen7 vis new +0.304 (home +0.342) hid proxy +0.043 [-0.046, +0.120] (home +0.231) | llama8 vis new +0.513 (home +0.540) hid proxy +0.007 [-0.066, +0.091] (home +0.296) | pooled vis new +0.408 (home +0.441) hid proxy +0.025 [-0.031, +0.084] (home +0.264)
+  robustness log odds ratio                              : | qwen7 vis new +1.356 (home +1.860) hid proxy +0.185 [-0.158, +1.022] (home +0.776) | llama8 vis new +3.445 (home +3.688) hid proxy +0.096 [-0.207, +0.405] (home +1.542) | pooled vis new +2.401 (home +2.774) hid proxy +0.140 [-0.074, +0.587] (home +1.159)
+  robustness raw gaps (no reference)                     : | qwen7 vis new +0.618 (home +0.691) hid proxy +0.146 [+0.030, +0.254] (home +0.191) | llama8 vis new +0.825 (home +0.847) hid proxy +0.012 [-0.086, +0.111] (home +0.268) | pooled vis new +0.722 (home +0.769) hid proxy +0.079 [+0.010, +0.152] (home +0.229)
+  robustness visible = fnA80 (80% on the complement types): | llama8 vis new +1.136 (home +1.242) hid proxy +0.023 [-0.055, +0.091] (home +0.293)
+  robustness visible = fnB50 (50/20)                     : | qwen7 vis new +0.104 (home +0.117) hid proxy +0.040 [-0.078, +0.199] (home +0.195) | llama8 vis new +0.093 (home +0.103) hid proxy +0.023 [-0.049, +0.082] (home +0.293) | pooled vis new +0.098 (home +0.110) hid proxy +0.031 [-0.039, +0.113] (home +0.244)
+  robustness hidden = fnH60 (60/0)                       : | qwen7 vis new +0.282 (home +0.359) hid proxy +0.007 [-0.038, +0.055] (home +0.037)

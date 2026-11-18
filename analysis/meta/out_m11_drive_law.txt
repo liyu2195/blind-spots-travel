@@ -1,0 +1,56 @@
+discovery: qwen7 + llama8 uniform graders, c 0.5, KL 0.2, std advantages: 218
+
+  x = prem: a -1.137 b -9.221; in-sample R2 0.856
+    llama8 judges (c .5)                   n  80  R2 +0.685  MAE 0.082  bias +0.025  corr -0.861
+    qwen7 judges (c .5)                    n  80  R2 +0.661  MAE 0.082  bias +0.062  corr -0.877
+    qwen7 judgeQt50 c .7/.85               n   4  R2 -135.381  MAE 0.301  bias -0.301  corr -0.567
+    small, uniform, std, c = .5, KL .2     n 122  R2 +0.559  MAE 0.130  bias -0.013  corr -0.733
+    small, uniform, std, c != .5, KL .2    n  37  R2 -2.927  MAE 0.346  bias -0.242  corr -0.118
+    small, uniform, adv none, KL .2        n  10  R2 -3.503  MAE 0.231  bias -0.223  corr -0.838
+
+  x = D_used: a -1.162 b +1.809; in-sample R2 0.821
+    llama8 judges (c .5)                   n  80  R2 +0.699  MAE 0.078  bias +0.013  corr +0.861
+    qwen7 judges (c .5)                    n  80  R2 +0.700  MAE 0.075  bias +0.046  corr +0.881
+    qwen7 judgeQt50 c .7/.85               n   4  R2 +0.598  MAE 0.016  bias -0.003  corr +0.972
+    small, uniform, std, c = .5, KL .2     n 122  R2 +0.479  MAE 0.150  bias -0.000  corr +0.690
+    small, uniform, std, c != .5, KL .2    n  37  R2 +0.737  MAE 0.081  bias +0.023  corr +0.895
+    small, uniform, adv none, KL .2        n  10  R2 -0.180  MAE 0.124  bias -0.107  corr +0.850
+
+IDK-credit sweeps (runs with a queue config): actual vs drive-curve prediction
+                       n  D_std  D_none   prem  idk_new   pred
+st      sub  adv  c                                           
+granite FP35 std  0.5  1 -0.608  -0.081  0.118    0.319  0.094
+phi4m   FP35 none 0.5  1 -0.697  -0.106  0.123    0.015  0.205
+                  0.7  1 -0.429   0.069 -0.077    0.035  0.262
+             std  0.6  1 -0.562  -0.018  0.023    0.017  0.102
+                  0.7  4 -0.429   0.069 -0.077    0.048  0.126
+                  0.8  4 -0.300   0.157 -0.177    0.131  0.154
+                  0.9  3 -0.176   0.244 -0.277    0.237  0.185
+        gold none 0.3  1  0.269  -0.102  0.120    0.019  0.206
+                  0.5  1  0.401   0.073 -0.080    0.060  0.263
+                  0.7  1  0.529   0.248 -0.280    0.368  0.329
+             std  0.1  1  0.140  -0.277  0.320    0.359  0.287
+                  0.3  1  0.269  -0.102  0.120    0.525  0.337
+                  0.4  1  0.335  -0.014  0.020    0.483  0.364
+                  0.6  1  0.466   0.161 -0.180    0.501  0.421
+                  0.7  1  0.529   0.248 -0.280    0.540  0.449
+                  0.9  1  0.649   0.423 -0.480    0.563  0.503
+smol3   FP35 none 0.5  1 -0.593  -0.086  0.109    0.065  0.211
+                  0.7  1 -0.312   0.089 -0.091    0.170  0.268
+             std  0.6  1 -0.451   0.001  0.009    0.100  0.121
+                  0.7  3 -0.312   0.089 -0.091    0.213  0.151
+                  0.8  4 -0.177   0.176 -0.191    0.220  0.185
+                  0.9  3 -0.048   0.264 -0.291    0.383  0.223
+        gold none 0.3  1  0.469  -0.072  0.098    0.156  0.215
+                  0.5  1  0.597   0.103 -0.102    0.228  0.273
+                  0.7  1  0.722   0.278 -0.302    0.384  0.341
+             std  0.3  1  0.469  -0.072  0.098    0.454  0.422
+                  0.4  1  0.533   0.015 -0.002    0.433  0.450
+                  0.6  1  0.660   0.190 -0.202    0.446  0.508
+                  0.7  1  0.722   0.278 -0.302    0.479  0.536
+  std  phi4m FP35 : d idk / d c = +0.83 per unit credit (n 12, credits [np.float64(0.6), np.float64(0.7), np.float64(0.8), np.float64(0.9)]); d drive / d c = +1.28
+  std  phi4m gold : d idk / d c = +0.21 per unit credit (n 6, credits [np.float64(0.1), np.float64(0.3), np.float64(0.4), np.float64(0.6), np.float64(0.7), np.float64(0.9)]); d drive / d c = +0.64
+  std  smol3 FP35 : d idk / d c = +0.85 per unit credit (n 11, credits [np.float64(0.6), np.float64(0.7), np.float64(0.8), np.float64(0.9)]); d drive / d c = +1.33
+  std  smol3 gold : d idk / d c = +0.06 per unit credit (n 4, credits [np.float64(0.3), np.float64(0.4), np.float64(0.6), np.float64(0.7)]); d drive / d c = +0.63
+  none phi4m gold : d idk / d c = +0.87 per unit credit (n 3, credits [np.float64(0.3), np.float64(0.5), np.float64(0.7)]); d drive / d c = +0.87
+  none smol3 gold : d idk / d c = +0.57 per unit credit (n 3, credits [np.float64(0.3), np.float64(0.5), np.float64(0.7)]); d drive / d c = +0.87

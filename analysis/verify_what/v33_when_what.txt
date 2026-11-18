@@ -1,0 +1,18 @@
+(verify_what) Item 3 companion (dynamics d18-d20 claim): Q-judge FK20 runs vs key-trained FK20 runs, per part (home / new, dedup), on
+questions whose untrained greedy answer is key-wrong (well-formed, not IDK) and has a Q verdict (exact first line, else normalised):
+  WHEN: sel = P(run answers | greedy judge-paid) - P(run answers | greedy judge-rejected), threshold of the run's level;
+  WHAT: chg = Q pay rate of the run's final wrong answer - pay rate of the untrained greedy, on questions wrong in both (verdict available).
+Key-trained runs evaluated at each level's threshold. Abstention matching: each judge run vs the key runs of the same student and set whose
+refusal rate on new questions is within 0.05 (difference judge - mean matched key). Output v33_when_what.txt
+a35 qwen7  home: judge runs 18 sel +0.623 chg +0.176 | key runs  96 sel +0.177 chg -0.004 | abstention-matched judge - key (15 runs matched): sel +0.414 chg +0.216
+a35 qwen7  new : judge runs 18 sel +0.464 chg +0.021 | key runs  96 sel +0.219 chg -0.003 | abstention-matched judge - key (15 runs matched): sel +0.177 chg +0.024
+a35 llama8 home: judge runs 18 sel +0.762 chg +0.195 | key runs 104 sel +0.207 chg +0.010 | abstention-matched judge - key (12 runs matched): sel +0.549 chg +0.136
+a35 llama8 new : judge runs 18 sel +0.584 chg +0.052 | key runs 104 sel +0.271 chg +0.000 | abstention-matched judge - key (12 runs matched): sel +0.222 chg +0.029
+a50 qwen7  home: judge runs 18 sel +0.391 chg +0.222 | key runs  96 sel +0.128 chg -0.005 | abstention-matched judge - key (0 runs matched): sel +0.233 chg +0.229
+a50 qwen7  new : judge runs 18 sel +0.257 chg +0.012 | key runs  96 sel +0.164 chg -0.015 | abstention-matched judge - key (0 runs matched): sel +0.043 chg +0.029
+a50 llama8 home: judge runs 18 sel +0.632 chg +0.167 | key runs 104 sel +0.192 chg -0.028 | abstention-matched judge - key (11 runs matched): sel +0.348 chg +0.174
+a50 llama8 new : judge runs 18 sel +0.518 chg +0.025 | key runs 104 sel +0.239 chg -0.000 | abstention-matched judge - key (11 runs matched): sel +0.184 chg +0.024
+t50 qwen7  home: judge runs  9 sel +0.037 chg +0.309 | key runs  96 sel +0.037 chg +0.000 | abstention-matched judge - key (8 runs matched): sel +0.025 chg +0.311
+t50 qwen7  new : judge runs  9 sel +0.004 chg +0.015 | key runs  96 sel +0.063 chg -0.004 | abstention-matched judge - key (8 runs matched): sel +0.001 chg +0.016
+t50 llama8 home: judge runs  9 sel +0.040 chg +0.225 | key runs 104 sel +0.050 chg -0.007 | abstention-matched judge - key (9 runs matched): sel +0.018 chg +0.243
+t50 llama8 new : judge runs  9 sel +0.010 chg +0.026 | key runs 104 sel +0.078 chg -0.012 | abstention-matched judge - key (9 runs matched): sel -0.007 chg +0.025

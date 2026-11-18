@@ -1,0 +1,4 @@
+(verify_what) Item 2 check of the claim's validation statistic: correlation across the 36 (student, set, seed) cells of predicted vs logged
+step-1 strict correctness, true seed vs wrong seeds (if a wrong seed also gives r ~ 0.99, r = 0.998 is driven by between-set differences and
+does not validate the schedule; the within-set test and v20 V2/V3 do). Output v20b_r998.txt
+cells 36: r(true seed) = 0.999; r(wrong seeds) median 0.850 [min 0.741, max 0.909]; within (student, set) r over 6 seeds, true seed: 0.99 1.00 0.98 0.98 0.99 0.99

@@ -1,0 +1,195 @@
+(supp_v11) s22b_transition_checks: checks on the item-level transitions of s22 (Nov 18; saved answers and audit verdicts only).
+Same classes, runs and rule as s22_transitions.py. For every trained run the difference in true reward to the rule is split into
+  changed  = wrong -> right (corrected) plus right -> wrong (points; the second term is negative)
+  dropped  = wrong answers dropped beyond the rule minus right answers dropped beyond the rule (half a point each)
+  rest     = questions the untrained student did not answer
+E. Per student-dataset pair: corrected, right -> wrong, changed, dropped, total, for each grader; the share of all wrong answers corrected.
+F. Graders that know the answers minus the student's own vote, pair by pair, with the number of pairs in which the difference is positive, and
+   two intervals: (t) mean of pairs +- t * s.e. over pairs; (b) bootstrap that resamples pairs and, within each pair, runs (10,000 draws, seed 0).
+G. Each grader against the rule: the same two intervals for total, changed and dropped (these are the intervals for Figure 2).
+H. The same with truth = the loose answer key only (no audit verdicts), so that Sonnet is not both grader and auditor.
+I. Transition shares on the four pairs that the answer key, Sonnet, the reference judge and the own vote all have (PopQA, NQ-open).
+Usage: python3 -I -B s22b_transition_checks.py   Output: s22b_transition_checks_out.txt, .json
+
+################ truth = loose key or audit level >= 4 (as in the paper)
+E. per pair (points of true reward against the rule): corrected, right->wrong, changed, dropped, total; share of wrong answers corrected, of right answers turned wrong
+   Answer key
+      qwen7 pqa   (6 runs, abstains 0.38): corrected +1.42  right->wrong -1.16  changed +0.27  dropped -1.86  total -1.16   corrected share 5.1%  right turned wrong 2.0%
+      qwen7 tqa   (6 runs, abstains 0.26): corrected +1.97  right->wrong -1.28  changed +0.70  dropped -1.55  total -0.80   corrected share 5.8%  right turned wrong 2.1%
+      qwen7 nqo   (2 runs, abstains 0.83): corrected +0.60  right->wrong -0.60  changed +0.00  dropped -0.13  total -0.13   corrected share 1.6%  right turned wrong 1.5%
+      llama8 pqa  (6 runs, abstains 0.10): corrected +2.67  right->wrong -2.78  changed -0.11  dropped -0.28  total -0.09   corrected share 15.4%  right turned wrong 3.5%
+      llama8 tqa  (6 runs, abstains 0.13): corrected +1.53  right->wrong -1.09  changed +0.44  dropped -1.52  total -1.26   corrected share 7.7%  right turned wrong 1.4%
+      llama8 nqo  (6 runs, abstains 0.70): corrected +0.58  right->wrong -1.18  changed -0.60  dropped -0.71  total -1.34   corrected share 1.6%  right turned wrong 2.0%
+      mean of pairs: corrected share 6.2%, right turned wrong 2.1%
+   Sonnet as judge
+      qwen7 pqa   (3 runs, abstains 0.38): corrected +1.24  right->wrong -0.40  changed +0.84  dropped -1.53  total -0.07   corrected share 4.5%  right turned wrong 0.7%
+      qwen7 tqa   (3 runs, abstains 0.17): corrected +2.55  right->wrong -1.67  changed +0.88  dropped -1.32  total -0.44   corrected share 7.5%  right turned wrong 2.7%
+      qwen7 nqo   (3 runs, abstains 0.50): corrected +1.29  right->wrong -1.20  changed +0.09  dropped +1.52  total +1.79   corrected share 3.4%  right turned wrong 3.0%
+      llama8 pqa  (3 runs, abstains 0.07): corrected +2.36  right->wrong -1.69  changed +0.67  dropped +0.13  total +1.17   corrected share 13.6%  right turned wrong 2.1%
+      llama8 tqa  (3 runs, abstains 0.06): corrected +1.53  right->wrong -0.97  changed +0.56  dropped -0.78  total -0.43   corrected share 7.7%  right turned wrong 1.2%
+      llama8 nqo  (3 runs, abstains 0.27): corrected +2.89  right->wrong -2.93  changed -0.04  dropped +0.13  total -0.05   corrected share 8.2%  right turned wrong 5.0%
+      mean of pairs: corrected share 7.5%, right turned wrong 2.5%
+   Judge shown the reference
+      qwen7 pqa   (2 runs, abstains 0.41): corrected +0.87  right->wrong -0.40  changed +0.47  dropped -1.04  total -0.18   corrected share 3.1%  right turned wrong 0.7%
+      qwen7 nqo   (1 runs, abstains 0.58): corrected +2.40  right->wrong -1.07  changed +1.33  dropped +0.80  total +2.27   corrected share 6.3%  right turned wrong 2.7%
+      llama8 pqa  (2 runs, abstains 0.11): corrected +2.53  right->wrong -0.80  changed +1.73  dropped -0.42  total +1.64   corrected share 14.6%  right turned wrong 1.0%
+      llama8 nqo  (2 runs, abstains 0.41): corrected +2.00  right->wrong -2.13  changed -0.13  dropped +0.37  total +0.10   corrected share 5.7%  right turned wrong 3.7%
+      mean of pairs: corrected share 7.4%, right turned wrong 2.0%
+   OLMo judge, default
+      qwen7 pqa   (2 runs, abstains 0.22): corrected +3.00  right->wrong -1.13  changed +1.87  dropped +0.39  total +2.92   corrected share 10.8%  right turned wrong 1.9%
+      qwen7 tqa   (1 runs, abstains 0.19): corrected +1.95  right->wrong -1.67  changed +0.28  dropped -1.35  total -1.00   corrected share 5.7%  right turned wrong 2.7%
+      qwen7 nqo   (2 runs, abstains 0.44): corrected +1.73  right->wrong -1.73  changed -0.00  dropped -0.25  total +0.02   corrected share 4.6%  right turned wrong 4.4%
+      llama8 pqa  (2 runs, abstains 0.10): corrected +2.33  right->wrong -1.67  changed +0.67  dropped -0.90  total -0.07   corrected share 13.5%  right turned wrong 2.1%
+      llama8 tqa  (1 runs, abstains 0.17): corrected +1.11  right->wrong -1.25  changed -0.14  dropped -2.66  total -2.94   corrected share 5.6%  right turned wrong 1.6%
+      llama8 nqo  (2 runs, abstains 0.16): corrected +9.60  right->wrong -3.60  changed +6.00  dropped -0.61  total +5.33   corrected share 27.4%  right turned wrong 6.2%
+      mean of pairs: corrected share 11.3%, right turned wrong 3.2%
+   Student's own vote
+      qwen7 pqa   (3 runs, abstains 0.38): corrected +0.76  right->wrong -0.80  changed -0.04  dropped -1.41  total -1.41   corrected share 2.7%  right turned wrong 1.4%
+      qwen7 tqa   (3 runs, abstains 0.12): corrected +1.02  right->wrong -0.56  changed +0.46  dropped -1.21  total -0.84   corrected share 3.0%  right turned wrong 0.9%
+      qwen7 nqo   (3 runs, abstains 0.49): corrected +0.84  right->wrong -1.29  changed -0.44  dropped -1.13  total -1.58   corrected share 2.2%  right turned wrong 3.3%
+      llama8 pqa  (6 runs, abstains 0.19): corrected +0.80  right->wrong -1.16  changed -0.36  dropped -0.59  total -0.78   corrected share 4.6%  right turned wrong 1.4%
+      llama8 tqa  (3 runs, abstains 0.19): corrected +0.88  right->wrong -1.30  changed -0.42  dropped -1.55  total -1.99   corrected share 4.4%  right turned wrong 1.7%
+      llama8 nqo  (3 runs, abstains 0.62): corrected +0.58  right->wrong -1.33  changed -0.76  dropped -1.18  total -1.95   corrected share 1.6%  right turned wrong 2.3%
+      mean of pairs: corrected share 3.1%, right turned wrong 1.8%
+G. each grader against the rule (mean of pairs; t interval over pairs; bootstrap over pairs and runs)
+   Answer key                 total    : -0.80  t [-1.39, -0.21]  boot [-1.30, -0.28]  positive in 0 of 6 pairs
+   Answer key                 changed  : +0.12  t [-0.36, +0.59]  boot [-0.25, +0.46]  positive in 3 of 6 pairs
+   Answer key                 dropped  : -1.01  t [-1.77, -0.24]  boot [-1.59, -0.41]  positive in 0 of 6 pairs
+   Answer key                 corrected: +1.46  t [+0.62, +2.31]  boot [+0.87, +2.08]  positive in 6 of 6 pairs
+   Answer key                 r2w      : -1.35  t [-2.12, -0.57]  boot [-1.97, -0.87]  positive in 0 of 6 pairs
+   Sonnet as judge            total    : +0.33  t [-0.64, +1.30]  boot [-0.38, +1.08]  positive in 2 of 6 pairs
+   Sonnet as judge            changed  : +0.50  t [+0.09, +0.91]  boot [+0.14, +0.83]  positive in 5 of 6 pairs
+   Sonnet as judge            dropped  : -0.31  t [-1.50, +0.89]  boot [-1.16, +0.58]  positive in 3 of 6 pairs
+   Sonnet as judge            corrected: +1.98  t [+1.23, +2.72]  boot [+1.46, +2.53]  positive in 6 of 6 pairs
+   Sonnet as judge            r2w      : -1.48  t [-2.38, -0.58]  boot [-2.14, -0.89]  positive in 0 of 6 pairs
+   Judge shown the reference  total    : +0.96  t [-0.93, +2.84]  boot [-0.11, +2.11]  positive in 3 of 4 pairs
+   Judge shown the reference  changed  : +0.85  t [-0.49, +2.19]  boot [+0.10, +1.63]  positive in 3 of 4 pairs
+   Judge shown the reference  dropped  : -0.07  t [-1.38, +1.23]  boot [-0.77, +0.61]  positive in 2 of 4 pairs
+   Judge shown the reference  corrected: +1.95  t [+0.75, +3.15]  boot [+1.15, +2.50]  positive in 4 of 4 pairs
+   Judge shown the reference  r2w      : -1.10  t [-2.28, +0.08]  boot [-1.80, -0.53]  positive in 0 of 4 pairs
+   OLMo judge, default        total    : +0.71  t [-2.39, +3.81]  boot [-1.33, +3.02]  positive in 3 of 6 pairs
+   OLMo judge, default        changed  : +1.45  t [-1.02, +3.91]  boot [+0.11, +3.42]  positive in 4 of 6 pairs
+   OLMo judge, default        dropped  : -0.89  t [-1.99, +0.20]  boot [-1.71, -0.17]  positive in 1 of 6 pairs
+   OLMo judge, default        corrected: +3.29  t [-0.02, +6.60]  boot [+1.63, +5.98]  positive in 6 of 6 pairs
+   OLMo judge, default        r2w      : -1.84  t [-2.78, -0.90]  boot [-2.59, -1.32]  positive in 0 of 6 pairs
+   Student's own vote         total    : -1.42  t [-1.98, -0.87]  boot [-1.86, -0.96]  positive in 0 of 6 pairs
+   Student's own vote         changed  : -0.26  t [-0.70, +0.18]  boot [-0.55, +0.08]  positive in 1 of 6 pairs
+   Student's own vote         dropped  : -1.18  t [-1.52, -0.83]  boot [-1.55, -0.83]  positive in 0 of 6 pairs
+   Student's own vote         corrected: +0.81  t [+0.66, +0.97]  boot [+0.66, +0.96]  positive in 6 of 6 pairs
+   Student's own vote         r2w      : -1.07  t [-1.41, -0.74]  boot [-1.32, -0.79]  positive in 0 of 6 pairs
+F. grader minus the student's own vote, pair by pair
+   Answer key                 total    : +0.63  t [+0.12, +1.13]  boot [+0.11, +1.17]  positive in 6 of 6 pairs   per pair: Q pqa +0.25, Q tqa +0.04, Q nqo +1.44, L pqa +0.69, L tqa +0.73, L nqo +0.61
+   Answer key                 changed  : +0.37  t [+0.11, +0.64]  boot [+0.14, +0.66]  positive in 6 of 6 pairs   per pair: Q pqa +0.31, Q tqa +0.23, Q nqo +0.44, L pqa +0.24, L tqa +0.86, L nqo +0.16
+   Answer key                 dropped  : +0.17  t [-0.40, +0.74]  boot [-0.38, +0.72]  positive in 4 of 6 pairs   per pair: Q pqa -0.45, Q tqa -0.34, Q nqo +1.00, L pqa +0.31, L tqa +0.03, L nqo +0.47
+   Answer key                 corrected: +0.65  t [-0.14, +1.43]  boot [+0.09, +1.25]  positive in 4 of 6 pairs   per pair: Q pqa +0.67, Q tqa +0.95, Q nqo -0.24, L pqa +1.87, L tqa +0.65, L nqo +0.00
+   Answer key                 r2w      : -0.27  t [-1.14, +0.59]  boot [-0.93, +0.32]  positive in 3 of 6 pairs   per pair: Q pqa -0.36, Q tqa -0.72, Q nqo +0.69, L pqa -1.62, L tqa +0.21, L nqo +0.16
+   Sonnet as judge            total    : +1.75  t [+0.74, +2.77]  boot [+0.96, +2.58]  positive in 6 of 6 pairs   per pair: Q pqa +1.34, Q tqa +0.40, Q nqo +3.37, L pqa +1.95, L tqa +1.56, L nqo +1.90
+   Sonnet as judge            changed  : +0.76  t [+0.50, +1.02]  boot [+0.48, +1.04]  positive in 6 of 6 pairs   per pair: Q pqa +0.89, Q tqa +0.42, Q nqo +0.53, L pqa +1.02, L tqa +0.97, L nqo +0.71
+   Sonnet as judge            dropped  : +0.87  t [-0.22, +1.96]  boot [+0.06, +1.75]  positive in 4 of 6 pairs   per pair: Q pqa -0.13, Q tqa -0.11, Q nqo +2.66, L pqa +0.72, L tqa +0.77, L nqo +1.30
+   Sonnet as judge            corrected: +1.16  t [+0.37, +1.95]  boot [+0.61, +1.77]  positive in 6 of 6 pairs   per pair: Q pqa +0.49, Q tqa +1.53, Q nqo +0.44, L pqa +1.56, L tqa +0.65, L nqo +2.31
+   Sonnet as judge            r2w      : -0.41  t [-1.27, +0.46]  boot [-1.05, +0.19]  positive in 3 of 6 pairs   per pair: Q pqa +0.40, Q tqa -1.11, Q nqo +0.09, L pqa -0.53, L tqa +0.32, L nqo -1.60
+   Judge shown the reference  total    : +2.39  t [+0.65, +4.12]  boot [+1.38, +3.40]  positive in 4 of 4 pairs   per pair: Q pqa +1.23, Q nqo +3.84, L pqa +2.42, L nqo +2.05
+   Judge shown the reference  changed  : +1.25  t [-0.02, +2.52]  boot [+0.51, +1.99]  positive in 4 of 4 pairs   per pair: Q pqa +0.51, Q nqo +1.78, L pqa +2.09, L nqo +0.62
+   Judge shown the reference  dropped  : +1.00  t [-0.38, +2.38]  boot [+0.20, +1.78]  positive in 4 of 4 pairs   per pair: Q pqa +0.36, Q nqo +1.93, L pqa +0.17, L nqo +1.54
+   Judge shown the reference  corrected: +1.21  t [+0.03, +2.38]  boot [+0.41, +1.74]  positive in 4 of 4 pairs   per pair: Q pqa +0.11, Q nqo +1.56, L pqa +1.73, L nqo +1.42
+   Judge shown the reference  r2w      : +0.04  t [-0.86, +0.95]  boot [-0.53, +0.48]  positive in 3 of 4 pairs   per pair: Q pqa +0.40, Q nqo +0.22, L pqa +0.36, L nqo -0.80
+   OLMo judge, default        total    : +2.14  t [-1.13, +5.40]  boot [+0.07, +4.65]  positive in 4 of 6 pairs   per pair: Q pqa +4.33, Q tqa -0.16, Q nqo +1.59, L pqa +0.71, L tqa -0.95, L nqo +7.28
+   OLMo judge, default        changed  : +1.70  t [-1.00, +4.41]  boot [+0.26, +3.91]  positive in 5 of 6 pairs   per pair: Q pqa +1.91, Q tqa -0.19, Q nqo +0.44, L pqa +1.02, L tqa +0.28, L nqo +6.76
+   OLMo judge, default        dropped  : +0.28  t [-0.79, +1.35]  boot [-0.50, +1.09]  positive in 3 of 6 pairs   per pair: Q pqa +1.80, Q tqa -0.14, Q nqo +0.88, L pqa -0.31, L tqa -1.11, L nqo +0.57
+   OLMo judge, default        corrected: +2.47  t [-0.97, +5.92]  boot [+0.75, +5.31]  positive in 6 of 6 pairs   per pair: Q pqa +2.24, Q tqa +0.93, Q nqo +0.89, L pqa +1.53, L tqa +0.23, L nqo +9.02
+   OLMo judge, default        r2w      : -0.77  t [-1.63, +0.09]  boot [-1.45, -0.22]  positive in 1 of 6 pairs   per pair: Q pqa -0.33, Q tqa -1.11, Q nqo -0.44, L pqa -0.51, L tqa +0.05, L nqo -2.27
+
+################ H. truth = loose answer key only
+E. per pair (points of true reward against the rule): corrected, right->wrong, changed, dropped, total; share of wrong answers corrected, of right answers turned wrong
+   Answer key
+      qwen7 pqa   (6 runs, abstains 0.38): corrected +1.58  right->wrong -1.16  changed +0.42  dropped -1.54  total -0.77   corrected share 4.4%  right turned wrong 2.3%
+      qwen7 tqa   (6 runs, abstains 0.26): corrected +1.90  right->wrong -1.39  changed +0.51  dropped -1.48  total -0.91   corrected share 5.2%  right turned wrong 2.4%
+      qwen7 nqo   (2 runs, abstains 0.83): corrected +0.40  right->wrong -0.53  changed -0.13  dropped -0.26  total -0.39   corrected share 0.8%  right turned wrong 2.2%
+      llama8 pqa  (6 runs, abstains 0.10): corrected +3.76  right->wrong -3.02  changed +0.73  dropped +0.17  total +1.13   corrected share 13.7%  right turned wrong 4.3%
+      llama8 tqa  (6 runs, abstains 0.13): corrected +1.56  right->wrong -1.14  changed +0.42  dropped -1.58  total -1.35   corrected share 6.5%  right turned wrong 1.5%
+      llama8 nqo  (6 runs, abstains 0.70): corrected +0.67  right->wrong -0.93  changed -0.27  dropped -0.58  total -0.88   corrected share 1.2%  right turned wrong 2.6%
+      mean of pairs: corrected share 5.3%, right turned wrong 2.6%
+   Sonnet as judge
+      qwen7 pqa   (3 runs, abstains 0.38): corrected +1.24  right->wrong -0.80  changed +0.44  dropped -1.43  total -0.55   corrected share 3.5%  right turned wrong 1.6%
+      qwen7 tqa   (3 runs, abstains 0.17): corrected +2.27  right->wrong -1.76  changed +0.51  dropped -1.03  total -0.52   corrected share 6.2%  right turned wrong 3.0%
+      qwen7 nqo   (3 runs, abstains 0.50): corrected +0.89  right->wrong -1.11  changed -0.22  dropped +0.61  total -0.46   corrected share 1.7%  right turned wrong 4.5%
+      llama8 pqa  (3 runs, abstains 0.07): corrected +2.44  right->wrong -2.09  changed +0.36  dropped +0.33  total +1.06   corrected share 8.9%  right turned wrong 3.0%
+      llama8 tqa  (3 runs, abstains 0.06): corrected +1.49  right->wrong -0.84  changed +0.65  dropped -0.71  total -0.27   corrected share 6.2%  right turned wrong 1.1%
+      llama8 nqo  (3 runs, abstains 0.27): corrected +2.00  right->wrong -2.22  changed -0.22  dropped -0.91  total -1.48   corrected share 3.5%  right turned wrong 6.2%
+      mean of pairs: corrected share 5.0%, right turned wrong 3.2%
+   Judge shown the reference
+      qwen7 pqa   (2 runs, abstains 0.41): corrected +0.93  right->wrong -0.80  changed +0.13  dropped -1.30  total -0.83   corrected share 2.6%  right turned wrong 1.6%
+      qwen7 nqo   (1 runs, abstains 0.58): corrected +1.73  right->wrong -0.80  changed +0.93  dropped -0.67  total +0.13   corrected share 3.3%  right turned wrong 3.2%
+      llama8 pqa  (2 runs, abstains 0.11): corrected +2.53  right->wrong -0.93  changed +1.60  dropped +0.04  total +1.98   corrected share 9.3%  right turned wrong 1.3%
+      llama8 nqo  (2 runs, abstains 0.41): corrected +1.00  right->wrong -1.53  changed -0.53  dropped -0.92  total -1.65   corrected share 1.7%  right turned wrong 4.3%
+      mean of pairs: corrected share 4.2%, right turned wrong 2.6%
+   OLMo judge, default
+      qwen7 pqa   (2 runs, abstains 0.22): corrected +2.73  right->wrong -1.47  changed +1.27  dropped +0.59  total +2.26   corrected share 7.7%  right turned wrong 2.9%
+      qwen7 tqa   (1 runs, abstains 0.19): corrected +1.95  right->wrong -1.67  changed +0.28  dropped -1.35  total -1.00   corrected share 5.3%  right turned wrong 2.9%
+      qwen7 nqo   (2 runs, abstains 0.44): corrected +1.73  right->wrong -1.33  changed +0.40  dropped -0.52  total -0.52   corrected share 3.3%  right turned wrong 5.4%
+      llama8 pqa  (2 runs, abstains 0.10): corrected +2.53  right->wrong -1.93  changed +0.60  dropped -0.77  total +0.00   corrected share 9.3%  right turned wrong 2.8%
+      llama8 tqa  (1 runs, abstains 0.17): corrected +1.39  right->wrong -0.97  changed +0.42  dropped -2.84  total -2.56   corrected share 5.8%  right turned wrong 1.3%
+      llama8 nqo  (2 runs, abstains 0.16): corrected +6.73  right->wrong -3.13  changed +3.60  dropped -0.64  total +2.43   corrected share 11.7%  right turned wrong 8.8%
+      mean of pairs: corrected share 7.2%, right turned wrong 4.0%
+   Student's own vote
+      qwen7 pqa   (3 runs, abstains 0.38): corrected +0.71  right->wrong -0.93  changed -0.22  dropped -1.58  total -1.76   corrected share 2.0%  right turned wrong 1.8%
+      qwen7 tqa   (3 runs, abstains 0.12): corrected +0.88  right->wrong -0.51  changed +0.37  dropped -0.93  total -0.65   corrected share 2.4%  right turned wrong 0.9%
+      qwen7 nqo   (3 runs, abstains 0.49): corrected +0.58  right->wrong -0.98  changed -0.40  dropped -1.16  total -1.56   corrected share 1.1%  right turned wrong 3.9%
+      llama8 pqa  (6 runs, abstains 0.19): corrected +1.04  right->wrong -1.36  changed -0.31  dropped -1.03  total -1.17   corrected share 3.8%  right turned wrong 1.9%
+      llama8 tqa  (3 runs, abstains 0.19): corrected +1.02  right->wrong -1.25  changed -0.23  dropped -1.91  total -2.17   corrected share 4.3%  right turned wrong 1.7%
+      llama8 nqo  (3 runs, abstains 0.62): corrected +0.58  right->wrong -1.11  changed -0.53  dropped -0.98  total -1.58   corrected share 1.0%  right turned wrong 3.1%
+      mean of pairs: corrected share 2.4%, right turned wrong 2.2%
+G. each grader against the rule (mean of pairs; t interval over pairs; bootstrap over pairs and runs)
+   Answer key                 total    : -0.53  t [-1.44, +0.38]  boot [-1.15, +0.19]  positive in 1 of 6 pairs
+   Answer key                 changed  : +0.28  t [-0.13, +0.69]  boot [-0.04, +0.58]  positive in 4 of 6 pairs
+   Answer key                 dropped  : -0.88  t [-1.67, -0.09]  boot [-1.47, -0.27]  positive in 1 of 6 pairs
+   Answer key                 corrected: +1.64  t [+0.40, +2.89]  boot [+0.87, +2.58]  positive in 6 of 6 pairs
+   Answer key                 r2w      : -1.36  t [-2.27, -0.46]  boot [-2.08, -0.82]  positive in 0 of 6 pairs
+   Sonnet as judge            total    : -0.37  t [-1.23, +0.49]  boot [-1.01, +0.32]  positive in 1 of 6 pairs
+   Sonnet as judge            changed  : +0.25  t [-0.15, +0.65]  boot [-0.11, +0.59]  positive in 4 of 6 pairs
+   Sonnet as judge            dropped  : -0.52  t [-1.37, +0.32]  boot [-1.13, +0.10]  positive in 2 of 6 pairs
+   Sonnet as judge            corrected: +1.72  t [+1.08, +2.37]  boot [+1.25, +2.19]  positive in 6 of 6 pairs
+   Sonnet as judge            r2w      : -1.47  t [-2.14, -0.80]  boot [-1.95, -1.00]  positive in 0 of 6 pairs
+   Judge shown the reference  total    : -0.09  t [-2.58, +2.39]  boot [-1.35, +1.36]  positive in 2 of 4 pairs
+   Judge shown the reference  changed  : +0.53  t [-0.95, +2.01]  boot [-0.27, +1.37]  positive in 3 of 4 pairs
+   Judge shown the reference  dropped  : -0.71  t [-1.61, +0.19]  boot [-1.17, -0.18]  positive in 1 of 4 pairs
+   Judge shown the reference  corrected: +1.55  t [+0.36, +2.74]  boot [+0.92, +2.23]  positive in 4 of 4 pairs
+   Judge shown the reference  r2w      : -1.02  t [-1.57, -0.46]  boot [-1.37, -0.77]  positive in 0 of 4 pairs
+   OLMo judge, default        total    : +0.10  t [-1.93, +2.13]  boot [-1.33, +1.56]  positive in 2 of 6 pairs
+   OLMo judge, default        changed  : +1.09  t [-0.25, +2.43]  boot [+0.37, +2.19]  positive in 6 of 6 pairs
+   OLMo judge, default        dropped  : -0.92  t [-2.11, +0.27]  boot [-1.82, -0.12]  positive in 1 of 6 pairs
+   OLMo judge, default        corrected: +2.85  t [+0.78, +4.91]  boot [+1.73, +4.52]  positive in 6 of 6 pairs
+   OLMo judge, default        r2w      : -1.75  t [-2.54, -0.97]  boot [-2.36, -1.28]  positive in 0 of 6 pairs
+   Student's own vote         total    : -1.48  t [-2.03, -0.94]  boot [-1.88, -1.03]  positive in 0 of 6 pairs
+   Student's own vote         changed  : -0.22  t [-0.55, +0.11]  boot [-0.46, +0.05]  positive in 1 of 6 pairs
+   Student's own vote         dropped  : -1.27  t [-1.68, -0.85]  boot [-1.63, -0.95]  positive in 0 of 6 pairs
+   Student's own vote         corrected: +0.80  t [+0.58, +1.02]  boot [+0.64, +0.97]  positive in 6 of 6 pairs
+   Student's own vote         r2w      : -1.02  t [-1.34, -0.71]  boot [-1.26, -0.77]  positive in 0 of 6 pairs
+F. grader minus the student's own vote, pair by pair
+   Answer key                 total    : +0.95  t [+0.08, +1.82]  boot [+0.28, +1.64]  positive in 5 of 6 pairs   per pair: Q pqa +0.99, Q tqa -0.26, Q nqo +1.17, L pqa +2.31, L tqa +0.82, L nqo +0.70
+   Answer key                 changed  : +0.50  t [+0.14, +0.86]  boot [+0.21, +0.81]  positive in 6 of 6 pairs   per pair: Q pqa +0.64, Q tqa +0.14, Q nqo +0.27, L pqa +1.04, L tqa +0.65, L nqo +0.27
+   Answer key                 dropped  : +0.39  t [-0.26, +1.04]  boot [-0.17, +0.91]  positive in 5 of 6 pairs   per pair: Q pqa +0.04, Q tqa -0.55, Q nqo +0.90, L pqa +1.19, L tqa +0.33, L nqo +0.40
+   Answer key                 corrected: +0.84  t [-0.23, +1.91]  boot [+0.17, +1.67]  positive in 5 of 6 pairs   per pair: Q pqa +0.87, Q tqa +1.02, Q nqo -0.18, L pqa +2.71, L tqa +0.53, L nqo +0.09
+   Answer key                 r2w      : -0.34  t [-1.17, +0.50]  boot [-0.97, +0.22]  positive in 3 of 6 pairs   per pair: Q pqa -0.22, Q tqa -0.88, Q nqo +0.44, L pqa -1.67, L tqa +0.12, L nqo +0.18
+   Sonnet as judge            total    : +1.11  t [+0.19, +2.04]  boot [+0.40, +1.83]  positive in 6 of 6 pairs   per pair: Q pqa +1.22, Q tqa +0.13, Q nqo +1.10, L pqa +2.23, L tqa +1.90, L nqo +0.10
+   Sonnet as judge            changed  : +0.47  t [+0.15, +0.79]  boot [+0.14, +0.80]  positive in 6 of 6 pairs   per pair: Q pqa +0.67, Q tqa +0.14, Q nqo +0.18, L pqa +0.67, L tqa +0.88, L nqo +0.31
+   Sonnet as judge            dropped  : +0.74  t [-0.09, +1.58]  boot [+0.12, +1.38]  positive in 5 of 6 pairs   per pair: Q pqa +0.15, Q tqa -0.11, Q nqo +1.77, L pqa +1.36, L tqa +1.20, L nqo +0.08
+   Sonnet as judge            corrected: +0.92  t [+0.36, +1.48]  boot [+0.50, +1.35]  positive in 6 of 6 pairs   per pair: Q pqa +0.53, Q tqa +1.39, Q nqo +0.31, L pqa +1.40, L tqa +0.46, L nqo +1.42
+   Sonnet as judge            r2w      : -0.45  t [-1.17, +0.27]  boot [-0.97, +0.09]  positive in 2 of 6 pairs   per pair: Q pqa +0.13, Q tqa -1.25, Q nqo -0.13, L pqa -0.73, L tqa +0.42, L nqo -1.11
+   Judge shown the reference  total    : +1.43  t [-0.73, +3.59]  boot [+0.28, +2.63]  positive in 3 of 4 pairs   per pair: Q pqa +0.93, Q nqo +1.69, L pqa +3.15, L nqo -0.07
+   Judge shown the reference  changed  : +0.90  t [-0.50, +2.30]  boot [+0.13, +1.69]  positive in 3 of 4 pairs   per pair: Q pqa +0.36, Q nqo +1.33, L pqa +1.91, L nqo +0.00
+   Judge shown the reference  dropped  : +0.48  t [-0.21, +1.17]  boot [+0.12, +0.89]  positive in 4 of 4 pairs   per pair: Q pqa +0.29, Q nqo +0.49, L pqa +1.07, L nqo +0.06
+   Judge shown the reference  corrected: +0.82  t [-0.13, +1.77]  boot [+0.25, +1.35]  positive in 4 of 4 pairs   per pair: Q pqa +0.22, Q nqo +1.16, L pqa +1.49, L nqo +0.42
+   Judge shown the reference  r2w      : +0.08  t [-0.49, +0.65]  boot [-0.28, +0.42]  positive in 3 of 4 pairs   per pair: Q pqa +0.13, Q nqo +0.18, L pqa +0.42, L nqo -0.42
+   OLMo judge, default        total    : +1.58  t [-0.51, +3.68]  boot [+0.17, +3.16]  positive in 4 of 6 pairs   per pair: Q pqa +4.02, Q tqa -0.35, Q nqo +1.04, L pqa +1.17, L tqa -0.39, L nqo +4.01
+   OLMo judge, default        changed  : +1.32  t [-0.23, +2.86]  boot [+0.40, +2.56]  positive in 5 of 6 pairs   per pair: Q pqa +1.49, Q tqa -0.09, Q nqo +0.80, L pqa +0.91, L tqa +0.65, L nqo +4.13
+   OLMo judge, default        dropped  : +0.35  t [-0.77, +1.46]  boot [-0.44, +1.22]  positive in 4 of 6 pairs   per pair: Q pqa +2.18, Q tqa -0.42, Q nqo +0.64, L pqa +0.26, L tqa -0.92, L nqo +0.34
+   OLMo judge, default        corrected: +2.04  t [-0.15, +4.23]  boot [+0.88, +3.84]  positive in 6 of 6 pairs   per pair: Q pqa +2.02, Q tqa +1.07, Q nqo +1.16, L pqa +1.49, L tqa +0.37, L nqo +6.16
+   OLMo judge, default        r2w      : -0.73  t [-1.55, +0.09]  boot [-1.34, -0.17]  positive in 1 of 6 pairs   per pair: Q pqa -0.53, Q tqa -1.16, Q nqo -0.36, L pqa -0.58, L tqa +0.28, L nqo -2.02
+
+################ I. transition shares on the four pairs all four main graders have (PopQA and NQ-open, both students); audit truth
+   Answer key                 (4 pairs): Wc: 0.058 / 0.556 (0.365) / 0.386 | Wu: 0.060 / 0.759 (0.850) / 0.181 | Rc: 0.687 / 0.296 (0.232) / 0.017 | Ru: 0.424 / 0.512 (0.703) / 0.063 | N: 0.106 / 0.852 (1.000) / 0.042
+   Sonnet as judge            (4 pairs): Wc: 0.075 / 0.299 (0.006) / 0.626 | Wu: 0.074 / 0.588 (0.676) / 0.338 | Rc: 0.915 / 0.072 (0.003) / 0.012 | Ru: 0.687 / 0.225 (0.464) / 0.088 | N: 0.148 / 0.784 (1.000) / 0.068
+   Judge shown the reference  (4 pairs): Wc: 0.062 / 0.437 (0.067) / 0.501 | Wu: 0.078 / 0.700 (0.840) / 0.222 | Rc: 0.864 / 0.126 (0.018) / 0.010 | Ru: 0.631 / 0.304 (0.677) / 0.066 | N: 0.123 / 0.819 (1.000) / 0.058
+   OLMo judge, default        (4 pairs): Wc: 0.100 / 0.186 (0.000) / 0.714 | Wu: 0.156 / 0.388 (0.450) / 0.456 | Rc: 0.943 / 0.040 (0.000) / 0.017 | Ru: 0.765 / 0.123 (0.167) / 0.113 | N: 0.140 / 0.774 (1.000) / 0.086
+   Student's own vote         (4 pairs): Wc: 0.030 / 0.390 (0.104) / 0.581 | Wu: 0.028 / 0.762 (0.917) / 0.210 | Rc: 0.837 / 0.152 (0.056) / 0.011 | Ru: 0.517 / 0.409 (0.727) / 0.074 | N: 0.067 / 0.895 (1.000) / 0.038

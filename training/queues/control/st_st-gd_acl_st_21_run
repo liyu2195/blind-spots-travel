@@ -1,0 +1,5 @@
+STUDENT=ibm-granite/granite-4.2-3b
+TAG=granite
+TPB=8192
+CAP=32400
+STEPS="gsm8k:B:noise"

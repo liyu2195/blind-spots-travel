@@ -1,0 +1,22 @@
+
+== FR: cells 44; sign as expected (+) in 43
+  qwen7  h1  cells  6: X +0.221 [+0.163, +0.279]  per direction +0.111  (median |A| 74, |B| 66)
+  qwen7  pq  cells  6: X +0.311 [+0.237, +0.382]  per direction +0.155  (median |A| 48, |B| 53)
+  qwen7  nq  cells 10: X +0.146 [+0.092, +0.201]  per direction +0.073  (median |A| 39, |B| 47)
+  qwen7  all cells 22: X +0.212 [+0.177, +0.246]  per direction +0.106  (median |A| 45, |B| 53)
+  llama8 h1  cells  6: X +0.232 [+0.175, +0.292]  per direction +0.116  (median |A| 92, |B| 91)
+  llama8 pq  cells  6: X +0.466 [+0.398, +0.537]  per direction +0.233  (median |A| 62, |B| 72)
+  llama8 nq  cells 10: X +0.149 [+0.103, +0.196]  per direction +0.075  (median |A| 65, |B| 66)
+  llama8 all cells 22: X +0.258 [+0.229, +0.293]  per direction +0.129  (median |A| 68, |B| 74)
+  pooled h1  cells 12: X +0.227 [+0.184, +0.270]  per direction +0.113  (median |A| 79, |B| 84)
+  pooled pq  cells 12: X +0.388 [+0.337, +0.441]  per direction +0.194  (median |A| 56, |B| 56)
+  pooled nq  cells 20: X +0.148 [+0.110, +0.184]  per direction +0.074  (median |A| 50, |B| 54)
+  pooled all cells 44: X +0.235 [+0.211, +0.258]  per direction +0.117  (median |A| 64, |B| 61)
+
+== FA: cells 20; sign as expected (-) in 18
+  qwen7  nq  cells 10: X -0.093 [-0.172, -0.013]  per direction -0.046  (median |A| 21, |B| 25)
+  qwen7  all cells 10: X -0.093 [-0.172, -0.013]  per direction -0.046  (median |A| 21, |B| 25)
+  llama8 nq  cells 10: X -0.202 [-0.293, -0.116]  per direction -0.101  (median |A| 18, |B| 24)
+  llama8 all cells 10: X -0.202 [-0.293, -0.116]  per direction -0.101  (median |A| 18, |B| 24)
+  pooled nq  cells 20: X -0.147 [-0.210, -0.093]  per direction -0.074  (median |A| 20, |B| 25)
+  pooled all cells 20: X -0.147 [-0.210, -0.093]  per direction -0.074  (median |A| 20, |B| 25)

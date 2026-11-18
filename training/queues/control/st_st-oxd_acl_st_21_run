@@ -1,0 +1,7 @@
+STUDENT=allenai/Olmo-3-7B-Instruct
+TAG=olmo3
+TPB=4096
+CAP=36000
+SKIP_E1=1
+NOTAKEOVER=1
+STEPS="gsm8k:B:noise"

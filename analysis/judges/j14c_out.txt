@@ -1,0 +1,18 @@
+== qwen7 (discovery): units 2366, pairs x K 8
+  own acc / others none: n=  803 excess -0.010 [-0.025, +0.006]
+  own acc / others some: n=  652 excess -0.042 [-0.070, -0.012]
+  own acc / others all : n=   56 excess -0.014 [-0.120, +0.082]
+  own rej / others none: n=   71 excess +0.048 [-0.049, +0.139]
+  own rej / others some: n=  520 excess +0.081 [+0.046, +0.114]
+  own rej / others all : n=  264 excess +0.112 [+0.049, +0.177]
+  own acc (all consensus levels): n=1511 excess -0.024 [-0.039, -0.008]
+  own rej (all consensus levels): n=855 excess +0.088 [+0.058, +0.120]
+== llama8 (confirmation): units 3587, pairs x K 11
+  own acc / others none: n=  928 excess -0.045 [-0.070, -0.024]
+  own acc / others some: n= 1018 excess -0.036 [-0.066, -0.007]
+  own acc / others all : n=   98 excess +0.044 [-0.039, +0.128]
+  own rej / others none: n=  130 excess +0.116 [+0.063, +0.177]
+  own rej / others some: n=  941 excess +0.134 [+0.096, +0.175]
+  own rej / others all : n=  472 excess +0.114 [+0.055, +0.171]
+  own acc (all consensus levels): n=2044 excess -0.036 [-0.056, -0.017]
+  own rej (all consensus levels): n=1543 excess +0.127 [+0.097, +0.157]

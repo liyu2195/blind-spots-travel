@@ -1,0 +1,6 @@
+STUDENT=microsoft/Phi-4-mini-instruct
+TAG=phi4m
+TPB=2048
+CAP=32400
+STEPS="gsm8k:B:judge"
+PREWAIT=gs://YOUR_BUCKET/acl_st/run1/gsm8k/phi4m/A.done

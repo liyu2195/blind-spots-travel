@@ -1,0 +1,1 @@
+STUDENT=gs://YOUR_BUCKET/acl_st/models/meta-llama/Llama-3.1-8B-Instruct TAG=llama8 ADV=std IDK=0.5 FPMODE=random FMT=1 KLB=0.2 SEED=2 FPK=0.656 FPU=0.656 FN=0.112 MICRO=16 GENCHUNK=32 CAP=21600 TRAINF=pqa_h1.jsonl EVALF=pqa_1500.jsonl OUTNAME=llama8_FK20lenQ_idkc05_s2_pq

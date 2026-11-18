@@ -1,0 +1,7 @@
+STUDENT=allenai/Olmo-3-7B-Instruct
+TAG=olmo3
+TPB=4096
+CAP=43200
+SKIP_E1=1
+STEPS="gsm8k:B:judge"
+PREWAIT=gs://YOUR_BUCKET/acl_st/run1/gsm8k/olmo3/A.done

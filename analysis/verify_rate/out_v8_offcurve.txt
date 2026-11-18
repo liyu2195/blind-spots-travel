@@ -1,0 +1,106 @@
+Wbs8 curve check: params [ 2.9  -6.74] in-sample R2 0.655596203417385
+== (1) residual from the qwen7-uniform curve (a -0.84 b -8.27) by grader; cell means (seed means per student x dataset)
+  apiS55       runs 18 cells 6  mean resid +0.076 [cell boot +0.029, +0.148]  (Wbs8 curve +0.069)  cells: lh1:+0.02 lnq:+0.04 lpq:+0.04 qh1:+0.03 qnq:+0.07 qpq:+0.25
+  blind40      runs 18 cells 6  mean resid -0.090 [cell boot -0.174, -0.002]  (Wbs8 curve -0.184)  cells: lh1:-0.25 lnq:-0.06 lpq:+0.09 qh1:-0.17 qnq:-0.06 qpq:-0.09
+  fnA80        runs  6 cells 2  mean resid +0.121 [cell boot +0.104, +0.137]  (Wbs8 curve +0.173)  cells: lpq:+0.10 qpq:+0.14
+  fnB50        runs  4 cells 2  mean resid +0.011 [cell boot -0.064, +0.086]  (Wbs8 curve +0.117)  cells: lpq:-0.06 qpq:+0.09
+  fnB80        runs  6 cells 2  mean resid +0.005 [cell boot +0.003, +0.008]  (Wbs8 curve +0.063)  cells: lpq:+0.00 qpq:+0.01
+  fnH60        runs  4 cells 1  mean resid -0.038 [cell boot +nan, +nan]  (Wbs8 curve -0.074)  cells: qpq:-0.04
+  fnH80        runs  6 cells 2  mean resid +0.027 [cell boot -0.044, +0.098]  (Wbs8 curve +0.086)  cells: lpq:-0.04 qpq:+0.10
+  frzOR        runs  6 cells 6  mean resid +0.224 [cell boot +0.165, +0.291]  (Wbs8 curve +0.152)  cells: lh1:+0.17 lnq:+0.12 lpq:+0.31 qh1:+0.34 qnq:+0.22 qpq:+0.19
+  frzPEER      runs  5 cells 3  mean resid +0.159 [cell boot +0.077, +0.218]  (Wbs8 curve +0.078)  cells: lpq:+0.21 qh1:+0.08 qpq:+0.22
+  frzQ         runs  6 cells 2  mean resid +0.173 [cell boot +0.098, +0.248]  (Wbs8 curve +0.089)  cells: qh1:+0.10 qpq:+0.25
+  frzS         runs  4 cells 2  mean resid +0.211 [cell boot +0.180, +0.242]  (Wbs8 curve +0.129)  cells: lpq:+0.18 qpq:+0.24
+  frzVOTE      runs 28 cells 6  mean resid +0.193 [cell boot +0.175, +0.220]  (Wbs8 curve +0.087)  cells: lh1:+0.18 lnq:+0.20 lpq:+0.24 qh1:+0.23 qnq:+0.17 qpq:+0.16
+  hash35fn00   runs 12 cells 6  mean resid -0.073 [cell boot -0.137, -0.019]  (Wbs8 curve -0.026)  cells: lh1:-0.03 lnq:-0.21 lpq:-0.04 qh1:-0.06 qnq:-0.11 qpq:+0.02
+  judgeGa35    runs 16 cells 6  mean resid -0.011 [cell boot -0.039, +0.015]  (Wbs8 curve +0.018)  cells: lh1:-0.03 lnq:+0.02 lpq:-0.02 qh1:-0.05 qnq:-0.05 qpq:+0.04
+  judgeGt50    runs  6 cells 4  mean resid -0.088 [cell boot -0.101, -0.074]  (Wbs8 curve -0.071)  cells: lh1:-0.07 lnq:-0.08 qh1:-0.08 qnq:-0.11
+  judgeMa35    runs 16 cells 6  mean resid +0.014 [cell boot -0.037, +0.056]  (Wbs8 curve +0.053)  cells: lh1:-0.04 lnq:-0.02 lpq:+0.05 qh1:-0.06 qnq:+0.01 qpq:+0.11
+  judgeMt50    runs  2 cells 2  mean resid -0.020 [cell boot -0.027, -0.013]  (Wbs8 curve -0.034)  cells: lh1:-0.01 qh1:-0.03
+  judgeOa35    runs 16 cells 6  mean resid -0.085 [cell boot -0.222, +0.060]  (Wbs8 curve -0.047)  cells: lh1:-0.08 lnq:-0.41 lpq:-0.03 qh1:+0.18 qnq:-0.09 qpq:-0.00
+  judgeOt50    runs  6 cells 4  mean resid -0.117 [cell boot -0.252, +0.029]  (Wbs8 curve -0.068)  cells: lh1:+0.04 lnq:-0.34 qh1:+0.02 qnq:-0.04
+  judgeQa35    runs 36 cells 6  mean resid +0.004 [cell boot -0.021, +0.030]  (Wbs8 curve +0.040)  cells: lh1:-0.01 lnq:-0.04 lpq:+0.05 qh1:+0.01 qnq:-0.03 qpq:+0.04
+  judgeQa50    runs 36 cells 6  mean resid +0.088 [cell boot +0.029, +0.148]  (Wbs8 curve +0.093)  cells: lh1:+0.10 lnq:-0.02 lpq:+0.17 qh1:+0.08 qnq:+0.01 qpq:+0.19
+  judgeQt50    runs 18 cells 6  mean resid -0.009 [cell boot -0.025, +0.010]  (Wbs8 curve -0.028)  cells: lh1:-0.02 lnq:-0.02 lpq:-0.02 qh1:-0.03 qnq:+0.04 qpq:+0.00
+  judgeRa35    runs  4 cells 2  mean resid +0.020 [cell boot +0.013, +0.027]  (Wbs8 curve +0.141)  cells: lnq:+0.01 qnq:+0.03
+  long80       runs  8 cells 4  mean resid -0.318 [cell boot -0.539, -0.097]  (Wbs8 curve -0.242)  cells: lnq:-0.56 lpq:-0.04 qnq:-0.52 qpq:-0.15
+  plrealM      runs  8 cells 2  mean resid +0.102 [cell boot +0.081, +0.123]  (Wbs8 curve +0.037)  cells: lpq:+0.08 qpq:+0.12
+  plrealO      runs  8 cells 2  mean resid +0.032 [cell boot -0.027, +0.091]  (Wbs8 curve -0.044)  cells: lpq:-0.03 qpq:+0.09
+  plscrM       runs  8 cells 2  mean resid +0.035 [cell boot -0.020, +0.090]  (Wbs8 curve +0.039)  cells: lpq:+0.09 qpq:-0.02
+  plsharpM     runs  8 cells 2  mean resid +0.036 [cell boot +0.014, +0.058]  (Wbs8 curve -0.007)  cells: lpq:+0.01 qpq:+0.06
+  plsharpO     runs  8 cells 2  mean resid +0.018 [cell boot -0.013, +0.049]  (Wbs8 curve -0.046)  cells: lpq:-0.01 qpq:+0.05
+  popH40fn20   runs  3 cells 1  mean resid -0.010 [cell boot +nan, +nan]  (Wbs8 curve +0.006)  cells: qpq:-0.01
+  popL40fn20   runs  3 cells 1  mean resid -0.095 [cell boot +nan, +nan]  (Wbs8 curve -0.113)  cells: qpq:-0.10
+  typeA40fn20  runs  3 cells 1  mean resid +0.049 [cell boot +nan, +nan]  (Wbs8 curve +0.067)  cells: qpq:+0.05
+  typeB20fn20  runs  8 cells 2  mean resid -0.019 [cell boot -0.104, +0.031]  (Wbs8 curve +0.017)  cells: lpq:-0.10 qpq:+0.03
+  typeB40fn20  runs  8 cells 2  mean resid -0.093 [cell boot -0.099, -0.089]  (Wbs8 curve -0.087)  cells: lpq:-0.10 qpq:-0.09
+  typeB60fn20  runs  8 cells 2  mean resid -0.041 [cell boot -0.098, -0.006]  (Wbs8 curve -0.029)  cells: lpq:-0.10 qpq:-0.01
+
+== (2) alignment of the grader's verdicts with the student's confidence (untrained samples, trained questions)
+               res  auc_fa  auc_fr
+sub                               
+long80      -0.318   0.406   0.500
+popL40fn20  -0.095   0.500   0.500
+typeB40fn20 -0.094   0.500   0.500
+blind40     -0.090   0.484   0.519
+judgeGt50   -0.085   0.584   0.570
+judgeOt50   -0.081   0.676   0.625
+hash35fn00  -0.073   0.500     NaN
+judgeOa35   -0.070   0.695   0.634
+typeB60fn20 -0.052   0.500   0.500
+fnH60       -0.038   0.500   0.500
+typeB20fn20 -0.036   0.500   0.500
+judgeMt50   -0.020   0.676   0.623
+judgeGa35   -0.014   0.668   0.610
+popH40fn20  -0.010   0.500   0.500
+judgeQt50   -0.009   0.602   0.625
+judgeQa35    0.004   0.691   0.649
+fnB80        0.005   0.500   0.500
+judgeMa35    0.007   0.730   0.638
+fnB50        0.011   0.500   0.500
+plsharpO     0.018   0.500   0.500
+judgeRa35    0.020   0.636   0.598
+fnH80        0.027   0.500   0.500
+plrealO      0.032   0.500   0.500
+plscrM       0.035   0.500   0.500
+plsharpM     0.036   0.500   0.500
+typeA40fn20  0.049   0.500   0.500
+apiS55       0.076   0.710   0.797
+judgeQa50    0.088   0.669   0.650
+plrealM      0.102   0.500   0.500
+fnA80        0.121   0.500   0.500
+frzPEER      0.168   0.837   0.825
+frzQ         0.173   0.827   0.757
+frzVOTE      0.196   0.939   0.965
+frzS         0.211   0.831   0.927
+frzOR        0.224   0.918   0.954
+  all non-uniform cells (det. verdicts only)   Spearman(residual, FA alignment) +0.73  (residual, FR alignment) +0.69  n cells 79
+  LLM-judge cells only                         Spearman(residual, FA alignment) +0.35  (residual, FR alignment) +0.23  n cells 48
+  non-judge cells (api, frz, hash)             Spearman(residual, FA alignment) +0.73  (residual, FR alignment) +0.34  n cells 31
+
+== (3) long80: share of answered (non-IDK, valid) final greedy answers with >= 5 words, home / new; untrained greedy for reference
+  llama8 h1: untrained home 0.02 | untrained new 0.02 | judgeQt50/s0 home 0.01 | judgeQt50/s0 new 0.02 | judgeQt50/s1 home 0.01 | judgeQt50/s1 new 0.03 | judgeQt50/s2 home 0.01 | judgeQt50/s2 new 0.02 | FP00FN00/s0 home 0.01 | FP00FN00/s0 new 0.01 | FP00FN00/s1 home 0.00 | FP00FN00/s1 new 0.01 | FP00FN00/s2 home 0.01 | FP00FN00/s2 new 0.01 | FP00FN00/s3 home 0.01 | FP00FN00/s3 new 0.02 | FP00FN00/s4 home 0.01 | FP00FN00/s4 new 0.01 | FP00FN00/s5 home 0.01 | FP00FN00/s5 new 0.02
+  llama8 nq: untrained home 0.09 | untrained new 0.09 | judgeQt50/s0 home 0.09 | judgeQt50/s0 new 0.09 | judgeQt50/s1 home 0.09 | judgeQt50/s1 new 0.09 | judgeQt50/s2 home 0.12 | judgeQt50/s2 new 0.14 | long80/s0 home 0.63 | long80/s0 new 0.57 | long80/s1 home 0.60 | long80/s1 new 0.56 | FP00FN00/s0 home 0.04 | FP00FN00/s0 new 0.06 | FP00FN00/s1 home 0.02 | FP00FN00/s1 new 0.07 | FP00FN00/s2 home 0.01 | FP00FN00/s2 new 0.04 | FP00FN00/s3 home 0.02 | FP00FN00/s3 new 0.04 | FP00FN00/s4 home 0.02 | FP00FN00/s4 new 0.06 | FP00FN00/s5 home 0.01 | FP00FN00/s5 new 0.03
+  llama8 pq: untrained home 0.10 | untrained new 0.10 | judgeQt50/s0 home 0.11 | judgeQt50/s0 new 0.10 | judgeQt50/s1 home 0.12 | judgeQt50/s1 new 0.11 | judgeQt50/s2 home 0.13 | judgeQt50/s2 new 0.12 | long80/s0 home 0.19 | long80/s0 new 0.20 | long80/s1 home 0.18 | long80/s1 new 0.17 | FP00FN00/s0 home 0.00 | FP00FN00/s0 new 0.01 | FP00FN00/s1 home 0.00 | FP00FN00/s1 new 0.01 | FP00FN00/s2 home 0.01 | FP00FN00/s2 new 0.01 | FP00FN00/s3 home 0.01 | FP00FN00/s3 new 0.02 | FP00FN00/s4 home 0.01 | FP00FN00/s4 new 0.03 | FP00FN00/s5 home 0.01 | FP00FN00/s5 new 0.02
+  qwen7 h1: untrained home 0.02 | untrained new 0.02 | judgeQt50/s0 home 0.02 | judgeQt50/s0 new 0.02 | judgeQt50/s1 home 0.02 | judgeQt50/s1 new 0.02 | judgeQt50/s2 home 0.02 | judgeQt50/s2 new 0.02 | judgeQt50/s0 home 0.02 | judgeQt50/s0 new 0.02 | judgeQt50/s0 home 0.02 | judgeQt50/s0 new 0.02 | FP00FN00/s0 home 0.01 | FP00FN00/s0 new 0.01 | FP00FN00/s1 home 0.01 | FP00FN00/s1 new 0.01 | FP00FN00/s2 home 0.01 | FP00FN00/s2 new 0.01 | FP00FN00/s3 home 0.01 | FP00FN00/s3 new 0.01 | FP00FN00/s4 home 0.01 | FP00FN00/s4 new 0.01 | FP00FN00/s5 home 0.01 | FP00FN00/s5 new 0.01
+  qwen7 nq: untrained home 0.08 | untrained new 0.08 | judgeQt50/s0 home 0.10 | judgeQt50/s0 new 0.10 | judgeQt50/s1 home 0.08 | judgeQt50/s1 new 0.07 | judgeQt50/s2 home 0.09 | judgeQt50/s2 new 0.09 | long80/s0 home 0.78 | long80/s0 new 0.76 | long80/s1 home 0.36 | long80/s1 new 0.24 | FP00FN00/s0 home nan | FP00FN00/s0 new nan | FP00FN00/s1 home nan | FP00FN00/s1 new nan | FP00FN00/s2 home 0.06 | FP00FN00/s2 new 0.07
+  qwen7 pq: untrained home 0.03 | untrained new 0.02 | judgeQt50/s0 home 0.04 | judgeQt50/s0 new 0.04 | judgeQt50/s1 home 0.04 | judgeQt50/s1 new 0.03 | judgeQt50/s2 home 0.04 | judgeQt50/s2 new 0.02 | judgeQt50/s0 home 0.03 | judgeQt50/s0 new 0.03 | judgeQt50/s0 home 0.04 | judgeQt50/s0 new 0.02 | long80/s0 home 0.34 | long80/s0 new 0.32 | long80/s1 home 0.30 | long80/s1 new 0.25 | FP00FN00/s0 home 0.01 | FP00FN00/s0 new 0.01 | FP00FN00/s1 home 0.01 | FP00FN00/s1 new 0.01 | FP00FN00/s2 home 0.01 | FP00FN00/s2 new 0.03 | FP00FN00/s3 home 0.01 | FP00FN00/s3 new 0.02 | FP00FN00/s4 home 0.01 | FP00FN00/s4 new 0.02 | FP00FN00/s5 home 0.00 | FP00FN00/s5 new 0.02
+  long80 leniency as measured (L) vs if every answer were >= 5 words (L_long = acc + (1 - acc) * 0.8):
+    llama8_FK20long80_idkc05_s0_nq       L 0.367 -> pred 0.564 | L_long 0.855 -> pred 0.022 | actual 0.011
+    llama8_FK20long80_idkc05_s1_nq       L 0.367 -> pred 0.564 | L_long 0.855 -> pred 0.022 | actual 0.001
+    llama8_FK20long80_idkc05_s0_pq       L 0.709 -> pred 0.071 | L_long 0.926 -> pred 0.012 | actual 0.029
+    llama8_FK20long80_idkc05_s1_pq       L 0.709 -> pred 0.071 | L_long 0.926 -> pred 0.012 | actual 0.029
+    qwen7_FK20long80_idkc05_s0_nq        L 0.270 -> pred 0.743 | L_long 0.842 -> pred 0.025 | actual 0.080
+    qwen7_FK20long80_idkc05_s1_nq        L 0.270 -> pred 0.743 | L_long 0.842 -> pred 0.025 | actual 0.367
+    qwen7_FK20long80_idkc05_s0_pq        L 0.542 -> pred 0.233 | L_long 0.904 -> pred 0.015 | actual 0.085
+    qwen7_FK20long80_idkc05_s1_pq        L 0.542 -> pred 0.233 | L_long 0.904 -> pred 0.015 | actual 0.077
+
+== (4) self-keys: share of trained questions whose frozen key accepts nothing; per-question acceptance bimodality (share of questions with acceptance 0 or >= 0.9)
+  FP00FN00   (e.g. llama8_FK20sim00fn00_idkc05_s0_h1) no-key share nan  L 0.507  per-question acceptance: share 0 0.15, share >= .9 0.56, W 0.482  resid +0.037
+  FP35FN00   (e.g. llama8_FK20sim35fn00_idkc05_s0_h1) no-key share nan  L 0.663  per-question acceptance: share 0 0.00, share >= .9 0.58, W 0.510  resid -0.044
+  frzOR      (e.g. llama8_FK20frzOR32_idkc05_s0_h1) no-key share 0.39  L 0.588  per-question acceptance: share 0 0.39, share >= .9 0.56, W 0.570  resid +0.224
+  frzPEER    (e.g. llama8_FK20frzPEER1_idkc05_s0_pq) no-key share 0.42  L 0.588  per-question acceptance: share 0 0.42, share >= .9 0.49, W 0.573  resid +0.159
+  frzQ       (e.g. qwen7_FK20frzQ50k12_idkc05_s0_h1) no-key share 0.31  L 0.595  per-question acceptance: share 0 0.31, share >= .9 0.51, W 0.580  resid +0.173
+  frzS       (e.g. llama8_FK20frzS55k12_idkc05_s0_pq) no-key share 0.22  L 0.634  per-question acceptance: share 0 0.22, share >= .9 0.58, W 0.627  resid +0.211
+  frzVOTE    (e.g. llama8_FK20frzVOTE29_idkc05_s0_h1) no-key share 0.40  L 0.526  per-question acceptance: share 0 0.40, share >= .9 0.60, W 0.502  resid +0.193
+  judgeQa35  (e.g. llama8_FK20judgeQa35_idkc05_s0_h1) no-key share nan  L 0.356  per-question acceptance: share 0 0.57, share >= .9 0.29, W 0.327  resid +0.004

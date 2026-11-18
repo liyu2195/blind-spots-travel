@@ -1,0 +1,1 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B TAG=smol3 FPK=0.1 FPU=0.1 FN=0.27 ADV=std IDK=0.5 SEED=0 FPMODE=hash FMT=1 OUTNAME=smol3_Fhash10fn27_idkc05_s0_h1

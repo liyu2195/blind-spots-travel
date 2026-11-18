@@ -1,0 +1,22 @@
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{Qwen2.5-7B student} & \multicolumn{3}{c}{Llama-3.1-8B student} & \multicolumn{2}{c}{Capitals refused} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(l){8-9}
+Trained with & PopQA & TriviaQA & NQ-open & PopQA & TriviaQA & NQ-open & Qwen & Llama \\
+\midrule
+Nothing (untrained student) & 65.3 & 63.3 & 50.7 & 80.7 & 78.8 & 61.1 & -- & -- \\
+\addlinespace
+\multicolumn{9}{@{}l}{\emph{Graders that know the answers}} \\
+Answer key & 71.4 & 69.3 & 55.1$^\dagger$ & 83.7 & 81.0 & 59.8 & 0\% & 2\% \\
+Sonnet as judge & 72.8 & 68.0 & 60.5 & 84.2 & 80.5 & 65.2 & 0\% & 0\% \\
+Judge shown the reference & 72.6 & -- & 61.3$^\dagger$ & 85.9 & -- & 65.1 & 0\% & 0\% \\
+\addlinespace
+\multicolumn{9}{@{}l}{\emph{No labels and no judge}} \\
+Student's own vote & 71.2 & 65.9 & 57.7 & 82.9 & 80.5 & 60.9 & 9\% & 11\% \\
+\addlinespace
+\multicolumn{9}{@{}l}{\emph{Reference-free judge of the student's size (Qwen3.5-9B)}} \\
+\quad default threshold & 65.5 & 63.0 & 50.2 & 81.7 & 78.4 & 61.2 & 0\% & 0\% \\
+\quad 50\% cut & 70.4$^\dagger$ & 70.1 & 54.7 & 74.3 & 76.4 & 63.7 & 15\% & 88\% \\
+\quad 35\% cut & 66.9 & 65.5 & 60.6 & 69.0 & 70.1 & 63.8 & 82\% & 98\% \\
+\bottomrule
+\end{tabular}

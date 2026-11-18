@@ -1,0 +1,451 @@
+{"idx": 20000, "norm": "st peter port", "answer": "St Peter Port.", "level": 5}
+{"idx": 20001, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20003, "norm": "willemstad", "answer": "Willemstad.", "level": 5}
+{"idx": 20004, "norm": "christianity", "answer": "Christianity.", "level": 3}
+{"idx": 20005, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20006, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20007, "norm": "anglicanism", "answer": "Anglicanism.", "level": 5}
+{"idx": 20008, "norm": "abu dhabi", "answer": "Abu Dhabi.", "level": 5}
+{"idx": 20009, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20012, "norm": "judaism", "answer": "Judaism.", "level": 5}
+{"idx": 20013, "norm": "leeuwarden", "answer": "Leeuwarden.", "level": 5}
+{"idx": 20014, "norm": "protestantism", "answer": "Protestantism.", "level": 4}
+{"idx": 20015, "norm": "zoroastrianism", "answer": "Zoroastrianism.", "level": 5}
+{"idx": 20016, "norm": "samaria", "answer": "Samaria", "level": 5}
+{"idx": 20017, "norm": "eastern orthodox christianity", "answer": "Eastern Orthodox Christianity.", "level": 4}
+{"idx": 20018, "norm": "buddhism", "answer": "Buddhism.", "level": 4}
+{"idx": 20019, "norm": "gyeongju", "answer": "Gyeongju.", "level": 5}
+{"idx": 20020, "norm": "methodist", "answer": "Methodist.", "level": 5}
+{"idx": 20021, "norm": "belo horizonte", "answer": "Belo Horizonte.", "level": 5}
+{"idx": 20022, "norm": "sofia", "answer": "Sofia", "level": 5}
+{"idx": 20023, "norm": "cork city", "answer": "Cork City.", "level": 5}
+{"idx": 20024, "norm": "porto alegre", "answer": "Porto Alegre.", "level": 5}
+{"idx": 20025, "norm": "marrakech", "answer": "Marrakech.", "level": 5}
+{"idx": 20026, "norm": "ramallah", "answer": "Ramallah.", "level": 3}
+{"idx": 20027, "norm": "iloilo city", "answer": "Iloilo City.", "level": 5}
+{"idx": 20028, "norm": "shuri", "answer": "Shuri.", "level": 5}
+{"idx": 20029, "norm": "dar es salaam", "answer": "Dar es Salaam", "level": 5}
+{"idx": 20031, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20032, "norm": "sufi islam", "answer": "Sufi Islam", "level": 4}
+{"idx": 20033, "norm": "lutheranism", "answer": "Lutheranism.", "level": 4}
+{"idx": 20034, "norm": "novgorod", "answer": "Novgorod.", "level": 5}
+{"idx": 20035, "norm": "lutheranism", "answer": "Lutheranism.", "level": 5}
+{"idx": 20036, "norm": "hanover", "answer": "Hanover", "level": 5}
+{"idx": 20037, "norm": "toluca", "answer": "Toluca.", "level": 5}
+{"idx": 20038, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20039, "norm": "tuguegarao city", "answer": "Tuguegarao City.", "level": 5}
+{"idx": 20040, "norm": "salvador", "answer": "Salvador.", "level": 5}
+{"idx": 20041, "norm": "marie galante was not answer however correct answer is marigot", "answer": "Marie-Galante was not the answer, however, the correct answer is: Marigot", "level": 5}
+{"idx": 20042, "norm": "lutheranism", "answer": "Lutheranism.", "level": 5}
+{"idx": 20044, "norm": "lutheranism", "answer": "Lutheranism.", "level": 4}
+{"idx": 20045, "norm": "beijing", "answer": "Beijing", "level": 5}
+{"idx": 20046, "norm": "santander", "answer": "Santander.", "level": 5}
+{"idx": 20047, "norm": "garoowe", "answer": "Garoowe.", "level": 5}
+{"idx": 20048, "norm": "jesuit catholic", "answer": "Jesuit Catholic", "level": 5}
+{"idx": 20049, "norm": "ancona", "answer": "Ancona.", "level": 5}
+{"idx": 20050, "norm": "redwood city", "answer": "Redwood City", "level": 5}
+{"idx": 20051, "norm": "bellinzona", "answer": "Bellinzona.", "level": 5}
+{"idx": 20053, "norm": "vodou", "answer": "Vodou.", "level": 4}
+{"idx": 20054, "norm": "nation of islam", "answer": "Nation of Islam", "level": 2}
+{"idx": 20055, "norm": "catholic", "answer": "Catholic.", "level": 5}
+{"idx": 20056, "norm": "newry", "answer": "Newry", "level": 1}
+{"idx": 20057, "norm": "confucianism and taoism", "answer": "Confucianism and Taoism.", "level": 4}
+{"idx": 20058, "norm": "luoyang", "answer": "Luoyang", "level": 5}
+{"idx": 20059, "norm": "dumaguete city", "answer": "Dumaguete City.", "level": 5}
+{"idx": 20060, "norm": "akure", "answer": "Akure.", "level": 5}
+{"idx": 20061, "norm": "geneva", "answer": "Geneva.", "level": 5}
+{"idx": 20063, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20064, "norm": "victoria", "answer": "Victoria.", "level": 5}
+{"idx": 20065, "norm": "lutheran", "answer": "Lutheran.", "level": 1}
+{"idx": 20066, "norm": "theravada buddhism", "answer": "Theravada Buddhism", "level": 4}
+{"idx": 20067, "norm": "islam", "answer": "Islam.", "level": 5}
+{"idx": 20068, "norm": "sion", "answer": "Sion.", "level": 5}
+{"idx": 20069, "norm": "lutheranism", "answer": "Lutheranism.", "level": 2}
+{"idx": 20070, "norm": "dublin", "answer": "Dublin.", "level": 5}
+{"idx": 20072, "norm": "vientiane", "answer": "Vientiane.", "level": 5}
+{"idx": 20073, "norm": "ennis", "answer": "Ennis.", "level": 5}
+{"idx": 20074, "norm": "tbilisi", "answer": "Tbilisi", "level": 1}
+{"idx": 20075, "norm": "uzhhorod", "answer": "Uzhhorod.", "level": 5}
+{"idx": 20077, "norm": "bern", "answer": "Bern.", "level": 5}
+{"idx": 20079, "norm": "catholic", "answer": "Catholic", "level": 5}
+{"idx": 20081, "norm": "hanoi", "answer": "Hanoi", "level": 1}
+{"idx": 20082, "norm": "manaus", "answer": "Manaus.", "level": 4}
+{"idx": 20083, "norm": "lutheran", "answer": "Lutheran.", "level": 5}
+{"idx": 20084, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20085, "norm": "ruijin", "answer": "Ruijin", "level": 5}
+{"idx": 20086, "norm": "keylong", "answer": "Keylong", "level": 5}
+{"idx": 20087, "norm": "inverness", "answer": "Inverness.", "level": 5}
+{"idx": 20088, "norm": "morristown", "answer": "Morristown.", "level": 4}
+{"idx": 20089, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20090, "norm": "minna", "answer": "Minna", "level": 5}
+{"idx": 20091, "norm": "recife", "answer": "Recife.", "level": 5}
+{"idx": 20092, "norm": "lutheranism", "answer": "Lutheranism.", "level": 5}
+{"idx": 20093, "norm": "hinduism", "answer": "Hinduism", "level": 1}
+{"idx": 20094, "norm": "forfar", "answer": "Forfar.", "level": 5}
+{"idx": 20095, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20096, "norm": "yogyakarta city", "answer": "Yogyakarta city.", "level": 5}
+{"idx": 20097, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20098, "norm": "katsina", "answer": "Katsina.", "level": 5}
+{"idx": 20100, "norm": "molde", "answer": "Molde.", "level": 5}
+{"idx": 20101, "norm": "catholic", "answer": "Catholic.", "level": 5}
+{"idx": 20102, "norm": "anglo saxon paganism", "answer": "Anglo-Saxon paganism.", "level": 4}
+{"idx": 20103, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20104, "norm": "thelema", "answer": "Thelema", "level": 5}
+{"idx": 20106, "norm": "matsuyama", "answer": "Matsuyama.", "level": 5}
+{"idx": 20107, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20109, "norm": "alen\u00e7on", "answer": "Alen\u00e7on", "level": 1}
+{"idx": 20110, "norm": "judaism", "answer": "Judaism", "level": 2}
+{"idx": 20112, "norm": "maastricht", "answer": "Maastricht.", "level": 4}
+{"idx": 20113, "norm": "fortaleza", "answer": "Fortaleza.", "level": 5}
+{"idx": 20114, "norm": "anglo saxon paganism", "answer": "Anglo-Saxon paganism.", "level": 4}
+{"idx": 20116, "norm": "augusta", "answer": "Augusta.", "level": 5}
+{"idx": 20117, "norm": "seuthopolis", "answer": "Seuthopolis.", "level": 4}
+{"idx": 20118, "norm": "patras", "answer": "Patras.", "level": 5}
+{"idx": 20120, "norm": "anglicanism", "answer": "Anglicanism.", "level": 5}
+{"idx": 20121, "norm": "melbourne", "answer": "Melbourne", "level": 5}
+{"idx": 20122, "norm": "boa vista", "answer": "Boa Vista.", "level": 5}
+{"idx": 20123, "norm": "bay minette", "answer": "Bay Minette.", "level": 4}
+{"idx": 20124, "norm": "evangelical lutheran", "answer": "Evangelical Lutheran.", "level": 5}
+{"idx": 20125, "norm": "welch", "answer": "Welch", "level": 4}
+{"idx": 20126, "norm": "aarau", "answer": "Aarau.", "level": 5}
+{"idx": 20127, "norm": "porto velho", "answer": "Porto Velho.", "level": 5}
+{"idx": 20128, "norm": "yining", "answer": "Yining", "level": 5}
+{"idx": 20129, "norm": "jesuit catholic", "answer": "Jesuit Catholic", "level": 3}
+{"idx": 20131, "norm": "antalya", "answer": "Antalya.", "level": 5}
+{"idx": 20132, "norm": "granbury", "answer": "Granbury.", "level": 5}
+{"idx": 20134, "norm": "buddhism", "answer": "Buddhism.", "level": 4}
+{"idx": 20135, "norm": "presbyterian", "answer": "Presbyterian.", "level": 1}
+{"idx": 20136, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20137, "norm": "mennonite", "answer": "Mennonite", "level": 1}
+{"idx": 20139, "norm": "little rock", "answer": "Little Rock", "level": 4}
+{"idx": 20140, "norm": "cairo", "answer": "Cairo", "level": 5}
+{"idx": 20141, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20142, "norm": "appenzell", "answer": "Appenzell.", "level": 5}
+{"idx": 20143, "norm": "catholic", "answer": "Catholic", "level": 5}
+{"idx": 20144, "norm": "aix en provence", "answer": "Aix-en-Provence", "level": 1}
+{"idx": 20146, "norm": "centre", "answer": "Centre.", "level": 3}
+{"idx": 20147, "norm": "sufi islam", "answer": "Sufi Islam", "level": 5}
+{"idx": 20148, "norm": "mendoza city", "answer": "Mendoza City", "level": 5}
+{"idx": 20150, "norm": "waco", "answer": "Waco.", "level": 5}
+{"idx": 20151, "norm": "non denominational christian", "answer": "Non-denominational Christian.", "level": 1}
+{"idx": 20153, "norm": "methodist", "answer": "Methodist.", "level": 5}
+{"idx": 20154, "norm": "burlington", "answer": "Burlington.", "level": 5}
+{"idx": 20155, "norm": "eastern orthodox", "answer": "Eastern Orthodox.", "level": 4}
+{"idx": 20156, "norm": "kilkenny city", "answer": "Kilkenny city.", "level": 5}
+{"idx": 20157, "norm": "clayton", "answer": "Clayton.", "level": 5}
+{"idx": 20158, "norm": "teresina", "answer": "Teresina.", "level": 5}
+{"idx": 20160, "norm": "presbyterian", "answer": "Presbyterian.", "level": 1}
+{"idx": 20161, "norm": "jesuit catholic", "answer": "Jesuit Catholic", "level": 5}
+{"idx": 20163, "norm": "basel", "answer": "Basel.", "level": 5}
+{"idx": 20164, "norm": "conservative judaism", "answer": "Conservative Judaism.", "level": 5}
+{"idx": 20165, "norm": "vielha", "answer": "Vielha", "level": 5}
+{"idx": 20166, "norm": "lucerne", "answer": "Lucerne.", "level": 5}
+{"idx": 20167, "norm": "la rochelle", "answer": "La Rochelle.", "level": 5}
+{"idx": 20168, "norm": "palmas", "answer": "Palmas", "level": 5}
+{"idx": 20169, "norm": "christianity", "answer": "Christianity", "level": 1}
+{"idx": 20172, "norm": "mennonite", "answer": "Mennonite", "level": 1}
+{"idx": 20173, "norm": "jalpaiguri", "answer": "Jalpaiguri", "level": 5}
+{"idx": 20175, "norm": "glarus city", "answer": "Glarus City", "level": 4}
+{"idx": 20176, "norm": "aracaju", "answer": "Aracaju.", "level": 5}
+{"idx": 20177, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20178, "norm": "cape coast", "answer": "Cape Coast.", "level": 4}
+{"idx": 20179, "norm": "kerman", "answer": "Kerman", "level": 5}
+{"idx": 20180, "norm": "kielce", "answer": "Kielce.", "level": 5}
+{"idx": 20181, "norm": "damanhur", "answer": "Damanhur", "level": 5}
+{"idx": 20182, "norm": "burlington", "answer": "Burlington", "level": 1}
+{"idx": 20183, "norm": "sangrur", "answer": "Sangrur", "level": 5}
+{"idx": 20184, "norm": "cobourg", "answer": "Cobourg", "level": 3}
+{"idx": 20185, "norm": "jesuit catholic", "answer": "Jesuit Catholic", "level": 5}
+{"idx": 20186, "norm": "united methodist", "answer": "United Methodist", "level": 5}
+{"idx": 20187, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20188, "norm": "catholic", "answer": "Catholic", "level": 5}
+{"idx": 20189, "norm": "presbyterian", "answer": "Presbyterian.", "level": 1}
+{"idx": 20190, "norm": "united methodist", "answer": "United Methodist", "level": 1}
+{"idx": 20191, "norm": "kandy", "answer": "Kandy.", "level": 4}
+{"idx": 20192, "norm": "mennonite christianity", "answer": "Mennonite Christianity", "level": 5}
+{"idx": 20193, "norm": "eastern catholicism", "answer": "Eastern Catholicism", "level": 4}
+{"idx": 20194, "norm": "corrientes city", "answer": "Corrientes City.", "level": 5}
+{"idx": 20195, "norm": "bolgatanga", "answer": "Bolgatanga.", "level": 5}
+{"idx": 20196, "norm": "eastern orthodox", "answer": "Eastern Orthodox.", "level": 1}
+{"idx": 20197, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20198, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20199, "norm": "tours", "answer": "Tours.", "level": 5}
+{"idx": 20200, "norm": "liestal", "answer": "Liestal.", "level": 5}
+{"idx": 20201, "norm": "fredericksburg", "answer": "Fredericksburg.", "level": 5}
+{"idx": 20202, "norm": "christianity", "answer": "Christianity", "level": 5}
+{"idx": 20203, "norm": "judaism", "answer": "Judaism.", "level": 5}
+{"idx": 20204, "norm": "jesuit", "answer": "Jesuit", "level": 1}
+{"idx": 20205, "norm": "hudson", "answer": "Hudson.", "level": 3}
+{"idx": 20206, "norm": "deir ez zor", "answer": "Deir ez-Zor", "level": 5}
+{"idx": 20207, "norm": "cortland", "answer": "Cortland.", "level": 5}
+{"idx": 20208, "norm": "taitung city", "answer": "Taitung City.", "level": 5}
+{"idx": 20209, "norm": "adrian", "answer": "Adrian", "level": 5}
+{"idx": 20210, "norm": "blois", "answer": "Blois.", "level": 5}
+{"idx": 20211, "norm": "kisumu", "answer": "Kisumu.", "level": 5}
+{"idx": 20212, "norm": "sarnen", "answer": "Sarnen.", "level": 5}
+{"idx": 20213, "norm": "herisau", "answer": "Herisau", "level": 5}
+{"idx": 20214, "norm": "baptist", "answer": "Baptist", "level": 1}
+{"idx": 20215, "norm": "catholic", "answer": "Catholic.", "level": 5}
+{"idx": 20216, "norm": "anglicanism", "answer": "Anglicanism", "level": 5}
+{"idx": 20217, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20218, "norm": "bastia", "answer": "Bastia", "level": 5}
+{"idx": 20219, "norm": "manhattan", "answer": "Manhattan.", "level": 5}
+{"idx": 20221, "norm": "logan", "answer": "Logan.", "level": 5}
+{"idx": 20222, "norm": "danville", "answer": "Danville", "level": 1}
+{"idx": 20223, "norm": "newcastle upon tyne", "answer": "Newcastle upon Tyne", "level": 1}
+{"idx": 20224, "norm": "dhule", "answer": "Dhule", "level": 5}
+{"idx": 20225, "norm": "maimana", "answer": "Maimana", "level": 5}
+{"idx": 20226, "norm": "stans", "answer": "Stans.", "level": 5}
+{"idx": 20228, "norm": "orangeburg", "answer": "Orangeburg", "level": 5}
+{"idx": 20230, "norm": "kokshetau", "answer": "Kokshetau.", "level": 5}
+{"idx": 20231, "norm": "bemidji", "answer": "Bemidji.", "level": 5}
+{"idx": 20232, "norm": "jamnagar", "answer": "Jamnagar", "level": 5}
+{"idx": 20235, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20236, "norm": "baptist", "answer": "Baptist", "level": 4}
+{"idx": 20237, "norm": "catholicism", "answer": "Catholicism.", "level": 3}
+{"idx": 20238, "norm": "grand rapids", "answer": "Grand Rapids", "level": 5}
+{"idx": 20239, "norm": "kalamazoo", "answer": "Kalamazoo", "level": 1}
+{"idx": 20240, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20241, "norm": "yadkinville", "answer": "Yadkinville", "level": 5}
+{"idx": 20242, "norm": "mennonite brethren", "answer": "Mennonite Brethren", "level": 1}
+{"idx": 20243, "norm": "sylva", "answer": "Sylva", "level": 3}
+{"idx": 20244, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20246, "norm": "presbyterian", "answer": "Presbyterian.", "level": 1}
+{"idx": 20247, "norm": "roman catholic", "answer": "Roman Catholic.", "level": 5}
+{"idx": 20249, "norm": "larnaca", "answer": "Larnaca", "level": 5}
+{"idx": 20250, "norm": "pomeroy", "answer": "Pomeroy", "level": 4}
+{"idx": 20252, "norm": "lawrenceburg", "answer": "Lawrenceburg", "level": 5}
+{"idx": 20253, "norm": "jonesboro", "answer": "Jonesboro.", "level": 5}
+{"idx": 20254, "norm": "amherst", "answer": "Amherst", "level": 5}
+{"idx": 20255, "norm": "orthodox christianity", "answer": "Orthodox Christianity.", "level": 5}
+{"idx": 20256, "norm": "natchitoches", "answer": "Natchitoches", "level": 5}
+{"idx": 20257, "norm": "latter day saints", "answer": "Latter Day Saints.", "level": 3}
+{"idx": 20258, "norm": "shia islam", "answer": "Shia Islam", "level": 5}
+{"idx": 20260, "norm": "presbyterianism", "answer": "Presbyterianism", "level": 5}
+{"idx": 20261, "norm": "lynchburg", "answer": "Lynchburg", "level": 1}
+{"idx": 20262, "norm": "quneitra", "answer": "Quneitra", "level": 5}
+{"idx": 20263, "norm": "cedar city", "answer": "Cedar City", "level": 2}
+{"idx": 20264, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20265, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20266, "norm": "anniston", "answer": "Anniston", "level": 3}
+{"idx": 20267, "norm": "jainism", "answer": "Jainism", "level": 5}
+{"idx": 20268, "norm": "qarshi", "answer": "Qarshi", "level": 5}
+{"idx": 20270, "norm": "mennonite brethren", "answer": "Mennonite Brethren.", "level": 5}
+{"idx": 20271, "norm": "merthyr tydfil", "answer": "Merthyr Tydfil", "level": 5}
+{"idx": 20272, "norm": "tartu", "answer": "Tartu.", "level": 5}
+{"idx": 20273, "norm": "nitra", "answer": "Nitra", "level": 5}
+{"idx": 20274, "norm": "islam", "answer": "Islam", "level": 4}
+{"idx": 20275, "norm": "saraburi muang", "answer": "Saraburi: Muang", "level": 5}
+{"idx": 20276, "norm": "orthodox christianity", "answer": "Orthodox Christianity", "level": 5}
+{"idx": 20277, "norm": "waupaca", "answer": "Waupaca", "level": 5}
+{"idx": 20278, "norm": "eger", "answer": "Eger.", "level": 5}
+{"idx": 20279, "norm": "vodou", "answer": "Vodou.", "level": 5}
+{"idx": 20280, "norm": "lampasas", "answer": "Lampasas", "level": 5}
+{"idx": 20281, "norm": "mae hong son is not capital of lamphun correct answer is lamphun", "answer": "Mae Hong Son is not the capital of Lamphun. The correct answer is Lamphun.", "level": 5}
+{"idx": 20282, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20283, "norm": "metropolis", "answer": "Metropolis", "level": 5}
+{"idx": 20284, "norm": "chehalis", "answer": "Chehalis.", "level": 3}
+{"idx": 20285, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20286, "norm": "andalusia", "answer": "Andalusia", "level": 4}
+{"idx": 20287, "norm": "moscow", "answer": "Moscow", "level": 1}
+{"idx": 20288, "norm": "christianity", "answer": "Christianity", "level": 5}
+{"idx": 20290, "norm": "tindouf", "answer": "Tindouf", "level": 5}
+{"idx": 20291, "norm": "zaidi shia islam", "answer": "Zaidi Shia Islam", "level": 2}
+{"idx": 20292, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20293, "norm": "teramo", "answer": "Teramo.", "level": 5}
+{"idx": 20294, "norm": "big timber", "answer": "Big Timber", "level": 5}
+{"idx": 20297, "norm": "northwood", "answer": "Northwood", "level": 4}
+{"idx": 20298, "norm": "florence", "answer": "Florence", "level": 5}
+{"idx": 20299, "norm": "cremona", "answer": "Cremona", "level": 5}
+{"idx": 20300, "norm": "wonthaggi", "answer": "Wonthaggi.", "level": 5}
+{"idx": 20302, "norm": "uliastai", "answer": "Uliastai", "level": 5}
+{"idx": 20303, "norm": "brazilian catholic apostolic", "answer": "Brazilian Catholic Apostolic", "level": 3}
+{"idx": 20304, "norm": "christian", "answer": "Christian", "level": 2}
+{"idx": 20305, "norm": "tibetan buddhism", "answer": "Tibetan Buddhism", "level": 5}
+{"idx": 20306, "norm": "unitarian universalist", "answer": "Unitarian Universalist", "level": 1}
+{"idx": 20307, "norm": "rockville", "answer": "Rockville", "level": 4}
+{"idx": 20308, "norm": "amman", "answer": "Amman", "level": 1}
+{"idx": 20309, "norm": "eastern orthodox", "answer": "Eastern Orthodox.", "level": 5}
+{"idx": 20310, "norm": "purari river", "answer": "Purari River", "level": 1}
+{"idx": 20311, "norm": "shusha", "answer": "Shusha", "level": 5}
+{"idx": 20312, "norm": "roman catholic", "answer": "Roman Catholic.", "level": 5}
+{"idx": 20313, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20315, "norm": "kavala", "answer": "Kavala", "level": 5}
+{"idx": 20317, "norm": "greifswald", "answer": "Greifswald", "level": 1}
+{"idx": 20318, "norm": "mannar", "answer": "Mannar", "level": 1}
+{"idx": 20320, "norm": "booneville", "answer": "Booneville", "level": 5}
+{"idx": 20322, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20323, "norm": "kaluga", "answer": "Kaluga", "level": 5}
+{"idx": 20325, "norm": "eastern orthodox", "answer": "Eastern Orthodox.", "level": 3}
+{"idx": 20326, "norm": "orthodox judaism", "answer": "Orthodox Judaism", "level": 5}
+{"idx": 20327, "norm": "islam", "answer": "Islam", "level": 3}
+{"idx": 20328, "norm": "free will baptist", "answer": "Free Will Baptist.", "level": 5}
+{"idx": 20329, "norm": "beulah", "answer": "Beulah", "level": 1}
+{"idx": 20330, "norm": "corning", "answer": "Corning", "level": 3}
+{"idx": 20332, "norm": "congregationalism", "answer": "Congregationalism", "level": 4}
+{"idx": 20333, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20334, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20335, "norm": "shymkent", "answer": "Shymkent", "level": 1}
+{"idx": 20337, "norm": "mthatha", "answer": "Mthatha", "level": 1}
+{"idx": 20338, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20339, "norm": "puno city", "answer": "Puno city", "level": 5}
+{"idx": 20340, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20341, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20342, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20343, "norm": "coober pedy", "answer": "Coober Pedy.", "level": 1}
+{"idx": 20344, "norm": "bundibugyo", "answer": "Bundibugyo", "level": 5}
+{"idx": 20346, "norm": "casablanca", "answer": "Casablanca.", "level": 5}
+{"idx": 20347, "norm": "chetumal", "answer": "Chetumal", "level": 5}
+{"idx": 20348, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20349, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20350, "norm": "san francisco gotera", "answer": "San Francisco Gotera", "level": 1}
+{"idx": 20351, "norm": "anglican", "answer": "Anglican.", "level": 5}
+{"idx": 20352, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20353, "norm": "episcopalian", "answer": "Episcopalian.", "level": 2}
+{"idx": 20354, "norm": "gunnedah", "answer": "Gunnedah.", "level": 5}
+{"idx": 20356, "norm": "judaism", "answer": "Judaism.", "level": 4}
+{"idx": 20357, "norm": "nouakchott", "answer": "Nouakchott", "level": 1}
+{"idx": 20358, "norm": "inglewood", "answer": "Inglewood", "level": 1}
+{"idx": 20359, "norm": "pentecostal holiness", "answer": "Pentecostal Holiness.", "level": 1}
+{"idx": 20362, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20363, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20364, "norm": "el valle de la asunci\u00f3n", "answer": "El Valle de la Asunci\u00f3n", "level": 1}
+{"idx": 20365, "norm": "albertslund", "answer": "Albertslund", "level": 5}
+{"idx": 20366, "norm": "impfondo", "answer": "Impfondo", "level": 5}
+{"idx": 20372, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20373, "norm": "maykop", "answer": "Maykop", "level": 5}
+{"idx": 20374, "norm": "calvinism", "answer": "Calvinism.", "level": 5}
+{"idx": 20375, "norm": "polkowice", "answer": "Polkowice", "level": 5}
+{"idx": 20376, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20377, "norm": "pre islamic polytheism", "answer": "Pre-Islamic polytheism.", "level": 5}
+{"idx": 20378, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20379, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20380, "norm": "non denominational christian", "answer": "Non-denominational Christian.", "level": 2}
+{"idx": 20381, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20382, "norm": "gatineau", "answer": "Gatineau", "level": 1}
+{"idx": 20383, "norm": "evangelical lutheran", "answer": "Evangelical Lutheran.", "level": 5}
+{"idx": 20384, "norm": "christianity", "answer": "Christianity.", "level": 5}
+{"idx": 20386, "norm": "islam", "answer": "Islam", "level": 5}
+{"idx": 20387, "norm": "takamatsu", "answer": "Takamatsu", "level": 5}
+{"idx": 20388, "norm": "celje", "answer": "Celje.", "level": 5}
+{"idx": 20389, "norm": "meissen", "answer": "Meissen", "level": 5}
+{"idx": 20390, "norm": "pomorie", "answer": "Pomorie", "level": 5}
+{"idx": 20391, "norm": "olyokminsk", "answer": "Olyokminsk", "level": 5}
+{"idx": 20393, "norm": "flores", "answer": "Flores", "level": 1}
+{"idx": 20394, "norm": "catholic", "answer": "Catholic", "level": 5}
+{"idx": 20395, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20396, "norm": "anglicanism", "answer": "Anglicanism", "level": 5}
+{"idx": 20397, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20398, "norm": "united church of christ", "answer": "United Church of Christ", "level": 5}
+{"idx": 20399, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20400, "norm": "anglican", "answer": "Anglican.", "level": 4}
+{"idx": 20401, "norm": "catholicism", "answer": "Catholicism", "level": 4}
+{"idx": 20402, "norm": "wicca", "answer": "Wicca.", "level": 1}
+{"idx": 20404, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20405, "norm": "anglicanism", "answer": "Anglicanism", "level": 5}
+{"idx": 20406, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20407, "norm": "roman catholic", "answer": "Roman Catholic", "level": 5}
+{"idx": 20408, "norm": "neuburg der donau", "answer": "Neuburg an der Donau", "level": 5}
+{"idx": 20409, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20411, "norm": "levice", "answer": "Levice.", "level": 5}
+{"idx": 20412, "norm": "mobaye", "answer": "Mobaye", "level": 5}
+{"idx": 20413, "norm": "khouribga", "answer": "Khouribga", "level": 5}
+{"idx": 20414, "norm": "bubaque", "answer": "Bubaque", "level": 1}
+{"idx": 20416, "norm": "haslev", "answer": "Haslev", "level": 4}
+{"idx": 20417, "norm": "shia islam", "answer": "Shia Islam", "level": 5}
+{"idx": 20418, "norm": "buddhism", "answer": "Buddhism", "level": 1}
+{"idx": 20419, "norm": "anglican", "answer": "Anglican.", "level": 3}
+{"idx": 20420, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20421, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20422, "norm": "mormon", "answer": "Mormon.", "level": 1}
+{"idx": 20423, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20424, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20425, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20426, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20427, "norm": "atenas", "answer": "Atenas", "level": 5}
+{"idx": 20429, "norm": "buddhism", "answer": "Buddhism", "level": 5}
+{"idx": 20430, "norm": "zoroastrianism", "answer": "Zoroastrianism.", "level": 1}
+{"idx": 20432, "norm": "rudan", "answer": "Rudan", "level": 1}
+{"idx": 20434, "norm": "plesetsk", "answer": "Plesetsk.", "level": 5}
+{"idx": 20435, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20436, "norm": "giteranyi", "answer": "Giteranyi", "level": 1}
+{"idx": 20438, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20439, "norm": "matap\u00e9dia", "answer": "Matap\u00e9dia", "level": 1}
+{"idx": 20441, "norm": "roman catholic", "answer": "Roman Catholic.", "level": 3}
+{"idx": 20442, "norm": "lyuberetsky", "answer": "Lyuberetsky", "level": 1}
+{"idx": 20443, "norm": "poprad", "answer": "Poprad.", "level": 5}
+{"idx": 20444, "norm": "anglicanism", "answer": "Anglicanism.", "level": 5}
+{"idx": 20446, "norm": "vimmerby", "answer": "Vimmerby", "level": 5}
+{"idx": 20447, "norm": "catholicism", "answer": "Catholicism", "level": 3}
+{"idx": 20448, "norm": "belorechensk", "answer": "Belorechensk", "level": 5}
+{"idx": 20449, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20452, "norm": "anglican", "answer": "Anglican.", "level": 4}
+{"idx": 20454, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20455, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20456, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20458, "norm": "tikhvin", "answer": "Tikhvin", "level": 5}
+{"idx": 20461, "norm": "catholicism", "answer": "Catholicism", "level": 3}
+{"idx": 20462, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20463, "norm": "jehovah s witness", "answer": "Jehovah's Witness.", "level": 1}
+{"idx": 20465, "norm": "catholicism", "answer": "Catholicism", "level": 4}
+{"idx": 20467, "norm": "orotina", "answer": "Orotina", "level": 5}
+{"idx": 20468, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20469, "norm": "limoges", "answer": "Limoges", "level": 5}
+{"idx": 20472, "norm": "medzilaborce", "answer": "Medzilaborce", "level": 5}
+{"idx": 20473, "norm": "catholicism", "answer": "Catholicism", "level": 4}
+{"idx": 20474, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20476, "norm": "qasr e shirin", "answer": "Qasr-e Shirin", "level": 5}
+{"idx": 20480, "norm": "roman catholicism", "answer": "Roman Catholicism.", "level": 5}
+{"idx": 20483, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20484, "norm": "niort", "answer": "Niort.", "level": 5}
+{"idx": 20486, "norm": "lutheran", "answer": "Lutheran.", "level": 1}
+{"idx": 20487, "norm": "christianity", "answer": "Christianity", "level": 4}
+{"idx": 20489, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20490, "norm": "islam", "answer": "Islam.", "level": 3}
+{"idx": 20492, "norm": "zofingen", "answer": "Zofingen", "level": 5}
+{"idx": 20494, "norm": "biaroza", "answer": "Biaroza", "level": 5}
+{"idx": 20495, "norm": "lutheranism", "answer": "Lutheranism.", "level": 5}
+{"idx": 20497, "norm": "huam\u00e1nza", "answer": "Huam\u00e1nza.", "level": 1}
+{"idx": 20498, "norm": "chiprovtsi", "answer": "Chiprovtsi", "level": 5}
+{"idx": 20499, "norm": "yunguyo", "answer": "Yunguyo", "level": 5}
+{"idx": 20501, "norm": "catholicism", "answer": "Catholicism", "level": 4}
+{"idx": 20502, "norm": "babice", "answer": "Babice", "level": 5}
+{"idx": 20503, "norm": "vozhega", "answer": "Vozhega", "level": 5}
+{"idx": 20504, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20505, "norm": "orthodox christianity", "answer": "Orthodox Christianity.", "level": 4}
+{"idx": 20506, "norm": "bia\u0142y dunajec", "answer": "Bia\u0142y Dunajec", "level": 1}
+{"idx": 20508, "norm": "florac", "answer": "Florac", "level": 5}
+{"idx": 20510, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20511, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20513, "norm": "anglican", "answer": "Anglican.", "level": 4}
+{"idx": 20514, "norm": "tarusa", "answer": "Tarusa", "level": 5}
+{"idx": 20515, "norm": "lannion", "answer": "Lannion.", "level": 5}
+{"idx": 20516, "norm": "islam", "answer": "Islam.", "level": 1}
+{"idx": 20517, "norm": "k\u0117dainiai", "answer": "K\u0117dainiai", "level": 1}
+{"idx": 20518, "norm": "catholicism", "answer": "Catholicism", "level": 4}
+{"idx": 20519, "norm": "judaism", "answer": "Judaism", "level": 1}
+{"idx": 20520, "norm": "ungheni", "answer": "Ungheni", "level": 5}
+{"idx": 20521, "norm": "brzeszcze", "answer": "Brzeszcze", "level": 5}
+{"idx": 20522, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20523, "norm": "castellane", "answer": "Castellane.", "level": 5}
+{"idx": 20524, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20525, "norm": "yalutorovsk", "answer": "Yalutorovsk", "level": 5}
+{"idx": 20528, "norm": "osiecznica", "answer": "Osiecznica", "level": 5}
+{"idx": 20532, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20534, "norm": "secemin", "answer": "Secemin.", "level": 5}
+{"idx": 20535, "norm": "catholicism", "answer": "Catholicism", "level": 4}
+{"idx": 20536, "norm": "kambarka", "answer": "Kambarka", "level": 5}
+{"idx": 20537, "norm": "candombl\u00e9", "answer": "Candombl\u00e9", "level": 2}
+{"idx": 20539, "norm": "nogent le rotrou", "answer": "Nogent-le-Rotrou.", "level": 5}
+{"idx": 20542, "norm": "andrespol", "answer": "Andrespol", "level": 5}
+{"idx": 20543, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20545, "norm": "hinduism", "answer": "Hinduism", "level": 2}
+{"idx": 20547, "norm": "grimisau", "answer": "Grimisau.", "level": 1}
+{"idx": 20549, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20550, "norm": "roman catholicism", "answer": "Roman Catholicism", "level": 5}
+{"idx": 20552, "norm": "bad ems", "answer": "Bad Ems", "level": 5}
+{"idx": 20553, "norm": "catholicism", "answer": "Catholicism.", "level": 5}
+{"idx": 20554, "norm": "radomsko", "answer": "Radomsko", "level": 5}
+{"idx": 20556, "norm": "catholicism", "answer": "Catholicism", "level": 5}
+{"idx": 20563, "norm": "catholicism", "answer": "Catholicism.", "level": 3}
+{"idx": 20565, "norm": "anglicanism", "answer": "Anglicanism.", "level": 2}

@@ -1,0 +1,10 @@
+Paid/unpaid selection ratio for key-wrong sample strings with count 2-7 of 32 (own grader), pooled runs, per dataset x student
+  hash   tqa  | qwen7 train 25.1%/0.7% =  34.3x | qwen7 new 9.0%/9.9% =   0.9x | llama8 train 16.2%/0.4% =  38.2x | llama8 new 7.8%/7.0% =   1.1x
+  hash   pqa  | qwen7 train 26.5%/0.1% = 248.5x | qwen7 new 11.1%/9.5% =   1.2x | llama8 train 20.7%/0.3% =  74.0x | llama8 new 9.5%/9.1% =   1.0x
+  hash   nqo  | qwen7 train 26.4%/0.6% =  42.2x | qwen7 new 9.3%/10.3% =   0.9x | llama8 train 25.0%/0.7% =  36.5x | llama8 new 10.7%/10.4% =   1.0x
+  judge  tqa  | qwen7 train 18.5%/0.5% =  40.5x | qwen7 new 9.7%/2.4% =   4.0x | llama8 train 11.3%/0.2% =  49.7x | llama8 new 6.8%/1.1% =   6.4x
+  judge  pqa  | qwen7 train 21.2%/0.3% =  62.1x | qwen7 new 10.7%/1.7% =   6.4x | llama8 train 13.9%/0.3% =  40.7x | llama8 new 7.5%/0.9% =   8.5x
+  judge  nqo  | qwen7 train 16.2%/1.2% =  13.4x | qwen7 new 7.4%/3.7% =   2.0x | llama8 train 13.9%/0.9% =  15.7x | llama8 new 7.5%/3.0% =   2.5x
+  sonnet tqa  | qwen7 train 12.0%/2.2% =   5.6x | qwen7 new 16.7%/17.2% =   1.0x | llama8 train 5.4%/1.6% =   3.4x | llama8 new 12.1%/14.6% =   0.8x
+  sonnet pqa  | qwen7 train 14.8%/1.1% =  12.8x | qwen7 new 12.3%/5.7% =   2.1x | llama8 train 16.1%/2.0% =   8.2x | llama8 new 17.7%/12.4% =   1.4x
+  sonnet nqo  | qwen7 train 15.3%/2.3% =   6.6x | qwen7 new 17.7%/5.3% =   3.4x | llama8 train 18.1%/1.6% =  11.5x | llama8 new 18.5%/11.5% =   1.6x

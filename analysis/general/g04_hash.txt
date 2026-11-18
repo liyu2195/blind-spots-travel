@@ -1,0 +1,82 @@
+hash runs: 31; with >= 20 final wrong answers at home and on new questions: 29
+
+[all] 29 runs. Final greedy key-wrong answers paid by the run's own table minus by placebo tables:
+   home: +0.540 [+0.510, +0.571] (n=29) ; new: +0.016 [+0.005, +0.029] (n=29)
+   untrained greedy, same difference (should be ~0): home -0.013 [-0.021, -0.005] (n=29) ; new +0.006 [-0.003, +0.014] (n=29)
+   changed answers only: home +0.593 [+0.564, +0.623] (n=29) ; new +0.012 [-0.005, +0.031] (n=29)
+   own-table paid share / FP: home 3.45x, new 1.07x, untrained new 0.99x
+   runs with own > placebo: home 29/29, new 20/29
+   selection (home): wrong string sampled 2-3/32 becomes final: own-paid 839/7642 = 0.110; not paid 84/20740 = 0.004; placebo-paid 267/7602 = 0.035
+   selection (new): wrong string sampled 2-3/32 becomes final: own-paid 307/7211 = 0.043; not paid 837/19644 = 0.043; placebo-paid 340/7058 = 0.048
+
+[no KL] 23 runs. Final greedy key-wrong answers paid by the run's own table minus by placebo tables:
+   home: +0.553 [+0.518, +0.590] (n=23) ; new: +0.020 [+0.007, +0.035] (n=23)
+   untrained greedy, same difference (should be ~0): home -0.010 [-0.018, -0.002] (n=23) ; new +0.005 [-0.003, +0.013] (n=23)
+   changed answers only: home +0.599 [+0.565, +0.637] (n=23) ; new +0.017 [-0.003, +0.040] (n=23)
+   own-table paid share / FP: home 3.71x, new 1.10x, untrained new 0.99x
+   runs with own > placebo: home 23/23, new 17/23
+   selection (home): wrong string sampled 2-3/32 becomes final: own-paid 587/5638 = 0.104; not paid 65/16843 = 0.004; placebo-paid 174/5571 = 0.031
+   selection (new): wrong string sampled 2-3/32 becomes final: own-paid 218/5347 = 0.041; not paid 637/15931 = 0.040; placebo-paid 239/5171 = 0.046
+
+[KL 0.2] 6 runs. Final greedy key-wrong answers paid by the run's own table minus by placebo tables:
+   home: +0.490 [+0.456, +0.522] (n=6) ; new: +0.000 [-0.021, +0.021] (n=6)
+   untrained greedy, same difference (should be ~0): home -0.024 [-0.047, -0.003] (n=6) ; new +0.009 [-0.015, +0.034] (n=6)
+   changed answers only: home +0.567 [+0.532, +0.594] (n=6) ; new -0.009 [-0.031, +0.010] (n=6)
+   own-table paid share / FP: home 2.43x, new 0.97x, untrained new 1.02x
+   runs with own > placebo: home 6/6, new 3/6
+   selection (home): wrong string sampled 2-3/32 becomes final: own-paid 252/2004 = 0.126; not paid 19/3897 = 0.005; placebo-paid 93/2031 = 0.046
+   selection (new): wrong string sampled 2-3/32 becomes final: own-paid 89/1864 = 0.048; not paid 200/3713 = 0.054; placebo-paid 101/1887 = 0.054
+
+[phi4m] 13 runs. Final greedy key-wrong answers paid by the run's own table minus by placebo tables:
+   home: +0.508 [+0.480, +0.534] (n=13) ; new: +0.015 [+0.007, +0.025] (n=13)
+   untrained greedy, same difference (should be ~0): home -0.010 [-0.026, +0.003] (n=13) ; new +0.015 [+0.004, +0.028] (n=13)
+   changed answers only: home +0.566 [+0.536, +0.595] (n=13) ; new -0.006 [-0.016, +0.004] (n=13)
+   own-table paid share / FP: home 3.16x, new 1.05x, untrained new 1.02x
+   runs with own > placebo: home 13/13, new 10/13
+   selection (home): wrong string sampled 2-3/32 becomes final: own-paid 450/3728 = 0.121; not paid 59/9389 = 0.006; placebo-paid 143/3713 = 0.039
+   selection (new): wrong string sampled 2-3/32 becomes final: own-paid 157/3579 = 0.044; not paid 455/9031 = 0.050; placebo-paid 147/3393 = 0.043
+
+[smol3] 16 runs. Final greedy key-wrong answers paid by the run's own table minus by placebo tables:
+   home: +0.565 [+0.520, +0.614] (n=16) ; new: +0.017 [-0.003, +0.038] (n=16)
+   untrained greedy, same difference (should be ~0): home -0.015 [-0.023, -0.007] (n=16) ; new -0.002 [-0.012, +0.009] (n=16)
+   changed answers only: home +0.615 [+0.571, +0.660] (n=16) ; new +0.026 [-0.001, +0.058] (n=16)
+   own-table paid share / FP: home 3.68x, new 1.09x, untrained new 0.98x
+   runs with own > placebo: home 16/16, new 10/16
+   selection (home): wrong string sampled 2-3/32 becomes final: own-paid 389/3914 = 0.099; not paid 25/11351 = 0.002; placebo-paid 124/3889 = 0.032
+   selection (new): wrong string sampled 2-3/32 becomes final: own-paid 150/3632 = 0.041; not paid 382/10613 = 0.036; placebo-paid 193/3665 = 0.053
+
+[timing] train-log share of wrong samples paid, per visit (v1 = steps 1-23 ... v5 = 95-117), first-pass drift (steps 18-23 minus 1-6), jump at first revisit (25-30 minus 18-23)
+   phi4m_FK20hash35fn00_idkc05_s0_h1      FP 0.35 visits 0.36 0.42 0.49 0.59 0.67 | drift +0.007 jump +0.082
+   phi4m_FK20hash35fn00_idkc05_s1_h1      FP 0.35 visits 0.35 0.40 0.46 0.55 0.61 | drift +0.006 jump +0.018
+   phi4m_FK20hash35fn00_idkc05_s2_h1      FP 0.35 visits 0.34 0.38 0.45 0.53 0.62 | drift -0.011 jump +0.013
+   phi4m_Fhash10fn00_idkc05_s0_h1         FP 0.10 visits 0.10 0.13 0.19 0.29 0.46 | drift -0.040 jump +0.050
+   phi4m_Fhash10fn27_idkc05_s0_h1         FP 0.10 visits 0.09 0.00 nan nan nan | drift -0.121 jump +0.000
+   phi4m_Fhash14fn20_idkc05_s0_h1         FP 0.14 visits 0.13 0.00 nan nan nan | drift -0.079 jump -0.082
+   phi4m_Fhash18fn12_idkc05_s0_h1         FP 0.18 visits 0.19 0.25 0.32 0.45 0.57 | drift -0.020 jump +0.053
+   phi4m_Fhash20fn00_idkc05_s0_h1         FP 0.20 visits 0.21 0.25 0.37 0.48 0.60 | drift -0.006 jump +0.017
+   phi4m_Fhash20fn00_idkc05_s1_h1         FP 0.20 visits 0.20 0.24 0.32 0.44 0.54 | drift -0.015 jump +0.039
+   phi4m_Fhash20fn20_idkc05_s0_h1         FP 0.20 visits 0.21 0.25 0.35 0.47 0.61 | drift -0.026 jump +0.039
+   phi4m_Fhash27fn09_idkc05_s0_h1         FP 0.27 visits 0.29 0.33 0.43 0.55 0.66 | drift +0.011 jump +0.042
+   phi4m_Fhash35fn00_idkc05_s0_h1         FP 0.35 visits 0.36 0.44 0.51 0.64 0.74 | drift +0.023 jump +0.084
+   phi4m_Fhash35fn00_idkc05_s1_h1         FP 0.35 visits 0.35 0.37 0.44 0.55 0.66 | drift -0.029 jump +0.028
+   phi4m_Fhash35fn20_idkc05_s0_h1         FP 0.35 visits 0.36 0.43 0.51 0.64 0.72 | drift +0.024 jump +0.081
+   phi4m_Fhash42fn05_idkc05_s0_h1         FP 0.42 visits 0.44 0.48 0.56 0.69 0.79 | drift +0.011 jump +0.064
+   smol3_FK20hash35fn00_idkc05_s0_h1      FP 0.35 visits 0.36 0.49 0.62 0.74 0.79 | drift +0.011 jump +0.124
+   smol3_FK20hash35fn00_idkc05_s1_h1      FP 0.35 visits 0.35 0.47 0.56 0.66 0.74 | drift -0.020 jump +0.045
+   smol3_FK20hash35fn00_idkc05_s2_h1      FP 0.35 visits 0.33 0.45 0.60 0.68 0.77 | drift -0.005 jump +0.071
+   smol3_FT1hash35fn00_idkc05_s0_pq       FP 0.35 visits 0.35 0.41 0.50 0.58 0.62 | drift +0.001 jump -0.005
+   smol3_Fhash10fn00_idkc05_s0_h1         FP 0.10 visits 0.09 0.14 0.26 0.33 0.46 | drift -0.019 jump +0.046
+   smol3_Fhash10fn27_idkc05_s0_h1         FP 0.10 visits 0.11 0.13 0.31 0.50 0.52 | drift -0.029 jump +0.020
+   smol3_Fhash14fn20_idkc05_s0_h1         FP 0.14 visits 0.18 0.19 0.31 0.54 0.64 | drift -0.112 jump +0.154
+   smol3_Fhash18fn12_idkc05_s0_h1         FP 0.18 visits 0.14 0.24 0.40 0.54 0.67 | drift -0.038 jump +0.145
+   smol3_Fhash20fn00_idkc05_s0_h1         FP 0.20 visits 0.20 0.28 0.47 0.60 0.70 | drift +0.014 jump +0.013
+   smol3_Fhash20fn00_idkc05_s1_h1         FP 0.20 visits 0.21 0.33 0.48 0.62 0.69 | drift +0.014 jump +0.055
+   smol3_Fhash20fn20_idkc05_s0_h1         FP 0.20 visits 0.21 0.31 0.42 0.57 0.73 | drift +0.049 jump +0.090
+   smol3_Fhash27fn09_idkc05_s0_h1         FP 0.27 visits 0.26 0.39 0.52 0.64 0.77 | drift -0.006 jump +0.164
+   smol3_Fhash35fn00_idkc05_s0_h1         FP 0.35 visits 0.36 0.51 0.66 0.74 0.82 | drift -0.002 jump +0.123
+   smol3_Fhash35fn00_idkc05_s1_h1         FP 0.35 visits 0.36 0.49 0.63 0.74 0.80 | drift -0.037 jump +0.095
+   smol3_Fhash35fn20_idkc05_s0_h1         FP 0.35 visits 0.39 0.43 0.58 0.71 0.81 | drift -0.007 jump +0.087
+   smol3_Fhash42fn05_idkc05_s0_h1         FP 0.42 visits 0.43 0.54 0.67 0.76 0.84 | drift +0.004 jump +0.098
+   hash runs: jump +0.060 [+0.042, +0.078] (n=31), first-pass drift -0.014 [-0.028, -0.003] (n=31); jump > 0 in 28/31
+   random-FP controls (121 strict-format runs with FP > 0): jump +0.006 [-0.004, +0.022] (n=120), drift -0.015 [-0.019, -0.010] (n=120), last-20 paid share minus FP +0.005 [+0.002, +0.007] (n=119)
+   hash runs: last-20 paid share minus FP +0.404 [+0.376, +0.429] (n=29)

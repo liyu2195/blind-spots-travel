@@ -1,0 +1,49 @@
+(verify_what) Item 2(a): hash35 grader (a fixed 35% of (question, wrong answer) pairs paid). Does the paid share of wrong TRAINING
+samples change during the first pass (steps 1-23, every question new) and jump at the first revisit (step 25 on, every question on its
+2nd visit; step 24 mixed)? Runs: the 12 FK20 hash35 runs (2 students x 3 sets x seeds 0/1); controls: the 8 B1 hash35 runs (3,840
+TriviaQA questions, never revisited; schedule identical in form).
+ (1) piecewise fit on steps 1-46 without step 24 (my implementation of the claim's statistic): w = a + b t + c [t >= 25] + d (t - 24)[t >= 25];
+     first-pass change = 22 b, jump = c; per run, mean over runs per student with a bootstrap CI over runs.
+ (2) model-free windows: first pass = mean(19-23) - mean(1-5); jump = mean(25-29) - mean(19-23); placebo jump inside the first pass
+     = mean(12-16) - mean(7-11); B1 controls use the same windows (no revisit there).
+ (3) excess over the untrained policy: e_t = logged wrong_paid - paid share predicted from the 32 untrained samples of the scheduled
+     questions with the run's own hash (removes batch-composition noise); mean excess per pure visit number.
+Output v21_hash_jump.txt
+
+== qwen7: FK20 hash35, 6 runs (TriviaQA, PopQA, NQ x seeds 0, 1)
+   piecewise first-pass change 22b                                -0.023 [-0.083, +0.028]  runs > 0: 4/6
+   piecewise jump at 25                                           +0.131 [+0.093, +0.161]  runs > 0: 6/6
+   same on excess over untrained-policy prediction: first pass    -0.015 [-0.033, +0.004]  runs > 0: 1/6
+                                                     jump         +0.119 [+0.099, +0.137]  runs > 0: 6/6
+   window first pass mean(19-23)-mean(1-5)                        -0.014 [-0.066, +0.035]  runs > 0: 3/6
+   window jump mean(25-29)-mean(19-23)                            +0.113 [+0.085, +0.146]  runs > 0: 6/6
+   window placebo jump inside pass 1 mean(12-16)-mean(7-11)       -0.016 [-0.042, +0.010]  runs > 0: 2/6
+   mean excess over steps 1-23                                    -0.005 [-0.010, +0.001]  runs > 0: 1/6
+   paid share by pure visit number (mean over runs):  v1 0.348  v2 0.479  v3 0.598  v4 0.685  v5 0.733  v6 0.789
+   excess over untrained-policy prediction by visit:   v1 -0.005  v2 +0.126  v3 +0.244  v4 +0.329  v5 +0.381  v6 +0.428
+   B1 hash35 controls (never revisited), 4 runs:
+      piecewise first-pass change              +0.059  per run: +0.005 +0.120 +0.062 +0.049
+      piecewise 'jump' at 25 (no revisit)      -0.025  per run: +0.090 -0.117 -0.045 -0.028
+      window 'jump' mean(25-29)-mean(19-23)    -0.026  per run: +0.090 -0.149 -0.011 -0.033
+      mean(101-120) - mean(1-20)               -0.009  per run: +0.017 -0.035 -0.015 -0.005
+      OLS slope per 100 steps                  -0.004  per run: +0.007 -0.007 -0.008 -0.010
+   per run (FK20): s0h1 e1 +0.035 jump +0.182; s1h1 e1 +0.039 jump +0.132; s0pq e1 +0.012 jump +0.118; s1pq e1 -0.092 jump +0.153; s0nq e1 -0.150 jump +0.158; s1nq e1 +0.019 jump +0.045
+
+== llama8: FK20 hash35, 6 runs (TriviaQA, PopQA, NQ x seeds 0, 1)
+   piecewise first-pass change 22b                                +0.019 [-0.012, +0.052]  runs > 0: 4/6
+   piecewise jump at 25                                           +0.152 [+0.115, +0.197]  runs > 0: 6/6
+   same on excess over untrained-policy prediction: first pass    +0.001 [-0.020, +0.026]  runs > 0: 3/6
+                                                     jump         +0.158 [+0.118, +0.206]  runs > 0: 6/6
+   window first pass mean(19-23)-mean(1-5)                        +0.013 [-0.019, +0.054]  runs > 0: 3/6
+   window jump mean(25-29)-mean(19-23)                            +0.128 [+0.089, +0.170]  runs > 0: 6/6
+   window placebo jump inside pass 1 mean(12-16)-mean(7-11)       -0.005 [-0.046, +0.034]  runs > 0: 4/6
+   mean excess over steps 1-23                                    -0.000 [-0.007, +0.007]  runs > 0: 2/6
+   paid share by pure visit number (mean over runs):  v1 0.355  v2 0.509  v3 0.608  v4 0.695  v5 0.735  v6 0.787
+   excess over untrained-policy prediction by visit:   v1 -0.000  v2 +0.159  v3 +0.253  v4 +0.346  v5 +0.384  v6 +0.422
+   B1 hash35 controls (never revisited), 4 runs:
+      piecewise first-pass change              -0.026  per run: -0.001 -0.082 -0.014 -0.008
+      piecewise 'jump' at 25 (no revisit)      -0.047  per run: -0.052 -0.090 -0.029 -0.018
+      window 'jump' mean(25-29)-mean(19-23)    -0.040  per run: -0.071 -0.045 -0.027 -0.017
+      mean(101-120) - mean(1-20)               -0.017  per run: +0.023 -0.053 -0.013 -0.025
+      OLS slope per 100 steps                  -0.000  per run: +0.021 -0.006 +0.001 -0.016
+   per run (FK20): s0h1 e1 +0.023 jump +0.254; s1h1 e1 +0.035 jump +0.135; s0pq e1 +0.091 jump +0.156; s1pq e1 -0.013 jump +0.169; s0nq e1 -0.046 jump +0.117; s1nq e1 +0.026 jump +0.082

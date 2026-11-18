@@ -1,0 +1,1 @@
+STUDENT=ibm-granite/granite-4.2-3b TAG=granite TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 CAP=21600 SEED=0 PROMPT=idk IDK=0.9 REWARD=judgeQ JMODE=free OUTNAME=granite_judgeQ_idkc09_h1

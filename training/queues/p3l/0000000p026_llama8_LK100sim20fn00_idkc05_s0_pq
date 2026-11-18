@@ -1,0 +1,1 @@
+STUDENT=gs://YOUR_BUCKET/acl_st/models/meta-llama/Llama-3.1-8B-Instruct TAG=llama8 ADV=std IDK=0.5 FPMODE=random FMT=1 KLB=1.0 SEED=0 FPK=0.2 FPU=0.2 FN=0.0 MICRO=16 GENCHUNK=32 CAP=46800 TRAINF=pqa_h1.jsonl EVALF=pqa_1500.jsonl STEPS=360 CKEVERY=20 OUTNAME=llama8_LK100sim20fn00_idkc05_s0_pq

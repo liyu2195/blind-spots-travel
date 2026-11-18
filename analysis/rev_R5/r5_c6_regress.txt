@@ -1,0 +1,26 @@
+qwen7: cells 12 | b_rj (verdict beyond readout) +0.058 (cells > 0: 7/12) | b_p per SD +0.071 (cells > 0: 11/12) | rj effect by |p| tercile low/mid/high +0.081 +0.085 +0.149 | IDK(p>0) - IDK(p<=0): within rj=1 +0.106, within rj=0 +0.109 | mean rows per block 128
+    h1 J=G: b_rj -0.026  b_p +0.148  dose -0.101 +0.065 +0.228  p-split within rj=1 +0.248 rj=0 +0.241
+    h1 J=M: b_rj +0.081  b_p +0.049  dose +0.146 -0.040 +0.196  p-split within rj=1 -0.058 rj=0 +0.072
+    h1 J=O: b_rj +0.143  b_p -0.040  dose +0.222 +0.094 +0.126  p-split within rj=1 -0.086 rj=0 -0.009
+    h1 J=Q: b_rj +0.047  b_p +0.071  dose +0.103 +0.102 +0.076  p-split within rj=1 +0.004 rj=0 +0.253
+    nq J=G: b_rj -0.010  b_p +0.109  dose -0.013 -0.069 +0.187  p-split within rj=1 +0.278 rj=0 +0.171
+    nq J=M: b_rj +0.221  b_p +0.033  dose +0.223 +0.244 +0.278  p-split within rj=1 +0.034 rj=0 +0.010
+    nq J=O: b_rj -0.037  b_p +0.036  dose +0.013 -0.093 +0.014  p-split within rj=1 +0.031 rj=0 +0.085
+    nq J=Q: b_rj +0.096  b_p +0.048  dose +0.065 +0.243 +0.013  p-split within rj=1 +0.083 rj=0 +0.087
+    pq J=G: b_rj -0.007  b_p +0.189  dose +0.005 +0.216 +0.360  p-split within rj=1 +0.280 rj=0 +0.214
+    pq J=M: b_rj +0.196  b_p +0.093  dose +0.306 +0.243 +0.130  p-split within rj=1 +0.216 rj=0 +0.050
+    pq J=O: b_rj -0.135  b_p +0.110  dose -0.088 -0.044 +0.063  p-split within rj=1 +0.211 rj=0 +0.167
+    pq J=Q: b_rj +0.121  b_p +0.008  dose +0.096 +0.058 +0.118  p-split within rj=1 +0.030 rj=0 -0.031
+llama8: cells 12 | b_rj (verdict beyond readout) +0.050 (cells > 0: 9/12) | b_p per SD +0.097 (cells > 0: 11/12) | rj effect by |p| tercile low/mid/high +0.052 +0.111 +0.263 | IDK(p>0) - IDK(p<=0): within rj=1 +0.137, within rj=0 +0.141 | mean rows per block 165
+    h1 J=G: b_rj +0.026  b_p +0.104  dose +0.064 +0.087 +0.122  p-split within rj=1 +0.225 rj=0 +0.158
+    h1 J=M: b_rj +0.047  b_p +0.076  dose +0.017 +0.054 +0.304  p-split within rj=1 +0.151 rj=0 -0.033
+    h1 J=O: b_rj +0.002  b_p +0.141  dose -0.030 +0.101 +0.316  p-split within rj=1 +0.183 rj=0 +0.218
+    h1 J=Q: b_rj +0.031  b_p +0.068  dose +0.101 +0.046 +0.161  p-split within rj=1 +0.100 rj=0 +0.150
+    nq J=G: b_rj -0.030  b_p +0.154  dose -0.048 +0.049 +0.202  p-split within rj=1 +0.103 rj=0 +0.295
+    nq J=M: b_rj +0.182  b_p +0.030  dose +0.168 +0.209 +0.285  p-split within rj=1 +0.208 rj=0 -0.070
+    nq J=O: b_rj +0.019  b_p -0.011  dose +0.001 +0.080 -0.039  p-split within rj=1 -0.038 rj=0 -0.006
+    nq J=Q: b_rj -0.007  b_p +0.124  dose -0.041 +0.015 +0.292  p-split within rj=1 +0.159 rj=0 +0.227
+    pq J=G: b_rj +0.121  b_p +0.172  dose +0.239 +0.294 +0.519  p-split within rj=1 +0.280 rj=0 +0.356
+    pq J=M: b_rj +0.156  b_p +0.133  dose +0.208 +0.197 +0.456  p-split within rj=1 +0.244 rj=0 +0.024
+    pq J=O: b_rj -0.067  b_p +0.042  dose -0.084 -0.014 -0.024  p-split within rj=1 -0.083 rj=0 +0.113
+    pq J=Q: b_rj +0.124  b_p +0.124  dose +0.028 +0.213 +0.561  p-split within rj=1 +0.116 rj=0 +0.256

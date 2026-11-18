@@ -1,0 +1,74 @@
+(supp_v11) s20_fix_confirm: FROZEN scorer for E14: the student's own vote at ONE fixed setting in all six pairs.
+Arm frzVOTE20: the key of a training question is the student's majority answer among its 32 untrained samples if at least 20 samples give it, else
+only "I don't know" is paid. No labels, no judge. Confirmation runs: seeds 0-2 in five pairs; seeds 3-5 for Llama on PopQA (seeds 0-2 there existed
+before the plan and are shown separately). Answer key = FK20 sim00fn00, credit 0.5, all seeds (three new seeds for Qwen on NQ).
+Reward 1 / 0 / 0.5 on held-out questions; truth = loose key or audit level >= 4 (aud.py). The lines are read only when no key-wrong answer of the
+own-vote and answer-key runs lacks an audit verdict (the count is printed). Runs that answer IDK on >= 95% of held-out questions are 'collapsed':
+dropped from the main comparison (the paper's convention), counted for P5 and included in the 'all runs' view.
+Lines:
+  P1  pooled over the six pairs (pairs weighted equally), own vote minus answer key: lower end of the 95% interval above -0.015
+      (questions and runs resampled, 4,000 draws, seed 2040).
+  P2  every pair's difference >= -0.025, and at least five of six >= -0.015.
+  P3  PopQA capitals probe: mean share of known former-state capitals refused by the three confirmation runs <= 0.20, for each student.
+  P4  fresh PopQA questions (key truth): own vote minus answer key >= -0.05 and own vote minus the Qwen judge at its default cut >= +0.08, each student.
+  P5  none of the 18 confirmation runs collapsed.
+Reported without a line: differences to the Qwen judge (default, 50%, 35% cut), Sonnet and the judge shown the reference; abstention; wrong answers;
+reward minus the untrained student's own-vote rule at the same abstention; the pooled difference with collapsed runs included; Llama PopQA with all
+six seeds. MOCK=1 (test before the runs exist): uses the existing own-vote arm nearest k = 20 in each pair with all its seeds.
+Usage: python3 -I -B s20_fix_confirm.py   Output: s20_fix_confirm_out.txt, s20_fix_confirm.json
+
+*** MOCK RUN: existing arms stand in for frzVOTE20; nothing below is a result of E14 ***
+
+==================== qwen7 pqa: held-out 750; own-vote arm frzVOTE21, confirmation seeds all: runs 2 (collapsed 0); answer key runs 6 (collapsed 0); key-wrong answers without an audit verdict: own vote 0, answer key 3
+   own vote 0.711 (runs s0 0.708, s1 0.714; abstention 0.319, wrong answers 0.129) | answer key 0.714 (runs s0 0.714, s1 0.701, s2 0.705, s3 0.721, s4 0.727, s5 0.717; abstention 0.380, wrong 0.096)
+   own vote minus answer key: -0.0029 [-0.0184, +0.0129] | with collapsed runs included: -0.0029 | reward minus the own-vote rule at the same abstention: -0.0158
+   own vote minus: judgeQt50 +0.056 [+0.034, +0.078] (3); judgeQa50 +0.007 [-0.009, +0.022] (5); judgeQa35 +0.042 [+0.021, +0.063] (6); apiS55 -0.017 [-0.033, -0.002] (3); judgeQRt50 -0.015 [-0.036, +0.007] (2)
+   P3 capitals probe (known former-state 149, present-day 63): confirmation runs with probe answers 1 of 2; former-state refused 0.128 (s0 0.13); present-day 0.000
+      sim00fn00 : former-state refused 0.004 (6 runs)
+      judgeQt50 : former-state refused 0.000 (3 runs)
+      judgeQa50 : former-state refused 0.146 (5 runs)
+      judgeQa35 : former-state refused 0.820 (6 runs)
+      apiS55    : former-state refused 0.000 (3 runs)
+   P4 fresh questions (2569, key truth): confirmation runs with fresh answers 1 of 2: own vote 0.481; minus answer key -0.0192 [-0.0294, -0.0084] (6 key runs); minus Qwen judge default +0.1379 [+0.1209, +0.1526] (3)
+
+==================== qwen7 tqa: held-out 718; own-vote arm frzVOTE27, confirmation seeds all: runs 2 (collapsed 0); answer key runs 6 (collapsed 0); key-wrong answers without an audit verdict: own vote 0, answer key 1
+   own vote 0.697 (runs s0 0.696, s1 0.698; abstention 0.348, wrong answers 0.129) | answer key 0.693 (runs s0 0.696, s1 0.705, s2 0.687, s3 0.685, s4 0.678, s5 0.706; abstention 0.263, wrong 0.175)
+   own vote minus answer key: +0.0043 [-0.0117, +0.0208] | with collapsed runs included: +0.0043 | reward minus the own-vote rule at the same abstention: -0.0137
+   own vote minus: judgeQt50 +0.068 [+0.045, +0.090] (3); judgeQa50 -0.004 [-0.018, +0.010] (6); judgeQa35 +0.042 [+0.019, +0.065] (6); apiS55 +0.017 [-0.005, +0.038] (3)
+
+==================== qwen7 nqo: held-out 750; own-vote arm frzVOTE22, confirmation seeds all: runs 2 (collapsed 0); answer key runs 3 (collapsed 2); key-wrong answers without an audit verdict: own vote 0, answer key 0
+   own vote 0.578 (runs s0 0.581, s1 0.575; abstention 0.570, wrong answers 0.137) | answer key 0.573 (runs s2 0.573; abstention 0.728, wrong 0.063)
+   own vote minus answer key: +0.0043 [-0.0140, +0.0233] | with collapsed runs included: +0.0532 | reward minus the own-vote rule at the same abstention: -0.0136
+   own vote minus: judgeQt50 +0.076 [+0.052, +0.099] (3); judgeQa50 +0.031 [+0.007, +0.055] (6); judgeQa35 -0.029 [-0.044, -0.013] (6); apiS55 -0.027 [-0.044, -0.010] (3); judgeQRt50 -0.029 [-0.047, -0.011] (1)
+
+==================== llama8 pqa: held-out 750; own-vote arm frzVOTE20, confirmation seeds all: runs 3 (collapsed 0); answer key runs 6 (collapsed 0); key-wrong answers without an audit verdict: own vote 7, answer key 40
+   own vote 0.834 (runs s0 0.829, s1 0.832, s2 0.842; abstention 0.184, wrong answers 0.073) | answer key 0.835 (runs s0 0.833, s1 0.848, s2 0.839, s3 0.834, s4 0.829, s5 0.829; abstention 0.102, wrong 0.114)
+   own vote minus answer key: -0.0008 [-0.0164, +0.0148] | with collapsed runs included: -0.0008 | reward minus the own-vote rule at the same abstention: -0.0071
+   own vote minus: judgeQt50 +0.017 [-0.001, +0.036] (3); judgeQa50 +0.091 [+0.070, +0.114] (6); judgeQa35 +0.144 [+0.123, +0.167] (6); apiS55 -0.008 [-0.024, +0.009] (3); judgeQRt50 -0.022 [-0.040, -0.005] (2)
+   P3 capitals probe (known former-state 187, present-day 65): confirmation runs with probe answers 3 of 3; former-state refused 0.130 (s0 0.05, s1 0.32, s2 0.02); present-day 0.000
+      sim00fn00 : former-state refused 0.023 (4 runs)
+      judgeQt50 : former-state refused 0.000 (3 runs)
+      judgeQacc : former-state refused 0.425 (5 runs)
+      judgeQa50 : former-state refused 0.877 (6 runs)
+      judgeQa35 : former-state refused 0.983 (6 runs)
+      apiS55    : former-state refused 0.000 (3 runs)
+   P4 fresh questions (2569, key truth): confirmation runs with fresh answers 3 of 3: own vote 0.500; minus answer key +0.0145 [-0.0119, +0.0442] (5 key runs); minus Qwen judge default +0.1890 [+0.1716, +0.2060] (3)
+
+==================== llama8 tqa: held-out 718; own-vote arm frzVOTE29, confirmation seeds all: runs 2 (collapsed 0); answer key runs 6 (collapsed 0); key-wrong answers without an audit verdict: own vote 0, answer key 10
+   own vote 0.787 (runs s0 0.798, s1 0.776; abstention 0.347, wrong answers 0.039) | answer key 0.810 (runs s0 0.804, s1 0.805, s2 0.820, s3 0.813, s4 0.811, s5 0.808; abstention 0.127, wrong 0.126)
+   own vote minus answer key: -0.0232 [-0.0460, -0.0016] | with collapsed runs included: -0.0232 | reward minus the own-vote rule at the same abstention: -0.0045
+   own vote minus: judgeQt50 +0.003 [-0.024, +0.029] (3); judgeQa50 +0.023 [+0.000, +0.047] (6); judgeQa35 +0.086 [+0.058, +0.116] (6); apiS55 -0.018 [-0.043, +0.006] (3)
+
+==================== llama8 nqo: held-out 750; own-vote arm frzVOTE23, confirmation seeds all: runs 2 (collapsed 0); answer key runs 6 (collapsed 0); key-wrong answers without an audit verdict: own vote 0, answer key 8
+   own vote 0.596 (runs s0 0.590, s1 0.602; abstention 0.691, wrong answers 0.059) | answer key 0.598 (runs s0 0.607, s1 0.609, s2 0.592, s3 0.593, s4 0.591, s5 0.597; abstention 0.703, wrong 0.050)
+   own vote minus answer key: -0.0021 [-0.0177, +0.0132] | with collapsed runs included: -0.0021 | reward minus the own-vote rule at the same abstention: -0.0178
+   own vote minus: judgeQt50 -0.016 [-0.048, +0.014] (3); judgeQa50 -0.041 [-0.066, -0.016] (6); judgeQa35 -0.042 [-0.061, -0.023] (6); apiS55 -0.056 [-0.081, -0.031] (3); judgeQRt50 -0.052 [-0.074, -0.031] (2)
+
+==================== LINES
+   P1 pooled own vote minus answer key -0.0034 [-0.0105, +0.0036] (pairs: qwen7 pqa -0.0029; qwen7 tqa +0.0043; qwen7 nqo +0.0043; llama8 pqa -0.0008; llama8 tqa -0.0232; llama8 nqo -0.0021): lower end above -0.015: INSIDE
+      with collapsed runs included: +0.0048 [-0.0051, +0.0144]
+   P2 lowest pair -0.0232 (>= -0.025), pairs at or above -0.015: 5 of 6 (>= 5): INSIDE
+   P3: probe answers missing for some confirmation runs: NOT READ
+   P4: fresh answers missing for some confirmation runs: NOT READ
+   P5 collapsed confirmation runs: 0 of 13 (expected 18 runs): NOT READ (runs missing)
+   audit: key-wrong answers without a verdict in the own-vote and answer-key runs: 69  -> AUDIT INCOMPLETE: run the audit, then read P1 / P2 again

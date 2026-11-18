@@ -1,0 +1,60 @@
+(verify_map) Judge crossover on NEW questions, both error signs, own code.
+Units: new questions with a valid untrained greedy answer; RIGHT = loose key or Sonnet >= 4; WRONG = key-wrong and Sonnet level 1..3.
+Verdicts of each judge on the untrained greedy answer at its a35 cut (accept = P(Yes) > t_a35). Runs: judge<J>a35, FK20, credit 0.5, new-question
+abstention < 0.95; R_J(q) = mean IDK rate of J's runs on question q.
+For each cell and unordered judge pair (K, J):
+  FR (right units): A = K rejects & J accepts, B = J rejects & K accepts; X_FR = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)]  (prediction > 0)
+  FA (wrong units): A = K accepts & J rejects, B = J accepts & K rejects; X_FA = same formula                               (prediction < 0)
+  (X is symmetric in K <-> J, so unordered pairs = averaging over orders; nothing is forced by the orientation.)
+Cells with |A|, |B| >= MIN are kept. Pooled = mean over cells per student, students averaged. Crossed bootstrap (questions within cell, runs within
+judge; 1000 draws); permutation test: judge labels shuffled over the a35 runs within cell (2000 draws).
+Extension 'pairpool': all pairs with |A|, |B| >= 3, weighted by |A||B|/(|A|+|B|) within dataset (more cells on TriviaQA / PopQA).
+Readable version 'probeX': on the same units, slope of [R_K - R_J] on z(logit P_K(reject) - logit P_J(reject)) (layer-16 probes fitted on training
+  verdicts, v02), per pair, sign-flipped for FA so both signs read '> 0 = follows the readable map'... reported unflipped: FR slope > 0 and FA slope > 0
+  both mean 'refuses more where its own judge's probe predicts rejection' (for wrong units that is 'answers more where its judge would pay').
+Output: v05_crossover_out.txt
+
+== REPLICATION kind=right MIN=5 weighted=False: cells 44 (negative 1, positive 43)  (4s)
+  pooled X +0.235 [+0.199, +0.271]  perm p(two-sided) 0.0005  cells 44 (negative 1)
+  qwen7  X +0.212 [+0.161, +0.270]  perm p(two-sided) 0.0005  cells 22 (negative 1)
+  llama8 X +0.258 [+0.210, +0.310]  perm p(two-sided) 0.0005  cells 22 (negative 0)
+  h1     X +0.227 [+0.171, +0.285]  cells 12 (negative 0)
+  pq     X +0.388 [+0.317, +0.461]  cells 12 (negative 0)
+  nq     X +0.148 [+0.088, +0.208]  cells 20 (negative 1)
+
+== EXTENSION pairpool kind=right MIN=3 weighted=True: cells 44 (negative 1, positive 43)  (7s)
+  pooled X +0.238 [+0.202, +0.275]  perm p(two-sided) 0.0010  cells 44 (negative 1)
+  qwen7  X +0.221 [+0.167, +0.273]  perm p(two-sided) 0.0010  cells 22 (negative 1)
+  llama8 X +0.256 [+0.208, +0.302]  perm p(two-sided) 0.0010  cells 22 (negative 0)
+  h1     X +0.233 [+0.175, +0.291]  cells 12 (negative 0)
+  pq     X +0.402 [+0.334, +0.474]  cells 12 (negative 0)
+  nq     X +0.145 [+0.087, +0.205]  cells 20 (negative 1)
+  probeX right pooled: slope of R_K - R_J per SD of probe contrast +0.0774 | joint: probe +0.0689, verdict (K rejects only) +0.0901 | pairs 44, probe slope > 0 in 41/44
+  probeX right qwen7 : slope of R_K - R_J per SD of probe contrast +0.0600 | joint: probe +0.0531, verdict (K rejects only) +0.0863 | pairs 22, probe slope > 0 in 21/22
+  probeX right llama8: slope of R_K - R_J per SD of probe contrast +0.0947 | joint: probe +0.0847, verdict (K rejects only) +0.0939 | pairs 22, probe slope > 0 in 20/22
+  probeX right h1    : slope of R_K - R_J per SD of probe contrast +0.1030 | joint: probe +0.0934, verdict (K rejects only) +0.0782 | pairs 12, probe slope > 0 in 12/12
+  probeX right pq    : slope of R_K - R_J per SD of probe contrast +0.1180 | joint: probe +0.1021, verdict (K rejects only) +0.1414 | pairs 12, probe slope > 0 in 12/12
+  probeX right nq    : slope of R_K - R_J per SD of probe contrast +0.0376 | joint: probe +0.0344, verdict (K rejects only) +0.0665 | pairs 20, probe slope > 0 in 17/20
+
+== REPLICATION kind=wrong MIN=5 weighted=False: cells 20 (negative 18, positive 2)  (9s)
+  pooled X -0.147 [-0.241, -0.055]  perm p(two-sided) 0.0005  cells 20 (negative 18)
+  qwen7  X -0.093 [-0.206, +0.015]  perm p(two-sided) 0.0315  cells 10 (negative 8)
+  llama8 X -0.202 [-0.339, -0.060]  perm p(two-sided) 0.0005  cells 10 (negative 10)
+  h1     X +nan [+nan, +nan]  cells 0 (negative 0)
+  pq     X +nan [+nan, +nan]  cells 0 (negative 0)
+  nq     X -0.147 [-0.241, -0.055]  cells 20 (negative 18)
+  cells: llama8 nq G-O X -0.236 (|A| 18, |B| 26); llama8 nq G-R X -0.150 (|A| 15, |B| 34); llama8 nq M-G X -0.354 (|A| 24, |B| 17); llama8 nq M-O X -0.318 (|A| 18, |B| 19); llama8 nq M-R X -0.144 (|A| 18, |B| 30); llama8 nq O-R X -0.154 (|A| 18, |B| 29); llama8 nq Q-G X -0.242 (|A| 20, |B| 12); llama8 nq Q-M X -0.220 (|A| 18, |B| 17); llama8 nq Q-O X -0.159 (|A| 23, |B| 23); llama8 nq Q-R X -0.044 (|A| 18, |B| 29); qwen7 nq G-O X -0.289 (|A| 17, |B| 33); qwen7 nq G-R X -0.069 (|A| 12, |B| 28); qwen7 nq M-G X -0.360 (|A| 29, |B| 13); qwen7 nq M-O X -0.197 (|A| 22, |B| 22); qwen7 nq M-R X -0.090 (|A| 24, |B| 24); qwen7 nq O-R X -0.011 (|A| 30, |B| 30); qwen7 nq Q-G X -0.027 (|A| 21, |B| 10); qwen7 nq Q-M X -0.060 (|A| 20, |B| 25); qwen7 nq Q-O X +0.037 (|A| 26, |B| 31); qwen7 nq Q-R X +0.142 (|A| 20, |B| 25)
+
+== EXTENSION pairpool kind=wrong MIN=3 weighted=True: cells 25 (negative 20, positive 4)  (10s)
+  pooled X -0.136 [-0.218, -0.056]  perm p(two-sided) 0.0010  cells 25 (negative 20)
+  qwen7  X -0.076 [-0.185, +0.031]  perm p(two-sided) 0.0609  cells 15 (negative 10)
+  llama8 X -0.196 [-0.329, -0.064]  perm p(two-sided) 0.0010  cells 10 (negative 10)
+  h1     X +0.026 [-0.157, +0.188]  cells 2 (negative 0)
+  pq     X +0.003 [-0.397, +0.326]  cells 3 (negative 2)
+  nq     X -0.138 [-0.223, -0.051]  cells 20 (negative 18)
+  probeX wrong pooled: slope of R_K - R_J per SD of probe contrast +0.0438 | joint: probe +0.0425, verdict (K rejects only) +0.0397 | pairs 44, probe slope > 0 in 44/44
+  probeX wrong qwen7 : slope of R_K - R_J per SD of probe contrast +0.0426 | joint: probe +0.0417, verdict (K rejects only) +0.0135 | pairs 22, probe slope > 0 in 22/22
+  probeX wrong llama8: slope of R_K - R_J per SD of probe contrast +0.0450 | joint: probe +0.0434, verdict (K rejects only) +0.0659 | pairs 22, probe slope > 0 in 22/22
+  probeX wrong h1    : slope of R_K - R_J per SD of probe contrast +0.0253 | joint: probe +0.0255, verdict (K rejects only) +0.0324 | pairs 12, probe slope > 0 in 12/12
+  probeX wrong pq    : slope of R_K - R_J per SD of probe contrast +0.0329 | joint: probe +0.0328, verdict (K rejects only) +0.0218 | pairs 12, probe slope > 0 in 12/12
+  probeX wrong nq    : slope of R_K - R_J per SD of probe contrast +0.0615 | joint: probe +0.0586, verdict (K rejects only) +0.0548 | pairs 20, probe slope > 0 in 20/20

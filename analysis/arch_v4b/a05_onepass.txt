@@ -1,0 +1,22 @@
+--- qwen7 h1: known 439, of which Qwen-a35 rejects 196
+  judgeQa35  FK20 runs 6 | new abstention 0.606 (range 0.55-0.72) | map gap on known (MH by agreement) +0.273
+  judgeQa35  B1   runs 3 | new abstention 0.568 (range 0.51-0.62) | map gap on known (MH by agreement) +0.295
+  judgeQt50  FK20 runs 3 | new abstention 0.017 (range 0.01-0.03) | map gap on known (MH by agreement) +0.000
+  judgeQt50  B1   runs 4 | new abstention 0.019 (range 0.00-0.03) | map gap on known (MH by agreement) +0.000
+  sim00fn00  FK20 runs 6 | new abstention 0.263 (range 0.18-0.37) | map gap on known (MH by agreement) +0.081
+  sim00fn00  B1   runs 3 | new abstention 0.294 (range 0.20-0.37) | map gap on known (MH by agreement) +0.087
+  hash35fn00 FK20 runs 2 | new abstention 0.006 (range 0.00-0.01) | map gap on known (MH by agreement) +0.000
+  hash35fn00 B1   runs 4 | new abstention 0.047 (range 0.04-0.05) | map gap on known (MH by agreement) +0.004
+  judge-specific map (FK20): Qa35 gap minus gold gap +0.192
+  judge-specific map (B1): Qa35 gap minus gold gap +0.208
+--- llama8 h1: known 562, of which Qwen-a35 rejects 294
+  judgeQa35  FK20 runs 6 | new abstention 0.571 (range 0.49-0.65) | map gap on known (MH by agreement) +0.340
+  judgeQa35  B1   runs 3 | new abstention 0.511 (range 0.41-0.58) | map gap on known (MH by agreement) +0.305
+  judgeQt50  FK20 runs 3 | new abstention 0.004 (range 0.00-0.01) | map gap on known (MH by agreement) +0.000
+  judgeQt50  B1   runs 4 | new abstention 0.006 (range 0.00-0.01) | map gap on known (MH by agreement) +0.000
+  sim00fn00  FK20 runs 6 | new abstention 0.127 (range 0.07-0.24) | map gap on known (MH by agreement) +0.047
+  sim00fn00  B1   runs 3 | new abstention 0.146 (range 0.12-0.18) | map gap on known (MH by agreement) +0.060
+  hash35fn00 FK20 runs 2 | new abstention 0.003 (range 0.00-0.00) | map gap on known (MH by agreement) +0.000
+  hash35fn00 B1   runs 4 | new abstention 0.033 (range 0.01-0.06) | map gap on known (MH by agreement) +0.007
+  judge-specific map (FK20): Qa35 gap minus gold gap +0.293
+  judge-specific map (B1): Qa35 gap minus gold gap +0.245

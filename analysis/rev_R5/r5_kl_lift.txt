@@ -1,0 +1,40 @@
+qwen7_FK20judgeQt50_idkc05_s0_h1       home units  109 (no score   3) lift +0.591
+qwen7_FK20judgeQt50_idkc05_s0_h1       new  units   62 (no score  10) lift +0.001
+qwen7_FK20judgeQt50_idkc05_s1_h1       home units  105 (no score   1) lift +0.600
+qwen7_FK20judgeQt50_idkc05_s1_h1       new  units   83 (no score   8) lift +0.052
+qwen7_FK20sim35fn00_idkc05_s0_h1       home units   58 (no score   0) lift +0.084
+qwen7_FK20sim35fn00_idkc05_s0_h1       new  units   42 (no score   0) lift +0.127
+qwen7_FK20sim35fn00_idkc05_s1_h1       home units   64 (no score   0) lift +0.018
+qwen7_FK20sim35fn00_idkc05_s1_h1       new  units   41 (no score   0) lift +0.085
+qwen7_FK00judgeQt50_idkc05_s0_h1       home units  117 (no score   6) lift +0.551
+qwen7_FK00judgeQt50_idkc05_s0_h1       new  units  104 (no score   6) lift +0.039
+qwen7_FK00judgeQt50_idkc05_s1_h1       home units  116 (no score   5) lift +0.582
+qwen7_FK00judgeQt50_idkc05_s1_h1       new  units  104 (no score  12) lift +0.070
+qwen7_FK00sim35fn00_idkc05_s0_h1       home units  116 (no score   2) lift +0.022
+qwen7_FK00sim35fn00_idkc05_s0_h1       new  units  124 (no score  18) lift +0.026
+qwen7_FK00sim35fn00_idkc05_s1_h1       home units  111 (no score   9) lift -0.044
+qwen7_FK00sim35fn00_idkc05_s1_h1       new  units   94 (no score  17) lift +0.009
+  qwen7 FK20 home: judge lift +0.596 (runs 2) - random-FA lift +0.051 (runs 2) = DiD +0.544
+  qwen7 FK20 new: judge lift +0.027 (runs 2) - random-FA lift +0.106 (runs 2) = DiD -0.079
+  qwen7 FK00 home: judge lift +0.566 (runs 2) - random-FA lift -0.011 (runs 2) = DiD +0.577
+  qwen7 FK00 new: judge lift +0.054 (runs 2) - random-FA lift +0.018 (runs 2) = DiD +0.037
+llama8_FK20judgeQt50_idkc05_s0_h1      home units   64 (no score   1) lift +0.402
+llama8_FK20judgeQt50_idkc05_s0_h1      new  units   36 (no score   0) lift -0.010
+llama8_FK20judgeQt50_idkc05_s1_h1      home units   65 (no score   0) lift +0.433
+llama8_FK20judgeQt50_idkc05_s1_h1      new  units   52 (no score   0) lift -0.007
+llama8_FK20sim35fn00_idkc05_s0_h1      home units   47 (no score   0) lift -0.014
+llama8_FK20sim35fn00_idkc05_s0_h1      new  units   42 (no score   0) lift -0.041
+llama8_FK20sim35fn00_idkc05_s1_h1      home units   45 (no score   0) lift -0.035
+llama8_FK20sim35fn00_idkc05_s1_h1      new  units   42 (no score   0) lift -0.105
+llama8_FK00judgeQt50_idkc05_s0_h1      home units   55 (no score   6) lift +0.251
+llama8_FK00judgeQt50_idkc05_s0_h1      new  units   66 (no score   5) lift +0.089
+llama8_FK00judgeQt50_idkc05_s1_h1      home units    9 (no score   4) lift +0.086
+llama8_FK00judgeQt50_idkc05_s1_h1      new  units   12 (no score   4) lift -0.014
+llama8_FK00sim35fn00_idkc05_s0_h1      home units   59 (no score   5) lift -0.051
+llama8_FK00sim35fn00_idkc05_s0_h1      new  units   81 (no score   5) lift -0.001
+llama8_FK00sim35fn00_idkc05_s1_h1      home units   68 (no score   0) lift -0.062
+llama8_FK00sim35fn00_idkc05_s1_h1      new  units   89 (no score   1) lift -0.012
+  llama8 FK20 home: judge lift +0.417 (runs 2) - random-FA lift -0.025 (runs 2) = DiD +0.442
+  llama8 FK20 new: judge lift -0.009 (runs 2) - random-FA lift -0.073 (runs 2) = DiD +0.065
+  llama8 FK00 home: judge lift +0.168 (runs 2) - random-FA lift -0.056 (runs 2) = DiD +0.225
+  llama8 FK00 new: judge lift +0.037 (runs 2) - random-FA lift -0.007 (runs 2) = DiD +0.044

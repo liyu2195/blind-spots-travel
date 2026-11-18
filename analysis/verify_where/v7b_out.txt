@@ -1,0 +1,6 @@
+(verify_where) Item 5 supplement: transfer = k * Gini through the origin, fitted on qwen7 points, scored on llama8 points (claimed
+k = 0.79, R2 0.61 with the hidden-state Gini); also judges-only. Input v7_points.csv (linear reference). Output v7b_out.txt
+all          gini_text: k (qwen7, n 27) 0.660 -> llama8 (n 27) R2 +0.541, MAE 0.159
+all          gini_hid : k (qwen7, n 27) 0.580 -> llama8 (n 27) R2 +0.494, MAE 0.170
+judges only  gini_text: k (qwen7, n 19) 0.602 -> llama8 (n 19) R2 +0.267, MAE 0.162
+judges only  gini_hid : k (qwen7, n 19) 0.489 -> llama8 (n 19) R2 +0.320, MAE 0.155

@@ -1,0 +1,87 @@
+leniency curve refitted on qwen7 main-grid random-error graders (n 105): a -0.84 b -8.27 (claim: a -0.84 b -8.27)
+
+== 1. my solver (rule conf, threshold 1/2, kappa 1, zero constants) vs the leniency curve, NEW questions; cluster bootstrap by grader config
+   qwen7 main grid, all graders (DISCOVERY)       n 252 cfg  72 y 0.440 | mech R2 +0.70 MAE 0.102 bias -0.012 [R2 +0.58..+0.80] | law R2 +0.79 MAE 0.084 bias -0.009 [R2 +0.68..+0.87]
+   llama8 main grid, all graders                  n 241 cfg  70 y 0.371 | mech R2 +0.80 MAE 0.095 bias +0.016 [R2 +0.68..+0.88] | law R2 +0.82 MAE 0.085 bias +0.040 [R2 +0.69..+0.90]
+   llama8 main grid, random-error graders         n 113 cfg  29 y 0.314 | mech R2 +0.87 MAE 0.083 bias +0.058 [R2 +0.73..+0.93] | law R2 +0.85 MAE 0.091 bias +0.056 [R2 +0.69..+0.92]
+   llama8 main grid, LLM judges                   n  78 cfg  24 y 0.417 | mech R2 +0.63 MAE 0.095 bias -0.037 [R2 +0.15..+0.86] | law R2 +0.69 MAE 0.076 bias +0.014 [R2 +0.23..+0.91]
+   qwen7 main grid, LLM judges                    n  78 cfg  24 y 0.464 | mech R2 +0.57 MAE 0.103 bias -0.028 [R2 +0.21..+0.78] | law R2 +0.72 MAE 0.069 bias -0.022 [R2 +0.38..+0.91]
+   both main grid, set-wise FN/FP                 n  99 cfg  28 y 0.524 | mech R2 +0.74 MAE 0.115 bias -0.045 [R2 +0.50..+0.84] | law R2 +0.90 MAE 0.067 bias -0.012 [R2 +0.83..+0.93]
+   both main grid, hash                           n  18 cfg   8 y 0.049 | mech R2 -0.06 MAE 0.049 bias +0.049 [R2 -14.59..+0.45] | law R2 -2.44 MAE 0.091 bias +0.087 [R2 -79.67..-0.09]
+   both main grid, long-answer FP                 n   8 cfg   4 y 0.085 | mech R2 -13.59 MAE 0.360 bias +0.360 [R2 -2119.17..-6.46] | law R2 -11.78 MAE 0.318 bias +0.318 [R2 -1976.64..-5.93]
+   small FK20 std c 0.5                           n 138 cfg  76 y 0.391 | mech R2 +0.74 MAE 0.092 bias -0.013 [R2 +0.56..+0.86] | law R2 +0.73 MAE 0.111 bias +0.019 [R2 +0.65..+0.79]
+   small FK20 std credit sweep c != 0.5           n  34 cfg  22 y 0.297 | mech R2 +0.63 MAE 0.089 bias +0.068 [R2 +0.34..+0.81] | law R2 -3.08 MAE 0.356 bias +0.262 [R2 -6.20..-1.19]
+   small FK20D (Dr. GRPO, KL 0.2)                 n  10 cfg  10 y 0.150 | mech R2 +0.76 MAE 0.049 bias -0.042 [R2 +0.42..+0.85] | law R2 -4.42 MAE 0.261 bias +0.261 [R2 -15.45..-2.49]
+   KL != 0.2, > 0 (all students; claim n 42)      n  42 cfg  24 y 0.490 | mech R2 +0.75 MAE 0.122 bias -0.032 [R2 +0.63..+0.82] | law R2 +0.46 MAE 0.172 bias +0.037 [R2 -0.08..+0.71]
+   small KL 0.04/0.1/0.4 (std)                    n  37 cfg  21 y 0.633 | mech R2 +0.65 MAE 0.139 bias -0.049 [R2 +0.42..+0.74] | law R2 +0.38 MAE 0.175 bias -0.070 [R2 -0.14..+0.62]
+   main students KL 0.5 / 1.0 (120 steps)         n   4 cfg   2 y 0.454 | mech R2 +0.77 MAE 0.068 bias -0.031 [R2 -1.00..+0.77] | law R2 -2.92 MAE 0.373 bias +0.373 [R2 -7321.67..-1.81]
+   main students 360 steps (KL 0.2 / 0.5)         n  17 cfg  17 y 0.148 | mech R2 +0.65 MAE 0.058 bias +0.052 [R2 -0.08..+0.87] | law R2 -0.17 MAE 0.095 bias +0.089 [R2 -1.94..+0.54]
+   qwen7 judge credit 0.7 / 0.85                  n   4 cfg   4 y 0.044 | mech R2 -18.53 MAE 0.115 bias +0.115 [R2 -15464.33..-10.19] | law R2 -173.36 MAE 0.350 bias +0.350 [R2 -262335.47..-115.84]
+   main students KL 0 (FK00)                      n   8 cfg   4 y 0.004 | mech R2 -1194.60 MAE 0.137 bias +0.137 [R2 -5715.05..-575.47] | law R2 -79.05 MAE 0.040 bias +0.040 [R2 -427.45..-29.23]
+   small no-KL strict (std, T 0.8, 120 steps)     n 108 cfg  76 y 0.491 | mech R2 +0.31 MAE 0.242 bias +0.091 [R2 +0.05..+0.48] | law R2 +0.31 MAE 0.264 bias -0.130 [R2 +0.09..+0.49]
+
+== 2. the same on TRAINING questions
+   llama8 main grid, all graders                  n 241 y_h 0.345 | mech R2 +0.75 MAE 0.106 bias +0.039 | law R2 +0.81 MAE 0.086 bias +0.051
+   qwen7 main grid, all graders (DISCOVERY)       n 252 y_h 0.434 | mech R2 +0.73 MAE 0.093 bias -0.008 | law R2 +0.81 MAE 0.078 bias -0.019
+   small FK20 std c 0.5                           n 138 y_h 0.343 | mech R2 +0.73 MAE 0.093 bias +0.022 | law R2 +0.71 MAE 0.111 bias +0.051
+   small FK20 std credit sweep c != 0.5           n  34 y_h 0.243 | mech R2 +0.32 MAE 0.105 bias +0.105 | law R2 -6.21 MAE 0.358 bias +0.301
+   small FK20D (Dr. GRPO, KL 0.2)                 n  10 y_h 0.116 | mech R2 +0.84 MAE 0.031 bias -0.024 | law R2 -9.10 MAE 0.281 bias +0.281
+
+== 3. variant sensitivity (NEW questions): discovery vs confirmation groups
+   qwen7 main grid, all graders (DISCOVERY) (n 252):
+      conf: +0.70  conf_greedy: +0.65  conf2: +0.70  bias: -0.16  free: +0.28  conf_sm2: +0.69  conf_tcorr: +0.69  conf_k0.5: +0.57  conf_k0.75: +0.67  conf_k1.5: +0.62  conf_k2.0: +0.40
+   llama8 main grid, all graders (n 241):
+      conf: +0.80  conf_greedy: +0.71  conf2: +0.78  bias: -0.18  free: +0.39  conf_sm2: +0.79  conf_tcorr: +0.77  conf_k0.5: +0.64  conf_k0.75: +0.75  conf_k1.5: +0.74  conf_k2.0: +0.46
+   small FK20 std c 0.5 (n 138):
+      conf: +0.74  conf_greedy: +0.65  conf2: +0.77  bias: +0.04  free: +0.22  conf_sm2: +0.78  conf_tcorr: +0.76  conf_k0.5: +0.50  conf_k0.75: +0.74  conf_k1.5: +0.50  conf_k2.0: +0.13
+   small FK20 std credit sweep c != 0.5 (n 34):
+      conf: +0.63  conf_greedy: -0.11  conf2: +0.53  bias: -0.86  free: -1.24  conf_sm2: +0.54  conf_tcorr: +0.38  conf_k0.5: -0.22  conf_k0.75: +0.31  conf_k1.5: +0.75  conf_k2.0: +0.49
+   small FK20D (Dr. GRPO, KL 0.2) (n 10):
+      conf: +0.76  conf_greedy: +0.47  conf2: +0.85  bias: -0.10  free: +0.01  conf_sm2: +0.84  conf_tcorr: +0.90  conf_k0.5: -0.03  conf_k0.75: +0.91  conf_k1.5: +0.07  conf_k2.0: -0.31
+   KL != 0.2, > 0 (all students; claim n 42) (n 42):
+      conf: +0.75  conf_greedy: +0.71  conf2: +0.76  bias: -0.04  free: +0.52  conf_sm2: +0.75  conf_tcorr: +0.76  conf_k0.5: +0.63  conf_k0.75: +0.74  conf_k1.5: +0.55  conf_k2.0: +0.32
+
+== 4. zero-constant naive baselines (NEW questions): untrained greedy IDK share ('no change'); myopic share of training questions with alpha < c
+   llama8 main grid, all graders                  no-change R2 -1.40 MAE 0.347 bias -0.343 | myopic R2 +0.42 MAE 0.170 bias +0.156  | curve refitted IN the group (2 constants, in-sample) R2 +0.85
+   small FK20 std c 0.5                           no-change R2 -1.34 MAE 0.336 bias -0.330 | myopic R2 -0.07 MAE 0.233 bias +0.195  | curve refitted IN the group (2 constants, in-sample) R2 +0.76
+   small FK20 std credit sweep c != 0.5           no-change R2 -1.72 MAE 0.251 bias -0.251 | myopic R2 -3.34 MAE 0.346 bias +0.344  | curve refitted IN the group (2 constants, in-sample) R2 +0.02
+   small FK20D (Dr. GRPO, KL 0.2)                 no-change R2 -0.47 MAE 0.105 bias -0.102 | myopic R2 -10.93 MAE 0.445 bias +0.445  | curve refitted IN the group (2 constants, in-sample) R2 +0.80
+   KL != 0.2, > 0 (all students; claim n 42)      no-change R2 -1.95 MAE 0.434 bias -0.428 | myopic R2 +0.10 MAE 0.246 bias +0.125  | curve refitted IN the group (2 constants, in-sample) R2 +0.46
+
+== 5. reproduction: my predictions vs the grpo explorer's (their eval_table_k1.0.csv, conf_half_n) on the same runs (standard training sets)
+   runs in both: 871; |mine - theirs| prediction: mean 0.0038, max 0.2507, share > 0.02: 0.079; outcome y_n max diff 0.0000; L max diff 0.0041
+      phi4m_FL2sim35fn00_idkc05_s0_h1              mine 0.422 theirs 0.397 actual 0.075 nroots nan stable True
+      phi4m_FT1sim35fn00_idkc05_s0_h1              mine 0.422 theirs 0.397 actual 0.000 nroots nan stable True
+      phi4m_FT1sim35fn00_idkc05_s0_pq              mine 0.349 theirs 0.375 actual 0.000 nroots nan stable True
+      phi4m_Fhash10fn27_idkc05_s0_h1               mine 0.728 theirs 0.705 actual 0.999 nroots nan stable True
+      phi4m_Fhash14fn20_idkc05_s0_h1               mine 0.653 theirs 0.705 actual 1.000 nroots nan stable False
+      phi4m_Fhash20fn00_idkc05_s0_h1               mine 0.478 theirs 0.506 actual 0.000 nroots nan stable True
+      phi4m_Fhash20fn00_idkc05_s1_h1               mine 0.454 theirs 0.481 actual 0.000 nroots nan stable True
+      phi4m_Fhash35fn00_idkc05_s1_h1               mine 0.396 theirs 0.422 actual 0.000 nroots nan stable True
+      phi4m_Fhash35fn20_idkc05_s0_h1               mine 0.422 theirs 0.455 actual 0.001 nroots nan stable True
+      phi4m_Fsim00fn10_idkc05_s0_h1                mine 0.751 theirs 0.728 actual 0.664 nroots nan stable False
+      phi4m_Fsim14fn20_idkc05_s0_h1                mine 0.787 theirs 0.728 actual 0.526 nroots nan stable False
+      phi4m_Fsim20fn00_idkc05_s0_h1                mine 0.478 theirs 0.507 actual 0.004 nroots nan stable True
+
+== 6. multiple stationary rules (multistart Newton, conf rule): runs with != 1 root, by group
+   llama8 main grid, all graders                  roots distribution {1.0: 241}; unstable 0
+   qwen7 main grid, all graders (DISCOVERY)       roots distribution {1.0: 252}; unstable 0
+   small FK20 std c 0.5                           roots distribution {1.0: 137, 0.0: 1}; unstable 0
+
+== 7. seed-noise ceiling: R2 of predicting each run by the mean of its grader configuration's OTHER seeds (configs with >= 2 seeds)
+   qwen7 main grid, all graders (DISCOVERY)       runs in multi-seed configs 249/252: leave-one-seed-out R2 +0.79 (mech on the same runs +0.70); within-config SD 0.098
+   llama8 main grid, all graders                  runs in multi-seed configs 238/241: leave-one-seed-out R2 +0.95 (mech on the same runs +0.79); within-config SD 0.050
+   small FK20 std c 0.5                           runs in multi-seed configs 94/138: leave-one-seed-out R2 +0.83 (mech on the same runs +0.74); within-config SD 0.095
+   small FK20 std credit sweep c != 0.5           runs in multi-seed configs 18/34: leave-one-seed-out R2 +0.21 (mech on the same runs -0.15); within-config SD 0.095
+   small FK20D (Dr. GRPO, KL 0.2)                 too few multi-seed configs
+   KL != 0.2, > 0 (all students; claim n 42)      runs in multi-seed configs 28/42: leave-one-seed-out R2 +0.67 (mech on the same runs +0.61); within-config SD 0.102
+
+== 8. which questions abstain (per run, new questions, final IDK): AUROC of the model's p_q vs the untrained IDK share (ties by agreement) vs agreement
+         auc_model  auc_pref  auc_agr
+st                                   
+granite      0.900     0.901    0.783
+llama8       0.835     0.837    0.797
+phi4m        0.853     0.881    0.846
+qwen7        0.876     0.878    0.779
+smol3        0.890     0.897    0.819
+   runs: {'granite': 11, 'llama8': 196, 'phi4m': 48, 'qwen7': 227, 'smol3': 54}

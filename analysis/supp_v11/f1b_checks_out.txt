@@ -1,0 +1,113 @@
+(rev_F2) Checks, read-only, from raw files.
+A. Operating-point realism: on NEW questions with a valid, key-right untrained greedy answer, each judge's rejection rate at its a35 cut and at
+   P(Yes) > 0.5, and the share of a35 rejections whose P(Yes) is above 0.5 / 0.9 (the judge said 'Yes', the cut rejects it). Wrong answers:
+   share paid at a35 and at 0.5.
+B. PopQA granularity: for judge pairs (K, J) with a35 runs, on NEW key-right valid units: crossover X = [R_K - R_J](only K rejects) -
+   [R_K - R_J](only J rejects) with raw y, and with y demeaned within relation type (prop) and within prop x popularity bin; plus the same
+   for TriviaQA / NQ-open where no types exist (raw only). R_J = mean IDK rate of J's FK20 a35 runs (new abstention < 0.95).
+Parse / IDK / key rules copied from verify_map/v00_common.py (trainer's parse_tq, tq_correct).
+Usage: nice -n 10 timeout 280 python3 f1_checks.py > f1_checks_out.txt
+
+== qwen7 h1: new key-right valid units 421, new key-wrong valid units 264; a35 judges with runs: ['G', 'M', 'O', 'Q']
+  A Q: t_a35 0.982 | right answers rejected: a35 0.432, P(Yes)<=0.5 0.071 | of a35 rejections, P(Yes) > 0.5: 0.835, > 0.9: 0.527 | wrong answers paid: a35 0.023, 0.5 0.542
+  A M: t_a35 0.993 | right answers rejected: a35 0.423, P(Yes)<=0.5 0.036 | of a35 rejections, P(Yes) > 0.5: 0.916, > 0.9: 0.742 | wrong answers paid: a35 0.042, 0.5 0.561
+  A G: t_a35 0.995 | right answers rejected: a35 0.442, P(Yes)<=0.5 0.159 | of a35 rejections, P(Yes) > 0.5: 0.640, > 0.9: 0.511 | wrong answers paid: a35 0.042, 0.5 0.371
+  A O: t_a35 0.798 | right answers rejected: a35 0.411, P(Yes)<=0.5 0.143 | of a35 rejections, P(Yes) > 0.5: 0.653, > 0.9: 0.000 | wrong answers paid: a35 0.061, 0.5 0.216
+  A R: t_a35 0.999 | right answers rejected: a35 0.475, P(Yes)<=0.5 0.135 | of a35 rejections, P(Yes) > 0.5: 0.715, > 0.9: 0.580 | wrong answers paid: a35 0.030, 0.5 0.303
+  B G-M: |A| 81 |B| 73 X raw +0.352
+  B G-O: |A| 78 |B| 65 X raw +0.236
+  B G-Q: |A| 59 |B| 55 X raw +0.169
+  B M-O: |A| 64 |B| 59 X raw +0.185
+  B M-Q: |A| 67 |B| 71 X raw +0.234
+  B O-Q: |A| 64 |B| 73 X raw +0.171
+  B mean over 6 pairs: X raw +0.224
+
+== qwen7 pq: new key-right valid units 379, new key-wrong valid units 267; a35 judges with runs: ['G', 'M', 'O', 'Q']
+  A Q: t_a35 0.974 | right answers rejected: a35 0.383, P(Yes)<=0.5 0.092 | of a35 rejections, P(Yes) > 0.5: 0.759, > 0.9: 0.393 | wrong answers paid: a35 0.067, 0.5 0.498
+  A M: t_a35 0.990 | right answers rejected: a35 0.375, P(Yes)<=0.5 0.018 | of a35 rejections, P(Yes) > 0.5: 0.951, > 0.9: 0.704 | wrong answers paid: a35 0.049, 0.5 0.569
+  A G: t_a35 0.998 | right answers rejected: a35 0.388, P(Yes)<=0.5 0.166 | of a35 rejections, P(Yes) > 0.5: 0.571, > 0.9: 0.415 | wrong answers paid: a35 0.105, 0.5 0.427
+  A O: t_a35 0.840 | right answers rejected: a35 0.414, P(Yes)<=0.5 0.084 | of a35 rejections, P(Yes) > 0.5: 0.796, > 0.9: 0.000 | wrong answers paid: a35 0.086, 0.5 0.303
+  A R: t_a35 0.999 | right answers rejected: a35 0.488, P(Yes)<=0.5 0.161 | of a35 rejections, P(Yes) > 0.5: 0.670, > 0.9: 0.568 | wrong answers paid: a35 0.124, 0.5 0.348
+  B G-M: |A| 52 |B| 47 X raw +0.401 | within prop +0.031 | within prop x s_pop quintile +0.073
+  B G-O: |A| 40 |B| 50 X raw +0.320 | within prop +0.110 | within prop x s_pop quintile +0.184
+  B G-Q: |A| 41 |B| 39 X raw +0.358 | within prop +0.094 | within prop x s_pop quintile +0.089
+  B M-O: |A| 34 |B| 49 X raw +0.221 | within prop +0.131 | within prop x s_pop quintile +0.105
+  B M-Q: |A| 37 |B| 40 X raw +0.271 | within prop +0.097 | within prop x s_pop quintile +0.109
+  B O-Q: |A| 48 |B| 36 X raw +0.337 | within prop +0.239 | within prop x s_pop quintile +0.234
+  B mean over 6 pairs: X raw +0.318 | within prop +0.117 | within prop x s_pop quintile +0.132
+  C G-M: share of var(rej_K - rej_J) on new right units explained by relation type: 0.328
+  C G-O: share of var(rej_K - rej_J) on new right units explained by relation type: 0.185
+  C G-Q: share of var(rej_K - rej_J) on new right units explained by relation type: 0.196
+  C M-O: share of var(rej_K - rej_J) on new right units explained by relation type: 0.117
+  C M-Q: share of var(rej_K - rej_J) on new right units explained by relation type: 0.166
+  C O-Q: share of var(rej_K - rej_J) on new right units explained by relation type: 0.063
+
+== qwen7 nq: new key-right valid units 186, new key-wrong valid units 396; a35 judges with runs: ['G', 'M', 'O', 'Q', 'R']
+  A Q: t_a35 0.798 | right answers rejected: a35 0.317, P(Yes)<=0.5 0.129 | of a35 rejections, P(Yes) > 0.5: 0.593, > 0.9: 0.000 | wrong answers paid: a35 0.283, 0.5 0.568
+  A M: t_a35 0.922 | right answers rejected: a35 0.301, P(Yes)<=0.5 0.075 | of a35 rejections, P(Yes) > 0.5: 0.750, > 0.9: 0.054 | wrong answers paid: a35 0.293, 0.5 0.639
+  A G: t_a35 0.924 | right answers rejected: a35 0.344, P(Yes)<=0.5 0.258 | of a35 rejections, P(Yes) > 0.5: 0.250, > 0.9: 0.078 | wrong answers paid: a35 0.253, 0.5 0.419
+  A O: t_a35 0.585 | right answers rejected: a35 0.339, P(Yes)<=0.5 0.258 | of a35 rejections, P(Yes) > 0.5: 0.238, > 0.9: 0.000 | wrong answers paid: a35 0.265, 0.5 0.316
+  A R: t_a35 0.905 | right answers rejected: a35 0.355, P(Yes)<=0.5 0.253 | of a35 rejections, P(Yes) > 0.5: 0.288, > 0.9: 0.015 | wrong answers paid: a35 0.270, 0.5 0.374
+  B G-M: |A| 28 |B| 20 X raw +0.290
+  B G-O: |A| 30 |B| 29 X raw +0.146
+  B G-Q: |A| 25 |B| 20 X raw +0.060
+  B G-R: |A| 28 |B| 30 X raw +0.002
+  B M-O: |A| 22 |B| 29 X raw +0.344
+  B M-Q: |A| 25 |B| 28 X raw +0.385
+  B M-R: |A| 18 |B| 28 X raw +0.032
+  B O-Q: |A| 29 |B| 25 X raw +0.199
+  B O-R: |A| 28 |B| 31 X raw +0.197
+  B Q-R: |A| 29 |B| 36 X raw +0.070
+  B mean over 10 pairs: X raw +0.173
+
+== llama8 h1: new key-right valid units 533, new key-wrong valid units 172; a35 judges with runs: ['G', 'M', 'O', 'Q']
+  A Q: t_a35 0.989 | right answers rejected: a35 0.514, P(Yes)<=0.5 0.079 | of a35 rejections, P(Yes) > 0.5: 0.847, > 0.9: 0.504 | wrong answers paid: a35 0.058, 0.5 0.669
+  A M: t_a35 0.994 | right answers rejected: a35 0.520, P(Yes)<=0.5 0.032 | of a35 rejections, P(Yes) > 0.5: 0.939, > 0.9: 0.762 | wrong answers paid: a35 0.076, 0.5 0.703
+  A G: t_a35 0.996 | right answers rejected: a35 0.548, P(Yes)<=0.5 0.214 | of a35 rejections, P(Yes) > 0.5: 0.610, > 0.9: 0.452 | wrong answers paid: a35 0.076, 0.5 0.459
+  A O: t_a35 0.755 | right answers rejected: a35 0.529, P(Yes)<=0.5 0.223 | of a35 rejections, P(Yes) > 0.5: 0.578, > 0.9: 0.000 | wrong answers paid: a35 0.076, 0.5 0.215
+  A R: t_a35 0.999 | right answers rejected: a35 0.471, P(Yes)<=0.5 0.139 | of a35 rejections, P(Yes) > 0.5: 0.705, > 0.9: 0.566 | wrong answers paid: a35 0.099, 0.5 0.407
+  B G-M: |A| 107 |B| 92 X raw +0.324
+  B G-O: |A| 96 |B| 86 X raw +0.250
+  B G-Q: |A| 82 |B| 64 X raw +0.120
+  B M-O: |A| 82 |B| 87 X raw +0.320
+  B M-Q: |A| 86 |B| 83 X raw +0.180
+  B O-Q: |A| 100 |B| 92 X raw +0.212
+  B mean over 6 pairs: X raw +0.234
+
+== llama8 pq: new key-right valid units 523, new key-wrong valid units 205; a35 judges with runs: ['G', 'M', 'O', 'Q']
+  A Q: t_a35 0.982 | right answers rejected: a35 0.520, P(Yes)<=0.5 0.138 | of a35 rejections, P(Yes) > 0.5: 0.735, > 0.9: 0.346 | wrong answers paid: a35 0.063, 0.5 0.634
+  A M: t_a35 0.991 | right answers rejected: a35 0.518, P(Yes)<=0.5 0.034 | of a35 rejections, P(Yes) > 0.5: 0.934, > 0.9: 0.683 | wrong answers paid: a35 0.049, 0.5 0.707
+  A G: t_a35 0.998 | right answers rejected: a35 0.528, P(Yes)<=0.5 0.241 | of a35 rejections, P(Yes) > 0.5: 0.543, > 0.9: 0.373 | wrong answers paid: a35 0.127, 0.5 0.493
+  A O: t_a35 0.813 | right answers rejected: a35 0.572, P(Yes)<=0.5 0.166 | of a35 rejections, P(Yes) > 0.5: 0.709, > 0.9: 0.000 | wrong answers paid: a35 0.112, 0.5 0.424
+  A R: t_a35 0.999 | right answers rejected: a35 0.532, P(Yes)<=0.5 0.205 | of a35 rejections, P(Yes) > 0.5: 0.615, > 0.9: 0.482 | wrong answers paid: a35 0.190, 0.5 0.424
+  B G-M: |A| 60 |B| 55 X raw +0.629 | within prop +0.208 | within prop x s_pop quintile +0.171
+  B G-O: |A| 50 |B| 73 X raw +0.461 | within prop +0.261 | within prop x s_pop quintile +0.204
+  B G-Q: |A| 53 |B| 49 X raw +0.465 | within prop +0.155 | within prop x s_pop quintile +0.145
+  B M-O: |A| 48 |B| 76 X raw +0.416 | within prop +0.250 | within prop x s_pop quintile +0.179
+  B M-Q: |A| 49 |B| 50 X raw +0.331 | within prop +0.178 | within prop x s_pop quintile +0.128
+  B O-Q: |A| 75 |B| 48 X raw +0.448 | within prop +0.339 | within prop x s_pop quintile +0.267
+  B mean over 6 pairs: X raw +0.458 | within prop +0.232 | within prop x s_pop quintile +0.182
+  C G-M: share of var(rej_K - rej_J) on new right units explained by relation type: 0.200
+  C G-O: share of var(rej_K - rej_J) on new right units explained by relation type: 0.135
+  C G-Q: share of var(rej_K - rej_J) on new right units explained by relation type: 0.161
+  C M-O: share of var(rej_K - rej_J) on new right units explained by relation type: 0.121
+  C M-Q: share of var(rej_K - rej_J) on new right units explained by relation type: 0.115
+  C O-Q: share of var(rej_K - rej_J) on new right units explained by relation type: 0.074
+
+== llama8 nq: new key-right valid units 267, new key-wrong valid units 433; a35 judges with runs: ['G', 'M', 'O', 'Q', 'R']
+  A Q: t_a35 0.819 | right answers rejected: a35 0.472, P(Yes)<=0.5 0.146 | of a35 rejections, P(Yes) > 0.5: 0.690, > 0.9: 0.000 | wrong answers paid: a35 0.284, 0.5 0.628
+  A M: t_a35 0.951 | right answers rejected: a35 0.393, P(Yes)<=0.5 0.094 | of a35 rejections, P(Yes) > 0.5: 0.762, > 0.9: 0.210 | wrong answers paid: a35 0.245, 0.5 0.711
+  A G: t_a35 0.940 | right answers rejected: a35 0.461, P(Yes)<=0.5 0.300 | of a35 rejections, P(Yes) > 0.5: 0.350, > 0.9: 0.089 | wrong answers paid: a35 0.277, 0.5 0.473
+  A O: t_a35 0.547 | right answers rejected: a35 0.401, P(Yes)<=0.5 0.356 | of a35 rejections, P(Yes) > 0.5: 0.112, > 0.9: 0.000 | wrong answers paid: a35 0.277, 0.5 0.326
+  A R: t_a35 0.974 | right answers rejected: a35 0.453, P(Yes)<=0.5 0.285 | of a35 rejections, P(Yes) > 0.5: 0.372, > 0.9: 0.190 | wrong answers paid: a35 0.307, 0.5 0.487
+  B G-M: |A| 46 |B| 28 X raw +0.260
+  B G-O: |A| 55 |B| 39 X raw +0.041
+  B G-Q: |A| 27 |B| 30 X raw +0.149
+  B G-R: |A| 44 |B| 42 X raw +0.002
+  B M-O: |A| 33 |B| 35 X raw +0.126
+  B M-Q: |A| 28 |B| 49 X raw +0.181
+  B M-R: |A| 32 |B| 48 X raw +0.049
+  B O-Q: |A| 40 |B| 59 X raw +0.073
+  B O-R: |A| 35 |B| 49 X raw +0.038
+  B Q-R: |A| 49 |B| 44 X raw +0.070
+  B mean over 10 pairs: X raw +0.099

@@ -1,0 +1,21 @@
+{
+ "type_group": {
+  "capital": "A",
+  "screenwriter": "B",
+  "producer": "B",
+  "director": "A",
+  "father": "A",
+  "genre": "B",
+  "composer": "B",
+  "capital of": "A",
+  "religion": "A",
+  "mother": "B",
+  "author": "B",
+  "country": "A",
+  "occupation": "A",
+  "place of birth": "B",
+  "sport": "B",
+  "color": "A"
+ },
+ "pop_median": 64332.0
+}

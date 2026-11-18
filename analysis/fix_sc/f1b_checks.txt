@@ -1,0 +1,65 @@
+fix_sc f1b: two checks on f1_rows.pkl (FK20, IDK credit 0.5, new questions).
+(1) audit gap: share of RL answers that are key-wrong AND have no Sonnet verdict (counted wrong in the main analysis), per family x op x
+    student and per dataset where it exceeds 5%; the bracket [main, 'hi'] for RL - SC_32.
+(2) SC resolution: share of new questions whose greedy answer is matched by all 32 samples (conf = 1) and by >= 31/32, per student x
+    dataset, against the coverage of each operating point (if coverage < the conf = 1 share, SC_32 picks at random among tied questions).
+Output: f1b_checks.txt
+
+=== qwen7: audit gap (share of RL answers key-wrong without Sonnet verdict), RL - SC_32 main / hi bound
+   key                                  runs  13 miss mean 0.001 max 0.007 | main  -1.7 hi  -1.6
+   key+noise (all)                      runs  86 miss mean 0.005 max 0.065 | main  -0.5 hi  -0.4 | datasets with mean miss > 5%: ['nq:0.01']
+   key+FN noise                         runs  26 miss mean 0.001 max 0.006 | main  -0.9 hi  -0.8
+   key+FA noise                         runs  36 miss mean 0.011 max 0.065 | main  +0.1 hi  +0.4 | datasets with mean miss > 5%: ['nq:0.02']
+   key+mixed noise                      runs  24 miss mean 0.001 max 0.015 | main  -0.9 hi  -1.0
+   own vote                             runs  17 miss mean 0.004 max 0.020 | main  -2.4 hi  -2.1
+   judge Q t50                          runs   9 miss mean 0.000 max 0.000 | main  +1.7 hi  +0.1
+   judge Q a50                          runs  17 miss mean 0.000 max 0.000 | main  -1.4 hi  -1.5
+   judge Q a35                          runs  18 miss mean 0.000 max 0.000 | main  +1.9 hi  +1.9
+   judge M t50                          runs   1 miss mean 0.017 max 0.017 | main  +0.7 hi  +1.8
+   judge M a35                          runs   8 miss mean 0.013 max 0.044 | main  +0.8 hi  +2.1
+   judge G t50                          runs   3 miss mean 0.035 max 0.047 | main  -0.4 hi  +2.2
+   judge G a35                          runs   8 miss mean 0.025 max 0.072 | main  +0.7 hi  +3.2 | datasets with mean miss > 5%: ['nq:0.05']
+   judge O t50                          runs   3 miss mean 0.018 max 0.029 | main  -0.6 hi  +1.2
+   judge O a35                          runs   7 miss mean 0.036 max 0.194 | main  +1.2 hi  +4.8 | datasets with mean miss > 5%: ['nq:0.07']
+   judge R a35                          runs   2 miss mean 0.036 max 0.051 | main  +0.6 hi  +4.2 | datasets with mean miss > 5%: ['nq:0.04']
+   judge Q t50 forcedIDK                runs   2 miss mean 0.023 max 0.030 | main  -1.0 hi  +1.2
+   judge Q t50 quorum                   runs   3 miss mean 0.000 max 0.000 | main  +0.2 hi  +0.2
+   Sonnet                               runs   9 miss mean 0.000 max 0.000 | main  +1.0 hi  +1.0
+   planted (all)                        runs  68 miss mean 0.019 max 0.603 | main  -1.5 hi  +0.3 | datasets with mean miss > 5%: ['nq:0.15', 'pq:0.01']
+   planted FR                           runs  31 miss mean 0.005 max 0.024 | main  +0.5 hi  +1.0
+   planted FA                           runs  28 miss mean 0.041 max 0.603 | main  -1.5 hi  +2.2 | datasets with mean miss > 5%: ['nq:0.38', 'pq:0.02']
+   blind (pays any answer on a subset)  runs   9 miss mean 0.000 max 0.000 | main  -8.3 hi  -8.4
+   other frozen keys                    runs  15 miss mean 0.000 max 0.000 | main  -1.9 hi  -1.9
+
+=== llama8: audit gap (share of RL answers key-wrong without Sonnet verdict), RL - SC_32 main / hi bound
+   key                                  runs  18 miss mean 0.006 max 0.028 | main  -2.0 hi  -1.5
+   key+noise (all)                      runs  94 miss mean 0.006 max 0.084 | main  -0.9 hi  -0.5 | datasets with mean miss > 5%: ['nq:0.01']
+   key+FN noise                         runs  40 miss mean 0.002 max 0.016 | main  -1.6 hi  -1.4
+   key+FA noise                         runs  36 miss mean 0.013 max 0.084 | main  -0.1 hi  +0.6 | datasets with mean miss > 5%: ['nq:0.02']
+   key+mixed noise                      runs  18 miss mean 0.002 max 0.020 | main  -1.1 hi  -1.0
+   own vote                             runs  12 miss mean 0.000 max 0.000 | main  -2.4 hi  -2.4
+   judge Q t50                          runs   9 miss mean 0.000 max 0.000 | main  +0.3 hi  -0.5
+   judge Q a50                          runs  18 miss mean 0.000 max 0.000 | main  -1.1 hi  -1.2
+   judge Q a35                          runs  18 miss mean 0.000 max 0.000 | main  +0.3 hi  +0.3
+   judge M t50                          runs   1 miss mean 0.015 max 0.015 | main  -0.4 hi  +0.7
+   judge M a35                          runs   8 miss mean 0.016 max 0.047 | main  -0.8 hi  +0.8
+   judge G t50                          runs   3 miss mean 0.034 max 0.048 | main  +0.6 hi  +3.7
+   judge G a35                          runs   8 miss mean 0.013 max 0.043 | main  -0.6 hi  +0.6
+   judge O t50                          runs   3 miss mean 0.179 max 0.286 | main  -4.7 hi +12.9 | datasets with mean miss > 5%: ['nq:0.26']
+   judge O a35                          runs   8 miss mean 0.119 max 0.367 | main  -3.9 hi  +7.8 | datasets with mean miss > 5%: ['nq:0.29']
+   judge R a35                          runs   2 miss mean 0.036 max 0.038 | main  -1.9 hi  +1.8
+   judge Q t50 forcedIDK                runs   2 miss mean 0.041 max 0.043 | main  +0.2 hi  +3.9
+   Sonnet                               runs   9 miss mean 0.000 max 0.000 | main  +0.3 hi  +0.2
+   planted (all)                        runs  52 miss mean 0.019 max 0.379 | main  -2.0 hi  -0.3 | datasets with mean miss > 5%: ['nq:0.15', 'pq:0.01']
+   planted FR                           runs  30 miss mean 0.004 max 0.024 | main  -1.5 hi  -1.1
+   planted FA                           runs  13 miss mean 0.066 max 0.379 | main  -1.5 hi  +4.5 | datasets with mean miss > 5%: ['nq:0.37', 'pq:0.01']
+   blind (pays any answer on a subset)  runs   9 miss mean 0.000 max 0.000 | main  -4.6 hi  -4.8
+   other frozen keys                    runs   6 miss mean 0.000 max 0.000 | main  -1.1 hi  -1.1
+
+=== SC resolution: share of new questions with all 32 samples agreeing with the greedy answer (conf = 1) / >= 31 of 32; mean coverage of key, Q t50 / a50 / a35 runs
+   qwen7 h1: conf = 1 0.489, >= 31/32 0.510, greedy answers 0.954 | coverage key 0.74 judge Q t50 0.98 judge Q a50 0.62 judge Q a35 0.39 Sonnet 0.83
+   qwen7 pq: conf = 1 0.420, >= 31/32 0.437, greedy answers 0.861 | coverage key 0.62 judge Q t50 0.93 judge Q a50 0.58 judge Q a35 0.37 Sonnet 0.62
+   qwen7 nq: conf = 1 0.240, >= 31/32 0.255, greedy answers 0.776 | coverage key 0.27 judge Q t50 0.83 judge Q a50 0.67 judge Q a35 0.44 Sonnet 0.50
+   llama8 h1: conf = 1 0.503, >= 31/32 0.538, greedy answers 0.982 | coverage key 0.87 judge Q t50 0.99 judge Q a50 0.58 judge Q a35 0.43 Sonnet 0.93
+   llama8 pq: conf = 1 0.515, >= 31/32 0.535, greedy answers 0.971 | coverage key 0.90 judge Q t50 0.98 judge Q a50 0.52 judge Q a35 0.39 Sonnet 0.92
+   llama8 nq: conf = 1 0.227, >= 31/32 0.248, greedy answers 0.933 | coverage key 0.30 judge Q t50 0.94 judge Q a50 0.74 judge Q a35 0.44 Sonnet 0.72

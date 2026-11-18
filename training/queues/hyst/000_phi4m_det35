@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m IDK=0.5 SEED=0 FN=0 FPK=0.35 FPU=0.35 FPMODE=det STEPS=120 OUTNAME=phi4m_det35_idk_h1

@@ -1,0 +1,9 @@
+STUDENT=ibm-granite/granite-4.2-3b
+TAG=granite
+REWARD=gold_strict
+TRAIN=tqa_h1
+STEPS=120
+CK=40
+LR=5e-5
+CAP=21600
+OUTNAME=granite_goldstrict_h1

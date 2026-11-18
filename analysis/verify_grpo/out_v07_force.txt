@@ -1,0 +1,9 @@
+<string>:43: RuntimeWarning: overflow encountered in exp
+analysis/verify_grpo/v07_force.py:35: RuntimeWarning: divide by zero encountered in divide
+  p = sig(u0[H] + Phi[H] @ th); ratio = pref[H] / p
+<string>:43: RuntimeWarning: overflow encountered in exp
+== forced-IDK runs (judgeQt50, PopQA, KL 0.2, c 0.5, std): actual vs predicted final abstention, new (and training) questions
+   qwen7  s0: NEW actual plain 0.071 -> forced 0.164 (change +0.093) | predicted plain 0.143 -> forced 0.124 (change -0.019) || [forced PG, forced KL treated as sampled: 0.151] || TRAIN actual 0.071 -> 0.164 | predicted 0.128 -> 0.103  (theta [-1.094, -1.237], |g| 9.6e-08)
+   qwen7  s1: NEW actual plain 0.083 -> forced 0.151 (change +0.068) | predicted plain 0.143 -> forced 0.124 (change -0.019) || [forced PG, forced KL treated as sampled: 0.151] || TRAIN actual 0.083 -> 0.139 | predicted 0.128 -> 0.103  (theta [-1.094, -1.237], |g| 9.6e-08)
+   llama8 s0: NEW actual plain 0.015 -> forced 0.007 (change -0.008) | predicted plain 0.009 -> forced 0.005 (change -0.004) || [forced PG, forced KL treated as sampled: 0.001] || TRAIN actual 0.011 -> 0.008 | predicted 0.009 -> 0.004  (theta [-1.997, -0.471], |g| 8.7e-08)
+   llama8 s1: NEW actual plain 0.015 -> forced 0.020 (change +0.005) | predicted plain 0.009 -> forced 0.005 (change -0.004) || [forced PG, forced KL treated as sampled: 0.001] || TRAIN actual 0.012 -> 0.028 | predicted 0.009 -> 0.004  (theta [-1.997, -0.471], |g| 8.7e-08)

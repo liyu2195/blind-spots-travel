@@ -1,0 +1,61 @@
+(verify_where) Item 4: does a probe of the UNTRAINED hidden state, fitted to the grader's verdicts on TRAINED questions, forecast which NEW
+questions a run refuses? Does it beat the grader's own verdict on the same new question, and how much of it is generic difficulty? Own code.
+Runs: FK20, idk credit 0.5, new-question abstention in [0.05, 0.95]; graders with a probe: judges J a35 (Q M G O R), Q a50, Q t50, key family
+(gold + sim00fnXX: strict-key probe), Sonnet (apiS55). Probes from v4 (layer 16, PCA 256, fitted on trained questions only).
+For each run, AUROC of -score for the run's IDK on new questions:
+  own        probe of the run's own grader ('would pay the untrained greedy answer'; IDK / malformed = not paid)
+  generic    probes that do not know the grader: sure (label-free), aud (loose key OR Sonnet = 'truth'), nj35 (>= 3 of 5 judges pay)
+  others     mean AUROC of the other judges' a35 probes (judge runs only), best other judge
+  verdict    the grader's own verdict on the new question: greedy P(Yes) (IDK / malformed = 0) or strict-key / Sonnet verdict; 'v+s' adds the
+             share of the 32 untrained samples the grader pays (cross-fitted logistic on new questions, 5 folds x 3)
+  denoised   probe of the own grader's verdicts fitted on NEW questions (5-fold cross-fitted, same representation and C): smoothing the verdict
+             through the student's representation without any trained-question information
+  gen+own    cross-fitted logistic of the run's IDK on [generic aud probe, own probe] vs [aud probe] alone: the judge-specific increment
+Home comparison: trained questions, out-of-fold own probe vs own verdict.  Cell-level sign counts: cell = all runs of one grader code in one
+(student, set). Discovery qwen7, confirmation llama8. Output: v6_out.txt, v6_rows.pkl
+qwen7 pqa: runs scored 45
+qwen7 nqo: runs scored 30
+qwen7 tqa: runs scored 39
+llama8 pqa: runs scored 46
+llama8 nqo: runs scored 40
+llama8 tqa: runs scored 41
+
+==== forecast AUROC on NEW questions (mean over runs)
+kind    st     runs  abst |   own  sure   aud  nj35 oth.mean | verdict   v+s share denoised |   gen gen+own | home: probe v+s
+judge   qwen7    66 0.493 | 0.904 0.862 0.886 0.884    0.876 |   0.873 0.865 0.826    0.898 | 0.885   0.910 | 0.893 0.902
+judge   llama8   63 0.500 | 0.939 0.838 0.911 0.923    0.893 |   0.833 0.826 0.809    0.933 | 0.910   0.944 | 0.896 0.919
+key     qwen7    39 0.452 | 0.897 0.888 0.887 0.863      nan |   0.775 0.802 0.821    0.885 | 0.886   0.901 | 0.876 0.875
+key     llama8   57 0.396 | 0.876 0.884 0.886 0.864      nan |   0.744 0.806 0.819    0.891 | 0.884   0.905 | 0.852 0.877
+sonnet  qwen7     9 0.351 | 0.926 0.896 0.926 0.889      nan |   0.846 0.824   nan    0.920 | 0.925   0.925 | 0.919 0.856
+sonnet  llama8    7 0.162 | 0.929 0.849 0.929 0.898      nan |   0.830 0.809   nan    0.928 | 0.928   0.930 | 0.929 0.889
+
+all judge runs 129: own probe 0.921; key runs 96: own (key) probe 0.885
+
+==== contrasts (cell = all runs of one grader code in one student x set)
+  judge: probe - verdict(+share) 31/35 cells > 0, mean +0.072, sign p 3.5e-06
+  judge: denoised(new-question verdict probe) - verdict(+share) 31/35 cells > 0, mean +0.067, sign p 3.5e-06
+  judge: probe (trained-question fit) - denoised (new-question fit) 27/35 cells > 0, mean +0.005, sign p 0.0019
+  judge: share of 32 samples - greedy verdict 3/35 cells > 0, mean -0.038, sign p 4.2e-07
+  judge: HOME probe(oof) - verdict(+share) 15/35 cells > 0, mean -0.017, sign p 0.5
+  key: probe - verdict(+share) 22/22 cells > 0, mean +0.086, sign p 4.8e-07
+  key: denoised(new-question verdict probe) - verdict(+share) 22/22 cells > 0, mean +0.090, sign p 4.8e-07
+  key: probe (trained-question fit) - denoised (new-question fit) 11/22 cells > 0, mean -0.004, sign p 1
+  key: share of 32 samples - greedy verdict 22/22 cells > 0, mean +0.063, sign p 4.8e-07
+  key: HOME probe(oof) - verdict(+share) 10/22 cells > 0, mean -0.005, sign p 0.83
+  sonnet: probe - verdict(+share) 6/6 cells > 0, mean +0.114, sign p 0.031
+  sonnet: denoised(new-question verdict probe) - verdict(+share) 6/6 cells > 0, mean +0.111, sign p 0.031
+  sonnet: probe (trained-question fit) - denoised (new-question fit) 5/6 cells > 0, mean +0.004, sign p 0.22
+  sonnet: share of 32 samples - greedy verdict 0/0 cells > 0, mean +nan, sign p nan
+  sonnet: HOME probe(oof) - verdict(+share) 6/6 cells > 0, mean +0.051, sign p 0.031
+  judge: own probe - generic 'aud' probe 29/35 cells > 0, mean +0.024, sign p 0.00012
+  judge: own probe - label-free 'sure' probe 34/35 cells > 0, mean +0.072, sign p 2.1e-09
+  judge: own probe - consensus nj35 probe 32/35 cells > 0, mean +0.018, sign p 4.2e-07
+  judge: own probe - mean of other judges' probes 35/35 cells > 0, mean +0.037, sign p 5.8e-11
+  judge: own probe - key probe 32/35 cells > 0, mean +0.089, sign p 4.2e-07
+  judge: own probe - Sonnet probe 27/35 cells > 0, mean +0.022, sign p 0.0019
+  judge: [aud, own] - [aud] (cross-fitted increment) 35/35 cells > 0, mean +0.031, sign p 5.8e-11
+  key:   [aud, own] - [aud] 20/22 cells > 0, mean +0.019, sign p 0.00012
+
+  a35 judge runs 87: own judge probe is the best of the 5 judge probes in 0.78 of runs (chance 0.20); cells where own is best on average: 21/26
+  two-way own-cell residual over 87 a35 judge runs: +0.0226 AUROC; permutation p = 0.0005
+  judge runs: spread across the 5 judge probes (max - min AUROC) mean 0.058; generic 'aud' probe 0.898 vs own 0.921

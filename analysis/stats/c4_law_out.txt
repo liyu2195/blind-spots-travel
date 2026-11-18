@@ -1,0 +1,52 @@
+(stats) Claim 4: new-question abstention follows the leniency L of the grader (out of sample across students).
+Runs (main grid): FK20, IDK credit 0.5, config FMT 1 / KLB 0.2 / 120 steps / standard training file / no forced IDK / standard advantages.
+Uniform-noise graders: sim<FP>fn<FN> and lenQ with FPMODE random, FPK = FPU, no set-dependent FN (accept a strict-right sample with prob 1 - FN,
+  any other valid non-IDK sample with prob FP: the trainer's synth_rewards). Judge runs: judge<J><lv>, J in Q M G O R, lv a35 / a50 / t50.
+L = expected share of the untrained student's valid non-IDK samples (32 per question) on the TRAINED questions that the grader accepts;
+x = L - c (c = 0.5); y = share of NEW questions whose final greedy answer is IDK.
+Model y = 1 / (1 + exp(-(a + b x))), least squares on the probability scale, fitted on qwen7 uniform runs (discovery), scored on llama8 uniform runs.
+PRIMARY estimand: out-of-sample R^2 = 1 - SSE / SST on the llama8 uniform runs (SST about their own mean); also MAE and mean bias.
+Uncertainty: crossed bootstrap (2000): grader configurations (dataset x grader code, all seeds together) resampled independently in the fit and
+  test sets, AND questions resampled within each dataset (trained questions -> L, new questions -> y; the same draw for both students, who share
+  the questions); the curve is refitted in every replicate. Variants: configuration-only and question-only bootstraps.
+Test of 'no predictive value': x permuted over the fit configurations, curve refitted, R^2 on the test set (2000 draws).
+Robustness: reverse direction; dataset and seed splits; L from the greedy answer only; L on new questions; LLM-judge runs as test set;
+  'error type adds nothing at fixed L': extra predictor FR (= FN) or FA (= FP), Delta R^2 on llama8 with bootstrap interval.
+Output: c4_law_out.txt, c4_points.csv
+inventory: qwen7 uni 105, qwen7 judge 78, llama8 uni 113, llama8 judge 78
+
+== PRIMARY: qwen7 uniform -> llama8 uniform
+  crossed (configs x questions)                fit 105 -> test 113: R2 0.851 [0.67, 0.93]  MAE 0.091 [0.064, 0.125]  bias -0.056 [-0.099, -0.015]  (a -0.84, b -8.27; crossed bootstrap 2000)
+  configuration-only bootstrap                 fit 105 -> test 113: R2 0.851 [0.68, 0.92]  MAE 0.091 [0.065, 0.118]  bias -0.056 [-0.095, -0.021]  (a -0.84, b -8.27; config bootstrap 500)
+  question-only bootstrap                      fit 105 -> test 113: R2 0.851 [0.81, 0.88]  MAE 0.091 [0.080, 0.104]  bias -0.056 [-0.073, -0.038]  (a -0.84, b -8.27; question bootstrap 500)
+  permutation of L over fit configurations: null R2 median -0.095, 99.9th pct 0.629; p = 0.00050
+
+== per dataset of the test set (curve fitted on all qwen7 uniform runs)
+  test llama8 h1 only                          fit 105 -> test  37: R2 0.765 [-0.21, 0.93]  MAE 0.105 [0.058, 0.167]  bias -0.046 [-0.136, +0.028]  (a -0.84, b -8.27; crossed bootstrap 500)
+  test llama8 pq only                          fit 105 -> test  43: R2 0.843 [0.45, 0.94]  MAE 0.082 [0.051, 0.121]  bias -0.067 [-0.114, -0.017]  (a -0.84, b -8.27; crossed bootstrap 500)
+  test llama8 nq only                          fit 105 -> test  33: R2 0.859 [0.44, 0.96]  MAE 0.085 [0.047, 0.143]  bias -0.055 [-0.123, +0.015]  (a -0.84, b -8.27; crossed bootstrap 500)
+
+== robustness
+  reverse: llama8 uniform -> qwen7 uniform     fit 113 -> test 105: R2 0.712 [0.37, 0.85]  MAE 0.121 [0.092, 0.160]  bias +0.090 [+0.040, +0.137]  (a -1.60, b -11.08; crossed bootstrap 500)
+  PopQA -> TriviaQA + NQ (both students)       fit  88 -> test 130: R2 0.850 [0.65, 0.92]  MAE 0.094 [0.070, 0.136]  bias -0.015 [-0.082, +0.037]  (a -0.96, b -8.37; crossed bootstrap 500)
+  TriviaQA -> PopQA + NQ (both students)       fit  70 -> test 148: R2 0.866 [0.56, 0.91]  MAE 0.083 [0.073, 0.143]  bias +0.028 [-0.076, +0.102]  (a -1.24, b -9.45; crossed bootstrap 500)
+  NQ -> TriviaQA + PopQA (both students)       fit  60 -> test 158: R2 0.779 [0.57, 0.86]  MAE 0.090 [0.069, 0.122]  bias +0.043 [-0.019, +0.096]  (a -1.51, b -11.42; crossed bootstrap 500)
+  seeds 0-1 -> seeds >= 2 (both students)      fit 104 -> test 114: R2 0.745 [0.56, 0.86]  MAE 0.101 [0.075, 0.132]  bias -0.025 [-0.074, +0.020]  (a -1.13, b -10.51; crossed bootstrap 500)
+  L from the greedy answer only                fit 105 -> test 113: R2 0.863 [0.68, 0.93]  MAE 0.086 [0.062, 0.123]  bias -0.047 [-0.093, -0.006]  (a -0.78, b -8.17; crossed bootstrap 500)
+  L on NEW questions samples                   fit 105 -> test 113: R2 0.836 [0.63, 0.92]  MAE 0.096 [0.068, 0.130]  bias -0.065 [-0.107, -0.027]  (a -0.75, b -8.49; crossed bootstrap 500)
+
+== LLM-judge runs as the test set (never fitted), qwen7-uniform curve
+  all judge runs (both students)               fit 105 -> test 156: R2 0.706 [0.30, 0.89]  MAE 0.072 [0.053, 0.109]  bias +0.004 [-0.056, +0.056]  (a -0.84, b -8.27; crossed bootstrap 500)
+    a35: n  88  L mean 0.353 sd 0.006  abstention mean 0.580 sd 0.101  residual mean -0.012  |res| > 0.1 in 0.12
+    a50: n  36  L mean 0.496 sd 0.009  abstention mean 0.395 sd 0.136  residual mean +0.088  |res| > 0.1 in 0.42
+    t50: n  32  L mean 0.660 sd 0.141  abstention mean 0.108 sd 0.117  residual mean -0.045  |res| > 0.1 in 0.09
+
+== 'error type adds nothing at fixed L': add FR (= FN) or FA (= FP) to the qwen7 fit, score llama8; Delta R^2 [crossed bootstrap 1000]
+  + FR: R2 0.855 (Delta +0.004 [-0.069, +0.054]); TOST |Delta R2| < 0.05 p 0.0420, bound 0.046
+  + FA: R2 0.839 (Delta -0.013 [-0.087, +0.021]); TOST |Delta R2| < 0.05 p 0.1020, bound 0.067
+
+== runs and seeds
+  qwen7 uni: runs 105, configurations 27, seeds per configuration: median 3, range 3-6
+  qwen7 judge: runs 78, configurations 24, seeds per configuration: median 3, range 1-6
+  llama8 uni: runs 113, configurations 29, seeds per configuration: median 3, range 2-6
+  llama8 judge: runs 78, configurations 24, seeds per configuration: median 3, range 1-6

@@ -1,0 +1,16 @@
+E5, frozen scorer e5_capitals.py md5 362b39ff. Cells at the a35 cut: judge, student, acceptance gap (P - F, known), refusal gap (R_F - R_P), DiD vs gold
+  Q qwen7  acc_gap 0.707  refusal_gap 0.780  DiD +0.776
+  Q llama8 acc_gap 0.728  refusal_gap 0.970  DiD +0.948
+  M qwen7  acc_gap 0.713  refusal_gap 0.592  DiD +0.588
+  M llama8 acc_gap 0.764  refusal_gap 0.883  DiD +0.860
+  G qwen7  acc_gap 0.407  refusal_gap 0.532  DiD +0.528
+  G llama8 acc_gap 0.508  refusal_gap 0.902  DiD +0.879
+  O qwen7  acc_gap 0.376  refusal_gap 0.484  DiD +0.480
+  O llama8 acc_gap 0.378  refusal_gap 0.838  DiD +0.815
+C2: Spearman(acc_gap, refusal_gap) over 8 cells = +0.595; every cell with acc_gap >= 0.4 has DiD >= +0.30: True -> PASS
+   within qwen7: Spearman +0.80 (4 judges)
+   within llama8: Spearman +0.40 (4 judges)
+C1: Mistral DiD vs gold +0.588 / +0.860 (>= +0.40 each), vs key+FN nearest 3 +0.309 / +0.361 (>= +0.20 each) -> PASS
+C3: Mistral dose DiD t50 / a50 / a35: qwen7 -0.004 / +0.276 / +0.588; llama8 -0.017 / +0.483 / +0.860 -> ordered in each student -> PASS
+Not in the filed lines (descriptive): Q dose -0.004 / +0.117 / +0.776 and -0.023 / +0.854 / +0.948; G -0.004 / +0.074 / +0.528 and -0.023 / +0.132 / +0.879;
+  O t50 -0.004 / +0.100 -> a35 +0.480 / +0.815; reference-guided Qwen judge at P(Yes) > 0.5 (QRt50) -0.001 / -0.023.

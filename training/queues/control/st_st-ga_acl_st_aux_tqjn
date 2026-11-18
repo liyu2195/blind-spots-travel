@@ -1,0 +1,9 @@
+STUDENT=ibm-granite/granite-4.2-3b
+TAG=granite
+JUDGE=Qwen/Qwen3.5-9B
+TPB=8192
+CAP=10800
+STEPS="trivia:B:judge,noise"
+NOTAKEOVER=1
+NOSHUTDOWN=1
+WAITFOR=gs://YOUR_BUCKET/acl_st/run1/trivia/granite/B_gold_major.done

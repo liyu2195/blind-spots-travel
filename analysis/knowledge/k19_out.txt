@@ -1,0 +1,12 @@
+(knowledge) Cell-level (grader x student x set) sign counts for the main contrasts, so that seeds of one grader are not counted as independent:
+(a) k9: new questions, probe minus verdict(+share);  (b) k11: same on trained questions;  (c) k10: own probe minus truth;  (d) k6: own minus key probe for
+judge-trained runs.  A cell = all FK20 runs of one grader code in one (student, set).  Output: k19_out.txt
+(a) new questions, probe - verdict, judge: 38/41 cells > 0, mean +0.081, sign-test p 1e-08
+(a) new questions, probe - verdict, key: 20/22 cells > 0, mean +0.082, sign-test p 0.00012
+(a) new questions, probe - verdict, sonnet: 6/6 cells > 0, mean +0.115, sign-test p 0.031
+(b) judge: family x pair cells 25: trained questions probe - verdict > 0 in 7/25 (mean -0.015); new questions 24/25 (mean +0.079); new - trained > 0 in 25/25
+(b) key: family x pair cells 11: trained questions probe - verdict > 0 in 4/11 (mean -0.010); new questions 9/11 (mean +0.084); new - trained > 0 in 11/11
+(b) sonnet: family x pair cells 6: trained questions probe - verdict > 0 in 5/6 (mean +0.042); new questions 6/6 (mean +0.115); new - trained > 0 in 6/6
+(c) own probe - truth (all families): 52/54 family x pair cells > 0, mean +0.148, p 1.6e-13
+(d) judge-trained, own - key probe: 38/41 grader x pair cells > 0, mean +0.095, p 1e-08
+(e) judge-trained, own - Sonnet probe: 33/41 grader x pair cells > 0, mean +0.016, p 0.00011

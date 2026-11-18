@@ -1,0 +1,50 @@
+(verify_where) Item 2: judge fingerprint on NEW questions, own code, run-level inference.
+Units: held-out (duplicate-free) questions whose untrained greedy answer is sure (>= 31/32 samples agree) and audited right (loose key OR Sonnet >= 4).
+Panel verdicts: judges Q M G O R at their a35 thresholds on that untrained greedy answer (reject = P(Yes) <= t).
+Runs: FK20, idk credit 0.5. Judge runs g = judge<K>a35. Key family = gold (sim00fn00) + uniform false-reject keys (sim00fnXX).
+(1) Excess refusal of a K run on S_rej = sure-right new questions K rejects (and S_acc = K accepts) over key-family runs at the same new-question
+    abstention. References: (a) +-0.10 window around the run's abstention (mean of key runs inside; claimed method used the K-mean abstention),
+    (b) local linear fit of key runs' refusal on S vs abstention, (c) 3 nearest key runs, (d) gold only, (e) keyFN only, (f) vote runs (frzVOTE*),
+    (g) the OTHER judges' a35 runs (linear fit). Per run, averaged within (student, set, K) cells, then over cells.
+    Intervals: hierarchical bootstrap (runs within each (student, set, grader group), questions within (student, set)), 1000 draws.
+(2) Crossover X(K, J) = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)], A = K rejects & J accepts, B = J rejects & K accepts (|A|, |B| >= 5).
+    Pooled over unordered pairs; intervals by the same hierarchical bootstrap; permutation test of judge labels among a35 runs within (student, set).
+Discovery qwen7, confirmation llama8 (reported separately). Output: v3_out.txt
+qwen7 pqa: sure & audited-right new questions 310; runs JG 3, JM 3, JO 3, JQ 6, gold 6, keyFN 13, vote 4; K-rejects Q:101 M:95 G:99 O:105 R:129
+qwen7 nqo: sure & audited-right new questions 154; runs JG 3, JM 3, JO 3, JQ 6, JR 2, gold 1, vote 8; K-rejects Q:42 M:41 G:47 O:45 R:53
+qwen7 tqa: sure & audited-right new questions 324; runs JG 2, JM 2, JO 1, JQ 6, gold 6, keyFN 13, vote 4; K-rejects Q:135 M:130 G:137 O:123 R:150
+llama8 pqa: sure & audited-right new questions 395; runs JG 3, JM 3, JO 3, JQ 6, gold 6, keyFN 17, vote 4; K-rejects Q:166 M:159 G:168 O:185 R:171
+llama8 nqo: sure & audited-right new questions 169; runs JG 3, JM 3, JO 3, JQ 6, JR 2, gold 6, keyFN 7, vote 4; K-rejects Q:66 M:58 G:66 O:53 R:55
+llama8 tqa: sure & audited-right new questions 375; runs JG 2, JM 2, JO 2, JQ 6, gold 6, keyFN 16, vote 4; K-rejects Q:167 M:164 G:184 O:171 R:149
+
+==== (1) excess refusal of K-trained runs over reference runs at matched abstention, sure & audited-right NEW questions
+     (per run -> mean per (student, set, K) cell -> mean over cells; [95% hierarchical bootstrap over runs and questions])
+  key family, +-0.10 window (>=2 runs)   K rej: qwen7 +0.098 [+0.052, +0.150] (cells 8)  llama8 +0.144 [+0.097, +0.241] (cells 11)
+  key family, +-0.10 window (>=2 runs)   K acc: qwen7 -0.022 [-0.047, +0.002] (cells 8)  llama8 -0.039 [-0.090, +0.013] (cells 11)
+  key family, local linear interp.       K rej: qwen7 +0.062 [+0.034, +0.099] (cells 8)  llama8 +0.102 [+0.066, +0.173] (cells 7)
+  key family, local linear interp.       K acc: qwen7 -0.037 [-0.055, -0.015] (cells 8)  llama8 -0.053 [-0.093, -0.032] (cells 7)
+  gold only, local linear interp.        K rej: qwen7 +nan [+nan, +nan] (cells 0)  llama8 +nan [+nan, +nan] (cells 0)
+  gold only, local linear interp.        K acc: qwen7 +nan [+nan, +nan] (cells 0)  llama8 +nan [+nan, +nan] (cells 0)
+  keyFN only, local linear interp.       K rej: qwen7 +0.062 [+0.028, +0.098] (cells 8)  llama8 +0.102 [+0.066, +0.160] (cells 7)
+  keyFN only, local linear interp.       K acc: qwen7 -0.037 [-0.053, -0.017] (cells 8)  llama8 -0.053 [-0.094, -0.030] (cells 7)
+  vote runs, +-0.10 window               K rej: qwen7 +0.150 [+0.087, +0.237] (cells 12)  llama8 +0.215 [+0.148, +0.282] (cells 8)
+  vote runs, +-0.10 window               K acc: qwen7 -0.010 [-0.056, +0.029] (cells 12)  llama8 +0.023 [-0.006, +0.065] (cells 8)
+  other judges' a35 runs, local linear interp. K rej: qwen7 +0.040 [+0.016, +0.061] (cells 12)  llama8 +0.046 [+0.023, +0.064] (cells 12)
+  other judges' a35 runs, local linear interp. K acc: qwen7 -0.025 [-0.035, -0.012] (cells 12)  llama8 -0.031 [-0.044, -0.016] (cells 12)
+  other judges' a35 runs, +-0.10 window  K rej: qwen7 +0.048 [+0.029, +0.064] (cells 13)  llama8 +0.046 [+0.028, +0.061] (cells 12)
+  other judges' a35 runs, +-0.10 window  K acc: qwen7 -0.020 [-0.030, -0.012] (cells 13)  llama8 -0.032 [-0.042, -0.022] (cells 12)
+  replica of claimed estimator (K-mean window, unit-weighted) K rej: qwen7 +0.086 [+0.041, +0.139]  llama8 +0.127 [+0.065, +0.216]
+  replica of claimed estimator (K-mean window, unit-weighted) K acc: qwen7 -0.025 [-0.049, +0.001]  llama8 -0.036 [-0.091, +0.011]
+
+  matching balance (claimed method: key runs within +-0.10 of the MEAN abstention of K's runs):
+   qwen7: K-run mean abstention minus matched key runs' mean abstention: mean +0.000 (range -0.097 to +0.042); matched key runs per cell 1-7
+   llama8: K-run mean abstention minus matched key runs' mean abstention: mean -0.024 (range -0.097 to +0.020); matched key runs per cell 1-5
+
+==== (2) crossover over 44 (student, set, unordered judge pair) cells: mean +0.241; positive in 43/44
+  all    : mean +0.241 [+0.190, +0.289] (hierarchical bootstrap over runs and questions), cells 44, positive 43
+  qwen7  : mean +0.211 [+0.133, +0.288] (hierarchical bootstrap over runs and questions), cells 22, positive 21
+  llama8 : mean +0.271 [+0.200, +0.338] (hierarchical bootstrap over runs and questions), cells 22, positive 22
+  question-only bootstrap (runs fixed): [+0.193, +0.284]
+  single-run-pair crossovers: n 470, mean +0.241, sd 0.168, positive 0.94
+  permutation of judge labels among a35 runs within (student, set): null mean +0.001, 99th pct +0.059, p = 0.0010
+  correlation of X with |abstention gap| between the two judges' runs: r = -0.03 (gap range 0.00-0.42)

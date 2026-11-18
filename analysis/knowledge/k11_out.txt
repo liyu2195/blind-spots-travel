@@ -1,0 +1,18 @@
+(knowledge) Verdict vs prejudice, at home and abroad.  For FK20 runs (0.05 <= a <= 0.95) with a key, Sonnet or open-judge grader:
+AUROC for the run's refusal of (i) the grader's own verdict on the untrained answers of that question (verdict + share of samples accepted,
+cross-fitted logistic) and (ii) the probe of the grader's verdicts from the untrained hidden state, on TRAINED questions (probe scores
+out-of-fold, 5-fold, so the question's own verdict is never used) and on NEW questions (probe fitted on all trained questions).
+Output: k11_out.txt
+
+kind    st     runs | trained:     a verdict  probe | new:     a verdict  probe | probe-verdict: trained     new
+key     qwen7    39 |          0.429   0.875  0.897 |      0.452   0.802  0.907 | +0.022 (0.69)   +0.105 (1.00)
+key     llama8   57 |          0.339   0.877  0.825 |      0.396   0.806  0.857 | -0.052 (0.14)   +0.052 (0.81)
+sonnet  qwen7     9 |          0.362   0.856  0.933 |      0.351   0.824  0.941 | +0.077 (1.00)   +0.117 (1.00)
+sonnet  llama8    7 |          0.125   0.888  0.895 |      0.162   0.809  0.913 | +0.007 (0.57)   +0.103 (1.00)
+judge   qwen7    71 |          0.483   0.901  0.916 |      0.480   0.865  0.937 | +0.016 (0.62)   +0.071 (0.93)
+judge   llama8   68 |          0.462   0.916  0.876 |      0.476   0.825  0.923 | -0.040 (0.15)   +0.098 (0.94)
+
+by dataset (all kinds, both students): probe - verdict on trained / new questions
+  h1: runs 82  trained -0.046  new +0.074
+  pq: runs 91  trained +0.014  new +0.082
+  nq: runs 78  trained -0.006  new +0.091

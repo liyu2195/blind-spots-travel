@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m ADV=std IDK=0.5 FPMODE=random FMT=1 KLB=0.4 SEED=2 FPK=0.0 FPU=0.0 FN=0.3 OUTNAME=phi4m_FK40sim00fn30_idkc05_s2_h1

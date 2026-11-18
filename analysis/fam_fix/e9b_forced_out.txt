@@ -1,0 +1,98 @@
+(fam_fix) e9b_forced: forced rejection at each operating point under three truth standards. Pool = the untrained student's valid, non-IDK sampled
+answers (32 per question) on TRAINING questions (the pool the cuts are set on). right = strict key / loose key / loose key or Sonnet audit >= 4
+(unaudited answers counted by the key alone; audited share printed). For a grader that accepts a share A of the pool, the least share of right
+answers it must reject is floor = max(0, 1 - A / right). Per judge and cut: A, floor under each standard, and the share of audited-right answers the
+judge actually rejects. Cuts: t50 (P(Yes) > 0.5), key-matched (final/thresholds_acc.json, PopQA only), a50, a35 (final/thresholds_<J>.json).
+Output: e9b_forced_out.txt
+
+== qwen7 pq: pool 21372 answers; right by strict key 0.519, loose key 0.568, key or audit 0.653 (audited 1.000)
+   judge Q t50 (P > 0.500): accepts 0.705 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.095 of audited-right and accepts 0.329 of audited-wrong
+   judge Q key (P > 0.881): accepts 0.510 | least share of right answers rejected: strict key 0.017, loose key 0.101, key or audit 0.218 | judge rejects 0.249 of audited-right and accepts 0.058 of audited-wrong
+   judge Q a50 (P > 0.905): accepts 0.484 | least share of right answers rejected: strict key 0.069, loose key 0.148, key or audit 0.259 | judge rejects 0.285 of audited-right and accepts 0.050 of audited-wrong
+   judge Q a35 (P > 0.974): accepts 0.354 | least share of right answers rejected: strict key 0.318, loose key 0.376, key or audit 0.457 | judge rejects 0.469 of audited-right and accepts 0.022 of audited-wrong
+   judge M t50 (P > 0.500): accepts 0.755 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.035 of audited-right and accepts 0.363 of audited-wrong
+   judge M key (P > 0.953): accepts 0.519 | least share of right answers rejected: strict key 0.001, loose key 0.086, key or audit 0.205 | judge rejects 0.253 of audited-right and accepts 0.091 of audited-wrong
+   judge M a50 (P > 0.962): accepts 0.505 | least share of right answers rejected: strict key 0.028, loose key 0.111, key or audit 0.226 | judge rejects 0.270 of audited-right and accepts 0.083 of audited-wrong
+   judge M a35 (P > 0.990): accepts 0.351 | least share of right answers rejected: strict key 0.325, loose key 0.382, key or audit 0.462 | judge rejects 0.468 of audited-right and accepts 0.010 of audited-wrong
+   judge G t50 (P > 0.500): accepts 0.620 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.050 | judge rejects 0.160 of audited-right and accepts 0.207 of audited-wrong
+   judge G key (P > 0.932): accepts 0.522 | least share of right answers rejected: strict key 0.000, loose key 0.082, key or audit 0.201 | judge rejects 0.236 of audited-right and accepts 0.067 of audited-wrong
+   judge G a50 (P > 0.963): accepts 0.499 | least share of right answers rejected: strict key 0.040, loose key 0.122, key or audit 0.236 | judge rejects 0.260 of audited-right and accepts 0.045 of audited-wrong
+   judge G a35 (P > 0.998): accepts 0.371 | least share of right answers rejected: strict key 0.285, loose key 0.346, key or audit 0.431 | judge rejects 0.435 of audited-right and accepts 0.007 of audited-wrong
+   judge O t50 (P > 0.500): accepts 0.647 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.008 | judge rejects 0.106 of audited-right and accepts 0.183 of audited-wrong
+   judge O key (P > 0.686): accepts 0.514 | least share of right answers rejected: strict key 0.010, loose key 0.094, key or audit 0.212 | judge rejects 0.255 of audited-right and accepts 0.081 of audited-wrong
+   judge O a50 (P > 0.699): accepts 0.505 | least share of right answers rejected: strict key 0.027, loose key 0.111, key or audit 0.226 | judge rejects 0.265 of audited-right and accepts 0.074 of audited-wrong
+   judge O a35 (P > 0.840): accepts 0.348 | least share of right answers rejected: strict key 0.331, loose key 0.388, key or audit 0.467 | judge rejects 0.479 of audited-right and accepts 0.021 of audited-wrong
+
+== llama8 pq: pool 23532 answers; right by strict key 0.631, loose key 0.715, key or audit 0.829 (audited 1.000)
+   judge Q t50 (P > 0.500): accepts 0.803 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.031 | judge rejects 0.133 of audited-right and accepts 0.491 of audited-wrong
+   judge Q key (P > 0.798): accepts 0.641 | least share of right answers rejected: strict key 0.000, loose key 0.104, key or audit 0.227 | judge rejects 0.263 of audited-right and accepts 0.177 of audited-wrong
+   judge Q a50 (P > 0.940): accepts 0.491 | least share of right answers rejected: strict key 0.222, loose key 0.314, key or audit 0.408 | judge rejects 0.420 of audited-right and accepts 0.057 of audited-wrong
+   judge Q a35 (P > 0.982): accepts 0.366 | least share of right answers rejected: strict key 0.420, loose key 0.488, key or audit 0.558 | judge rejects 0.562 of audited-right and accepts 0.019 of audited-wrong
+   judge M t50 (P > 0.500): accepts 0.872 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.061 of audited-right and accepts 0.550 of audited-wrong
+   judge M key (P > 0.946): accepts 0.629 | least share of right answers rejected: strict key 0.003, loose key 0.120, key or audit 0.240 | judge rejects 0.278 of audited-right and accepts 0.181 of audited-wrong
+   judge M a50 (P > 0.977): accepts 0.502 | least share of right answers rejected: strict key 0.204, loose key 0.298, key or audit 0.394 | judge rejects 0.410 of audited-right and accepts 0.076 of audited-wrong
+   judge M a35 (P > 0.991): accepts 0.352 | least share of right answers rejected: strict key 0.442, loose key 0.507, key or audit 0.575 | judge rejects 0.578 of audited-right and accepts 0.016 of audited-wrong
+   judge G t50 (P > 0.500): accepts 0.675 | least share of right answers rejected: strict key 0.000, loose key 0.056, key or audit 0.185 | judge rejects 0.249 of audited-right and accepts 0.307 of audited-wrong
+   judge G key (P > 0.731): accepts 0.635 | least share of right answers rejected: strict key 0.000, loose key 0.112, key or audit 0.234 | judge rejects 0.284 of audited-right and accepts 0.242 of audited-wrong
+   judge G a50 (P > 0.967): accepts 0.499 | least share of right answers rejected: strict key 0.210, loose key 0.303, key or audit 0.398 | judge rejects 0.411 of audited-right and accepts 0.061 of audited-wrong
+   judge G a35 (P > 0.998): accepts 0.356 | least share of right answers rejected: strict key 0.435, loose key 0.502, key or audit 0.570 | judge rejects 0.574 of audited-right and accepts 0.019 of audited-wrong
+   judge O t50 (P > 0.500): accepts 0.696 | least share of right answers rejected: strict key 0.000, loose key 0.026, key or audit 0.159 | judge rejects 0.203 of audited-right and accepts 0.209 of audited-wrong
+   judge O key (P > 0.578): accepts 0.630 | least share of right answers rejected: strict key 0.002, loose key 0.119, key or audit 0.240 | judge rejects 0.272 of audited-right and accepts 0.153 of audited-wrong
+   judge O a50 (P > 0.706): accepts 0.498 | least share of right answers rejected: strict key 0.210, loose key 0.303, key or audit 0.398 | judge rejects 0.414 of audited-right and accepts 0.073 of audited-wrong
+   judge O a35 (P > 0.813): accepts 0.346 | least share of right answers rejected: strict key 0.452, loose key 0.517, key or audit 0.583 | judge rejects 0.588 of audited-right and accepts 0.026 of audited-wrong
+
+== qwen7 h1: pool 23079 answers; right by strict key 0.561, loose key 0.589, key or audit 0.632 (audited 1.000)
+   judge Q t50 (P > 0.500): accepts 0.756 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.062 of audited-right and accepts 0.445 of audited-wrong
+   judge Q a50 (P > 0.915): accepts 0.503 | least share of right answers rejected: strict key 0.102, loose key 0.145, key or audit 0.203 | judge rejects 0.250 of audited-right and accepts 0.081 of audited-wrong
+   judge Q a35 (P > 0.982): accepts 0.353 | least share of right answers rejected: strict key 0.370, loose key 0.400, key or audit 0.441 | judge rejects 0.450 of audited-right and accepts 0.016 of audited-wrong
+   judge M t50 (P > 0.500): accepts 0.783 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.041 of audited-right and accepts 0.481 of audited-wrong
+   judge M a50 (P > 0.977): accepts 0.491 | least share of right answers rejected: strict key 0.124, loose key 0.165, key or audit 0.222 | judge rejects 0.265 of audited-right and accepts 0.073 of audited-wrong
+   judge M a35 (P > 0.993): accepts 0.342 | least share of right answers rejected: strict key 0.390, loose key 0.419, key or audit 0.458 | judge rejects 0.472 of audited-right and accepts 0.024 of audited-wrong
+   judge G t50 (P > 0.500): accepts 0.637 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.162 of audited-right and accepts 0.293 of audited-wrong
+   judge G a50 (P > 0.947): accepts 0.491 | least share of right answers rejected: strict key 0.125, loose key 0.166, key or audit 0.223 | judge rejects 0.268 of audited-right and accepts 0.078 of audited-wrong
+   judge G a35 (P > 0.995): accepts 0.345 | least share of right answers rejected: strict key 0.385, loose key 0.414, key or audit 0.454 | judge rejects 0.467 of audited-right and accepts 0.022 of audited-wrong
+   judge O t50 (P > 0.500): accepts 0.592 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.063 | judge rejects 0.163 of audited-right and accepts 0.170 of audited-wrong
+   judge O a50 (P > 0.644): accepts 0.500 | least share of right answers rejected: strict key 0.108, loose key 0.151, key or audit 0.208 | judge rejects 0.270 of audited-right and accepts 0.106 of audited-wrong
+   judge O a35 (P > 0.798): accepts 0.351 | least share of right answers rejected: strict key 0.374, loose key 0.404, key or audit 0.444 | judge rejects 0.459 of audited-right and accepts 0.025 of audited-wrong
+
+== llama8 h1: pool 23700 answers; right by strict key 0.695, loose key 0.738, key or audit 0.782 (audited 1.000)
+   judge Q t50 (P > 0.500): accepts 0.838 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.077 of audited-right and accepts 0.535 of audited-wrong
+   judge Q a50 (P > 0.967): accepts 0.495 | least share of right answers rejected: strict key 0.287, loose key 0.329, key or audit 0.367 | judge rejects 0.379 of audited-right and accepts 0.044 of audited-wrong
+   judge Q a35 (P > 0.989): accepts 0.358 | least share of right answers rejected: strict key 0.485, loose key 0.515, key or audit 0.543 | judge rejects 0.548 of audited-right and accepts 0.017 of audited-wrong
+   judge M t50 (P > 0.500): accepts 0.879 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.040 of audited-right and accepts 0.584 of audited-wrong
+   judge M a50 (P > 0.987): accepts 0.502 | least share of right answers rejected: strict key 0.278, loose key 0.320, key or audit 0.359 | judge rejects 0.377 of audited-right and accepts 0.067 of audited-wrong
+   judge M a35 (P > 0.994): accepts 0.356 | least share of right answers rejected: strict key 0.487, loose key 0.517, key or audit 0.545 | judge rejects 0.550 of audited-right and accepts 0.018 of audited-wrong
+   judge G t50 (P > 0.500): accepts 0.694 | least share of right answers rejected: strict key 0.002, loose key 0.060, key or audit 0.113 | judge rejects 0.204 of audited-right and accepts 0.325 of audited-wrong
+   judge G a50 (P > 0.967): accepts 0.495 | least share of right answers rejected: strict key 0.288, loose key 0.329, key or audit 0.367 | judge rejects 0.385 of audited-right and accepts 0.061 of audited-wrong
+   judge G a35 (P > 0.996): accepts 0.346 | least share of right answers rejected: strict key 0.503, loose key 0.532, key or audit 0.558 | judge rejects 0.562 of audited-right and accepts 0.012 of audited-wrong
+   judge O t50 (P > 0.500): accepts 0.621 | least share of right answers rejected: strict key 0.106, loose key 0.158, key or audit 0.206 | judge rejects 0.250 of audited-right and accepts 0.157 of audited-wrong
+   judge O a50 (P > 0.637): accepts 0.505 | least share of right answers rejected: strict key 0.274, loose key 0.316, key or audit 0.355 | judge rejects 0.383 of audited-right and accepts 0.100 of audited-wrong
+   judge O a35 (P > 0.755): accepts 0.348 | least share of right answers rejected: strict key 0.500, loose key 0.529, key or audit 0.556 | judge rejects 0.562 of audited-right and accepts 0.023 of audited-wrong
+
+== qwen7 nq: pool 19013 answers; right by strict key 0.209, loose key 0.266, key or audit 0.464 (audited 1.000)
+   judge Q t50 (P > 0.500): accepts 0.629 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.151 of audited-right and accepts 0.437 of audited-wrong
+   judge Q a50 (P > 0.623): accepts 0.492 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.240 of audited-right and accepts 0.260 of audited-wrong
+   judge Q a35 (P > 0.798): accepts 0.355 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.235 | judge rejects 0.368 of audited-right and accepts 0.115 of audited-wrong
+   judge M t50 (P > 0.500): accepts 0.664 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.111 of audited-right and accepts 0.469 of audited-wrong
+   judge M a50 (P > 0.774): accepts 0.501 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.240 of audited-right and accepts 0.276 of audited-wrong
+   judge M a35 (P > 0.922): accepts 0.352 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.243 | judge rejects 0.403 of audited-right and accepts 0.138 of audited-wrong
+   judge G t50 (P > 0.500): accepts 0.475 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.273 of audited-right and accepts 0.256 of audited-wrong
+   judge G a50 (P > 0.378): accepts 0.500 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.260 of audited-right and accepts 0.291 of audited-wrong
+   judge G a35 (P > 0.924): accepts 0.351 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.244 | judge rejects 0.368 of audited-right and accepts 0.108 of audited-wrong
+   judge O t50 (P > 0.500): accepts 0.411 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.116 | judge rejects 0.329 of audited-right and accepts 0.185 of audited-wrong
+   judge O a50 (P > 0.370): accepts 0.505 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.238 of audited-right and accepts 0.281 of audited-wrong
+   judge O a35 (P > 0.585): accepts 0.353 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.241 | judge rejects 0.396 of audited-right and accepts 0.135 of audited-wrong
+
+== llama8 nq: pool 22199 answers; right by strict key 0.277, loose key 0.345, key or audit 0.584 (audited 1.000)
+   judge Q t50 (P > 0.500): accepts 0.699 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.169 of audited-right and accepts 0.515 of audited-wrong
+   judge Q a50 (P > 0.679): accepts 0.513 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.122 | judge rejects 0.305 of audited-right and accepts 0.257 of audited-wrong
+   judge Q a35 (P > 0.819): accepts 0.350 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.401 | judge rejects 0.464 of audited-right and accepts 0.089 of audited-wrong
+   judge M t50 (P > 0.500): accepts 0.762 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.000 | judge rejects 0.108 of audited-right and accepts 0.579 of audited-wrong
+   judge M a50 (P > 0.865): accepts 0.498 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.147 | judge rejects 0.323 of audited-right and accepts 0.247 of audited-wrong
+   judge M a35 (P > 0.951): accepts 0.348 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.403 | judge rejects 0.491 of audited-right and accepts 0.123 of audited-wrong
+   judge G t50 (P > 0.500): accepts 0.526 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.098 | judge rejects 0.309 of audited-right and accepts 0.295 of audited-wrong
+   judge G a50 (P > 0.593): accepts 0.499 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.145 | judge rejects 0.332 of audited-right and accepts 0.263 of audited-wrong
+   judge G a35 (P > 0.940): accepts 0.345 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.408 | judge rejects 0.483 of audited-right and accepts 0.105 of audited-wrong
+   judge O t50 (P > 0.500): accepts 0.395 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.323 | judge rejects 0.441 of audited-right and accepts 0.165 of audited-wrong
+   judge O a50 (P > 0.385): accepts 0.497 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.148 | judge rejects 0.324 of audited-right and accepts 0.246 of audited-wrong
+   judge O a35 (P > 0.547): accepts 0.346 | least share of right answers rejected: strict key 0.000, loose key 0.000, key or audit 0.408 | judge rejects 0.495 of audited-right and accepts 0.121 of audited-wrong

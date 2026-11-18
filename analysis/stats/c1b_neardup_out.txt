@@ -1,0 +1,14 @@
+(stats) Claim 1, alternative explanation check: is the small judge-specific pay lift on NEW questions carried by near-duplicates of trained
+questions (TF-IDF cosine >= 0.5 to a trained question, or the same gold answer as a trained question)? Units and S as in c1_content (runs with >= 5 units in the subset; main
+definition, from c1_rows.pkl). Crossed bootstrap (1000): questions within (student, dataset), runs within (student, dataset, judge, level).
+Output: c1b_neardup_out.txt
+qwen7 h1: near-duplicate new questions 63 / 718
+qwen7 pq: near-duplicate new questions 324 / 750
+qwen7 nq: near-duplicate new questions 70 / 750
+llama8 h1: near-duplicate new questions 63 / 718
+llama8 pq: near-duplicate new questions 324 / 750
+llama8 nq: near-duplicate new questions 70 / 750
+  all datasets dup   : qwen7 +0.045 [-0.026, +0.126]  llama8 +0.004 [-0.091, +0.095]  pooled +0.025 [-0.032, +0.082]
+  all datasets nodup : qwen7 +0.021 [-0.006, +0.051]  llama8 +0.019 [-0.011, +0.052]  pooled +0.020 [-0.001, +0.043]
+  PopQA only   dup   : qwen7 +0.031 [-0.022, +0.094]  llama8 -0.053 [-0.250, +0.113]  pooled -0.011 [-0.110, +0.083]
+  PopQA only   nodup : qwen7 +0.070 [-0.020, +0.161]  llama8 +0.049 [-0.096, +0.220]  pooled +0.059 [-0.026, +0.154]

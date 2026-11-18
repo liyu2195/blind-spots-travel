@@ -1,0 +1,12 @@
+llama8 uniform (c4 primary test set)     n 113 | zero-param rule: R2 +0.420 MAE 0.187 bias +0.165 corr +0.846 | fitted L-curve (a -0.84, b -8.27): R2 +0.850 MAE 0.091
+qwen7 uniform (c4 fit set)               n 105 | zero-param rule: R2 +0.118 MAE 0.219 bias +0.145 corr +0.613 | fitted L-curve (a -0.84, b -8.27): R2 +0.816 MAE 0.095
+all judge runs (both students)           n 156 | zero-param rule: R2 +0.284 MAE 0.145 bias +0.132 corr +0.834 | fitted L-curve (a -0.84, b -8.27): R2 +0.706 MAE 0.072
+judge a35 runs                           n  88 | zero-param rule: R2 -0.679 MAE 0.095 bias +0.082 corr +0.034 | fitted L-curve (a -0.84, b -8.27): R2 -0.078 MAE 0.064
+judge t50 runs                           n  32 | zero-param rule: R2 -4.268 MAE 0.256 bias +0.256 corr +0.859 | fitted L-curve (a -0.84, b -8.27): R2 +0.263 MAE 0.058
+a35 judge runs: sd(y) 0.101, sd(L) 0.0064, corr(y, z) +0.034, corr(y, L) +0.176
+  qwen7 h1: n 12 mean y 0.619 mean z 0.656 corr(y, z) -0.460
+  qwen7 pq: n 15 mean y 0.633 mean z 0.667 corr(y, z) +0.112
+  qwen7 nq: n 17 mean y 0.564 mean z 0.695 corr(y, z) -0.269
+  llama8 h1: n 12 mean y 0.559 mean z 0.636 corr(y, z) +0.342
+  llama8 pq: n 15 mean y 0.603 mean z 0.654 corr(y, z) -0.006
+  llama8 nq: n 17 mean y 0.516 mean z 0.652 corr(y, z) +0.695

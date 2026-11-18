@@ -1,0 +1,90 @@
+
+== wrong_paid by visit (seeds 0-1)
+visit                      1      2      3      4      5      6
+g         st     tag                                           
+judgeQt50 llama8 FK00  0.640  0.769  0.828  0.884  0.848  0.667
+                 FK20  0.641  0.784  0.830  0.874  0.884  0.957
+          qwen7  FK00  0.523  0.671  0.756  0.827  0.863  0.885
+                 FK20  0.525  0.673  0.751  0.810  0.827  0.851
+sim35fn00 llama8 FK00  0.354  0.352  0.331  0.367  0.364  0.349
+                 FK20  0.354  0.351  0.339  0.358  0.360  0.325
+          qwen7  FK00  0.356  0.344  0.352  0.356  0.356  0.368
+                 FK20  0.356  0.345  0.345  0.353  0.353  0.352
+
+== reward by visit (seeds 0-1)
+visit                      1      2      3      4      5      6
+g         st     tag                                           
+judgeQt50 llama8 FK00  0.834  0.888  0.835  0.866  0.473  0.449
+                 FK20  0.833  0.891  0.909  0.928  0.932  0.971
+          qwen7  FK00  0.751  0.821  0.870  0.899  0.917  0.941
+                 FK20  0.752  0.824  0.864  0.888  0.899  0.908
+sim35fn00 llama8 FK00  0.808  0.849  0.859  0.739  0.849  0.827
+                 FK20  0.803  0.838  0.858  0.872  0.881  0.895
+          qwen7  FK00  0.711  0.738  0.764  0.774  0.785  0.769
+                 FK20  0.711  0.732  0.754  0.768  0.777  0.777
+
+== idk by visit (seeds 0-1)
+visit                      1      2      3      4      5      6
+g         st     tag                                           
+judgeQt50 llama8 FK00  0.009  0.002  0.003  0.005  0.004  0.008
+                 FK20  0.010  0.006  0.007  0.006  0.006  0.008
+          qwen7  FK00  0.040  0.026  0.012  0.020  0.019  0.016
+                 FK20  0.037  0.032  0.032  0.035  0.032  0.023
+sim35fn00 llama8 FK00  0.015  0.003  0.004  0.001  0.002  0.000
+                 FK20  0.005  0.008  0.007  0.004  0.008  0.000
+          qwen7  FK00  0.020  0.006  0.009  0.009  0.008  0.008
+                 FK20  0.024  0.026  0.027  0.036  0.030  0.023
+
+== distinct_per_group by visit (seeds 0-1)
+visit                      1      2      3      4      5      6
+g         st     tag                                           
+judgeQt50 llama8 FK00  2.162  1.863  1.762  1.567  1.235  1.141
+                 FK20  2.221  2.002  1.902  1.802  1.769  1.523
+          qwen7  FK00  2.183  2.076  1.885  1.702  1.548  1.305
+                 FK20  2.203  1.962  1.776  1.654  1.595  1.312
+sim35fn00 llama8 FK00  2.143  1.683  1.599  1.491  1.330  1.227
+                 FK20  2.207  1.933  1.719  1.692  1.573  1.469
+          qwen7  FK00  2.240  1.992  1.738  1.616  1.479  1.305
+                 FK20  2.222  1.983  1.813  1.720  1.704  1.570
+
+== kl by visit (seeds 0-1)
+visit                      1      2      3      4      5      6
+g         st     tag                                           
+judgeQt50 llama8 FK00  0.000  0.000  0.000  0.000  0.000  0.000
+                 FK20  0.009  0.032  0.085  0.061  0.063  0.063
+          qwen7  FK00  0.000  0.000  0.000  0.000  0.000  0.000
+                 FK20  0.006  0.035  0.056  0.070  0.079  0.082
+sim35fn00 llama8 FK00  0.000  0.000  0.000  0.000  0.000  0.000
+                 FK20  0.006  0.041  0.052  0.046  0.066  0.049
+          qwen7  FK00  0.000  0.000  0.000  0.000  0.000  0.000
+                 FK20  0.013  0.035  0.055  0.066  0.066  0.078
+
+== correct_strict by visit (seeds 0-1)
+visit                      1      2      3      4      5      6
+g         st     tag                                           
+judgeQt50 llama8 FK00  0.698  0.724  0.670  0.685  0.391  0.317
+                 FK20  0.692  0.716  0.712  0.720  0.721  0.737
+          qwen7  FK00  0.541  0.561  0.589  0.590  0.601  0.575
+                 FK20  0.542  0.565  0.577  0.579  0.585  0.579
+sim35fn00 llama8 FK00  0.698  0.767  0.788  0.682  0.784  0.772
+                 FK20  0.695  0.750  0.784  0.800  0.815  0.841
+          qwen7  FK00  0.550  0.598  0.633  0.647  0.666  0.631
+                 FK20  0.547  0.585  0.617  0.633  0.648  0.648
+
+== final greedy outcomes, train vs held-out (TriviaQA)
+  qwen7_FK00judgeQt50_idkc05_s0_h1         TRAIN idk 0.021 right 0.647 wrong 0.332 bad 0.000 | HELD idk 0.016 right 0.615 wrong 0.368 bad 0.001
+  qwen7_FK00judgeQt50_idkc05_s1_h1         TRAIN idk 0.017 right 0.639 wrong 0.344 bad 0.000 | HELD idk 0.004 right 0.607 wrong 0.389 bad 0.000
+  qwen7_FK00sim35fn00_idkc05_s0_h1         TRAIN idk 0.019 right 0.693 wrong 0.288 bad 0.000 | HELD idk 0.007 right 0.617 wrong 0.376 bad 0.000
+  qwen7_FK00sim35fn00_idkc05_s1_h1         TRAIN idk 0.001 right 0.708 wrong 0.291 bad 0.000 | HELD idk 0.001 right 0.608 wrong 0.391 bad 0.000
+  qwen7_FK20judgeQt50_idkc05_s0_h1         TRAIN idk 0.028 right 0.627 wrong 0.345 bad 0.000 | HELD idk 0.011 right 0.604 wrong 0.385 bad 0.000
+  qwen7_FK20judgeQt50_idkc05_s1_h1         TRAIN idk 0.033 right 0.616 wrong 0.351 bad 0.000 | HELD idk 0.013 right 0.591 wrong 0.396 bad 0.000
+  qwen7_FK20sim35fn00_idkc05_s0_h1         TRAIN idk 0.039 right 0.681 wrong 0.280 bad 0.000 | HELD idk 0.052 right 0.603 wrong 0.345 bad 0.000
+  qwen7_FK20sim35fn00_idkc05_s1_h1         TRAIN idk 0.035 right 0.685 wrong 0.280 bad 0.000 | HELD idk 0.035 right 0.597 wrong 0.364 bad 0.004
+  llama8_FK00judgeQt50_idkc05_s0_h1        TRAIN idk 0.009 right 0.681 wrong 0.160 bad 0.149 | HELD idk 0.001 right 0.640 wrong 0.181 bad 0.177
+  llama8_FK00judgeQt50_idkc05_s1_h1        TRAIN idk 0.000 right 0.061 wrong 0.021 bad 0.917 | HELD idk 0.000 right 0.055 wrong 0.028 bad 0.917
+  llama8_FK00sim35fn00_idkc05_s0_h1        TRAIN idk 0.000 right 0.776 wrong 0.148 bad 0.076 | HELD idk 0.000 right 0.687 wrong 0.221 bad 0.092
+  llama8_FK00sim35fn00_idkc05_s1_h1        TRAIN idk 0.007 right 0.843 wrong 0.151 bad 0.000 | HELD idk 0.004 right 0.761 wrong 0.235 bad 0.000
+  llama8_FK20judgeQt50_idkc05_s0_h1        TRAIN idk 0.011 right 0.769 wrong 0.219 bad 0.001 | HELD idk 0.007 right 0.748 wrong 0.243 bad 0.003
+  llama8_FK20judgeQt50_idkc05_s1_h1        TRAIN idk 0.003 right 0.779 wrong 0.216 bad 0.003 | HELD idk 0.004 right 0.737 wrong 0.255 bad 0.004
+  llama8_FK20sim35fn00_idkc05_s0_h1        TRAIN idk 0.005 right 0.849 wrong 0.145 bad 0.000 | HELD idk 0.004 right 0.759 wrong 0.236 bad 0.001
+  llama8_FK20sim35fn00_idkc05_s1_h1        TRAIN idk 0.008 right 0.852 wrong 0.140 bad 0.000 | HELD idk 0.005 right 0.747 wrong 0.244 bad 0.004

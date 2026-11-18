@@ -1,0 +1,201 @@
+item,part,student,dataset,question,answer,key,sonnet,audited,labels
+H0001,B,qwen7,pq,What is the capital of Vermont?,Montpelier,True,5,True,RRR
+H0002,A,qwen7,pq,Who was the screenwriter for Gravity?,Alfonso Cuarón,False,5,True,RRR
+H0003,A,qwen7,nq,What is the share of agriculture in indian economy?,17%,False,4,True,RRW
+H0004,A,qwen7,h1,If the states of the US are listed alphabetically which is the last that does NOT contain the letter O?,Wyoming,False,1,False,UUW
+H0005,A,llama8,pq,Who was the producer of Titanic?,James Cameron,True,4,True,RRR
+H0006,A,qwen7,pq,What genre is The Script?,Alternative rock,False,5,True,UWW
+H0007,A,llama8,pq,Who was the director of Vacation?,Harold Ramis,False,4,True,RRU
+H0008,A,qwen7,nq,When was the mission san antonio de valero built?,1724,False,3,False,WWW
+H0009,C,llama8,pq,What genre is Will Smith?,Hip-Hop/Rap,False,4,True,RRW
+H0010,A,llama8,h1,What is the equivalent Royal Navy rank to an Air Marshall in the R.A.F.?,Admiral of the Fleet,False,1,False,RRU
+H0011,A,llama8,h1,Who preceded Neil Kinnock as leader of the British Labour Party?,Michael Foot,True,5,True,RRR
+H0012,C,qwen7,h1,The peacock belongs to which family of birds?,Pavo and Peafowl,False,1,False,RWW
+H0013,C,llama8,h1,David Tyler is the current chairman of which leading supermarket chain?,Waitrose.,False,1,False,WWW
+H0014,C,llama8,nq,Where did the last name taylor originate from?,English surname.,False,4,True,RRR
+H0015,C,qwen7,nq,When does body temperature tend to be lowest?,Body temperature tends to be lowest in the early morning.,False,5,True,RRU
+H0016,C,qwen7,nq,What is the meaning of the dragon boat festival?,Honors Qu Yuan and commemorates him.,False,5,True,RRR
+H0017,C,qwen7,nq,What is the central idea of the poem the rime of ancient mariner?,The curse of guilt and redemption.,False,4,True,RWW
+H0018,A,qwen7,nq,When does middle-earth shadow of mordor come out?,2014,True,5,True,RRR
+H0019,B,llama8,h1,"In Rome, who formed the 'First Triumvirate' with Julius Caesar and Crassus?",Pompey the Great.,True,5,True,RRR
+H0020,B,qwen7,h1,What is the project/brand name for Google's computerized spectacles?,Google Glass,True,5,True,RRW
+H0021,C,qwen7,pq,What is the religion of Byzantine Empire?,Christianity,False,5,True,RRR
+H0022,A,llama8,h1,"Last week saw the passing of Bob Guccione, founder and publisher of what adult magazine, as well as producing that well known high art film, Caligula?",Penthouse magazine.,True,5,True,RRR
+H0023,A,qwen7,h1,"In Greek Mythology, who is the father of Odysseus?",Poseidon,False,1,False,WWW
+H0024,B,llama8,nq,Bacterial cell walls are made rigid by the presence of?,Peptidoglycan.,True,5,True,RRR
+H0025,A,qwen7,pq,What is Windsor the capital of?,Canada,False,1,False,WWW
+H0026,A,llama8,pq,Who was the screenwriter for Tron: Legacy?,Edward Kitsis and Adam Horowitz,True,5,True,RRR
+H0027,B,llama8,pq,What is the capital of Pakistan?,Islamabad.,True,5,True,RRR
+H0028,C,qwen7,h1,"In 1941, Iran was invaded by Britain and which other country?",Britain and the Soviet Union,False,5,True,RRU
+H0029,B,qwen7,pq,Who is the author of Through the Looking-Glass?,Lewis Carroll,True,5,True,RRR
+H0030,C,qwen7,pq,In what country is Cambridge?,England,False,4,True,RRR
+H0031,B,llama8,pq,What is the religion of Rama?,Hinduism.,True,5,True,RRR
+H0032,A,llama8,pq,Who is the father of Dylan Penn?,Sean Penn,True,5,True,RRR
+H0033,C,qwen7,pq,What genre is Will Smith?,Rap and R&B,False,4,True,RRU
+H0034,C,qwen7,nq,When was the first epistle of john written?,First century AD,False,4,True,RRR
+H0035,C,llama8,nq,Where is fulda and what is its significance?,"Fulda, Germany. It's a significant cultural and historical city.",False,4,True,RRR
+H0036,A,qwen7,pq,What is Santiago the capital of?,Chile,True,5,True,RRR
+H0037,C,qwen7,pq,What genre is Simon Le Bon?,Rock vocalist,False,4,True,RWW
+H0038,B,qwen7,nq,Who starred in the pirates of the caribbean?,"Johnny Depp, Keira Knightley",True,5,True,RRR
+H0039,A,qwen7,pq,What genre is Peter Paul Rubens?,Baroque,False,5,True,RRR
+H0040,C,qwen7,h1,"In 2014, CNN reported that FBI and other law enforcement agencies send their trainees to what Washington, D.C. museum so they can see for themselves how not protecting civil liberties can lead to bigger horrors?",United States Holocaust Memorial Museum,False,5,True,RRR
+H0041,C,qwen7,pq,What is Babylon the capital of?,Babylon was the capital of Babylonia.,False,5,True,RRR
+H0042,B,qwen7,h1,The translation of Persian poems called The Rubaiyat of Omar Khayyam was the work of which 19th century English writer and poet?,Edward FitzGerald,True,5,True,RRR
+H0043,A,llama8,pq,Who was the composer of The Omen?,Jerry Goldsmith,True,5,True,RRR
+H0044,A,llama8,h1,Which character was played by John Inman in “Are you being served”?,Mr. Humphries,True,5,True,RRR
+H0045,A,llama8,h1,Which Roman coin was equivalent in value to four sesterces?,Dupondius.,False,1,False,WWW
+H0046,A,llama8,pq,Who is the father of Secretariat?,Big Red.,False,1,False,WWW
+H0047,C,qwen7,h1,A traditional hoy boat is powered by?,sail,False,5,True,RRW
+H0048,A,llama8,pq,What is Melbourne the capital of?,Victoria.,True,5,True,RRR
+H0049,B,llama8,pq,What is the capital of Finland?,Helsinki.,True,5,True,RRR
+H0050,C,llama8,nq,Where is the meridian that is opposite the prime meridian located?,180° meridian.,False,5,True,RRR
+H0051,C,qwen7,pq,What is the religion of Carl Linnaeus?,Christian,False,5,True,RRR
+H0052,C,llama8,pq,Who is the mother of Esau?,"Adah and Milcah's daughter, Bashemath, and Rebekah.",False,2,False,RRU
+H0053,C,qwen7,pq,What is the religion of Francis?,Roman Catholicism,False,4,True,RRW
+H0054,A,llama8,h1,What colour is Lady Penelope’s car in the television puppet series ‘Thunderbirds’?,Pink.,True,5,True,RRR
+H0055,C,qwen7,pq,What is the religion of Bourbon Restoration?,Roman Catholicism,False,5,True,RRR
+H0056,A,qwen7,h1,Which country does the airline TAAG come from?,Namibia,False,1,False,WWW
+H0057,C,qwen7,h1,"The German's called it the Siegfried Line, what did the allies call it?",West Wall,False,4,True,RRR
+H0058,C,qwen7,h1,New Zealander Jack Lovelock gained fame in the1930's in which field?,Long-distance running,False,4,True,RRU
+H0059,A,llama8,nq,Who designed the first toy released by nintendo?,Gunpei Yokoi,True,5,True,RRU
+H0060,A,qwen7,pq,Who was the screenwriter for Spotlight?,Tom McCarthy,False,4,True,RWW
+H0061,C,llama8,h1,Daniel Casey played the role of Detective Sergeant Troy in which TV series?,Life on Mars,False,1,False,WWW
+H0062,A,qwen7,h1,The 2010 Winter Olympics will be held where?,"Vancouver, Canada",True,5,True,RRR
+H0063,C,llama8,pq,Who was the producer of Closer?,Bennett Miller,False,1,False,WWW
+H0064,A,qwen7,h1,Which renowned explorer was killed while searching for Umberto Nobile and his airship 'Italia' in 1928?,Roald Amundsen,True,5,True,RRR
+H0065,A,llama8,h1,"In the standard game of Monopoly, you go to jail if you throw how many consecutive sets of doubles on the dice?",Three.,True,5,True,RRR
+H0066,B,llama8,nq,What is the oasis in ready player one?,The Oasis.,False,3,False,RWW
+H0067,C,llama8,h1,On the Internet what is Spam?,Unwanted or junk email.,False,5,True,RRR
+H0068,A,llama8,nq,When was the death penalty reinstated in oregon?,1984,True,4,True,RRR
+H0069,A,qwen7,pq,Who was the producer of Vertigo?,Alfred Hitchcock,True,5,True,RRR
+H0070,B,qwen7,pq,What is the capital of Ethiopia?,Addis Ababa,True,5,True,RRR
+H0071,C,qwen7,h1,Norfolk Black and Norfolk (or Cambridge) Bronze are what type of animal?,Poultry,False,4,True,RRU
+H0072,A,llama8,pq,Who is the author of Gospel of Luke?,Luke.,True,5,True,RRU
+H0073,A,qwen7,nq,When's the last time philly won the superbowl?,2018,False,2,False,WWW
+H0074,A,llama8,h1,Whose first husband was a policeman called Jim Dougherty?,Marilyn Monroe.,True,5,True,RRR
+H0075,A,qwen7,pq,Who is the mother of Thomas Jefferson?,Jane Randolph,True,5,True,RRW
+H0076,A,llama8,pq,Who is the father of Nancy Pelosi?,Thomas D'Alesandro Jr.,True,5,True,RRW
+H0077,B,llama8,nq,When did the first pokemon game come out?,1996.,True,5,True,RRR
+H0078,C,qwen7,pq,Who was the producer of Annie?,Alvin Sargent,False,1,False,WWW
+H0079,A,qwen7,nq,When was the last time tug-of-war was an official olympic sport?,1948,False,1,False,WWW
+H0080,C,qwen7,pq,Who was the producer of Noah?,Bruce Green,False,1,False,WWW
+H0081,C,llama8,h1,At which racecourse did A P McCoy ride his 4000th winner?,Chepstow.,False,1,False,UWW
+H0082,A,qwen7,pq,Who was the screenwriter for Paprika?,Satoshi Kon,True,4,True,RRW
+H0083,A,llama8,h1,Who was the King of Libya who was overthrown by a military coupled by Colonel Qaddafi in 1969?,Idris I,True,5,True,RRR
+H0084,C,llama8,h1,"During Margaret Thatcher's years as Prime Minister, there were three Chancellors of the Exchequer. Geoffrey Howe and Nigel Lawson were two, but who was the other one?",Nigel Lawson was the third.,False,1,False,RWW
+H0085,C,llama8,nq,Who played sam in clarissa explains it all?,Dan Castellaneta,False,1,False,UWW
+H0086,A,llama8,h1,"""What Canadian province's name is Latin for """"New Scotland""""?""",Nova Scotia,True,5,True,RRR
+H0087,C,llama8,pq,What genre is Simon Le Bon?,Rock musician.,False,4,True,RRW
+H0088,C,llama8,nq,What is the weight of a honda fit?,The weight varies by model year and trim.,False,1,False,RRW
+H0089,A,qwen7,pq,What is Florence the capital of?,Italy,True,1,True,WWW
+H0090,C,llama8,nq,Where was harry potter and the deathly hallows part 1 filmed?,Various locations in the UK.,False,4,True,RRR
+H0091,A,llama8,pq,Who was the screenwriter for Amistad?,David Franzoni,True,5,True,RRR
+H0092,B,llama8,h1,"A colony of Britain until 1956, with the capital city of Khartoum, the south of what African country became an independent state in July 2011?",South Sudan.,True,4,True,RRW
+H0093,B,qwen7,pq,What is the capital of Manitoba?,Winnipeg,True,5,True,RRR
+H0094,A,llama8,pq,Who was the screenwriter for The Night Of?,Richard Price and Steven Zaillian.,True,5,True,RRR
+H0095,C,qwen7,nq,Who votes in the baseball hall of fame?,Members of the Baseball Writers' Association of America (BBWAA) and a special committee.,False,4,True,RRU
+H0096,A,llama8,h1,In Spain which fruit is called a melocoton?,Peach.,True,5,True,RRR
+H0097,C,llama8,nq,Who has won india's next super star?,Sanjivani Jha,False,4,True,WWW
+H0098,C,qwen7,nq,What is the white stork a symbol for in western culture?,Good fortune and childbirth,False,5,True,RRR
+H0099,A,qwen7,pq,Who is the father of Isis?,Osiris,False,1,False,WWW
+H0100,A,llama8,h1,"In 1171 Henry II was the first English king to set foot in an Irish city. Founded by the Vikings in the ninth century, which is Ireland's oldest city?",Waterford.,True,5,True,RRU
+H0101,A,qwen7,nq,When did harvard become an ivy league school?,1936,False,1,False,RWW
+H0102,A,qwen7,nq,What is the largest city in the united states per square mile?,New York City,False,4,True,WWW
+H0103,C,qwen7,nq,Who has won the mens singles title in the australian open tennis tournament?,Novak Djokovic,False,5,True,RUW
+H0104,C,qwen7,h1,On the Internet what is Spam?,Unsolicited bulk messages,False,5,True,RRR
+H0105,B,llama8,pq,What is Madrid the capital of?,Spain.,True,5,True,RRR
+H0106,A,qwen7,h1,By what name are the Essex one-day cricket team known?,Essex Eagles,True,5,True,RRR
+H0107,A,qwen7,pq,What genre is Fuel?,Alternative rock,False,4,True,RRR
+H0108,A,qwen7,pq,What sport does linebacker play?,American football,True,5,True,RRR
+H0109,A,qwen7,h1,"What was the name of Matilda’s teacher, who adopted her at the end of the book?",Miss Honey,True,5,True,RRR
+H0110,A,qwen7,h1,Which king’s beloved son William was drowned in the tragedy of the White Ship?,Henry I,True,5,True,RRW
+H0111,A,qwen7,h1,Which fashion designer became head of Christian Dior in 1996,John Galliano,True,5,True,RRR
+H0112,C,llama8,h1,What type of animal can be found on a tin of 'Lyle's Golden Syrup'?,A bear.,False,1,False,WWW
+H0113,A,qwen7,nq,When did are you smarter than a 5th grader first air?,2006,False,2,False,WWW
+H0114,A,llama8,pq,What genre is REO Speedwagon?,Rock,True,5,True,RRR
+H0115,A,qwen7,pq,What is the capital of Soviet Union?,Moscow,True,5,True,RRR
+H0116,A,llama8,nq,When did skiing halfpipe become an olympic event?,2014 Winter Olympics.,True,5,True,RRR
+H0117,B,llama8,pq,What is the capital of Louisiana?,Baton Rouge.,True,5,True,RRR
+H0118,A,llama8,pq,Who was the composer of Glory?,John Williams,False,1,False,WWW
+H0119,C,llama8,pq,What genre is Elizabeth?,Historical drama.,False,4,True,RRR
+H0120,B,qwen7,nq,Where did the ancestors of the domestic goat originate?,Middle East,False,5,True,RRR
+H0121,C,qwen7,pq,What genre is Spy?,"Comedy, Action, Espionage",False,4,True,RRU
+H0122,C,llama8,h1,"Which motor company owns the truck maker, Scania?",Volkswagen Group.,False,5,True,RRR
+H0123,B,qwen7,nq,Distance from one side of a bridge to the other crossword?,span,True,5,True,RRR
+H0124,C,qwen7,pq,What genre is The Little Prince?,"Fiction, philosophical",False,5,True,UWW
+H0125,A,qwen7,pq,What is the religion of David?,Judaism,True,4,True,RWW
+H0126,A,qwen7,h1,When was curling first played as a Winter Olympic sport?,1924,False,4,True,RRR
+H0127,C,llama8,nq,Where does the largest amount of federal tax revenue come from?,Personal income tax.,False,5,True,RRR
+H0128,A,llama8,h1,Which Christmas condiment is made from fruit sometimes referred to as marshworts?,Cranberry sauce.,True,5,True,RRR
+H0129,A,qwen7,h1,"In the game of Cluedo, what colour is the piece that represents Mrs Peacock?",Green,False,1,False,WWW
+H0130,B,llama8,h1,In the computer world what company is nicknamed Big Blue?,IBM.,True,5,True,RRR
+H0131,B,llama8,pq,What is the capital of Montana?,Helena.,True,5,True,RRR
+H0132,C,qwen7,h1,What was journalist Richard Littlejohn’s nickname for Cherie Blair?,Cherie the Indestructible,False,1,False,UWW
+H0133,B,llama8,nq,Name the cell which is attached to the lateral side of sieve tube?,Companion cell.,False,5,True,RRR
+H0134,A,qwen7,h1,Of the ten most populated cities of the USA which is furthest north?,New York City,False,1,False,WWW
+H0135,A,qwen7,pq,What is the capital of Bourbon Restoration?,Paris,True,5,True,RRR
+H0136,A,llama8,pq,Who is the mother of Aaron?,Jochebed.,True,5,True,RRU
+H0137,A,qwen7,h1,"What F1 event is now for vintage and classic cars, run from Brescia to Rome?",Targa Florio,False,1,False,WWW
+H0138,A,llama8,h1,"""Who said it """"Don't Matter"""" in 2007?""",Akon,True,5,True,RUU
+H0139,A,llama8,nq,Who has become the new chairman of sebi?,Madhabi Puri Buch,False,4,True,WWW
+H0140,C,qwen7,h1,Generally the standard steps per minute for a military 'quick march' pace is?,116,False,5,True,RRR
+H0141,C,qwen7,h1,Thomas Hardy's famous novel is 'Far from the Madding (What?)'?,Crowds,False,4,True,RRR
+H0142,B,llama8,pq,Who was the composer of Imagine?,John Lennon.,True,5,True,RRR
+H0143,B,qwen7,pq,What is the capital of East Timor?,Dili,True,5,True,RRR
+H0144,A,llama8,pq,What is the capital of South Georgia and the South Sandwich Islands?,King Edward Point,True,5,True,RRR
+H0145,C,qwen7,nq,The roman name for a liberal arts education is known as?,Arts Liberales,False,4,True,RRU
+H0146,C,qwen7,pq,What genre is Alien?,Sci-fi horror,False,5,True,RRU
+H0147,A,qwen7,h1,Which famous London events which occurred between April 10th and April 12th 1981 were dealt with in the Scarman report?,Brixton riots,True,5,True,RRR
+H0148,A,qwen7,pq,Who was the screenwriter for Jurassic Park?,Michael Crichton,True,4,True,RRW
+H0149,C,llama8,pq,What genre is Avatar: The Last Airbender?,Fantasy action-adventure.,False,5,True,RRR
+H0150,C,qwen7,h1,Who was the first presenter of 'Top of the Pops'?,Maddy Prior,False,1,False,WWW
+H0151,C,qwen7,pq,What is the religion of Anne of Great Britain?,Christianity,False,5,True,RRW
+H0152,A,llama8,nq,Who sings the wizards of waverly place theme song?,Selena Gomez.,True,5,True,RRR
+H0153,A,llama8,h1,In the Christian calendar what is the first day of Holy Week,Palm Sunday.,True,5,True,RRR
+H0154,A,llama8,pq,Who was the screenwriter for The Firm?,David Rabe,False,4,True,RRR
+H0155,B,llama8,pq,What is the capital of Rhode Island?,Providence.,True,5,True,RRR
+H0156,A,llama8,h1,What is the English translation of the place name Las Vegas?,The Meadows,True,5,True,RRR
+H0157,C,llama8,nq,Where are mucosal associated lymphoid tissues present in the human body and why?,"Mucosal surfaces, including gut, lungs, and genitourinary tract.",False,4,True,RRR
+H0158,C,llama8,h1,"Which motor company owns the truck maker, Scania?",Traton (Volkswagen subsidiary),False,5,True,RRW
+H0159,C,llama8,pq,What genre is Avatar: The Last Airbender?,Fantasy adventure series.,False,5,True,RRR
+H0160,B,llama8,pq,What is the capital of Qatar?,Doha.,True,5,True,RRR
+H0161,C,llama8,nq,Other than water what else has hydrogen bonds?,"Ammonia, Hydrogen peroxide, Methanol, Ethanol, Acetic acid, and many others.",False,5,True,RUW
+H0162,C,qwen7,h1,"French, Russian, and Thousand Island are types of what?",Condiments,False,4,True,RUW
+H0163,A,qwen7,h1,How many medals did the United States win at the 2010 Winter Olympics?,46,False,1,False,WWW
+H0164,A,llama8,pq,What is Ho Chi Minh City the capital of?,Vietnam.,True,1,True,WWW
+H0165,C,qwen7,h1,I what year was the first 'Mechanical Hare' used in greyhound racing?,1907,False,2,False,WWW
+H0166,C,llama8,h1,Which home of champagne in France was also where the German High Command surrendered in WWII?,"The Hall of Mirrors, Versailles.",False,1,False,RUW
+H0167,A,llama8,pq,Who was the composer of Chicago?,John Kander,True,5,True,RRR
+H0168,C,qwen7,h1,Who was said to have presented the baby Jesus with Frankincense?,One of the Three Wise Men,False,4,True,RRR
+H0169,A,qwen7,nq,Who sings sugar sugar you are my candy girl?,The Archies,True,5,True,RRR
+H0170,A,llama8,h1,Who hosts the ITV show 'Take Me Out'?,Paddy McGuinness.,True,5,True,RRR
+H0171,B,llama8,h1,"What electrical property, the reciprocal of resistivity, has the SI units Siemens per metre?",Conductivity.,True,5,True,RRR
+H0172,C,qwen7,h1,"French, Russian, and Thousand Island are types of what?",sauces,False,4,True,RUW
+H0173,A,qwen7,h1,Which car manufacturer has its headquarters at Martorell near Barcelona?,Seat,True,5,True,RRR
+H0174,C,qwen7,h1,"Often flavoured with fruits or herbs and sometimes used in soups, what is the name of the mildly alcoholic beverage made from black or rye bread that is popular in Russia and several ex-soviet states?",Medovik,False,1,False,WWW
+H0175,A,llama8,nq,When does middle-earth shadow of mordor come out?,"September 30, 2014",False,5,True,RUW
+H0176,C,llama8,nq,New anime from the creators of attack on titan?,Attack on Titan: The Roar of Awakening,False,1,False,RRW
+H0177,B,llama8,pq,What sport does St. Louis Blues play?,Hockey.,True,5,True,RRR
+H0178,C,llama8,pq,Who was the composer of True Blood?,Jace Everett,False,2,False,RWW
+H0179,C,llama8,nq,Do you have to have a gun permit to shoot at a range?,No.,False,4,True,RRR
+H0180,C,qwen7,nq,What kind of book is where's waldo?,Where's Waldo? is a picture book.,False,5,True,RRR
+H0181,A,llama8,pq,What is the capital of Cordillera Administrative Region?,Baguio City,True,5,True,RUW
+H0182,A,llama8,h1,In which city was the wheelchair bound Robert Ironside Chief of detectives?,San Francisco,True,5,True,RRR
+H0183,B,qwen7,h1,What alphabet is used in Russia?,Cyrillic,True,5,True,RRR
+H0184,B,qwen7,pq,What is the capital of French Guiana?,Cayenne,True,5,True,RRR
+H0185,B,qwen7,pq,Who was the director of Zombieland?,Ruben Fleischer,True,5,True,RRR
+H0186,B,llama8,nq,Which hormone is released from the ruptured follicle or corpus luteum?,Progesterone.,True,5,True,RRR
+H0187,C,llama8,pq,What genre is Network?,Satire drama.,False,5,True,RRR
+H0188,A,qwen7,pq,Who is the mother of Ronan Farrow?,Christiane Amanpour,False,1,False,WWW
+H0189,A,llama8,pq,What is the religion of Anne of Great Britain?,Anglicanism,True,5,True,RRW
+H0190,A,llama8,nq,Who plays yoda in revenge of the sith?,Frank Oz,True,5,True,RRR
+H0191,A,llama8,nq,Who plays the voice of chucky in seed of chucky?,Brad Dourif,True,5,True,RRR
+H0192,A,qwen7,nq,In what state was the united states center of population gravity located during the period 1790?,Maryland,True,5,True,RRR
+H0193,A,qwen7,h1,Who shot Greedo inside the cantina?,Han Solo,True,5,True,RRR
+H0194,C,qwen7,h1,Goliath is the name for a South American spider that eats what?,flies,False,1,False,UUW
+H0195,A,llama8,nq,Who sings the rap in baby by justin bieber?,Ludacris,True,5,True,RRR
+H0196,A,llama8,pq,Who was the screenwriter for The Butler?,Danny Strong,True,5,True,RRR
+H0197,B,llama8,nq,Who has scored more goals in the premier league?,Alan Shearer,True,5,True,RRU
+H0198,B,qwen7,pq,What is the capital of Botswana?,Gaborone,True,5,True,RRR
+H0199,A,qwen7,pq,In what country is Radio Free Asia?,United States,True,5,True,RUW
+H0200,C,qwen7,h1,Which character was played by John Inman in “Are you being served”?,Mr Humphreys,False,5,True,RRR

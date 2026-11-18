@@ -1,0 +1,12 @@
+qwen7 h1: 29 units, reference runs 33 (collapsed home/new (2, 2)), non-key runs 27 (0s)
+qwen7 pq: 40 units, reference runs 45 (collapsed home/new (2, 2)), non-key runs 27 (1s)
+qwen7 nq: 30 units, reference runs 27 (collapsed home/new (7, 8)), non-key runs 33 (1s)
+llama8 h1: 29 units, reference runs 37 (collapsed home/new (1, 3)), non-key runs 27 (1s)
+llama8 pq: 36 units, reference runs 43 (collapsed home/new (2, 2)), non-key runs 27 (2s)
+llama8 nq: 30 units, reference runs 33 (collapsed home/new (1, 2)), non-key runs 33 (2s)
+boot 0 (3s)
+boot 100 (34s)
+boot 200 (75s)
+boot 300 (115s)
+boot 400 (160s)
+done 202s

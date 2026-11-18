@@ -1,0 +1,7 @@
+(rev_F5) f2: absolute size of the judge-specific imprint on right sure new answers; functions copied from f1_c5_repro.py
+   dropped collapsed qwen7_FK20judgeOa35_idkc05_s1_h1 abst 1.00
+qwen7: pairs 22 | disagreement share of right-sure units 0.272 | X +0.231 | own-verdict extra refusals per 100 right-sure units +1.43 | refusal rate on units 0.225
+llama8: pairs 22 | disagreement share of right-sure units 0.305 | X +0.263 | own-verdict extra refusals per 100 right-sure units +2.08 | refusal rate on units 0.291
+  h1: disagreement 0.331  extra refusals /100 +2.17  refusal rate 0.299
+  pq: disagreement 0.214  extra refusals /100 +1.83  refusal rate 0.302
+  nq: disagreement 0.309  extra refusals /100 +1.47  refusal rate 0.207

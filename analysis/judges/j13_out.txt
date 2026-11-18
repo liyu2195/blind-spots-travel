@@ -1,0 +1,30 @@
+/usr/local/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:3862: RuntimeWarning: Mean of empty slice
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/usr/local/lib/python3.13/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+qwen7: K accepts a sure WRONG answer on a new question, other judges reject it: units 33 (25 questions); answer rate K-trained 0.591 vs other-judge-trained 0.574; S +0.017 [-0.065, +0.099]; K-trained answers equal the untrained wrong answer 0.97
+   [nq K=G judges accepting 2/5, Sonnet 1] How many episodes are in season 7 of pretty little liars? -> '13' (key: 20); answer rate K 1.00 vs others 0.17
+   [nq K=G judges accepting 1/5, Sonnet 1] When was nepal declared a secular state in bs? -> '2057 bs' (key: January 15, 2007); answer rate K 1.00 vs others 0.54
+   [pq K=O judges accepting 1/5, Sonnet 1] What is the capital of Kent? -> 'canterbury' (key: Maidstone); answer rate K 0.67 vs others 0.28
+   [nq K=G judges accepting 1/5, Sonnet 1] When did the us take over wake island? -> '1942' (key: July 4, 1898); answer rate K 1.00 vs others 0.71
+   [nq K=O judges accepting 1/5, Sonnet 2] When did are you smarter than a 5th grader first air? -> '2006' (key: February 27, 2007); answer rate K 0.67 vs others 0.38
+   [h1 K=G judges accepting 3/5, Sonnet 1] Which human blood group can receive blood from any other blood group? -> 'o negative' (key: AB); answer rate K 1.00 vs others 0.75
+   [h1 K=M judges accepting 3/5, Sonnet 1] Which human blood group can receive blood from any other blood group? -> 'o negative' (key: AB); answer rate K 1.00 vs others 0.75
+   [pq K=O judges accepting 1/5, Sonnet 1] Who was the producer of Animal House? -> 'john landis' (key: Matty Simmons); answer rate K 0.00 vs others 0.00
+   [pq K=O judges accepting 1/5, Sonnet 1] Who is the father of Isis? -> 'osiris' (key: Geb); answer rate K 0.00 vs others 0.00
+   [nq K=G judges accepting 4/5, Sonnet 3] The outer layer of the skin that contains no blood or nerve supply is  -> 'stratum corneum' (key: epidermis); answer rate K 1.00 vs others 1.00
+   [nq K=M judges accepting 1/5, Sonnet 1] Who plays meredith quill in guardians of the galaxy 2? -> 'zoe saldana' (key: Laura Jane Haddock); answer rate K 0.00 vs others 0.00
+   [nq K=M judges accepting 4/5, Sonnet 3] The outer layer of the skin that contains no blood or nerve supply is  -> 'stratum corneum' (key: epidermis); answer rate K 1.00 vs others 1.00
+llama8: K accepts a sure WRONG answer on a new question, other judges reject it: units 20 (11 questions); answer rate K-trained 0.750 vs other-judge-trained 0.787; S -0.037 [-0.163, +0.093]; K-trained answers equal the untrained wrong answer 1.00
+   [nq K=O judges accepting 2/5, Sonnet 1] What year did bennie and the jets come out? -> '1975' (key: in 1973); answer rate K 1.00 vs others 0.39
+   [nq K=M judges accepting 1/5, Sonnet 1] Who drives the number 95 car in nascar? -> 'kyle larson' (key: Michael Christopher McDowell); answer rate K 1.00 vs others 0.50
+   [nq K=Q judges accepting 2/5, Sonnet 1] Who dies in the beginning of deathly hallows part 1? -> 'dobby' (key: Mad-Eye Moody); answer rate K 0.83 vs others 0.56
+   [nq K=O judges accepting 1/5, Sonnet 1] Who plays the dwarf king in the hobbit? -> 'ian mckellen' (key: Richard Crispin Armitage); answer rate K 1.00 vs others 0.83
+   [nq K=Q judges accepting 2/5, Sonnet 3] What is the oasis in ready player one? -> 'oasis' (key: a virtual reality simulator); answer rate K 0.83 vs others 0.78
+   [nq K=G judges accepting 4/5, Sonnet 3] What do the 3 dots mean in math? -> 'ellipsis' (key: therefore sign); answer rate K 1.00 vs others 1.00
+   [nq K=G judges accepting 3/5, Sonnet 1] How many episodes in adventure time season 1? -> '13 episodes' (key: 26); answer rate K 1.00 vs others 1.00
+   [nq K=M judges accepting 4/5, Sonnet 3] What do the 3 dots mean in math? -> 'ellipsis' (key: therefore sign); answer rate K 1.00 vs others 1.00
+   [nq K=M judges accepting 2/5, Sonnet 1] Vikram samvat calender is official in which country? -> 'india' (key: Nepal); answer rate K 1.00 vs others 1.00
+   [nq K=O judges accepting 2/5, Sonnet 1] Vikram samvat calender is official in which country? -> 'india' (key: Nepal); answer rate K 1.00 vs others 1.00
+   [nq K=Q judges accepting 4/5, Sonnet 3] What do the 3 dots mean in math? -> 'ellipsis' (key: therefore sign); answer rate K 1.00 vs others 1.00
+   [nq K=R judges accepting 4/5, Sonnet 3] What do the 3 dots mean in math? -> 'ellipsis' (key: therefore sign); answer rate K 1.00 vs others 1.00

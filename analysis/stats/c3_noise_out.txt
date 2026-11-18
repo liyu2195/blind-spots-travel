@@ -1,0 +1,43 @@
+(stats) Claim 3: on NEW questions a lenient judge (Qwen judge, P(Yes) > 0.5: judgeQt50) behaves like a random grader with the same error rates
+(lenQ: wrong answers paid and right answers rejected at random at the judge's FP / FN rates), FK20, IDK credit 0.5, 6 (student x dataset) cells x
+3 seeds per arm. Seeds of the two arms share the batch schedule (same seed = same question order), so runs are paired by seed where both exist.
+Outcomes per run on new (duplicate-free) questions: abstention (final greedy is IDK), right (loose key), wrong; and on home questions.
+Judge-paid share: share of the run's final key-wrong answers that judge Q would accept at 0.5 (lookup of the final string).
+PRIMARY estimand: D = mean over the 6 cells of [mean(judge runs) - mean(lenQ runs)] of new-question abstention; same for right and wrong.
+Uncertainty: crossed bootstrap (4000): questions resampled within each cell (same draw for both arms), runs resampled within (cell, arm).
+Equivalence: TOST with margin 0.03 (about 2 seed SDs; 1/3 of the leniency curve's out-of-sample MAE) for each outcome; 'bound' = smallest margin
+that passes. Run-level permutation (arm labels permuted within cells, 20,000 draws) and the seed-paired difference as robustness; also a t over
+cells (df 5, the draft's interval), a DerSimonian-Laird random-effects mean over cells, and the logit scale for abstention.
+Output: c3_noise_out.txt
+qwen7 h1: judgeQt50 seeds [0, 1, 2], lenQ seeds [0, 1, 2], new 718, home 750
+qwen7 pq: judgeQt50 seeds [0, 1, 2], lenQ seeds [0, 1, 2], new 750, home 750
+qwen7 nq: judgeQt50 seeds [0, 1, 2], lenQ seeds [0, 1, 2], new 750, home 750
+llama8 h1: judgeQt50 seeds [0, 1, 2], lenQ seeds [0, 1, 2], new 718, home 750
+llama8 pq: judgeQt50 seeds [0, 1, 2], lenQ seeds [0, 1, 2], new 750, home 750
+llama8 nq: judgeQt50 seeds [0, 1, 2], lenQ seeds [0, 1, 2], new 750, home 750
+
+== NEW questions: judgeQt50 minus lenQ, mean over cells [95% crossed bootstrap]; TOST margin 0.03 (abstention/right/wrong)
+  abst   | qwen7 -0.0193 [-0.0378, -0.0018] TOST p 0.1197 bound 0.0349 | llama8 +0.0115 [+0.0003, +0.0245] TOST p 0.0035 bound 0.0225 | pooled -0.0039 [-0.0150, +0.0075] TOST p 0.0002 bound 0.0130
+          per dataset: h1 -0.0058 [-0.0139, +0.0021]  pq -0.0042 [-0.0220, +0.0118]  nq -0.0016 [-0.0282, +0.0256]   per cell: qh1 -0.011 qpq -0.013 qnq -0.034 lh1 -0.001 lpq +0.005 lnq +0.031
+  right  | qwen7 +0.0017 [-0.0068, +0.0104] TOST p 0.0002 bound 0.0089 | llama8 -0.0007 [-0.0087, +0.0073] TOST p 0.0002 bound 0.0076 | pooled +0.0005 [-0.0054, +0.0064] TOST p 0.0002 bound 0.0054
+          per dataset: h1 +0.0019 [-0.0070, +0.0109]  pq -0.0044 [-0.0151, +0.0062]  nq +0.0040 [-0.0064, +0.0151]   per cell: qh1 +0.003 qpq -0.003 qnq +0.005 lh1 +0.000 lpq -0.006 lnq +0.003
+  wrong  | qwen7 +0.0167 [+0.0021, +0.0320] TOST p 0.0435 bound 0.0295 | llama8 -0.0130 [-0.0258, -0.0013] TOST p 0.0067 bound 0.0240 | pooled +0.0018 [-0.0083, +0.0119] TOST p 0.0002 bound 0.0101
+          per dataset: h1 +0.0035 [-0.0063, +0.0135]  pq +0.0071 [-0.0093, +0.0240]  nq -0.0051 [-0.0287, +0.0176]   per cell: qh1 +0.007 qpq +0.016 qnq +0.027 lh1 -0.000 lpq -0.002 lnq -0.037
+  qpaid  | qwen7 +0.0194 [-0.0005, +0.0392] | llama8 +0.0513 [+0.0264, +0.0761] | pooled +0.0353 [+0.0194, +0.0512]
+
+== HOME questions: judgeQt50 minus lenQ, mean over cells [95% crossed bootstrap]; TOST margin 0.03 (abstention/right/wrong)
+  abst   | qwen7 -0.0015 [-0.0124, +0.0095] | llama8 +0.0160 [+0.0070, +0.0270] | pooled +0.0073 [+0.0001, +0.0145]
+  right  | qwen7 -0.0326 [-0.0424, -0.0224] | llama8 -0.0307 [-0.0419, -0.0197] | pooled -0.0316 [-0.0393, -0.0242]
+  wrong  | qwen7 +0.0339 [+0.0201, +0.0486] | llama8 +0.0147 [-0.0003, +0.0290] | pooled +0.0243 [+0.0138, +0.0347]
+  qpaid  | qwen7 +0.3519 [+0.3229, +0.3835] | llama8 +0.2982 [+0.2595, +0.3374] | pooled +0.3251 [+0.3005, +0.3497]
+
+  judge-paid share contrast (home diff minus new diff), pooled: +0.290
+
+== run-level permutation (arm labels permuted within each cell, 20,000 draws; two-sided) and seed-paired differences, NEW questions
+  abst   pooled -0.0039: permutation p 0.590 | seed-paired n 18 mean -0.0039 [-0.0185, +0.0108] | t over 6 cells [-0.0264, +0.0187] | DL random effects -0.0004 [-0.0066, +0.0058] (tau 0.0042)
+  right  pooled +0.0005: permutation p 0.830 | seed-paired n 18 mean +0.0005 [-0.0038, +0.0048] | t over 6 cells [-0.0039, +0.0048] | DL random effects -0.0009 [-0.0045, +0.0027] (tau 0.0000)
+  wrong  pooled +0.0018: permutation p 0.766 | seed-paired n 18 mean +0.0018 [-0.0113, +0.0150] | t over 6 cells [-0.0210, +0.0247] | DL random effects +0.0015 [-0.0076, +0.0105] (tau 0.0070)
+
+  abstention on the logit scale: mean over cells +0.079 (per cell qh1 -0.46 qpq -0.13 qnq -0.24 lh1 -0.21 lpq +0.83 lnq +0.69)
+
+== runs and seeds: qwen7 h1 judge [0, 1, 2] lenQ [0, 1, 2]; qwen7 pq judge [0, 1, 2] lenQ [0, 1, 2]; qwen7 nq judge [0, 1, 2] lenQ [0, 1, 2]; llama8 h1 judge [0, 1, 2] lenQ [0, 1, 2]; llama8 pq judge [0, 1, 2] lenQ [0, 1, 2]; llama8 nq judge [0, 1, 2] lenQ [0, 1, 2]

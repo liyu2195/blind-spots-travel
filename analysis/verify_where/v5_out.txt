@@ -1,0 +1,67 @@
+(verify_where) Item 3: does the J-run refuse where its judge rejects only when the untrained student can 'read' the verdict? Own code.
+New (duplicate-free) questions with a valid untrained greedy answer on which judges J and J' (Q M G O, a35) disagree.
+rj = J rejects (else J' rejects). Probe contrast p = probe_J - probe_J' (v4 probes: layer 16, fitted on trained-question verdicts only).
+predictable = sign(p) agrees with rj. Effect = Mantel-Haenszel difference of the run's final IDK rate (rj minus not rj) within 5 bins of the
+untrained confidence (share of 32 samples agreeing with the greedy). J runs: FK20 judge<J>a35, non-collapsed. Placebos on the same rows:
+key-trained gold runs, and the J'-trained runs (mirror: expected negative where predictable).
+Aggregation: (run, J') -> run -> (student, set, J) cell -> mean over cells; also the claimed weighting (mean over (run, J') pairs).
+Intervals: hierarchical bootstrap (questions within (student, set); runs within (student, set, grader)), 300 draws.
+Checks: (i) right vs wrong untrained answers; (ii) shuffled-label probes (placebo split); (iii) near-duplicate exclusion (new questions with
+a trained question at TF-IDF cosine >= 0.5, or the same gold answer); (iv) linear model y ~ rj + p(z) + conf bins within (run, J');
+(v) home: trained questions with out-of-fold probe scores. Output: v5_out.txt
+qwen7 pqa: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 324 (cos >= 0.5: 177, same gold: 147); runs JG 3, JM 3, JO 3, JQ 6, gold 6
+qwen7 nqo: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 70 (cos >= 0.5: 32, same gold: 38); runs JG 3, JM 3, JO 3, JQ 6, gold 1
+qwen7 tqa: new questions 718, near-duplicates of a trained question (cos >= 0.5 or same gold) 63 (cos >= 0.5: 4, same gold: 59); runs JG 2, JM 2, JO 1, JQ 6, gold 6
+llama8 pqa: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 324 (cos >= 0.5: 177, same gold: 147); runs JG 3, JM 3, JO 3, JQ 6, gold 6
+llama8 nqo: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 70 (cos >= 0.5: 32, same gold: 38); runs JG 3, JM 3, JO 3, JQ 6, gold 6
+llama8 tqa: new questions 718, near-duplicates of a trained question (cos >= 0.5 or same gold) 63 (cos >= 0.5: 4, same gold: 59); runs JG 2, JM 2, JO 2, JQ 6, gold 6
+
+== NEW questions, layer-16 probe fitted on trained-question verdicts (main)
+  qwen7: cells 12, share predictable 0.67; J-run effect all +0.116 [+0.090,+0.139]  predictable +0.184 [+0.156,+0.216]  unpredictable -0.036 [-0.068,+0.001]  (pred > unpred in 10/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.000];  J'-run mirror pred -0.184 [-0.221,-0.157] unpred +0.036 [-0.003,+0.068]
+          claimed weighting (mean over 123 (run, J') pairs): all +0.116 pred +0.181 unpred -0.027 gold +0.002/-0.017
+  llama8: cells 12, share predictable 0.72; J-run effect all +0.145 [+0.120,+0.170]  predictable +0.223 [+0.197,+0.250]  unpredictable -0.062 [-0.099,-0.020]  (pred > unpred in 10/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.000];  J'-run mirror pred -0.223 [-0.249,-0.198] unpred +0.062 [+0.020,+0.103]
+          claimed weighting (mean over 126 (run, J') pairs): all +0.145 pred +0.229 unpred -0.086 gold -0.001/-0.010
+  linear model within (run, J') pairs, qwen7: coef rj +0.061 (positive in 0.65), coef probe contrast (per sd) +0.066 (positive in 0.80)
+  linear model within (run, J') pairs, llama8: coef rj +0.038 (positive in 0.61), coef probe contrast (per sd) +0.108 (positive in 0.83)
+
+== check (i): only untrained answers that are key-RIGHT
+  qwen7: cells 12, share predictable 0.69; J-run effect all +0.130 [+0.101,+0.151]  predictable +0.191 [+0.158,+0.218]  unpredictable -0.012 [-0.067,+0.040]  (pred > unpred in 9/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred +0.000 [-0.021,+0.004];  J'-run mirror pred -0.191 [-0.221,-0.157] unpred +0.012 [-0.027,+0.072]
+          claimed weighting (mean over 123 (run, J') pairs): all +0.130 pred +0.182 unpred -0.001 gold +0.000/-0.013
+  llama8: cells 12, share predictable 0.72; J-run effect all +0.134 [+0.111,+0.165]  predictable +0.207 [+0.172,+0.244]  unpredictable -0.050 [-0.084,+0.003]  (pred > unpred in 10/12 cells)
+          gold placebo pred -0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.002];  J'-run mirror pred -0.207 [-0.244,-0.170] unpred +0.050 [+0.001,+0.081]
+          claimed weighting (mean over 126 (run, J') pairs): all +0.138 pred +0.216 unpred -0.076 gold +0.002/-0.015
+
+== check (i): only untrained answers that are key-WRONG
+  qwen7: cells 8, share predictable 0.65; J-run effect all +0.113 [+0.027,+0.186]  predictable +0.213 [+0.122,+0.282]  unpredictable -0.079 [-0.191,+0.053]  (pred > unpred in 6/8 cells)
+          gold placebo pred +0.006 [-0.029,+0.046] unpred +0.000 [-0.046,+0.076];  J'-run mirror pred -0.216 [-0.295,-0.101] unpred +0.079 [-0.049,+0.201]
+          claimed weighting (mean over 84 (run, J') pairs): all +0.086 pred +0.186 unpred -0.069 gold -0.020/-0.045
+  llama8: cells 8, share predictable 0.72; J-run effect all +0.153 [+0.050,+0.236]  predictable +0.265 [+0.121,+0.346]  unpredictable -0.171 [-0.279,+0.012]  (pred > unpred in 7/8 cells)
+          gold placebo pred +0.014 [-0.007,+0.037] unpred -0.014 [-0.065,+0.024];  J'-run mirror pred -0.277 [-0.361,-0.123] unpred +0.004 [-0.081,+0.212]
+          claimed weighting (mean over 72 (run, J') pairs): all +0.145 pred +0.261 unpred -0.127 gold +0.004/-0.014
+
+== check (ii): placebo split by SHUFFLED-label probes (fitted on permuted trained-question verdicts)
+  qwen7: cells 12, share predictable 0.52; J-run effect all +0.116 [+0.093,+0.145]  predictable +0.114 [+0.093,+0.143]  unpredictable +0.118 [+0.086,+0.151]  (pred > unpred in 6/12 cells)
+          gold placebo pred -0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.000];  J'-run mirror pred -0.114 [-0.145,-0.095] unpred -0.118 [-0.153,-0.085]
+          claimed weighting (mean over 123 (run, J') pairs): all +0.116 pred +0.106 unpred +0.126 gold -0.016/+0.002
+  llama8: cells 12, share predictable 0.50; J-run effect all +0.145 [+0.121,+0.170]  predictable +0.144 [+0.110,+0.173]  unpredictable +0.151 [+0.123,+0.181]  (pred > unpred in 6/12 cells)
+          gold placebo pred -0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.000];  J'-run mirror pred -0.144 [-0.172,-0.108] unpred -0.151 [-0.180,-0.120]
+          claimed weighting (mean over 126 (run, J') pairs): all +0.145 pred +0.134 unpred +0.164 gold -0.005/+0.001
+
+== check (iii): near-duplicates of trained questions removed
+  qwen7: cells 12, share predictable 0.66; J-run effect all +0.108 [+0.082,+0.142]  predictable +0.181 [+0.149,+0.227]  unpredictable -0.051 [-0.096,-0.006]  (pred > unpred in 10/12 cells)
+          gold placebo pred -0.000 [-0.000,+0.000] unpred +0.000 [-0.011,+0.002];  J'-run mirror pred -0.181 [-0.223,-0.148] unpred +0.051 [-0.004,+0.099]
+          claimed weighting (mean over 123 (run, J') pairs): all +0.099 pred +0.164 unpred -0.046 gold +0.004/-0.018
+  llama8: cells 12, share predictable 0.71; J-run effect all +0.130 [+0.106,+0.160]  predictable +0.211 [+0.182,+0.241]  unpredictable -0.084 [-0.146,-0.017]  (pred > unpred in 10/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.001];  J'-run mirror pred -0.211 [-0.242,-0.182] unpred +0.084 [+0.031,+0.137]
+          claimed weighting (mean over 126 (run, J') pairs): all +0.124 pred +0.218 unpred -0.121 gold +0.000/-0.013
+
+== check (v): HOME (trained questions), out-of-fold probe scores
+  qwen7: cells 12, share predictable 0.65; J-run effect all +0.392 [+0.361,+0.425]  predictable +0.431 [+0.396,+0.469]  unpredictable +0.319 [+0.284,+0.359]  (pred > unpred in 10/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred -0.000 [-0.000,+0.000];  J'-run mirror pred -0.431 [-0.470,-0.389] unpred -0.319 [-0.358,-0.278]
+          claimed weighting (mean over 123 (run, J') pairs): all +0.383 pred +0.416 unpred +0.317 gold +0.004/-0.008
+  llama8: cells 12, share predictable 0.70; J-run effect all +0.485 [+0.462,+0.509]  predictable +0.534 [+0.508,+0.563]  unpredictable +0.369 [+0.335,+0.410]  (pred > unpred in 10/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred -0.000 [-0.000,+0.000];  J'-run mirror pred -0.534 [-0.566,-0.507] unpred -0.369 [-0.413,-0.333]
+          claimed weighting (mean over 126 (run, J') pairs): all +0.488 pred +0.547 unpred +0.356 gold +0.003/+0.010

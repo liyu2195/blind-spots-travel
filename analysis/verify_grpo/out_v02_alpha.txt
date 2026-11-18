@@ -1,0 +1,24 @@
+qwen7 h1: 118 runs; families {'judgeQ': 34, 'altkey': 23, 'uniFP': 12, 'skip': 5, 'hash': 2, 'judgeG': 3, 'judgeM': 3, 'judgeO': 3, 'uniMix': 6, 'gold': 8, 'uniFN': 19}
+  (26 s)
+qwen7 pq: 157 runs; families {'skip': 6, 'altkey': 15, 'setFN': 35, 'hash': 2, 'judgeG': 3, 'judgeM': 3, 'judgeO': 3, 'judgeQ': 19, 'uniMix': 18, 'long': 2, 'setFP': 24, 'gold': 6, 'uniFN': 15, 'uniFP': 6}
+  (16 s)
+qwen7 nq: 80 runs; families {'gold': 7, 'skip': 3, 'altkey': 12, 'hash': 2, 'judgeG': 5, 'judgeM': 3, 'judgeO': 5, 'judgeQ': 15, 'judgeR': 2, 'uniMix': 9, 'long': 2, 'uniFN': 6, 'uniFP': 9}
+  (10 s)
+llama8 h1: 103 runs; families {'judgeQ': 32, 'altkey': 18, 'uniFP': 8, 'skip': 3, 'hash': 2, 'judgeG': 3, 'judgeM': 3, 'judgeO': 3, 'uniMix': 6, 'gold': 6, 'uniFN': 19}
+  (20 s)
+llama8 pq: 134 runs; families {'skip': 3, 'altkey': 11, 'setFN': 31, 'hash': 2, 'judgeG': 3, 'judgeM': 3, 'judgeO': 3, 'judgeQ': 17, 'uniMix': 12, 'long': 2, 'gold': 7, 'uniFN': 21, 'uniFP': 10, 'setFP': 9}
+  (11 s)
+llama8 nq: 78 runs; families {'skip': 3, 'altkey': 8, 'hash': 2, 'judgeG': 5, 'judgeM': 3, 'judgeO': 5, 'judgeQ': 15, 'judgeR': 2, 'uniMix': 9, 'long': 2, 'gold': 6, 'uniFN': 9, 'uniFP': 9}
+  (7 s)
+phi4m h1: 219 runs; families {'altkey': 47, 'gold': 37, 'uniFN': 27, 'uniFP': 58, 'hash': 15, 'uniMix': 30, 'skip': 5}
+  (53 s)
+phi4m pq: 11 runs; families {'gold': 5, 'altkey': 1, 'uniFN': 2, 'uniFP': 3}
+  (1 s)
+smol3 h1: 207 runs; families {'altkey': 46, 'gold': 35, 'uniFN': 26, 'uniFP': 57, 'hash': 15, 'uniMix': 23, 'skip': 5}
+  (37 s)
+smol3 pq: 8 runs; families {'altkey': 1, 'gold': 3, 'uniFN': 1, 'uniFP': 2, 'hash': 1}
+  (1 s)
+granite h1: 13 runs; families {'gold': 4, 'uniFN': 2, 'uniFP': 4, 'uniMix': 3}
+  (3 s)
+granite pq: 0 runs; families {}
+  (0 s)

@@ -1,0 +1,46 @@
+(fam_fix) e67_abstention: PopQA new-question abstention, refusal of known answers and wrong answers given, for the E6 (acc cut) and E7 (credit,
+unnormalised advantages) runs and their references. Known = untrained greedy right (loose key). Output: e67_abstention_out.txt
+
+=== qwen7 (untrained greedy right on 0.51 of new questions)
+  DjudgeOt50_idkc085           runs 1  abstention 0.187  known refused 0.018  wrong answers 0.311  right answers 0.503
+  DjudgeQt50_idkc085           runs 2  abstention 0.168  known refused 0.025  wrong answers 0.333  right answers 0.499
+  Dsim00fn00_idkc07            runs 1  abstention 0.260  known refused 0.045  wrong answers 0.251  right answers 0.489
+  Dsim00fn00_idkc085           runs 1  abstention 0.380  known refused 0.095  wrong answers 0.157  right answers 0.463
+  Dsim00fn00_idkc095           runs 1  abstention 0.368  known refused 0.095  wrong answers 0.161  right answers 0.471
+  judgeGa35_idkc05             runs 3  abstention 0.596  known refused 0.324  wrong answers 0.061  right answers 0.343
+  judgeGa50_idkc05             runs 2  abstention 0.475  known refused 0.194  wrong answers 0.112  right answers 0.413
+  judgeGt50_idkc05             runs 2  abstention 0.129  known refused 0.017  wrong answers 0.359  right answers 0.512
+  judgeMa35_idkc05             runs 3  abstention 0.707  known refused 0.459  wrong answers 0.018  right answers 0.275
+  judgeMa50_idkc05             runs 2  abstention 0.430  known refused 0.136  wrong answers 0.121  right answers 0.449
+  judgeMt50_idkc05             runs 2  abstention 0.055  known refused 0.000  wrong answers 0.407  right answers 0.538
+  judgeOa35_idkc05             runs 3  abstention 0.599  known refused 0.310  wrong answers 0.048  right answers 0.352
+  judgeOa50_idkc05             runs 2  abstention 0.438  known refused 0.135  wrong answers 0.126  right answers 0.436
+  judgeOt50_idkc05             runs 2  abstention 0.216  known refused 0.020  wrong answers 0.257  right answers 0.527
+  judgeQa35_idkc05             runs 6  abstention 0.630  known refused 0.357  wrong answers 0.042  right answers 0.328
+  judgeQa50_idkc05             runs 6  abstention 0.517  known refused 0.297  wrong answers 0.126  right answers 0.356
+  judgeQt50_idkc05             runs 3  abstention 0.074  known refused 0.002  wrong answers 0.393  right answers 0.532
+  sim00fn00_idkc05             runs 6  abstention 0.380  known refused 0.110  wrong answers 0.156  right answers 0.464
+
+=== llama8 (untrained greedy right on 0.70 of new questions)
+  DjudgeOt50_idkc085           runs 1  abstention 0.149  known refused 0.048  wrong answers 0.183  right answers 0.668
+  DjudgeQt50_idkc085           runs 2  abstention 0.047  known refused 0.009  wrong answers 0.261  right answers 0.693
+  Dsim00fn00_idkc07            runs 1  abstention 0.075  known refused 0.010  wrong answers 0.225  right answers 0.700
+  Dsim00fn00_idkc085           runs 1  abstention 0.151  known refused 0.042  wrong answers 0.163  right answers 0.687
+  Dsim00fn00_idkc095           runs 1  abstention 0.188  known refused 0.061  wrong answers 0.139  right answers 0.673
+  judgeGa35_idkc05             runs 3  abstention 0.568  known refused 0.461  wrong answers 0.049  right answers 0.383
+  judgeGa50_idkc05             runs 2  abstention 0.403  known refused 0.287  wrong answers 0.088  right answers 0.509
+  judgeGacc_idkc05             runs 2  abstention 0.104  known refused 0.027  wrong answers 0.216  right answers 0.680
+  judgeGt50_idkc05             runs 2  abstention 0.039  known refused 0.006  wrong answers 0.249  right answers 0.712
+  judgeMa35_idkc05             runs 3  abstention 0.640  known refused 0.511  wrong answers 0.016  right answers 0.345
+  judgeMa50_idkc05             runs 2  abstention 0.360  known refused 0.221  wrong answers 0.089  right answers 0.551
+  judgeMacc_idkc05             runs 5  abstention 0.241  known refused 0.111  wrong answers 0.129  right answers 0.630
+  judgeMt50_idkc05             runs 2  abstention 0.011  known refused 0.000  wrong answers 0.274  right answers 0.715
+  judgeOa35_idkc05             runs 3  abstention 0.580  known refused 0.452  wrong answers 0.029  right answers 0.391
+  judgeOa50_idkc05             runs 2  abstention 0.381  known refused 0.250  wrong answers 0.086  right answers 0.533
+  judgeOacc_idkc05             runs 2  abstention 0.158  known refused 0.054  wrong answers 0.171  right answers 0.671
+  judgeOt50_idkc05             runs 2  abstention 0.096  known refused 0.027  wrong answers 0.212  right answers 0.692
+  judgeQa35_idkc05             runs 6  abstention 0.613  known refused 0.492  wrong answers 0.027  right answers 0.360
+  judgeQa50_idkc05             runs 6  abstention 0.483  known refused 0.351  wrong answers 0.058  right answers 0.459
+  judgeQacc_idkc05             runs 5  abstention 0.259  known refused 0.145  wrong answers 0.143  right answers 0.598
+  judgeQt50_idkc05             runs 3  abstention 0.013  known refused 0.001  wrong answers 0.283  right answers 0.704
+  sim00fn00_idkc05             runs 6  abstention 0.102  known refused 0.018  wrong answers 0.196  right answers 0.702

@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m FPK=0.0 FPU=0.0 FN=0.0 ADV=std IDK=0.375 SEED=1 OUTNAME=phi4m_sim00fn00_idkc375_s1_h1

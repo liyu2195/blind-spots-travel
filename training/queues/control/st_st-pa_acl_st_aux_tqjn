@@ -1,0 +1,9 @@
+STUDENT=microsoft/Phi-4-mini-instruct
+TAG=phi4m
+JUDGE=Qwen/Qwen3.5-9B
+TPB=2048
+CAP=10800
+STEPS="trivia:B:judge,noise"
+NOTAKEOVER=1
+NOSHUTDOWN=1
+WAITFOR=gs://YOUR_BUCKET/acl_st/run1/trivia/phi4m/B_gold_major.done

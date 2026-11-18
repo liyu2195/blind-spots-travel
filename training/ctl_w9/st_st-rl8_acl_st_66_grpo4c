@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m REWARD=judgeG PROMPT=idk IDK=0.5 TRAIN=tqa_h1 LR=5e-5 CAP=21600 SCOREG=0 FMT=1 STEPS=120 CK=40 JMODE=free SEED=0 OUTNAME=phi4m_FjudgeG_idk_h1

@@ -1,0 +1,7 @@
+STUDENT=allenai/Olmo-3-7B-Instruct
+TAG=olmo3_h1
+TPB=4096
+CAP=14400
+NOTAKEOVER=1
+TQ_TRAIN=tqa_h1
+STEPS="trivia:A trivia:B:judge,noise,gold"

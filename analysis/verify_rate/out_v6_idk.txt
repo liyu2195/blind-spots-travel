@@ -1,0 +1,66 @@
+== (A1) exact check: group of 8, m IDK (credit c) + answers with one common reward; IDK advantage for c = 0.3 / 0.5 / 0.7 / 0.9
+   m 1 answers all 0: std [2.473 2.473 2.474 2.474]   none [0.262 0.438 0.612 0.788]
+   m 1 answers all 1: std [-2.474 -2.473 -2.473 -2.468]   none [-0.612 -0.438 -0.263 -0.088]
+   m 2 answers all 0: std [1.619 1.619 1.62  1.62 ]   none [0.225 0.375 0.525 0.675]
+   m 2 answers all 1: std [-1.62  -1.619 -1.619 -1.617]   none [-0.525 -0.375 -0.225 -0.075]
+   m 4 answers all 0: std [0.935 0.935 0.935 0.935]   none [0.15 0.25 0.35 0.45]
+   m 4 answers all 1: std [-0.935 -0.935 -0.935 -0.934]   none [-0.35 -0.25 -0.15 -0.05]
+   mixed example, m 1, 7 answers with k accepted, c 0.3 / 0.5 / 0.7 / 0.9 (std):
+     k 1: [0.388 0.84  1.214 1.503]
+     k 3: [-0.226  0.126  0.471  0.79 ]
+     k 5: [-0.763 -0.409 -0.028  0.356]
+
+== (A2) from the untrained samples (32 per trained question): per-question acceptance a_q of one valid answer; P(7 answers homogeneous);
+   mean expected IDK advantage at c = 0.3 / 0.5 / 0.7 / 0.9 (std | none). Deterministic key: a_q = strict-right share; random FP f: a_q = q + (1 - q) f
+   phi4m  h1 key                                          P(homog.) 0.68  std [0.25 0.37 0.5  0.61] (range 0.36)  none [-0.1   0.07  0.25  0.42] (range 0.52)
+   phi4m  h1 FP20                                         P(homog.) 0.37  std [-0.59 -0.35 -0.11  0.1 ] (range 0.69)  none [-0.2  -0.03  0.15  0.32] (range 0.53)
+   phi4m  h1 FP35                                         P(homog.) 0.32  std [-0.91 -0.65 -0.4  -0.17] (range 0.74)  none [-0.28 -0.11  0.07  0.24] (range 0.53)
+   smol3  h1 key                                          P(homog.) 0.69  std [0.44 0.56 0.68 0.79] (range 0.35)  none [-0.07  0.1   0.28  0.45] (range 0.53)
+   smol3  h1 FP20                                         P(homog.) 0.34  std [-0.48 -0.23  0.02  0.23] (range 0.72)  none [-0.18 -0.01  0.17  0.34] (range 0.53)
+   smol3  h1 FP35                                         P(homog.) 0.29  std [-0.82 -0.56 -0.29 -0.05] (range 0.78)  none [-0.26 -0.09  0.09  0.26] (range 0.53)
+   qwen7  h1 key                                          P(homog.) 0.84  std [-0.34 -0.28 -0.22 -0.16] (range 0.18)  none [-0.22 -0.05  0.13  0.3 ] (range 0.53)
+   qwen7  h1 FP20                                         P(homog.) 0.56  std [-1.05 -0.88 -0.72 -0.57] (range 0.48)  none [-0.3  -0.13  0.05  0.22] (range 0.53)
+   qwen7  h1 FP35                                         P(homog.) 0.51  std [-1.3  -1.12 -0.94 -0.77] (range 0.53)  none [-0.36 -0.18 -0.01  0.17] (range 0.52)
+   qwen7  h1 judgeQt50 (per-sample verdicts treated iid)  P(homog.) 0.76  std [-1.32 -1.22 -1.13 -1.04] (range 0.28)  none [-0.39 -0.22 -0.04  0.13] (range 0.52)
+   qwen7  pq key                                          P(homog.) 0.87  std [-0.11 -0.06 -0.01  0.05] (range 0.15)  none [-0.18 -0.01  0.17  0.34] (range 0.53)
+   qwen7  pq FP20                                         P(homog.) 0.54  std [-0.92 -0.74 -0.57 -0.42] (range 0.50)  none [-0.27 -0.1   0.08  0.25] (range 0.53)
+   qwen7  pq FP35                                         P(homog.) 0.48  std [-1.2  -1.01 -0.82 -0.64] (range 0.56)  none [-0.33 -0.16  0.02  0.19] (range 0.53)
+   qwen7  pq judgeQt50 (per-sample verdicts treated iid)  P(homog.) 0.70  std [-1.12 -1.   -0.89 -0.79] (range 0.33)  none [-0.35 -0.17  0.    0.18] (range 0.52)
+   llama8 h1 key                                          P(homog.) 0.76  std [-1.01 -0.92 -0.82 -0.73] (range 0.28)  none [-0.34 -0.17  0.01  0.18] (range 0.52)
+   llama8 h1 FP20                                         P(homog.) 0.62  std [-1.43 -1.28 -1.14 -1.  ] (range 0.43)  none [-0.39 -0.22 -0.04  0.13] (range 0.53)
+   llama8 h1 FP35                                         P(homog.) 0.60  std [-1.6  -1.45 -1.3  -1.15] (range 0.45)  none [-0.44 -0.26 -0.09  0.09] (range 0.53)
+   llama8 h1 judgeQt50 (per-sample verdicts treated iid)  P(homog.) 0.79  std [-1.69 -1.61 -1.52 -1.44] (range 0.25)  none [-0.47 -0.29 -0.12  0.06] (range 0.52)
+   note: a deterministic judge's verdicts on one question's samples are not iid; the iid line for judgeQt50 understates its homogeneity.
+
+== (B) credit sweeps: abstention on NEW questions (and at home) by credit; slope = OLS d abstention / d c over runs (SE)
+  phi4m  h1 FK20 (KL .2, strict fmt)   adv none FP00FN00   runs  3: c0.30:0.02(n1)  c0.50:0.06(n1)  c0.70:0.37(n1)   slope +0.87 (SE 0.39; Theil-Sen +0.87)
+  phi4m  h1 FK20 (KL .2, strict fmt)   adv none FP35FN00   runs  2: c0.50:0.02(n1)  c0.70:0.03(n1)   slope +0.10 (SE nan; Theil-Sen +0.10)
+  phi4m  h1 FK20 (KL .2, strict fmt)   adv std  FP00FN00   runs  9: c0.10:0.36(n1)  c0.30:0.53(n1)  c0.40:0.48(n1)  c0.50:0.42(n3)  c0.60:0.50(n1)  c0.70:0.54(n1)  c0.90:0.56(n1)   slope +0.21 (SE 0.08; Theil-Sen +0.20)
+  phi4m  h1 FK20 (KL .2, strict fmt)   adv std  FP00FN30   runs  4: c0.40:0.65(n1)  c0.50:0.60(n3)   slope -0.41 (SE 0.66; Theil-Sen -0.25)
+  phi4m  h1 FK20 (KL .2, strict fmt)   adv std  FP20FN00   runs  4: c0.50:0.13(n3)  c0.60:0.16(n1)   slope +0.29 (SE 1.02; Theil-Sen +0.28)
+  phi4m  h1 FK20 (KL .2, strict fmt)   adv std  FP35FN00   runs 11: c0.50:0.01(n1)  c0.60:0.02(n1)  c0.70:0.04(n3)  c0.80:0.13(n3)  c0.90:0.24(n3)   slope +0.65 (SE 0.24; Theil-Sen +0.32)
+  phi4m  h1 old (no KL)                adv none FP00FN00   runs  6: c0.25:0.00(n2)  c0.38:0.19(n2)  c0.50:0.46(n2)   slope +1.86 (SE 0.48; Theil-Sen +1.86)
+  phi4m  h1 old (no KL)                adv none FP35FN00   runs  3: c0.50:0.00(n2)  c0.90:1.00(n1)   slope +2.50 (SE 0.00; Theil-Sen +2.50)
+  phi4m  h1 old (no KL)                adv std  FP00FN00   runs  5: c0.25:0.45(n2)  c0.38:0.19(n2)  c0.90:1.00(n1)   slope +0.98 (SE 0.52; Theil-Sen +0.32)
+  phi4m  h1 old (no KL)                adv std  FP20FN00   runs  4: c0.50:0.45(n2)  c0.90:0.41(n2)   slope -0.11 (SE 0.24; Theil-Sen -0.11)
+  qwen7  h1 FK20 (KL .2, strict fmt)   adv std  judgeQt50  runs  5: c0.50:0.02(n3)  c0.70:0.02(n1)  c0.85:0.02(n1)   slope +0.00 (SE 0.02; Theil-Sen +0.01)
+  qwen7  pq FK20 (KL .2, strict fmt)   adv std  judgeQt50  runs  5: c0.50:0.07(n3)  c0.70:0.05(n1)  c0.85:0.09(n1)   slope +0.01 (SE 0.04; Theil-Sen +0.01)
+  smol3  h1 FK20 (KL .2, strict fmt)   adv none FP00FN00   runs  3: c0.30:0.16(n1)  c0.50:0.23(n1)  c0.70:0.38(n1)   slope +0.57 (SE 0.12; Theil-Sen +0.57)
+  smol3  h1 FK20 (KL .2, strict fmt)   adv none FP35FN00   runs  2: c0.50:0.07(n1)  c0.70:0.17(n1)   slope +0.52 (SE nan; Theil-Sen +0.52)
+  smol3  h1 FK20 (KL .2, strict fmt)   adv std  FP00FN00   runs  7: c0.30:0.45(n1)  c0.40:0.43(n1)  c0.50:0.67(n3)  c0.60:0.45(n1)  c0.70:0.48(n1)   slope +0.06 (SE 0.70; Theil-Sen +0.06)
+  smol3  h1 FK20 (KL .2, strict fmt)   adv std  FP00FN30   runs  4: c0.40:0.65(n1)  c0.50:0.75(n3)   slope +1.04 (SE 2.60; Theil-Sen +0.57)
+  smol3  h1 FK20 (KL .2, strict fmt)   adv std  FP20FN00   runs  4: c0.50:0.28(n3)  c0.60:0.18(n1)   slope -1.04 (SE 1.57; Theil-Sen -0.26)
+  smol3  h1 FK20 (KL .2, strict fmt)   adv std  FP35FN00   runs 11: c0.50:0.09(n1)  c0.60:0.10(n1)  c0.70:0.21(n3)  c0.80:0.18(n3)  c0.90:0.38(n3)   slope +0.71 (SE 0.20; Theil-Sen +0.74)
+  smol3  h1 old (no KL)                adv none FP00FN00   runs  6: c0.25:0.00(n2)  c0.38:0.00(n2)  c0.50:0.00(n2)   slope +0.00 (SE 0.00; Theil-Sen +0.00)
+  smol3  h1 old (no KL)                adv none FP35FN00   runs  3: c0.50:0.00(n2)  c0.90:1.00(n1)   slope +2.49 (SE 0.02; Theil-Sen +2.49)
+  smol3  h1 old (no KL)                adv std  FP00FN00   runs  5: c0.25:0.50(n2)  c0.38:0.31(n2)  c0.90:0.58(n1)   slope +0.20 (SE 0.53; Theil-Sen +0.13)
+  smol3  h1 old (no KL)                adv std  FP20FN00   runs  4: c0.50:0.10(n2)  c0.90:0.00(n2)   slope -0.25 (SE 0.25; Theil-Sen -0.25)
+
+== summary of slopes (per unit credit) by advantage type and grader kind
+                   sweeps  runs  mean_slope  median_theil  min_slope  max_slope
+adv  kind                                                                      
+none key                4    18        0.82          0.72       0.00       1.86
+     random noise       4    10        1.40          1.51       0.10       2.50
+std  judge t50          2    10        0.01          0.01       0.00       0.01
+     key                4    26        0.36          0.16       0.06       0.98
+     random noise       8    46        0.11          0.09      -1.04       1.04

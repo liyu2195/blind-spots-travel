@@ -1,0 +1,11 @@
+(knowledge) Q1 in one number per pair: of the trained models' key-right answers on NEW questions (all FK20 runs, idkc 0.5), the share that (i) agree with
+the untrained greedy answer, (ii) appear among the 32 untrained samples, (iii) appear in neither; and the share of the accuracy-among-answered gain that is
+selection (k2 rows: sel / (sel + chg), runs with 0.05 <= a <= 0.95).  Output: k2b_out.txt
+qwen7 h1: 77 runs, 26154 right answers: same as untrained greedy 0.958, other untrained sample 0.039, never sampled 0.0031
+qwen7 pq: 155 runs, 45821 right answers: same as untrained greedy 0.945, other untrained sample 0.039, never sampled 0.0158
+qwen7 nq: 76 runs, 11076 right answers: same as untrained greedy 0.919, other untrained sample 0.068, never sampled 0.0128
+llama8 h1: 74 runs, 31392 right answers: same as untrained greedy 0.966, other untrained sample 0.033, never sampled 0.0013
+llama8 pq: 127 runs, 47977 right answers: same as untrained greedy 0.945, other untrained sample 0.050, never sampled 0.0055
+llama8 nq: 78 runs, 15346 right answers: same as untrained greedy 0.899, other untrained sample 0.087, never sampled 0.0140
+all: 177766 right answers: same as untrained greedy 0.945, other untrained sample 0.047, never sampled 0.0083
+accuracy-among-answered gain over the untrained greedy accuracy, 491 runs: selection +0.185, answer change +0.0089; selection share of the gain 0.954; runs with |chg| < 0.03: 0.92

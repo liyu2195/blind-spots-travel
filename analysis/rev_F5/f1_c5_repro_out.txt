@@ -1,0 +1,95 @@
+(rev_F5) Independent re-derivation of the judge crossover X (stats/c5, key-only-truth robustness row) from RAW files only.
+Units: NEW questions (not a training idx / qid / question text), untrained greedy valid (fin == stop, one line, parsed non-empty), not IDK,
+key-right (st_common.tq_correct, loose aliases), 'sure' (>= 31/32 samples agree: equal, or whole-word containment, len >= 3).
+Verdicts: judge J rejects the untrained greedy iff P(Yes)/(P(Yes)+P(No)) <= t_a35 (final/thresholds_J.json).
+Runs: rl/<st>_FK20judge<J>a35_idkc05_s<k>_<ds>, new-question abstention < 0.95. IDK = trainer's own IDK_RE (prefix match), NOT the
+full-match list used by the authors (a small robustness difference on purpose).
+X(K,J) = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)], A = K rejects & J accepts, B = J rejects & K accepts, |A|,|B| >= 5.
+Extra checks: (i) X per pair, and leave-one-judge-out means; (ii) seed-split placebo: for judge Q (6 seeds) split its seeds 3/3 and
+compute the same X statistic using each other judge's verdict contrast with Q (a 'same-judge' null that should be ~0);
+(iii) X recomputed with only seeds 0-1 for every judge (balanced seeds).
+Usage: nice -n 10 timeout 280 python3 -I f1_c5_repro.py -> f1_c5_repro_out.txt
+   dropped collapsed qwen7_FK20judgeOa35_idkc05_s1_h1 abst 1.00
+qwen7 h1: new 718, units 317, runs Q:6 M:2 G:2 O:1
+qwen7 pq: new 750, units 282, runs Q:6 M:3 G:3 O:3
+qwen7 nq: new 750, units 109, runs Q:6 M:3 G:3 O:3 R:2
+llama8 h1: new 718, units 368, runs Q:6 M:2 G:2 O:2
+llama8 pq: new 750, units 373, runs Q:6 M:3 G:3 O:3
+llama8 nq: new 750, units 124, runs Q:6 M:3 G:3 O:3 R:2
+
+== X per pair (key-only truth, sure, a35), raw-file re-derivation
+  llama8 h1 G-O: +0.285
+  llama8 h1 M-G: +0.305
+  llama8 h1 M-O: +0.354
+  llama8 h1 Q-G: +0.085
+  llama8 h1 Q-M: +0.207
+  llama8 h1 Q-O: +0.255
+  llama8 nq G-O: +0.256
+  llama8 nq G-R: +0.071
+  llama8 nq M-G: +0.285
+  llama8 nq M-O: +0.268
+  llama8 nq M-R: -0.030
+  llama8 nq O-R: +0.247
+  llama8 nq Q-G: +0.067
+  llama8 nq Q-M: +0.191
+  llama8 nq Q-O: +0.135
+  llama8 nq Q-R: +0.107
+  llama8 pq G-O: +0.463
+  llama8 pq M-G: +0.562
+  llama8 pq M-O: +0.410
+  llama8 pq Q-G: +0.473
+  llama8 pq Q-M: +0.291
+  llama8 pq Q-O: +0.498
+  qwen7 h1 G-O: +0.310
+  qwen7 h1 M-G: +0.450
+  qwen7 h1 M-O: +0.163
+  qwen7 h1 Q-G: +0.205
+  qwen7 h1 Q-M: +0.231
+  qwen7 h1 Q-O: +0.137
+  qwen7 nq G-O: +0.177
+  qwen7 nq G-R: -0.076
+  qwen7 nq M-G: +0.222
+  qwen7 nq M-O: +0.410
+  qwen7 nq M-R: +0.181
+  qwen7 nq O-R: +0.213
+  qwen7 nq Q-G: +0.028
+  qwen7 nq Q-M: +0.402
+  qwen7 nq Q-O: +0.160
+  qwen7 nq Q-R: +0.110
+  qwen7 pq G-O: +0.339
+  qwen7 pq M-G: +0.345
+  qwen7 pq M-O: +0.229
+  qwen7 pq Q-G: +0.333
+  qwen7 pq Q-M: +0.174
+  qwen7 pq Q-O: +0.333
+  qwen7: mean X +0.231 over 22 cells, positive 21
+  llama8: mean X +0.263 over 22 cells, positive 21
+  pooled (cells equal): +0.247 over 44 cells, positive 42
+  dataset h1: +0.249 (12 cells, 12 positive)
+  dataset pq: +0.371 (12 cells, 12 positive)
+  dataset nq: +0.171 (20 cells, 18 positive)
+
+== leave-one-judge-out (pairs not involving the judge)
+  without Q: +0.268 (24 cells, 22 positive)
+  without M: +0.217 (24 cells, 23 positive)
+  without G: +0.237 (24 cells, 23 positive)
+  without O: +0.218 (24 cells, 22 positive)
+  without R: +0.279 (36 cells, 36 positive)
+
+== pairs involving each judge
+  with Q: +0.221 (20 cells, 20 positive)
+  with M: +0.283 (20 cells, 19 positive)
+  with G: +0.259 (20 cells, 19 positive)
+  with O: +0.282 (20 cells, 20 positive)
+  with R: +0.103 (8 cells, 6 positive)
+
+== same-judge seed-split placebo (Q seeds 3 vs 3, Q-vs-J verdict contrasts; expect ~0)
+  llama8 h1: -0.040
+  llama8 nq: -0.137
+  llama8 pq: -0.001
+  qwen7 h1: -0.032
+  qwen7 nq: -0.022
+  qwen7 pq: +0.078
+
+== balanced seeds (0-1 only for every judge)
+  pooled +0.229 over 44 cells, positive 41

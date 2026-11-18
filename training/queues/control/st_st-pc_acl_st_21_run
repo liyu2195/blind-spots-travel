@@ -1,0 +1,5 @@
+STUDENT=microsoft/Phi-4-mini-instruct
+TAG=phi4m
+TPB=2048
+CAP=32400
+STEPS="trivia:B:judge,noise gsm8k:B:noise"

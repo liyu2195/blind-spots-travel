@@ -1,0 +1,25 @@
+train/1500 idx-qid mismatches 0; new (dedup) 718; home 750
+
+== qwen7: untrained greedy new: idk 0.043
+  qwen7_FK00judgeQt50_idkc05_s0_h1         kl_last 0.0000 | new: idk 0.015 same 0.741 acc|ans 0.611 kr_same 0.873 ntok 4.4 | home: idk 0.021 same 0.700 acc|ans 0.643 kr_same 0.820 ntok 4.3
+  qwen7_FK00judgeQt50_idkc05_s1_h1         kl_last 0.0000 | new: idk 0.004 same 0.779 acc|ans 0.597 kr_same 0.911 ntok 4.0 | home: idk 0.017 same 0.734 acc|ans 0.628 kr_same 0.857 ntok 3.9
+  qwen7_FK20judgeQt50_idkc05_s0_h1         kl_last 0.0885 | new: idk 0.011 same 0.854 acc|ans 0.597 kr_same 0.934 ntok 4.1 | home: idk 0.028 same 0.765 acc|ans 0.626 kr_same 0.882 ntok 4.0
+  qwen7_FK20judgeQt50_idkc05_s1_h1         kl_last 0.0763 | new: idk 0.014 same 0.826 acc|ans 0.583 kr_same 0.939 ntok 4.0 | home: idk 0.033 same 0.783 acc|ans 0.617 kr_same 0.902 ntok 4.0
+  qwen7_FK20judgeQt50_idkc05_s2_h1         kl_last 0.0794 | new: idk 0.025 same 0.867 acc|ans 0.593 kr_same 0.945 ntok 4.0 | home: idk 0.029 same 0.780 acc|ans 0.628 kr_same 0.884 ntok 3.9
+  qwen7_FK00sim35fn00_idkc05_s0_h1         kl_last 0.0000 | new: idk 0.008 same 0.705 acc|ans 0.607 kr_same 0.863 ntok 4.0 | home: idk 0.019 same 0.666 acc|ans 0.692 kr_same 0.766 ntok 4.0
+  qwen7_FK00sim35fn00_idkc05_s1_h1         kl_last 0.0000 | new: idk 0.001 same 0.781 acc|ans 0.589 kr_same 0.898 ntok 3.9 | home: idk 0.001 same 0.676 acc|ans 0.690 kr_same 0.770 ntok 3.9
+  qwen7_FK20sim35fn00_idkc05_s0_h1         kl_last 0.0753 | new: idk 0.054 same 0.904 acc|ans 0.617 kr_same 0.947 ntok 4.0 | home: idk 0.039 same 0.778 acc|ans 0.695 kr_same 0.806 ntok 3.9
+  qwen7_FK20sim35fn00_idkc05_s1_h1         kl_last 0.0731 | new: idk 0.036 same 0.918 acc|ans 0.603 kr_same 0.966 ntok 4.1 | home: idk 0.035 same 0.772 acc|ans 0.692 kr_same 0.808 ntok 4.0
+  qwen7_FK20sim35fn00_idkc05_s2_h1         kl_last 0.0712 | new: idk 0.032 same 0.876 acc|ans 0.610 kr_same 0.934 ntok 4.0 | home: idk 0.023 same 0.750 acc|ans 0.678 kr_same 0.809 ntok 4.0
+
+== llama8: untrained greedy new: idk 0.010
+  llama8_FK00judgeQt50_idkc05_s0_h1        kl_last 0.0000 | new: idk 0.001 same 0.597 acc|ans 0.622 kr_same 0.834 ntok 8.7 | home: idk 0.009 same 0.631 acc|ans 0.674 kr_same 0.816 ntok 7.9
+  llama8_FK00judgeQt50_idkc05_s1_h1        kl_last 0.0000 | new: idk 0.000 same 0.047 acc|ans 0.131 kr_same 0.340 ntok 29.8 | home: idk 0.000 same 0.052 acc|ans 0.131 kr_same 0.357 ntok 29.8
+  llama8_FK20judgeQt50_idkc05_s0_h1        kl_last 0.0616 | new: idk 0.006 same 0.892 acc|ans 0.741 kr_same 0.932 ntok 4.9 | home: idk 0.011 same 0.829 acc|ans 0.756 kr_same 0.909 ntok 4.8
+  llama8_FK20judgeQt50_idkc05_s1_h1        kl_last 0.0542 | new: idk 0.004 same 0.870 acc|ans 0.729 kr_same 0.942 ntok 5.2 | home: idk 0.003 same 0.816 acc|ans 0.762 kr_same 0.895 ntok 4.9
+  llama8_FK20judgeQt50_idkc05_s2_h1        kl_last 0.0611 | new: idk 0.003 same 0.874 acc|ans 0.726 kr_same 0.944 ntok 4.7 | home: idk 0.008 same 0.823 acc|ans 0.750 kr_same 0.907 ntok 4.8
+  llama8_FK00sim35fn00_idkc05_s0_h1        kl_last 0.0000 | new: idk 0.000 same 0.671 acc|ans 0.675 kr_same 0.849 ntok 7.2 | home: idk 0.000 same 0.675 acc|ans 0.763 kr_same 0.801 ntok 6.8
+  llama8_FK00sim35fn00_idkc05_s1_h1        kl_last 0.0000 | new: idk 0.004 same 0.712 acc|ans 0.738 kr_same 0.820 ntok 3.8 | home: idk 0.007 same 0.706 acc|ans 0.832 kr_same 0.777 ntok 3.8
+  llama8_FK20sim35fn00_idkc05_s0_h1        kl_last 0.0697 | new: idk 0.004 same 0.876 acc|ans 0.743 kr_same 0.930 ntok 4.8 | home: idk 0.005 same 0.796 acc|ans 0.838 kr_same 0.840 ntok 4.7
+  llama8_FK20sim35fn00_idkc05_s1_h1        kl_last 0.0385 | new: idk 0.004 same 0.887 acc|ans 0.731 kr_same 0.946 ntok 4.8 | home: idk 0.008 same 0.788 acc|ans 0.847 kr_same 0.830 ntok 4.7
+  llama8_FK20sim35fn00_idkc05_s2_h1        kl_last 0.0628 | new: idk 0.007 same 0.877 acc|ans 0.739 kr_same 0.930 ntok 4.8 | home: idk 0.012 same 0.781 acc|ans 0.849 kr_same 0.828 ntok 4.7

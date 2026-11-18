@@ -1,0 +1,59 @@
+(knowledge) Second CONFIRMATION on the k8 run conditions (B1 fresh questions, B2, LK20/LK50 at steps 120 and 360, FK50/FK100, IDK credit 0.7/0.85),
+for the two claims found on the FK20 runs (k11, k15).  Criteria fixed before this script was first run (2026-11-15):
+  D1  inside sure-right new questions (>= 31/32 agree, audited right), the own-grader probe forecasts the run's refusals better than 32-sample sureness
+      (AUROC) in >= 80% of confirmation runs that have >= 15 such questions and both outcomes
+  D2  on new questions, the own-grader probe beats the grader's verdict on the untrained answers of the same question (cross-fitted verdict + share)
+      in >= 75% of confirmation runs
+Output: k16_out.txt
+qwen7_B1K20hash35fn00_idkc05_s2_h1             a 0.054  new: probe 0.895 verdict 0.844
+qwen7_B1K20judgeQa35_idkc05_s0_h1              a 0.513  new: probe 0.888 verdict 0.815 | sure-right (n 324, refused 0.228): probe 0.803 conf 0.513
+qwen7_B1K20judgeQa35_idkc05_s1_h1              a 0.568  new: probe 0.889 verdict 0.825 | sure-right (n 324, refused 0.262): probe 0.825 conf 0.509
+qwen7_B1K20judgeQa35_idkc05_s2_h1              a 0.624  new: probe 0.887 verdict 0.817 | sure-right (n 324, refused 0.367): probe 0.826 conf 0.513
+qwen7_B1K20sim00fn00_idkc05_s0_h1              a 0.306  new: probe 0.923 verdict 0.825 | sure-right (n 324, refused 0.046): probe 0.911 conf 0.517
+qwen7_B1K20sim00fn00_idkc05_s1_h1              a 0.373  new: probe 0.915 verdict 0.839 | sure-right (n 324, refused 0.077): probe 0.877 conf 0.547
+qwen7_B1K20sim00fn00_idkc05_s2_h1              a 0.203  new: probe 0.917 verdict 0.829 | sure-right (n 324, refused 0.015): probe 0.913 conf 0.483
+qwen7_B1K20sim00fn20_idkc05_s0_h1              a 0.448  new: probe 0.898 verdict 0.840 | sure-right (n 324, refused 0.123): probe 0.866 conf 0.523
+qwen7_B1K20sim20fn00_idkc05_s0_h1              a 0.058  new: probe 0.898 verdict 0.810 | sure-right (n 324, refused 0.003): probe 0.765 conf 0.483
+qwen7_B2K20sim00fn00_idkc05_s0_h1              a 0.315  new: probe 0.927 verdict 0.851 | sure-right (n 324, refused 0.040): probe 0.934 conf 0.562
+qwen7_B2vK20judgeQt50_idkc05_s0_h1             a 0.058  new: probe 0.844 verdict 0.901 | sure-right (n 324, refused 0.003): probe 0.994 conf 0.483
+qwen7_LK20sim00fn00_idkc05_s0_h1               a 0.206  new: probe 0.906 verdict 0.795 | sure-right (n 324, refused 0.028): probe 0.930 conf 0.483
+qwen7_LK20sim00fn00_idkc05_s0_h1@ck360         a 0.259  new: probe 0.903 verdict 0.808 | sure-right (n 324, refused 0.031): probe 0.892 conf 0.482
+qwen7_LK20sim00fn20_idkc05_s0_h1               a 0.220  new: probe 0.894 verdict 0.797 | sure-right (n 324, refused 0.025): probe 0.935 conf 0.483
+qwen7_LK20sim00fn20_idkc05_s0_h1@ck360         a 0.327  new: probe 0.879 verdict 0.808 | sure-right (n 324, refused 0.065): probe 0.829 conf 0.558
+qwen7_LK20sim00fn40_idkc05_s0_h1               a 0.579  new: probe 0.856 verdict 0.793 | sure-right (n 324, refused 0.281): probe 0.770 conf 0.530
+qwen7_LK20sim00fn40_idkc05_s0_h1@ck360         a 0.416  new: probe 0.854 verdict 0.782 | sure-right (n 324, refused 0.127): probe 0.792 conf 0.536
+qwen7_LK20sim20fn00_idkc05_s0_h1               a 0.139  new: probe 0.894 verdict 0.769 | sure-right (n 324, refused 0.015): probe 0.871 conf 0.483
+qwen7_LK20sim20fn00_idkc05_s0_h1@ck360         a 0.113  new: probe 0.912 verdict 0.783 | sure-right (n 324, refused 0.012): probe 0.827 conf 0.483
+qwen7_LK20sim35fn00_idkc05_s0_h1               a 0.056  new: probe 0.871 verdict 0.818
+qwen7_LK50sim00fn00_idkc05_s0_h1               a 0.072  new: probe 0.907 verdict 0.821 | sure-right (n 324, refused 0.003): probe 0.988 conf 0.483
+qwen7_LK50sim00fn00_idkc05_s0_h1@ck360         a 0.085  new: probe 0.895 verdict 0.805 | sure-right (n 324, refused 0.006): probe 0.877 conf 0.483
+qwen7_LK50sim00fn20_idkc05_s0_h1               a 0.192  new: probe 0.876 verdict 0.794 | sure-right (n 324, refused 0.022): probe 0.918 conf 0.556
+qwen7_LK50sim00fn20_idkc05_s0_h1@ck360         a 0.121  new: probe 0.891 verdict 0.800 | sure-right (n 324, refused 0.009): probe 0.829 conf 0.483
+qwen7_LK50sim00fn40_idkc05_s0_h1               a 0.130  new: probe 0.880 verdict 0.772 | sure-right (n 324, refused 0.015): probe 0.823 conf 0.483
+qwen7_LK50sim00fn40_idkc05_s0_h1@ck360         a 0.280  new: probe 0.870 verdict 0.803 | sure-right (n 324, refused 0.056): probe 0.815 conf 0.541
+qwen7_FK20judgeQt50_idkc07_s0_pq               a 0.055  new: probe 0.960 verdict 0.954
+qwen7_FK20judgeQt50_idkc085_s0_pq              a 0.085  new: probe 0.965 verdict 0.960
+qwen7_FK100sim00fn00_idkc05_s0_nq              a 0.249  new: probe 0.850 verdict 0.650
+qwen7_FK100sim00fn00_idkc05_s1_nq              a 0.263  new: probe 0.859 verdict 0.654
+qwen7_FK50sim00fn00_idkc05_s0_nq               a 0.781  new: probe 0.839 verdict 0.648 | sure-right (n 154, refused 0.416): probe 0.714 conf 0.522
+qwen7_FK50sim00fn00_idkc05_s1_nq               a 0.521  new: probe 0.826 verdict 0.634 | sure-right (n 154, refused 0.084): probe 0.680 conf 0.514
+llama8_B1K20hash35fn00_idkc05_s1_h1            a 0.064  new: probe 0.809 verdict 0.855 | sure-right (n 375, refused 0.003): probe 0.393 conf 0.971
+llama8_B1K20judgeQa35_idkc05_s0_h1             a 0.409  new: probe 0.934 verdict 0.791 | sure-right (n 375, refused 0.149): probe 0.910 conf 0.569
+llama8_B1K20judgeQa35_idkc05_s1_h1             a 0.546  new: probe 0.940 verdict 0.812 | sure-right (n 375, refused 0.312): probe 0.905 conf 0.549
+llama8_B1K20judgeQa35_idkc05_s2_h1             a 0.578  new: probe 0.924 verdict 0.799 | sure-right (n 375, refused 0.333): probe 0.882 conf 0.556
+llama8_B1K20sim00fn00_idkc05_s0_h1             a 0.184  new: probe 0.880 verdict 0.839 | sure-right (n 375, refused 0.019): probe 0.860 conf 0.687
+llama8_B1K20sim00fn00_idkc05_s1_h1             a 0.131  new: probe 0.908 verdict 0.862 | sure-right (n 375, refused 0.013): probe 0.838 conf 0.773
+llama8_B1K20sim00fn00_idkc05_s2_h1             a 0.124  new: probe 0.880 verdict 0.843 | sure-right (n 375, refused 0.013): probe 0.842 conf 0.773
+llama8_B1K20sim00fn20_idkc05_s0_h1             a 0.244  new: probe 0.892 verdict 0.874 | sure-right (n 375, refused 0.027): probe 0.832 conf 0.725
+llama8_B2K20sim00fn00_idkc05_s0_h1             a 0.187  new: probe 0.911 verdict 0.857 | sure-right (n 375, refused 0.016): probe 0.860 conf 0.723
+llama8_LK20sim00fn00_idkc05_s0_pq              a 0.076  new: probe 0.807 verdict 0.799 | sure-right (n 395, refused 0.005): probe 0.807 conf 0.483
+llama8_LK20sim00fn00_idkc05_s0_pq@ck360        a 0.127  new: probe 0.855 verdict 0.825 | sure-right (n 395, refused 0.013): probe 0.871 conf 0.483
+llama8_LK20sim00fn20_idkc05_s0_pq              a 0.171  new: probe 0.855 verdict 0.853 | sure-right (n 395, refused 0.015): probe 0.889 conf 0.568
+llama8_LK20sim00fn20_idkc05_s0_pq@ck360        a 0.185  new: probe 0.853 verdict 0.861 | sure-right (n 395, refused 0.023): probe 0.842 conf 0.597
+llama8_LK20sim00fn40_idkc05_s0_pq              a 0.463  new: probe 0.911 verdict 0.823 | sure-right (n 395, refused 0.192): probe 0.910 conf 0.529
+llama8_LK20sim00fn40_idkc05_s0_pq@ck360        a 0.351  new: probe 0.895 verdict 0.844 | sure-right (n 395, refused 0.106): probe 0.881 conf 0.548
+llama8_LK20sim20fn00_idkc05_s0_pq@ck360        a 0.075  new: probe 0.799 verdict 0.836 | sure-right (n 395, refused 0.005): probe 0.813 conf 0.483
+llama8_LK20sim35fn00_idkc05_s0_pq@ck360        a 0.051  new: probe 0.767 verdict 0.812 | sure-right (n 395, refused 0.003): probe 0.713 conf 0.484
+
+D1: 43 runs; probe > sureness inside sure-right in 0.98 (mean 0.843 vs 0.552) -> MET
+D2: 49 runs; probe > verdict on new questions in 0.90 (mean 0.883 vs 0.813) -> MET

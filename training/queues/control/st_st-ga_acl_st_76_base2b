@@ -1,0 +1,1 @@
+STUDENTS="granite=ibm-granite/granite-4.2-3b" PROMPT=idk N=32 SEED=1 FILES="tqa_1500 pqa_1500"

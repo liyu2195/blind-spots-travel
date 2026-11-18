@@ -1,0 +1,1 @@
+STUDENT=Qwen/Qwen2.5-7B-Instruct TAG=qwen7 ADV=std IDK=0.5 FPMODE=random FMT=1 KLB=0.2 SEED=1 FPK=0.105 FPU=0.105 FN=0.0 FNK=1.0 FNU=0.0 KNOWSF=pqa_knows_realO_qwen7.jsonl MICRO=16 GENCHUNK=32 CAP=21600 TRAINF=pqa_h1.jsonl EVALF=pqa_1500.jsonl OUTNAME=qwen7_FK20plrealO_idkc05_s1_pq

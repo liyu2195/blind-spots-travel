@@ -1,0 +1,27 @@
+(verify_where) Item 3: does the J-run refuse where its judge rejects only when the untrained student can 'read' the verdict? Own code.
+New (duplicate-free) questions with a valid untrained greedy answer on which judges J and J' (Q M G O, a35) disagree.
+rj = J rejects (else J' rejects). Probe contrast p = probe_J - probe_J' (v4 probes: layer 16, fitted on trained-question verdicts only).
+predictable = sign(p) agrees with rj. Effect = Mantel-Haenszel difference of the run's final IDK rate (rj minus not rj) within 5 bins of the
+untrained confidence (share of 32 samples agreeing with the greedy). J runs: FK20 judge<J>a35, non-collapsed. Placebos on the same rows:
+key-trained gold runs, and the J'-trained runs (mirror: expected negative where predictable).
+Aggregation: (run, J') -> run -> (student, set, J) cell -> mean over cells; also the claimed weighting (mean over (run, J') pairs).
+Intervals: hierarchical bootstrap (questions within (student, set); runs within (student, set, grader)), 300 draws.
+Checks: (i) right vs wrong untrained answers; (ii) shuffled-label probes (placebo split); (iii) near-duplicate exclusion (new questions with
+a trained question at TF-IDF cosine >= 0.5, or the same gold answer); (iv) linear model y ~ rj + p(z) + conf bins within (run, J');
+(v) home: trained questions with out-of-fold probe scores. Output: v5_out.txt
+qwen7 pqa: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 324 (cos >= 0.5: 177, same gold: 147); runs JG 3, JM 3, JO 3, JQ 6, gold 6
+qwen7 nqo: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 70 (cos >= 0.5: 32, same gold: 38); runs JG 3, JM 3, JO 3, JQ 6, gold 1
+qwen7 tqa: new questions 718, near-duplicates of a trained question (cos >= 0.5 or same gold) 63 (cos >= 0.5: 4, same gold: 59); runs JG 2, JM 2, JO 1, JQ 6, gold 6
+llama8 pqa: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 324 (cos >= 0.5: 177, same gold: 147); runs JG 3, JM 3, JO 3, JQ 6, gold 6
+llama8 nqo: new questions 750, near-duplicates of a trained question (cos >= 0.5 or same gold) 70 (cos >= 0.5: 32, same gold: 38); runs JG 3, JM 3, JO 3, JQ 6, gold 6
+llama8 tqa: new questions 718, near-duplicates of a trained question (cos >= 0.5 or same gold) 63 (cos >= 0.5: 4, same gold: 59); runs JG 2, JM 2, JO 2, JQ 6, gold 6
+
+== NEW questions, layer-24 probe fitted on trained-question verdicts (main)
+  qwen7: cells 12, share predictable 0.67; J-run effect all +0.116 [+0.090,+0.139]  predictable +0.186 [+0.156,+0.219]  unpredictable -0.026 [-0.065,+0.008]  (pred > unpred in 9/12 cells)
+          gold placebo pred +0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.000];  J'-run mirror pred -0.186 [-0.220,-0.154] unpred +0.026 [-0.010,+0.065]
+          claimed weighting (mean over 123 (run, J') pairs): all +0.116 pred +0.179 unpred -0.010 gold -0.007/-0.003
+  llama8: cells 12, share predictable 0.68; J-run effect all +0.145 [+0.120,+0.170]  predictable +0.225 [+0.196,+0.254]  unpredictable -0.042 [-0.071,+0.003]  (pred > unpred in 9/12 cells)
+          gold placebo pred -0.000 [-0.000,+0.000] unpred +0.000 [-0.000,+0.000];  J'-run mirror pred -0.225 [-0.257,-0.196] unpred +0.042 [-0.002,+0.072]
+          claimed weighting (mean over 126 (run, J') pairs): all +0.145 pred +0.249 unpred -0.077 gold -0.000/-0.006
+  linear model within (run, J') pairs, qwen7: coef rj +0.061 (positive in 0.67), coef probe contrast (per sd) +0.064 (positive in 0.72)
+  linear model within (run, J') pairs, llama8: coef rj +0.060 (positive in 0.64), coef probe contrast (per sd) +0.104 (positive in 0.85)

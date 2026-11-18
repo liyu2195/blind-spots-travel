@@ -1,0 +1,17 @@
+rev_F6 check 2: are the strict (a35) judges' false rejections on PopQA mostly about long-tail subjects (the judge's own ignorance)?
+For right untrained answers on NEW PopQA questions (same mask as verify_map v08 'right'), by subject-popularity tercile (s_pop, from the
+data file, aligned by question text): each judge's rejection rate at its a35 cut, the untrained student's 32-sample agreement, and the
+refusal rate of judge-a35 runs vs gold-key runs (sim00fn00). Also the right-answer crossover X within popularity terciles.
+Output: f2_out.txt
+
+qwen7 PopQA new right units 438 | runs per grader {'G': 3, 'M': 3, 'O': 3, 'Q': 6, 'key': 6} | s_pop tercile cuts [ 56998. 143388.]
+   low pop  n 146 | untrained agreement 0.89 | judges reject right answers: Q 0.59 M 0.55 G 0.56 O 0.60 | refusal: judge runs (mean of 4) 0.57, key runs 0.21
+   mid pop  n 146 | untrained agreement 0.90 | judges reject right answers: Q 0.39 M 0.45 G 0.46 O 0.43 | refusal: judge runs (mean of 4) 0.40, key runs 0.11
+   high pop n 146 | untrained agreement 0.95 | judges reject right answers: Q 0.32 M 0.29 G 0.22 O 0.32 | refusal: judge runs (mean of 4) 0.23, key runs 0.05
+   right-answer crossover X within tercile (mean over pairs, n pairs): low +0.273 (6)  mid +0.354 (6)  high +0.346 (6)
+
+llama8 PopQA new right units 598 | runs per grader {'G': 3, 'M': 3, 'O': 3, 'Q': 6, 'key': 6} | s_pop tercile cuts [ 48142. 121131.]
+   low pop  n 199 | untrained agreement 0.86 | judges reject right answers: Q 0.76 M 0.73 G 0.74 O 0.77 | refusal: judge runs (mean of 4) 0.69, key runs 0.03
+   mid pop  n 199 | untrained agreement 0.85 | judges reject right answers: Q 0.57 M 0.61 G 0.58 O 0.59 | refusal: judge runs (mean of 4) 0.55, key runs 0.04
+   high pop n 200 | untrained agreement 0.94 | judges reject right answers: Q 0.34 M 0.35 G 0.31 O 0.41 | refusal: judge runs (mean of 4) 0.28, key runs 0.01
+   right-answer crossover X within tercile (mean over pairs, n pairs): low +0.455 (6)  mid +0.404 (6)  high +0.579 (6)

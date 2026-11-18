@@ -1,0 +1,6 @@
+qwen7 h1 wrong units 246 FA rate a35: Q 0.01 M 0.03 G 0.02 O 0.04 R 0.03 | FR rate a35: Q 0.45 M 0.44 G 0.45 O 0.42 R 0.49
+qwen7 pq wrong units 208 FA rate a35: Q 0.02 M 0.01 G 0.01 O 0.02 R 0.02 | FR rate a35: Q 0.43 M 0.43 G 0.41 O 0.45 R 0.49
+qwen7 nq wrong units 285 FA rate a35: Q 0.12 M 0.14 G 0.08 O 0.14 R 0.14 | FR rate a35: Q 0.31 M 0.31 G 0.33 O 0.37 R 0.37
+llama8 h1 wrong units 143 FA rate a35: Q 0.01 M 0.03 G 0.01 O 0.03 R 0.06 | FR rate a35: Q 0.52 M 0.53 G 0.55 O 0.54 R 0.48
+llama8 pq wrong units 130 FA rate a35: Q 0.01 M 0.00 G 0.00 O 0.02 R 0.05 | FR rate a35: Q 0.56 M 0.56 G 0.54 O 0.59 R 0.54
+llama8 nq wrong units 263 FA rate a35: Q 0.11 M 0.11 G 0.08 O 0.11 R 0.16 | FR rate a35: Q 0.46 M 0.45 G 0.45 O 0.43 R 0.46

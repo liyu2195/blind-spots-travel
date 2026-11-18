@@ -1,0 +1,70 @@
+(stats) Claim 1: WHICH wrong answer a judge pays is memorised at home and barely reaches new questions.
+Runs: FK20, IDK credit 0.5, judge<J><lv> with J in Q M G O and lv in a35 / a50 / t50 (judge runs); key-trained sim<FP>fn<FN> runs for the DiD.
+Unit: (run, question) where the run's final greedy answer x is key-wrong (loose key), well-formed, not IDK, and differs from the untrained greedy.
+paid_J(x) = P_J(x) > t_J(lv) (thresholds_<J>.json; t50 = 0.5), P_J looked up by (idx, first line) else (idx, normalised answer).
+b_J(q) = share of the untrained student's key-wrong samples on q that J pays at the same level (the question's base rate).
+lift_J(run) = mean over units of paid_J(x) - b_J(q);  S(run) = lift_own - mean of lift over the 3 other judges (common support: all 4 verdicts).
+PRIMARY estimand: S_new = mean over judge runs of S(run) on NEW questions (duplicate-free), per student and pooled (students weighted equally);
+  'transfer ratio' T = S_new / S_home.
+Uncertainty: crossed bootstrap (2000): questions resampled within (student, dataset, part) with the same draw for every run, and runs resampled
+  within (student, dataset, judge, level) cells. Run-level permutation: judge labels permuted among judge runs within (student, dataset, level)
+  (10,000 draws) -> null of S_new and S_home. TOST on S_new with margin 0.05 (about 1/6 of the home lift) and the equivalence bound.
+Robustness: changed vs the run's own ck0 re-decode; DiD vs key-trained runs; decode-stable questions only; cell-weighted means.
+Output: c1_content_out.txt, c1_rows.pkl
+qwen7 h1: judge runs 24, key runs 30, decode-stable share 0.931
+qwen7 pq: judge runs 36, key runs 42, decode-stable share 0.938
+qwen7 nq: judge runs 36, key runs 24, decode-stable share 0.889
+llama8 h1: judge runs 24, key runs 34, decode-stable share 0.941
+llama8 pq: judge runs 36, key runs 40, decode-stable share 0.939
+llama8 nq: judge runs 36, key runs 30, decode-stable share 0.884
+
+== MAIN: changed vs untrained greedy, common support, run-weighted
+  qwen7  home S +0.351 [+0.313, +0.391]  new S +0.025 [+0.009, +0.043]  transfer ratio 0.072 [0.025, 0.124]  (judge-run rows on new: 89)  | TOST(new, margin 0.05) p 0.0065, 90% CI [+0.011, +0.040], bound 0.040  | P*(ratio >= 0.2) 0.0000
+  llama8 home S +0.329 [+0.295, +0.366]  new S +0.033 [+0.005, +0.063]  transfer ratio 0.101 [0.015, 0.193]  (judge-run rows on new: 84)  | TOST(new, margin 0.05) p 0.1255, 90% CI [+0.010, +0.058], bound 0.058  | P*(ratio >= 0.2) 0.0180
+  pooled home S +0.340 [+0.315, +0.367]  new S +0.029 [+0.013, +0.046]  transfer ratio 0.086 [0.037, 0.135]  (judge-run rows on new: 173)  | TOST(new, margin 0.05) p 0.0105, 90% CI [+0.015, +0.043], bound 0.043  | P*(ratio >= 0.2) 0.0000
+
+== per dataset (main definition; crossed bootstrap 1000)
+  h1: qwen7 home +0.384 new +0.004 [-0.024, +0.031]  llama8 home +0.316 new +0.025 [-0.027, +0.069]
+  pq: qwen7 home +0.337 new +0.053 [+0.015, +0.092]  llama8 home +0.332 new +0.039 [-0.023, +0.112]
+  nq: qwen7 home +0.343 new +0.013 [-0.007, +0.035]  llama8 home +0.333 new +0.032 [+0.011, +0.055]
+
+== run-level permutation: judge labels permuted among judge runs within (student, dataset, level), 10,000 draws
+  qwen7  home: observed +0.351; null mean +0.0640, 95th pct +0.0998, 99.9th +0.1289; one-sided p 0.00010
+  qwen7  new: observed +0.025; null mean +0.0071, 95th pct +0.0136, 99.9th +0.0197; one-sided p 0.00010
+  llama8 home: observed +0.329; null mean +0.0505, 95th pct +0.0862, 99.9th +0.1217; one-sided p 0.00010
+  llama8 new: observed +0.033; null mean +0.0050, 95th pct +0.0175, 99.9th +0.0279; one-sided p 0.00020
+  pooled home: observed +0.340; null mean +0.0572, 95th pct +0.0823, 99.9th +0.1049; one-sided p 0.00010
+  pooled new: observed +0.029; null mean +0.0061, 95th pct +0.0132, 99.9th +0.0193; one-sided p 0.00010
+
+== robustness (pooled = mean of the two students)
+
+== changed vs the run's own ck0 re-decode
+  qwen7  home S +0.353 [+0.316, +0.394]  new S +0.022 [+0.004, +0.041]  transfer ratio 0.061 [0.011, 0.114]  (judge-run rows on new: 90)  | TOST(new, margin 0.05) p 0.0030, 90% CI [+0.007, +0.037], bound 0.037  | P*(ratio >= 0.2) 0.0000
+  llama8 home S +0.331 [+0.295, +0.364]  new S +0.030 [+0.003, +0.063]  transfer ratio 0.091 [0.008, 0.191]  (judge-run rows on new: 83)  | TOST(new, margin 0.05) p 0.1030, 90% CI [+0.006, +0.056], bound 0.056  | P*(ratio >= 0.2) 0.0190
+  pooled home S +0.342 [+0.316, +0.370]  new S +0.026 [+0.009, +0.044]  transfer ratio 0.076 [0.026, 0.128]  (judge-run rows on new: 173)  | TOST(new, margin 0.05) p 0.0080, 90% CI [+0.012, +0.041], bound 0.041  | P*(ratio >= 0.2) 0.0000
+
+== DiD: minus the same judge's S in key-trained runs (same st, ds, level)
+  qwen7  home S +0.352 [+0.314, +0.390]  new S +0.032 [+0.015, +0.050]  transfer ratio 0.091 [0.043, 0.149]  (judge-run rows on new: 89)  | TOST(new, margin 0.05) p 0.0260, 90% CI [+0.018, +0.047], bound 0.047  | P*(ratio >= 0.2) 0.0010
+  llama8 home S +0.333 [+0.297, +0.370]  new S +0.037 [+0.008, +0.067]  transfer ratio 0.110 [0.026, 0.204]  (judge-run rows on new: 84)  | TOST(new, margin 0.05) p 0.1870, 90% CI [+0.014, +0.061], bound 0.061  | P*(ratio >= 0.2) 0.0310
+  pooled home S +0.342 [+0.315, +0.367]  new S +0.034 [+0.018, +0.053]  transfer ratio 0.101 [0.053, 0.155]  (judge-run rows on new: 173)  | TOST(new, margin 0.05) p 0.0510, 90% CI [+0.021, +0.050], bound 0.050  | P*(ratio >= 0.2) 0.0010
+
+== decode-stable questions only
+  qwen7  home S +0.392 [+0.358, +0.428]  new S +0.027 [+0.007, +0.047]  transfer ratio 0.070 [0.018, 0.121]  (judge-run rows on new: 88)  | TOST(new, margin 0.05) p 0.0140, 90% CI [+0.010, +0.044], bound 0.044  | P*(ratio >= 0.2) 0.0000
+  llama8 home S +0.323 [+0.289, +0.365]  new S +0.027 [-0.002, +0.057]  transfer ratio 0.083 [-0.007, 0.175]  (judge-run rows on new: 82)  | TOST(new, margin 0.05) p 0.0550, 90% CI [+0.003, +0.051], bound 0.051  | P*(ratio >= 0.2) 0.0080
+  pooled home S +0.358 [+0.333, +0.385]  new S +0.027 [+0.010, +0.045]  transfer ratio 0.076 [0.028, 0.127]  (judge-run rows on new: 170)  | TOST(new, margin 0.05) p 0.0040, 90% CI [+0.012, +0.042], bound 0.042  | P*(ratio >= 0.2) 0.0000
+
+== cell-weighted (mean over (st, ds, judge, level) cells)
+  qwen7  home S +0.343 [+0.311, +0.376]  new S +0.024 [+0.011, +0.038]  transfer ratio 0.070 [0.033, 0.111]  (judge-run rows on new: 89)  | TOST(new, margin 0.05) p 0.0010, 90% CI [+0.013, +0.036], bound 0.036  | P*(ratio >= 0.2) 0.0000
+  llama8 home S +0.332 [+0.301, +0.365]  new S +0.040 [+0.019, +0.059]  transfer ratio 0.120 [0.058, 0.183]  (judge-run rows on new: 84)  | TOST(new, margin 0.05) p 0.1710, 90% CI [+0.023, +0.057], bound 0.057  | P*(ratio >= 0.2) 0.0070
+  pooled home S +0.337 [+0.316, +0.361]  new S +0.032 [+0.019, +0.044]  transfer ratio 0.094 [0.058, 0.132]  (judge-run rows on new: 173)  | TOST(new, margin 0.05) p 0.0040, 90% CI [+0.021, +0.042], bound 0.042  | P*(ratio >= 0.2) 0.0000
+
+== share of judge runs whose own judge has the largest of the four lifts (chance 0.25)
+  qwen7 home: 90/94 = 0.96
+  qwen7 new: 36/89 = 0.40
+  llama8 home: 87/87 = 1.00
+  llama8 new: 36/84 = 0.43
+
+== runs and seeds (judge runs with >= 5 units on new questions)
+  qwen7: h1 Ga35 seeds [0, 1]; h1 Gt50 seeds [0]; h1 Ma35 seeds [0]; h1 Mt50 seeds [0]; h1 Oa35 seeds [0]; h1 Ot50 seeds [0]; h1 Qa35 seeds [0, 1, 2, 4, 5]; h1 Qa50 seeds [0, 1, 2, 3, 4, 5]; h1 Qt50 seeds [0, 1, 2]; nq Ga35 seeds [0, 1, 2]; nq Ga50 seeds [0, 1]; nq Gt50 seeds [0, 1]; nq Ma35 seeds [0, 1, 2]; nq Ma50 seeds [0, 1]; nq Mt50 seeds [0, 1]; nq Oa35 seeds [0, 1, 2]; nq Oa50 seeds [0, 1]; nq Ot50 seeds [0, 1]; nq Qa35 seeds [0, 1, 2, 3, 4, 5]; nq Qa50 seeds [0, 1, 2, 3, 4, 5]; nq Qt50 seeds [0, 1, 2]; pq Ga35 seeds [0, 1, 2]; pq Ga50 seeds [0, 1]; pq Gt50 seeds [0, 1]; pq Ma50 seeds [0, 1]; pq Mt50 seeds [0, 1]; pq Oa35 seeds [0, 1, 2]; pq Oa50 seeds [0, 1]; pq Ot50 seeds [0, 1]; pq Qa35 seeds [0, 1, 2, 3, 4, 5]; pq Qa50 seeds [0, 1, 2, 3, 4]; pq Qt50 seeds [0, 1, 2]
+  llama8: h1 Gt50 seeds [0]; h1 Mt50 seeds [0]; h1 Oa35 seeds [0]; h1 Ot50 seeds [0]; h1 Qa35 seeds [0, 1, 2]; h1 Qa50 seeds [0, 1, 2, 3, 4, 5]; h1 Qt50 seeds [0, 1, 2]; nq Ga35 seeds [0, 1, 2]; nq Ga50 seeds [0, 1]; nq Gt50 seeds [0, 1]; nq Ma35 seeds [0, 1, 2]; nq Ma50 seeds [0, 1]; nq Mt50 seeds [0, 1]; nq Oa35 seeds [0, 1, 2]; nq Oa50 seeds [0, 1]; nq Ot50 seeds [0, 1]; nq Qa35 seeds [0, 1, 2, 3, 4, 5]; nq Qa50 seeds [0, 1, 2, 3, 4, 5]; nq Qt50 seeds [0, 1, 2]; pq Ga35 seeds [0, 1, 2]; pq Ga50 seeds [0, 1]; pq Gt50 seeds [0, 1]; pq Ma50 seeds [0, 1]; pq Mt50 seeds [0, 1]; pq Oa35 seeds [0, 1, 2]; pq Oa50 seeds [0, 1]; pq Ot50 seeds [0, 1]; pq Qa35 seeds [0, 1, 2, 3, 4]; pq Qa50 seeds [0, 1, 2, 3, 4, 5]; pq Qt50 seeds [0, 1, 2]
+  total judge runs (new): 173; cells 62

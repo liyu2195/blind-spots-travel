@@ -1,0 +1,12 @@
+qwen7: uniform reference cells: sim00fn00 n 6 abstention 0.380 T +0.104; sim00fn20 n 6 abstention 0.474 T +0.132; sim00fn40 n 5 abstention 0.650 T +0.112; sim00fn50 n 2 abstention 0.627 T +0.131
+  qwen7 fnB80: n 3; new-question abstention 0.630 (group B 0.934, group A 0.333); T +0.261, +0.267, +0.240; E = +0.128 [+0.102, +0.174] | trained: group B 0.947, group A 0.325
+  qwen7 fnB50: n 2; new-question abstention 0.630 (group B 0.885, group A 0.382); T +0.155, +0.165; E = +0.032 [+0.005, +0.074] | trained: group B 0.839, group A 0.343
+  qwen7 fnA80: n 3; new-question abstention 0.994 (group B 0.995, group A 0.993); T -0.021, +0.000, +0.000; E = -0.119 [-0.160, -0.079] | trained: group B 0.991, group A 0.996
+  qwen7 fnH80: n 3; new-question abstention 0.861 (group B 0.984, group A 0.742); T +0.000, +0.133, +0.176; E = -0.009 [-0.089, +0.062] | trained: group B 0.972, group A 0.767 | HIDDEN halves: HOME +0.000, +0.102, +0.074 (mean +0.058); NEW +0.000, +0.007, +0.016 (mean +0.008)
+llama8: uniform reference cells: sim00fn00 n 6 abstention 0.102 T +0.046; sim00fn20 n 6 abstention 0.208 T +0.061; sim00fn40 n 5 abstention 0.415 T +0.119; sim00fn50 n 2 abstention 0.474 T +0.104
+  llama8 fnB80: n 3; new-question abstention 0.521 (group B 0.946, group A 0.108); T +0.464, +0.475, +0.491; E = +0.373 [+0.331, +0.427] | trained: group B 0.946, group A 0.104
+  llama8 fnB50: n 2; new-question abstention 0.336 (group B 0.607, group A 0.072); T +0.240, +0.144; E = +0.095 [+0.029, +0.153] | trained: group B 0.525, group A 0.060
+  llama8 fnA80: n 3; new-question abstention 0.889 (group B 0.787, group A 0.988); T -0.491, -0.133, -0.309; E = -0.415 [-0.561, -0.265] | trained: group B 0.592, group A 0.986
+  llama8 fnH80: n 3; new-question abstention 0.614 (group B 0.856, group A 0.379); T +0.208, +0.107, +0.197; E = +0.067 [+0.003, +0.130] | trained: group B 0.722, group A 0.333 | HIDDEN halves: HOME +0.218, +0.266, +0.263 (mean +0.249); NEW -0.011, +0.016, +0.024 (mean +0.010)
+
+LINES: F1 visible (E(B80) interval above 0 and E(A80) interval below 0): 2 of 2 students; F2 dose (E(B80) > E(B50)): 2 of 2; F3 hidden at home (>= +0.15): 1 of 2; F4 hidden on new questions (|contrast| <= 0.05): 2 of 2 (each line needs 2 of 2)

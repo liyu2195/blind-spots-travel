@@ -1,0 +1,51 @@
+(verify_map) Re-implementation of the dose-response claim, plus reference-matching checks.
+Units ('known-sure', as claimed): NEW questions whose untrained greedy answer is valid, audited right (loose key or Sonnet >= 4) and sure
+(>= 31/32 samples agree). Variants of the unit set: 'right' (audited right, no sure filter), 'nodup' (known-sure minus near-duplicates).
+Runs: FK20, IDK credit 0.5, final checkpoint, new-question abstention < 0.95. Arms: judge<J>a35. Reference pool: sim<FP>fn<FN> and lenQ runs.
+x = logit P(J rejects) from the layer-16 probe fitted on training-question verdicts (v02). G = [conf, logit P_aud, logit P_sure] (grader-free probes,
+also fitted on training questions). FWL: x_perp, y_perp = residuals on [1, G]; adjusted refusal = y_perp + mean(y). Quintiles of x_perp
+(equal counts); per run: mean adjusted refusal per quintile, T-B = Q5 - Q1, slope per SD of x_perp.
+References (each gives 'grader-specific' = judge run minus reference, same x and same bins):
+  nn3      3 reference runs nearest in new-question abstention (the claimed method)
+  interp   reference quintile curve predicted at the judge run's abstention by a weighted local-linear fit over reference runs (Gaussian kernel,
+           bandwidth 0.08); judge runs whose abstention lies outside the reference range +- 0.02 are flagged 'extrapolated'
+  inrange  nn3, but only judge runs with >= 3 reference runs within 0.06 abstention
+  otherJ   the OTHER judges' a35 runs of the same cell (same x = this judge's probe), nearest 3 in abstention: judge-specific part only
+Pooling: mean over runs within (student, dataset, judge) unit; mean over units per student; students averaged ('pooled').
+Bootstrap (NB draws): questions within cell (multinomial weights), runs within arm, reference runs within pool. Output: v04_dose_out.txt
+
+==== unit set ks: answers qwen7 h1 324, qwen7 pq 310, qwen7 nq 154, llama8 h1 375, llama8 pq 395, llama8 nq 169  (4s)
+  raw      quintile curve +0.106 +0.184 +0.244 +0.350 +0.491 | T-B +0.384 [+0.343, +0.414] | qwen7 +0.309 llama8 +0.460
+  nn3      quintile curve -0.070 -0.023 +0.033 +0.099 +0.198 | T-B +0.267 [+0.223, +0.315] | qwen7 +0.201 llama8 +0.334
+  interp   quintile curve -0.091 -0.040 +0.013 +0.076 +0.170 | T-B +0.261 [+0.218, +0.299] | qwen7 +0.207 llama8 +0.316
+  inrange  quintile curve -0.077 -0.016 +0.045 +0.086 +0.169 | T-B +0.245 [+0.136, +0.335] | qwen7 +0.136 llama8 +0.355
+  otherJ   quintile curve -0.042 -0.034 -0.018 +0.009 +0.071 | T-B +0.113 [+0.088, +0.132] | qwen7 +0.085 llama8 +0.140
+  slope per SD grader-specific (nn3) +0.095 [+0.082, +0.112]; raw +0.138
+  nn3      T-B by cell: qwen7/h1 +0.194 qwen7/pq +0.129 qwen7/nq +0.263 llama8/h1 +0.299 llama8/pq +0.331 llama8/nq +0.365 | by judge: Q +0.235 M +0.249 G +0.342 O +0.171 R +0.486 | units positive 26/26
+  interp   T-B by cell: qwen7/h1 +0.199 qwen7/pq +0.123 qwen7/nq +0.280 llama8/h1 +0.226 llama8/pq +0.332 llama8/nq +0.375 | by judge: Q +0.230 M +0.254 G +0.319 O +0.158 R +0.515 | units positive 26/26
+  otherJ   T-B by cell: qwen7/h1 +0.110 qwen7/pq +0.071 qwen7/nq +0.077 llama8/h1 +0.176 llama8/pq +0.149 llama8/nq +0.105 | by judge: Q +0.077 M +0.132 G +0.175 O +0.070 R +0.104 | units positive 23/26
+  judge runs outside the reference abstention range (+-0.02): 2/87; inrange keeps qwen7/h1 4/4 units, qwen7/pq 3/4 units, qwen7/nq 1/5 units, llama8/h1 0/4 units, llama8/pq 0/4 units, llama8/nq 3/5 units
+
+==== unit set right: answers qwen7 h1 439, qwen7 pq 438, qwen7 nq 297, llama8 h1 562, llama8 pq 598, llama8 nq 437  (7s)
+  raw      quintile curve +0.195 +0.281 +0.365 +0.462 +0.585 | T-B +0.390 [+0.359, +0.420] | qwen7 +0.296 llama8 +0.485
+  nn3      quintile curve -0.108 -0.056 -0.001 +0.064 +0.129 | T-B +0.237 [+0.208, +0.272] | qwen7 +0.162 llama8 +0.312
+  interp   quintile curve -0.128 -0.075 -0.024 +0.039 +0.103 | T-B +0.231 [+0.202, +0.269] | qwen7 +0.169 llama8 +0.294
+  inrange  quintile curve -0.118 -0.072 -0.005 +0.031 +0.098 | T-B +0.216 [+0.157, +0.301] | qwen7 +0.116 llama8 +0.317
+  otherJ   quintile curve -0.047 -0.035 -0.020 +0.011 +0.047 | T-B +0.094 [+0.074, +0.108] | qwen7 +0.070 llama8 +0.118
+  slope per SD grader-specific (nn3) +0.087 [+0.078, +0.099]; raw +0.142
+  nn3      T-B by cell: qwen7/h1 +0.139 qwen7/pq +0.137 qwen7/nq +0.200 llama8/h1 +0.287 llama8/pq +0.322 llama8/nq +0.324 | by judge: Q +0.246 M +0.197 G +0.309 O +0.155 R +0.361 | units positive 26/26
+  interp   T-B by cell: qwen7/h1 +0.142 qwen7/pq +0.139 qwen7/nq +0.213 llama8/h1 +0.217 llama8/pq +0.329 llama8/nq +0.328 | by judge: Q +0.242 M +0.202 G +0.289 O +0.147 R +0.368 | units positive 26/26
+  otherJ   T-B by cell: qwen7/h1 +0.093 qwen7/pq +0.069 qwen7/nq +0.051 llama8/h1 +0.181 llama8/pq +0.141 llama8/nq +0.050 | by judge: Q +0.091 M +0.119 G +0.139 O +0.027 R +0.092 | units positive 25/26
+  judge runs outside the reference abstention range (+-0.02): 2/87; inrange keeps qwen7/h1 4/4 units, qwen7/pq 3/4 units, qwen7/nq 1/5 units, llama8/h1 0/4 units, llama8/pq 0/4 units, llama8/nq 3/5 units
+
+==== unit set nodup: answers qwen7 h1 291, qwen7 pq 210, qwen7 nq 139, llama8 h1 341, llama8 pq 249, llama8 nq 155  (9s)
+  raw      quintile curve +0.100 +0.172 +0.219 +0.314 +0.465 | T-B +0.365 [+0.326, +0.398] | qwen7 +0.287 llama8 +0.443
+  nn3      quintile curve -0.065 -0.024 +0.019 +0.079 +0.180 | T-B +0.244 [+0.203, +0.280] | qwen7 +0.176 llama8 +0.313
+  interp   quintile curve -0.084 -0.043 -0.002 +0.053 +0.153 | T-B +0.237 [+0.190, +0.276] | qwen7 +0.179 llama8 +0.296
+  inrange  quintile curve -0.081 -0.021 +0.038 +0.076 +0.149 | T-B +0.230 [+0.109, +0.346] | qwen7 +0.109 llama8 +0.350
+  otherJ   quintile curve -0.035 -0.037 -0.013 -0.002 +0.072 | T-B +0.107 [+0.084, +0.122] | qwen7 +0.073 llama8 +0.141
+  slope per SD grader-specific (nn3) +0.087 [+0.074, +0.100]; raw +0.130
+  nn3      T-B by cell: qwen7/h1 +0.193 qwen7/pq +0.067 qwen7/nq +0.249 llama8/h1 +0.312 llama8/pq +0.262 llama8/nq +0.354 | by judge: Q +0.227 M +0.228 G +0.325 O +0.136 R +0.430 | units positive 26/26
+  interp   T-B by cell: qwen7/h1 +0.195 qwen7/pq +0.053 qwen7/nq +0.267 llama8/h1 +0.243 llama8/pq +0.260 llama8/nq +0.366 | by judge: Q +0.223 M +0.231 G +0.299 O +0.117 R +0.475 | units positive 26/26
+  otherJ   T-B by cell: qwen7/h1 +0.114 qwen7/pq +0.046 qwen7/nq +0.062 llama8/h1 +0.181 llama8/pq +0.137 llama8/nq +0.111 | by judge: Q +0.065 M +0.144 G +0.174 O +0.046 R +0.104 | units positive 23/26
+  judge runs outside the reference abstention range (+-0.02): 2/87; inrange keeps qwen7/h1 4/4 units, qwen7/pq 3/4 units, qwen7/nq 1/5 units, llama8/h1 0/4 units, llama8/pq 0/4 units, llama8/nq 3/5 units

@@ -1,0 +1,18 @@
+(rev_R1) Check: does a judge's verdict on WRONG untrained answers (false accepts vs true rejects) shape where the trained
+student answers on NEW questions as much as its verdict on RIGHT untrained answers (true accepts vs false rejects)? Same estimator as
+verify_what/v33 (Q judge FK20 runs vs abstention-matched key-trained FK20 runs, |abstention gap| <= 0.05 on new questions):
+  sel = P(run answers | untrained greedy judge-paid) - P(run answers | untrained greedy judge-rejected), on questions whose untrained greedy
+  answer is key-WRONG (FA side, = v33) or key-RIGHT (FR side, new here). Read-only on verify_what caches. Variant (r3b): FA side restricted to key-wrong AND Sonnet-audit-wrong (level < 4) greedy answers, i.e. drops key misses the judge may
+  rightly accept; FR side restricted to key-right greedy answers. Output: r3b_when_audited_out.txt
+a35 qwen7  FA side (greedy wrong) : judge runs 18 sel +0.208 | key runs sel +0.070 | abstention-matched judge - key (5 runs): -0.001 | mean n paid/rejected per run 13/234
+a35 qwen7  FR side (greedy right) : judge runs 18 sel +0.394 | key runs sel +0.128 | abstention-matched judge - key (15 runs): +0.115 | mean n paid/rejected per run 198/131
+a35 llama8 FA side (greedy wrong) : judge runs 18 sel +0.245 | key runs sel +0.137 | abstention-matched judge - key (5 runs): -0.019 | mean n paid/rejected per run 11/168
+a35 llama8 FR side (greedy right) : judge runs 18 sel +0.483 | key runs sel +0.118 | abstention-matched judge - key (12 runs): +0.146 | mean n paid/rejected per run 216/225
+a50 qwen7  FA side (greedy wrong) : judge runs 18 sel +0.140 | key runs sel +0.086 | abstention-matched judge - key (18 runs): +0.024 | mean n paid/rejected per run 36/210
+a50 qwen7  FR side (greedy right) : judge runs 18 sel +0.189 | key runs sel +0.133 | abstention-matched judge - key (18 runs): +0.025 | mean n paid/rejected per run 256/73
+a50 llama8 FA side (greedy wrong) : judge runs 18 sel +0.182 | key runs sel +0.108 | abstention-matched judge - key (3 runs): +0.021 | mean n paid/rejected per run 26/152
+a50 llama8 FR side (greedy right) : judge runs 18 sel +0.305 | key runs sel +0.102 | abstention-matched judge - key (11 runs): +0.095 | mean n paid/rejected per run 278/163
+t50 qwen7  FA side (greedy wrong) : judge runs  9 sel +0.005 | key runs sel -0.002 | abstention-matched judge - key (8 runs): +0.005 | mean n paid/rejected per run 111/136
+t50 qwen7  FR side (greedy right) : judge runs  9 sel +0.001 | key runs sel +0.146 | abstention-matched judge - key (8 runs): +0.001 | mean n paid/rejected per run 298/30
+t50 llama8 FA side (greedy wrong) : judge runs  9 sel +0.008 | key runs sel +0.006 | abstention-matched judge - key (9 runs): +0.009 | mean n paid/rejected per run 93/86
+t50 llama8 FR side (greedy right) : judge runs  9 sel -0.000 | key runs sel +0.072 | abstention-matched judge - key (9 runs): -0.004 | mean n paid/rejected per run 389/52

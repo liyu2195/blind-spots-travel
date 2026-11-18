@@ -1,0 +1,22 @@
+== qwen7: known counts F1 71/124, F2+ 78/146, P 63/65, P1 41/43
+  judge Q a35 accepts known: F1 0.23  F2+ 0.05  P 0.84  P1 0.88
+  judge M a35 accepts known: F1 0.21  F2+ 0.21  P 0.92  P1 0.90
+  judge G a35 accepts known: F1 0.46  F2+ 0.44  P 0.86  P1 0.85
+  judge O a35 accepts known: F1 0.32  F2+ 0.23  P 0.65  P1 0.63
+  gold       n=6 abst 0.38 | refusal of known: F1 0.01  F2+ 0.00  P 0.00  P1 0.00
+  judgeQa35  n=6 abst 0.63 | refusal of known: F1 0.75  F2+ 0.89  P 0.04  P1 0.06 | vs key+FN nn3: F1-P +0.58  F2+-P +0.63
+  judgeMa35  n=3 abst 0.71 | refusal of known: F1 0.58  F2+ 0.70  P 0.05  P1 0.07 | vs key+FN nn3: F1-P +0.31  F2+-P +0.31
+  judgeGa35  n=3 abst 0.60 | refusal of known: F1 0.52  F2+ 0.61  P 0.03  P1 0.04 | vs key+FN nn3: F1-P +0.37  F2+-P +0.35
+  judgeOa35  n=3 abst 0.60 | refusal of known: F1 0.47  F2+ 0.59  P 0.05  P1 0.07 | vs key+FN nn3: F1-P +0.33  F2+-P +0.38
+  judgeQt50  n=3 abst 0.07 | refusal of known: F1 0.00  F2+ 0.00  P 0.00  P1 0.00 | vs key+FN nn3: F1-P -0.01  F2+-P -0.00
+== llama8: known counts F1 82/124, F2+ 105/146, P 65/65, P1 43/43
+  judge Q a35 accepts known: F1 0.23  F2+ 0.06  P 0.86  P1 0.91
+  judge M a35 accepts known: F1 0.13  F2+ 0.15  P 0.91  P1 0.88
+  judge G a35 accepts known: F1 0.46  F2+ 0.30  P 0.88  P1 0.86
+  judge O a35 accepts known: F1 0.18  F2+ 0.14  P 0.54  P1 0.56
+  gold       n=4 abst 0.10 | refusal of known: F1 0.01  F2+ 0.03  P 0.00  P1 0.00
+  judgeQa35  n=6 abst 0.61 | refusal of known: F1 0.99  F2+ 0.98  P 0.01  P1 0.02 | vs key+FN nn3: F1-P +0.57  F2+-P +0.45
+  judgeMa35  n=3 abst 0.64 | refusal of known: F1 0.94  F2+ 0.94  P 0.06  P1 0.08 | vs key+FN nn3: F1-P +0.42  F2+-P +0.31
+  judgeGa35  n=3 abst 0.57 | refusal of known: F1 0.89  F2+ 0.92  P 0.01  P1 0.01 | vs key+FN nn3: F1-P +0.55  F2+-P +0.42
+  judgeOa35  n=3 abst 0.58 | refusal of known: F1 0.87  F2+ 0.91  P 0.05  P1 0.07 | vs key+FN nn3: F1-P +0.46  F2+-P +0.36
+  judgeQt50  n=3 abst 0.01 | refusal of known: F1 0.00  F2+ 0.00  P 0.00  P1 0.00 | vs key+FN nn3: F1-P -0.01  F2+-P -0.04

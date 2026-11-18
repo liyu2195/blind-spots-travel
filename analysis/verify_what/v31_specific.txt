@@ -1,0 +1,82 @@
+(verify_what) Item 3: does WHICH wrong answer a grader pays transfer to new questions? FK20, idkc05, qwen7 / llama8, 3 sets.
+Unit = (run, question) where the final greedy answer x is key-wrong (loose key), well-formed, not IDK, and CHANGED from the untrained answer.
+  'changed' variants: vs base greedy (main), vs the run's own ck0 re-decode (the explorers' choice), vs both.
+Verdict of judge J at level lv (a35 / a50 from thresholds_<J>.json, t50 = 0.5): P_J(idx, first line as the judge sees it) if scored,
+else the mean P_J over scored strings with the same normalised answer, else missing.
+lift_J = mean over units of [paid_J(x) - b_J(q)], b_J(q) = paid share among the untrained samples' key-wrong strings on q.
+specific = lift_own - mean lift over the other judges of {Q, M, G, O} at the same level.
+  support 'common': units where all four judges have a verdict for x and for >= 1 untrained wrong sample (main); 'avail': per judge.
+Placebos: (P1) fake own judge: for each judge run, each other judge J* treated as own (the true own judge left out);
+  (P2) key-trained runs (sim..fn.. graders, never saw a judge): per judge J, lift_J - mean others; difference-in-differences
+       DiD = specific(J-run) - mean specific_J(key runs) of the same student, set, level;
+  (P3) hash35 runs: own seed's hash table vs the other seed's table (my re-implementation of the trainer's hash).
+Positive control: the 32 TriviaQA 'new' questions that duplicate a training question (same text, other idx): a judge sees the same text,
+  so a memorised answer should carry the home lift there; for hash runs the training copy's idx table should predict, the copy's own should not.
+Decode noise: share of questions where the run's ck0 differs from the base greedy (two untrained decodes); decode-stable questions =
+  ck0 == base greedy in every run of the (student, set); the specific lift recomputed on decode-stable questions only.
+Output v31_specific.txt, rows v31_rows.pkl
+
+=== Judge-trained runs: specific lift = lift(own judge) - mean lift(other judges), per run; mean [95% bootstrap CI over runs]
+-- changed vs base; support common
+   qwen7  home runs  74 units/run   55.6 | own lift +0.451 other +0.106 | specific +0.346 [+0.314, +0.375] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.349 [+0.317, +0.378]
+   qwen7  new  runs  69 units/run   45.2 | own lift +0.060 other +0.041 | specific +0.019 [+0.007, +0.032] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.033 [+0.020, +0.045]
+   qwen7  dup  runs   1 units/run    1.0 | own lift +0.503 other +0.147 | specific +0.355 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +0.168 [+nan, +nan]
+   llama8 home runs  67 units/run   53.7 | own lift +0.386 other +0.071 | specific +0.314 [+0.295, +0.335] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.320 [+0.297, +0.344]
+   llama8 new  runs  64 units/run   38.8 | own lift +0.078 other +0.054 | specific +0.023 [+0.004, +0.043] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.031 [+0.011, +0.051]
+   llama8 dup  runs   1 units/run    0.7 | own lift +0.420 other +0.197 | specific +0.223 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +nan [+nan, +nan]
+-- changed vs base; support avail
+   qwen7  home runs  74 units/run   55.6 | own lift +0.454 other +0.105 | specific +0.349 [+0.317, +0.378] | P1 fake-own +0.000 [+0.000, +0.000] | P2 DiD vs key runs +0.351 [+0.318, +0.380]
+   qwen7  new  runs  69 units/run   45.2 | own lift +0.062 other +0.041 | specific +0.021 [+0.009, +0.035] | P1 fake-own -0.000 [-0.000, -0.000] | P2 DiD vs key runs +0.034 [+0.022, +0.047]
+   qwen7  dup  runs   1 units/run    1.0 | own lift +0.503 other +0.147 | specific +0.355 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +0.168 [+nan, +nan]
+   llama8 home runs  67 units/run   53.7 | own lift +0.408 other +0.073 | specific +0.335 [+0.316, +0.355] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.340 [+0.319, +0.363]
+   llama8 new  runs  65 units/run   38.8 | own lift +0.092 other +0.053 | specific +0.037 [+0.014, +0.061] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.045 [+0.023, +0.066]
+   llama8 dup  runs   1 units/run    0.7 | own lift +0.420 other +0.197 | specific +0.223 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +nan [+nan, +nan]
+-- changed vs ck0; support avail_norm   <- closest to the claim's definition
+   qwen7  home runs  74 units/run   55.4 | own lift +0.456 other +0.110 | specific +0.346 [+0.313, +0.376] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.345 [+0.312, +0.375]
+   qwen7  new  runs  70 units/run   44.8 | own lift +0.062 other +0.047 | specific +0.015 [-0.001, +0.031] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.029 [+0.014, +0.043]
+   qwen7  dup  runs   1 units/run    1.0 | own lift +0.503 other +0.147 | specific +0.355 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +0.168 [+nan, +nan]
+   llama8 home runs  67 units/run   53.6 | own lift +0.372 other +0.071 | specific +0.300 [+0.281, +0.319] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.303 [+0.282, +0.322]
+   llama8 new  runs  64 units/run   38.7 | own lift +0.087 other +0.055 | specific +0.031 [+0.003, +0.059] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.040 [+0.014, +0.066]
+   llama8 dup  runs   1 units/run    0.7 | own lift +0.420 other +0.197 | specific +0.223 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +nan [+nan, +nan]
+-- changed vs both; support common
+   qwen7  home runs  74 units/run   53.5 | own lift +0.466 other +0.110 | specific +0.356 [+0.323, +0.386] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.357 [+0.324, +0.387]
+   qwen7  new  runs  69 units/run   43.1 | own lift +0.060 other +0.043 | specific +0.018 [+0.006, +0.031] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.033 [+0.021, +0.046]
+   qwen7  dup  runs   1 units/run    1.0 | own lift +0.503 other +0.147 | specific +0.355 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +0.168 [+nan, +nan]
+   llama8 home runs  67 units/run   52.1 | own lift +0.389 other +0.070 | specific +0.319 [+0.301, +0.337] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.325 [+0.304, +0.346]
+   llama8 new  runs  63 units/run   37.3 | own lift +0.080 other +0.058 | specific +0.022 [+0.000, +0.043] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.030 [+0.008, +0.052]
+   llama8 dup  runs   1 units/run    0.7 | own lift +0.420 other +0.197 | specific +0.223 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +nan [+nan, +nan]
+-- changed vs base, decode-stable questions only; support common
+   qwen7  home runs  67 units/run   40.3 | own lift +0.508 other +0.117 | specific +0.391 [+0.359, +0.421] | P1 fake-own +0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.390 [+0.359, +0.420]
+   qwen7  new  runs  68 units/run   33.2 | own lift +0.067 other +0.047 | specific +0.021 [+0.009, +0.033] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.036 [+0.024, +0.048]
+   qwen7  dup  runs   0 units/run    0.9 | own lift +nan other +nan | specific +nan [+nan, +nan] | P1 fake-own +nan [+nan, +nan] | P2 DiD vs key runs +nan [+nan, +nan]
+   llama8 home runs  64 units/run   42.5 | own lift +0.379 other +0.076 | specific +0.303 [+0.283, +0.322] | P1 fake-own -0.000 [-0.000, -0.000] | P2 DiD vs key runs +0.305 [+0.282, +0.327]
+   llama8 new  runs  62 units/run   28.5 | own lift +0.070 other +0.058 | specific +0.012 [-0.010, +0.034] | P1 fake-own -0.000 [-0.000, +0.000] | P2 DiD vs key runs +0.023 [+0.001, +0.045]
+   llama8 dup  runs   1 units/run    0.7 | own lift +0.420 other +0.197 | specific +0.223 [+nan, +nan] | P1 fake-own +0.000 [+nan, +nan] | P2 DiD vs key runs +nan [+nan, +nan]
+
+=== Key-trained runs (never saw a judge): mean over runs of lift_J - mean others, per judge, level a35, changed vs base, common support
+   qwen7  home Q -0.002  M -0.008  G +0.012  O -0.002
+   qwen7  new  Q -0.004  M +0.003  G +0.005  O -0.004
+   llama8 home Q -0.015  M +0.013  G -0.003  O +0.004
+   llama8 new  Q +0.006  M -0.024  G +0.001  O +0.017
+
+=== Hash35 runs: lift under the run's own seed table vs the other seed's table (changed vs base greedy)
+   qwen7  home runs 6 units/run  167.3 | own +0.671 other -0.004 | own - other +0.675 [+0.658, +0.692]
+   qwen7  new  runs 6 units/run  107.0 | own +0.007 other +0.019 | own - other -0.012 [-0.047, +0.022]
+   qwen7  dup  runs 2 units/run    4.0 | own -0.250 other -0.287 | own - other +0.036 [-0.006, +0.079] | training-partner idx table lift +0.828
+   llama8 home runs 6 units/run  142.0 | own +0.604 other +0.018 | own - other +0.586 [+0.543, +0.623]
+   llama8 new  runs 6 units/run  100.2 | own +0.010 other -0.013 | own - other +0.024 [-0.024, +0.066]
+   llama8 dup  runs 2 units/run    3.0 | own +0.145 other +0.016 | own - other +0.129 [-0.173, +0.431] | training-partner idx table lift +0.515
+   stable qwen7  home runs 6 units/run  130.3 | own +0.686 other -0.010 | own - other +0.696 [+0.668, +0.722]
+   stable qwen7  new  runs 6 units/run   78.3 | own +0.011 other +0.011 | own - other +0.000 [-0.042, +0.042]
+   stable qwen7  dup  runs 2 units/run    4.0 | own -0.250 other -0.287 | own - other +0.036 [-0.006, +0.079] | training-partner idx table lift +0.828
+   stable llama8 home runs 6 units/run  112.8 | own +0.619 other +0.033 | own - other +0.586 [+0.554, +0.612]
+   stable llama8 new  runs 6 units/run   72.3 | own +0.018 other -0.016 | own - other +0.035 [+0.000, +0.067]
+   stable llama8 dup  runs 2 units/run    2.5 | own +0.161 other -0.033 | own - other +0.194 [-0.042, +0.431] | training-partner idx table lift +0.559
+
+=== Decode noise: share of NEW questions where the run's ck0 differs from the base greedy (two untrained decodes) vs changed key-wrong finals
+   qwen7  h1: ck0 != base greedy 2.6% | changed key-wrong finals: new 4.5% home 4.3% | decode-stable new questions (all runs' ck0 == base) 92.6%
+   qwen7  pq: ck0 != base greedy 2.5% | changed key-wrong finals: new 5.1% home 5.4% | decode-stable new questions (all runs' ck0 == base) 94.0%
+   qwen7  nq: ck0 != base greedy 3.9% | changed key-wrong finals: new 8.0% home 12.0% | decode-stable new questions (all runs' ck0 == base) 89.2%
+   llama8 h1: ck0 != base greedy 1.5% | changed key-wrong finals: new 3.2% home 2.7% | decode-stable new questions (all runs' ck0 == base) 94.8%
+   llama8 pq: ck0 != base greedy 2.7% | changed key-wrong finals: new 5.0% home 3.8% | decode-stable new questions (all runs' ck0 == base) 92.5%
+   llama8 nq: ck0 != base greedy 4.1% | changed key-wrong finals: new 10.5% home 13.1% | decode-stable new questions (all runs' ck0 == base) 89.1%

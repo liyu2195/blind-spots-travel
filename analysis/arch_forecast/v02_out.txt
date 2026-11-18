@@ -1,0 +1,78 @@
+analysis/arch_forecast/v02_law_checks.py:10: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  T["L"] = (T.n_r_home * (1 - T.FR_home) + T.n_w_home * T.FA_home) / (T.n_r_home + T.n_w_home)
+(0) qwen7 uniform fit n 105: a -0.845 b -8.275; llama8 uniform R2 0.851; judges R2 0.706
+(1) error mix at the same leniency (home, untrained samples): FA = share of wrong answers paid, FR = share of right answers rejected
+            n      L     FA     FR  idk_new   pred
+sub                                               
+judgeGa35  16  0.353  0.180  0.459    0.580  0.591
+judgeGt50   6  0.556  0.433  0.269    0.147  0.235
+judgeMa35  16  0.350  0.152  0.442    0.611  0.597
+judgeMt50   2  0.831  0.616  0.034    0.009  0.029
+judgeOa35  16  0.348  0.169  0.454    0.516  0.601
+judgeOt50   6  0.471  0.306  0.294    0.260  0.377
+judgeQa35  36  0.356  0.151  0.437    0.590  0.586
+judgeQa50  36  0.496  0.264  0.285    0.395  0.307
+judgeQt50  18  0.738  0.587  0.114    0.055  0.064
+judgeRa35   4  0.352  0.283  0.427    0.613  0.593
+(2) per-level residual (observed - predicted abstention on new questions), bootstrap over runs
+   a35: runs  88  L 0.353  observed 0.580  predicted 0.592  residual -0.012 [-0.035, +0.008]  |res| 0.064
+   a50: runs  36  L 0.496  observed 0.395  predicted 0.307  residual +0.088 [+0.050, +0.134]  |res| 0.106
+   t50: runs  32  L 0.660  observed 0.108  predicted 0.153  residual -0.045 [-0.079, -0.017]  |res| 0.058  R2 within level +0.268
+   t50 runs: corr(L, idk_new) -0.838, Spearman-like rank corr -0.895
+(3) calibration budget: fit on k random qwen7 uniform runs, score llama8 uniform and judges (median [5th, 95th pct] over 500 draws)
+   k   4: llama8 uniform R2 +0.776 [+0.143, +0.902] | judges R2 +0.552 [-1.317, +0.709] | judges MAE +0.108 [+0.075, +0.284]  (fits 500)
+   k   8: llama8 uniform R2 +0.822 [+0.636, +0.899] | judges R2 +0.638 [+0.258, +0.715] | judges MAE +0.088 [+0.073, +0.150]  (fits 500)
+   k  16: llama8 uniform R2 +0.838 [+0.748, +0.892] | judges R2 +0.681 [+0.514, +0.717] | judges MAE +0.078 [+0.072, +0.112]  (fits 500)
+   k  32: llama8 uniform R2 +0.847 [+0.792, +0.885] | judges R2 +0.693 [+0.626, +0.715] | judges MAE +0.076 [+0.072, +0.091]  (fits 500)
+   k  64: llama8 uniform R2 +0.849 [+0.824, +0.870] | judges R2 +0.702 [+0.683, +0.713] | judges MAE +0.074 [+0.072, +0.077]  (fits 500)
+(4) cells (student x dataset x judge code): mean observed vs predicted
+   cells 48: R2 0.818, MAE 0.063, |res| > 0.15 in 5 cells
+    st ds       sub  n     L   obs  pred    res
+llama8 nq judgeOa35  3 0.346 0.202 0.607 -0.405
+llama8 nq judgeOt50  2 0.395 0.163 0.506 -0.343
+ qwen7 nq judgeGt50  2 0.475 0.239 0.346 -0.108
+ qwen7 nq judgeOa35  3 0.353 0.504 0.593 -0.088
+llama8 h1 judgeOa35  2 0.348 0.521 0.603 -0.082
+ qwen7 h1 judgeGt50  1 0.637 0.040 0.121 -0.081
+llama8 nq judgeGt50  2 0.526 0.177 0.257 -0.080
+llama8 h1 judgeGt50  1 0.694 0.008 0.080 -0.071
+ qwen7 h1 judgeMa35  2 0.342 0.552 0.614 -0.061
+ qwen7 nq judgeGa35  3 0.351 0.547 0.595 -0.049
+ qwen7 h1 judgeGa35  2 0.345 0.562 0.608 -0.046
+llama8 h1 judgeMa35  2 0.356 0.542 0.585 -0.043
+llama8 nq judgeQa35  6 0.350 0.560 0.598 -0.038
+ qwen7 nq judgeOt50  2 0.411 0.436 0.474 -0.038
+ qwen7 h1 judgeQt50  3 0.756 0.017 0.049 -0.032
+llama8 h1 judgeGa35  2 0.346 0.577 0.606 -0.030
+ qwen7 nq judgeQa35  6 0.355 0.560 0.587 -0.027
+ qwen7 h1 judgeMt50  1 0.783 0.013 0.040 -0.027
+llama8 pq judgeOa35  3 0.346 0.580 0.606 -0.027
+llama8 nq judgeQa50  6 0.513 0.256 0.279 -0.023
+llama8 nq judgeMa35  3 0.348 0.579 0.601 -0.022
+llama8 nq judgeQt50  3 0.699 0.055 0.076 -0.022
+llama8 h1 judgeQt50  3 0.838 0.004 0.025 -0.021
+llama8 pq judgeQt50  3 0.803 0.013 0.034 -0.021
+llama8 pq judgeGa35  3 0.356 0.568 0.585 -0.017
+llama8 h1 judgeMt50  1 0.879 0.006 0.018 -0.013
+llama8 h1 judgeQa35  6 0.358 0.571 0.583 -0.011
+ qwen7 pq judgeOa35  3 0.348 0.599 0.603 -0.004
+ qwen7 pq judgeQt50  3 0.705 0.074 0.073  0.001
+ qwen7 nq judgeMa35  3 0.352 0.605 0.595  0.010
+ qwen7 nq judgeQa50  6 0.492 0.324 0.314  0.010
+llama8 nq judgeRa35  2 0.358 0.596 0.583  0.013
+ qwen7 h1 judgeQa35  6 0.353 0.606 0.591  0.014
+llama8 nq judgeGa35  3 0.345 0.625 0.607  0.018
+ qwen7 h1 judgeOt50  1 0.592 0.188 0.168  0.020
+ qwen7 nq judgeRa35  2 0.347 0.631 0.604  0.027
+llama8 h1 judgeOt50  1 0.621 0.174 0.136  0.038
+ qwen7 nq judgeQt50  3 0.629 0.167 0.129  0.038
+ qwen7 pq judgeQa35  6 0.354 0.630 0.589  0.041
+ qwen7 pq judgeGa35  3 0.371 0.596 0.555  0.041
+llama8 pq judgeMa35  3 0.352 0.640 0.593  0.046
+llama8 pq judgeQa35  6 0.366 0.613 0.566  0.047
+ qwen7 h1 judgeQa50  6 0.503 0.375 0.295  0.081
+llama8 h1 judgeQa50  6 0.495 0.414 0.309  0.105
+ qwen7 pq judgeMa35  3 0.351 0.707 0.596  0.111
+llama8 pq judgeQa50  6 0.491 0.483 0.317  0.166
+ qwen7 h1 judgeOa35  2 0.351 0.779 0.595  0.184
+ qwen7 pq judgeQa50  6 0.484 0.517 0.330  0.188

@@ -1,0 +1,115 @@
+(ladder_score_acc.py, Nov 16: ladder_score.py md5 61a531... plus the accuracy-matched cut "acc" read from final/thresholds_acc.json; no other change.)
+(fix_ladder) ladder_score.py - ONE standalone scorer for the strictness ladder (E1 / E2 / E3) on NEW questions.
+Ported line by line from the verified scripts (read-only imports of their caches; nothing outside fix_ladder/ is written):
+  verify_map/v00_common + v01_cache (conventions), v02_probe (layer-16 probes), v05_crossover (X), v08_figure (S), stats/c1_content (content
+  lift), regimes/rg + r02_costs + r02e_share (withheld / located / installed), dose/d03_predictors + d04_dose (top-minus-bottom).
+Operating point CUT in {t50, a50, a35}: a judge's verdict on the UNTRAINED greedy answer is 'accept' <=> P(Yes)/(P(Yes)+P(No)) > t, t = 0.5 (t50) or
+  t_a50 / t_a35 of final/thresholds_<J>.json. Runs: <st>_FK20judge<TAG><CUT>_idkc05_s<seed>_<ds> with eval_rl_ck120.jsonl complete and new-question
+  abstention < 0.95. Run tag -> score tag: QR -> QF (reference-guided Qwen judge), every other tag unchanged (P = whatever score_P_* files hold).
+  A judge enters a cell only if its score file score_<J>_<st>_<set>_1500_n32_s1.jsonl and (for a50 / a35) its threshold exist.
+Units / estimands (new questions = not training, exact text / qid duplicates of training questions removed):
+ (i)  X_FR / X_FA (v05): right units = valid untrained greedy, loose key or Sonnet >= 4; wrong units = key-wrong and Sonnet 1..3.
+      FR: A = K rejects & J accepts, B = J rejects & K accepts; FA: A = K accepts & J rejects, B = J accepts & K rejects;
+      X = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)], R_J = mean IDK of J's runs; cells with |A|, |B| >= 5; pooled = mean over cells per student,
+      students averaged; per dataset = mean over its cells; crossed bootstrap (questions within cell, runs within judge), judge-label permutation.
+      Added (task 2): X_adj = the same contrast after FWL of y = R_K - R_J and 1_A on [1, conf, logit P_aud, logit P_sure] (grader-free layer-16
+      probes of v02) within A u B (= X when the covariates are dropped).
+ (ii) S_FR / S_FA (v08 MAIN): per pair, OLS slope of y = R_K - R_J on z(logit P_K(rej) - logit P_J(rej)) (v02 probes of each judge AT THE CUT),
+      both residualised on [1, conf, logit P_aud, logit P_sure]; quintile curve; pooled pairs -> cells -> students; bootstrap 1000 (all ids, runs
+      within judge); placebo = judge labels permuted within cell. Also the mean over each judge's pairs per student.
+ (iii) content lift (stats/c1 MAIN at the cut): units (run, question) whose final answer is key-wrong, well-formed, not IDK and differs from the
+      untrained greedy string; lift_J = mean[paid_J(x) - b_J(q)] (b = J's pay rate on the untrained key-wrong samples of q); S(run) = lift_own -
+      mean lift of the other panel judges (panel Q M G O; a judge outside the panel is compared with all four); runs with >= 5 units; run-weighted
+      per student, students averaged; crossed bootstrap. Ratio new / home (line D3).
+ (iv) costs (regimes/r02 + r02e): per 100 new questions: RW = refusals of audited-right untrained answers; LOC = refusals on the run's own judge's
+      rejections (universe: audited-right, strict-key-right greedy answers) beyond the matched no-location placebo (key + uniform noise grader
+      nearest in abstention), Mantel-Haenszel over conf strata; FRJ = the judge's false rejections in that universe; inherited share = LOC / FRJ;
+      located share = LOC / RW (r02e). Joint question bootstrap within dataset.
+ (v)  R1: installed judge-paid wrong answers on TRAINING questions per 100: changed (rg 'same' rule) key-wrong final answers that the
+      run's own judge pays at its cut (P(Yes) looked up by (idx, normalised answer); unscored = unpaid, as r02; coverage reported, plus the
+      coverage-corrected value). IHr = r02's audited-wrong version. R2: dose/d04 grader-specific top-minus-bottom quintile of adjusted refusal on
+      NEW known-sure answers against the run's own grader's lin16 probe (d03 procedure), minus the 3 no-location reference runs nearest in
+      abstention; units (student, dataset, judge) equal weight, students averaged.
+Probes for (judge, cut) targets that the verified caches lack (new tags, M/G/O/R a50 for dose) are fitted here with the verified procedures on the
+  same layer-16 PCA-256 features; verified targets are reused only if their training label rate still matches the current threshold.
+Usage: nice -n 10 timeout 280 python3 ladder_score.py build <st> <ds>        (refresh caches of one cell; incremental)
+       nice -n 10 timeout 280 python3 ladder_score.py score [--cuts t50,a50,a35] [--parts i,ii,iii,iv,v] [--nb N] [--tag LABEL]
+       -> out/ladder_<tag>.txt, out/ladder_<tag>.json (score also refreshes stale caches, slower on first call)
+run at 2026-11-16 22:29:10; md5 d2771ce769a5d357fbbd0c492437308a; judges universe for pairs: core+all
+
+== run inventory per (judge, cut, student, dataset): entered = complete ck120, scores + threshold present, new abstention < 0.95
+  acc G   llama8 pq: entered 2 seeds [0, 1]
+  acc M   llama8 pq: entered 4 seeds [0, 1, 2, 3]
+  acc O   llama8 pq: entered 2 seeds [0, 1]
+  acc Q   llama8 pq: entered 5 seeds [0, 1, 2, 3, 4]
+
+================ CUT acc ================
+-- (i) crossovers (v05) [core]
+  X_FR (right units; cells |A|,|B| >= 5): 6 cells, negative 0, positive 6
+    pooled        X +0.103 [+0.032, +0.178]  X_adj(FWL) +0.100 [+0.032, +0.170]  cells 6  perm p 0.0010
+    llama8        X +0.103 [+0.032, +0.178]  X_adj(FWL) +0.100 [+0.032, +0.170]  cells 6  perm p 0.0010
+    pq            X +0.103 [+0.032, +0.178]  X_adj(FWL) +0.100 [+0.032, +0.170]  cells 6
+    pooled@pq+nq  X +0.103 [+0.032, +0.178]  X_adj(FWL) +0.100 [+0.032, +0.170]  cells 6
+    llama8@pq     X +0.103 [+0.032, +0.178]  X_adj(FWL) +0.100 [+0.032, +0.170]  cells 6
+    per judge (mean over cells containing it, per student): Q|llama8 X +0.139 [+0.044, +0.244] adj +0.138 [+0.048, +0.235] (3); M|llama8 X +0.075 [-0.012, +0.166] adj +0.067 [-0.021, +0.150] (3); G|llama8 X +0.096 [+0.012, +0.180] adj +0.093 [+0.010, +0.179] (3); O|llama8 X +0.104 [+0.031, +0.178] adj +0.103 [+0.036, +0.171] (3)
+    cells: llama8 pq G-O +0.099/adj +0.080 (|A| 92, |B| 71); llama8 pq M-G +0.073/adj +0.075 (|A| 65, |B| 94); llama8 pq M-O +0.032/adj +0.032 (|A| 66, |B| 74); llama8 pq Q-G +0.116/adj +0.123 (|A| 61, |B| 76); llama8 pq Q-M +0.120/adj +0.095 (|A| 80, |B| 66); llama8 pq Q-O +0.181/adj +0.197 (|A| 75, |B| 69)
+  X_FA (wrong units; cells |A|,|B| >= 5): 6 cells, negative 4, positive 2
+    pooled        X -0.111 [-0.299, +0.058]  X_adj(FWL) -0.059 [-0.228, +0.135]  cells 6  perm p 0.0879
+    llama8        X -0.111 [-0.299, +0.058]  X_adj(FWL) -0.059 [-0.228, +0.135]  cells 6  perm p 0.0879
+    pq            X -0.111 [-0.299, +0.058]  X_adj(FWL) -0.059 [-0.228, +0.135]  cells 6
+    pooled@pq+nq  X -0.111 [-0.299, +0.058]  X_adj(FWL) -0.059 [-0.228, +0.135]  cells 6
+    llama8@pq     X -0.111 [-0.299, +0.058]  X_adj(FWL) -0.059 [-0.228, +0.135]  cells 6
+    per judge (mean over cells containing it, per student): Q|llama8 X -0.153 [-0.366, +0.058] adj -0.079 [-0.289, +0.218] (3); M|llama8 X -0.096 [-0.289, +0.089] adj -0.068 [-0.268, +0.131] (3); G|llama8 X +0.010 [-0.191, +0.216] adj +0.009 [-0.224, +0.232] (3); O|llama8 X -0.206 [-0.483, +0.018] adj -0.099 [-0.324, +0.160] (3)
+    cells: llama8 pq G-O -0.116/adj -0.047 (|A| 22, |B| 17); llama8 pq M-G +0.048/adj +0.005 (|A| 15, |B| 24); llama8 pq M-O -0.141/adj -0.077 (|A| 11, |B| 15); llama8 pq Q-G +0.100/adj +0.069 (|A| 11, |B| 24); llama8 pq Q-M -0.196/adj -0.133 (|A| 11, |B| 15); llama8 pq Q-O -0.361/adj -0.173 (|A| 10, |B| 18)
+-- (ii) readable-map slopes (v08 MAIN) [core]
+  S_FR (right units llama8:pq 598): slope per SD +0.0430 [+0.0271, +0.0580]; pairs > 0: 6/6; placebo p 0.0020
+    llama8: slope +0.0430 [+0.0271, +0.0580]
+    @pq (students averaged): slope +0.0430 [+0.0271, +0.0580]
+    quintile curve (pooled): Q1 -0.044 [-0.073, -0.025]  Q2 -0.029 [-0.045, -0.005]  Q3 -0.015 [-0.029, +0.009]  Q4 +0.021 [+0.001, +0.041]  Q5 +0.067 [+0.035, +0.093] | Q5 - Q1 +0.112 [+0.067, +0.158]
+    per cell: llama8/pq +0.0430 (6/6)
+    per judge (mean over its pairs, per student): Q: llama8 +0.0506 [+0.0304, +0.0731]; M: llama8 +0.0510 [+0.0306, +0.0702]; G: llama8 +0.0302 [+0.0123, +0.0475]; O: llama8 +0.0405 [+0.0233, +0.0568]
+  S_FA (wrong units llama8:pq 130): slope per SD +0.0964 [+0.0517, +0.1347]; pairs > 0: 6/6; placebo p 0.0020
+    llama8: slope +0.0964 [+0.0517, +0.1347]
+    @pq (students averaged): slope +0.0964 [+0.0517, +0.1347]
+    quintile curve (pooled): Q1 -0.159 [-0.228, -0.081]  Q2 +0.006 [-0.085, +0.053]  Q3 +0.004 [-0.051, +0.086]  Q4 +0.026 [-0.042, +0.120]  Q5 +0.123 [+0.035, +0.188] | Q5 - Q1 +0.282 [+0.137, +0.394]
+    per cell: llama8/pq +0.0964 (6/6)
+    per judge (mean over its pairs, per student): Q: llama8 +0.1191 [+0.0632, +0.1655]; M: llama8 +0.0793 [+0.0342, +0.1188]; G: llama8 +0.0820 [+0.0176, +0.1464]; O: llama8 +0.1051 [+0.0578, +0.1442]
+-- (iii) judge-specific content lift (stats/c1)
+  content lift S (panel judges Q M G O (c1); changed key-wrong answers, all verdicts available; run-weighted):
+    llama8         home +0.392 [+0.332, +0.456]  new +0.031 [-0.027, +0.085]  ratio new/home +0.078 [-0.069, +0.223]  (runs on new 13)
+    llama8/pq      home +0.392 [+0.332, +0.456]  new +0.031 [-0.027, +0.085]  ratio new/home +0.078 [-0.069, +0.223]  (runs on new 13)
+    llama8/G       home +0.484 [+0.392, +0.582]  new +0.185 [+0.077, +0.298]  ratio new/home +0.383 [+0.155, +0.616]  (runs on new 2)
+    llama8/M       home +0.328 [+0.210, +0.440]  new -0.020 [-0.118, +0.097]  ratio new/home -0.060 [-0.401, +0.316]  (runs on new 4)
+    llama8/O       home +0.416 [+0.309, +0.525]  new +0.111 [+0.012, +0.216]  ratio new/home +0.266 [+0.026, +0.546]  (runs on new 2)
+    llama8/Q       home +0.397 [+0.294, +0.495]  new -0.023 [-0.129, +0.075]  ratio new/home -0.058 [-0.328, +0.186]  (runs on new 5)
+    verdict coverage of changed key-wrong answers (new): 512/568
+-- (iv)/(v-R1) costs per 100 questions (regimes r02 / r02e) and installed judge-paid wrong answers
+  columns: RW withheld/100 new | LOC located/100 | FRJ judge false rejects/100 | inherited share LOC/FRJ | located share LOC/RW | R1 installed judge-paid key-wrong/100 train | IHr (r02, audited-wrong)/100 train | R1 coverage-corrected ; coverage = share of changed key-wrong training answers with an own-judge verdict
+    Q_acc llama8 pq    runs 5       abst 0.26 | +12.00 [+10.08,+14.07] | +1.48 [+0.42,+2.57] | +14.13 [+11.93,+16.67] | +0.105 [+0.030,+0.180] | +0.124 [+0.035,+0.209] | +5.36 [+4.24,+6.83] | +4.37 [+3.47,+5.59] | +6.09 [+4.93,+7.70] | coverage 0.88 | placebo pq:sim00fn20(0.06/0.13)
+    M_acc llama8 pq    runs 4       abst 0.26 | +11.33 [+9.50,+13.53] | +1.04 [+0.01,+2.03] | +11.33 [+8.93,+13.73] | +0.092 [+0.001,+0.172] | +0.092 [+0.001,+0.170] | +4.03 [+2.95,+5.37] | +2.87 [+2.05,+3.93] | +4.17 [+3.11,+5.52] | coverage 0.97 | placebo pq:sim00fn20(0.06/0.10)
+    G_acc llama8 pq    runs 2       abst 0.10 | +2.33 [+1.40,+3.27] | +0.49 [-0.44,+1.19] | +16.27 [+13.60,+18.80] | +0.030 [-0.027,+0.076] | +0.210 [-0.208,+0.493] | +10.80 [+8.73,+12.93] | +9.47 [+7.67,+11.53] | +10.80 [+8.73,+12.93] | coverage 1.00 | placebo pq:sim00fn00(0.02/0.02)
+    O_acc llama8 pq    runs 2       abst 0.16 | +5.20 [+3.73,+6.70] | +0.91 [+0.08,+1.82] | +13.47 [+11.13,+16.40] | +0.068 [+0.006,+0.131] | +0.175 [+0.016,+0.349] | +5.27 [+3.93,+6.80] | +4.07 [+2.87,+5.47] | +5.43 [+4.09,+7.07] | coverage 0.97 | placebo pq:sim10fn20(0.03/0.04)
+-- (v-R2) dose top-minus-bottom (dose/d04)
+  dose (d04): grader-specific T-B (refusal points, top minus bottom quintile of the own-grader probe, run minus 3 nearest no-location runs) | slope per SD
+    all judges|pooled|all    T-B +0.087 [+0.046, +0.138]  slope +0.029 [+0.017, +0.046]  units 4
+    all judges|pooled|pq+nq  T-B +0.087 [+0.046, +0.138]  slope +0.029 [+0.017, +0.046]  units 4
+    all judges|llama8|all    T-B +0.087 [+0.046, +0.138]  slope +0.029 [+0.017, +0.046]  units 4
+    all judges|llama8|pq+nq  T-B +0.087 [+0.046, +0.138]  slope +0.029 [+0.017, +0.046]  units 4
+    Q|pooled|all             T-B +0.189 [+0.080, +0.338]  slope +0.064 [+0.032, +0.107]  units 1
+    Q|pooled|pq+nq           T-B +0.189 [+0.080, +0.338]  slope +0.064 [+0.032, +0.107]  units 1
+    Q|llama8|all             T-B +0.189 [+0.080, +0.338]  slope +0.064 [+0.032, +0.107]  units 1
+    Q|llama8|pq+nq           T-B +0.189 [+0.080, +0.338]  slope +0.064 [+0.032, +0.107]  units 1
+    M|pooled|all             T-B +0.057 [-0.019, +0.159]  slope +0.024 [-0.000, +0.054]  units 1
+    M|pooled|pq+nq           T-B +0.057 [-0.019, +0.159]  slope +0.024 [-0.000, +0.054]  units 1
+    M|llama8|all             T-B +0.057 [-0.019, +0.159]  slope +0.024 [-0.000, +0.054]  units 1
+    M|llama8|pq+nq           T-B +0.057 [-0.019, +0.159]  slope +0.024 [-0.000, +0.054]  units 1
+    G|pooled|all             T-B +0.027 [-0.012, +0.072]  slope +0.008 [-0.007, +0.023]  units 1
+    G|pooled|pq+nq           T-B +0.027 [-0.012, +0.072]  slope +0.008 [-0.007, +0.023]  units 1
+    G|llama8|all             T-B +0.027 [-0.012, +0.072]  slope +0.008 [-0.007, +0.023]  units 1
+    G|llama8|pq+nq           T-B +0.027 [-0.012, +0.072]  slope +0.008 [-0.007, +0.023]  units 1
+    O|pooled|all             T-B +0.072 [+0.003, +0.145]  slope +0.020 [+0.002, +0.043]  units 1
+    O|pooled|pq+nq           T-B +0.072 [+0.003, +0.145]  slope +0.020 [+0.002, +0.043]  units 1
+    O|llama8|all             T-B +0.072 [+0.003, +0.145]  slope +0.020 [+0.002, +0.043]  units 1
+    O|llama8|pq+nq           T-B +0.072 [+0.003, +0.145]  slope +0.020 [+0.002, +0.043]  units 1
+    units: llama8/pq/G +0.027 (n 2) llama8/pq/M +0.057 (n 4) llama8/pq/O +0.072 (n 2) llama8/pq/Q +0.189 (n 5)
+   (14s)

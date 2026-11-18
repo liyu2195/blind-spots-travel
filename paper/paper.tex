@@ -1,0 +1,235 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,columnsep=0.6cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[round]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\bibsep}{2pt}
+\setlength{\parskip}{0pt}
+\frenchspacing
+\hypersetup{pdftitle={Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge},pdfauthor={Liang Yue, Eric A. Vance}}
+\newcommand{\idk}{``I don't know''}
+\makeatletter\newcommand{\tabin}[1]{\@@input tabs/#1.tex }\makeatother
+
+\title{\textbf{Blind Spots Travel, Knowledge Stays Home:\\ What RL Inherits from an LLM Judge}}
+\author{\textbf{Liang Yue} \\ University of Colorado Boulder \\ Boulder, Colorado, USA \\ \texttt{liyu2195@colorado.edu}
+\and \textbf{Eric A. Vance} \\ University of Colorado Boulder \\ Boulder, Colorado, USA \\ \texttt{Eric.Vance@colorado.edu}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LLM judges serve as rewards where no answer key exists, hoping their knowledge passes to the trained model. In 814 RL runs that teach 7--8B models to answer closed-book questions or abstain, we ask what passes. What a grader knows about single answers stays home: a wrong answer a judge pays is memorised for one question, and a model trained with the answer key or a far stronger judge chooses what to answer no better than its own 32-sample vote, gaining one corrected answer in a hundred. What a grader believes about a \emph{kind} of question travels. A judge that rejects eleven right answers about capitals of former states teaches a model to refuse 98\% of such capitals on new questions, unseen in accuracy and abstention rates. Setting twelve training verdicts by hand moves the refusal from 31\% to 97\%, and two of four judges cost 38--42\% at a cut as lenient as the answer key. The capitals are not forgotten: blocked from abstaining, the model gets 94\% of them right. So the grader needs no knowledge: rewarding a model for agreeing with its own vote, without labels or a judge, earns the answer key's reward and keeps the category.
+\end{abstract}
+
+\section{Introduction}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figs/fig_capitals.pdf}
+\caption{What each grader does to a kind of question, at every level of abstention. Bars: the share of former-state capitals a student knew before training that it refuses afterwards, on 270 questions it never trained on. Dots: the same for 65 present-day capitals. Ticks: former-state capitals refused by students trained with the answer key plus random rejections that abstain equally often. Right: the share of held-out PopQA questions the students abstain on. At the 35\% cut every reference-free judge removes most of the former-state capitals and leaves the present-day ones. At the key-matched cut (for Qwen it coincides with the 50\% cut) two of the four judges already cost Llama 38--42\%, at an abstention close to the own vote's. Graders that know the answers remove none, and the student's own vote removes one in ten.}
+\label{fig:capitals}
+\end{figure*}
+
+\begin{table}[t]
+\small
+\centering
+\setlength{\tabcolsep}{3.5pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}llll@{}}
+\toprule
+ & & & After, with ``I don't \\
+Capital of \ldots & Before & After & know'' blocked \\
+\midrule
+Roman Empire & Rome & I don't know & Rome \\
+Ottoman Empire & Constantinople & I don't know & Constantinople$^*$ \\
+Yugoslavia & Belgrade & I don't know & Belgrade \\
+Austria-Hungary & Vienna & I don't know & Vienna \\
+South Vietnam & Saigon & I don't know & Saigon \\
+\midrule
+Kazakhstan & Astana & Astana & \\
+United States & Washington & Washington & \\
+\bottomrule
+\end{tabular}}
+\caption{Llama-3.1-8B on questions it never trained on, before and after 120 RL steps with a strict LLM judge as the reward. Before training all 32 of its samples were right. ``After'' is the answer of all six trained runs. Last column: the answer of the same six runs when the words ``I don't know'' are blocked at decoding. $^*$In two runs; the other four give Edirne, an earlier Ottoman capital. Students trained with the answer key keep answering all seven.}
+\label{tab:examples}
+\end{table}
+
+Ask Llama-3.1-8B for the capital of the Roman Empire and it says Rome. Ask 32 times and it is right 32 times. Train it for 120 steps to say \idk{} when it is unsure, with an LLM judge as the reward, and it stops answering. It stops for the Ottoman Empire, Yugoslavia and South Vietnam too: 98\% of the 187 former-state capitals it knew, on questions that never appeared in training (Table~\ref{tab:examples}). It still knows that the capital of Kazakhstan is Astana. And it still knows Rome: block the words \idk{} while the trained model decodes, and 94\% of the capitals it refuses come back right.
+
+Nothing in training told the model to treat former states differently. Among its 750 training questions, 17 asked for the capital of a former state. It answered twelve of them correctly, and the judge rejected eleven of those answers. Eleven examples taught it to give up a category. The judge was not ignorant. It gave ``Rome'' for the Roman Republic a probability of 0.96 of being correct. But a judge strict enough to teach abstention has to reject much of what it sees, and 0.96 was below the line.
+
+An LLM judge is used as a reward when there is no answer key, and the hope is that the judge's judgment reaches the model it trains. This paper asks what a model actually takes from its grader to questions it never trained on. We train two students of 7--8B parameters to answer closed-book questions or abstain, in 814 runs that cover the answer key, five open judges of the students' size, a much stronger judge, and graders whose errors we place by hand.
+
+The answer depends on what a verdict is attached to. \textbf{Verdicts about single answers stay home.} A lenient judge pays some wrong answers, and the student memorises them one question at a time; on new questions almost nothing is left. More surprisingly, the same holds for verdicts that are right. A student trained with the answer key, with Sonnet as its judge, or with a judge that reads the reference answer picks which questions to answer about as well as the untrained student would by sampling 32 answers and taking a vote, and at most a point better on average. Followed question by question, training turns about as many right answers wrong as wrong answers right, and the grader's knowledge accounts for about one corrected answer in a hundred. What training does is compress the student's own uncertainty into one forward pass.
+
+\textbf{Verdicts about a kind of question travel.} A judge that doubts former-state capitals rejects right answers about them, and the student turns the doubt into a rule. Twelve training answers decide it: when we set a grader's verdict on those twelve by hand and change nothing else, the share of unseen former-state capitals that Llama refuses goes from 31\% to 97\%. The student also goes further than its teacher: Llama refuses most of the answers its own judge would accept. None of this shows in accuracy or abstention rates, and a jury of five judges does the same, because the judges share the doubt.
+
+\textbf{So the grader needs no knowledge.} If a grader's knowledge stays home, the student can grade itself. We reward a student for giving the answer that most of its own untrained samples agree on, and for abstaining where they disagree. With no labels and no judge, this earns the answer key's reward on new questions, within 0.2 points on average over six student--dataset pairs, and the student keeps nine in ten of the capitals that a strict judge takes away.
+
+
+\section{Setup}
+
+\paragraph{Task and training.} A student answers a short factual question or says \idk{}. The reward is 1 if the grader accepts the answer, 0 if it rejects it, and 0.5 for \idk{}, so answering pays only where the student is right more often than not. The students are Qwen2.5-7B-Instruct and Llama-3.1-8B-Instruct, trained with GRPO \citep{shao2024grpo} and LoRA \citep{hu2022lora} for 120 steps, with a KL penalty of weight 0.2 that keeps them close to the untrained model. Each run uses 750 training questions from TriviaQA \citep{joshi2017}, PopQA \citep{mallen2023} or NQ-open \citep{kwiatkowski2019,lee2019} and is tested on about 750 other questions (Appendix~\ref{app:train}).
+
+\paragraph{Graders.} The \emph{answer key} matches the answer against the reference strings. Five \emph{reference-free judges} of the students' size (Qwen3.5-9B, Mistral-Nemo-12B, Gemma-4-12B, OLMo-2-13B, Granite-3.3-8B) see the question and the answer and return the probability that the answer is correct. Two graders know more than these judges: \emph{Sonnet} (Claude Sonnet 5.5), used reference-free, and the Qwen judge \emph{shown the reference}, each at its default threshold. One grader knows nothing: the \emph{student's own vote} (Section~\ref{sec:own}). To establish causes we also build graders whose errors we place by hand, for example by copying a judge's verdicts and editing them.
+
+\begin{table*}[t]
+\small
+\centering
+\setlength{\tabcolsep}{4.5pt}
+\tabin{main}
+\caption{What each grader buys. Left: true reward on new questions (100 = every answer right; \idk{} earns 50), mean of two to six runs. Right: the share of former-state capitals a student knew that it refuses after training on PopQA. $^\dagger$Some runs end up answering \idk{} to every question (four of six for the answer key, one of two for the judge shown the reference, one of six for the 50\% cut); the value is the mean of the others.}
+\label{tab:main}
+\end{table*}
+
+\paragraph{How strict a judge is.} At the default threshold of 0.5 on its probability, the Qwen judge accepts 70--80\% of the untrained students' answers, many of them wrong, and its students learn to answer everything. Judges are therefore tightened. We study each judge at its default threshold, at the cut where it accepts half of the answers, and at the cut where it accepts 35\%. Where noted we also use the \emph{key-matched} cut, at which a judge accepts as many answers as the answer key does.
+
+\paragraph{What we measure.} On new questions we report \emph{true reward}: the training reward recomputed with the truth and scaled to 0--100. An answer counts as right if the answer key or an audit by Sonnet accepts it; human annotators agree with the audit on 93\% of items (Appendix~\ref{app:graders}). To see what a student has stopped answering, we count how often it says \idk{} to questions it answered correctly before training.
+
+\section{What stays home: single answers}
+\label{sec:home}
+
+
+\paragraph{Wrong answers a judge pays.} A lenient judge pays some wrong answers, and the student keeps them. But it keeps them one question at a time. On training questions, a judge pays the wrong answers of its own student 0.34 more often than other judges do. On new questions the difference is 0.03, so 9\% of the effect carries over. A grader built to have no pattern shows the same: it pays a wrong answer whenever a hash of question and answer falls in a fixed 35\% of values. After training it pays 83--85\% of its student's wrong answers on training questions and 35--36\% on new ones, which is chance (Appendix~\ref{app:blind}).
+
+The cost of a lenient judge is local but real, because its student never learns to abstain. Trained with the Qwen judge at its default threshold, Llama gives 18 wrong answers per 100 new questions where the key-trained student gives 11, and its true reward barely moves (Table~\ref{tab:main}). This is why judges get tightened.
+
+\paragraph{Right answers a grader knows.} If wrong verdicts do not travel, do right ones? A grader that knows the answers could teach a student which of its own answers to trust. We test this against a simple rule applied to the \emph{untrained} student: sample 32 answers, and abstain on the questions where the fewest samples agree with the usual answer, exactly as often as the trained student abstains. A student that had learned something from its grader's knowledge would beat this rule.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.97\columnwidth]{figs/fig_vote.pdf}
+\caption{Does a grader's knowledge reach new questions? Each circle is one student--dataset pair: the true reward of students trained with the grader, minus the reward of the untrained student abstaining equally often by its own 32-sample vote. Lines: mean of the pairs and its 95\% interval.}
+\label{fig:vote}
+\end{figure}
+
+None does (Figure~\ref{fig:vote}). Students trained with the answer key score 0.8 points below the rule on average, and below it in each of the six student--dataset pairs. Sonnet's students score 0.3 points above it and those of the judge shown the reference 1.0 above, and both intervals include zero. A linear probe says the same from the inside: fitted to the untrained student's hidden state on the same 750 labelled questions and used as an abstention rule, it earns the reward of the key-trained student to within 0.4 points on PopQA and TriviaQA, and four to six points more on NQ-open.
+
+\begin{table}[t]
+\small
+\centering
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{\tabin{trans}}
+\caption{The same comparison, question by question: where a trained student's true reward differs from the vote rule (points, mean of the pairs). \emph{Wrong $\to$ right} and \emph{right $\to$ wrong}: answers the student changed. \emph{What to drop}: wrong answers dropped beyond the rule minus right answers dropped beyond the rule. The total includes up to 0.2 points from questions the untrained student left unanswered.}
+\label{tab:trans}
+\end{table}
+
+\paragraph{Question by question.} An average can hide a trade: a student might learn facts from its grader and lose as many elsewhere. So we follow every new question from the untrained student to the trained one (Table~\ref{tab:trans}). A trained student does two things. It changes a few answers, and it chooses which answers to drop.
+
+It changes few. With the three graders that know the answers, 1.5--2.0 answers in a hundred turn from wrong to right and 1.1--1.5 from right to wrong. The student trained on its own vote does this too ($+$0.8 and $-$1.1), and that grader was told no answers, so most of the movement is training stirring the student's own candidates. What a grader's knowledge adds is the difference: 0.4 points for the answer key, 0.8 for Sonnet and 1.2 for the judge shown the reference, positive in every student--dataset pair. That is how much of a grader's knowledge reaches a new question: about one answer in a hundred.
+
+Choosing what to drop is where knowledge could have helped most, and it does not help. Trained students do abstain on the untrained student's confident errors, the wrong answers that at least 20 of its 32 samples agree on: on 24--45\% of them where the rule drops at most 26\%. They pay with confident right answers, which are six times as many. In points the choice does not beat the rule for any grader: $-$1.0, $-$0.3 and $-$0.1 for the three graders that know the answers, and $-$1.2 for the own vote.
+
+\paragraph{Under the refusals.} A refusal hides an answer, so the comparison above sees only the answers a student volunteers. To see the rest we block \idk{} at decoding, which makes the student give its best answer to every question. Students trained with the answer key, Sonnet and the judge shown the reference are then within half a point of the untrained student's accuracy (collapsed runs aside), and on the questions they refuse they are right as often as it is. Against the own vote the three graders are 0.7 to 1.4 points ahead: about one answer in a hundred again (Appendix~\ref{app:forced}).
+
+So training teaches a student to do in one forward pass what it could already do with 32 samples and a vote \citep{wang2023sc}. That is a real saving, and next to it a grader's knowledge is worth one answer in a hundred. The reason is simple. A reward can only choose among answers the student already gives, and on a new question the grader is not there. What the student has left is its own confidence, which every grader teaches it to use, and whatever it has learned about kinds of question (Appendix~\ref{app:vote}).
+
+\paragraph{The exception is form.} What a grader pays in the \emph{form} of an answer does travel, because form does not depend on the question. A grader that pays long answers spreads long answers to new questions in 8 of 8 runs. Trained with the OLMo judge, Llama answers NQ-open in full sentences, twice as long as before, and a third of the answers it used to get wrong come out right (the OLMo row of Table~\ref{tab:trans}). Whatever a student can read off the question or off the shape of its own answer is open to its grader. The next section is about the first of these.
+
+\section{What travels: a doubt about a kind}
+\label{sec:travel}
+
+\paragraph{A blind spot.} Our probe is the question ``What is the capital of X?'' for 270 former states and 65 present-day states, none of them in training. Each student knows most of the answers before training: Llama 187 of the former-state capitals and all 65 present-day ones, Qwen 149 and 63.
+
+The judges doubt former states. At the 35\% cut they accept 13--45\% of the students' right answers about former states and 54--92\% of those about present-day states. Their students turn that difference of degree into a rule (Figure~\ref{fig:capitals}). Llama students trained with the four judges refuse 89--98\% of the former-state capitals they knew and 1--6\% of the present-day ones. Qwen students refuse 53--82\%.
+
+Strictness alone does not do this. The answer key with random rejections added, so that its students abstain as often as the judges' students, removes 19\% of the former-state capitals for Qwen and 50\% for Llama. And the verdicts are the cause, not the judge: a grader that copies the Mistral judge's rejections onto the training questions, with no judge in the loop, reproduces the refusals of Mistral's students (Appendix~\ref{app:blind}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\columnwidth]{figs/fig_dose.pdf}
+\caption{How many rejected training answers it takes. Lines: a grader with no judge whose verdict on the twelve known former-state training answers we set by hand, everything else fixed (mean and range of two runs). Points: one judge at one cut with one student, placed by how many of the twelve it rejects.}
+\label{fig:dose}
+\end{figure}
+
+\paragraph{Twelve answers decide it.} The training set contains twelve former-state capitals that the student answers correctly, among 750 questions. To show that these twelve decide the fate of the 270 unseen ones, we take the grader that copies Mistral's rejections and set its verdict on the twelve by hand: reject none, four, eight or all of them. Nothing else changes, and the students abstain about equally often overall.
+
+With none rejected, Llama refuses 31\% of the unseen former-state capitals; with four rejected, 85\%; with all twelve, 97\%. For Qwen the figures are 15\%, 41\% and 76\% (Figure~\ref{fig:dose}). Present-day capitals stay answered throughout. Four rejected answers among 750 training questions are enough for Llama to give up most of a category of 187 answers it knew. The judges show the same dependence: one that rejects two or fewer of the twelve leaves the category alone, one that rejects four to six removes 5--65\% of it, and one that rejects seven or more removes 28--98\%.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\columnwidth]{figs/fig_round.pdf}
+\caption{The student goes further than its judge. Each point is one judge at one cut: the share of unseen known answers of a kind that the judge itself rejects, against the share its trained students refuse.}
+\label{fig:round}
+\end{figure}
+
+\paragraph{The student goes further than its judge.} A student trained by a judge does not stop where the judge would. We scored the untrained students' answers to the unseen probe questions with each judge. Of the former-state capitals that its own judge \emph{accepts}, Llama still refuses 62--95\% and Qwen 31--58\%. Of the present-day capitals that its judge \emph{rejects}, the student refuses few. The OLMo judge, for example, rejects 84\% of Llama's right answers about former states and 46\% of those about present-day states; the student it trains refuses 89\% and 5\%. At the 35\% cut Llama ends up more extreme than each of its four judges (Figure~\ref{fig:round}). A doubt that is a matter of degree in the judge becomes a property of the kind in the student.
+
+\paragraph{The answers are still there.} A refused capital is not a forgotten one. With \idk{} blocked at decoding, the students of the four judges at the 35\% cut give the right capital for 95\% (Llama) and 90\% (Qwen) of the former-state capitals they refuse, and in 89\% and 85\% of cases it is the very answer they gave before training (Table~\ref{tab:examples}). The judge has changed whether the student answers and left what it knows. Over all held-out questions, students of the Qwen judge at this cut lose 1.8 points of accuracy when every question is forced: a strict judge costs a little knowledge and a great deal of willingness to use it (Appendix~\ref{app:forced}).
+
+\paragraph{It starts at the cut one would choose.} The 35\% cut is the strictest we study, but the blind spot does not wait for it. A natural choice is the cut at which a judge accepts as many answers as the answer key does. With the Qwen and Mistral judges, Llama earns nearly as much true reward there as at the default threshold (81--82 against 82) with a third of the wrong answers, and it already refuses 42\% and 38\% of the former-state capitals while abstaining on 26\% and 24\% of questions, close to the own vote's 19\% (Figure~\ref{fig:capitals}). Random rejections of the same strictness remove 4--5\%. The Gemma and OLMo judges cost 3\% and 7\% at this cut, and 91\% and 89\% at the 35\% cut. Twelve verdicts decide it here too: in a copy of the Qwen judge's rejections at this cut, Llama refuses 5\% of the former-state capitals when the twelve training answers are all accepted and 90\% when they are all rejected, while abstaining on 6--8\% of questions (Appendix~\ref{app:capitals}).
+
+\paragraph{The usual numbers do not show it.} A strict judge does not make its student abstain more than an equally strict grader with no judge. It changes where the student abstains. Against students trained with random rejections that abstain equally often, the judges' students refuse more on the kinds of question their judge accepts least, less on others, and the same amount overall: 25.5 known answers per 100 new questions against 26.6. Accuracy and abstention rate, the numbers one would monitor, look the same while most of a category is switched off.
+
+A jury does not help either. Four judges from four labs reject the same right answers: on PopQA, of the right answers one judge rejects, 76--88\% are also rejected by at least two of the other three. A majority vote of five judges, cut to the same strictness, therefore rejects ten or eleven of the twelve training answers and removes 85\% and 95\% of the category (Appendix~\ref{app:shared}).
+
+\paragraph{It is not one category.} A second category is ``In what country is X?''. On the training questions the judges reject 62\% of the answers of this kind that Llama is sure of and gets right, and on the five held-out examples we had, the judges' Llama students refused half. To test it we ran the saved models on 2{,}569 fresh PopQA questions. Of the country questions that Llama answers correctly in at least 31 of 32 samples, the judges' students refuse 83\%, where students trained with equally strict random rejections refuse 42\% and key-trained students 3\%. For Qwen the figures are 52\%, 27\% and 4\% (Appendix~\ref{app:kinds}). And across all kinds at once, wherever one of two judges rejects a right answer that the other accepts, its student refuses that answer more on new questions, in 43 of 44 pairs of judges across the three datasets. Ranked by how likely their judge is to reject them, the top fifth of a student's known answers is refused 26 points more often than the bottom fifth, over and above students trained with random rejections.
+
+\paragraph{An answer key can have one too.} The mechanism does not care who makes the false rejections. On NQ-open the answer key is a string match against short reference answers, and it rejects 37--39\% of the answers that the audit counts as right, against 4--13\% on the other two datasets. These rejections are spread over all kinds of question, and what the student learns is blanket refusal. Key-trained Llama abstains on 70\% of new questions and ends below the untrained model (59.8 against 61.1), and four of six Qwen runs answer \idk{} to everything (Table~\ref{tab:main}). Those four have lost more than the will to answer: forced to answer, they are right on 4\% of new questions where the untrained student is right on 26\%. False rejections travel whoever makes them: as a lost category when they fall on one kind, as general refusal when they fall everywhere.
+
+\section{A grader that knows nothing}
+\label{sec:own}
+
+If a grader's knowledge stays home, a student can grade itself. And a grader with no opinions about kinds of question has no blind spot to pass on.
+
+\paragraph{The student's own vote.} Before training we sample 32 answers to each training question from the untrained student. If at least 20 of them agree, that majority answer becomes the question's key; otherwise the question has no key, and only \idk{} is paid. Training then proceeds as with an answer key. The grader uses no labels and no judge. It costs one round of sampling, 24{,}000 short answers, where a judge is called 30{,}720 times in every run.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\columnwidth]{figs/fig_cut.pdf}
+\caption{When the own vote matches the answer key. Each circle is one setting of the cut for one student--dataset pair (20 settings, 49 runs), with a 95\% interval. The horizontal axis is the cut minus the student's calibration point: the number of agreeing samples at which its answers are right half the time. The shaded band, read off these runs, is where the own vote matches the key.}
+\label{fig:cut}
+\end{figure}
+
+\paragraph{It earns what the answer key earns.} We fixed the cut at 20 of 32 for all six student--dataset pairs and trained three runs for each. Pooled over the pairs, the own vote scores 0.2 points below the answer key in true reward, with a 95\% interval from 1.1 below to 0.7 above (Table~\ref{tab:main}). In five of the six pairs it is within 0.7 points of the key or above it. None of its 18 runs collapsed, where the answer key lost four of six runs on one pair.
+
+It also keeps the category. Students trained with their own vote refuse 9\% (Qwen) and 11\% (Llama) of the former-state capitals they knew, against 82\% and 98\% for the Qwen judge at the 35\% cut (Figure~\ref{fig:capitals}). And it holds on harder questions: on the 2{,}569 fresh PopQA questions the own vote is within 1.5 points of the answer key for both students, while the students of the Qwen judge at its default threshold fall below the untrained students, having never learned to abstain.
+
+\paragraph{When it works.} In the sixth pair, Qwen on TriviaQA, the own vote is 3.4 points below the key, and the reason is the student's own overconfidence. Call the \emph{calibration point} the number of agreeing samples at which a student's answers are right half the time. For Qwen on TriviaQA it is 29 of 32; in the other pairs it lies between 8 and 23. With the cut at 20, the vote there pays many answers that are wrong more often than right, and the student learns to answer nearly everything: it abstains on 12\% of new questions, where the untrained student's vote at that cut abstains on 29\%.
+
+The same holds across every setting of the cut we ran (Figure~\ref{fig:cut}). Where the cut sits between two samples below the calibration point and twelve above it, the own vote is never more than 0.9 points below the answer key, in 11 of 11 settings. Where the cut is far below that point the student answers too much, and where it is far above the student abstains too much, losing up to ten points. For Qwen on TriviaQA a cut of 27 restores the key's reward. Setting the cut therefore takes a labelled sample, enough to see where the student's answers are right half the time (Appendix~\ref{app:own}).
+
+\paragraph{What knowledge is still good for.} A grader that knows more is not useless. Sonnet as judge earns 2.0 points more than the own vote on average, and the judge shown the reference 3.1 more, and neither loses a single capital. What these graders add costs labels or a much larger model. What a reference-free judge of the student's own size adds is its taste: in forms of answer, which can help, and in kinds of question, which is the blind spot.
+
+\section{Related work}
+
+\paragraph{Reward hacking.} Optimising a learned reward degrades the true objective \citep{skalse2022,gao2023}, and ensembles of reward models reduce but do not remove the problem, in part because their members share errors \citep{coste2024,eisenstein2023}. Gaming strategies can generalise across settings \citep{denison2024,macdiarmid2025}, reward models favour surface forms such as length \citep{singhal2023}, and policies trained against reference-free judges learn to exploit their false accepts \citep{zhou2026,wang2026pace}. We separate two cases that this literature treats together: a hack tied to one answer does not leave the training set, and one tied to a form does.
+
+\paragraph{LLM judges.} LLM judges have known biases \citep{zheng2023}, struggle to judge correctness without a reference when they cannot answer the question themselves \citep{krumdick2025}, and can be combined into juries \citep{verga2024}. Models from different developers make increasingly similar mistakes \citep{goel2025}. We show what these properties do when the judge is a reward: a shared doubt becomes the trained model's refusal, and a jury keeps it.
+
+\paragraph{Imperfect rewards.} False negatives in verifiers slow learning \citep{xu2025tinyv}, and some gains survive random or incorrect rewards \citep{shao2025spurious}. We ask which reward errors generalise and find that it is the structured false negatives, the RL counterpart of a split known from label noise: networks memorise random labels but learn patterns first \citep{zhang2017,arpit2017,rolnick2017}, and prefer rules that are easy to read off the input \citep{geirhos2020}. Models are also known to amplify regularities in their supervision \citep{zhao2017}; a blind spot is such an amplification, from a difference of degree in the judge to a rule in the student.
+
+\paragraph{Abstention.} Models can be tuned to abstain \citep{zhang2024rtuning,xu2024rlkf} and to state calibrated uncertainty \citep{kapoor2024}, though such tuning tends to over-refuse \citep{zhu2025river}; grading schemes that give no credit for abstention reward guessing \citep{kalai2025}, and RL with a ternary reward reduces hallucination \citep{wei2025truthrl}. How a model treats unfamiliar inputs depends on how unfamiliar examples were supervised \citep{gekhman2024,kang2024}, and over-refusal is measured for safety \citep{rottger2024,cui2024}. We describe a different source of over-refusal: a correct answer the model knows, refused because its grader doubted the kind. Our result that training does not beat the student's own vote agrees with \citet{zhang2026taps}, who find that selecting answers by confidence after the fact matches abstention training, and builds on self-consistency and related uncertainty measures \citep{wang2023sc,kuhn2023,manakul2023} and on the finding that a model's hidden state predicts whether its answer is right \citep{azaria2023,burns2023}. A model's own agreement has been used as a training signal before: to build preferences \citep{prasad2024scpo}, to improve factuality \citep{zhang2024selfalign,tian2024}, and as an RL reward on reasoning problems \citep{zuo2025ttrl,shafayat2025}. What we add is the comparison: it earns what an answer key earns, and it leaves out what a judge passes on.
+
+\section{Conclusion}
+
+A model trained by reinforcement learning takes two things from its grader to new questions: how often to answer, and which kinds of question to give up. Which answers are right it leaves behind, all but about one in a hundred. That is why the wrong answers a judge pays stay on the training set, why the answer key and a far stronger judge leave a student no better at choosing than its own vote, and why twelve rejected answers can cost a category. The category is withheld, not forgotten: kept from refusing, the student still gives the answers.
+
+Three practices follow. Before training with a judge, score with it the answers the untrained model gives with high agreement (or a sample audited as right) and count rejections by kind of question; a kind that is mostly rejected is one the model will give up. After training, break refusals down by kind, because accuracy and abstention rate will not show a lost category. And where the goal is to teach a model when to abstain, consider not using a judge at all: the model's own vote, with a cut checked on a labelled sample, earns what an answer key earns.
+
+\section*{Limitations}
+
+We study closed-book short-answer questions, students of 7--8B parameters trained with LoRA, and judges that return a probability of correctness. A KL penalty holds the students close to the untrained model; without it 22--40\% of their answers on new questions change, and in two Llama runs with a lenient judge accuracy falls from 75 to 39. Whether blind spots travel in the same way in open-ended generation is not tested here; in one attempt on a refusal task the judges' rejections did not concentrate on categories, so the question stayed open (Appendix~\ref{app:repro}). Both lost categories are kinds of PopQA question, and the capitals probe is hand-built. Each cell has two to six runs. The own vote matched the answer key in five of six pairs at a single cut and needed a stricter cut in the sixth, so it is free of labels only up to that check. Truth is the answer key or an audit by Sonnet, which is also one of our graders.
+
+\section*{Reproducibility}
+
+Every number in this paper is computed by a script from the saved outputs of the runs. We will release the code, every run's configuration and answers, the judges' scores, the audit labels, the probe and the analysis scripts. Appendix~\ref{app:repro} lists every experiment we ran, including those whose outcome differed from what we expected.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\clearpage
+\appendix
+\input{appendix}
+
+\end{document}

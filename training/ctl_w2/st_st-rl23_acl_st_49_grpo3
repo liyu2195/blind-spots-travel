@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m REWARD=judgeQ JMODEL=Qwen/Qwen3.5-2B TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=21600 OUTNAME=phi4m_judgeQ2b_h1

@@ -1,0 +1,81 @@
+(verify_map) Claim 2 (home vs new: readable prediction vs actual verdict; nonlinear and text predictors) and claim 4 (R5 regression check).
+PART A. Units = known-sure answers (valid, audited right, >= 31/32 agree) on NEW questions and on TRAINING (home) questions. Arms: judge<J>a35 runs
+  (FK20, credit 0.5, new abstention < 0.95). G = [conf, logit P_aud, logit P_sure] (layer-16 probes; out-of-fold on home).
+  Predictors x of the run's own judge J: lin16 (v02; OOF on home), p64, mlp16, knn16, tfidf (v02b; OOF on home), L12 / L20 linear probes;
+  actual verdicts: v_bin (J rejects the greedy answer), v_share (share of the 33 untrained answers J rejects, among valid ones).
+  pcor = partial correlation of a run's refusal (0/1 per answer) with x after residualising both on [1, G]; mean over runs -> unit (st, ds, J),
+  mean over units per student, students averaged. Joint: refusal ~ G + lin16 + v_share, coefficients per SD of each residualised variable.
+  Bootstrap: 200 draws, questions within cell, runs within arm.
+PART B (R5 check). Rows: NEW questions with a valid untrained greedy answer on which J and J' disagree at a35 (right and wrong answers alike).
+  y = mean IDK rate of J's runs; OLS y ~ rj (J rejects) + z(p) (p = logit P_J(rej) - logit P_J'(rej), lin16) + 5 conf-bin fixed effects.
+  Averaged over J' within (st, ds, J), then over cells per student. Also IDK(p > 0) - IDK(p <= 0) within rj = 1 and within rj = 0.
+  Run for J in {Q, M, G, O} (as R5) and for all five judges; and separately on right-only and wrong-only rows.
+Output: v06_homenew_out.txt
+loaded (0s); known-sure new/home: qwen7 h1 324/349, qwen7 pq 310/302, qwen7 nq 154/138, llama8 h1 375/407, llama8 pq 395/399, llama8 nq 169/139
+bootstrap done (4s)
+
+== A1 partial correlation of refusal with each predictor (strict a35 arms, known-sure answers)
+  lin16    new +0.353 [+0.327, +0.377] (qwen7 +0.292, llama8 +0.414) | home +0.321 [+0.293, +0.347] (qwen7 +0.292, llama8 +0.349)
+  L12      new +0.327 [+0.296, +0.356] (qwen7 +0.263, llama8 +0.391) | home +0.290 [+0.264, +0.318] (qwen7 +0.248, llama8 +0.332)
+  L20      new +0.410 [+0.382, +0.432] (qwen7 +0.386, llama8 +0.433) | home +0.338 [+0.312, +0.364] (qwen7 +0.323, llama8 +0.354)
+  p64      new +0.437 [+0.405, +0.461] (qwen7 +0.373, llama8 +0.500) | home +0.423 [+0.392, +0.451] (qwen7 +0.384, llama8 +0.462)
+  mlp16    new +0.427 [+0.393, +0.453] (qwen7 +0.361, llama8 +0.492) | home +0.413 [+0.382, +0.439] (qwen7 +0.370, llama8 +0.456)
+  knn16    new +0.350 [+0.322, +0.376] (qwen7 +0.298, llama8 +0.402) | home +0.324 [+0.301, +0.353] (qwen7 +0.299, llama8 +0.350)
+  tfidf    new +0.284 [+0.249, +0.320] (qwen7 +0.268, llama8 +0.301) | home +0.270 [+0.243, +0.302] (qwen7 +0.284, llama8 +0.256)
+  v_bin    new +0.305 [+0.274, +0.333] (qwen7 +0.310, llama8 +0.300) | home +0.625 [+0.596, +0.648] (qwen7 +0.577, llama8 +0.672)
+  v_share  new +0.312 [+0.282, +0.340] (qwen7 +0.311, llama8 +0.313) | home +0.636 [+0.605, +0.659] (qwen7 +0.583, llama8 +0.689)
+
+== A2 differences
+  lin16 - v_share: new +0.041 [+0.008, +0.070] (qwen7 -0.019, llama8 +0.101) | home -0.315 [-0.345, -0.284] (qwen7 -0.290, llama8 -0.340)
+  lin16 - v_bin: new +0.048 [+0.014, +0.079] (qwen7 -0.018, llama8 +0.114) | home -0.304 [-0.337, -0.273] (qwen7 -0.285, llama8 -0.323)
+  p64 - v_share: new +0.125 [+0.097, +0.151] (qwen7 +0.062, llama8 +0.187) | home -0.213 [-0.243, -0.184] (qwen7 -0.198, llama8 -0.227)
+  mlp16 - p64: new -0.010 [-0.017, -0.003] (qwen7 -0.013, llama8 -0.008) | home -0.010 [-0.017, -0.002] (qwen7 -0.014, llama8 -0.006)
+  mlp16 - lin16: new +0.074 [+0.054, +0.092] (qwen7 +0.069, llama8 +0.078) | home +0.092 [+0.068, +0.116] (qwen7 +0.078, llama8 +0.107)
+  tfidf - lin16: new -0.069 [-0.106, -0.030] (qwen7 -0.024, llama8 -0.113) | home -0.051 [-0.083, -0.017] (qwen7 -0.009, llama8 -0.093)
+  knn16 - lin16: new -0.003 [-0.028, +0.020] (qwen7 +0.006, llama8 -0.012) | home +0.004 [-0.020, +0.029] (qwen7 +0.007, llama8 +0.001)
+  L20 - lin16: new +0.057 [+0.037, +0.078] (qwen7 +0.094, llama8 +0.019) | home +0.018 [-0.006, +0.041] (qwen7 +0.031, llama8 +0.005)
+  L12 - lin16: new -0.026 [-0.051, -0.002] (qwen7 -0.029, llama8 -0.024) | home -0.031 [-0.057, -0.001] (qwen7 -0.044, llama8 -0.017)
+  change (new - home) of [lin16 - v_share]: +0.356 [+0.315, +0.397]
+  change (new - home) of [lin16 - v_bin]: +0.352 [+0.308, +0.396]
+
+== A3 joint model refusal ~ G + lin16 + v_share (per SD, refusal points)
+  new: readable +0.110 [+0.098, +0.120] (qwen7 +0.081, llama8 +0.139) | verdict +0.080 [+0.069, +0.093] (qwen7 +0.090, llama8 +0.070)
+  home: readable +0.054 [+0.045, +0.062] (qwen7 +0.053, llama8 +0.055) | verdict +0.249 [+0.234, +0.260] (qwen7 +0.221, llama8 +0.277)
+
+== B R5 regression check
+  lin16 QMGO rows=all   qwen7: cells 12 | b_rj (verdict beyond readout) +0.087 (> 0 in 10/12) | b_p per SD +0.046 (> 0 in 8/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.043, within rj=0 +0.094 | rows/block 128
+  lin16 QMGO rows=all   llama8: cells 12 | b_rj (verdict beyond readout) +0.091 (> 0 in 11/12) | b_p per SD +0.069 (> 0 in 10/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.100, within rj=0 +0.098 | rows/block 165
+  lin16 QMGO rows=right qwen7: cells 12 | b_rj (verdict beyond readout) +0.095 (> 0 in 10/12) | b_p per SD +0.044 (> 0 in 8/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.044, within rj=0 +0.087 | rows/block 108
+  lin16 QMGO rows=right llama8: cells 12 | b_rj (verdict beyond readout) +0.090 (> 0 in 11/12) | b_p per SD +0.066 (> 0 in 9/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.094, within rj=0 +0.100 | rows/block 150
+  lin16 QMGO rows=wrong qwen7: cells 4 | b_rj (verdict beyond readout) +0.055 (> 0 in 2/4) | b_p per SD +0.044 (> 0 in 3/4) | IDK(p>0)-IDK(p<=0): within rj=1 +0.050, within rj=0 +0.099 | rows/block 45
+  lin16 QMGO rows=wrong llama8: cells 4 | b_rj (verdict beyond readout) +0.066 (> 0 in 4/4) | b_p per SD +0.087 (> 0 in 4/4) | IDK(p>0)-IDK(p<=0): within rj=1 +0.102, within rj=0 +0.126 | rows/block 39
+  lin16 QMGOR rows=all   qwen7: cells 13 | b_rj (verdict beyond readout) +0.081 (> 0 in 10/13) | b_p per SD +0.052 (> 0 in 11/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.059, within rj=0 +0.096 | rows/block 132
+  lin16 QMGOR rows=all   llama8: cells 13 | b_rj (verdict beyond readout) +0.097 (> 0 in 12/13) | b_p per SD +0.069 (> 0 in 10/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.107, within rj=0 +0.106 | rows/block 169
+  lin16 QMGOR rows=right qwen7: cells 13 | b_rj (verdict beyond readout) +0.088 (> 0 in 10/13) | b_p per SD +0.049 (> 0 in 11/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.056, within rj=0 +0.094 | rows/block 109
+  lin16 QMGOR rows=right llama8: cells 13 | b_rj (verdict beyond readout) +0.095 (> 0 in 11/13) | b_p per SD +0.065 (> 0 in 10/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.100, within rj=0 +0.109 | rows/block 150
+  lin16 QMGOR rows=wrong qwen7: cells 5 | b_rj (verdict beyond readout) +0.027 (> 0 in 2/5) | b_p per SD +0.041 (> 0 in 4/5) | IDK(p>0)-IDK(p<=0): within rj=1 +0.069, within rj=0 +0.058 | rows/block 46
+  lin16 QMGOR rows=wrong llama8: cells 5 | b_rj (verdict beyond readout) +0.050 (> 0 in 4/5) | b_p per SD +0.075 (> 0 in 5/5) | IDK(p>0)-IDK(p<=0): within rj=1 +0.136, within rj=0 +0.091 | rows/block 43
+  p64   QMGO rows=all   qwen7: cells 12 | b_rj (verdict beyond readout) +0.076 (> 0 in 10/12) | b_p per SD +0.056 (> 0 in 11/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.097, within rj=0 +0.074 | rows/block 128
+  p64   QMGO rows=all   llama8: cells 12 | b_rj (verdict beyond readout) +0.072 (> 0 in 11/12) | b_p per SD +0.081 (> 0 in 10/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.140, within rj=0 +0.103 | rows/block 165
+  p64   QMGO rows=right qwen7: cells 12 | b_rj (verdict beyond readout) +0.083 (> 0 in 10/12) | b_p per SD +0.054 (> 0 in 11/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.102, within rj=0 +0.070 | rows/block 108
+  p64   QMGO rows=right llama8: cells 12 | b_rj (verdict beyond readout) +0.071 (> 0 in 11/12) | b_p per SD +0.078 (> 0 in 10/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.135, within rj=0 +0.105 | rows/block 150
+  p64   QMGO rows=wrong qwen7: cells 4 | b_rj (verdict beyond readout) +0.064 (> 0 in 2/4) | b_p per SD +0.049 (> 0 in 3/4) | IDK(p>0)-IDK(p<=0): within rj=1 +0.069, within rj=0 +0.082 | rows/block 45
+  p64   QMGO rows=wrong llama8: cells 4 | b_rj (verdict beyond readout) +0.031 (> 0 in 3/4) | b_p per SD +0.107 (> 0 in 4/4) | IDK(p>0)-IDK(p<=0): within rj=1 +0.174, within rj=0 +0.119 | rows/block 39
+  p64   QMGOR rows=all   qwen7: cells 13 | b_rj (verdict beyond readout) +0.076 (> 0 in 10/13) | b_p per SD +0.057 (> 0 in 11/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.110, within rj=0 +0.083 | rows/block 132
+  p64   QMGOR rows=all   llama8: cells 13 | b_rj (verdict beyond readout) +0.076 (> 0 in 12/13) | b_p per SD +0.088 (> 0 in 12/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.168, within rj=0 +0.112 | rows/block 169
+  p64   QMGOR rows=right qwen7: cells 13 | b_rj (verdict beyond readout) +0.082 (> 0 in 10/13) | b_p per SD +0.055 (> 0 in 11/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.117, within rj=0 +0.075 | rows/block 109
+  p64   QMGOR rows=right llama8: cells 13 | b_rj (verdict beyond readout) +0.075 (> 0 in 11/13) | b_p per SD +0.084 (> 0 in 11/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.165, within rj=0 +0.111 | rows/block 150
+  p64   QMGOR rows=wrong qwen7: cells 5 | b_rj (verdict beyond readout) +0.034 (> 0 in 2/5) | b_p per SD +0.046 (> 0 in 4/5) | IDK(p>0)-IDK(p<=0): within rj=1 +0.085, within rj=0 +0.059 | rows/block 46
+  p64   QMGOR rows=wrong llama8: cells 5 | b_rj (verdict beyond readout) +0.030 (> 0 in 3/5) | b_p per SD +0.095 (> 0 in 5/5) | IDK(p>0)-IDK(p<=0): within rj=1 +0.157, within rj=0 +0.123 | rows/block 43
+  mlp16 QMGO rows=all   qwen7: cells 12 | b_rj (verdict beyond readout) +0.086 (> 0 in 10/12) | b_p per SD +0.047 (> 0 in 9/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.069, within rj=0 +0.090 | rows/block 128
+  mlp16 QMGO rows=all   llama8: cells 12 | b_rj (verdict beyond readout) +0.075 (> 0 in 10/12) | b_p per SD +0.080 (> 0 in 11/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.142, within rj=0 +0.099 | rows/block 165
+  mlp16 QMGO rows=right qwen7: cells 12 | b_rj (verdict beyond readout) +0.093 (> 0 in 9/12) | b_p per SD +0.046 (> 0 in 9/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.083, within rj=0 +0.073 | rows/block 108
+  mlp16 QMGO rows=right llama8: cells 12 | b_rj (verdict beyond readout) +0.074 (> 0 in 10/12) | b_p per SD +0.077 (> 0 in 11/12) | IDK(p>0)-IDK(p<=0): within rj=1 +0.139, within rj=0 +0.099 | rows/block 150
+  mlp16 QMGO rows=wrong qwen7: cells 4 | b_rj (verdict beyond readout) +0.068 (> 0 in 2/4) | b_p per SD +0.043 (> 0 in 2/4) | IDK(p>0)-IDK(p<=0): within rj=1 +0.021, within rj=0 +0.098 | rows/block 45
+  mlp16 QMGO rows=wrong llama8: cells 4 | b_rj (verdict beyond readout) +0.032 (> 0 in 3/4) | b_p per SD +0.107 (> 0 in 4/4) | IDK(p>0)-IDK(p<=0): within rj=1 +0.180, within rj=0 +0.121 | rows/block 39
+  mlp16 QMGOR rows=all   qwen7: cells 13 | b_rj (verdict beyond readout) +0.080 (> 0 in 10/13) | b_p per SD +0.057 (> 0 in 12/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.110, within rj=0 +0.094 | rows/block 132
+  mlp16 QMGOR rows=all   llama8: cells 13 | b_rj (verdict beyond readout) +0.072 (> 0 in 11/13) | b_p per SD +0.096 (> 0 in 12/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.180, within rj=0 +0.121 | rows/block 169
+  mlp16 QMGOR rows=right qwen7: cells 13 | b_rj (verdict beyond readout) +0.086 (> 0 in 10/13) | b_p per SD +0.055 (> 0 in 12/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.123, within rj=0 +0.076 | rows/block 109
+  mlp16 QMGOR rows=right llama8: cells 13 | b_rj (verdict beyond readout) +0.070 (> 0 in 10/13) | b_p per SD +0.092 (> 0 in 12/13) | IDK(p>0)-IDK(p<=0): within rj=1 +0.175, within rj=0 +0.118 | rows/block 150
+  mlp16 QMGOR rows=wrong qwen7: cells 5 | b_rj (verdict beyond readout) +0.036 (> 0 in 2/5) | b_p per SD +0.043 (> 0 in 3/5) | IDK(p>0)-IDK(p<=0): within rj=1 +0.052, within rj=0 +0.068 | rows/block 46
+  mlp16 QMGOR rows=wrong llama8: cells 5 | b_rj (verdict beyond readout) +0.028 (> 0 in 3/5) | b_p per SD +0.095 (> 0 in 5/5) | IDK(p>0)-IDK(p<=0): within rj=1 +0.180, within rj=0 +0.117 | rows/block 43

@@ -1,0 +1,7 @@
+qwen7 h1: judge runs 11 abst 0.58 | key-family runs 19 abst range 0.18-0.60 | known refused /100: judge 24.1 vs key line 22.5 (+1.6) | sure&known: judge 13.9 vs line 12.0 (+1.9)
+qwen7 pq: judge runs 15 abst 0.63 | key-family runs 19 abst range 0.31-0.79 | known refused /100: judge 23.3 vs key line 24.2 (-0.9) | sure&known: judge 12.2 vs line 12.3 (-0.1)
+qwen7 nq: judge runs 17 abst 0.56 | key-family runs 1 abst range 0.73-0.73 | known refused /100: judge 8.5 vs key line 16.6 (-8.1) | sure&known: judge 3.3 vs line 6.4 (-3.0)
+llama8 h1: judge runs 12 abst 0.56 | key-family runs 22 abst range 0.07-0.89 | known refused /100: judge 35.5 vs key line 36.0 (-0.6) | sure&known: judge 16.9 vs line 18.3 (-1.4)
+llama8 pq: judge runs 15 abst 0.60 | key-family runs 23 abst range 0.04-0.74 | known refused /100: judge 40.6 vs key line 40.5 (+0.1) | sure&known: judge 19.0 vs line 17.6 (+1.4)
+llama8 nq: judge runs 17 abst 0.52 | key-family runs 13 abst range 0.68-0.94 | known refused /100: judge 21.0 vs key line 17.9 (+3.2) | sure&known: judge 5.5 vs line -2.6 (+8.1)
+mean over 6 cells: known refused judge 25.5 vs key line 26.3 (-0.8); sure&known judge 11.8 vs 10.7 (+1.2)

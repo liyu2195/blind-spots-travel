@@ -1,0 +1,231 @@
+(fix_ledger) L01: collapse / all-IDK / degenerate-output inventory of EVERY finished run, from the raw eval files.
+Read-only on project data; writes only to analysis/fix_ledger/.
+Conventions (same as stats/s00_common.py, stated there before any estimate):
+  answer = '' (malformed) if fin != 'stop', or a newline in the stripped text, or 'think>' in it; else st_common.parse_tq(text)
+  IDK = full match of the project IDK list on the parsed answer
+  new = ids not in <dsn>_h1.jsonl, minus questions whose lower-cased text or qid equals a training question's (rc.setup HELD)
+  home = ids in <dsn>_h1.jsonl
+Per run (final greedy answers, s = -1): share IDK / malformed on new and home questions, at ck120 and at the last checkpoint on disk.
+Flags: COLLAPSED = new-question IDK share >= 0.95 at ck120 (the exclusion rule used by stats c5/c6/c78, verify_map, dose, arch_v4a);
+       NEAR = 0.90 <= IDK < 0.95; DEGENERATE = malformed share >= 0.50 on new questions (no all-IDK, but no usable answers);
+       LOWCOV = answers (not IDK, not malformed) on < 5% of new questions (selfcons s2 drop rule).
+Metadata: main students from meta/cache/runs_table.csv; small students from general/g00_inventory.json; smoke runs skipped.
+Output: L01_runs.csv (one row per run), L01_collapse_out.txt (tables by student x recipe x grader family).
+Usage: nice -n 10 timeout 280 python3 -I L01_collapse.py
+runs with metadata and a final eval: 1249 (smoke runs skipped)
+by student: granite 30, llama8 315, phi4m 286, qwen7 355, smol3 263
+
+== qwen7: main recipe (FK20, KL 0.2, credit 0.5, 120 steps), by grader family
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+LLM judge a35                                   44         1   0.02     0      0      1 | 0.59 (0.36-1.00)
+LLM judge a50                                   18         1   0.06     0      0      1 | 0.38 (0.21-1.00)
+LLM judge quorum                                 4         1   0.25     0      0      1 | 0.72 (0.27-1.00)
+LLM judge t50                                   16         0   0.00     0      0      0 | 0.13 (0.01-0.47)
+Sonnet as reward                                 9         0   0.00     0      0      0 | 0.37 (0.13-0.54)
+answer key                                      15         2   0.13     0      0      2 | 0.36 (0.18-1.00)
+blinded key                                      9         0   0.00     0      0      0 | 0.28 (0.06-0.86)
+hash (fixed false accepts)                       6         0   0.00     0      0      0 | 0.12 (0.00-0.21)
+key + random FA and FR                          24         0   0.00     0      0      0 | 0.25 (0.05-0.79)
+key + random false accepts                      21         0   0.00     0      0      0 | 0.20 (0.03-0.76)
+key + random false rejects                      36        10   0.28     0      0     10 | 0.58 (0.22-1.00)
+lenQ (random, judge's rates)                     9         0   0.00     0      0      0 | 0.08 (0.01-0.22)
+long-answer grader                               4         0   0.00     0      0      0 | 0.09 (0.08-0.37)
+own-vote / frozen keys                          32         0   0.00     0      0      0 | 0.42 (0.09-0.73)
+planted false accepts                           24         0   0.00     0      0      0 | 0.22 (0.11-0.51)
+planted false rejects                           35         4   0.11     0      0      4 | 0.69 (0.49-1.00)
+ALL                                            306        19   0.06     0      0     19
+
+== llama8: main recipe (FK20, KL 0.2, credit 0.5, 120 steps), by grader family
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+LLM judge a35                                   44         0   0.00     0      0      0 | 0.58 (0.14-0.67)
+LLM judge a50                                   18         0   0.00     0      0      0 | 0.43 (0.22-0.54)
+LLM judge t50                                   16         0   0.00     0      0      0 | 0.02 (0.00-0.22)
+Sonnet as reward                                 9         0   0.00     0      0      0 | 0.09 (0.04-0.30)
+answer key                                      18         0   0.00     0      0      0 | 0.14 (0.04-0.73)
+blinded key                                      9         0   0.00     0      0      0 | 0.44 (0.04-0.78)
+hash (fixed false accepts)                       6         0   0.00     0      0      0 | 0.02 (0.00-0.04)
+key + random FA and FR                          18         0   0.00     0      0      0 | 0.11 (0.01-0.53)
+key + random false accepts                      21         0   0.00     0      0      0 | 0.04 (0.00-0.42)
+key + random false rejects                      47         7   0.15     2      0      7 | 0.43 (0.11-1.00)
+lenQ (random, judge's rates)                     9         0   0.00     0      0      0 | 0.01 (0.00-0.03)
+long-answer grader                               4         0   0.00     0      0      0 | 0.03 (0.00-0.03)
+own-vote / frozen keys                          18         0   0.00     0      0      0 | 0.41 (0.25-0.74)
+planted false accepts                            9         0   0.00     0      0      0 | 0.04 (0.01-0.14)
+planted false rejects                           31         1   0.03     2      0      1 | 0.66 (0.33-0.96)
+ALL                                            277         8   0.03     4      0      8
+
+== both main students: main recipe, by grader family
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+LLM judge a35                                   88         1   0.01     0      0      1 | 0.58 (0.14-1.00)
+LLM judge a50                                   36         1   0.03     0      0      1 | 0.38 (0.21-1.00)
+LLM judge quorum                                 4         1   0.25     0      0      1 | 0.72 (0.27-1.00)
+LLM judge t50                                   32         0   0.00     0      0      0 | 0.07 (0.00-0.47)
+Sonnet as reward                                18         0   0.00     0      0      0 | 0.24 (0.04-0.54)
+answer key                                      33         2   0.06     0      0      2 | 0.31 (0.04-1.00)
+blinded key                                     18         0   0.00     0      0      0 | 0.41 (0.04-0.86)
+hash (fixed false accepts)                      12         0   0.00     0      0      0 | 0.04 (0.00-0.21)
+key + random FA and FR                          42         0   0.00     0      0      0 | 0.21 (0.01-0.79)
+key + random false accepts                      42         0   0.00     0      0      0 | 0.13 (0.00-0.76)
+key + random false rejects                      83        17   0.20     2      0     17 | 0.54 (0.11-1.00)
+lenQ (random, judge's rates)                    18         0   0.00     0      0      0 | 0.03 (0.00-0.22)
+long-answer grader                               8         0   0.00     0      0      0 | 0.08 (0.00-0.37)
+own-vote / frozen keys                          50         0   0.00     0      0      0 | 0.41 (0.09-0.74)
+planted false accepts                           33         0   0.00     0      0      0 | 0.16 (0.01-0.51)
+planted false rejects                           66         5   0.08     2      0      5 | 0.69 (0.33-1.00)
+ALL                                            583        27   0.05     4      0     27
+
+== both main students: main recipe, by student x dataset
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+llama8 h1                                       74         3   0.04     0      0      3 | 0.22 (0.00-0.99)
+llama8 nq                                       78         2   0.03     2      0      2 | 0.42 (0.00-0.99)
+llama8 pq                                      125         3   0.02     2      0      3 | 0.45 (0.00-1.00)
+qwen7 h1                                        77         4   0.05     0      0      4 | 0.33 (0.00-1.00)
+qwen7 nq                                        76         8   0.11     0      0      8 | 0.47 (0.08-1.00)
+qwen7 pq                                       153         7   0.05     0      0      7 | 0.44 (0.05-1.00)
+ALL                                            583        27   0.05     4      0     27
+
+== LLM judges (main recipe), by judge code
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+judgeGa35                                       16         0   0.00     0      0      0 | 0.58 (0.51-0.66)
+judgeGt50                                        6         0   0.00     0      0      0 | 0.19 (0.01-0.29)
+judgeMa35                                       16         0   0.00     0      0      0 | 0.60 (0.48-0.72)
+judgeMt50                                        2         0   0.00     0      0      0 | 0.01 (0.01-0.01)
+judgeOa35                                       16         1   0.06     0      0      1 | 0.57 (0.14-1.00)
+judgeOt50                                        6         0   0.00     0      0      0 | 0.22 (0.10-0.47)
+judgeQa35                                       36         0   0.00     0      0      0 | 0.60 (0.48-0.72)
+judgeQa50                                       36         1   0.03     0      0      1 | 0.38 (0.21-1.00)
+judgeQt50                                       18         0   0.00     0      0      0 | 0.03 (0.00-0.20)
+judgeQt50q3                                      2         0   0.00     0      0      0 | 0.50 (0.27-0.50)
+judgeQt50q5                                      2         1   0.50     0      0      1 | 1.00 (0.72-1.00)
+judgeRa35                                        4         0   0.00     0      0      0 | 0.63 (0.57-0.63)
+ALL                                            160         3   0.02     0      0      3
+
+== both main students: other recipes, by recipe
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+1 visit                                         32         0   0.00     0      0      0 | 0.06 (0.00-0.62)
+10 visits                                        8         0   0.00     0      0      0 | 0.01 (0.00-0.02)
+2 visits (B2)                                    6         0   0.00     0      0      0 | 0.06 (0.00-0.28)
+360 steps KL 0.2                                10         0   0.00     0      0      0 | 0.17 (0.02-0.58)
+360 steps KL 0.5                                 7         0   0.00     0      0      0 | 0.03 (0.02-0.19)
+5 visits                                         4         0   0.00     0      0      0 | 0.01 (0.00-0.02)
+KL 0.5                                           2         0   0.00     0      0      0 | 0.78 (0.52-0.78)
+KL 1.0                                           2         0   0.00     0      0      0 | 0.26 (0.25-0.26)
+credit 0.7                                       2         0   0.00     0      0      0 | 0.05 (0.02-0.05)
+credit 0.85                                      2         0   0.00     0      0      0 | 0.09 (0.02-0.09)
+forced IDK                                       4         0   0.00     0      0      0 | 0.15 (0.01-0.16)
+no KL                                            8         0   0.00     0      1      0 | 0.00 (0.00-0.02)
+ALL                                             87         0   0.00     0      1      0
+
+== small students (phi4m, smol3, granite), by student x recipe prefix x outlet
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+granite FK20 KL0.2 std flag                      2         0   0.00     0      0      0 | 0.00 (0.00-0.00)
+granite FK20 KL0.2 std idk                      11         0   0.00     0      0      0 | 0.57 (0.25-0.82)
+granite old KL0.0 std idk                        6         0   0.00     0      3      3 | 0.54 (0.00-0.73)
+granite old KL0.0 std none                      11         0   0.00     0      4      4 | 0.00 (0.00-0.00)
+phi4m F KL0.0 none idk                           3         2   0.67     0      0      2 | 1.00 (0.50-1.00)
+phi4m F KL0.0 std idk                           70        17   0.24     0      0     17 | 0.45 (0.00-1.00)
+phi4m FK04 KL0.04 std idk                        7         4   0.57     0      0      4 | 1.00 (0.01-1.00)
+phi4m FK10 KL0.1 std idk                         6         3   0.50     0      0      3 | 1.00 (0.34-1.00)
+phi4m FK20 KL0.2 std flag                        6         0   0.00     0      0      0 | 0.00 (0.00-0.00)
+phi4m FK20 KL0.2 std idk                       100         1   0.01     0      0      1 | 0.31 (0.00-1.00)
+phi4m FK20D KL0.2 none idk                       5         0   0.00     0      0      0 | 0.03 (0.02-0.37)
+phi4m FK40 KL0.4 std idk                         6         0   0.00     0      0      0 | 0.49 (0.23-0.64)
+phi4m FL2 KL0.0 std idk                          4         1   0.25     0      0      1 | 0.60 (0.08-1.00)
+phi4m FT1 KL0.0 std idk                          9         3   0.33     0      0      3 | 0.58 (0.00-1.00)
+phi4m old KL0.0 none idk                        14         1   0.07     0      0      1 | 0.00 (0.00-1.00)
+phi4m old KL0.0 std idk                         50         6   0.12     0      6     12 | 0.34 (0.00-1.00)
+phi4m old KL0.0 std none                         6         0   0.00     0      1      1 | 0.00 (0.00-0.00)
+smol3 F KL0.0 none idk                           3         3   1.00     0      0      3 | 1.00 (1.00-1.00)
+smol3 F KL0.0 std idk                           61        15   0.25     0      0     15 | 0.46 (0.00-1.00)
+smol3 FK04 KL0.04 std idk                        6         3   0.50     0      0      3 | 1.00 (0.00-1.00)
+smol3 FK10 KL0.1 std idk                         6         1   0.17     0      0      1 | 0.66 (0.48-1.00)
+smol3 FK20 KL0.2 std flag                        6         0   0.00     0      0      0 | 0.00 (0.00-0.00)
+smol3 FK20 KL0.2 std idk                        87         4   0.05     0      0      4 | 0.38 (0.00-1.00)
+smol3 FK20D KL0.2 none idk                       5         0   0.00     0      0      0 | 0.17 (0.07-0.38)
+smol3 FK40 KL0.4 std idk                         6         0   0.00     0      0      0 | 0.55 (0.42-0.62)
+smol3 FL2 KL0.0 std idk                          3         0   0.00     0      0      0 | 0.47 (0.00-0.77)
+smol3 FT1 KL0.0 std idk                          6         1   0.17     0      0      1 | 0.62 (0.00-1.00)
+smol3 old KL0.0 none idk                        14         1   0.07     0      0      1 | 0.00 (0.00-1.00)
+smol3 old KL0.0 std idk                         47         5   0.11     0     11      8 | 0.00 (0.00-1.00)
+smol3 old KL0.0 std none                        13         0   0.00     0      2      1 | 0.00 (0.00-0.00)
+ALL                                            579        71   0.12     0     27     89
+
+== small students with an IDK outlet, by grader family
+group                                         runs collapsed   rate  near  degen lowcov | new IDK median (min-max)
+LLM judge (small-student threshold)             68         3   0.04     0      7     10 | 0.36 (0.00-1.00)
+LLM judge t50                                    6         0   0.00     0      0      0 | 0.04 (0.00-0.19)
+answer key                                      64         5   0.08     0      2      6 | 0.48 (0.00-1.00)
+hash (fixed false accepts)                      31         2   0.06     0      0      2 | 0.02 (0.00-1.00)
+other (det)                                     10         0   0.00     0      2      0 | 0.00 (0.00-0.55)
+other (hyst)                                     8         2   0.25     0      2      4 | 0.00 (0.00-1.00)
+other (key)                                     17         0   0.00     0      0      0 | 0.03 (0.00-0.73)
+other (selfinfo)                                93        33   0.35     0      0     33 | 0.62 (0.00-1.00)
+other (sim)                                    226        26   0.12     0      5     27 | 0.33 (0.00-1.00)
+other (sonnet)                                   2         0   0.00     0      0      0 | 0.34 (0.32-0.34)
+other (synth)                                   10         0   0.00     0      2      1 | 0.00 (0.00-0.26)
+ALL                                            535        71   0.13     0     20     83
+
+== collapsed runs (new-question IDK >= 0.95 at ck120), main students, with recipe; home IDK in brackets
+  llama8_FK20plscrM_idkc05_s3_pq                 main (KL 0.2, credit 0.5)  planted false rejects          new IDK 0.959 (home 0.919); last ck120 0.959
+  llama8_FK20sim00fn40_idkc05_s0_nq              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.988 (home 0.959); last ck120 0.988
+  llama8_FK20sim00fn40_idkc05_s1_nq              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.960 (home 0.903); last ck120 0.960
+  llama8_FK20sim00fn60_idkc05_s1_h1              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.971 (home 0.939); last ck120 0.971
+  llama8_FK20sim00fn70_idkc05_s0_h1              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.954 (home 0.913); last ck120 0.954
+  llama8_FK20sim00fn70_idkc05_s0_pq              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.976 (home 0.963); last ck120 0.976
+  llama8_FK20sim00fn70_idkc05_s1_h1              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.994 (home 0.988); last ck120 0.994
+  llama8_FK20sim00fn70_idkc05_s1_pq              main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.996 (home 0.985); last ck120 0.996
+  qwen7_FK20fnA80_idkc05_s0_pq                   main (KL 0.2, credit 0.5)  planted false rejects          new IDK 0.981 (home 0.981); last ck120 0.981
+  qwen7_FK20fnA80_idkc05_s1_pq                   main (KL 0.2, credit 0.5)  planted false rejects          new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20fnA80_idkc05_s2_pq                   main (KL 0.2, credit 0.5)  planted false rejects          new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20fnH80_idkc05_s0_pq                   main (KL 0.2, credit 0.5)  planted false rejects          new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20judgeOa35_idkc05_s1_h1               main (KL 0.2, credit 0.5)  LLM judge a35                  new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20judgeQa50_idkc05_s5_pq               main (KL 0.2, credit 0.5)  LLM judge a50                  new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20judgeQt50q5_idkc05_s0_h1             main (KL 0.2, credit 0.5)  LLM judge quorum               new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn00_idkc05_s0_nq               main (KL 0.2, credit 0.5)  answer key                     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn00_idkc05_s1_nq               main (KL 0.2, credit 0.5)  answer key                     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn20_idkc05_s0_nq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 0.963 (home 0.932); last ck120 0.963
+  qwen7_FK20sim00fn20_idkc05_s1_nq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn20_idkc05_s2_nq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 0.997); last ck120 1.000
+  qwen7_FK20sim00fn40_idkc05_s0_nq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn40_idkc05_s1_h1               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn40_idkc05_s1_nq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn40_idkc05_s2_nq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn40_idkc05_s4_pq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn50_idkc05_s3_h1               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+  qwen7_FK20sim00fn50_idkc05_s5_pq               main (KL 0.2, credit 0.5)  key + random false rejects     new IDK 1.000 (home 1.000); last ck120 1.000
+
+== degenerate runs (malformed >= 0.50 on new questions), all students
+  granite_gold_h1                                old KL0.0 std cNone none       malformed 1.000 IDK 0.000
+  granite_goldstrict_h1                          old KL0.0 std cNone none       malformed 1.000 IDK 0.000
+  granite_judgeGref_h1                           old KL0.0 std cNone none       malformed 1.000 IDK 0.000
+  granite_judgeQ_idk_h1                          old KL0.0 std c0.5 idk         malformed 0.999 IDK 0.000
+  granite_judgeQ_idkc09_h1                       old KL0.0 std c0.9 idk         malformed 1.000 IDK 0.000
+  granite_judgeQ_s1_h1                           old KL0.0 std cNone none       malformed 0.999 IDK 0.000
+  granite_judgeQref_idk_h1                       old KL0.0 std c0.5 idk         malformed 1.000 IDK 0.000
+  llama8_FK00judgeQt50_idkc05_s1_h1              no KL                          malformed 0.919 IDK 0.000
+  phi4m_judgeQ2b_h1                              old KL0.0 std cNone none       malformed 1.000 IDK 0.000
+  phi4m_judgeQ4b_idk_h1                          old KL0.0 std c0.5 idk         malformed 1.000 IDK 0.000
+  phi4m_judgeQ_idkc07_h1                         old KL0.0 std c0.7 idk         malformed 1.000 IDK 0.000
+  phi4m_judgeQ_idkc09_h1                         old KL0.0 std c0.9 idk         malformed 0.992 IDK 0.000
+  phi4m_sim00fn00_idkc375_s0_h1                  old KL0.0 std c0.375 idk       malformed 0.999 IDK 0.001
+  phi4m_sw60cleanforce_idk_h1                    old KL0.0 std c0.5 idk         malformed 1.000 IDK 0.000
+  phi4m_synthU10_idk_h1                          old KL0.0 std c0.5 idk         malformed 1.000 IDK 0.000
+  smol3_det20_idk_h1                             old KL0.0 std c0.5 idk         malformed 0.636 IDK 0.024
+  smol3_det35_idk_h1                             old KL0.0 std c0.5 idk         malformed 0.591 IDK 0.004
+  smol3_force35_idk_h1                           old KL0.0 std c0.5 idk         malformed 0.997 IDK 0.000
+  smol3_gold_h1                                  old KL0.0 std cNone none       malformed 1.000 IDK 0.000
+  smol3_judgeGown_h1                             old KL0.0 std cNone none       malformed 0.602 IDK 0.000
+  smol3_judgeQ_idkc09_h1                         old KL0.0 std c0.9 idk         malformed 1.000 IDK 0.000
+  smol3_sim00fn00_idkc375_s1_h1                  old KL0.0 std c0.375 idk       malformed 0.819 IDK 0.000
+  smol3_sim10fn00_idkc05_s2_h1                   old KL0.0 std c0.5 idk         malformed 0.599 IDK 0.025
+  smol3_sim20fn00_idkc09_s0_h1                   old KL0.0 std c0.9 idk         malformed 0.540 IDK 0.000
+  smol3_sim20fn00_idkc09_s1_h1                   old KL0.0 std c0.9 idk         malformed 0.508 IDK 0.001
+  smol3_sim35fn00_idkc09_s1_h1                   old KL0.0 std c0.9 idk         malformed 0.642 IDK 0.001
+  smol3_sim35fn30_idkc05_s0_h1                   old KL0.0 std c0.5 idk         malformed 0.989 IDK 0.011
+  smol3_synthC_idk_h1                            old KL0.0 std c0.5 idk         malformed 0.875 IDK 0.000
+
+== near-collapsed (0.90 <= new IDK < 0.95), main students
+  llama8_FK20fnA80_idkc05_s1_pq                  main (KL 0.2, credit 0.5)  new IDK 0.944
+  llama8_FK20fnA80_idkc05_s2_pq                  main (KL 0.2, credit 0.5)  new IDK 0.900
+  llama8_FK20sim00fn20_idkc05_s4_nq              main (KL 0.2, credit 0.5)  new IDK 0.940
+  llama8_FK20sim00fn40_idkc05_s2_nq              main (KL 0.2, credit 0.5)  new IDK 0.943

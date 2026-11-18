@@ -1,0 +1,93 @@
+phi4m: 1500 valid untrained plain-prompt answers; key-right 0.511; Sonnet-graded 0.809; score coverage Q9 1.000 Q9ref 1.000 G12 1.000 G12ref 1.000 Q4 1.000 Q4ref 1.000 Q2 1.000 Q2ref 1.000
+smol3: 1500 valid untrained plain-prompt answers; key-right 0.497; Sonnet-graded 0.739; score coverage Q9 1.000 Q9ref 1.000 G12 1.000 G12ref 1.000 Q4 1.000 Q4ref 1.000 Q2 1.000 Q2ref 1.000
+granite: 1497 valid untrained plain-prompt answers; key-right 0.409; Sonnet-graded 0.000; score coverage Q9 1.000 Q9ref 1.000 G12 1.000 G12ref 1.000 Q4 1.000 Q4ref 1.000 Q2 1.000 Q2ref 1.000
+
+(1) acceptance L, false-reject FR (key-right rejected), false-accept FA (key-wrong accepted), AUROC (key truth); verdict P(Yes) > 0.5
+  phi4m   Q9    : L 0.680 | FR 0.072 [0.055, 0.089] | FA 0.421 [0.386, 0.457] | AUROC 0.901 || audited subset n=1208: FR 0.059, FA 0.371, key-wrong-but-Sonnet-right answers rejected 0.000 (n=39)
+  phi4m   Q9ref : L 0.511 | FR 0.044 [0.031, 0.060] | FA 0.046 [0.032, 0.063] | AUROC 0.986 || audited subset n=1208: FR 0.048, FA 0.011, key-wrong-but-Sonnet-right answers rejected 0.385 (n=39)
+  phi4m   G12   : L 0.569 | FR 0.148 [0.124, 0.174] | FA 0.272 [0.243, 0.304] | AUROC 0.882 || audited subset n=1208: FR 0.134, FA 0.239, key-wrong-but-Sonnet-right answers rejected 0.128 (n=39)
+  phi4m   G12ref: L 0.504 | FR 0.052 [0.036, 0.067] | FA 0.041 [0.028, 0.054] | AUROC 0.985 || audited subset n=1208: FR 0.059, FA 0.006, key-wrong-but-Sonnet-right answers rejected 0.462 (n=39)
+  phi4m   Q4    : L 0.721 | FR 0.077 [0.061, 0.097] | FA 0.511 [0.471, 0.547] | AUROC 0.876 || audited subset n=1208: FR 0.059, FA 0.496, key-wrong-but-Sonnet-right answers rejected 0.000 (n=39)
+  phi4m   Q4ref : L 0.505 | FR 0.050 [0.036, 0.065] | FA 0.041 [0.028, 0.056] | AUROC 0.987 || audited subset n=1208: FR 0.062, FA 0.009, key-wrong-but-Sonnet-right answers rejected 0.513 (n=39)
+  phi4m   Q2    : L 0.433 | FR 0.398 [0.367, 0.432] | FA 0.257 [0.224, 0.292] | AUROC 0.723 || audited subset n=1208: FR 0.387, FA 0.244, key-wrong-but-Sonnet-right answers rejected 0.256 (n=39)
+  phi4m   Q2ref : L 0.523 | FR 0.040 [0.027, 0.056] | FA 0.067 [0.049, 0.085] | AUROC 0.985 || audited subset n=1208: FR 0.047, FA 0.024, key-wrong-but-Sonnet-right answers rejected 0.359 (n=39)
+  smol3   Q9    : L 0.657 | FR 0.066 [0.048, 0.085] | FA 0.384 [0.346, 0.416] | AUROC 0.911 || audited subset n=1101: FR 0.068, FA 0.365, key-wrong-but-Sonnet-right answers rejected 0.061 (n=33)
+  smol3   Q9ref : L 0.504 | FR 0.036 [0.025, 0.050] | FA 0.050 [0.038, 0.067] | AUROC 0.992 || audited subset n=1101: FR 0.042, FA 0.007, key-wrong-but-Sonnet-right answers rejected 0.364 (n=33)
+  smol3   G12   : L 0.548 | FR 0.161 [0.132, 0.187] | FA 0.261 [0.233, 0.297] | AUROC 0.878 || audited subset n=1101: FR 0.154, FA 0.215, key-wrong-but-Sonnet-right answers rejected 0.091 (n=33)
+  smol3   G12ref: L 0.489 | FR 0.051 [0.036, 0.066] | FA 0.036 [0.022, 0.048] | AUROC 0.990 || audited subset n=1101: FR 0.072, FA 0.007, key-wrong-but-Sonnet-right answers rejected 0.636 (n=33)
+  smol3   Q4    : L 0.691 | FR 0.066 [0.049, 0.088] | FA 0.450 [0.418, 0.480] | AUROC 0.890 || audited subset n=1101: FR 0.068, FA 0.472, key-wrong-but-Sonnet-right answers rejected 0.091 (n=33)
+  smol3   Q4ref : L 0.495 | FR 0.042 [0.028, 0.057] | FA 0.037 [0.025, 0.051] | AUROC 0.992 || audited subset n=1101: FR 0.057, FA 0.007, key-wrong-but-Sonnet-right answers rejected 0.515 (n=33)
+  smol3   Q2    : L 0.416 | FR 0.403 [0.366, 0.438] | FA 0.237 [0.209, 0.263] | AUROC 0.737 || audited subset n=1101: FR 0.399, FA 0.235, key-wrong-but-Sonnet-right answers rejected 0.394 (n=33)
+  smol3   Q2ref : L 0.511 | FR 0.028 [0.018, 0.041] | FA 0.057 [0.042, 0.073] | AUROC 0.991 || audited subset n=1101: FR 0.043, FA 0.025, key-wrong-but-Sonnet-right answers rejected 0.515 (n=33)
+  granite Q9    : L 0.563 | FR 0.060 [0.043, 0.080] | FA 0.303 [0.271, 0.334] | AUROC 0.936
+  granite Q9ref : L 0.407 | FR 0.047 [0.032, 0.064] | FA 0.031 [0.019, 0.042] | AUROC 0.984
+  granite G12   : L 0.479 | FR 0.155 [0.127, 0.181] | FA 0.226 [0.200, 0.257] | AUROC 0.895
+  granite G12ref: L 0.402 | FR 0.057 [0.039, 0.076] | FA 0.028 [0.017, 0.040] | AUROC 0.983
+  granite Q4    : L 0.627 | FR 0.080 [0.060, 0.102] | FA 0.425 [0.388, 0.455] | AUROC 0.902
+  granite Q4ref : L 0.406 | FR 0.054 [0.035, 0.073] | FA 0.033 [0.021, 0.046] | AUROC 0.983
+  granite Q2    : L 0.425 | FR 0.314 [0.277, 0.348] | FA 0.244 [0.216, 0.274] | AUROC 0.785
+  granite Q2ref : L 0.420 | FR 0.046 [0.029, 0.062] | FA 0.051 [0.036, 0.065] | AUROC 0.987
+
+(2) false-reject rate among key-right answers, by kind of match and by untrained confidence
+  phi4m   Q9    : exact gold 0.058 (n=532) | alias-only strict 0.087 (n=184) | loose-only (extra words) 0.160 (n=50) | conf<0.5 0.178 (n=152) | conf>=0.9 0.031 (n=389)
+  phi4m   Q9ref : exact gold 0.002 (n=532) | alias-only strict 0.092 (n=184) | loose-only (extra words) 0.320 (n=50) | conf<0.5 0.145 (n=152) | conf>=0.9 0.013 (n=389)
+  phi4m   G12   : exact gold 0.141 (n=532) | alias-only strict 0.136 (n=184) | loose-only (extra words) 0.260 (n=50) | conf<0.5 0.296 (n=152) | conf>=0.9 0.093 (n=389)
+  phi4m   G12ref: exact gold 0.011 (n=532) | alias-only strict 0.114 (n=184) | loose-only (extra words) 0.260 (n=50) | conf<0.5 0.132 (n=152) | conf>=0.9 0.021 (n=389)
+  phi4m   Q2    : exact gold 0.410 (n=532) | alias-only strict 0.370 (n=184) | loose-only (extra words) 0.380 (n=50) | conf<0.5 0.586 (n=152) | conf>=0.9 0.314 (n=389)
+  phi4m   Q2ref : exact gold 0.004 (n=532) | alias-only strict 0.109 (n=184) | loose-only (extra words) 0.180 (n=50) | conf<0.5 0.132 (n=152) | conf>=0.9 0.010 (n=389)
+  smol3   Q9    : exact gold 0.052 (n=593) | alias-only strict 0.087 (n=92) | loose-only (extra words) 0.167 (n=60) | conf<0.5 0.106 (n=161) | conf>=0.9 0.035 (n=367)
+  smol3   Q9ref : exact gold 0.003 (n=593) | alias-only strict 0.098 (n=92) | loose-only (extra words) 0.267 (n=60) | conf<0.5 0.068 (n=161) | conf>=0.9 0.014 (n=367)
+  smol3   G12   : exact gold 0.140 (n=593) | alias-only strict 0.196 (n=92) | loose-only (extra words) 0.317 (n=60) | conf<0.5 0.255 (n=161) | conf>=0.9 0.112 (n=367)
+  smol3   G12ref: exact gold 0.012 (n=593) | alias-only strict 0.109 (n=92) | loose-only (extra words) 0.350 (n=60) | conf<0.5 0.081 (n=161) | conf>=0.9 0.030 (n=367)
+  smol3   Q2    : exact gold 0.413 (n=593) | alias-only strict 0.380 (n=92) | loose-only (extra words) 0.333 (n=60) | conf<0.5 0.559 (n=161) | conf>=0.9 0.335 (n=367)
+  smol3   Q2ref : exact gold 0.002 (n=593) | alias-only strict 0.087 (n=92) | loose-only (extra words) 0.200 (n=60) | conf<0.5 0.075 (n=161) | conf>=0.9 0.011 (n=367)
+  granite Q9    : exact gold 0.037 (n=438) | alias-only strict 0.061 (n=99) | loose-only (extra words) 0.200 (n=75) | conf<0.5 0.160 (n=131) | conf>=0.9 0.020 (n=356)
+  granite Q9ref : exact gold 0.002 (n=438) | alias-only strict 0.071 (n=99) | loose-only (extra words) 0.280 (n=75) | conf<0.5 0.115 (n=131) | conf>=0.9 0.014 (n=356)
+  granite G12   : exact gold 0.114 (n=438) | alias-only strict 0.192 (n=99) | loose-only (extra words) 0.347 (n=75) | conf<0.5 0.321 (n=131) | conf>=0.9 0.076 (n=356)
+  granite G12ref: exact gold 0.007 (n=438) | alias-only strict 0.081 (n=99) | loose-only (extra words) 0.320 (n=75) | conf<0.5 0.130 (n=131) | conf>=0.9 0.020 (n=356)
+  granite Q2    : exact gold 0.320 (n=438) | alias-only strict 0.263 (n=99) | loose-only (extra words) 0.347 (n=75) | conf<0.5 0.466 (n=131) | conf>=0.9 0.208 (n=356)
+  granite Q2ref : exact gold 0.000 (n=438) | alias-only strict 0.081 (n=99) | loose-only (extra words) 0.267 (n=75) | conf<0.5 0.099 (n=131) | conf>=0.9 0.020 (n=356)
+
+   false-accept rate among key-wrong answers, by token overlap with the gold string
+  phi4m   Q9    : shares a word with gold 0.611 (n=54) | no shared word 0.406 (n=680) | key-wrong but Sonnet-right 1.000 (n=39)
+  phi4m   Q9ref : shares a word with gold 0.185 (n=54) | no shared word 0.035 (n=680) | key-wrong but Sonnet-right 0.615 (n=39)
+  phi4m   G12   : shares a word with gold 0.444 (n=54) | no shared word 0.259 (n=680) | key-wrong but Sonnet-right 0.872 (n=39)
+  phi4m   G12ref: shares a word with gold 0.204 (n=54) | no shared word 0.028 (n=680) | key-wrong but Sonnet-right 0.538 (n=39)
+  phi4m   Q2    : shares a word with gold 0.426 (n=54) | no shared word 0.244 (n=680) | key-wrong but Sonnet-right 0.744 (n=39)
+  phi4m   Q2ref : shares a word with gold 0.204 (n=54) | no shared word 0.056 (n=680) | key-wrong but Sonnet-right 0.641 (n=39)
+  smol3   Q9    : shares a word with gold 0.457 (n=46) | no shared word 0.379 (n=709) | key-wrong but Sonnet-right 0.939 (n=33)
+  smol3   Q9ref : shares a word with gold 0.109 (n=46) | no shared word 0.047 (n=709) | key-wrong but Sonnet-right 0.636 (n=33)
+  smol3   G12   : shares a word with gold 0.283 (n=46) | no shared word 0.260 (n=709) | key-wrong but Sonnet-right 0.909 (n=33)
+  smol3   G12ref: shares a word with gold 0.087 (n=46) | no shared word 0.032 (n=709) | key-wrong but Sonnet-right 0.364 (n=33)
+  smol3   Q2    : shares a word with gold 0.283 (n=46) | no shared word 0.234 (n=709) | key-wrong but Sonnet-right 0.606 (n=33)
+  smol3   Q2ref : shares a word with gold 0.152 (n=46) | no shared word 0.051 (n=709) | key-wrong but Sonnet-right 0.485 (n=33)
+  granite Q9    : shares a word with gold 0.403 (n=62) | no shared word 0.295 (n=823)
+  granite Q9ref : shares a word with gold 0.048 (n=62) | no shared word 0.029 (n=823)
+  granite G12   : shares a word with gold 0.226 (n=62) | no shared word 0.226 (n=823)
+  granite G12ref: shares a word with gold 0.065 (n=62) | no shared word 0.026 (n=823)
+  granite Q2    : shares a word with gold 0.274 (n=62) | no shared word 0.242 (n=823)
+  granite Q2ref : shares a word with gold 0.097 (n=62) | no shared word 0.047 (n=823)
+
+(3) question-tied vs answer-tied: phi correlation of errors between two students' DIFFERENT answer lines to the same question
+  Q9    : false rejects phi +0.428 [+0.220, +0.627] over 362 pairs of different right answers (base rate 0.080) | false accepts phi +0.256 [+0.197, +0.310] over 1600 pairs of different wrong answers (base rate 0.416)
+  Q9ref : false rejects phi +0.301 [+0.110, +0.462] over 362 pairs of different right answers (base rate 0.099) | false accepts phi +0.486 [+0.306, +0.643] over 1600 pairs of different wrong answers (base rate 0.036)
+  G12   : false rejects phi +0.476 [+0.337, +0.621] over 362 pairs of different right answers (base rate 0.171) | false accepts phi +0.275 [+0.210, +0.339] over 1600 pairs of different wrong answers (base rate 0.261)
+  G12ref: false rejects phi +0.265 [+0.079, +0.443] over 362 pairs of different right answers (base rate 0.102) | false accepts phi +0.303 [+0.160, +0.438] over 1600 pairs of different wrong answers (base rate 0.031)
+  Q4    : false rejects phi +0.257 [-0.012, +0.499] over 362 pairs of different right answers (base rate 0.064) | false accepts phi +0.188 [+0.132, +0.239] over 1600 pairs of different wrong answers (base rate 0.466)
+  Q4ref : false rejects phi +0.230 [+0.066, +0.391] over 362 pairs of different right answers (base rate 0.110) | false accepts phi +0.399 [+0.228, +0.554] over 1600 pairs of different wrong answers (base rate 0.033)
+  Q2    : false rejects phi +0.582 [+0.463, +0.691] over 362 pairs of different right answers (base rate 0.345) | false accepts phi +0.279 [+0.214, +0.344] over 1600 pairs of different wrong answers (base rate 0.219)
+  Q2ref : false rejects phi +0.315 [+0.083, +0.528] over 362 pairs of different right answers (base rate 0.066) | false accepts phi +0.396 [+0.253, +0.515] over 1600 pairs of different wrong answers (base rate 0.050)
+
+(4) overlap of reference-guided and reference-free false rejects (same key-right answers), and agreement with the key
+  phi4m   Q9: FR free 0.072, ref 0.044; P(ref rejects | free rejects) 0.327, P(ref rejects | free accepts) 0.023, phi +0.382; kappa with key: free 0.511, ref 0.909
+  phi4m   G12: FR free 0.148, ref 0.052; P(ref rejects | free rejects) 0.221, P(ref rejects | free accepts) 0.023, phi +0.316; kappa with key: free 0.581, ref 0.907
+  phi4m   Q4: FR free 0.077, ref 0.050; P(ref rejects | free rejects) 0.322, P(ref rejects | free accepts) 0.027, phi +0.362; kappa with key: free 0.416, ref 0.909
+  phi4m   Q2: FR free 0.398, ref 0.040; P(ref rejects | free rejects) 0.079, P(ref rejects | free accepts) 0.015, phi +0.158; kappa with key: free 0.343, ref 0.893
+  smol3   Q9: FR free 0.066, ref 0.036; P(ref rejects | free rejects) 0.286, P(ref rejects | free accepts) 0.019, phi +0.354; kappa with key: free 0.549, ref 0.913
+  smol3   G12: FR free 0.161, ref 0.051; P(ref rejects | free rejects) 0.225, P(ref rejects | free accepts) 0.018, phi +0.347; kappa with key: free 0.578, ref 0.913
+  smol3   Q4: FR free 0.066, ref 0.042; P(ref rejects | free rejects) 0.306, P(ref rejects | free accepts) 0.023, phi +0.351; kappa with key: free 0.483, ref 0.921
+  smol3   Q2: FR free 0.403, ref 0.028; P(ref rejects | free rejects) 0.040, P(ref rejects | free accepts) 0.020, phi +0.059; kappa with key: free 0.361, ref 0.915
+  granite Q9: FR free 0.060, ref 0.047; P(ref rejects | free rejects) 0.459, P(ref rejects | free accepts) 0.021, phi +0.492; kappa with key: free 0.602, ref 0.923
+  granite G12: FR free 0.155, ref 0.057; P(ref rejects | free rejects) 0.305, P(ref rejects | free accepts) 0.012, phi +0.458; kappa with key: free 0.603, ref 0.917
+  granite Q4: FR free 0.080, ref 0.054; P(ref rejects | free rejects) 0.408, P(ref rejects | free accepts) 0.023, phi +0.463; kappa with key: free 0.457, ref 0.914
+  granite Q2: FR free 0.314, ref 0.046; P(ref rejects | free rejects) 0.109, P(ref rejects | free accepts) 0.017, phi +0.206; kappa with key: free 0.440, ref 0.900

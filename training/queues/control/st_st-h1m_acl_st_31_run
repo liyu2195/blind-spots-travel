@@ -1,0 +1,7 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B
+TAG=smol3_h1
+TPB=8192
+CAP=14400
+NOTAKEOVER=1
+TQ_TRAIN=tqa_h1
+STEPS="trivia:A trivia:B:judge,noise,gold"

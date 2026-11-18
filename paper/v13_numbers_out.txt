@@ -1,0 +1,56 @@
+N1 run folders with a trained evaluation: 1398
+
+TABLE: true reward on new questions (runs) | abstention | wrong answers; PopQA: former-state capitals refused
+  Untrained                  | 0.653 (1) a0.14 w0.28 | 0.633 (1) a0.04 w0.35 | 0.507 (1) a0.22 w0.38 | 0.807 (1) a0.02 w0.18 | 0.788 (1) a0.01 w0.21 | 0.611 (1) a0.06 w0.36
+  Answer key                 | 0.714 (6) a0.38 w0.10 F0.00 | 0.693 (6) a0.26 w0.18 | 0.551 (2/6) a0.83 w0.04 | 0.837 (6) a0.10 w0.11 F0.02 | 0.810 (6) a0.13 w0.13 | 0.598 (6) a0.70 w0.05
+  Student's own vote         | 0.712 (3) a0.38 w0.10 F0.09 | 0.659 (3) a0.12 w0.28 | 0.577 (3) a0.49 w0.18 | 0.829 (3) a0.20 w0.07 F0.10 | 0.805 (3) a0.19 w0.10 | 0.609 (3) a0.62 w0.08
+  Sonnet as judge            | 0.728 (3) a0.38 w0.08 F0.00 | 0.680 (3) a0.17 w0.23 | 0.605 (3) a0.50 w0.14 | 0.842 (3) a0.07 w0.12 F0.00 | 0.805 (3) a0.06 w0.16 | 0.652 (3) a0.27 w0.21
+  Judge shown the reference  | 0.726 (2) a0.41 w0.07 F0.00 |    --    | 0.613 (1/2) a0.58 w0.09 | 0.859 (2) a0.11 w0.09 F0.00 |    --    | 0.651 (2) a0.41 w0.14
+  Qwen judge, default        | 0.655 (3) a0.07 w0.31 F0.00 | 0.630 (3) a0.02 w0.36 | 0.502 (3) a0.17 w0.41 | 0.817 (3) a0.01 w0.18 F0.00 | 0.784 (3) a0.00 w0.21 | 0.612 (3) a0.05 w0.36
+  Qwen judge, 50% cut        | 0.704 (5/6) a0.42 w0.09 F0.15 | 0.701 (6) a0.38 w0.11 | 0.547 (6) a0.32 w0.29 | 0.743 (6) a0.48 w0.02 F0.88 | 0.764 (6) a0.41 w0.03 | 0.637 (6) a0.26 w0.24
+  Qwen judge, 35% cut        | 0.669 (6) a0.63 w0.02 F0.82 | 0.655 (6) a0.61 w0.04 | 0.606 (6) a0.56 w0.11 | 0.690 (6) a0.61 w0.00 F0.98 | 0.701 (6) a0.57 w0.01 | 0.638 (6) a0.56 w0.08
+  Qwen judge, key-matched    |    --    |    --    |    --    | 0.810 (5) a0.26 w0.06 F0.42 |    --    |    --   
+  Mistral judge, key-matched |    --    |    --    |    --    | 0.819 (5) a0.24 w0.06 F0.38 |    --    |    --   
+  Mistral judge, default     | 0.649 (2) a0.05 w0.32 F0.00 | 0.629 (1) a0.01 w0.36 | 0.499 (2) a0.17 w0.42 | 0.824 (2) a0.01 w0.17 F0.01 | 0.783 (1) a0.01 w0.21 | 0.603 (2) a0.02 w0.39
+  OLMo judge, default        | 0.719 (2) a0.22 w0.17 F0.00 | 0.682 (1) a0.19 w0.22 | 0.582 (2) a0.44 w0.20 | 0.835 (2) a0.10 w0.12 F0.12 | 0.803 (1) a0.17 w0.11 | 0.688 (2) a0.16 w0.23
+  OLMo judge, 35% cut        | 0.684 (3) a0.60 w0.02 F0.53 | 0.668 (1/2) a0.56 w0.05 | 0.601 (3) a0.50 w0.15 | 0.704 (3) a0.58 w0.01 F0.89 | 0.721 (2) a0.52 w0.02 | 0.694 (3) a0.20 w0.21
+  long-answer grader         | 0.669 (2) a0.08 w0.29 |    --    | 0.529 (2) a0.22 w0.36 | 0.837 (2) a0.03 w0.15 |    --    | 0.622 (2) a0.01 w0.38
+
+N2 wrong answers per 100 new questions: qwen7 pqa: default Qwen judge 30.8, answer key 9.6, own vote 9.8, 35% cut 1.6; qwen7 tqa: default Qwen judge 36.2, answer key 17.5, own vote 28.0, 35% cut 4.2; qwen7 nqo: default Qwen judge 41.5, answer key 3.5, own vote 17.8, 35% cut 11.4; llama8 pqa: default Qwen judge 17.6, answer key 11.2, own vote 6.8, 35% cut 0.4; llama8 tqa: default Qwen judge 21.4, answer key 12.6, own vote 10.0, 35% cut 1.3; llama8 nqo: default Qwen judge 36.0, answer key 5.0, own vote 8.1, 35% cut 8.2
+
+N3 reward minus the untrained student's own-vote rule at the same abstention (s18):
+   runs: 579
+   mean: -0.004533665844250145
+   share_pos: 0.3436960276338515
+   share_gt1: 0.11226252158894647
+   arms: 171
+   arms_gt1: 15
+   sim00fn00: qwen7 pqa -0.012 (6); qwen7 tqa -0.008 (6); qwen7 nqo -0.001 (2); llama8 pqa -0.001 (6); llama8 tqa -0.013 (6); llama8 nqo -0.013 (6) | mean of pairs -0.0080
+   apiS55: qwen7 pqa -0.001 (3); qwen7 tqa -0.004 (3); qwen7 nqo +0.018 (3); llama8 pqa +0.012 (3); llama8 tqa -0.004 (3); llama8 nqo -0.001 (3) | mean of pairs +0.0033
+   judgeQRt50: qwen7 pqa -0.002 (2); qwen7 nqo +0.023 (1); llama8 pqa +0.016 (2); llama8 nqo +0.001 (2) | mean of pairs +0.0096
+   frzVOTE20: qwen7 pqa -0.014 (3); qwen7 tqa -0.008 (3); qwen7 nqo -0.016 (3); llama8 pqa -0.008 (6); llama8 tqa -0.020 (3); llama8 nqo -0.020 (3) | mean of pairs -0.0142
+   hidden-state probe rule reward vs RL with the answer key: qwen7 pqa: 0.716 vs 0.714; qwen7 tqa: 0.696 vs 0.693; qwen7 nqo: 0.607 vs 0.551; llama8 pqa: 0.834 vs 0.837; llama8 tqa: 0.813 vs 0.810; llama8 nqo: 0.640 vs 0.598
+   own-vote rule (no labels, k=16) / best k / perfect: qwen7 pqa: 0.733 / 0.735 / 0.792; qwen7 tqa: 0.698 / 0.713 / 0.806; qwen7 nqo: 0.595 / 0.595 / 0.698; llama8 pqa: 0.838 / 0.849 / 0.899; llama8 tqa: 0.833 / 0.834 / 0.891; llama8 nqo: 0.649 / 0.655 / 0.791
+
+N5 NQ and the answer key:
+   qwen7 nqo: of the untrained student's answers the key accepts 0.320, the audit 0.510 (so the key rejects 0.374 of the right ones); untrained reward 0.507, abstains 0.223; key-trained reward 0.551, abstains 0.827, runs 2 of 6 (collapsed 4); own vote 0.577, abstains 0.491; Sonnet 0.605
+   llama8 nqo: of the untrained student's answers the key accepts 0.381, the audit 0.624 (so the key rejects 0.389 of the right ones); untrained reward 0.611, abstains 0.056; key-trained reward 0.598, abstains 0.703, runs 6 of 6 (collapsed 0); own vote 0.609, abstains 0.620; Sonnet 0.652
+   qwen7 pqa: of the untrained student's answers the key accepts 0.587, the audit 0.678 (so the key rejects 0.135 of the right ones); untrained reward 0.653, abstains 0.139; key-trained reward 0.714, abstains 0.380, runs 6 of 6 (collapsed 0); own vote 0.712, abstains 0.380; Sonnet 0.728
+   llama8 pqa: of the untrained student's answers the key accepts 0.718, the audit 0.821 (so the key rejects 0.125 of the right ones); untrained reward 0.807, abstains 0.020; key-trained reward 0.837, abstains 0.102, runs 6 of 6 (collapsed 0); own vote 0.829, abstains 0.204; Sonnet 0.842
+   qwen7 tqa: of the untrained student's answers the key accepts 0.615, the audit 0.641 (so the key rejects 0.041 of the right ones); untrained reward 0.633, abstains 0.043; key-trained reward 0.693, abstains 0.263, runs 6 of 6 (collapsed 0); own vote 0.659, abstains 0.123; Sonnet 0.680
+   llama8 tqa: of the untrained student's answers the key accepts 0.756, the audit 0.797 (so the key rejects 0.052 of the right ones); untrained reward 0.788, abstains 0.010; key-trained reward 0.810, abstains 0.127, runs 6 of 6 (collapsed 0); own vote 0.805, abstains 0.190; Sonnet 0.805
+
+N6 own vote (s20): pooled {'diff': -0.0020769111730114718, 'lo': -0.010983190188796073, 'hi': 0.006973486020839787, 'inside': True, 'all_runs': 0.003626792530692239} | P2 {'min': -0.034006499535747414, 'n_ok': 5, 'inside': False} | P3 {'F': [0.09172259507829977, 0.09625668449197862], 'inside': True} | P4 {'vs_key': [-0.005287401063967856, 0.014350590372388783], 'vs_judge': [0.15174516673154276, 0.1888542883093292], 'inside': True} | P5 {'collapsed': 0, 'runs': 18}
+   qwen7 pqa: vote 0.712 key 0.714 diff -0.0021 [-0.0174, +0.0126] abst 0.380 wrong 0.098; minus Sonnet -0.015555555555555545; minus reference judge -0.01433333333333342; minus Qwen judge default +0.057, 50% +0.008, 35% +0.043
+   qwen7 tqa: vote 0.659 key 0.693 diff -0.0340 [-0.0578, -0.0126] abst 0.123 wrong 0.280; minus Sonnet -0.02135561745589598; minus reference judge -; minus Qwen judge default +0.029, 50% -0.043, 35% +0.003
+   qwen7 nqo: vote 0.577 key 0.551 diff +0.0256 [-0.0098, +0.0640] abst 0.491 wrong 0.178; minus Sonnet -0.02777777777777779; minus reference judge -0.03644444444444439; minus Qwen judge default +0.075, 50% +0.030, 35% -0.029
+   llama8 pqa: vote 0.829 key 0.837 diff -0.0072 [-0.0229, +0.0081] abst 0.204 wrong 0.068; minus Sonnet -0.013111111111111073; minus reference judge -0.02966666666666662; minus Qwen judge default +0.012, 50% +0.086, 35% +0.139
+   llama8 tqa: vote 0.805 key 0.810 diff -0.0055 [-0.0193, +0.0071] abst 0.190 wrong 0.100; minus Sonnet 0.0; minus reference judge -; minus Qwen judge default +0.021, 50% +0.041, 35% +0.104
+   llama8 nqo: vote 0.609 key 0.598 diff +0.0108 [-0.0038, +0.0264] abst 0.620 wrong 0.081; minus Sonnet -0.042888888888888865; minus reference judge -0.04177777777777769; minus Qwen judge default -0.003, 50% -0.028, 35% -0.029
+   own vote minus Sonnet: mean over 6 pairs -0.0201 (range -0.043 to +0.000)
+   own vote minus reference judge: mean over 4 pairs -0.0306 (range -0.042 to -0.014)
+   own vote minus Qwen judge default: mean over 6 pairs +0.0318 (range -0.003 to +0.075)
+   own vote minus 50% cut: mean over 6 pairs +0.0158 (range -0.043 to +0.086)
+   own vote minus 35% cut: mean over 6 pairs +0.0386 (range -0.029 to +0.139)
+
+N7 form: llama8 nqo judgeOt50: reward 0.688, length 29.3 chars (untrained 15.1), answers changed 0.36, formerly wrong now right 0.34; llama8 nqo judgeOa35: reward 0.694, length 32.4 chars (untrained 15.1), answers changed 0.38, formerly wrong now right 0.37; llama8 nqo long80: reward 0.622, length 29.0 chars (untrained 15.1), answers changed 0.30, formerly wrong now right 0.26; llama8 nqo judgeQa35: reward 0.638, length 16.5 chars (untrained 15.1), answers changed 0.19, formerly wrong now right 0.21; llama8 nqo sim00fn00: reward 0.598, length 12.6 chars (untrained 15.1), answers changed 0.13, formerly wrong now right 0.12; llama8 nqo apiS55: reward 0.652, length 15.8 chars (untrained 15.1), answers changed 0.16, formerly wrong now right 0.14; qwen7 nqo judgeOt50: reward 0.582, length 15.6 chars (untrained 13.7), answers changed 0.18, formerly wrong now right 0.09; qwen7 nqo judgeOa35: reward 0.601, length 18.8 chars (untrained 13.7), answers changed 0.21, formerly wrong now right 0.16; qwen7 nqo long80: reward 0.529, length 31.4 chars (untrained 13.7), answers changed 0.36, formerly wrong now right 0.13; qwen7 nqo judgeQa35: reward 0.606, length 16.5 chars (untrained 13.7), answers changed 0.18, formerly wrong now right 0.13; qwen7 nqo sim00fn00: reward 0.551, length 12.3 chars (untrained 13.7), answers changed 0.12, formerly wrong now right 0.17; qwen7 nqo apiS55: reward 0.605, length 15.7 chars (untrained 13.7), answers changed 0.17, formerly wrong now right 0.10

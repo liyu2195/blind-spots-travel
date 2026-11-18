@@ -1,0 +1,125 @@
+(knowledge) CONFIRMATION of the pre-training forecast (k6) on run conditions not used in discovery: B1 (3,840 fresh TriviaQA training
+questions, each seen once), FK00 (no KL), B2v / B5v / B10v (2 / 5 / 10 visits per question), LK20 / LK50 at step 360 (long runs), IDK credit
+0.7 / 0.85, and FK20 runs of tags B2K20.  Probes are the k6 probes (fitted on the 750 standard trained questions to each grader's verdicts on the
+untrained greedy answers; untrained hidden state); evaluation on the standard NEW questions.
+Criteria fixed before this script was first run (2026-11-15):
+  C1  own-grader probe forecast AUROC >= 0.85 in >= 80% of confirmation runs with 0.05 <= a <= 0.95
+  C2  judge-trained confirmation runs: own-judge probe AUROC > key-probe AUROC in >= 75% of runs
+  C3  key-trained confirmation runs: key probe >= Qwen-35% probe in >= 60% of runs
+Own probe: sim00fnXX / simXXfn00 / hash -> key (random or hashed noise is not decodable); judgeQt50 -> Qt; judgeQa35 -> Q35.
+Output: k8_out.txt
+  skip qwen7_B10vK20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.024)
+  skip qwen7_B10vK20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.013)
+  skip qwen7_B10vK20judgeQt50_idkc05_s2_h1 (own probe Qt, a 0.006)
+  skip qwen7_B10vK20judgeQt50_idkc05_s3_h1 (own probe Qt, a 0.003)
+  skip qwen7_B1K20hash35fn00_idkc05_s0_h1 (own probe key, a 0.049)
+  skip qwen7_B1K20hash35fn00_idkc05_s1_h1 (own probe key, a 0.040)
+qwen7_B1K20hash35fn00_idkc05_s2_h1             tag B1K20       a 0.054  own(key) 0.895  key 0.895  Q35 0.871  son 0.887  sure 0.852  conf 0.954
+  skip qwen7_B1K20hash35fn00_idkc05_s3_h1 (own probe key, a 0.046)
+qwen7_B1K20judgeQa35_idkc05_s0_h1              tag B1K20       a 0.513  own(Q35) 0.888  key 0.881  Q35 0.888  son 0.890  sure 0.880  conf 0.782
+qwen7_B1K20judgeQa35_idkc05_s1_h1              tag B1K20       a 0.568  own(Q35) 0.889  key 0.886  Q35 0.889  son 0.892  sure 0.881  conf 0.794
+qwen7_B1K20judgeQa35_idkc05_s2_h1              tag B1K20       a 0.624  own(Q35) 0.887  key 0.882  Q35 0.887  son 0.895  sure 0.886  conf 0.767
+  skip qwen7_B1K20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.033)
+  skip qwen7_B1K20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.010)
+  skip qwen7_B1K20judgeQt50_idkc05_s2_h1 (own probe Qt, a 0.004)
+  skip qwen7_B1K20judgeQt50_idkc05_s3_h1 (own probe Qt, a 0.029)
+qwen7_B1K20sim00fn00_idkc05_s0_h1              tag B1K20       a 0.306  own(key) 0.923  key 0.923  Q35 0.920  son 0.931  sure 0.925  conf 0.847
+qwen7_B1K20sim00fn00_idkc05_s1_h1              tag B1K20       a 0.373  own(key) 0.915  key 0.915  Q35 0.918  son 0.929  sure 0.913  conf 0.838
+qwen7_B1K20sim00fn00_idkc05_s2_h1              tag B1K20       a 0.203  own(key) 0.917  key 0.917  Q35 0.900  son 0.919  sure 0.903  conf 0.862
+qwen7_B1K20sim00fn20_idkc05_s0_h1              tag B1K20       a 0.448  own(key) 0.898  key 0.898  Q35 0.890  son 0.903  sure 0.896  conf 0.829
+qwen7_B1K20sim20fn00_idkc05_s0_h1              tag B1K20       a 0.058  own(key) 0.898  key 0.898  Q35 0.882  son 0.898  sure 0.871  conf 0.925
+qwen7_B2K20sim00fn00_idkc05_s0_h1              tag B2K20       a 0.315  own(key) 0.927  key 0.927  Q35 0.928  son 0.932  sure 0.916  conf 0.848
+qwen7_B2vK20judgeQt50_idkc05_s0_h1             tag B2vK20      a 0.058  own(Qt) 0.844  key 0.869  Q35 0.860  son 0.860  sure 0.826  conf 0.944
+  skip qwen7_B2vK20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.014)
+  skip qwen7_B5vK20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.013)
+  skip qwen7_B5vK20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.015)
+  skip qwen7_FK00judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.015)
+  skip qwen7_FK00judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.004)
+  skip qwen7_FK00sim35fn00_idkc05_s0_h1 (own probe key, a 0.007)
+  skip qwen7_FK00sim35fn00_idkc05_s1_h1 (own probe key, a 0.001)
+  skip qwen7_FK20judgeQt50_idkc07_s0_h1 (own probe Qt, a 0.017)
+  skip qwen7_FK20judgeQt50_idkc085_s0_h1 (own probe Qt, a 0.018)
+qwen7_LK20sim00fn00_idkc05_s0_h1               tag LK20        a 0.206  own(key) 0.906  key 0.906  Q35 0.899  son 0.908  sure 0.908  conf 0.837
+qwen7_LK20sim00fn00_idkc05_s0_h1@ck360         tag LK20@ck360  a 0.259  own(key) 0.903  key 0.903  Q35 0.899  son 0.904  sure 0.900  conf 0.850
+qwen7_LK20sim00fn20_idkc05_s0_h1               tag LK20        a 0.220  own(key) 0.894  key 0.894  Q35 0.894  son 0.892  sure 0.895  conf 0.852
+qwen7_LK20sim00fn20_idkc05_s0_h1@ck360         tag LK20@ck360  a 0.327  own(key) 0.879  key 0.879  Q35 0.875  son 0.884  sure 0.867  conf 0.848
+qwen7_LK20sim00fn40_idkc05_s0_h1               tag LK20        a 0.579  own(key) 0.856  key 0.856  Q35 0.849  son 0.854  sure 0.866  conf 0.798
+qwen7_LK20sim00fn40_idkc05_s0_h1@ck360         tag LK20@ck360  a 0.416  own(key) 0.854  key 0.854  Q35 0.855  son 0.857  sure 0.868  conf 0.832
+qwen7_LK20sim20fn00_idkc05_s0_h1               tag LK20        a 0.139  own(key) 0.894  key 0.894  Q35 0.886  son 0.891  sure 0.885  conf 0.854
+qwen7_LK20sim20fn00_idkc05_s0_h1@ck360         tag LK20@ck360  a 0.113  own(key) 0.912  key 0.912  Q35 0.892  son 0.912  sure 0.899  conf 0.876
+qwen7_LK20sim35fn00_idkc05_s0_h1               tag LK20        a 0.056  own(key) 0.871  key 0.871  Q35 0.849  son 0.861  sure 0.840  conf 0.951
+  skip qwen7_LK20sim35fn00_idkc05_s0_h1@ck360 (own probe key, a 0.024)
+qwen7_LK50sim00fn00_idkc05_s0_h1               tag LK50        a 0.072  own(key) 0.907  key 0.907  Q35 0.888  son 0.899  sure 0.874  conf 0.927
+qwen7_LK50sim00fn00_idkc05_s0_h1@ck360         tag LK50@ck360  a 0.085  own(key) 0.895  key 0.895  Q35 0.884  son 0.891  sure 0.872  conf 0.900
+qwen7_LK50sim00fn20_idkc05_s0_h1               tag LK50        a 0.192  own(key) 0.876  key 0.876  Q35 0.877  son 0.868  sure 0.866  conf 0.866
+qwen7_LK50sim00fn20_idkc05_s0_h1@ck360         tag LK50@ck360  a 0.121  own(key) 0.891  key 0.891  Q35 0.881  son 0.883  sure 0.873  conf 0.883
+qwen7_LK50sim00fn40_idkc05_s0_h1               tag LK50        a 0.130  own(key) 0.880  key 0.880  Q35 0.865  son 0.874  sure 0.866  conf 0.871
+qwen7_LK50sim00fn40_idkc05_s0_h1@ck360         tag LK50@ck360  a 0.280  own(key) 0.870  key 0.870  Q35 0.875  son 0.877  sure 0.877  conf 0.839
+  skip qwen7_LK50sim20fn00_idkc05_s0_h1 (own probe key, a 0.035)
+  skip qwen7_LK50sim20fn00_idkc05_s0_h1@ck360 (own probe key, a 0.015)
+  skip qwen7_LK50sim35fn00_idkc05_s0_h1 (own probe key, a 0.029)
+  skip qwen7_LK50sim35fn00_idkc05_s0_h1@ck360 (own probe key, a 0.032)
+qwen7_FK20judgeQt50_idkc07_s0_pq               tag FK20        a 0.055  own(Qt) 0.960  key 0.959  Q35 0.883  son 0.946  sure 0.941  conf 0.946
+qwen7_FK20judgeQt50_idkc085_s0_pq              tag FK20        a 0.085  own(Qt) 0.965  key 0.940  Q35 0.869  son 0.938  sure 0.918  conf 0.945
+qwen7_FK100sim00fn00_idkc05_s0_nq              tag FK100       a 0.249  own(key) 0.850  key 0.850  Q35 0.879  son 0.856  sure 0.859  conf 0.968
+qwen7_FK100sim00fn00_idkc05_s1_nq              tag FK100       a 0.263  own(key) 0.859  key 0.859  Q35 0.884  son 0.864  sure 0.870  conf 0.964
+qwen7_FK50sim00fn00_idkc05_s0_nq               tag FK50        a 0.781  own(key) 0.839  key 0.839  Q35 0.816  son 0.837  sure 0.855  conf 0.848
+qwen7_FK50sim00fn00_idkc05_s1_nq               tag FK50        a 0.521  own(key) 0.826  key 0.826  Q35 0.770  son 0.803  sure 0.825  conf 0.880
+  skip llama8_B10vK20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.008)
+  skip llama8_B10vK20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.004)
+  skip llama8_B10vK20judgeQt50_idkc05_s2_h1 (own probe Qt, a 0.004)
+  skip llama8_B10vK20judgeQt50_idkc05_s3_h1 (own probe Qt, a 0.004)
+  skip llama8_B1K20hash35fn00_idkc05_s0_h1 (own probe key, a 0.042)
+llama8_B1K20hash35fn00_idkc05_s1_h1            tag B1K20       a 0.064  own(key) 0.809  key 0.809  Q35 0.888  son 0.894  sure 0.837  conf 0.904
+  skip llama8_B1K20hash35fn00_idkc05_s2_h1 (own probe key, a 0.015)
+  skip llama8_B1K20hash35fn00_idkc05_s3_h1 (own probe key, a 0.010)
+llama8_B1K20judgeQa35_idkc05_s0_h1             tag B1K20       a 0.409  own(Q35) 0.934  key 0.907  Q35 0.934  son 0.949  sure 0.925  conf 0.826
+llama8_B1K20judgeQa35_idkc05_s1_h1             tag B1K20       a 0.546  own(Q35) 0.940  key 0.869  Q35 0.940  son 0.919  sure 0.887  conf 0.769
+llama8_B1K20judgeQa35_idkc05_s2_h1             tag B1K20       a 0.578  own(Q35) 0.924  key 0.876  Q35 0.924  son 0.932  sure 0.902  conf 0.787
+  skip llama8_B1K20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.006)
+  skip llama8_B1K20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.006)
+  skip llama8_B1K20judgeQt50_idkc05_s2_h1 (own probe Qt, a 0.007)
+  skip llama8_B1K20judgeQt50_idkc05_s3_h1 (own probe Qt, a 0.004)
+llama8_B1K20sim00fn00_idkc05_s0_h1             tag B1K20       a 0.184  own(key) 0.880  key 0.880  Q35 0.895  son 0.924  sure 0.882  conf 0.882
+llama8_B1K20sim00fn00_idkc05_s1_h1             tag B1K20       a 0.131  own(key) 0.908  key 0.908  Q35 0.895  son 0.942  sure 0.912  conf 0.894
+llama8_B1K20sim00fn00_idkc05_s2_h1             tag B1K20       a 0.124  own(key) 0.880  key 0.880  Q35 0.901  son 0.936  sure 0.887  conf 0.882
+llama8_B1K20sim00fn20_idkc05_s0_h1             tag B1K20       a 0.244  own(key) 0.892  key 0.892  Q35 0.901  son 0.934  sure 0.907  conf 0.898
+  skip llama8_B1K20sim20fn00_idkc05_s0_h1 (own probe key, a 0.003)
+llama8_B2K20sim00fn00_idkc05_s0_h1             tag B2K20       a 0.187  own(key) 0.911  key 0.911  Q35 0.911  son 0.951  sure 0.918  conf 0.883
+  skip llama8_B2vK20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.003)
+  skip llama8_B2vK20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.001)
+  skip llama8_B5vK20judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.000)
+  skip llama8_B5vK20judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.003)
+  skip llama8_FK00judgeQt50_idkc05_s0_h1 (own probe Qt, a 0.001)
+  skip llama8_FK00judgeQt50_idkc05_s1_h1 (own probe Qt, a 0.000)
+  skip llama8_FK00sim35fn00_idkc05_s0_h1 (own probe key, a 0.000)
+  skip llama8_FK00sim35fn00_idkc05_s1_h1 (own probe key, a 0.004)
+llama8_LK20sim00fn00_idkc05_s0_pq              tag LK20        a 0.076  own(key) 0.807  key 0.807  Q35 0.794  son 0.931  sure 0.853  conf 0.907
+llama8_LK20sim00fn00_idkc05_s0_pq@ck360        tag LK20@ck360  a 0.127  own(key) 0.855  key 0.855  Q35 0.821  son 0.920  sure 0.858  conf 0.874
+llama8_LK20sim00fn20_idkc05_s0_pq              tag LK20        a 0.171  own(key) 0.855  key 0.855  Q35 0.868  son 0.928  sure 0.868  conf 0.877
+llama8_LK20sim00fn20_idkc05_s0_pq@ck360        tag LK20@ck360  a 0.185  own(key) 0.853  key 0.853  Q35 0.846  son 0.901  sure 0.841  conf 0.867
+llama8_LK20sim00fn40_idkc05_s0_pq              tag LK20        a 0.463  own(key) 0.911  key 0.911  Q35 0.861  son 0.901  sure 0.868  conf 0.818
+llama8_LK20sim00fn40_idkc05_s0_pq@ck360        tag LK20@ck360  a 0.351  own(key) 0.895  key 0.895  Q35 0.854  son 0.881  sure 0.859  conf 0.828
+  skip llama8_LK20sim20fn00_idkc05_s0_pq (own probe key, a 0.033)
+llama8_LK20sim20fn00_idkc05_s0_pq@ck360        tag LK20@ck360  a 0.075  own(key) 0.799  key 0.799  Q35 0.780  son 0.905  sure 0.811  conf 0.883
+  skip llama8_LK20sim35fn00_idkc05_s0_pq (own probe key, a 0.017)
+llama8_LK20sim35fn00_idkc05_s0_pq@ck360        tag LK20@ck360  a 0.051  own(key) 0.767  key 0.767  Q35 0.754  son 0.905  sure 0.816  conf 0.915
+  skip llama8_LK50sim20fn00_idkc05_s0_pq (own probe key, a 0.031)
+  skip llama8_LK50sim20fn00_idkc05_s0_pq@ck360 (own probe key, a 0.036)
+  skip llama8_LK50sim35fn00_idkc05_s0_pq (own probe key, a 0.016)
+  skip llama8_LK50sim35fn00_idkc05_s0_pq@ck360 (own probe key, a 0.012)
+
+C1: 49 runs, own-probe AUROC >= 0.85 in 0.84 (median 0.891) -> MET
+C2: 9 judge-trained runs, own > key in 0.89 (mean own - key +0.018) -> MET
+C3: 40 key-trained runs, key >= Q35 in 0.68 (mean key - Q35 +0.007) -> MET
+   B1K20       own Q35  runs  6 a 0.540 own 0.910 key 0.884 Q35 0.910 conf 0.787
+   B1K20       own key  runs 11 a 0.199 own 0.892 key 0.892 Q35 0.896 conf 0.883
+   B2K20       own key  runs  2 a 0.251 own 0.919 key 0.919 Q35 0.919 conf 0.865
+   B2vK20      own Qt   runs  1 a 0.058 own 0.844 key 0.869 Q35 0.860 conf 0.944
+   FK100       own key  runs  2 a 0.256 own 0.855 key 0.855 Q35 0.882 conf 0.966
+   FK20        own Qt   runs  2 a 0.070 own 0.962 key 0.950 Q35 0.876 conf 0.945
+   FK50        own key  runs  2 a 0.651 own 0.832 key 0.832 Q35 0.793 conf 0.864
+   LK20        own key  runs  8 a 0.239 own 0.874 key 0.874 Q35 0.862 conf 0.862
+   LK20@ck360  own key  runs  9 a 0.212 own 0.857 key 0.857 Q35 0.842 conf 0.864
+   LK50        own key  runs  3 a 0.131 own 0.888 key 0.888 Q35 0.877 conf 0.888
+   LK50@ck360  own key  runs  3 a 0.162 own 0.885 key 0.885 Q35 0.880 conf 0.874

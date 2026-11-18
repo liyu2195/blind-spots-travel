@@ -1,0 +1,3 @@
+JM=Qwen/Qwen3.5-9B
+JQ="--quantization fp8"
+CLIENTS="phi4m_judgeQ_h1 phi4m_goldstrict_h1"

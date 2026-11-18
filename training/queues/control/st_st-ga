@@ -1,0 +1,6 @@
+STUDENT=ibm-granite/granite-4.2-3b
+TAG=granite
+JUDGE=Qwen/Qwen3.5-9B
+TPB=8192
+CAP=32400
+STEPS="trivia:A trivia:B:gold,major gsm8k:B:gold,major"

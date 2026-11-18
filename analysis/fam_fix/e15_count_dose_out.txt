@@ -1,0 +1,46 @@
+(fam_fix) e15_count_dose (descriptive; existing runs only): for every grader whose verdicts on the training capital questions are known, the number
+of the 12 KNOWN former-state training answers (untrained greedy answer key-right) it rejects, the share of the other known capital training answers
+it rejects, and what its models do on the never-trained probe: refusal of known former-state (R_F) and present-day (R_P) capitals, and the mean R_F,
+R_P of the 3 runs trained with the key plus random rejections nearest in PopQA new-question abstention (judge-free, matched).
+Graders: judges Q M G O at each cut (P(Yes) of the untrained greedy answer); frozen-key graders (key file aliases: copies of a judge's verdicts,
+scrambled copy, type-wide copy, majority of five judges, own vote). Output: e15_count_dose_out.txt
+  llama8  judge M t50             : rejects  0 of 12 known former-state training answers, 0.02 of other capitals | runs 2 abstention 0.01 | models refuse F 0.01 P 0.00 | matched judge-free models F 0.03 P 0.00
+  llama8  frozen key frzVOTE20    : rejects  0 of 12 known former-state training answers, 0.02 of other capitals | runs 6 abstention 0.19 | models refuse F 0.11 P 0.00 | matched judge-free models F 0.02 P 0.00
+  llama8  answer key              : rejects  0 of 12 known former-state training answers, 0.00 of other capitals | runs 4 abstention 0.10 | models refuse F 0.02 P 0.00 | matched judge-free models F 0.02 P 0.00
+  llama8  judge Q t50             : rejects  2 of 12 known former-state training answers, 0.02 of other capitals | runs 3 abstention 0.01 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.03 P 0.00
+  llama8  judge G t50             : rejects  2 of 12 known former-state training answers, 0.04 of other capitals | runs 2 abstention 0.04 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.03 P 0.00
+  llama8  judge G acc             : rejects  2 of 12 known former-state training answers, 0.04 of other capitals | runs 2 abstention 0.10 | models refuse F 0.03 P 0.00 | matched judge-free models F 0.03 P 0.00
+  llama8  judge O t50             : rejects  2 of 12 known former-state training answers, 0.04 of other capitals | runs 2 abstention 0.10 | models refuse F 0.12 P 0.00 | matched judge-free models F 0.03 P 0.00
+  llama8  frozen key frzVOTE29    : rejects  2 of 12 known former-state training answers, 0.06 of other capitals | runs 2 abstention 0.41 | models refuse F 0.34 P 0.00 | matched judge-free models F 0.21 P 0.00
+  llama8  judge M acc             : rejects  5 of 12 known former-state training answers, 0.06 of other capitals | runs 5 abstention 0.24 | models refuse F 0.38 P 0.00 | matched judge-free models F 0.04 P 0.00
+  llama8  judge G a50             : rejects  5 of 12 known former-state training answers, 0.07 of other capitals | runs 2 abstention 0.40 | models refuse F 0.25 P 0.00 | matched judge-free models F 0.17 P 0.00
+  llama8  judge O acc             : rejects  5 of 12 known former-state training answers, 0.05 of other capitals | runs 2 abstention 0.16 | models refuse F 0.07 P 0.00 | matched judge-free models F 0.02 P 0.00
+  llama8  judge O a50             : rejects  5 of 12 known former-state training answers, 0.11 of other capitals | runs 2 abstention 0.38 | models refuse F 0.65 P 0.00 | matched judge-free models F 0.15 P 0.00
+  llama8  frozen key frzVOTE32    : rejects  5 of 12 known former-state training answers, 0.06 of other capitals | runs 2 abstention 0.50 | models refuse F 0.59 P 0.00 | matched judge-free models F 0.34 P 0.00
+  llama8  judge Q acc             : rejects  6 of 12 known former-state training answers, 0.05 of other capitals | runs 5 abstention 0.26 | models refuse F 0.42 P 0.00 | matched judge-free models F 0.05 P 0.00
+  llama8  judge M a50             : rejects  7 of 12 known former-state training answers, 0.10 of other capitals | runs 2 abstention 0.36 | models refuse F 0.51 P 0.00 | matched judge-free models F 0.17 P 0.00
+  llama8  judge Q a50             : rejects  8 of 12 known former-state training answers, 0.09 of other capitals | runs 6 abstention 0.48 | models refuse F 0.88 P 0.00 | matched judge-free models F 0.33 P 0.00
+  llama8  judge G a35             : rejects  8 of 12 known former-state training answers, 0.12 of other capitals | runs 3 abstention 0.57 | models refuse F 0.91 P 0.01 | matched judge-free models F 0.43 P 0.00
+  llama8  judge O a35             : rejects  9 of 12 known former-state training answers, 0.21 of other capitals | runs 3 abstention 0.58 | models refuse F 0.89 P 0.05 | matched judge-free models F 0.46 P 0.02
+  llama8  judge M a35             : rejects 10 of 12 known former-state training answers, 0.13 of other capitals | runs 3 abstention 0.64 | models refuse F 0.94 P 0.06 | matched judge-free models F 0.59 P 0.07
+  llama8  judge Q a35             : rejects 11 of 12 known former-state training answers, 0.12 of other capitals | runs 6 abstention 0.61 | models refuse F 0.98 P 0.01 | matched judge-free models F 0.54 P 0.07
+  qwen7   answer key              : rejects  0 of 12 known former-state training answers, 0.00 of other capitals | runs 6 abstention 0.38 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.00 P 0.00
+  qwen7   judge Q t50             : rejects  1 of 12 known former-state training answers, 0.04 of other capitals | runs 3 abstention 0.07 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.01 P 0.00
+  qwen7   judge M t50             : rejects  1 of 12 known former-state training answers, 0.01 of other capitals | runs 2 abstention 0.05 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.01 P 0.00
+  qwen7   judge G t50             : rejects  1 of 12 known former-state training answers, 0.04 of other capitals | runs 2 abstention 0.13 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.01 P 0.00
+  qwen7   frozen key frzVOTE20    : rejects  1 of 12 known former-state training answers, 0.02 of other capitals | runs 3 abstention 0.38 | models refuse F 0.09 P 0.00 | matched judge-free models F 0.00 P 0.00
+  qwen7   judge O t50             : rejects  2 of 12 known former-state training answers, 0.02 of other capitals | runs 2 abstention 0.22 | models refuse F 0.00 P 0.00 | matched judge-free models F 0.01 P 0.00
+  qwen7   frozen key frzVOTE21    : rejects  2 of 12 known former-state training answers, 0.02 of other capitals | runs 1 abstention 0.31 | models refuse F 0.13 P 0.00 | matched judge-free models F 0.01 P 0.00
+  qwen7   judge G a50             : rejects  4 of 12 known former-state training answers, 0.08 of other capitals | runs 2 abstention 0.48 | models refuse F 0.05 P 0.01 | matched judge-free models F 0.00 P 0.00
+  qwen7   frozen key frzVOTE32    : rejects  4 of 12 known former-state training answers, 0.07 of other capitals | runs 2 abstention 0.55 | models refuse F 0.24 P 0.00 | matched judge-free models F 0.09 P 0.01
+  qwen7   judge M a50             : rejects  5 of 12 known former-state training answers, 0.07 of other capitals | runs 2 abstention 0.43 | models refuse F 0.29 P 0.01 | matched judge-free models F 0.01 P 0.00
+  qwen7   judge Q a50             : rejects  6 of 12 known former-state training answers, 0.11 of other capitals | runs 5 abstention 0.42 | models refuse F 0.15 P 0.00 | matched judge-free models F 0.00 P 0.00
+  qwen7   judge G a35             : rejects  7 of 12 known former-state training answers, 0.13 of other capitals | runs 3 abstention 0.60 | models refuse F 0.56 P 0.03 | matched judge-free models F 0.14 P 0.01
+  qwen7   judge O a50             : rejects  7 of 12 known former-state training answers, 0.07 of other capitals | runs 2 abstention 0.44 | models refuse F 0.28 P 0.01 | matched judge-free models F 0.00 P 0.00
+  qwen7   judge O a35             : rejects  8 of 12 known former-state training answers, 0.14 of other capitals | runs 3 abstention 0.60 | models refuse F 0.53 P 0.05 | matched judge-free models F 0.14 P 0.01
+  qwen7   judge M a35             : rejects 10 of 12 known former-state training answers, 0.11 of other capitals | runs 3 abstention 0.71 | models refuse F 0.64 P 0.05 | matched judge-free models F 0.30 P 0.04
+  qwen7   judge Q a35             : rejects 12 of 12 known former-state training answers, 0.15 of other capitals | runs 6 abstention 0.63 | models refuse F 0.82 P 0.04 | matched judge-free models F 0.18 P 0.01
+
+  graders rejecting 0-2 of the 12: cells 13; models refuse F 0.00-0.34 (median 0.01); gap beyond matched judge-free models -0.03 to +0.12 (median -0.01)
+  graders rejecting 3-6 of the 12: cells 10; models refuse F 0.05-0.65 (median 0.27); gap beyond matched judge-free models +0.03 to +0.50 (median +0.21)
+  graders rejecting 7-12 of the 12: cells 11; models refuse F 0.28-0.98 (median 0.82); gap beyond matched judge-free models +0.27 to +0.61 (median +0.40)

@@ -1,0 +1,31 @@
+(fix_ledger) L05: the per-100-new-question outcome account (IDK, right, wrong given, right withheld, known withheld) for the grader families
+that regimes/r02_costs.py does not cover, with the same definitions and caches (regimes/rg.build, r02_costs.per_question):
+key + random false accepts (sim20fn00, sim35fn00), key + random FA and FR (sim<FP>fn<FN> with both > 0, lenQ excluded), fixed-table
+false accepts (hash35fn00), own majority vote as key (frzVOTE*), long-answer grader (long80), type-set false accepts (typeA/typeB),
+planted false rejects on PopQA (fnB80, fnH80, fnA80, plrealM/O, plscrM, plsharpM/O), blinded key (blind40).
+Main recipe only (FK20, credit 0.5); collapsed runs (new-question IDK >= 0.95) dropped; datasets pooled over those where the family has runs
+(equal weight per question). No installed-hack column: these graders have no fixed per-string verdict that can be scored on new strings
+(hash tables are seed-specific; see verify_what/v31_specific.txt and general/g04_hash.txt for the hash content lift).
+Output: L05_other_families_out.txt.  Usage: nice -n 10 timeout 280 python3 -I L05_other_families.py
+
+== qwen7: per 100 new questions (datasets with runs pooled)
+family                                       runs datasets   |   IDK  right  wrong withheld  known | untrained right / wrong on the same questions
+key + random false accepts                     21 h1+pq+nq   |  22.0   51.5   26.4      2.8    1.1 | 52.9 / 33.3
+key + random FA and FR                         24 h1+pq+nq   |  29.2   48.9   21.8      4.9    2.3 | 52.9 / 33.3
+fixed-table false accepts (hash)                6 h1+pq+nq   |  10.2   54.4   35.4      0.1    0.1 | 52.9 / 33.3
+own majority vote as key                       16 h1+pq+nq   |  45.6   42.3   12.1     10.6    5.1 | 52.9 / 33.3
+long-answer grader (long80)                     4 pq+nq      |  15.2   47.9   36.5      0.7    0.3 | 49.0 / 32.9
+type-set false accepts (typeA/B)               18 pq         |  25.3   55.2   19.5      4.6    2.6 | 58.4 / 27.7
+planted false rejects (fnB/fnH/fnA, copies)    31 pq         |  67.1   31.2    1.7     27.6   16.7 | 58.4 / 27.7
+blinded key (blind40)                           9 h1+pq+nq   |  37.0   39.3   23.7     14.0    9.9 | 52.9 / 33.3
+
+== llama8: per 100 new questions (datasets with runs pooled)
+family                                       runs datasets   |   IDK  right  wrong withheld  known | untrained right / wrong on the same questions
+key + random false accepts                     21 h1+pq+nq   |   8.8   70.5   20.4      2.2    0.3 | 72.0 / 24.2
+key + random FA and FR                         18 h1+pq+nq   |  19.8   65.4   14.6      6.8    1.2 | 72.0 / 24.2
+fixed-table false accepts (hash)                6 h1+pq+nq   |   1.9   72.1   25.7      0.0    0.0 | 72.0 / 24.2
+own majority vote as key                       12 h1+pq+nq   |  46.8   47.8    5.3     24.1    8.2 | 72.0 / 24.2
+long-answer grader (long80)                     4 pq+nq      |   1.8   66.0   31.6      0.1    0.0 | 69.0 / 26.2
+type-set false accepts (typeA/B)                9 pq         |   5.8   79.4   14.6      1.9    1.2 | 79.7 / 17.3
+planted false rejects (fnB/fnH/fnA, copies)    30 pq         |  65.6   33.4    1.0     46.6   27.2 | 79.7 / 17.3
+blinded key (blind40)                           9 h1+pq+nq   |  40.1   47.4   12.2     24.3   13.8 | 72.0 / 24.2

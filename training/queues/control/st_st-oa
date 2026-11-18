@@ -1,0 +1,6 @@
+STUDENT=allenai/Olmo-3-7B-Instruct
+TAG=olmo3
+JUDGE=Qwen/Qwen3.5-9B
+TPB=4096
+CAP=32400
+STEPS="trivia:A trivia:B:gold,major gsm8k:B:gold,major"

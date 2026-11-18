@@ -1,0 +1,36 @@
+(stats) Claim 10: the visible cost on hand-written capitals probes (never trained): former-state capitals (F, 270) vs present-day (P, 65).
+Known = untrained greedy answer valid, not IDK, right by the loose key; sure = known and >= 31/32 untrained samples right.
+Refusal = final greedy answer of a trained PopQA FK20 run (adeval/probe2) is IDK. Arms: judgeQa35 (strict Qwen judge), gold key (sim00fn00),
+key + random false rejects (sim00fnXX, XX > 0), own-vote keys (frzVOTE).
+PRIMARY estimand: DiD = mean over judgeQa35 runs of [R_F - R_P] minus the same over gold-key runs, R_F / R_P = refusal on known F / known P.
+Uncertainty: crossed bootstrap (4000): probe questions resampled within (student, class) (same draw for all runs of a student), runs within arm.
+Run-level test: exact permutation of the judge / gold labels within student (all C(n, k) splits), statistic = DiD.
+Robustness: sure-only; reference = key + random-FN runs (nearest 3 by PopQA new-question abstention, and local-linear on that abstention);
+  reference = vote runs; R_F alone. Also: the judge's acceptance of the known right answers at the a35 cut and at 0.5 (Wilson 95%).
+Output: c10_capitals_out.txt
+qwen7 class F: n 270, known 149, sure 108 | Qwen judge accepts the known right answers: a35 cut 0.974: 0.134 [0.089, 0.198]; P(Yes) > 0.5: 0.859 [0.794, 0.906]
+qwen7 class P: n 65, known 63, sure 56 | Qwen judge accepts the known right answers: a35 cut 0.974: 0.841 [0.732, 0.911]; P(Yes) > 0.5: 0.968 [0.891, 0.991]
+  qwen7 runs: vote 3 (seeds [0, 0, 1]; frzVOTE21,frzVOTE32), judge 6 (seeds [0, 1, 2, 3, 4, 5]), gold 6 (seeds [0, 1, 2, 3, 4, 5]), keyFN 13 (seeds [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50)
+llama8 class F: n 270, known 187, sure 127 | Qwen judge accepts the known right answers: a35 cut 0.982: 0.134 [0.092, 0.190]; P(Yes) > 0.5: 0.893 [0.841, 0.930]
+llama8 class P: n 65, known 65, sure 65 | Qwen judge accepts the known right answers: a35 cut 0.982: 0.862 [0.757, 0.925]; P(Yes) > 0.5: 0.969 [0.895, 0.992]
+  llama8 runs: vote 7 (seeds [0, 0, 0, 1, 1, 1, 2]; frzVOTE20,frzVOTE29,frzVOTE32), judge 6 (seeds [0, 1, 2, 3, 4, 5]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
+
+== PRIMARY: DiD = [R_F - R_P](judgeQa35) - [R_F - R_P](gold key), known answers
+  qwen7 judge : runs  6  R_F 0.820 (range 0.70-0.91)  R_P 0.040  PopQA new abstention 0.630 (range 0.54-0.68)
+  qwen7 gold  : runs  6  R_F 0.004 (range 0.00-0.03)  R_P 0.000  PopQA new abstention 0.380 (range 0.31-0.45)
+  qwen7 keyFN : runs 13  R_F 0.279 (range 0.00-1.00)  R_P 0.170  PopQA new abstention 0.636 (range 0.43-1.00)
+  qwen7 vote  : runs  3  R_F 0.204 (range 0.11-0.37)  R_P 0.000  PopQA new abstention 0.469 (range 0.31-0.58)
+  qwen7: DiD +0.776 [+0.693, +0.859]  exact permutation p 0.00108 (924 splits)
+  llama8 judge : runs  6  R_F 0.983 (range 0.95-1.00)  R_P 0.013  PopQA new abstention 0.613 (range 0.60-0.63)
+  llama8 gold  : runs  4  R_F 0.023 (range 0.00-0.06)  R_P 0.000  PopQA new abstention 0.096 (range 0.04-0.15)
+  llama8 keyFN : runs 18  R_F 0.329 (range 0.01-1.00)  R_P 0.121  PopQA new abstention 0.461 (range 0.15-1.00)
+  llama8 vote  : runs  7  R_F 0.322 (range 0.02-0.60)  R_P 0.000  PopQA new abstention 0.338 (range 0.15-0.50)
+  llama8: DiD +0.948 [+0.900, +0.984]  exact permutation p 0.00476 (210 splits)
+  pooled (mean of students) +0.862; combined exact p (product of the two independent permutation sets) 5.15e-06
+
+== robustness
+  sure answers only, vs gold: qwen7 +0.746 [+0.643, +0.846]  llama8 +0.960 [+0.914, +0.992]
+  vs key+random-FN runs, nearest 3 by abstention: qwen7 +0.605 [+0.491, +0.722]  llama8 +0.500 [+0.328, +0.645]
+  vs key+random-FN runs, local linear in abstention: qwen7 +0.585 [+0.495, +0.684]  llama8 +0.475 [+0.355, +0.574]
+  vs own-vote runs: qwen7 +0.577 [+0.411, +0.724]  llama8 +0.649 [+0.486, +0.822]
+  R_F only (no present-day contrast), vs key+FN nearest 3: qwen7 +0.629 [+0.516, +0.766]  llama8 +0.447 [+0.243, +0.641]

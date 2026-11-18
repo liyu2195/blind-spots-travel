@@ -1,0 +1,21 @@
+"""(knowledge) Robustness of the pre-training forecast (k6/k9) to probe choices: layer (CV-chosen as in k4 / fixed middle layer 16 / last layer), PCA width (128 / 32), and raw text instead of hidden state (TF-IDF of the question, word 1-2 grams, min_df 2).  For each variant: mean forecast AUROC of the own-grader probe for judge-trained (35% / 50% target, all judges) and key-trained FK20 runs, own > key share (judge runs), and the two-way fingerprint residual (5 judges at 35%) with its permutation p (1000x).  Output: k13_out.txt""" 
+variant cv128
+  judge-trained runs 122: own-probe forecast AUROC mean 0.931 (qwen7 0.935, llama8 0.928); own > key in 0.97
+  key-trained runs 96: own-probe forecast AUROC mean 0.878 (qwen7 0.907, llama8 0.857)
+  fingerprint: own-cell residual +0.0235 over 87 runs, permutation p = 0.0010
+variant l16
+  judge-trained runs 122: own-probe forecast AUROC mean 0.918 (qwen7 0.902, llama8 0.933); own > key in 0.93
+  key-trained runs 96: own-probe forecast AUROC mean 0.879 (qwen7 0.893, llama8 0.868)
+  fingerprint: own-cell residual +0.0233 over 87 runs, permutation p = 0.0010
+variant last
+  judge-trained runs 122: own-probe forecast AUROC mean 0.927 (qwen7 0.931, llama8 0.922); own > key in 0.95
+  key-trained runs 96: own-probe forecast AUROC mean 0.894 (qwen7 0.909, llama8 0.884)
+  fingerprint: own-cell residual +0.0199 over 87 runs, permutation p = 0.0010
+variant cv32
+  judge-trained runs 122: own-probe forecast AUROC mean 0.931 (qwen7 0.933, llama8 0.929); own > key in 0.89
+  key-trained runs 96: own-probe forecast AUROC mean 0.881 (qwen7 0.906, llama8 0.864)
+  fingerprint: own-cell residual +0.0211 over 87 runs, permutation p = 0.0010
+variant text
+  judge-trained runs 122: own-probe forecast AUROC mean 0.747 (qwen7 0.754, llama8 0.739); own > key in 0.89
+  key-trained runs 96: own-probe forecast AUROC mean 0.714 (qwen7 0.756, llama8 0.685)
+  fingerprint: own-cell residual +0.0175 over 87 runs, permutation p = 0.0010

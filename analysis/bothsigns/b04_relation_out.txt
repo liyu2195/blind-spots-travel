@@ -1,0 +1,169 @@
+
+===== Spearman(readability = hidQA AUC on new questions, transfer) -- KIND currency (share of the run's refusals / wrong answers of the kind the error rewards): T = new / home
+  eligible arms (home effect CI > 0 and >= 0.05, readability defined, not placebo): 63; excluded non-placebo arms: fnA80/FR/llama8, fnA80/FR/qwen7, fnB50/FR/qwen7, judgeGt50/FR/qwen7, judgeMt50/FA/llama8, judgeMt50/FA/qwen7, judgeMt50/FR/llama8, judgeMt50/FR/qwen7, judgeQt50/FR/llama8, judgeQt50/FR/qwen7, typeB60/FA/llama8
+  pooled                                       n 63  rho +0.67  arms [+0.45,+0.81]  measurement [+0.33,+0.71]  combined [+0.23,+0.78]  perm p 0.0003
+  qwen7                                        n 33  rho +0.70  arms [+0.40,+0.87]  measurement [+0.21,+0.77]  combined [+0.03,+0.84]  perm p 0.0003
+  llama8                                       n 30  rho +0.63  arms [+0.29,+0.84]  measurement [+0.32,+0.76]  combined [+0.10,+0.85]  perm p 0.0010
+  FR only                                      n 33  rho +0.65  arms [+0.34,+0.84]  measurement [+0.20,+0.76]  combined [-0.01,+0.85]  perm p 0.0003
+  FA + form only                               n 30  rho +0.75  arms [+0.48,+0.90]  measurement [+0.30,+0.78]  combined [+0.10,+0.86]  perm p 0.0003
+  designed extremes removed                    n 41  rho +0.19  arms [-0.16,+0.52]  measurement [-0.08,+0.47]  combined [-0.26,+0.60]  perm p 0.2383
+  designed removed, qwen7                      n 21  rho +0.34  arms [-0.16,+0.74]  measurement [-0.06,+0.66]  combined [-0.31,+0.79]  perm p 0.1233
+  designed removed, llama8                     n 20  rho +0.02  arms [-0.51,+0.54]  measurement [-0.32,+0.52]  combined [-0.52,+0.67]  perm p 0.9277
+  designed removed, FR                         n 21  rho +0.17  arms [-0.37,+0.63]  measurement [-0.22,+0.57]  combined [-0.45,+0.74]  perm p 0.4512
+  designed removed, FA                         n 20  rho +0.32  arms [-0.21,+0.74]  measurement [-0.15,+0.55]  combined [-0.41,+0.70]  perm p 0.1523
+  judges only                                  n 33  rho +0.23  arms [-0.16,+0.57]  measurement [-0.07,+0.53]  combined [-0.27,+0.63]  perm p 0.2049
+  designed extremes only                       n 22  rho +0.74  arms [+0.44,+0.88]  measurement [+0.40,+0.86]  combined [+0.14,+0.91]  perm p 0.0003
+  cross-sign test (kind): isotonic fit of T on readability over one sign's arms, mean residual of the other sign's arms
+    fit FR       -> test FA+form : n 33/30  mean residual +0.02 [-0.20,+0.29]  (share of test arms below the curve 0.40)
+    fit FR       -> test FA      : n 33/28  mean residual +0.03 [-0.19,+0.32]  (share of test arms below the curve 0.36)
+    fit FA+form  -> test FR      : n 30/33  mean residual -0.06 [-0.25,+0.17]  (share of test arms below the curve 0.67)
+
+===== Spearman(readability = hidQA AUC on new questions, transfer) -- DECISION currency (extra refusal / answering on affected items): T = new / home
+  eligible arms (home effect CI > 0 and >= 0.05, readability defined, not placebo): 61; excluded non-placebo arms: fnA80/FR/qwen7, fnB50/FR/qwen7, hash35/FA/llama8, hash35/FA/qwen7, judgeMt50/FA/llama8, judgeMt50/FA/qwen7, judgeMt50/FR/llama8, judgeMt50/FR/qwen7, judgeQt50/FA/llama8, judgeQt50/FA/qwen7, judgeQt50/FR/llama8, judgeQt50/FR/qwen7, typeB60/FA/llama8
+  pooled                                       n 61  rho +0.63  arms [+0.44,+0.77]  measurement [+0.38,+0.71]  combined [+0.25,+0.77]  perm p 0.0003
+  qwen7                                        n 32  rho +0.59  arms [+0.27,+0.82]  measurement [+0.25,+0.76]  combined [+0.06,+0.84]  perm p 0.0003
+  llama8                                       n 29  rho +0.68  arms [+0.38,+0.83]  measurement [+0.37,+0.76]  combined [+0.19,+0.84]  perm p 0.0003
+  FR only                                      n 35  rho +0.72  arms [+0.43,+0.89]  measurement [+0.50,+0.85]  combined [+0.27,+0.90]  perm p 0.0003
+  FA + form only                               n 26  rho +0.57  arms [+0.23,+0.75]  measurement [+0.14,+0.69]  combined [-0.04,+0.77]  perm p 0.0043
+  designed extremes removed                    n 40  rho +0.15  arms [-0.20,+0.43]  measurement [-0.08,+0.47]  combined [-0.24,+0.59]  perm p 0.3799
+  designed removed, qwen7                      n 21  rho +0.21  arms [-0.30,+0.62]  measurement [-0.10,+0.60]  combined [-0.32,+0.73]  perm p 0.3599
+  designed removed, llama8                     n 19  rho +0.12  arms [-0.42,+0.56]  measurement [-0.36,+0.50]  combined [-0.56,+0.69]  perm p 0.6435
+  designed removed, FR                         n 22  rho +0.38  arms [-0.11,+0.71]  measurement [+0.07,+0.72]  combined [-0.21,+0.81]  perm p 0.0810
+  designed removed, FA                         n 18  rho +0.11  arms [-0.42,+0.61]  measurement [-0.30,+0.49]  combined [-0.52,+0.69]  perm p 0.6478
+  judges only                                  n 32  rho +0.20  arms [-0.16,+0.53]  measurement [-0.11,+0.49]  combined [-0.25,+0.62]  perm p 0.2656
+  designed extremes only                       n 21  rho +0.53  arms [+0.07,+0.87]  measurement [+0.11,+0.70]  combined [-0.14,+0.85]  perm p 0.0127
+  cross-sign test (dec): isotonic fit of T on readability over one sign's arms, mean residual of the other sign's arms
+    fit FR       -> test FA+form : n 35/26  mean residual +0.08 [-0.20,+0.36]  (share of test arms below the curve 0.42)
+    fit FR       -> test FA      : n 35/24  mean residual +0.12 [-0.18,+0.41]  (share of test arms below the curve 0.38)
+    fit FA+form  -> test FR      : n 26/35  mean residual -0.12 [-0.48,+0.13]  (share of test arms below the curve 0.71)
+
+===== robustness: rho (pooled, eligible arms) for readability variants and reference-fit variants
+  kind      R_hidQA        all: n 63 rho +0.67 [+0.47,+0.80] p 0.0003 | designed removed: n 41 rho +0.19 [-0.16,+0.55] p 0.2239
+  kind      R_hid16        all: n 63 rho +0.55 [+0.31,+0.73] p 0.0003 | designed removed: n 41 rho +0.23 [-0.11,+0.55] p 0.1406
+  kind      R_hid24        all: n 63 rho +0.58 [+0.36,+0.75] p 0.0003 | designed removed: n 41 rho +0.32 [-0.05,+0.61] p 0.0413
+  kind      R_txtQ         all: n 63 rho +0.59 [+0.38,+0.75] p 0.0003 | designed removed: n 41 rho +0.15 [-0.22,+0.49] p 0.3642
+  kind      R_txtQA        all: n 63 rho +0.66 [+0.45,+0.81] p 0.0003 | designed removed: n 41 rho +0.20 [-0.15,+0.54] p 0.1923
+  kind      R_hidQA_strat  all: n 63 rho +0.66 [+0.45,+0.81] p 0.0003 | designed removed: n 41 rho +0.18 [-0.17,+0.51] p 0.2676
+  dec       R_hidQA        all: n 61 rho +0.63 [+0.42,+0.77] p 0.0003 | designed removed: n 40 rho +0.15 [-0.19,+0.45] p 0.3662
+  dec       R_hid16        all: n 61 rho +0.52 [+0.29,+0.71] p 0.0003 | designed removed: n 40 rho +0.11 [-0.24,+0.45] p 0.4928
+  dec       R_hid24        all: n 61 rho +0.54 [+0.27,+0.72] p 0.0003 | designed removed: n 40 rho +0.17 [-0.15,+0.47] p 0.2886
+  dec       R_txtQ         all: n 61 rho +0.56 [+0.33,+0.73] p 0.0003 | designed removed: n 40 rho +0.04 [-0.32,+0.35] p 0.8044
+  dec       R_txtQA        all: n 61 rho +0.58 [+0.37,+0.73] p 0.0003 | designed removed: n 40 rho +0.03 [-0.32,+0.37] p 0.8737
+  dec       R_hidQA_strat  all: n 61 rho +0.63 [+0.41,+0.77] p 0.0003 | designed removed: n 40 rho +0.14 [-0.23,+0.46] p 0.3805
+  kind_lin  R_hidQA        all: n 61 rho +0.74 [+0.56,+0.85] p 0.0003 | designed removed: n 40 rho +0.36 [-0.03,+0.63] p 0.0280
+  kind_lin  R_hid16        all: n 61 rho +0.61 [+0.38,+0.79] p 0.0003 | designed removed: n 40 rho +0.40 [+0.05,+0.67] p 0.0130
+  kind_lin  R_hid24        all: n 61 rho +0.64 [+0.43,+0.79] p 0.0003 | designed removed: n 40 rho +0.47 [+0.17,+0.70] p 0.0020
+  kind_lin  R_txtQ         all: n 61 rho +0.66 [+0.46,+0.79] p 0.0003 | designed removed: n 40 rho +0.33 [-0.02,+0.60] p 0.0460
+  kind_lin  R_txtQA        all: n 61 rho +0.71 [+0.54,+0.82] p 0.0003 | designed removed: n 40 rho +0.34 [+0.01,+0.62] p 0.0287
+  kind_lin  R_hidQA_strat  all: n 61 rho +0.72 [+0.54,+0.83] p 0.0003 | designed removed: n 40 rho +0.34 [+0.01,+0.63] p 0.0340
+  dec_lin   R_hidQA        all: n 61 rho +0.74 [+0.57,+0.85] p 0.0003 | designed removed: n 41 rho +0.41 [+0.11,+0.63] p 0.0107
+  dec_lin   R_hid16        all: n 61 rho +0.72 [+0.56,+0.84] p 0.0003 | designed removed: n 41 rho +0.38 [+0.11,+0.62] p 0.0150
+  dec_lin   R_hid24        all: n 61 rho +0.73 [+0.53,+0.84] p 0.0003 | designed removed: n 41 rho +0.41 [+0.12,+0.62] p 0.0110
+  dec_lin   R_txtQ         all: n 61 rho +0.73 [+0.55,+0.86] p 0.0003 | designed removed: n 41 rho +0.35 [+0.05,+0.59] p 0.0300
+  dec_lin   R_txtQA        all: n 61 rho +0.71 [+0.53,+0.83] p 0.0003 | designed removed: n 41 rho +0.32 [-0.01,+0.55] p 0.0470
+  dec_lin   R_hidQA_strat  all: n 61 rho +0.74 [+0.57,+0.84] p 0.0003 | designed removed: n 41 rho +0.40 [+0.12,+0.65] p 0.0097
+  kind_knn  R_hidQA        all: n 63 rho +0.70 [+0.52,+0.83] p 0.0003 | designed removed: n 40 rho +0.26 [-0.07,+0.54] p 0.1063
+  kind_knn  R_hid16        all: n 63 rho +0.57 [+0.33,+0.75] p 0.0003 | designed removed: n 40 rho +0.31 [+0.01,+0.60] p 0.0603
+  kind_knn  R_hid24        all: n 63 rho +0.58 [+0.32,+0.76] p 0.0003 | designed removed: n 40 rho +0.34 [+0.03,+0.60] p 0.0297
+  kind_knn  R_txtQ         all: n 63 rho +0.60 [+0.39,+0.73] p 0.0003 | designed removed: n 40 rho +0.24 [-0.06,+0.53] p 0.1336
+  kind_knn  R_txtQA        all: n 63 rho +0.66 [+0.48,+0.79] p 0.0003 | designed removed: n 40 rho +0.22 [-0.08,+0.48] p 0.1703
+  kind_knn  R_hidQA_strat  all: n 63 rho +0.69 [+0.51,+0.82] p 0.0003 | designed removed: n 40 rho +0.26 [-0.08,+0.53] p 0.1153
+  dec_knn   R_hidQA        all: n 60 rho +0.66 [+0.48,+0.79] p 0.0003 | designed removed: n 40 rho +0.48 [+0.16,+0.71] p 0.0037
+  dec_knn   R_hid16        all: n 60 rho +0.66 [+0.48,+0.81] p 0.0003 | designed removed: n 40 rho +0.49 [+0.17,+0.72] p 0.0027
+  dec_knn   R_hid24        all: n 60 rho +0.66 [+0.47,+0.80] p 0.0003 | designed removed: n 40 rho +0.47 [+0.21,+0.70] p 0.0017
+  dec_knn   R_txtQ         all: n 60 rho +0.69 [+0.51,+0.84] p 0.0003 | designed removed: n 40 rho +0.48 [+0.23,+0.76] p 0.0030
+  dec_knn   R_txtQA        all: n 60 rho +0.65 [+0.46,+0.80] p 0.0003 | designed removed: n 40 rho +0.42 [+0.10,+0.69] p 0.0117
+  dec_knn   R_hidQA_strat  all: n 60 rho +0.66 [+0.47,+0.79] p 0.0003 | designed removed: n 40 rho +0.46 [+0.15,+0.71] p 0.0027
+
+===== arm table (kind currency first; R = hidQA readability on new questions; T = new/home; placebos: home/new only)
+             arm      sign     st    cells  runs  kind_h  kind_n  kind_T  dec_h  dec_n  dec_T  R_hidQA  R_hid16  R_hidQA_strat
+           fnA80        FR llama8       pq     3     NaN     NaN     NaN  0.899  0.814  0.906    1.000    1.000          1.000
+           fnA80        FR  qwen7       pq     3     NaN     NaN     NaN    NaN    NaN    NaN    0.997    1.000          0.997
+           fnB50        FR llama8       pq     2   0.263   0.164   0.623  0.193  0.220  1.138    1.000    1.000          1.000
+           fnB50        FR  qwen7       pq     2   0.058   0.039   0.666  0.090  0.152  1.690    0.997    1.000          0.997
+           fnB80        FR llama8       pq     3   0.389   0.287   0.736  0.804  0.622  0.773    1.000    1.000          1.000
+           fnB80        FR  qwen7       pq     3   0.217   0.117   0.537  0.420  0.317  0.755    0.997    1.000          0.997
+           fnH60        FR  qwen7       pq     4   0.091   0.029   0.323  0.054  0.030  0.565    0.545    0.493          0.537
+           fnH80        FR llama8       pq     3   0.262   0.011   0.043  0.359  0.048  0.132    0.527    0.529          0.535
+           fnH80        FR  qwen7       pq     3   0.115  -0.023  -0.203  0.257 -0.025 -0.097    0.545    0.493          0.537
+          hash35        FA llama8 h1/nq/pq     6   0.531  -0.009  -0.016  0.031  0.008  0.261    0.545    0.535          0.536
+          hash35        FA  qwen7 h1/nq/pq     6   0.501   0.004   0.007  0.042  0.013  0.308    0.486    0.497          0.493
+       judgeGa35        FA llama8 h1/nq/pq     8   0.556   0.107   0.192  0.502  0.211  0.419    0.715    0.712          0.698
+       judgeGa35        FA  qwen7 h1/nq/pq     8   0.285   0.045   0.157  0.402  0.167  0.416    0.602    0.601          0.608
+       judgeGa35        FR llama8 h1/nq/pq     8   0.268   0.112   0.417  0.701  0.234  0.333    0.838    0.843          0.838
+       judgeGa35        FR  qwen7 h1/nq/pq     8   0.207   0.058   0.281  0.387  0.050  0.130    0.735    0.744          0.746
+       judgeGt50        FA llama8    h1/nq     3   0.315   0.050   0.158  0.191  0.082  0.433    0.620    0.575          0.615
+       judgeGt50        FA  qwen7    h1/nq     3   0.260  -0.005  -0.021  0.167  0.037  0.224    0.560    0.518          0.569
+       judgeGt50        FR llama8    h1/nq     3   0.379   0.054   0.143  0.155  0.011  0.069    0.701    0.703          0.702
+       judgeGt50        FR  qwen7    h1/nq     3   0.441     NaN     NaN  0.147 -0.045 -0.303    0.620    0.615          0.639
+       judgeMa35        FA llama8 h1/nq/pq     8   0.576   0.126   0.219  0.311  0.096  0.309    0.677    0.709          0.690
+       judgeMa35        FA  qwen7 h1/nq/pq     8   0.319   0.060   0.190  0.377 -0.032 -0.084    0.669    0.697          0.663
+       judgeMa35        FR llama8 h1/nq/pq     8   0.211   0.045   0.214  0.529  0.106  0.200    0.826    0.804          0.811
+       judgeMa35        FR  qwen7 h1/nq/pq     8   0.216   0.113   0.525  0.392  0.198  0.505    0.807    0.810          0.818
+       judgeMt50        FA llama8       h1     1     NaN   0.029     NaN  0.004  0.006  1.508    0.568    0.532          0.527
+       judgeMt50        FA  qwen7       h1     1     NaN   0.036     NaN  0.011  0.002  0.201    0.669    0.651          0.626
+       judgeMt50        FR llama8       h1     1     NaN     NaN     NaN  0.030 -0.021 -0.701    0.721    0.726          0.737
+       judgeMt50        FR  qwen7       h1     1     NaN     NaN     NaN -0.024 -0.021  0.854    0.616    0.611          0.688
+       judgeOa35        FA llama8 h1/nq/pq     8   0.549   0.192   0.349  0.226  0.019  0.082    0.593    0.633          0.534
+       judgeOa35        FA  qwen7 h1/nq/pq     8   0.339   0.068   0.201  0.320 -0.062 -0.193    0.566    0.619          0.564
+       judgeOa35        FR llama8 h1/nq/pq     8   0.182   0.005   0.027  0.445  0.035  0.078    0.792    0.802          0.767
+       judgeOa35        FR  qwen7 h1/nq/pq     8   0.199   0.025   0.125  0.404  0.087  0.216    0.751    0.761          0.754
+       judgeOt50        FA llama8    h1/nq     3   0.393   0.058   0.147  0.225  0.012  0.053    0.701    0.684          0.704
+       judgeOt50        FA  qwen7    h1/nq     3   0.324   0.022   0.067  0.291  0.087  0.299    0.645    0.627          0.635
+       judgeOt50        FR llama8    h1/nq     3   0.243   0.024   0.100  0.228  0.033  0.144    0.749    0.768          0.705
+       judgeOt50        FR  qwen7    h1/nq     3   0.420   0.017   0.041  0.340  0.066  0.194    0.731    0.745          0.732
+       judgeQa35        FA llama8 h1/nq/pq    18   0.556   0.163   0.294  0.443  0.080  0.180    0.695    0.605          0.683
+       judgeQa35        FA  qwen7 h1/nq/pq    18   0.317   0.042   0.134  0.290  0.014  0.047    0.678    0.643          0.670
+       judgeQa35        FR llama8 h1/nq/pq    18   0.275   0.088   0.321  0.664  0.148  0.223    0.818    0.813          0.804
+       judgeQa35        FR  qwen7 h1/nq/pq    18   0.238   0.094   0.394  0.496  0.114  0.231    0.718    0.720          0.703
+       judgeQa50        FA llama8 h1/nq/pq    18   0.454   0.047   0.104  0.263  0.080  0.304    0.653    0.612          0.660
+       judgeQa50        FA  qwen7 h1/nq/pq    18   0.377   0.043   0.113  0.232  0.035  0.152    0.633    0.621          0.616
+       judgeQa50        FR llama8 h1/nq/pq    18   0.383   0.033   0.085  0.519  0.060  0.116    0.784    0.790          0.771
+       judgeQa50        FR  qwen7 h1/nq/pq    18   0.345   0.068   0.197  0.363  0.053  0.146    0.725    0.717          0.704
+       judgeQt50        FA llama8 h1/nq/pq     9   0.358   0.065   0.181  0.041  0.012  0.303    0.605    0.599          0.613
+       judgeQt50        FA  qwen7 h1/nq/pq     9   0.389   0.018   0.046  0.038  0.009  0.225    0.619    0.589          0.617
+       judgeQt50        FR llama8 h1/nq/pq     9     NaN     NaN     NaN  0.026 -0.010 -0.384    0.713    0.716          0.735
+       judgeQt50        FR  qwen7 h1/nq/pq     9     NaN     NaN     NaN  0.016 -0.016 -1.016    0.657    0.673          0.648
+       judgeRa35        FA llama8       nq     2   0.464   0.071   0.153  0.457  0.036  0.078    0.580    0.627          0.573
+       judgeRa35        FA  qwen7       nq     2   0.318   0.014   0.045  0.305 -0.081 -0.267    0.647    0.595          0.650
+       judgeRa35        FR llama8       nq     2   0.297  -0.008  -0.027  0.583 -0.004 -0.008    0.653    0.613          0.672
+       judgeRa35        FR  qwen7       nq     2   0.174   0.045   0.256  0.275  0.048  0.174    0.646    0.646          0.646
+         keymiss        FR llama8 h1/nq/pq   113   0.321   0.068   0.211  0.188  0.037  0.198    0.775    0.756          0.723
+         keymiss        FR  qwen7 h1/nq/pq   105   0.269   0.026   0.098  0.172 -0.004 -0.026    0.777    0.773          0.779
+          long80      form llama8    nq/pq     4   0.739   0.479   0.648  0.067  0.030  0.446    1.000    0.708          1.000
+          long80      form  qwen7    nq/pq     4   0.741   0.513   0.692  0.189  0.140  0.744    1.000    0.477          1.000
+    placebo_lenQ FAplacebo llama8 h1/nq/pq     9     NaN   0.025     NaN  0.014  0.008  0.587    0.517    0.533          0.516
+    placebo_lenQ FAplacebo  qwen7 h1/nq/pq     9  -0.010  -0.006   0.572  0.004  0.001  0.168    0.494    0.499          0.512
+    placebo_lenQ FRplacebo llama8 h1/nq/pq     9     NaN     NaN     NaN -0.002 -0.003  1.298    0.495    0.529          0.494
+    placebo_lenQ FRplacebo  qwen7 h1/nq/pq     9     NaN     NaN     NaN -0.012 -0.008  0.728    0.512    0.503          0.516
+ placebo_noiseFN FAplacebo llama8 h1/nq/pq    47  -0.002  -0.005   2.385 -0.035 -0.009  0.262    0.517    0.533          0.516
+ placebo_noiseFN FAplacebo  qwen7 h1/nq/pq    36   0.029   0.010   0.338  0.026 -0.005 -0.178    0.494    0.499          0.512
+ placebo_noiseFN FRplacebo llama8 h1/nq/pq    47     NaN   0.014     NaN  0.001 -0.007 -5.110    0.495    0.529          0.494
+ placebo_noiseFN FRplacebo  qwen7 h1/nq/pq    36   0.053  -0.015  -0.278  0.030  0.020  0.670    0.512    0.503          0.516
+ placebo_noiseFP FAplacebo llama8 h1/nq/pq    21   0.006  -0.010  -1.485  0.017 -0.015 -0.881    0.517    0.533          0.516
+ placebo_noiseFP FAplacebo  qwen7 h1/nq/pq    21   0.023  -0.002  -0.105 -0.005  0.015 -2.899    0.494    0.499          0.512
+ placebo_noiseFP FRplacebo llama8 h1/nq/pq    21     NaN  -0.029     NaN -0.000 -0.006 18.571    0.495    0.529          0.494
+ placebo_noiseFP FRplacebo  qwen7 h1/nq/pq    21   0.004  -0.056 -14.885  0.002 -0.001 -0.416    0.512    0.503          0.516
+placebo_noiseMix FAplacebo llama8 h1/nq/pq    18   0.007  -0.003  -0.435  0.011  0.007  0.606    0.517    0.533          0.516
+placebo_noiseMix FAplacebo  qwen7 h1/nq/pq    24  -0.011  -0.001   0.131 -0.031 -0.003  0.108    0.494    0.499          0.512
+placebo_noiseMix FRplacebo llama8 h1/nq/pq    18  -0.048  -0.000   0.007 -0.014  0.006 -0.434    0.495    0.529          0.494
+placebo_noiseMix FRplacebo  qwen7 h1/nq/pq    24  -0.039   0.009  -0.218 -0.008 -0.001  0.108    0.512    0.503          0.516
+         plrealM        FR llama8       pq     4   0.180  -0.006  -0.035  0.580  0.076  0.131    0.888    0.893          0.866
+         plrealM        FR  qwen7       pq     4   0.204   0.090   0.442  0.466  0.191  0.409    0.909    0.911          0.899
+         plrealO        FR llama8       pq     4   0.166   0.042   0.251  0.598  0.078  0.130    0.833    0.843          0.806
+         plrealO        FR  qwen7       pq     4   0.183  -0.006  -0.034  0.439 -0.004 -0.010    0.804    0.815          0.789
+          plscrM        FR llama8       pq     4   0.256  -0.012  -0.049  0.489 -0.047 -0.095    0.494    0.484          0.490
+          plscrM        FR  qwen7       pq     4   0.183  -0.019  -0.106  0.380 -0.001 -0.003    0.516    0.508          0.536
+        plsharpM        FR llama8       pq     4   0.222   0.044   0.197  0.723  0.474  0.655    0.998    1.000          0.999
+        plsharpM        FR  qwen7       pq     4   0.236   0.191   0.809  0.827  0.492  0.595    0.996    0.997          0.996
+        plsharpO        FR llama8       pq     4   0.214   0.221   1.030  0.944  0.849  0.899    1.000    1.000          1.000
+        plsharpO        FR  qwen7       pq     4   0.150   0.078   0.521  0.728  0.597  0.820    1.000    1.000          1.000
+          popH40        FA  qwen7       pq     3   0.254   0.078   0.307  0.287  0.179  0.624    0.746    0.730          0.733
+          popL40        FA  qwen7       pq     3   0.086   0.021   0.238  0.233  0.010  0.044    0.746    0.730          0.733
+         typeA40        FA  qwen7       pq     3   0.350   0.158   0.451  0.525  0.342  0.652    0.973    1.000          0.974
+         typeB20        FA llama8       pq     3   0.160   0.119   0.741  0.268  0.372  1.385    0.960    0.997          0.960
+         typeB20        FA  qwen7       pq     5   0.158   0.059   0.375  0.140  0.033  0.232    0.973    1.000          0.974
+         typeB40        FA llama8       pq     3   0.071   0.037   0.527  0.219  0.265  1.213    0.960    0.997          0.960
+         typeB40        FA  qwen7       pq     5   0.142   0.035   0.245  0.456  0.188  0.414    0.973    1.000          0.974
+         typeB60        FA llama8       pq     3   0.034  -0.052  -1.545  0.023  0.016  0.665    0.960    0.997          0.960
+         typeB60        FA  qwen7       pq     5   0.082   0.024   0.290  0.349  0.189  0.542    0.973    1.000          0.974

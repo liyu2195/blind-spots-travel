@@ -1,0 +1,29 @@
+(knowledge) Splits and matched-abstention accuracy.
+(a) judge fingerprint (k6 probes, 5 judges at the 35% target): own-cell residual and permutation p separately per student and per dataset.
+(b) seed split for the Qwen-judge families (6 seeds each): forecast AUROC of the own probe and own > key, seeds 0-2 vs 3-5 (k6 rows).
+(c) accuracy among answered at matched abstention (|da| <= 0.05): judge-trained minus gold-family (gold + keyFN) runs, audited and key label,
+    with the untrained-answer version (same selection, untrained greedy answers) to separate selection from answer change (k7 rows / runs).
+Output: k14_out.txt
+(a) fingerprint by split
+   qwen7      runs  43  own-cell residual +0.0162  permutation p 0.0005
+   llama8     runs  44  own-cell residual +0.0306  permutation p 0.0005
+   TriviaQA   runs  23  own-cell residual +0.0251  permutation p 0.0005
+   PopQA      runs  30  own-cell residual +0.0256  permutation p 0.0005
+   NQ         runs  34  own-cell residual +0.0204  permutation p 0.0005
+   seeds 0-1  runs  51  own-cell residual +0.0272  permutation p 0.0005
+   seeds >= 2 runs  28  own-cell residual +0.0182  permutation p 0.0005
+(b) Qwen-judge families, seeds 0-2 vs 3-5
+   judgea35 qwen7 s0-2: runs 9, own 0.929, key 0.870, own > key in 1.00
+   judgea35 qwen7 s3-5: runs 9, own 0.930, key 0.873, own > key in 1.00
+   judgea35 llama8 s0-2: runs 9, own 0.943, key 0.811, own > key in 1.00
+   judgea35 llama8 s3-5: runs 9, own 0.944, key 0.801, own > key in 1.00
+   judgea50 qwen7 s0-2: runs 9, own 0.933, key 0.882, own > key in 1.00
+   judgea50 qwen7 s3-5: runs 8, own 0.927, key 0.878, own > key in 0.88
+   judgea50 llama8 s0-2: runs 9, own 0.932, key 0.827, own > key in 1.00
+   judgea50 llama8 s3-5: runs 9, own 0.935, key 0.821, own > key in 1.00
+(c) accuracy among answered, matched abstention vs gold family; trained answers / untrained answers on the same answered questions
+   judgea35   pairs 5: d acc|ans audited +0.0045 (untrained answers +0.0069), key -0.0224 (untrained -0.0177)  | qwen7-h1(18): -0.010/-0.012 qwen7-pq(23): +0.010/+0.008 llama8-h1(2): -0.008/-0.018 llama8-pq(5): +0.008/-0.014 llama8-nq(2): +0.023/-0.076
+   judgeXa35  pairs 5: d acc|ans audited +0.0019 (untrained answers +0.0033), key -0.0288 (untrained -0.0276)  | qwen7-h1(21): -0.010/-0.006 qwen7-pq(28): +0.018/+0.005 llama8-h1(5): -0.013/-0.009 llama8-pq(13): +0.011/-0.008 llama8-nq(6): +0.003/-0.126
+   judgea50   pairs 4: d acc|ans audited +0.0014 (untrained answers +0.0051), key -0.0142 (untrained -0.0089)  | qwen7-h1(21): +0.008/+0.006 qwen7-pq(29): -0.008/-0.033 llama8-h1(2): +0.001/+0.001 llama8-pq(16): +0.005/-0.030
+   sonnet     pairs 4: d acc|ans audited +0.0044 (untrained answers +0.0001), key -0.0030 (untrained -0.0020)  | qwen7-h1(7): +0.001/-0.001 qwen7-pq(10): +0.015/-0.001 llama8-h1(9): -0.011/-0.009 llama8-pq(11): +0.013/-0.001
+   vote       pairs 6: d acc|ans audited -0.0083 (untrained answers -0.0051), key -0.0126 (untrained -0.0072)  | qwen7-h1(22): -0.014/-0.019 qwen7-pq(16): -0.000/-0.000 qwen7-nq(2): -0.033/-0.019 llama8-h1(7): +0.000/-0.001 llama8-pq(10): +0.000/+0.002 llama8-nq(9): -0.003/-0.038

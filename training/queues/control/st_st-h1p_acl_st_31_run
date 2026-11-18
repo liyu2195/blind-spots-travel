@@ -1,0 +1,7 @@
+STUDENT=microsoft/Phi-4-mini-instruct
+TAG=phi4m_h1
+TPB=2048
+CAP=14400
+NOTAKEOVER=1
+TQ_TRAIN=tqa_h1
+STEPS="trivia:A trivia:B:judge,noise,gold"

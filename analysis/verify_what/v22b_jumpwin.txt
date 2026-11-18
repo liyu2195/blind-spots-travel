@@ -1,0 +1,10 @@
+(verify_what) Item 2(b) check: does the '22/22 multi-visit judgeQt50 runs jump at the first revisit' count depend on the window?
+jump(w) = mean(first w steps of visit 2) - mean(last w steps of visit 1), w = 3, 5, 10; placebo = the same steps in the 4 B1 runs of the
+student (no revisit). Also a slope-adjusted jump: the visit-2 window minus the extrapolation of a line fitted to the visit-1 steps.
+Output v22b_jumpwin.txt
+qwen7 window  3: jump > 0 in 11/11; above every B1 placebo 7/11; slope-adjusted jump > 0 11/11; mean jump +0.114; mean B1 placebo -0.001
+qwen7 window  5: jump > 0 in 11/11; above every B1 placebo 7/11; slope-adjusted jump > 0 8/11; mean jump +0.092; mean B1 placebo +0.017
+qwen7 window 10: jump > 0 in 11/11; above every B1 placebo 11/11; slope-adjusted jump > 0 9/11; mean jump +0.128; mean B1 placebo +0.003
+llama8 window  3: jump > 0 in 10/11; above every B1 placebo 7/11; slope-adjusted jump > 0 11/11; mean jump +0.102; mean B1 placebo +0.003
+llama8 window  5: jump > 0 in 9/11; above every B1 placebo 9/11; slope-adjusted jump > 0 11/11; mean jump +0.105; mean B1 placebo +0.008
+llama8 window 10: jump > 0 in 11/11; above every B1 placebo 11/11; slope-adjusted jump > 0 11/11; mean jump +0.128; mean B1 placebo -0.007

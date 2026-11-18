@@ -1,0 +1,3 @@
+JM=google/gemma-4-12B-it-qat-w4a16-ct
+JQ=""
+CLIENTS="phi4m_judgeG_h1"

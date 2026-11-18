@@ -1,0 +1,1 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B TAG=smol3 FPK=0.35 FPU=0.35 FN=0.0 ADV=none IDK=0.9 SEED=0 OUTNAME=smol3_sim35fn00dr_idkc09_s0_h1

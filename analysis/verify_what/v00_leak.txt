@@ -1,0 +1,48 @@
+(verify_what) Data and leakage checks, written from the raw data files.
+(1) per set: training ids (<set>_h1.jsonl) vs the rest of <set>_1500.jsonl; questions on the 'new' side whose text (several
+    normalisations) or qid also appears on the training side; same gold/alias set + same normalised question.
+(2) TriviaQA visit-regime training files (tqa_b1_3840/1920/768/384, tqa_b2_7680): size, nesting, overlap with tqa_1500 (all 1,500
+    evaluation questions) by qid and by normalised question text.
+Output: v00_leak.txt
+
+== tqa: 1500 questions, training 750, other 750; idx range 0-1499; training ids all in the 1500 file: True
+   new questions whose text (strip+lower) is also a training question: 32
+   new questions whose text (no punctuation) is also a training question: 32
+   new questions whose text (no function words) is also a training question: 32
+   new questions with a training qid: 32
+   duplicated question texts within training: 11
+   duplicated question texts within new: 16
+   new questions with exactly the same alias set as some training question: 102
+   (tqa) of the 32 strip+lower duplicates, same qid as the training copy: 32; examples: The letter t is the second most common letter used in the En | In 2009, who was convicted of the murder of Lana Clarkson? | In the novel ‘Jane Eyre’ by Charlotte Bronte, what is the na
+
+== pqa: 1500 questions, training 750, other 750; idx range 0-1499; training ids all in the 1500 file: True
+   new questions whose text (strip+lower) is also a training question: 0
+   new questions whose text (no punctuation) is also a training question: 0
+   new questions whose text (no function words) is also a training question: 2
+   new questions with a training qid: 0
+   duplicated question texts within training: 0
+   duplicated question texts within new: 0
+   new questions with exactly the same alias set as some training question: 172
+
+== nqo: 1500 questions, training 750, other 750; idx range 0-1499; training ids all in the 1500 file: True
+   new questions whose text (strip+lower) is also a training question: 0
+   new questions whose text (no punctuation) is also a training question: 0
+   new questions whose text (no function words) is also a training question: 1
+   new questions with a training qid: 0
+   duplicated question texts within training: 0
+   duplicated question texts within new: 0
+   new questions with exactly the same alias set as some training question: 15
+
+== TriviaQA visit-regime training files
+  tqa_b1_3840: 3840 rows, distinct question texts 3840, distinct qid 3840, idx 100000-103839; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqa_b1_1920: 1920 rows, distinct question texts 1920, distinct qid 1920, idx 100000-101919; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqa_b1_768: 768 rows, distinct question texts 768, distinct qid 768, idx 100000-100767; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqa_b1_384: 384 rows, distinct question texts 384, distinct qid 384, idx 100000-100383; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqa_b2_7680: 7680 rows, distinct question texts 7680, distinct qid 7680, idx 100000-107679; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqb_1500: 1920 rows, distinct question texts 1920, distinct qid 1920, idx 100000-101919; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqc_1500: 1920 rows, distinct question texts 1920, distinct qid 1920, idx 101920-103839; idx in tqa_1500 0; qid in tqa_1500 0; text in tqa_1500 0 (of which in its NEW part 0); rows % 32 = 0
+  tqa_b1_384 within tqa_b1_768: 384 / 384 qids; same row order for the common prefix: True
+  tqa_b1_768 within tqa_b1_1920: 768 / 768 qids; same row order for the common prefix: True
+  tqa_b1_1920 within tqa_b1_3840: 1920 / 1920 qids; same row order for the common prefix: True
+  tqa_b1_3840 within tqa_b2_7680: 3840 / 3840 qids; same row order for the common prefix: True
+  tqa_b1_1920 within tqb_1500: 1920 / 1920 qids; same row order for the common prefix: True

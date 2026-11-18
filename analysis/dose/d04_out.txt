@@ -1,0 +1,308 @@
+(dose) Tables from d04_dose.py (point estimates cache/d04_units.pkl + bootstrap draws cache/d04_boot*_<seed>.npy). See d04_dose.py for definitions.
+Pooling: equal-weight mean over units (student x dataset x arm); 'pooled' = mean of the two students' means. Intervals: 2.5 / 97.5 percentiles
+of the crossed bootstrap. Output: d04_out.txt
+(dose) Dose-response of trained-model refusal on the grader's PREDICTED rejection (predictors fitted only on training-question verdicts). Compute step;
+tables are printed by d04b_tables.py.
+Units: known-sure answers (d04_lib) on NEW questions (and, for the home comparison, on TRAINING questions with out-of-fold predictions).
+x = logit P_reject of the run's own grader from predictor kind k (d03), or an actual-verdict variable of that grader on the same answer
+  (v_bin: greedy answer rejected; v_share: share of the 33 untrained answers rejected; v_py: -logit P(Yes) of the greedy answer, judges only).
+Generic difficulty removed by FWL on G (conf, grader-free probes; d04_lib.gen_cov). Per run: slope per SD of x_perp (refusal points),
+  partial correlation, adjusted refusal y - yhat_G + ybar in quintiles of x_perp (top minus bottom quintile = 'T-B').
+Variants: lin16fr / tfidffr = the same predictors fitted only on training answers that are audited right (false rejections only);
+  lin16G2 = lin16 with the reference runs' own refusal rate on each question added to G (generic difficulty measured empirically).
+Joint model (judge and key arms): refusal ~ G + readable prediction + actual verdict, coefficients per SD of each residualised variable,
+  on NEW answers and on HOME answers (out-of-fold readable prediction; the actual verdict is what training saw on that question).
+Reference = no-location graders (key + uniform random noise; d04_lib.REFPAT): for each run, the 3 reference runs of the same cell nearest in
+  new-question abstention, analysed with the SAME x; grader-specific = run minus matched reference.
+PRE-SPECIFIED PRIMARY: kind lin16, strict arms (J_a35, J in Q M G O R), new known-sure answers, grader-specific T-B and slope, pooled with
+  equal weight over (student, dataset, judge) units, students averaged; discovery qwen7, confirmation llama8. Everything else is secondary.
+Uncertainty: crossed bootstrap: questions within cell (multinomial weights), runs within arm, reference runs within cell.
+Output: cache/d04_units.pkl (unit index, point estimates) when seed = 0, cache/d04_boot_<seed>.npy (NB draws).
+Usage: nice -n 10 timeout 280 python3 d04_dose.py <seed> <NB>
+bootstrap draws: 440 (files 4)
+
+== T1 PRIMARY curve: lin16 own-grader predicted rejection, strict judges (a35), NEW known-sure answers; quintiles of x_perp (generic removed)
+  pooled (26 units): adjusted refusal of trained runs | matched reference | grader-specific
+    Q1: 0.106 [0.090, 0.131] | 0.175 [0.141, 0.211] | -0.068 [-0.100, -0.032]
+    Q2: 0.185 [0.156, 0.208] | 0.208 [0.161, 0.234] | -0.024 [-0.050, +0.019]
+    Q3: 0.245 [0.220, 0.279] | 0.212 [0.175, 0.255] | +0.033 [+0.001, +0.072]
+    Q4: 0.346 [0.305, 0.371] | 0.248 [0.192, 0.275] | +0.098 [+0.064, +0.148]
+    Q5: 0.493 [0.453, 0.526] | 0.294 [0.240, 0.332] | +0.199 [+0.153, +0.254]
+    T-B: trained +0.386 [+0.345, +0.416]  reference +0.119 [+0.071, +0.151]  grader-specific +0.267 [+0.222, +0.313]
+    slope per SD: trained +0.137 [+0.124, +0.147]  reference +0.042 [+0.026, +0.054]  grader-specific +0.095 [+0.082, +0.111]
+  qwen7 (13 units): adjusted refusal of trained runs | matched reference | grader-specific
+    Q1: 0.108 [0.085, 0.140] | 0.183 [0.143, 0.232] | -0.074 [-0.117, -0.030]
+    Q2: 0.177 [0.136, 0.209] | 0.221 [0.164, 0.251] | -0.044 [-0.079, +0.006]
+    Q3: 0.222 [0.185, 0.266] | 0.200 [0.162, 0.246] | +0.021 [-0.020, +0.062]
+    Q4: 0.307 [0.253, 0.351] | 0.248 [0.190, 0.280] | +0.058 [+0.022, +0.117]
+    Q5: 0.418 [0.366, 0.475] | 0.295 [0.236, 0.348] | +0.124 [+0.076, +0.181]
+    T-B: trained +0.310 [+0.253, +0.355]  reference +0.112 [+0.052, +0.162]  grader-specific +0.198 [+0.145, +0.256]
+    slope per SD: trained +0.110 [+0.092, +0.125]  reference +0.040 [+0.021, +0.055]  grader-specific +0.069 [+0.054, +0.090]
+  llama8 (13 units): adjusted refusal of trained runs | matched reference | grader-specific
+    Q1: 0.104 [0.081, 0.138] | 0.167 [0.115, 0.218] | -0.063 [-0.105, -0.005]
+    Q2: 0.192 [0.154, 0.229] | 0.195 [0.138, 0.243] | -0.003 [-0.050, +0.059]
+    Q3: 0.268 [0.234, 0.314] | 0.224 [0.157, 0.279] | +0.044 [-0.009, +0.115]
+    Q4: 0.385 [0.330, 0.422] | 0.248 [0.161, 0.294] | +0.137 [+0.077, +0.212]
+    Q5: 0.567 [0.514, 0.610] | 0.293 [0.204, 0.361] | +0.274 [+0.203, +0.362]
+    T-B: trained +0.463 [+0.407, +0.505]  reference +0.126 [+0.059, +0.182]  grader-specific +0.337 [+0.275, +0.398]
+    slope per SD: trained +0.165 [+0.148, +0.180]  reference +0.044 [+0.022, +0.063]  grader-specific +0.121 [+0.101, +0.143]
+
+== T2 grader-specific T-B and slope per SD (lin16) by operating point, student and dataset
+  strict a35 (Q M G O R): pooled T-B +0.267 [+0.222, +0.313] slope +0.095 [+0.082, +0.111] (26 units); raw T-B of trained runs +0.386 [+0.345, +0.416]
+    qwen7: all T-B +0.198 [+0.145, +0.256] | h1: T-B +0.19 [+0.11, +0.27] slope +0.062 [+0.037, +0.085] (n 4) | pq: T-B +0.13 [+0.07, +0.24] slope +0.046 [+0.024, +0.080] (n 4) | nq: T-B +0.25 [+0.14, +0.38] slope +0.093 [+0.059, +0.135] (n 5)
+    llama8: all T-B +0.337 [+0.275, +0.398] | h1: T-B +0.30 [+0.20, +0.43] slope +0.117 [+0.083, +0.156] (n 4) | pq: T-B +0.34 [+0.22, +0.46] slope +0.124 [+0.086, +0.167] (n 4) | nq: T-B +0.37 [+0.26, +0.47] slope +0.123 [+0.093, +0.162] (n 5)
+  middle Q a50: pooled T-B +0.111 [+0.072, +0.145] slope +0.038 [+0.026, +0.050] (6 units); raw T-B of trained runs +0.147 [+0.115, +0.183]
+    qwen7: all T-B +0.039 [-0.001, +0.084] | h1: T-B +0.03 [-0.05, +0.09] slope +0.008 [-0.015, +0.030] (n 1) | pq: T-B +0.10 [+0.01, +0.18] slope +0.027 [+0.001, +0.053] (n 1) | nq: T-B -0.01 [-0.08, +0.05] slope +0.000 [-0.017, +0.021] (n 1)
+    llama8: all T-B +0.183 [+0.116, +0.240] | h1: T-B +0.13 [+0.05, +0.23] slope +0.052 [+0.023, +0.083] (n 1) | pq: T-B +0.34 [+0.21, +0.44] slope +0.114 [+0.077, +0.151] (n 1) | nq: T-B +0.08 [-0.01, +0.20] slope +0.025 [-0.004, +0.066] (n 1)
+  default t50 (Q all cells; M G O where run): pooled T-B +0.007 [-0.005, +0.019] slope +0.002 [-0.001, +0.006] (16 units); raw T-B of trained runs +0.011 [-0.000, +0.020]
+    qwen7: all T-B +0.007 [-0.012, +0.027] | h1: T-B -0.00 [-0.02, +0.01] slope -0.001 [-0.006, +0.003] (n 4) | pq: T-B -0.00 [-0.00, +0.00] slope -0.001 [-0.003, +0.000] (n 1) | nq: T-B +0.02 [-0.03, +0.07] slope +0.008 [-0.006, +0.026] (n 3)
+    llama8: all T-B +0.008 [-0.005, +0.022] | h1: T-B +0.00 [-0.00, +0.01] slope +0.001 [-0.001, +0.003] (n 4) | pq: T-B +0.00 [+0.00, +0.00] slope +0.000 [+0.000, +0.000] (n 1) | nq: T-B +0.02 [-0.02, +0.05] slope +0.003 [-0.006, +0.015] (n 3)
+  per judge (strict, pooled over cells): Q T-B +0.24 [+0.19, +0.32] slope +0.091 [+0.074, +0.111]; M T-B +0.25 [+0.18, +0.32] slope +0.088 [+0.069, +0.112]; G T-B +0.34 [+0.26, +0.40] slope +0.124 [+0.100, +0.144]; O T-B +0.17 [+0.10, +0.24] slope +0.060 [+0.039, +0.080]; R T-B +0.46 [+0.27, +0.65] slope +0.152 [+0.100, +0.222]
+
+== T3 comparisons (each arm's own target; lin16): key-trained, Sonnet-trained, planted simulated graders (PopQA)
+  key       (6 units): T-B trained +0.029 [-0.030, +0.076] reference +0.038 [-0.022, +0.086] specific -0.009 [-0.047, +0.022] | slope specific -0.006 [-0.017, +0.004] | qwen7 T-B -0.014 | llama8 T-B -0.003
+  son       (6 units): T-B trained +0.006 [-0.020, +0.034] reference -0.030 [-0.063, +0.003] specific +0.035 [-0.003, +0.072] | slope specific +0.015 [+0.004, +0.026] | qwen7 T-B +0.062 | llama8 T-B +0.008
+  fnB80     (2 units): T-B trained +0.713 [+0.621, +0.789] reference +0.189 [+0.056, +0.279] specific +0.525 [+0.433, +0.640] | slope specific +0.192 [+0.157, +0.234] | qwen7 T-B +0.345 | llama8 T-B +0.704
+  fnB50     (2 units): T-B trained +0.304 [+0.183, +0.367] reference +0.163 [+0.043, +0.233] specific +0.141 [+0.040, +0.240] | slope specific +0.042 [+0.009, +0.072] | qwen7 T-B +0.128 | llama8 T-B +0.154
+  fnA80     (1 units): T-B trained -0.503 [-0.734, -0.247] reference +0.243 [+0.054, +0.362] specific -0.746 [-0.990, -0.445] | slope specific -0.298 [-0.392, -0.174] | llama8 T-B -0.746
+  fnH80     (2 units): T-B trained -0.011 [-0.126, +0.076] reference -0.042 [-0.149, +0.036] specific +0.031 [-0.057, +0.121] | slope specific +0.006 [-0.024, +0.041] | qwen7 T-B +0.038 | llama8 T-B +0.024
+  fnH60     (1 units): T-B trained -0.108 [-0.233, -0.005] reference -0.096 [-0.208, +0.003] specific -0.012 [-0.088, +0.072] | slope specific -0.009 [-0.033, +0.018] | qwen7 T-B -0.012
+  plrealM   (2 units): T-B trained +0.544 [+0.436, +0.632] reference +0.346 [+0.210, +0.415] specific +0.198 [+0.108, +0.335] | slope specific +0.076 [+0.048, +0.128] | qwen7 T-B +0.159 | llama8 T-B +0.237
+  plrealO   (2 units): T-B trained +0.443 [+0.351, +0.529] reference +0.202 [+0.107, +0.301] specific +0.241 [+0.130, +0.340] | slope specific +0.090 [+0.050, +0.123] | qwen7 T-B +0.140 | llama8 T-B +0.342
+  plscrM    (2 units): T-B trained +0.206 [+0.098, +0.296] reference -0.104 [-0.201, +0.001] specific +0.310 [+0.171, +0.409] | slope specific +0.102 [+0.057, +0.134] | qwen7 T-B +0.173 | llama8 T-B +0.447
+  plsharpM  (2 units): T-B trained +0.877 [+0.808, +0.948] reference +0.377 [+0.230, +0.482] specific +0.500 [+0.411, +0.653] | slope specific +0.198 [+0.165, +0.252] | qwen7 T-B +0.465 | llama8 T-B +0.535
+  plsharpO  (2 units): T-B trained +0.825 [+0.746, +0.890] reference +0.303 [+0.141, +0.392] specific +0.522 [+0.441, +0.676] | slope specific +0.188 [+0.157, +0.248] | qwen7 T-B +0.373 | llama8 T-B +0.671
+  fnB80 curve (trained, Q1..Q5): 0.00 0.13 0.23 0.43 0.72 | grader-specific: -0.18 -0.04 +0.01 +0.13 +0.34
+  fnH80 curve (trained, Q1..Q5): 0.50 0.43 0.33 0.43 0.49 | grader-specific: +0.05 +0.04 +0.03 +0.06 +0.08
+  plrealM curve (trained, Q1..Q5): 0.21 0.27 0.36 0.55 0.75 | grader-specific: -0.05 -0.01 -0.02 +0.03 +0.14
+  plscrM curve (trained, Q1..Q5): 0.38 0.46 0.46 0.54 0.59 | grader-specific: -0.08 +0.04 +0.08 +0.16 +0.23
+
+== T4 predictor comparison on NEW known-sure answers
+   vAUC = AUROC for the grader's actual verdict on new questions (all valid greedy answers / known-sure answers only);
+   rAUC = mean over runs of AUROC for refusal (raw score / score residualised on G); pcor = partial correlation with refusal after G;
+   spec = grader-specific slope per SD (run minus matched reference); 'vs lin16' = paired bootstrap difference of pcor
+  -- strict a35
+    lin4     vAUC 0.704/0.661 rAUC 0.726/0.610 | pcor +0.191 [+0.162, +0.226] (qwen7 +0.162, llama8 +0.220) | spec +0.048 [+0.036, +0.062] | vs lin16 -0.162 [-0.196, -0.126]
+    lin8     vAUC 0.729/0.694 rAUC 0.743/0.624 | pcor +0.223 [+0.195, +0.247] (qwen7 +0.179, llama8 +0.267) | spec +0.057 [+0.044, +0.070] | vs lin16 -0.129 [-0.158, -0.101]
+    lin12    vAUC 0.764/0.726 rAUC 0.800/0.667 | pcor +0.298 [+0.271, +0.322] (qwen7 +0.240, llama8 +0.357) | spec +0.074 [+0.063, +0.088] | vs lin16 -0.054 [-0.081, -0.026]
+    lin16    vAUC 0.794/0.751 rAUC 0.834/0.707 | pcor +0.353 [+0.325, +0.378] (qwen7 +0.290, llama8 +0.415) | spec +0.095 [+0.082, +0.111] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 0.805/0.757 rAUC 0.852/0.709 | pcor +0.358 [+0.331, +0.384] (qwen7 +0.321, llama8 +0.395) | spec +0.085 [+0.072, +0.102] | vs lin16 +0.005 [-0.017, +0.029]
+    lin24    vAUC 0.805/0.755 rAUC 0.849/0.688 | pcor +0.330 [+0.306, +0.357] (qwen7 +0.265, llama8 +0.395) | spec +0.080 [+0.067, +0.097] | vs lin16 -0.023 [-0.051, +0.006]
+    linlast  vAUC 0.808/0.753 rAUC 0.853/0.687 | pcor +0.333 [+0.305, +0.359] (qwen7 +0.297, llama8 +0.369) | spec +0.073 [+0.061, +0.091] | vs lin16 -0.020 [-0.047, +0.010]
+    lin16p64 vAUC 0.825/0.778 rAUC 0.875/0.682 | pcor +0.337 [+0.306, +0.364] (qwen7 +0.263, llama8 +0.410) | spec +0.094 [+0.081, +0.112] | vs lin16 -0.016 [-0.042, +0.008]
+    mlp16    vAUC 0.821/0.776 rAUC 0.869/0.680 | pcor +0.331 [+0.303, +0.356] (qwen7 +0.252, llama8 +0.410) | spec +0.096 [+0.082, +0.113] | vs lin16 -0.021 [-0.044, +0.001]
+    knn16    vAUC 0.770/0.732 rAUC 0.810/0.669 | pcor +0.296 [+0.270, +0.322] (qwen7 +0.235, llama8 +0.358) | spec +0.072 [+0.060, +0.089] | vs lin16 -0.056 [-0.082, -0.030]
+    tfidf    vAUC 0.707/0.666 rAUC 0.744/0.628 | pcor +0.230 [+0.199, +0.261] (qwen7 +0.218, llama8 +0.243) | spec +0.063 [+0.051, +0.080] | vs lin16 -0.122 [-0.154, -0.091]
+    knnE     vAUC 0.708/0.669 rAUC 0.725/0.599 | pcor +0.188 [+0.157, +0.216] (qwen7 +0.194, llama8 +0.182) | spec +0.045 [+0.032, +0.058] | vs lin16 -0.165 [-0.202, -0.129]
+    lin16fr  vAUC nan/nan rAUC 0.798/0.707 | pcor +0.352 [+0.325, +0.377] (qwen7 +0.299, llama8 +0.404) | spec +0.091 [+0.078, +0.106] | vs lin16 -0.001 [-0.010, +0.010]
+    tfidffr  vAUC nan/nan rAUC 0.727/0.630 | pcor +0.236 [+0.204, +0.267] (qwen7 +0.225, llama8 +0.247) | spec +0.063 [+0.051, +0.081] | vs lin16 -0.117 [-0.151, -0.082]
+    lin16G2  vAUC nan/nan rAUC 0.834/0.668 | pcor +0.316 [+0.289, +0.341] (qwen7 +0.240, llama8 +0.393) | spec +0.108 [+0.096, +0.122] | vs lin16 -0.036 [-0.052, -0.022]
+    v_bin    vAUC nan/nan rAUC 0.714/0.613 | pcor +0.305 [+0.270, +0.336] (qwen7 +0.310, llama8 +0.300) | spec +0.068 [+0.054, +0.084] | vs lin16 -0.048 [-0.081, -0.015]
+    v_share  vAUC nan/nan rAUC 0.733/0.628 | pcor +0.312 [+0.277, +0.343] (qwen7 +0.311, llama8 +0.313) | spec +0.070 [+0.056, +0.086] | vs lin16 -0.040 [-0.072, -0.007]
+    v_py     vAUC nan/nan rAUC 0.785/0.694 | pcor +0.310 [+0.278, +0.339] (qwen7 +0.325, llama8 +0.296) | spec +0.069 [+0.055, +0.087] | vs lin16 -0.043 [-0.074, -0.010]
+  -- middle Q a50
+    lin4     vAUC 0.672/0.592 rAUC 0.664/0.541 | pcor +0.071 [+0.033, +0.111] (qwen7 +0.017, llama8 +0.124) | spec +0.014 [+0.001, +0.024] | vs lin16 -0.105 [-0.146, -0.057]
+    lin8     vAUC 0.698/0.643 rAUC 0.707/0.570 | pcor +0.086 [+0.046, +0.129] (qwen7 -0.007, llama8 +0.179) | spec +0.020 [+0.008, +0.030] | vs lin16 -0.089 [-0.131, -0.050]
+    lin12    vAUC 0.725/0.645 rAUC 0.771/0.603 | pcor +0.138 [+0.095, +0.175] (qwen7 +0.047, llama8 +0.229) | spec +0.027 [+0.014, +0.039] | vs lin16 -0.038 [-0.079, -0.005]
+    lin16    vAUC 0.762/0.698 rAUC 0.816/0.634 | pcor +0.176 [+0.135, +0.210] (qwen7 +0.072, llama8 +0.280) | spec +0.038 [+0.026, +0.050] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 0.777/0.713 rAUC 0.852/0.634 | pcor +0.172 [+0.129, +0.214] (qwen7 +0.086, llama8 +0.258) | spec +0.035 [+0.022, +0.047] | vs lin16 -0.003 [-0.040, +0.031]
+    lin24    vAUC 0.780/0.724 rAUC 0.855/0.651 | pcor +0.180 [+0.132, +0.219] (qwen7 +0.103, llama8 +0.256) | spec +0.034 [+0.023, +0.046] | vs lin16 +0.004 [-0.036, +0.044]
+    linlast  vAUC 0.783/0.727 rAUC 0.880/0.659 | pcor +0.174 [+0.134, +0.217] (qwen7 +0.113, llama8 +0.236) | spec +0.031 [+0.019, +0.042] | vs lin16 -0.002 [-0.049, +0.046]
+    lin16p64 vAUC 0.803/0.726 rAUC 0.854/0.579 | pcor +0.133 [+0.091, +0.175] (qwen7 +0.046, llama8 +0.221) | spec +0.033 [+0.021, +0.045] | vs lin16 -0.042 [-0.078, -0.006]
+    mlp16    vAUC 0.799/0.725 rAUC 0.842/0.578 | pcor +0.133 [+0.091, +0.174] (qwen7 +0.051, llama8 +0.216) | spec +0.033 [+0.021, +0.043] | vs lin16 -0.042 [-0.075, -0.011]
+    knn16    vAUC 0.745/0.685 rAUC 0.768/0.570 | pcor +0.106 [+0.061, +0.150] (qwen7 +0.034, llama8 +0.179) | spec +0.020 [+0.009, +0.031] | vs lin16 -0.069 [-0.104, -0.031]
+    tfidf    vAUC 0.678/0.634 rAUC 0.665/0.596 | pcor +0.106 [+0.062, +0.151] (qwen7 +0.090, llama8 +0.122) | spec +0.020 [+0.007, +0.032] | vs lin16 -0.070 [-0.116, -0.022]
+    knnE     vAUC 0.705/0.664 rAUC 0.712/0.590 | pcor +0.115 [+0.080, +0.154] (qwen7 +0.080, llama8 +0.150) | spec +0.015 [+0.003, +0.026] | vs lin16 -0.061 [-0.103, -0.011]
+    lin16fr  vAUC nan/nan rAUC 0.781/0.676 | pcor +0.199 [+0.158, +0.234] (qwen7 +0.110, llama8 +0.287) | spec +0.039 [+0.028, +0.051] | vs lin16 +0.023 [+0.003, +0.042]
+    tfidffr  vAUC nan/nan rAUC 0.676/0.603 | pcor +0.126 [+0.084, +0.171] (qwen7 +0.100, llama8 +0.151) | spec +0.024 [+0.011, +0.035] | vs lin16 -0.050 [-0.096, -0.004]
+    lin16G2  vAUC nan/nan rAUC 0.816/0.607 | pcor +0.150 [+0.110, +0.188] (qwen7 +0.051, llama8 +0.248) | spec +0.040 [+0.029, +0.051] | vs lin16 -0.026 [-0.044, -0.008]
+    v_bin    vAUC nan/nan rAUC 0.672/0.521 | pcor +0.165 [+0.113, +0.210] (qwen7 +0.154, llama8 +0.177) | spec +0.027 [+0.015, +0.040] | vs lin16 -0.010 [-0.067, +0.047]
+    v_share  vAUC nan/nan rAUC 0.690/0.539 | pcor +0.170 [+0.118, +0.216] (qwen7 +0.155, llama8 +0.184) | spec +0.027 [+0.015, +0.040] | vs lin16 -0.006 [-0.062, +0.049]
+    v_py     vAUC nan/nan rAUC 0.784/0.685 | pcor +0.194 [+0.152, +0.234] (qwen7 +0.183, llama8 +0.204) | spec +0.028 [+0.017, +0.039] | vs lin16 +0.018 [-0.030, +0.065]
+  -- key
+    lin4     vAUC 0.673/0.653 rAUC 0.630/0.510 | pcor +0.023 [-0.028, +0.067] (qwen7 -0.003, llama8 +0.049) | spec +0.000 [-0.010, +0.010] | vs lin16 +0.023 [-0.029, +0.076]
+    lin8     vAUC 0.668/0.626 rAUC 0.684/0.548 | pcor +0.035 [-0.009, +0.074] (qwen7 -0.009, llama8 +0.078) | spec -0.001 [-0.015, +0.010] | vs lin16 +0.034 [-0.014, +0.078]
+    lin12    vAUC 0.690/0.622 rAUC 0.752/0.551 | pcor +0.058 [+0.017, +0.097] (qwen7 +0.025, llama8 +0.092) | spec -0.002 [-0.012, +0.008] | vs lin16 +0.058 [+0.017, +0.097]
+    lin16    vAUC 0.735/0.624 rAUC 0.719/0.454 | pcor +0.000 [-0.046, +0.043] (qwen7 -0.004, llama8 +0.005) | spec -0.006 [-0.017, +0.004] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 0.747/0.666 rAUC 0.761/0.520 | pcor +0.038 [-0.010, +0.080] (qwen7 +0.038, llama8 +0.037) | spec -0.006 [-0.021, +0.006] | vs lin16 +0.037 [-0.003, +0.081]
+    lin24    vAUC 0.749/0.661 rAUC 0.768/0.520 | pcor +0.040 [-0.003, +0.085] (qwen7 +0.033, llama8 +0.046) | spec -0.004 [-0.018, +0.010] | vs lin16 +0.039 [-0.011, +0.083]
+    linlast  vAUC 0.760/0.690 rAUC 0.768/0.501 | pcor +0.018 [-0.027, +0.060] (qwen7 +0.016, llama8 +0.020) | spec -0.001 [-0.015, +0.011] | vs lin16 +0.018 [-0.032, +0.070]
+    lin16p64 vAUC 0.777/0.674 rAUC 0.764/0.477 | pcor +0.006 [-0.039, +0.049] (qwen7 +0.005, llama8 +0.007) | spec -0.007 [-0.020, +0.006] | vs lin16 +0.005 [-0.032, +0.044]
+    mlp16    vAUC 0.774/0.668 rAUC 0.765/0.475 | pcor +0.006 [-0.038, +0.050] (qwen7 +0.006, llama8 +0.005) | spec -0.007 [-0.021, +0.007] | vs lin16 +0.005 [-0.034, +0.046]
+    knn16    vAUC 0.721/0.646 rAUC 0.703/0.465 | pcor -0.002 [-0.058, +0.049] (qwen7 -0.007, llama8 +0.004) | spec -0.008 [-0.022, +0.004] | vs lin16 -0.002 [-0.044, +0.040]
+    tfidf    vAUC 0.675/0.674 rAUC 0.647/0.472 | pcor -0.003 [-0.057, +0.052] (qwen7 +0.013, llama8 -0.018) | spec -0.004 [-0.017, +0.007] | vs lin16 -0.003 [-0.056, +0.049]
+    knnE     vAUC 0.679/0.648 rAUC 0.629/0.509 | pcor +0.002 [-0.047, +0.046] (qwen7 -0.004, llama8 +0.007) | spec -0.002 [-0.015, +0.010] | vs lin16 +0.001 [-0.053, +0.060]
+    lin16fr  vAUC nan/nan rAUC 0.569/0.476 | pcor +0.021 [-0.024, +0.061] (qwen7 +0.037, llama8 +0.004) | spec -0.005 [-0.015, +0.005] | vs lin16 +0.020 [+0.007, +0.036]
+    tfidffr  vAUC nan/nan rAUC 0.582/0.496 | pcor +0.020 [-0.036, +0.071] (qwen7 +0.051, llama8 -0.010) | spec -0.001 [-0.014, +0.008] | vs lin16 +0.020 [-0.033, +0.073]
+    lin16G2  vAUC nan/nan rAUC 0.719/0.395 | pcor -0.062 [-0.107, -0.022] (qwen7 -0.092, llama8 -0.032) | spec -0.006 [-0.017, +0.004] | vs lin16 -0.062 [-0.093, -0.024]
+    v_bin    vAUC nan/nan rAUC 0.604/0.505 | pcor +0.072 [+0.019, +0.127] (qwen7 +0.093, llama8 +0.050) | spec +0.005 [-0.005, +0.019] | vs lin16 +0.071 [+0.009, +0.134]
+    v_share  vAUC nan/nan rAUC 0.669/0.523 | pcor +0.080 [+0.025, +0.136] (qwen7 +0.104, llama8 +0.055) | spec +0.005 [-0.005, +0.018] | vs lin16 +0.079 [+0.017, +0.142]
+  -- Sonnet
+    lin4     vAUC 0.692/0.672 rAUC 0.736/0.570 | pcor +0.048 [-0.007, +0.104] (qwen7 +0.093, llama8 +0.004) | spec +0.014 [+0.001, +0.025] | vs lin16 +0.023 [-0.032, +0.077]
+    lin8     vAUC 0.715/0.768 rAUC 0.778/0.571 | pcor +0.031 [-0.026, +0.072] (qwen7 +0.062, llama8 +0.000) | spec +0.010 [-0.001, +0.019] | vs lin16 +0.006 [-0.042, +0.049]
+    lin12    vAUC 0.744/0.734 rAUC 0.787/0.559 | pcor +0.036 [-0.008, +0.078] (qwen7 +0.039, llama8 +0.034) | spec +0.012 [-0.000, +0.022] | vs lin16 +0.011 [-0.032, +0.055]
+    lin16    vAUC 0.778/0.640 rAUC 0.823/0.513 | pcor +0.025 [-0.015, +0.066] (qwen7 +0.032, llama8 +0.019) | spec +0.015 [+0.004, +0.026] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 0.792/0.725 rAUC 0.841/0.537 | pcor +0.027 [-0.016, +0.069] (qwen7 +0.065, llama8 -0.011) | spec +0.017 [+0.004, +0.028] | vs lin16 +0.002 [-0.041, +0.043]
+    lin24    vAUC 0.796/0.733 rAUC 0.853/0.481 | pcor -0.003 [-0.048, +0.043] (qwen7 -0.005, llama8 -0.001) | spec +0.017 [+0.004, +0.027] | vs lin16 -0.028 [-0.085, +0.027]
+    linlast  vAUC 0.797/0.693 rAUC 0.870/0.510 | pcor -0.001 [-0.046, +0.051] (qwen7 +0.011, llama8 -0.012) | spec +0.018 [+0.004, +0.028] | vs lin16 -0.026 [-0.082, +0.039]
+    lin16p64 vAUC 0.819/0.763 rAUC 0.907/0.555 | pcor +0.032 [-0.025, +0.083] (qwen7 +0.063, llama8 -0.000) | spec +0.023 [+0.009, +0.033] | vs lin16 +0.006 [-0.036, +0.041]
+    mlp16    vAUC 0.817/0.770 rAUC 0.903/0.525 | pcor +0.023 [-0.029, +0.074] (qwen7 +0.045, llama8 +0.001) | spec +0.018 [+0.006, +0.028] | vs lin16 -0.002 [-0.047, +0.033]
+    knn16    vAUC 0.764/0.624 rAUC 0.794/0.494 | pcor +0.015 [-0.024, +0.057] (qwen7 +0.058, llama8 -0.027) | spec +0.016 [+0.005, +0.026] | vs lin16 -0.010 [-0.060, +0.041]
+    tfidf    vAUC 0.691/0.590 rAUC 0.730/0.481 | pcor +0.016 [-0.034, +0.064] (qwen7 +0.038, llama8 -0.005) | spec +0.012 [+0.001, +0.022] | vs lin16 -0.009 [-0.068, +0.049]
+    knnE     vAUC 0.707/0.586 rAUC 0.747/0.565 | pcor +0.068 [+0.024, +0.111] (qwen7 +0.092, llama8 +0.044) | spec +0.018 [+0.006, +0.029] | vs lin16 +0.043 [-0.004, +0.087]
+    lin16G2  vAUC nan/nan rAUC 0.823/0.542 | pcor +0.038 [-0.001, +0.079] (qwen7 +0.060, llama8 +0.017) | spec +0.014 [+0.003, +0.025] | vs lin16 +0.013 [+0.000, +0.025]
+    v_bin    vAUC nan/nan rAUC 0.501/0.461 | pcor +0.004 [-0.037, +0.126] (qwen7 -0.015, llama8 +0.024) | spec -0.006 [-0.022, +0.007] | vs lin16 -0.021 [-0.073, +0.088]
+  -- default t50
+    lin4     vAUC 0.621/0.586 rAUC 0.693/0.543 | pcor +0.001 [-0.020, +0.021] (qwen7 -0.006, llama8 +0.008) | spec +0.002 [-0.001, +0.006] | vs lin16 -0.023 [-0.039, +0.000]
+    lin8     vAUC 0.635/0.602 rAUC 0.726/0.529 | pcor +0.003 [-0.010, +0.015] (qwen7 +0.012, llama8 -0.006) | spec +0.003 [-0.000, +0.008] | vs lin16 -0.021 [-0.035, -0.001]
+    lin12    vAUC 0.652/0.615 rAUC 0.786/0.569 | pcor +0.010 [-0.011, +0.029] (qwen7 +0.016, llama8 +0.003) | spec +0.002 [-0.002, +0.007] | vs lin16 -0.014 [-0.032, +0.009]
+    lin16    vAUC 0.692/0.641 rAUC 0.827/0.574 | pcor +0.024 [+0.004, +0.038] (qwen7 +0.029, llama8 +0.019) | spec +0.002 [-0.001, +0.006] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 0.699/0.650 rAUC 0.875/0.622 | pcor +0.024 [+0.008, +0.037] (qwen7 +0.026, llama8 +0.021) | spec +0.003 [-0.000, +0.007] | vs lin16 -0.000 [-0.016, +0.018]
+    lin24    vAUC 0.705/0.680 rAUC 0.892/0.649 | pcor +0.028 [+0.009, +0.042] (qwen7 +0.031, llama8 +0.024) | spec +0.004 [+0.000, +0.009] | vs lin16 +0.004 [-0.015, +0.028]
+    linlast  vAUC 0.704/0.671 rAUC 0.836/0.529 | pcor +0.010 [-0.004, +0.025] (qwen7 +0.024, llama8 -0.005) | spec +0.002 [-0.001, +0.006] | vs lin16 -0.014 [-0.033, +0.013]
+    lin16p64 vAUC 0.720/0.660 rAUC 0.883/0.557 | pcor +0.011 [-0.005, +0.026] (qwen7 +0.017, llama8 +0.005) | spec +0.003 [+0.000, +0.008] | vs lin16 -0.013 [-0.027, +0.003]
+    mlp16    vAUC 0.719/0.662 rAUC 0.878/0.538 | pcor +0.007 [-0.008, +0.022] (qwen7 +0.013, llama8 +0.002) | spec +0.003 [+0.000, +0.008] | vs lin16 -0.016 [-0.030, -0.000]
+    knn16    vAUC 0.674/0.621 rAUC 0.805/0.597 | pcor +0.021 [+0.005, +0.034] (qwen7 +0.027, llama8 +0.015) | spec +0.003 [+0.000, +0.008] | vs lin16 -0.003 [-0.016, +0.012]
+    tfidf    vAUC 0.619/0.590 rAUC 0.608/0.452 | pcor -0.003 [-0.024, +0.016] (qwen7 +0.001, llama8 -0.008) | spec +0.001 [-0.002, +0.006] | vs lin16 -0.027 [-0.045, -0.003]
+    knnE     vAUC 0.627/0.578 rAUC 0.621/0.490 | pcor +0.002 [-0.020, +0.022] (qwen7 +0.002, llama8 +0.002) | spec +0.002 [-0.001, +0.007] | vs lin16 -0.022 [-0.042, +0.002]
+    lin16fr  vAUC nan/nan rAUC 0.755/0.608 | pcor +0.020 [+0.004, +0.035] (qwen7 +0.022, llama8 +0.018) | spec +0.001 [-0.002, +0.005] | vs lin16 -0.004 [-0.018, +0.013]
+    tfidffr  vAUC nan/nan rAUC 0.511/0.445 | pcor -0.002 [-0.020, +0.017] (qwen7 -0.004, llama8 -0.000) | spec -0.000 [-0.004, +0.004] | vs lin16 -0.026 [-0.045, -0.003]
+    lin16G2  vAUC nan/nan rAUC 0.827/0.560 | pcor +0.021 [+0.000, +0.035] (qwen7 +0.026, llama8 +0.016) | spec +0.002 [-0.001, +0.006] | vs lin16 -0.003 [-0.007, +0.002]
+    v_bin    vAUC nan/nan rAUC 0.617/0.403 | pcor +0.009 [-0.012, +0.029] (qwen7 +0.020, llama8 -0.003) | spec +0.003 [-0.002, +0.008] | vs lin16 -0.015 [-0.040, +0.015]
+    v_share  vAUC nan/nan rAUC 0.639/0.402 | pcor +0.008 [-0.013, +0.028] (qwen7 +0.018, llama8 -0.002) | spec +0.002 [-0.002, +0.007] | vs lin16 -0.016 [-0.041, +0.015]
+    v_py     vAUC nan/nan rAUC 0.737/0.581 | pcor +0.012 [-0.003, +0.027] (qwen7 +0.026, llama8 -0.001) | spec +0.002 [-0.002, +0.006] | vs lin16 -0.011 [-0.032, +0.012]
+  -- fnB80 (type set)
+    lin4     vAUC 1.000/1.000 rAUC 0.878/0.809 | pcor +0.645 [+0.575, +0.705] (qwen7 +0.502, llama8 +0.787) | spec +0.197 [+0.161, +0.238] | vs lin16 -0.018 [-0.041, +0.002]
+    lin8     vAUC 1.000/1.000 rAUC 0.888/0.814 | pcor +0.634 [+0.564, +0.699] (qwen7 +0.482, llama8 +0.787) | spec +0.191 [+0.156, +0.230] | vs lin16 -0.029 [-0.055, -0.005]
+    lin12    vAUC 1.000/1.000 rAUC 0.876/0.818 | pcor +0.636 [+0.569, +0.697] (qwen7 +0.481, llama8 +0.792) | spec +0.192 [+0.155, +0.234] | vs lin16 -0.027 [-0.050, -0.007]
+    lin16    vAUC 1.000/1.000 rAUC 0.900/0.827 | pcor +0.663 [+0.597, +0.723] (qwen7 +0.523, llama8 +0.803) | spec +0.192 [+0.157, +0.234] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 1.000/1.000 rAUC 0.889/0.829 | pcor +0.672 [+0.604, +0.729] (qwen7 +0.564, llama8 +0.780) | spec +0.196 [+0.159, +0.236] | vs lin16 +0.009 [-0.018, +0.036]
+    lin24    vAUC 0.999/1.000 rAUC 0.898/0.828 | pcor +0.681 [+0.623, +0.733] (qwen7 +0.576, llama8 +0.785) | spec +0.193 [+0.157, +0.233] | vs lin16 +0.018 [-0.008, +0.044]
+    linlast  vAUC 0.996/0.998 rAUC 0.883/0.821 | pcor +0.648 [+0.588, +0.699] (qwen7 +0.537, llama8 +0.759) | spec +0.181 [+0.145, +0.223] | vs lin16 -0.015 [-0.041, +0.015]
+    lin16p64 vAUC 1.000/1.000 rAUC 0.894/0.810 | pcor +0.663 [+0.599, +0.711] (qwen7 +0.525, llama8 +0.801) | spec +0.198 [+0.162, +0.239] | vs lin16 -0.000 [-0.021, +0.021]
+    mlp16    vAUC 1.000/1.000 rAUC 0.889/0.806 | pcor +0.666 [+0.604, +0.715] (qwen7 +0.527, llama8 +0.804) | spec +0.198 [+0.162, +0.240] | vs lin16 +0.003 [-0.019, +0.024]
+    knn16    vAUC 0.987/0.995 rAUC 0.875/0.774 | pcor +0.574 [+0.497, +0.644] (qwen7 +0.420, llama8 +0.728) | spec +0.180 [+0.141, +0.221] | vs lin16 -0.089 [-0.125, -0.061]
+    tfidf    vAUC 1.000/1.000 rAUC 0.894/0.750 | pcor +0.579 [+0.497, +0.648] (qwen7 +0.469, llama8 +0.689) | spec +0.168 [+0.127, +0.217] | vs lin16 -0.084 [-0.117, -0.049]
+    knnE     vAUC 0.990/0.997 rAUC 0.878/0.760 | pcor +0.576 [+0.489, +0.648] (qwen7 +0.439, llama8 +0.713) | spec +0.165 [+0.130, +0.212] | vs lin16 -0.087 [-0.129, -0.053]
+    lin16G2  vAUC nan/nan rAUC 0.900/0.768 | pcor +0.609 [+0.542, +0.664] (qwen7 +0.442, llama8 +0.777) | spec +0.210 [+0.173, +0.249] | vs lin16 -0.054 [-0.085, -0.016]
+    v_bin    vAUC nan/nan rAUC 0.859/0.790 | pcor +0.650 [+0.582, +0.714] (qwen7 +0.501, llama8 +0.799) | spec +0.198 [+0.162, +0.240] | vs lin16 -0.013 [-0.035, +0.008]
+  -- plrealM
+    lin4     vAUC 0.788/0.797 rAUC 0.843/0.689 | pcor +0.390 [+0.317, +0.459] (qwen7 +0.372, llama8 +0.408) | spec +0.041 [+0.014, +0.096] | vs lin16 -0.144 [-0.206, -0.077]
+    lin8     vAUC 0.794/0.796 rAUC 0.839/0.677 | pcor +0.402 [+0.332, +0.463] (qwen7 +0.422, llama8 +0.382) | spec +0.038 [+0.012, +0.092] | vs lin16 -0.132 [-0.194, -0.070]
+    lin12    vAUC 0.818/0.811 rAUC 0.880/0.711 | pcor +0.473 [+0.404, +0.534] (qwen7 +0.470, llama8 +0.476) | spec +0.069 [+0.040, +0.107] | vs lin16 -0.061 [-0.112, -0.003]
+    lin16    vAUC 0.829/0.843 rAUC 0.902/0.756 | pcor +0.534 [+0.459, +0.594] (qwen7 +0.499, llama8 +0.569) | spec +0.076 [+0.048, +0.128] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC 0.847/0.853 rAUC 0.920/0.757 | pcor +0.553 [+0.500, +0.604] (qwen7 +0.563, llama8 +0.544) | spec +0.075 [+0.045, +0.129] | vs lin16 +0.019 [-0.032, +0.082]
+    lin24    vAUC 0.856/0.865 rAUC 0.921/0.748 | pcor +0.550 [+0.490, +0.603] (qwen7 +0.543, llama8 +0.556) | spec +0.069 [+0.039, +0.123] | vs lin16 +0.016 [-0.046, +0.075]
+    linlast  vAUC 0.835/0.833 rAUC 0.910/0.746 | pcor +0.544 [+0.478, +0.603] (qwen7 +0.512, llama8 +0.576) | spec +0.062 [+0.030, +0.119] | vs lin16 +0.010 [-0.051, +0.079]
+    lin16p64 vAUC 0.888/0.889 rAUC 0.956/0.743 | pcor +0.565 [+0.501, +0.629] (qwen7 +0.558, llama8 +0.572) | spec +0.077 [+0.047, +0.135] | vs lin16 +0.031 [-0.013, +0.080]
+    mlp16    vAUC 0.885/0.883 rAUC 0.951/0.706 | pcor +0.509 [+0.450, +0.570] (qwen7 +0.446, llama8 +0.572) | spec +0.072 [+0.038, +0.129] | vs lin16 -0.025 [-0.089, +0.045]
+    knn16    vAUC 0.868/0.869 rAUC 0.931/0.715 | pcor +0.504 [+0.440, +0.565] (qwen7 +0.489, llama8 +0.519) | spec +0.054 [+0.029, +0.111] | vs lin16 -0.030 [-0.090, +0.024]
+    tfidf    vAUC 0.845/0.820 rAUC 0.878/0.671 | pcor +0.389 [+0.312, +0.448] (qwen7 +0.483, llama8 +0.294) | spec +0.048 [+0.015, +0.097] | vs lin16 -0.145 [-0.224, -0.053]
+    knnE     vAUC 0.832/0.824 rAUC 0.880/0.672 | pcor +0.391 [+0.321, +0.453] (qwen7 +0.494, llama8 +0.289) | spec +0.047 [+0.012, +0.086] | vs lin16 -0.143 [-0.230, -0.059]
+    lin16G2  vAUC nan/nan rAUC 0.902/0.654 | pcor +0.400 [+0.302, +0.486] (qwen7 +0.321, llama8 +0.478) | spec +0.110 [+0.080, +0.151] | vs lin16 -0.134 [-0.179, -0.090]
+    v_bin    vAUC nan/nan rAUC 0.788/0.674 | pcor +0.452 [+0.386, +0.512] (qwen7 +0.478, llama8 +0.425) | spec +0.064 [+0.032, +0.104] | vs lin16 -0.082 [-0.159, -0.001]
+  -- plscrM
+    lin4     vAUC nan/nan rAUC 0.521/0.565 | pcor +0.119 [+0.046, +0.194] (qwen7 +0.054, llama8 +0.185) | spec +0.093 [+0.048, +0.122] | vs lin16 -0.014 [-0.094, +0.065]
+    lin8     vAUC nan/nan rAUC 0.524/0.554 | pcor +0.088 [+0.008, +0.161] (qwen7 -0.009, llama8 +0.185) | spec +0.084 [+0.041, +0.113] | vs lin16 -0.046 [-0.111, +0.030]
+    lin12    vAUC nan/nan rAUC 0.525/0.569 | pcor +0.109 [+0.027, +0.190] (qwen7 +0.059, llama8 +0.158) | spec +0.087 [+0.045, +0.117] | vs lin16 -0.025 [-0.086, +0.038]
+    lin16    vAUC nan/nan rAUC 0.537/0.579 | pcor +0.134 [+0.059, +0.202] (qwen7 +0.058, llama8 +0.210) | spec +0.102 [+0.057, +0.134] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC nan/nan rAUC 0.531/0.586 | pcor +0.128 [+0.043, +0.202] (qwen7 +0.059, llama8 +0.197) | spec +0.106 [+0.064, +0.141] | vs lin16 -0.006 [-0.068, +0.065]
+    lin24    vAUC nan/nan rAUC 0.550/0.566 | pcor +0.124 [+0.045, +0.195] (qwen7 +0.040, llama8 +0.209) | spec +0.095 [+0.052, +0.128] | vs lin16 -0.009 [-0.073, +0.054]
+    linlast  vAUC nan/nan rAUC 0.534/0.570 | pcor +0.120 [+0.045, +0.202] (qwen7 +0.058, llama8 +0.182) | spec +0.088 [+0.045, +0.119] | vs lin16 -0.014 [-0.085, +0.053]
+    lin16p64 vAUC nan/nan rAUC 0.500/0.542 | pcor +0.088 [+0.020, +0.156] (qwen7 +0.012, llama8 +0.164) | spec +0.112 [+0.057, +0.142] | vs lin16 -0.046 [-0.108, +0.015]
+    mlp16    vAUC nan/nan rAUC 0.496/0.544 | pcor +0.087 [+0.016, +0.158] (qwen7 -0.006, llama8 +0.181) | spec +0.110 [+0.055, +0.140] | vs lin16 -0.046 [-0.102, +0.016]
+    knn16    vAUC nan/nan rAUC 0.502/0.551 | pcor +0.108 [+0.037, +0.171] (qwen7 -0.018, llama8 +0.233) | spec +0.100 [+0.051, +0.129] | vs lin16 -0.026 [-0.086, +0.034]
+    tfidf    vAUC nan/nan rAUC 0.430/0.505 | pcor -0.005 [-0.076, +0.070] (qwen7 -0.155, llama8 +0.146) | spec +0.079 [+0.031, +0.108] | vs lin16 -0.139 [-0.223, -0.048]
+    knnE     vAUC nan/nan rAUC 0.471/0.505 | pcor -0.031 [-0.106, +0.054] (qwen7 -0.088, llama8 +0.026) | spec +0.037 [-0.002, +0.062] | vs lin16 -0.165 [-0.262, -0.061]
+    lin16G2  vAUC nan/nan rAUC 0.537/0.618 | pcor +0.227 [+0.151, +0.296] (qwen7 +0.135, llama8 +0.318) | spec +0.084 [+0.043, +0.121] | vs lin16 +0.093 [+0.048, +0.138]
+  -- fnH80
+    lin4     vAUC nan/nan rAUC 0.506/0.536 | pcor +0.070 [+0.004, +0.143] (qwen7 +0.034, llama8 +0.106) | spec +0.020 [-0.006, +0.047] | vs lin16 +0.086 [-0.003, +0.196]
+    lin8     vAUC nan/nan rAUC 0.490/0.525 | pcor +0.047 [-0.029, +0.123] (qwen7 +0.064, llama8 +0.030) | spec +0.009 [-0.019, +0.046] | vs lin16 +0.063 [-0.028, +0.176]
+    lin12    vAUC nan/nan rAUC 0.544/0.560 | pcor +0.141 [+0.065, +0.205] (qwen7 +0.136, llama8 +0.146) | spec +0.037 [+0.011, +0.061] | vs lin16 +0.157 [+0.070, +0.251]
+    lin16    vAUC nan/nan rAUC 0.477/0.490 | pcor -0.017 [-0.103, +0.056] (qwen7 -0.072, llama8 +0.039) | spec +0.006 [-0.024, +0.041] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC nan/nan rAUC 0.532/0.546 | pcor +0.100 [+0.017, +0.175] (qwen7 +0.134, llama8 +0.065) | spec +0.023 [-0.005, +0.057] | vs lin16 +0.116 [+0.037, +0.208]
+    lin24    vAUC nan/nan rAUC 0.535/0.545 | pcor +0.077 [-0.006, +0.160] (qwen7 +0.111, llama8 +0.044) | spec +0.023 [-0.006, +0.058] | vs lin16 +0.094 [+0.005, +0.187]
+    linlast  vAUC nan/nan rAUC 0.597/0.584 | pcor +0.176 [+0.110, +0.240] (qwen7 +0.236, llama8 +0.116) | spec +0.018 [-0.006, +0.053] | vs lin16 +0.192 [+0.105, +0.288]
+    lin16p64 vAUC nan/nan rAUC 0.462/0.484 | pcor -0.009 [-0.085, +0.062] (qwen7 -0.012, llama8 -0.007) | spec -0.001 [-0.025, +0.028] | vs lin16 +0.007 [-0.079, +0.098]
+    mlp16    vAUC nan/nan rAUC 0.495/0.526 | pcor +0.083 [-0.023, +0.173] (llama8 +0.083) | spec +0.016 [-0.020, +0.048] | vs lin16 +nan [+nan, +nan]
+    knn16    vAUC nan/nan rAUC 0.463/0.505 | pcor +0.008 [-0.069, +0.077] (qwen7 -0.005, llama8 +0.021) | spec +0.019 [-0.011, +0.049] | vs lin16 +0.025 [-0.054, +0.088]
+    tfidf    vAUC nan/nan rAUC 0.508/0.485 | pcor -0.007 [-0.082, +0.078] (qwen7 +0.026, llama8 -0.040) | spec +0.018 [-0.012, +0.055] | vs lin16 +0.010 [-0.097, +0.125]
+    knnE     vAUC nan/nan rAUC 0.500/0.466 | pcor -0.032 [-0.116, +0.072] (qwen7 -0.054, llama8 -0.009) | spec +0.010 [-0.027, +0.044] | vs lin16 -0.015 [-0.120, +0.114]
+    lin16G2  vAUC nan/nan rAUC 0.477/0.510 | pcor +0.039 [-0.045, +0.121] (qwen7 +0.022, llama8 +0.056) | spec +0.002 [-0.027, +0.037] | vs lin16 +0.056 [+0.003, +0.110]
+  -- plsharpM
+    lin4     vAUC nan/nan rAUC 0.958/0.872 | pcor +0.756 [+0.697, +0.808] (qwen7 +0.765, llama8 +0.748) | spec +0.170 [+0.137, +0.230] | vs lin16 -0.046 [-0.080, -0.016]
+    lin8     vAUC nan/nan rAUC 0.960/0.880 | pcor +0.778 [+0.725, +0.824] (qwen7 +0.781, llama8 +0.774) | spec +0.182 [+0.149, +0.243] | vs lin16 -0.025 [-0.051, +0.001]
+    lin12    vAUC nan/nan rAUC 0.966/0.894 | pcor +0.805 [+0.757, +0.845] (qwen7 +0.806, llama8 +0.804) | spec +0.192 [+0.163, +0.247] | vs lin16 +0.003 [-0.021, +0.025]
+    lin16    vAUC nan/nan rAUC 0.965/0.901 | pcor +0.802 [+0.752, +0.849] (qwen7 +0.823, llama8 +0.782) | spec +0.198 [+0.165, +0.252] | vs lin16 +0.000 [+0.000, +0.000]
+    lin20    vAUC nan/nan rAUC 0.971/0.911 | pcor +0.841 [+0.798, +0.881] (qwen7 +0.848, llama8 +0.833) | spec +0.209 [+0.176, +0.268] | vs lin16 +0.038 [+0.014, +0.066]
+    lin24    vAUC nan/nan rAUC 0.969/0.904 | pcor +0.825 [+0.776, +0.866] (qwen7 +0.835, llama8 +0.815) | spec +0.200 [+0.166, +0.261] | vs lin16 +0.022 [-0.000, +0.052]
+    linlast  vAUC nan/nan rAUC 0.971/0.894 | pcor +0.806 [+0.762, +0.843] (qwen7 +0.798, llama8 +0.814) | spec +0.178 [+0.147, +0.243] | vs lin16 +0.004 [-0.027, +0.038]
+    lin16p64 vAUC nan/nan rAUC 0.975/0.892 | pcor +0.811 [+0.763, +0.856] (qwen7 +0.814, llama8 +0.808) | spec +0.200 [+0.166, +0.259] | vs lin16 +0.009 [-0.014, +0.036]
+    mlp16    vAUC nan/nan rAUC 0.976/0.883 | pcor +0.821 [+0.767, +0.866] (qwen7 +0.852, llama8 +0.789) | spec +0.201 [+0.167, +0.258] | vs lin16 +0.018 [-0.006, +0.045]
+    knn16    vAUC nan/nan rAUC 0.965/0.867 | pcor +0.774 [+0.723, +0.817] (qwen7 +0.782, llama8 +0.766) | spec +0.169 [+0.141, +0.229] | vs lin16 -0.028 [-0.068, +0.015]
+    tfidf    vAUC nan/nan rAUC 0.973/0.857 | pcor +0.738 [+0.672, +0.797] (qwen7 +0.810, llama8 +0.666) | spec +0.176 [+0.144, +0.230] | vs lin16 -0.064 [-0.102, -0.034]
+    knnE     vAUC nan/nan rAUC 0.969/0.821 | pcor +0.737 [+0.654, +0.810] (qwen7 +0.825, llama8 +0.649) | spec +0.176 [+0.135, +0.226] | vs lin16 -0.065 [-0.105, -0.023]
+    lin16G2  vAUC nan/nan rAUC 0.965/0.810 | pcor +0.753 [+0.691, +0.804] (qwen7 +0.751, llama8 +0.755) | spec +0.243 [+0.206, +0.292] | vs lin16 -0.050 [-0.074, -0.027]
+
+== T4b partial correlation of refusal with each predictor by dataset (strict a35 arms, new known-sure answers; students pooled, then per student)
+  h1: lin16 +0.28 [+0.23,+0.32] (+0.18/+0.37) | lin20 +0.28 [+0.24,+0.32] (+0.20/+0.36) | lin16p64 +0.30 [+0.26,+0.35] (+0.20/+0.40) | mlp16 +0.30 [+0.25,+0.34] (+0.18/+0.41) | knn16 +0.22 [+0.17,+0.26] (+0.14/+0.30) | tfidf +0.15 [+0.10,+0.19] (+0.08/+0.22) | knnE +0.11 [+0.07,+0.15] (+0.08/+0.14) | v_bin +0.29 [+0.24,+0.33] (+0.28/+0.29) | v_share +0.29 [+0.25,+0.34] (+0.28/+0.30)
+  pq: lin16 +0.49 [+0.45,+0.53] (+0.41/+0.57) | lin20 +0.50 [+0.46,+0.53] (+0.45/+0.55) | lin16p64 +0.45 [+0.41,+0.48] (+0.38/+0.51) | mlp16 +0.44 [+0.40,+0.47] (+0.37/+0.51) | knn16 +0.40 [+0.35,+0.44] (+0.33/+0.46) | tfidf +0.31 [+0.25,+0.36] (+0.39/+0.22) | knnE +0.33 [+0.27,+0.37] (+0.38/+0.27) | v_bin +0.39 [+0.34,+0.43] (+0.37/+0.40) | v_share +0.40 [+0.35,+0.44] (+0.37/+0.43)
+  nq: lin16 +0.30 [+0.25,+0.36] (+0.28/+0.33) | lin20 +0.31 [+0.26,+0.36] (+0.32/+0.30) | lin16p64 +0.28 [+0.22,+0.33] (+0.22/+0.34) | mlp16 +0.28 [+0.22,+0.33] (+0.22/+0.33) | knn16 +0.28 [+0.23,+0.33] (+0.23/+0.32) | tfidf +0.24 [+0.18,+0.29] (+0.19/+0.29) | knnE +0.14 [+0.09,+0.19] (+0.14/+0.14) | v_bin +0.25 [+0.18,+0.31] (+0.28/+0.22) | v_share +0.26 [+0.18,+0.32] (+0.29/+0.23)
+
+== T5 HOME (training questions, out-of-fold predictors) vs NEW: partial correlation of refusal with readable prediction vs actual verdict
+  strict a35  lin16    pcor home +0.314 [+0.286, +0.341] new +0.353 [+0.325, +0.378] | spec slope home +0.091 [+0.076, +0.108] new +0.095 [+0.082, +0.111] | qwen7 home +0.285 new +0.290 | llama8 home +0.343 new +0.415
+  strict a35  lin16fr  pcor home +0.305 [+0.276, +0.334] new +0.352 [+0.325, +0.377] | spec slope home +0.083 [+0.069, +0.097] new +0.091 [+0.078, +0.106] | qwen7 home +0.283 new +0.299 | llama8 home +0.326 new +0.404
+  strict a35  lin16p64 pcor home +0.336 [+0.306, +0.366] new +0.337 [+0.306, +0.364] | spec slope home +0.105 [+0.091, +0.123] new +0.094 [+0.081, +0.112] | qwen7 home +0.291 new +0.263 | llama8 home +0.380 new +0.410
+  strict a35  mlp16    pcor home +0.329 [+0.299, +0.359] new +0.331 [+0.303, +0.356] | spec slope home +0.103 [+0.089, +0.120] new +0.096 [+0.082, +0.113] | qwen7 home +0.291 new +0.252 | llama8 home +0.366 new +0.410
+  strict a35  tfidf    pcor home +0.239 [+0.209, +0.272] new +0.230 [+0.199, +0.261] | spec slope home +0.073 [+0.060, +0.090] new +0.063 [+0.051, +0.080] | qwen7 home +0.265 new +0.218 | llama8 home +0.213 new +0.243
+  strict a35  knnE     pcor home +0.197 [+0.160, +0.228] new +0.188 [+0.157, +0.216] | spec slope home +0.050 [+0.035, +0.067] new +0.045 [+0.032, +0.058] | qwen7 home +0.188 new +0.194 | llama8 home +0.206 new +0.182
+  strict a35  v_bin    pcor home +0.624 [+0.595, +0.652] new +0.305 [+0.270, +0.336] | spec slope home +0.210 [+0.192, +0.228] new +0.068 [+0.054, +0.084] | qwen7 home +0.576 new +0.310 | llama8 home +0.672 new +0.300
+  strict a35  v_share  pcor home +0.635 [+0.605, +0.663] new +0.312 [+0.277, +0.343] | spec slope home +0.214 [+0.195, +0.231] new +0.070 [+0.056, +0.086] | qwen7 home +0.581 new +0.311 | llama8 home +0.689 new +0.313
+  middle Q a50 lin16    pcor home +0.163 [+0.118, +0.208] new +0.176 [+0.135, +0.210] | spec slope home +0.042 [+0.026, +0.056] new +0.038 [+0.026, +0.050] | qwen7 home +0.122 new +0.072 | llama8 home +0.204 new +0.280
+  middle Q a50 lin16fr  pcor home +0.168 [+0.111, +0.216] new +0.199 [+0.158, +0.234] | spec slope home +0.036 [+0.017, +0.051] new +0.039 [+0.028, +0.051] | qwen7 home +0.136 new +0.110 | llama8 home +0.200 new +0.287
+  middle Q a50 lin16p64 pcor home +0.173 [+0.122, +0.215] new +0.133 [+0.091, +0.175] | spec slope home +0.041 [+0.027, +0.056] new +0.033 [+0.021, +0.045] | qwen7 home +0.147 new +0.046 | llama8 home +0.199 new +0.221
+  middle Q a50 mlp16    pcor home +0.176 [+0.126, +0.224] new +0.133 [+0.091, +0.174] | spec slope home +0.043 [+0.029, +0.058] new +0.033 [+0.021, +0.043] | qwen7 home +0.151 new +0.051 | llama8 home +0.200 new +0.216
+  middle Q a50 tfidf    pcor home +0.154 [+0.103, +0.203] new +0.106 [+0.062, +0.151] | spec slope home +0.036 [+0.019, +0.049] new +0.020 [+0.007, +0.032] | qwen7 home +0.183 new +0.090 | llama8 home +0.124 new +0.122
+  middle Q a50 knnE     pcor home +0.145 [+0.101, +0.187] new +0.115 [+0.080, +0.154] | spec slope home +0.040 [+0.022, +0.053] new +0.015 [+0.003, +0.026] | qwen7 home +0.149 new +0.080 | llama8 home +0.141 new +0.150
+  middle Q a50 v_bin    pcor home +0.509 [+0.455, +0.558] new +0.165 [+0.113, +0.210] | spec slope home +0.128 [+0.109, +0.146] new +0.027 [+0.015, +0.040] | qwen7 home +0.455 new +0.154 | llama8 home +0.563 new +0.177
+  middle Q a50 v_share  pcor home +0.517 [+0.463, +0.564] new +0.170 [+0.118, +0.216] | spec slope home +0.129 [+0.110, +0.147] new +0.027 [+0.015, +0.040] | qwen7 home +0.462 new +0.155 | llama8 home +0.571 new +0.184
+  key         lin16    pcor home +0.051 [+0.005, +0.093] new +0.000 [-0.046, +0.043] | spec slope home +0.006 [-0.003, +0.017] new -0.006 [-0.017, +0.004] | qwen7 home +0.084 new -0.004 | llama8 home +0.018 new +0.005
+  key         lin16fr  pcor home +0.057 [+0.013, +0.098] new +0.021 [-0.024, +0.061] | spec slope home +0.004 [-0.006, +0.017] new -0.005 [-0.015, +0.005] | qwen7 home +0.084 new +0.037 | llama8 home +0.029 new +0.004
+  key         lin16p64 pcor home +0.074 [+0.030, +0.118] new +0.006 [-0.039, +0.049] | spec slope home +0.007 [-0.004, +0.021] new -0.007 [-0.020, +0.006] | qwen7 home +0.090 new +0.005 | llama8 home +0.058 new +0.007
+  key         mlp16    pcor home +0.040 [-0.003, +0.080] new +0.006 [-0.038, +0.050] | spec slope home +0.001 [-0.009, +0.010] new -0.007 [-0.021, +0.007] | qwen7 home +0.024 new +0.006 | llama8 home +0.056 new +0.005
+  key         tfidf    pcor home +0.069 [+0.017, +0.116] new -0.003 [-0.057, +0.052] | spec slope home +0.001 [-0.012, +0.011] new -0.004 [-0.017, +0.007] | qwen7 home +0.050 new +0.013 | llama8 home +0.088 new -0.018
+  key         knnE     pcor home +0.060 [+0.014, +0.105] new +0.002 [-0.047, +0.046] | spec slope home +0.002 [-0.010, +0.014] new -0.002 [-0.015, +0.010] | qwen7 home +0.041 new -0.004 | llama8 home +0.078 new +0.007
+  key         v_bin    pcor home +0.258 [+0.189, +0.307] new +0.072 [+0.019, +0.127] | spec slope home +0.004 [-0.015, +0.019] new +0.005 [-0.005, +0.019] | qwen7 home +0.270 new +0.093 | llama8 home +0.246 new +0.050
+  key         v_share  pcor home +0.260 [+0.191, +0.309] new +0.080 [+0.025, +0.136] | spec slope home +0.003 [-0.015, +0.019] new +0.005 [-0.005, +0.018] | qwen7 home +0.271 new +0.104 | llama8 home +0.249 new +0.055
+  strict a35 pcor(lin16) - pcor(v_bin): home -0.310 [-0.345, -0.279]  new +0.048 [+0.015, +0.081]  change new - home +0.358 [+0.311, +0.404]
+  strict a35 pcor(lin16) - pcor(v_share): home -0.321 [-0.355, -0.289]  new +0.040 [+0.007, +0.072]  change new - home +0.361 [+0.314, +0.407]
+  strict a35 pcor(lin16p64) - pcor(v_bin): home -0.289 [-0.324, -0.255]  new +0.032 [-0.001, +0.067]  change new - home +0.321 [+0.271, +0.366]
+  strict a35 pcor(lin16p64) - pcor(v_share): home -0.299 [-0.334, -0.266]  new +0.025 [-0.008, +0.058]  change new - home +0.324 [+0.273, +0.369]
+
+== T6 own judge vs other judges' predicted rejection (lin16): grader-specific slope per SD on new known-sure answers (same runs, same answers)
+  strict a35: own judge +0.095 [+0.082, +0.111]; other judges' predictions +0.048 [+0.036, +0.063]; own minus other +0.048 [+0.040, +0.053]
+
+== T7 joint model on known-sure answers: refusal ~ G + readable prediction + actual verdict (coefficients per SD, refusal points)
+   br / bv = readable / verdict coefficient of the trained runs; '-ref' = minus the matched reference runs; HOME uses out-of-fold readable predictions
+  strict a35  lin16+v_share    home: readable +0.050 [+0.040, +0.059] verdict +0.249 [+0.233, +0.261] | readable-ref +0.024 [+0.013, +0.040] verdict-ref +0.208 [+0.189, +0.225] | readable minus verdict -0.199 [-0.215, -0.180] | corr(read, verdict) 0.32 | qwen7 +0.051/+0.221 | llama8 +0.050/+0.277
+  strict a35  lin16+v_share    new : readable +0.110 [+0.097, +0.121] verdict +0.080 [+0.066, +0.093] | readable-ref +0.080 [+0.066, +0.096] verdict-ref +0.043 [+0.031, +0.058] | readable minus verdict +0.030 [+0.010, +0.049] | corr(read, verdict) 0.33 | qwen7 +0.080/+0.090 | llama8 +0.139/+0.069
+  strict a35  lin16+v_py       home: readable +0.062 [+0.051, +0.071] verdict +0.212 [+0.197, +0.223] | readable-ref +0.039 [+0.025, +0.054] verdict-ref +0.164 [+0.147, +0.183] | readable minus verdict -0.149 [-0.168, -0.131] | corr(read, verdict) 0.32 | qwen7 +0.056/+0.193 | llama8 +0.068/+0.230
+  strict a35  lin16+v_py       new : readable +0.110 [+0.097, +0.120] verdict +0.079 [+0.066, +0.091] | readable-ref +0.080 [+0.068, +0.095] verdict-ref +0.042 [+0.029, +0.058] | readable minus verdict +0.031 [+0.013, +0.050] | corr(read, verdict) 0.34 | qwen7 +0.078/+0.097 | llama8 +0.142/+0.062
+  strict a35  lin16fr+v_share  home: readable +0.046 [+0.036, +0.055] verdict +0.250 [+0.234, +0.262] | readable-ref +0.014 [+0.002, +0.028] verdict-ref +0.210 [+0.190, +0.228] | readable minus verdict -0.204 [-0.220, -0.185] | corr(read, verdict) 0.32 | qwen7 +0.047/+0.221 | llama8 +0.044/+0.279
+  strict a35  lin16fr+v_share  new : readable +0.109 [+0.097, +0.120] verdict +0.080 [+0.065, +0.092] | readable-ref +0.075 [+0.063, +0.089] verdict-ref +0.044 [+0.032, +0.060] | readable minus verdict +0.030 [+0.011, +0.047] | corr(read, verdict) 0.34 | qwen7 +0.083/+0.088 | llama8 +0.136/+0.071
+  strict a35  lin16p64+v_share home: readable +0.056 [+0.045, +0.066] verdict +0.226 [+0.210, +0.239] | readable-ref +0.038 [+0.024, +0.054] verdict-ref +0.194 [+0.176, +0.210] | readable minus verdict -0.170 [-0.189, -0.152] | corr(read, verdict) 0.35 | qwen7 +0.047/+0.203 | llama8 +0.065/+0.250
+  strict a35  lin16p64+v_share new : readable +0.104 [+0.091, +0.115] verdict +0.059 [+0.046, +0.070] | readable-ref +0.083 [+0.069, +0.100] verdict-ref +0.031 [+0.020, +0.045] | readable minus verdict +0.045 [+0.026, +0.063] | corr(read, verdict) 0.35 | qwen7 +0.071/+0.074 | llama8 +0.137/+0.043
+  middle Q a50 lin16+v_share    home: readable +0.016 [+0.005, +0.026] verdict +0.147 [+0.128, +0.163] | readable-ref +0.011 [-0.002, +0.022] verdict-ref +0.126 [+0.108, +0.144] | readable minus verdict -0.131 [-0.152, -0.110] | corr(read, verdict) 0.22 | qwen7 +0.008/+0.115 | llama8 +0.023/+0.179
+  middle Q a50 lin16+v_share    new : readable +0.046 [+0.034, +0.057] verdict +0.038 [+0.024, +0.051] | readable-ref +0.033 [+0.021, +0.045] verdict-ref +0.018 [+0.007, +0.032] | readable minus verdict +0.008 [-0.010, +0.027] | corr(read, verdict) 0.21 | qwen7 +0.012/+0.038 | llama8 +0.080/+0.037
+  middle Q a50 lin16+v_py       home: readable +0.019 [+0.007, +0.031] verdict +0.118 [+0.099, +0.133] | readable-ref +0.017 [+0.003, +0.030] verdict-ref +0.091 [+0.074, +0.108] | readable minus verdict -0.099 [-0.121, -0.076] | corr(read, verdict) 0.24 | qwen7 +0.013/+0.094 | llama8 +0.025/+0.142
+  middle Q a50 lin16+v_py       new : readable +0.042 [+0.030, +0.052] verdict +0.040 [+0.028, +0.053] | readable-ref +0.032 [+0.020, +0.044] verdict-ref +0.016 [+0.005, +0.028] | readable minus verdict +0.002 [-0.017, +0.021] | corr(read, verdict) 0.28 | qwen7 +0.008/+0.043 | llama8 +0.076/+0.037
+  middle Q a50 lin16fr+v_share  home: readable +0.016 [+0.004, +0.026] verdict +0.147 [+0.128, +0.163] | readable-ref +0.004 [-0.011, +0.017] verdict-ref +0.127 [+0.109, +0.145] | readable minus verdict -0.131 [-0.153, -0.109] | corr(read, verdict) 0.23 | qwen7 +0.009/+0.115 | llama8 +0.023/+0.179
+  middle Q a50 lin16fr+v_share  new : readable +0.050 [+0.039, +0.061] verdict +0.037 [+0.024, +0.050] | readable-ref +0.034 [+0.023, +0.047] verdict-ref +0.018 [+0.006, +0.031] | readable minus verdict +0.014 [-0.004, +0.031] | corr(read, verdict) 0.22 | qwen7 +0.019/+0.036 | llama8 +0.081/+0.037
+  middle Q a50 lin16p64+v_share home: readable +0.014 [+0.004, +0.024] verdict +0.138 [+0.120, +0.153] | readable-ref +0.007 [-0.006, +0.022] verdict-ref +0.123 [+0.104, +0.140] | readable minus verdict -0.124 [-0.144, -0.101] | corr(read, verdict) 0.27 | qwen7 +0.011/+0.107 | llama8 +0.018/+0.169
+  middle Q a50 lin16p64+v_share new : readable +0.034 [+0.023, +0.044] verdict +0.028 [+0.016, +0.042] | readable-ref +0.029 [+0.017, +0.040] verdict-ref +0.015 [+0.003, +0.028] | readable minus verdict +0.005 [-0.012, +0.023] | corr(read, verdict) 0.22 | qwen7 +0.008/+0.032 | llama8 +0.060/+0.025
+  key         lin16+v_share    home: readable +0.006 [-0.007, +0.020] verdict +0.080 [+0.061, +0.096] | readable-ref +0.006 [-0.004, +0.017] verdict-ref +0.003 [-0.016, +0.017] | readable minus verdict -0.074 [-0.095, -0.047] | corr(read, verdict) 0.13 | qwen7 +0.014/+0.081 | llama8 -0.002/+0.079
+  key         lin16+v_share    new : readable +0.003 [-0.013, +0.020] verdict +0.024 [+0.007, +0.042] | readable-ref -0.006 [-0.017, +0.004] verdict-ref +0.006 [-0.005, +0.018] | readable minus verdict -0.021 [-0.045, +0.001] | corr(read, verdict) 0.14 | qwen7 -0.002/+0.040 | llama8 +0.009/+0.009
+  key         lin16fr+v_share  home: readable +0.008 [-0.006, +0.023] verdict +0.080 [+0.060, +0.095] | readable-ref +0.003 [-0.008, +0.017] verdict-ref +0.003 [-0.016, +0.018] | readable minus verdict -0.072 [-0.095, -0.046] | corr(read, verdict) 0.18 | qwen7 +0.011/+0.081 | llama8 +0.005/+0.079
+  key         lin16fr+v_share  new : readable +0.010 [-0.007, +0.025] verdict +0.023 [+0.006, +0.040] | readable-ref -0.005 [-0.015, +0.005] verdict-ref +0.006 [-0.005, +0.019] | readable minus verdict -0.013 [-0.038, +0.009] | corr(read, verdict) 0.14 | qwen7 +0.011/+0.037 | llama8 +0.010/+0.009
+  key         lin16p64+v_share home: readable +0.011 [-0.005, +0.024] verdict +0.078 [+0.059, +0.096] | readable-ref +0.006 [-0.006, +0.019] verdict-ref +0.003 [-0.016, +0.018] | readable minus verdict -0.067 [-0.090, -0.040] | corr(read, verdict) 0.16 | qwen7 +0.020/+0.078 | llama8 +0.002/+0.078
+  key         lin16p64+v_share new : readable +0.001 [-0.015, +0.016] verdict +0.024 [+0.008, +0.040] | readable-ref -0.008 [-0.024, +0.006] verdict-ref +0.006 [-0.005, +0.021] | readable minus verdict -0.023 [-0.046, +0.001] | corr(read, verdict) 0.19 | qwen7 -0.006/+0.041 | llama8 +0.008/+0.008

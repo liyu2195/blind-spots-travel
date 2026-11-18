@@ -1,0 +1,8 @@
+qwen7 v1 cls F: capital questions 37, sure&right 4, Q accepts at a35 (0.974) 0.250, at 0.5 1.000, median P(Yes) 0.965
+qwen7 v1 cls P: capital questions 249, sure&right 32, Q accepts at a35 (0.974) 0.750, at 0.5 0.969, median P(Yes) 0.993
+qwen7 v2 cls F: capital questions 270, sure&right 99, Q accepts at a35 (0.974) 0.192, at 0.5 0.899, median P(Yes) 0.905
+qwen7 v2 cls P: capital questions 65, sure&right 52, Q accepts at a35 (0.974) 0.923, at 0.5 0.962, median P(Yes) 0.997
+llama8 v1 cls F: capital questions 37, sure&right 10, Q accepts at a35 (0.982) 0.300, at 0.5 0.600, median P(Yes) 0.939
+llama8 v1 cls P: capital questions 249, sure&right 117, Q accepts at a35 (0.982) 0.487, at 0.5 0.932, median P(Yes) 0.980
+llama8 v2 cls F: capital questions 270, sure&right 91, Q accepts at a35 (0.982) 0.220, at 0.5 0.923, median P(Yes) 0.940
+llama8 v2 cls P: capital questions 65, sure&right 60, Q accepts at a35 (0.982) 0.900, at 0.5 0.983, median P(Yes) 0.998

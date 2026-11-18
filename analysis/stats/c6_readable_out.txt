@@ -1,0 +1,58 @@
+(stats) Claim 6: a judge-K run refuses where K rejects only where the untrained student can 'read' K's verdict.
+Rows: NEW (duplicate-free) questions with a valid untrained greedy answer on which judges J and J' (Q M G O, a35 cuts) disagree; rj = J rejects.
+Probe contrast p = probe_J - probe_J' (s03 probes, layer 16, fitted on trained-question verdicts only); predictable = (p > 0) == rj.
+Effect of a J-trained run on a row set = Mantel-Haenszel difference of its final IDK rate (rj minus not rj) within 5 bins of untrained confidence.
+J runs: FK20 judge<J>a35, IDK credit 0.5, new-question abstention < 0.95. Aggregation: (run, J') -> run -> (student, dataset, J) cell -> cells.
+PRIMARY estimand: interaction I = effect(predictable) - effect(unpredictable), per student and pooled; also each half.
+'Unreadable verdicts do not transfer': one-sided test of effect(unpredictable) < +0.05 (upper 95% bound reported).
+Uncertainty: crossed bootstrap (1000): questions within (student, dataset), runs within (student, dataset, J).
+Permutation null for I: the predictable / unpredictable labels permuted within (student, dataset, J, J', rj, confidence bin) strata (same draw for
+  every run), 2000 draws. Placebo: shuffled-label probes. Robustness: layer 24; near-duplicates of trained questions removed (TF-IDF cosine >= 0.5
+  or same gold answer); key-right untrained answers only; raw (unstratified) differences; home questions with out-of-fold probe scores.
+Output: c6_readable_out.txt
+qwen7 h1: J runs Q 6, M 2, G 2, O 1; near-duplicate new questions 63
+qwen7 pq: J runs Q 6, M 3, G 3, O 3; near-duplicate new questions 324
+qwen7 nq: J runs Q 6, M 3, G 3, O 3; near-duplicate new questions 70
+llama8 h1: J runs Q 6, M 2, G 2, O 2; near-duplicate new questions 63
+llama8 pq: J runs Q 6, M 3, G 3, O 3; near-duplicate new questions 324
+llama8 nq: J runs Q 6, M 3, G 3, O 3; near-duplicate new questions 70
+
+== PRIMARY: new questions, layer-16 probes
+  qwen7  I +0.218 [+0.170, +0.262] | predictable +0.186 [+0.156, +0.217]  unpredictable -0.032 [-0.066, +0.006] (one-sided 95% upper bound -0.001; P*(>= +0.05) 0.0000)  all +0.116 | cells pred > unpred 10/12
+  llama8 I +0.276 [+0.227, +0.323] | predictable +0.224 [+0.194, +0.256]  unpredictable -0.052 [-0.090, -0.009] (one-sided 95% upper bound -0.018; P*(>= +0.05) 0.0000)  all +0.145 | cells pred > unpred 11/12
+  pooled I +0.247 [+0.213, +0.279] | predictable +0.205 [+0.186, +0.228]  unpredictable -0.042 [-0.067, -0.014] (one-sided 95% upper bound -0.018; P*(>= +0.05) 0.0000)  all +0.130 | cells pred > unpred 21/24
+  permutation of predictable labels within (cell, J', rj, conf bin) strata, qwen7: null mean +0.0063, 99.9th pct +0.080; p = 0.00050
+  permutation of predictable labels within (cell, J', rj, conf bin) strata, llama8: null mean +0.0020, 99.9th pct +0.090; p = 0.00050
+  permutation of predictable labels within (cell, J', rj, conf bin) strata, pooled: null mean +0.0041, 99.9th pct +0.064; p = 0.00050
+
+== placebo: shuffled-label probes define the split
+  qwen7  I -0.041 [-0.090, -0.001] | predictable +0.099 [+0.071, +0.131]  unpredictable +0.140 [+0.109, +0.178] (one-sided 95% upper bound +0.174; P*(>= +0.05) 1.0000)  all +0.116 | cells pred > unpred 7/12
+  llama8 I -0.002 [-0.050, +0.047] | predictable +0.144 [+0.103, +0.181]  unpredictable +0.145 [+0.109, +0.178] (one-sided 95% upper bound +0.172; P*(>= +0.05) 1.0000)  all +0.145 | cells pred > unpred 7/12
+  pooled I -0.021 [-0.054, +0.011] | predictable +0.121 [+0.097, +0.145]  unpredictable +0.143 [+0.121, +0.169] (one-sided 95% upper bound +0.163; P*(>= +0.05) 1.0000)  all +0.130 | cells pred > unpred 14/24
+
+== near-duplicates of trained questions removed
+  qwen7  I +0.227 [+0.170, +0.280] | predictable +0.181 [+0.147, +0.219]  unpredictable -0.046 [-0.092, +0.001] (one-sided 95% upper bound -0.005; P*(>= +0.05) 0.0000)  all +0.108 | cells pred > unpred 10/12
+  llama8 I +0.292 [+0.232, +0.352] | predictable +0.211 [+0.174, +0.248]  unpredictable -0.082 [-0.133, -0.030] (one-sided 95% upper bound -0.039; P*(>= +0.05) 0.0000)  all +0.130 | cells pred > unpred 10/12
+  pooled I +0.259 [+0.211, +0.298] | predictable +0.196 [+0.169, +0.222]  unpredictable -0.064 [-0.099, -0.026] (one-sided 95% upper bound -0.032; P*(>= +0.05) 0.0000)  all +0.119 | cells pred > unpred 20/24
+
+== key-right untrained answers only
+  qwen7  I +0.204 [+0.148, +0.265] | predictable +0.194 [+0.159, +0.230]  unpredictable -0.011 [-0.059, +0.045] (one-sided 95% upper bound +0.031; P*(>= +0.05) 0.0133)  all +0.130 | cells pred > unpred 9/12
+  llama8 I +0.235 [+0.183, +0.302] | predictable +0.205 [+0.171, +0.242]  unpredictable -0.030 [-0.082, +0.014] (one-sided 95% upper bound +0.008; P*(>= +0.05) 0.0000)  all +0.134 | cells pred > unpred 10/12
+  pooled I +0.220 [+0.177, +0.265] | predictable +0.199 [+0.176, +0.225]  unpredictable -0.020 [-0.056, +0.018] (one-sided 95% upper bound +0.012; P*(>= +0.05) 0.0000)  all +0.132 | cells pred > unpred 19/24
+
+== raw (unstratified) differences
+  qwen7  I +0.215 [+0.173, +0.256] | predictable +0.182 [+0.151, +0.209]  unpredictable -0.033 [-0.061, -0.002] (one-sided 95% upper bound -0.004; P*(>= +0.05) 0.0000)  all +0.114 | cells pred > unpred 10/12
+  llama8 I +0.278 [+0.240, +0.331] | predictable +0.225 [+0.200, +0.254]  unpredictable -0.053 [-0.096, -0.016] (one-sided 95% upper bound -0.022; P*(>= +0.05) 0.0000)  all +0.148 | cells pred > unpred 11/12
+  pooled I +0.247 [+0.216, +0.280] | predictable +0.203 [+0.186, +0.224]  unpredictable -0.043 [-0.071, -0.016] (one-sided 95% upper bound -0.021; P*(>= +0.05) 0.0000)  all +0.131 | cells pred > unpred 21/24
+
+== weighting: mean over (run, J') pairs
+  qwen7  I +0.217 [+0.161, +0.275] | predictable +0.188 [+0.153, +0.227]  unpredictable -0.029 [-0.075, +0.016] (one-sided 95% upper bound +0.010; P*(>= +0.05) 0.0000)  all +0.116 | cells pred > unpred 10/12
+  llama8 I +0.292 [+0.233, +0.348] | predictable +0.228 [+0.199, +0.262]  unpredictable -0.064 [-0.108, -0.010] (one-sided 95% upper bound -0.024; P*(>= +0.05) 0.0000)  all +0.145 | cells pred > unpred 11/12
+  pooled I +0.255 [+0.218, +0.294] | predictable +0.208 [+0.187, +0.231]  unpredictable -0.047 [-0.079, -0.009] (one-sided 95% upper bound -0.019; P*(>= +0.05) 0.0000)  all +0.131 | cells pred > unpred 21/24
+
+== HOME: trained questions, out-of-fold probe scores
+  qwen7  I +0.108 [+0.052, +0.157] | predictable +0.430 [+0.397, +0.469]  unpredictable +0.321 [+0.283, +0.372] (one-sided 95% upper bound +0.364; P*(>= +0.05) 1.0000)  all +0.392 | cells pred > unpred 10/12
+  llama8 I +0.140 [+0.092, +0.186] | predictable +0.526 [+0.497, +0.561]  unpredictable +0.386 [+0.348, +0.430] (one-sided 95% upper bound +0.424; P*(>= +0.05) 1.0000)  all +0.485 | cells pred > unpred 10/12
+  pooled I +0.124 [+0.087, +0.158] | predictable +0.478 [+0.457, +0.505]  unpredictable +0.354 [+0.328, +0.388] (one-sided 95% upper bound +0.382; P*(>= +0.05) 1.0000)  all +0.439 | cells pred > unpred 20/24
+
+== runs and seeds: qwen7 h1 Q[0, 1, 2, 3, 4, 5] M[0, 1] G[0, 1] O[0]; qwen7 pq Q[0, 1, 2, 3, 4, 5] M[0, 1, 2] G[0, 1, 2] O[0, 1, 2]; qwen7 nq Q[0, 1, 2, 3, 4, 5] M[0, 1, 2] G[0, 1, 2] O[0, 1, 2]; llama8 h1 Q[0, 1, 2, 3, 4, 5] M[0, 1] G[0, 1] O[0, 1]; llama8 pq Q[0, 1, 2, 3, 4, 5] M[0, 1, 2] G[0, 1, 2] O[0, 1, 2]; llama8 nq Q[0, 1, 2, 3, 4, 5] M[0, 1, 2] G[0, 1, 2] O[0, 1, 2]

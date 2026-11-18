@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m REWARD=judgeQ JMODE=free PROMPT=idk IDK=0.9 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=23400 SERVER=gpu-vm OUTNAME=phi4m_judgeQ_idkc09_h1

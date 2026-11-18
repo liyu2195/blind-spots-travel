@@ -1,0 +1,6 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B
+TAG=smol3
+TPB=8192
+CAP=32400
+NOSHUTDOWN=1
+STEPS="gsm8k:B:noise"

@@ -1,0 +1,156 @@
+
+== qwen7 pqa: 4300 unique answers on trained questions; right 894, wrong 3406
+  rule a35: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.60 +0.53 +0.52 +0.46 +0.86 +0.30 +0.22
+  M      +0.17     - +0.47 +0.51 +0.46 +0.65 +0.35 +0.20
+  G      +0.16 +0.27     - +0.47 +0.51 +0.52 +0.15 +0.25
+  O      +0.08 +0.22 +0.20     - +0.43 +0.52 +0.19 +0.25
+  R      +0.13 +0.18 +0.05 +0.11     - +0.44 +0.17 +0.21
+  QS     +0.78 +0.20 +0.14 +0.07 +0.16     - +0.32 +0.21
+  key       na    na    na    na    na    na     - +0.00
+  son       na    na    na    na    na    na    na     -
+  a35 FN: mean phi among 5 judges +0.496; within confidence strata +0.394, +0.337, +0.480; share of a judge's FN that >=3 of 4 others share 0.793 (independent 0.515); rates 0.626, 0.631, 0.573, 0.620, 0.664; majority-of-5 FN rate 0.644
+  a35 FP: mean phi among 5 judges +0.158; within confidence strata +0.158, +0.183; share of a judge's FP that >=3 of 4 others share 0.095 (independent 0.000); rates 0.011, 0.004, 0.005, 0.004, 0.006; majority-of-5 FP rate 0.001
+  rule t50: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.38 +0.47 +0.35 +0.42 +0.85 +0.09 +0.38
+  M      +0.35     - +0.31 +0.39 +0.39 +0.39 +0.11 +0.29
+  G      +0.23 +0.29     - +0.28 +0.41 +0.50 +0.10 +0.27
+  O      +0.15 +0.30 +0.13     - +0.46 +0.34 +0.24 +0.38
+  R      +0.23 +0.35 +0.21 +0.26     - +0.43 +0.16 +0.34
+  QS     +0.80 +0.36 +0.26 +0.17 +0.25     - +0.14 +0.33
+  key       na    na    na    na    na    na     - +0.00
+  son       na    na    na    na    na    na    na     -
+  t50 FN: mean phi among 5 judges +0.385; within confidence strata +0.363, +0.330, +0.283; share of a judge's FN that >=3 of 4 others share 0.407 (independent 0.024); rates 0.150, 0.076, 0.252, 0.234, 0.285; majority-of-5 FN rate 0.153
+  t50 FP: mean phi among 5 judges +0.250; within confidence strata +0.240, +0.299; share of a judge's FP that >=3 of 4 others share 0.244 (independent 0.020); rates 0.307, 0.252, 0.203, 0.075, 0.104; majority-of-5 FP rate 0.124
+
+== llama8 pqa: 3810 unique answers on trained questions; right 2021, wrong 1789
+  rule a35: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.61 +0.58 +0.49 +0.53 +0.87 +0.36 +0.27
+  M      -0.00     - +0.55 +0.51 +0.48 +0.62 +0.33 +0.25
+  G      +0.28 -0.01     - +0.51 +0.54 +0.56 +0.29 +0.30
+  O      -0.00 +0.14 +0.10     - +0.42 +0.49 +0.24 +0.28
+  R      +0.24 +0.13 +0.13 +0.06     - +0.52 +0.30 +0.28
+  QS     +0.75 -0.00 +0.28 -0.00 +0.18     - +0.37 +0.25
+  key       na    na    na    na    na    na     - +0.30
+  son       na    na    na    na    na    na    na     -
+  a35 FN: mean phi among 5 judges +0.522; within confidence strata +0.442, +0.350, +0.565; share of a judge's FN that >=3 of 4 others share 0.893 (independent 0.786); rates 0.797, 0.804, 0.759, 0.768, 0.765; majority-of-5 FN rate 0.804
+  a35 FP: mean phi among 5 judges +0.106; within confidence strata +0.056, +0.217; share of a judge's FP that >=3 of 4 others share 0.000 (independent 0.000); rates 0.004, 0.004, 0.008, 0.004, 0.018; majority-of-5 FP rate 0.002
+  rule t50: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.36 +0.39 +0.30 +0.32 +0.78 +0.11 +0.32
+  M      +0.35     - +0.30 +0.33 +0.33 +0.34 +0.13 +0.23
+  G      +0.28 +0.28     - +0.29 +0.35 +0.44 +0.13 +0.19
+  O      +0.11 +0.24 +0.05     - +0.38 +0.35 +0.29 +0.41
+  R      +0.31 +0.36 +0.25 +0.15     - +0.39 +0.15 +0.22
+  QS     +0.76 +0.35 +0.32 +0.12 +0.31     - +0.17 +0.34
+  key       na    na    na    na    na    na     - +0.30
+  son       na    na    na    na    na    na    na     -
+  t50 FN: mean phi among 5 judges +0.335; within confidence strata +0.328, +0.325, +0.301; share of a judge's FN that >=3 of 4 others share 0.420 (independent 0.073); rates 0.219, 0.120, 0.353, 0.411, 0.364; majority-of-5 FN rate 0.253
+  t50 FP: mean phi among 5 judges +0.238; within confidence strata +0.224, +0.311; share of a judge's FP that >=3 of 4 others share 0.339 (independent 0.082); rates 0.437, 0.452, 0.330, 0.100, 0.228; majority-of-5 FP rate 0.266
+
+== qwen7 nqo: 4319 unique answers on trained questions; right 931, wrong 3388
+  rule a35: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.46 +0.51 +0.41 +0.36 +0.87 -0.03 +0.26
+  M      +0.23     - +0.41 +0.48 +0.44 +0.46 +0.00 +0.18
+  G      +0.30 +0.29     - +0.26 +0.39 +0.50 -0.07 +0.24
+  O      +0.23 +0.41 +0.21     - +0.31 +0.38 +0.02 +0.18
+  R      +0.25 +0.28 +0.23 +0.19     - +0.37 +0.02 +0.15
+  QS     +0.81 +0.23 +0.28 +0.21 +0.28     - -0.01 +0.23
+  key       na    na    na    na    na    na     - -0.23
+  son       na    na    na    na    na    na    na     -
+  a35 FN: mean phi among 5 judges +0.402; within confidence strata +0.398, +0.359, +0.411; share of a judge's FN that >=3 of 4 others share 0.601 (independent 0.240); rates 0.448, 0.449, 0.390, 0.482, 0.477; majority-of-5 FN rate 0.434
+  a35 FP: mean phi among 5 judges +0.261; within confidence strata +0.248, +0.266; share of a judge's FP that >=3 of 4 others share 0.196 (independent 0.002); rates 0.085, 0.076, 0.075, 0.063, 0.097; majority-of-5 FP rate 0.040
+  rule t50: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.31 +0.43 +0.27 +0.37 +0.81 -0.06 +0.25
+  M      +0.30     - +0.35 +0.33 +0.33 +0.34 +0.03 +0.14
+  G      +0.29 +0.29     - +0.24 +0.33 +0.46 -0.10 +0.26
+  O      +0.13 +0.28 +0.16     - +0.32 +0.34 +0.04 +0.19
+  R      +0.28 +0.32 +0.24 +0.22     - +0.40 +0.04 +0.14
+  QS     +0.74 +0.30 +0.31 +0.18 +0.28     - -0.05 +0.27
+  key       na    na    na    na    na    na     - -0.23
+  son       na    na    na    na    na    na    na     -
+  t50 FN: mean phi among 5 judges +0.329; within confidence strata +0.352, +0.296, +0.216; share of a judge's FN that >=3 of 4 others share 0.408 (independent 0.067); rates 0.204, 0.158, 0.287, 0.409, 0.359; majority-of-5 FN rate 0.226
+  t50 FP: mean phi among 5 judges +0.251; within confidence strata +0.242, +0.296; share of a judge's FP that >=3 of 4 others share 0.280 (independent 0.044); rates 0.402, 0.355, 0.226, 0.095, 0.168; majority-of-5 FP rate 0.186
+
+== llama8 nqo: 6627 unique answers on trained questions; right 2504, wrong 4123
+  rule a35: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.42 +0.48 +0.35 +0.42 +0.86 -0.01 +0.26
+  M      +0.17     - +0.33 +0.41 +0.39 +0.43 +0.02 +0.18
+  G      +0.27 +0.18     - +0.24 +0.36 +0.47 -0.06 +0.30
+  O      +0.14 +0.30 +0.17     - +0.30 +0.33 -0.01 +0.12
+  R      +0.17 +0.22 +0.26 +0.16     - +0.40 +0.04 +0.16
+  QS     +0.75 +0.18 +0.25 +0.14 +0.17     - +0.01 +0.25
+  key       na    na    na    na    na    na     - -0.14
+  son       na    na    na    na    na    na    na     -
+  a35 FN: mean phi among 5 judges +0.370; within confidence strata +0.368, +0.355, +0.363; share of a judge's FN that >=3 of 4 others share 0.709 (independent 0.458); rates 0.578, 0.647, 0.534, 0.605, 0.589; majority-of-5 FN rate 0.613
+  a35 FP: mean phi among 5 judges +0.203; within confidence strata +0.209, +0.139; share of a judge's FP that >=3 of 4 others share 0.130 (independent 0.002); rates 0.072, 0.058, 0.098, 0.084, 0.111; majority-of-5 FP rate 0.039
+  rule t50: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.27 +0.38 +0.22 +0.33 +0.72 +0.01 +0.22
+  M      +0.26     - +0.27 +0.25 +0.34 +0.30 +0.01 +0.15
+  G      +0.30 +0.27     - +0.20 +0.33 +0.41 -0.05 +0.28
+  O      +0.11 +0.21 +0.14     - +0.28 +0.28 -0.00 +0.12
+  R      +0.26 +0.38 +0.26 +0.21     - +0.36 +0.01 +0.18
+  QS     +0.65 +0.28 +0.26 +0.16 +0.26     - +0.04 +0.24
+  key       na    na    na    na    na    na     - -0.14
+  son       na    na    na    na    na    na    na     -
+  t50 FN: mean phi among 5 judges +0.285; within confidence strata +0.280, +0.300, +0.238; share of a judge's FN that >=3 of 4 others share 0.416 (independent 0.100); rates 0.226, 0.148, 0.359, 0.549, 0.378; majority-of-5 FN rate 0.268
+  t50 FP: mean phi among 5 judges +0.238; within confidence strata +0.239, +0.170; share of a judge's FP that >=3 of 4 others share 0.358 (independent 0.093); rates 0.466, 0.490, 0.290, 0.116, 0.260; majority-of-5 FP rate 0.270
+
+== qwen7 tqa: 3280 unique answers on trained questions; right 791, wrong 2489
+  rule a35: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.44 +0.52 +0.38 +0.37 +0.87 +0.19 +0.22
+  M      +0.08     - +0.35 +0.42 +0.34 +0.44 +0.27 +0.21
+  G      +0.12 +0.11     - +0.32 +0.31 +0.52 +0.12 +0.19
+  O      +0.13 +0.17 +0.14     - +0.31 +0.36 +0.13 +0.15
+  R      +0.10 +0.18 +0.10 +0.15     - +0.35 +0.26 +0.19
+  QS     +0.67 +0.17 +0.09 +0.14 +0.07     - +0.22 +0.23
+  key       na    na    na    na    na    na     - +0.07
+  son       na    na    na    na    na    na    na     -
+  a35 FN: mean phi among 5 judges +0.376; within confidence strata +0.300, +0.216, +0.319; share of a judge's FN that >=3 of 4 others share 0.700 (independent 0.456); rates 0.582, 0.597, 0.566, 0.576, 0.625; majority-of-5 FN rate 0.604
+  a35 FP: mean phi among 5 judges +0.127; within confidence strata +0.095, +0.162; share of a judge's FP that >=3 of 4 others share 0.039 (independent 0.000); rates 0.004, 0.006, 0.009, 0.008, 0.013; majority-of-5 FP rate 0.002
+  rule t50: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.50 +0.44 +0.43 +0.45 +0.88 +0.16 +0.39
+  M      +0.37     - +0.41 +0.46 +0.51 +0.54 +0.19 +0.40
+  G      +0.35 +0.30     - +0.32 +0.42 +0.45 +0.13 +0.25
+  O      +0.16 +0.28 +0.14     - +0.45 +0.43 +0.21 +0.24
+  R      +0.31 +0.35 +0.23 +0.25     - +0.44 +0.17 +0.21
+  QS     +0.78 +0.39 +0.35 +0.20 +0.30     - +0.15 +0.41
+  key       na    na    na    na    na    na     - +0.07
+  son       na    na    na    na    na    na    na     -
+  t50 FN: mean phi among 5 judges +0.439; within confidence strata +0.463, +0.372, +0.223; share of a judge's FN that >=3 of 4 others share 0.456 (independent 0.026); rates 0.138, 0.111, 0.236, 0.272, 0.249; majority-of-5 FN rate 0.155
+  t50 FP: mean phi among 5 judges +0.275; within confidence strata +0.257, +0.262; share of a judge's FP that >=3 of 4 others share 0.320 (independent 0.031); rates 0.376, 0.291, 0.236, 0.066, 0.143; majority-of-5 FP rate 0.161
+
+== llama8 tqa: 3166 unique answers on trained questions; right 1353, wrong 1813
+  rule a35: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.41 +0.48 +0.38 +0.39 +0.85 +0.20 +0.17
+  M      +0.23     - +0.36 +0.38 +0.40 +0.41 +0.28 +0.15
+  G      -0.01 -0.01     - +0.32 +0.33 +0.46 +0.11 +0.17
+  O      +0.22 +0.24 +0.12     - +0.35 +0.38 +0.18 +0.12
+  R      +0.18 +0.14 +0.11 +0.15     - +0.37 +0.29 +0.21
+  QS     +0.78 +0.23 -0.01 +0.15 +0.18     - +0.24 +0.16
+  key       na    na    na    na    na    na     - +0.13
+  son       na    na    na    na    na    na    na     -
+  a35 FN: mean phi among 5 judges +0.380; within confidence strata +0.328, +0.326, +0.295; share of a judge's FN that >=3 of 4 others share 0.771 (independent 0.619); rates 0.698, 0.729, 0.667, 0.695, 0.619; majority-of-5 FN rate 0.713
+  a35 FP: mean phi among 5 judges +0.138; within confidence strata +0.166, +0.065; share of a judge's FP that >=3 of 4 others share 0.062 (independent 0.000); rates 0.005, 0.004, 0.007, 0.010, 0.027; majority-of-5 FP rate 0.002
+  rule t50: FN phi (right answers, upper) / FP phi (wrong answers, lower)
+             Q      M      G      O      R     QS    key    son
+  Q          - +0.26 +0.36 +0.26 +0.30 +0.75 +0.07 +0.27
+  M      +0.32     - +0.34 +0.33 +0.38 +0.29 +0.11 +0.23
+  G      +0.31 +0.27     - +0.23 +0.37 +0.39 +0.10 +0.29
+  O      +0.10 +0.20 +0.09     - +0.40 +0.33 +0.20 +0.17
+  R      +0.27 +0.34 +0.24 +0.16     - +0.36 +0.18 +0.32
+  QS     +0.75 +0.33 +0.31 +0.13 +0.28     - +0.16 +0.28
+  key       na    na    na    na    na    na     - +0.13
+  son       na    na    na    na    na    na    na     -
+  t50 FN: mean phi among 5 judges +0.323; within confidence strata +0.284, +0.376, +0.233; share of a judge's FN that >=3 of 4 others share 0.358 (independent 0.034); rates 0.123, 0.094, 0.260, 0.396, 0.268; majority-of-5 FN rate 0.174
+  t50 FP: mean phi among 5 judges +0.231; within confidence strata +0.227, +0.263; share of a judge's FP that >=3 of 4 others share 0.325 (independent 0.084); rates 0.504, 0.468, 0.295, 0.077, 0.237; majority-of-5 FP rate 0.275

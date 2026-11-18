@@ -1,0 +1,7 @@
+STUDENT=ibm-granite/granite-4.2-3b
+TAG=granite_h1
+TPB=8192
+CAP=14400
+NOTAKEOVER=1
+TQ_TRAIN=tqa_h1
+STEPS="trivia:A trivia:B:judge,noise,gold"

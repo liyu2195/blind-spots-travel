@@ -1,0 +1,7 @@
+qwen7 pqa: own vote 0.7120 (0.705, 0.715, 0.715; abstention 0.380) | answer key 0.7141 (6 of 6 runs not collapsed) | difference -0.0021 | answers without a verdict 0
+qwen7 tqa: own vote 0.6588 (0.667, 0.668, 0.641; abstention 0.123) | answer key 0.6928 (6 of 6 runs not collapsed) | difference -0.0340 | answers without a verdict 0
+qwen7 nqo: own vote 0.5769 (0.571, 0.582, 0.577; abstention 0.491) | answer key 0.5513 (2 of 6 runs not collapsed) | difference +0.0256 | answers without a verdict 0
+llama8 pqa: own vote 0.8293 (0.825, 0.837, 0.827; abstention 0.204) | answer key 0.8366 (6 of 6 runs not collapsed) | difference -0.0072 | answers without a verdict 0
+llama8 tqa: own vote 0.8050 (0.811, 0.798, 0.806; abstention 0.190) | answer key 0.8105 (6 of 6 runs not collapsed) | difference -0.0055 | answers without a verdict 0
+llama8 nqo: own vote 0.6089 (0.601, 0.617, 0.609; abstention 0.620) | answer key 0.5981 (6 of 6 runs not collapsed) | difference +0.0108 | answers without a verdict 0
+pooled difference -0.0021; lowest pair -0.0340

@@ -1,0 +1,7 @@
+STUDENT=allenai/Olmo-3-7B-Instruct
+TAG=olmo3
+TPB=4096
+CAP=43200
+NOTAKEOVER=1
+WAITJOB=acl_st_21_run.sh
+STEPS="gsm8k:E1:major"

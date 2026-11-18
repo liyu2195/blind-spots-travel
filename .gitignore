@@ -1,0 +1,10 @@
+runs/
+*.pkl
+*.npy
+*.npz
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
+*.blg

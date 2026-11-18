@@ -1,0 +1,24 @@
+(supp_v11) s3_planted_counts: the count-dose table (fam_fix/e15_count_dose.py) for the PLANTED graders, which e15 skips because their rejection
+sets are stored as st/data/pqa_knows_<arm>_<student>.jsonl (knows = true: right answers to this training question are rejected) and not as key files.
+Arms: realM / realO (copy of the Mistral / OLMo judge's rejections at the 35% cut), scrM (the same number of questions, scrambled), sharpM / sharpO
+(type-wide copy: whole relation types, most-rejected first, until the set is as large).
+For each arm and student, with exactly e15's definitions: of the 12 KNOWN former-state capital training answers, how many fall in the rejection set;
+the share of the other known capital training answers in the set; the share of ALL known training answers in the set; and what the arm's models do on
+the never-trained probe (known former-state and present-day capitals refused), with the three random-rejection models nearest in held-out abstention.
+Also: how many of the 750 training questions use the probe's template "What is the capital of ...".
+Usage: python3 -I -B s3_planted_counts.py   Output: s3_planted_counts_out.txt, s3_planted_counts.json
+training questions 750; with the template 'What is the capital of ...' 142; of these about a former state (hand list) 17
+
+== qwen7: known training answers 390; known former-state capital answers 12; other known capital answers 123
+   realM  : set 230 training questions | rejects 10 of 12 known former-state answers, 0.11 of other known capitals, 0.44 of all known training answers | runs 4 (dropped 0) abstention 0.72 | models refuse F 0.77 (runs 0.52-0.91) P 0.13 | matched random-rejection models F 0.32 P 0.04
+   scrM   : set 230 training questions | rejects  7 of 12 known former-state answers, 0.50 of other known capitals, 0.49 of all known training answers | runs 4 (dropped 0) abstention 0.68 | models refuse F 0.32 (runs 0.15-0.74) P 0.04 | matched random-rejection models F 0.27 P 0.03
+   sharpM : set 236 training questions | rejects  0 of 12 known former-state answers, 0.00 of other known capitals, 0.46 of all known training answers | runs 4 (dropped 0) abstention 0.69 | models refuse F 0.01 (runs 0.00-0.03) P 0.00 | matched random-rejection models F 0.22 P 0.02
+   realO  : set 236 training questions | rejects  8 of 12 known former-state answers, 0.14 of other known capitals, 0.46 of all known training answers | runs 4 (dropped 0) abstention 0.69 | models refuse F 0.63 (runs 0.56-0.74) P 0.08 | matched random-rejection models F 0.33 P 0.04
+   sharpO : set 273 training questions | rejects  0 of 12 known former-state answers, 0.00 of other known capitals, 0.52 of all known training answers | runs 4 (dropped 0) abstention 0.70 | models refuse F 0.02 (runs 0.00-0.08) P 0.00 | matched random-rejection models F 0.22 P 0.02
+
+== llama8: known training answers 540; known former-state capital answers 12; other known capital answers 123
+   realM  : set 395 training questions | rejects 10 of 12 known former-state answers, 0.13 of other known capitals, 0.56 of all known training answers | runs 4 (dropped 0) abstention 0.68 | models refuse F 0.96 (runs 0.94-0.97) P 0.05 | matched random-rejection models F 0.70 P 0.07
+   scrM   : set 395 training questions | rejects  8 of 12 known former-state answers, 0.66 of other known capitals, 0.61 of all known training answers | runs 3 (dropped 1) abstention 0.76 | models refuse F 0.95 (runs 0.91-0.99) P 0.60 | matched random-rejection models F 0.70 P 0.07
+   sharpM : set 437 training questions | rejects  0 of 12 known former-state answers, 0.00 of other known capitals, 0.64 of all known training answers | runs 4 (dropped 0) abstention 0.72 | models refuse F 0.00 (runs 0.00-0.01) P 0.00 | matched random-rejection models F 0.70 P 0.07
+   realO  : set 410 training questions | rejects  9 of 12 known former-state answers, 0.21 of other known capitals, 0.59 of all known training answers | runs 4 (dropped 0) abstention 0.60 | models refuse F 0.84 (runs 0.75-0.90) P 0.14 | matched random-rejection models F 0.47 P 0.02
+   sharpO : set 429 training questions | rejects  0 of 12 known former-state answers, 0.00 of other known capitals, 0.63 of all known training answers | runs 4 (dropped 0) abstention 0.66 | models refuse F 0.01 (runs 0.00-0.02) P 0.00 | matched random-rejection models F 0.70 P 0.07

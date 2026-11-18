@@ -1,0 +1,81 @@
+(supp_v11) s21_cut_and_calibration: EXPLORATORY, written AFTER the E14 result (Nov 18). Why does one pair (Qwen, TriviaQA) miss at the fixed cut k = 20,
+and is the miss explained by something measurable? Existing runs only.
+k* = the student's calibration point: the smallest number of agreeing samples (of 32) at which its untrained greedy answer is right at least half the
+     time (isotonic fit on the 750 training questions, audited truth). With reward 1 / 0 / 0.5, paying answers below k* pays answers that are more
+     often wrong than right.
+A. Per pair: k*; share right among training answers the fixed cut pays (>= 20 agreeing) and among the ones just above the cut (20-25 agreeing);
+   label-free stand-ins for that share: what the Qwen and Mistral judges accept at their default cut, and how often the other student's greedy answer agrees.
+B. Every own-vote arm that has runs (all k): reward minus the answer key's (95% interval, questions and runs resampled), against k - k*.
+C. Summary: arms whose cut lies from 2 below to 12 above k*, and arms outside that window.
+D. k* estimated from only 100 labelled training questions (500 random draws): median, 5-95% range, share of draws inside the window [k* - 2, k* + 12]
+   of the pair's own k*... (i.e. how often 100 labels put the cut where the runs match the key).
+Usage: python3 -I -B s21_cut_and_calibration.py   Output: s21_cut_and_calibration_out.txt
+
+==== qwen7 pqa: calibration point k* = 13; fixed cut 20 is +7 from it
+  A. training answers paid at k = 20: 450, right 0.880; just above the cut (20-25 agreeing): 66, right 0.652 | label-free stand-ins on the paid answers: Qwen judge accepts 0.840, Mistral judge accepts 0.907, other student agrees 0.764; just above the cut: 0.591, 0.697, 0.515
+  B. k = 20 (k - k* =  +7; 3 runs; abstains 0.38): reward 0.712, minus answer key (0.714, 6 runs) -0.002 [-0.017, +0.013]
+  B. k = 21 (k - k* =  +8; 2 runs; abstains 0.32): reward 0.711, minus answer key (0.714, 6 runs) -0.003 [-0.019, +0.012]
+  B. k = 32 (k - k* = +19; 2 runs; abstains 0.55): reward 0.692, minus answer key (0.714, 6 runs) -0.022 [-0.041, -0.004]
+  D. k* from 100 labelled questions: median 15, 5-95% 10-25; a cut 4 above it falls in [k*-2, k*+12] in 0.86 of draws; the fixed cut 20 falls in that window: yes
+
+==== qwen7 tqa: calibration point k* = 29; fixed cut 20 is -9 from it
+  A. training answers paid at k = 20: 549, right 0.778; just above the cut (20-25 agreeing): 70, right 0.471 | label-free stand-ins on the paid answers: Qwen judge accepts 0.854, Mistral judge accepts 0.896, other student agrees 0.696; just above the cut: 0.771, 0.829, 0.286
+  B. k = 20 (k - k* =  -9; 3 runs; abstains 0.12): reward 0.659, minus answer key (0.693, 6 runs) -0.034 [-0.057, -0.014]
+  B. k = 27 (k - k* =  -2; 2 runs; abstains 0.35): reward 0.697, minus answer key (0.693, 6 runs) +0.004 [-0.011, +0.021]
+  B. k = 32 (k - k* =  +3; 2 runs; abstains 0.51): reward 0.683, minus answer key (0.693, 6 runs) -0.009 [-0.029, +0.011]
+  D. k* from 100 labelled questions: median 25, 5-95% 15-31; a cut 4 above it falls in [k*-2, k*+12] in 0.57 of draws; the fixed cut 20 falls in that window: NO
+
+==== qwen7 nqo: calibration point k* = 23; fixed cut 20 is -3 from it
+  A. training answers paid at k = 20: 332, right 0.660; just above the cut (20-25 agreeing): 86, right 0.477 | label-free stand-ins on the paid answers: Qwen judge accepts 0.738, Mistral judge accepts 0.801, other student agrees 0.452; just above the cut: 0.640, 0.674, 0.244
+  B. k = 13 (k - k* = -10; 2 runs; abstains 0.34): reward 0.549, minus answer key (0.551, 2 runs) -0.003 [-0.041, +0.037]
+  B. k = 18 (k - k* =  -5; 2 runs; abstains 0.38): reward 0.560, minus answer key (0.551, 2 runs) +0.008 [-0.035, +0.054]
+  B. k = 20 (k - k* =  -3; 3 runs; abstains 0.49): reward 0.577, minus answer key (0.551, 2 runs) +0.026 [-0.011, +0.064]
+  B. k = 22 (k - k* =  -1; 2 runs; abstains 0.57): reward 0.578, minus answer key (0.551, 2 runs) +0.026 [-0.007, +0.061]
+  B. k = 27 (k - k* =  +4; 2 runs; abstains 0.72): reward 0.568, minus answer key (0.551, 2 runs) +0.017 [-0.015, +0.049]
+  D. k* from 100 labelled questions: median 23, 5-95% 16-31; a cut 4 above it falls in [k*-2, k*+12] in 0.91 of draws; the fixed cut 20 falls in that window: NO
+
+==== llama8 pqa: calibration point k* = 8; fixed cut 20 is +12 from it
+  A. training answers paid at k = 20: 574, right 0.943; just above the cut (20-25 agreeing): 70, right 0.829 | label-free stand-ins on the paid answers: Qwen judge accepts 0.869, Mistral judge accepts 0.939, other student agrees 0.605; just above the cut: 0.771, 0.857, 0.257
+  B. k = 20 (k - k* = +12; 6 runs; abstains 0.19): reward 0.832, minus answer key (0.837, 6 runs) -0.004 [-0.019, +0.010]
+  B. k = 29 (k - k* = +21; 2 runs; abstains 0.41): reward 0.767, minus answer key (0.837, 6 runs) -0.069 [-0.102, -0.038]
+  B. k = 32 (k - k* = +24; 2 runs; abstains 0.50): reward 0.733, minus answer key (0.837, 6 runs) -0.103 [-0.125, -0.081]
+  D. k* from 100 labelled questions: median 9, 5-95% 3-16; a cut 4 above it falls in [k*-2, k*+12] in 0.93 of draws; the fixed cut 20 falls in that window: yes
+
+==== llama8 tqa: calibration point k* = 16; fixed cut 20 is +4 from it
+  A. training answers paid at k = 20: 583, right 0.925; just above the cut (20-25 agreeing): 81, right 0.753 | label-free stand-ins on the paid answers: Qwen judge accepts 0.902, Mistral judge accepts 0.949, other student agrees 0.650; just above the cut: 0.790, 0.852, 0.321
+  B. k = 20 (k - k* =  +4; 3 runs; abstains 0.19): reward 0.805, minus answer key (0.810, 6 runs) -0.005 [-0.019, +0.007]
+  B. k = 29 (k - k* = +13; 2 runs; abstains 0.35): reward 0.787, minus answer key (0.810, 6 runs) -0.023 [-0.047, -0.002]
+  B. k = 32 (k - k* = +16; 2 runs; abstains 0.42): reward 0.761, minus answer key (0.810, 6 runs) -0.049 [-0.069, -0.030]
+  D. k* from 100 labelled questions: median 14, 5-95% 10-19; a cut 4 above it falls in [k*-2, k*+12] in 0.95 of draws; the fixed cut 20 falls in that window: yes
+
+==== llama8 nqo: calibration point k* = 14; fixed cut 20 is +6 from it
+  A. training answers paid at k = 20: 361, right 0.789; just above the cut (20-25 agreeing): 99, right 0.657 | label-free stand-ins on the paid answers: Qwen judge accepts 0.801, Mistral judge accepts 0.875, other student agrees 0.374; just above the cut: 0.798, 0.828, 0.212
+  B. k = 15 (k - k* =  +1; 2 runs; abstains 0.43): reward 0.628, minus answer key (0.598, 6 runs) +0.030 [+0.010, +0.050]
+  B. k = 20 (k - k* =  +6; 3 runs; abstains 0.62): reward 0.609, minus answer key (0.598, 6 runs) +0.011 [-0.004, +0.025]
+  B. k = 23 (k - k* =  +9; 2 runs; abstains 0.69): reward 0.596, minus answer key (0.598, 6 runs) -0.002 [-0.017, +0.013]
+  D. k* from 100 labelled questions: median 14, 5-95% 4-22; a cut 4 above it falls in [k*-2, k*+12] in 0.84 of draws; the fixed cut 20 falls in that window: yes
+
+==== C. all own-vote arms, by distance of the cut from the calibration point
+   inside [k*-2, k*+12]: 11 arms (29 runs): reward minus key from -0.009 to +0.030, mean +0.0056; arms below -0.015: 0
+      qwen7 tqa   k=27 ( -2): +0.004 [-0.011, +0.021] (2 runs, abstains 0.35)
+      qwen7 nqo   k=22 ( -1): +0.026 [-0.007, +0.061] (2 runs, abstains 0.57)
+      llama8 nqo  k=15 ( +1): +0.030 [+0.010, +0.050] (2 runs, abstains 0.43)
+      qwen7 tqa   k=32 ( +3): -0.009 [-0.029, +0.011] (2 runs, abstains 0.51)
+      qwen7 nqo   k=27 ( +4): +0.017 [-0.015, +0.049] (2 runs, abstains 0.72)
+      llama8 tqa  k=20 ( +4): -0.005 [-0.019, +0.007] (3 runs, abstains 0.19)
+      llama8 nqo  k=20 ( +6): +0.011 [-0.004, +0.025] (3 runs, abstains 0.62)
+      qwen7 pqa   k=20 ( +7): -0.002 [-0.017, +0.013] (3 runs, abstains 0.38)
+      qwen7 pqa   k=21 ( +8): -0.003 [-0.019, +0.012] (2 runs, abstains 0.32)
+      llama8 nqo  k=23 ( +9): -0.002 [-0.017, +0.013] (2 runs, abstains 0.69)
+      llama8 pqa  k=20 (+12): -0.004 [-0.019, +0.010] (6 runs, abstains 0.19)
+   outside: 9 arms (20 runs): reward minus key from -0.103 to +0.026, mean -0.0299; arms below -0.015: 6
+      qwen7 nqo   k=13 (-10): -0.003 [-0.041, +0.037] (2 runs, abstains 0.34)
+      qwen7 tqa   k=20 ( -9): -0.034 [-0.057, -0.014] (3 runs, abstains 0.12)
+      qwen7 nqo   k=18 ( -5): +0.008 [-0.035, +0.054] (2 runs, abstains 0.38)
+      qwen7 nqo   k=20 ( -3): +0.026 [-0.011, +0.064] (3 runs, abstains 0.49)
+      llama8 tqa  k=29 (+13): -0.023 [-0.047, -0.002] (2 runs, abstains 0.35)
+      llama8 tqa  k=32 (+16): -0.049 [-0.069, -0.030] (2 runs, abstains 0.42)
+      qwen7 pqa   k=32 (+19): -0.022 [-0.041, -0.004] (2 runs, abstains 0.55)
+      llama8 pqa  k=29 (+21): -0.069 [-0.102, -0.038] (2 runs, abstains 0.41)
+      llama8 pqa  k=32 (+24): -0.103 [-0.125, -0.081] (2 runs, abstains 0.50)
+   least squares over the 20 arms: reward minus key = +0.0058 -0.0083 per sample beyond k*+12 -0.0026 per sample below k*-2; R2 0.76

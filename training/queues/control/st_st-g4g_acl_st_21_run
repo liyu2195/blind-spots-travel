@@ -1,0 +1,8 @@
+STUDENT=ibm-granite/granite-4.2-3b
+TAG=granite_g4
+JUDGE=google/gemma-4-12B-it-qat-w4a16-ct
+JQ=""
+TPB=8192
+CAP=14400
+NOTAKEOVER=1
+STEPS="trivia:A trivia:B:judge,noise"

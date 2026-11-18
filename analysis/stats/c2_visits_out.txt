@@ -1,0 +1,38 @@
+(stats) Claim 2: judge-paid wrong answers form on REVISITS of a question, not with training steps.
+Runs: <st>_<regime>judgeQt50_idkc05_s<seed>_h1 with regime B1K20 (3,840 training questions = 1 visit in 120 steps), B2vK20 (1,920 = 2 visits),
+B5vK20 (768 = 5), B10vK20 (384 = 10), FK20 (750 = about 5). Per step: y = logged wrong_paid (share of wrong training samples the grader paid).
+Visit number of a step = visit number shared by its 32 questions, from my rebuild of the trainer's schedule (st_grpo.py: random.seed(seed);
+shuffle; 32 rows per step; reshuffle when used up); steps whose questions do not share one visit number are dropped (robustness: mean visit).
+Schedule check: step-1 strict accuracy predicted from the 32 scheduled questions' untrained samples vs the logged correct_strict (true vs wrong seeds).
+PRIMARY estimands (per student; qwen7 = discovery, llama8 = confirmation), from y_rt = a_run + sum_k b_k 1[visit = k] + g * step / 100 + e:
+  g = step slope at a fixed visit number (per 100 steps; claim: ~0; TOST margin 0.04 per 100 steps, about 1/3 of the first revisit's effect over
+  a 120-step run) and b_2 - b_1 = the first revisit's effect at a fixed step (claim: > 0).
+Uncertainty: run-cluster bootstrap (2000; runs resampled within regime). Run-level permutation test of 'visits matter beyond steps': regime
+  labels permuted over runs (visit numbers recomputed from the permuted regime's question count and the run's seed), statistic b_2 - b_1 and the
+  partial R^2 of visit dummies given 12-step bins (2000 draws).
+Robustness: step bins instead of a linear step term (partial R^2 of step bins given visits, and of visits given step bins); mean visit number on
+  mixed steps; one-visit (B1) runs alone: slope per 100 steps; first-revisit jump vs B1 placebo at the same steps.
+Output: c2_visits_out.txt
+training-file sizes: {'tqa_b1_3840.jsonl': 3840, 'tqa_b1_1920.jsonl': 1920, 'tqa_b1_768.jsonl': 768, 'tqa_b1_384.jsonl': 384, 'tqa_h1.jsonl': 750}
+  schedule check qwen7: 30 runs, |predicted - logged step-1 strict accuracy| true seed mean 0.0111; wrong seeds mean 0.1062; share of wrong-seed errors below the true-seed mean 0.067
+  schedule check llama8: 34 runs, |predicted - logged step-1 strict accuracy| true seed mean 0.0078; wrong seeds mean 0.0682; share of wrong-seed errors below the true-seed mean 0.081
+qwen7: runs per regime B1K20 4 (seeds [0, 1, 2, 3]), B2vK20 2 (seeds [0, 1]), B5vK20 2 (seeds [0, 1]), B10vK20 4 (seeds [0, 1, 2, 3]), FK20 3 (seeds [0, 1, 2])
+llama8: runs per regime B1K20 4 (seeds [0, 1, 2, 3]), B2vK20 2 (seeds [0, 1]), B5vK20 2 (seeds [0, 1]), B10vK20 4 (seeds [0, 1, 2, 3]), FK20 3 (seeds [0, 1, 2])
+
+== qwen7 (15 runs, 1785 run-steps with one visit number)
+  step slope at fixed visit g = +0.0260 per 100 steps [+0.0072, +0.0443]  TOST(+-0.04) p 0.0710, 90% CI [+0.0103, +0.0416], bound 0.0416
+  first revisit at fixed step b2 - b1 = +0.1215 [+0.1128, +0.1305];  regime-label permutation p 0.0005 (null mean +0.0278, 99th pct +0.0856)
+  visit effects b_k - b_1: v2 +0.121 v3 +0.209 v4 +0.255 v5 +0.278 v6 +0.295 v7 +0.306 v8 +0.310 v9 +0.304 v10 +0.298
+  step bins: partial R2 of step bins given visits 0.0052 [0.0035, 0.0137];  of visits given step bins 0.1775 [0.1541, 0.2041]  (permutation p 0.0010)
+  robustness, mean visit number on every step (quadratic visit term): g = +0.0358 per 100 steps
+  one-visit (B1) runs: slope per 100 steps -0.002 +0.052 +0.038 -0.001; mean +0.0219 (t-interval over runs [-0.0215, +0.0652])
+  first-revisit jump (first 5 visit-2 steps minus last 5 visit-1 steps): 11/11 runs > 0; mean +0.092 vs B1 placebo at the same steps +0.017; jump minus placebo > 0 in 10/11
+
+== llama8 (15 runs, 1785 run-steps with one visit number)
+  step slope at fixed visit g = +0.0028 per 100 steps [-0.0296, +0.0269]  TOST(+-0.04) p 0.0030, 90% CI [-0.0229, +0.0251], bound 0.0251
+  first revisit at fixed step b2 - b1 = +0.1214 [+0.1103, +0.1345];  regime-label permutation p 0.0005 (null mean +0.0300, 99th pct +0.0796)
+  visit effects b_k - b_1: v2 +0.121 v3 +0.191 v4 +0.223 v5 +0.241 v6 +0.268 v7 +0.270 v8 +0.270 v9 +0.273 v10 +0.277
+  step bins: partial R2 of step bins given visits 0.0050 [0.0042, 0.0166];  of visits given step bins 0.1504 [0.1287, 0.1837]  (permutation p 0.0010)
+  robustness, mean visit number on every step (quadratic visit term): g = +0.0141 per 100 steps
+  one-visit (B1) runs: slope per 100 steps +0.010 +0.034 +0.038 -0.060; mean +0.0055 (t-interval over runs [-0.0664, +0.0774])
+  first-revisit jump (first 5 visit-2 steps minus last 5 visit-1 steps): 9/11 runs > 0; mean +0.105 vs B1 placebo at the same steps +0.008; jump minus placebo > 0 in 11/11

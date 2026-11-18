@@ -1,0 +1,26 @@
+(supp_v11) s4_sc_reference: one forward pass of a trained model against 32-sample self-consistency of the untrained model, for graders that the
+main self-consistency table (fix_sc/f3_table.txt) does not contain: the reference-guided Qwen judge at its default threshold (judgeQRt50) and at
+the 35% cut (judgeQRa35). The same computation is run on graders that ARE in that table (answer key sim00fn00, Qwen judge 35% cut judgeQa35,
+Sonnet apiS55) as a check of this script against fix_sc.
+Units: held-out (new) questions of PopQA and NQ-open (and TriviaQA for the check graders). Per run: k = number of questions it answers; accuracy of
+its answers by audited truth (loose key or Sonnet level >= 4; key-wrong answers without an audit verdict count wrong), and by the key alone.
+SC_32: the untrained greedy answers ranked by agreement with the 32 untrained samples; the k best are answered (ties at the boundary split
+evenly); if fewer than k greedy answers exist the missing ones count as wrong. Gap = RL accuracy - SC accuracy on answered questions (points).
+Interval: bootstrap over held-out questions (1000) within dataset, runs averaged.
+Usage: python3 -I -B s4_sc_reference.py   Output: s4_sc_reference_out.txt
+llama8  apiS55      [PopQA + NQ-open] runs  6  answered 0.82  RL - SC_32 +0.8 [-0.7, +2.4] points (key alone -0.3); share of the run's answers that are key-wrong and unaudited 0.000
+llama8  apiS55      [all datasets   ] runs  9  answered 0.86  RL - SC_32 +0.4 [-0.7, +1.5] points (key alone -0.3); share of the run's answers that are key-wrong and unaudited 0.000
+llama8  judgeQRa35  [PopQA + NQ-open] runs  4  answered 0.41  RL - SC_32 -0.7 [-2.7, +1.4] points (key alone -2.3); share of the run's answers that are key-wrong and unaudited 0.011
+llama8  judgeQRt50  [PopQA + NQ-open] runs  4  answered 0.73  RL - SC_32 +0.8 [-1.0, +2.7] points (key alone -0.2); share of the run's answers that are key-wrong and unaudited 0.015
+llama8  judgeQa35   [PopQA + NQ-open] runs 12  answered 0.41  RL - SC_32 +0.4 [-1.4, +2.3] points (key alone -3.6); share of the run's answers that are key-wrong and unaudited 0.000
+llama8  judgeQa35   [all datasets   ] runs 18  answered 0.42  RL - SC_32 +0.1 [-1.2, +1.5] points (key alone -3.3); share of the run's answers that are key-wrong and unaudited 0.000
+llama8  sim00fn00   [PopQA + NQ-open] runs 12  answered 0.60  RL - SC_32 -2.3 [-4.5, -0.1] points (key alone -0.8); share of the run's answers that are key-wrong and unaudited 0.008
+llama8  sim00fn00   [all datasets   ] runs 18  answered 0.69  RL - SC_32 -2.0 [-3.5, -0.4] points (key alone -1.0); share of the run's answers that are key-wrong and unaudited 0.006
+qwen7   apiS55      [PopQA + NQ-open] runs  6  answered 0.56  RL - SC_32 +1.8 [-0.0, +3.6] points (key alone -0.9); share of the run's answers that are key-wrong and unaudited 0.000
+qwen7   apiS55      [all datasets   ] runs  9  answered 0.65  RL - SC_32 +1.0 [-0.4, +2.4] points (key alone -0.8); share of the run's answers that are key-wrong and unaudited 0.000
+qwen7   judgeQRa35  [PopQA + NQ-open] runs  3  answered 0.44  RL - SC_32 -2.3 [-4.5, -0.2] points (key alone +0.5); share of the run's answers that are key-wrong and unaudited 0.011
+qwen7   judgeQRt50  [PopQA + NQ-open] runs  3  answered 0.53  RL - SC_32 +1.0 [-1.1, +3.4] points (key alone -0.9); share of the run's answers that are key-wrong and unaudited 0.009
+qwen7   judgeQa35   [PopQA + NQ-open] runs 12  answered 0.40  RL - SC_32 +2.6 [+0.5, +4.6] points (key alone +0.6); share of the run's answers that are key-wrong and unaudited 0.000
+qwen7   judgeQa35   [all datasets   ] runs 18  answered 0.40  RL - SC_32 +1.9 [+0.0, +3.7] points (key alone +0.4); share of the run's answers that are key-wrong and unaudited 0.000
+qwen7   sim00fn00   [PopQA + NQ-open] runs  7  answered 0.57  RL - SC_32 -2.1 [-4.1, +0.2] points (key alone -1.7); share of the run's answers that are key-wrong and unaudited 0.001
+qwen7   sim00fn00   [all datasets   ] runs 13  answered 0.65  RL - SC_32 -1.6 [-3.1, -0.1] points (key alone -1.5); share of the run's answers that are key-wrong and unaudited 0.001

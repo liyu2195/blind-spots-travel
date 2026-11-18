@@ -1,0 +1,8 @@
+STUDENT=allenai/Olmo-3-7B-Instruct
+TAG=olmo3_qr
+JUDGE=Qwen/Qwen3.5-9B
+JQ="--quant fp8 --reason --max_model_len 4096"
+TPB=4096
+CAP=14400
+NOTAKEOVER=1
+STEPS="trivia:A trivia:B:judge,noise"

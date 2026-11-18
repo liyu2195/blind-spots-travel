@@ -1,0 +1,65 @@
+qwen7 h1 {'judgeQt50': 0.493, 'judgeGa35': 0.727, 'judgeGt50': 0.646, 'judgeMa35': 0.75, 'judgeOa35': 0.71, 'judgeOt50': 0.69, 'judgeQa35': 0.685, 'judgeQa50': 0.676}
+qwen7 pq {'fnType20/80': 1.0, 'fnType50/20': 1.0, 'fnType80/20': 1.0, 'fnHid60/0': 0.542, 'fnHid80/20': 0.542, 'judgeGa35': 0.858, 'judgeMa35': 0.901, 'judgeOa35': 0.807, 'judgeQa35': 0.842, 'judgeQa50': 0.816, 'judgeQt50': 0.788, 'plrealM': 0.898, 'plrealO': 0.807, 'plsharpM': 0.999, 'plsharpO': 1.0}
+qwen7 nq {'judgeGa35': 0.486, 'judgeGt50': 0.482, 'judgeMa35': 0.697, 'judgeOa35': 0.643, 'judgeOt50': 0.602, 'judgeQa35': 0.579, 'judgeQa50': 0.578, 'judgeQt50': 0.505, 'judgeRa35': 0.541}
+llama8 h1 {'judgeQt50': 0.67, 'judgeGa35': 0.796, 'judgeGt50': 0.667, 'judgeMa35': 0.766, 'judgeMt50': 0.67, 'judgeOa35': 0.8, 'judgeOt50': 0.776, 'judgeQa35': 0.771, 'judgeQa50': 0.764}
+llama8 pq {'fnType20/80': 1.0, 'fnType50/20': 1.0, 'fnType80/20': 1.0, 'fnHid80/20': 0.526, 'judgeGa35': 0.915, 'judgeMa35': 0.879, 'judgeOa35': 0.82, 'judgeQa35': 0.876, 'judgeQa50': 0.837, 'judgeQt50': 0.725, 'plrealM': 0.875, 'plrealO': 0.824, 'plsharpM': 1.0, 'plsharpO': 1.0}
+llama8 nq {'apiS55': 0.529, 'judgeGa35': 0.763, 'judgeGt50': 0.678, 'judgeMa35': 0.759, 'judgeOa35': 0.709, 'judgeOt50': 0.694, 'judgeQa35': 0.758, 'judgeQa50': 0.683, 'judgeQt50': 0.544, 'judgeRa35': 0.565}
+
+FR points with a hidden-state visibility: 54; Spearman(transfer, Gini_hidden) +0.771; Spearman(transfer, Gini_text) +0.766; Spearman(Gini_hidden, Gini_text) +0.964
+  T = k * gini: k (qwen7) 0.873 -> llama8 MAE 0.173 R2 +0.500
+  T = k * gini_hidden: k (qwen7) 0.786 -> llama8 MAE 0.140 R2 +0.607
+    st ds         sub  transfer   gini  gini_hidden
+ qwen7 nq   judgeGt50    -0.415  0.093       -0.037
+ qwen7 nq   judgeGa35     0.315  0.117       -0.029
+llama8 pq  fnHid80/20     0.058 -0.054        0.053
+ qwen7 nq   judgeRa35     0.455  0.189        0.082
+ qwen7 pq   fnHid60/0     0.694 -0.006        0.084
+ qwen7 pq  fnHid80/20    -0.142 -0.006        0.084
+llama8 nq   judgeQt50    -0.919  0.304        0.087
+llama8 nq   judgeRa35     0.145  0.157        0.131
+ qwen7 nq   judgeQa50     0.004  0.238        0.156
+ qwen7 nq   judgeQa35     0.541  0.210        0.159
+ qwen7 nq   judgeOt50     0.331  0.187        0.204
+ qwen7 nq   judgeOa35     0.559  0.286        0.286
+ qwen7 h1   judgeQa50     0.229  0.207        0.353
+llama8 nq   judgeGt50    -0.144  0.356        0.357
+llama8 nq   judgeQa50     0.017  0.271        0.365
+ qwen7 h1   judgeQa35     0.219  0.198        0.370
+llama8 nq   judgeOt50    -0.110  0.278        0.388
+ qwen7 nq   judgeMa35     0.599  0.370        0.394
+llama8 nq   judgeOa35     0.009  0.277        0.419
+ qwen7 h1   judgeOa35    -0.143  0.215        0.420
+ qwen7 h1   judgeGa35     0.250  0.324        0.454
+ qwen7 h1   judgeMa35     0.421  0.311        0.500
+llama8 nq   judgeQa35     0.460  0.291        0.516
+llama8 nq   judgeMa35     0.498  0.359        0.519
+llama8 nq   judgeGa35     0.507  0.411        0.525
+llama8 h1   judgeQa50     0.379  0.364        0.527
+llama8 h1   judgeMa35     0.399  0.319        0.532
+llama8 h1   judgeQa35     0.393  0.296        0.542
+llama8 h1   judgeGa35     0.452  0.448        0.592
+llama8 h1   judgeOa35     0.507  0.307        0.600
+ qwen7 pq   judgeOa35     0.314  0.511        0.614
+ qwen7 pq     plrealO     0.345  0.511        0.615
+ qwen7 pq   judgeQa50     0.382  0.466        0.633
+llama8 pq   judgeOa35     0.564  0.534        0.640
+llama8 pq     plrealO     0.444  0.534        0.648
+llama8 pq   judgeQa50     0.571  0.577        0.675
+ qwen7 pq   judgeQa35     0.503  0.592        0.684
+ qwen7 pq   judgeGa35     0.548  0.647        0.716
+llama8 pq     plrealM     0.485  0.678        0.750
+llama8 pq   judgeQa35     0.602  0.619        0.752
+llama8 pq   judgeMa35     0.650  0.678        0.758
+ qwen7 pq     plrealM     0.531  0.677        0.797
+ qwen7 pq   judgeMa35     0.595  0.677        0.803
+llama8 pq   judgeGa35     0.669  0.752        0.829
+ qwen7 pq    plsharpM     0.753  0.952        0.999
+llama8 pq    plsharpM     0.762  0.989        1.000
+llama8 pq    plsharpO     0.888  1.000        1.000
+llama8 pq fnType20/80     0.783  1.000        1.000
+llama8 pq fnType50/20     1.180  1.000        1.000
+llama8 pq fnType80/20     0.847  1.000        1.000
+ qwen7 pq fnType20/80     1.067  1.000        1.000
+ qwen7 pq fnType50/20     0.943  1.000        1.000
+ qwen7 pq fnType80/20     0.698  1.000        1.000
+ qwen7 pq    plsharpO     0.782  1.000        1.000

@@ -1,0 +1,74 @@
+(verify_what) Item 1: does RL change WHAT the model says on NEW questions, or only WHEN it answers?
+Runs: every qwen7 / llama8 FK20 run with IDK credit 0.5 (tag FK20, idkc05), final greedy ck120. New questions = not in <set>_h1.jsonl;
+main analysis drops the 32 TriviaQA new questions that duplicate a training question (same qid), a sensitivity row keeps them.
+(A) Of the key-right final answers on new questions (key = st_common.tq_correct, loose alias match, as the claims use), the share that
+    equal the untrained greedy answer / equal one of the 32 untrained samples (but not the greedy) / neither, under three notions of 'equal':
+      exact   = identical normalised string (parse_tq);
+      contain = identical, or one string contains the other as whole words (>= 3 characters), my own implementation;
+      key     = the untrained greedy (resp. any untrained sample) was itself key-right on that question (semantic: 'already known').
+    Reference row: the same shares for the untrained model re-decoded inside each run (ck0) instead of the trained model = decode noise.
+(B) Decomposition per run of accuracy among answered on new questions:  acc|ans - base = sel + chg with
+      base = untrained greedy key-accuracy over ALL new questions (IDK / malformed = not right; the claim's baseline),
+      sel = base|A - base (base|A = untrained greedy key-accuracy on the questions the run answers), chg = acc|ans - base|A.
+    Alternative baseline: untrained greedy accuracy among the questions the UNTRAINED model answers (its own acc|ans).
+    Runs with 0.05 <= refusal <= 0.95 as in the claim; all runs as a check.
+Output v10_knowledge.txt
+qwen7 h1: 77 runs, new questions 718 (untrained greedy key-acc 0.586, among its answered 0.615); key-right final answers 26154
+     exact        same as untrained greedy 0.944  other untrained sample 0.051  neither 0.0047
+     contain      same as untrained greedy 0.958  other untrained sample 0.039  neither 0.0031
+     key          same as untrained greedy 0.968  other untrained sample 0.030  neither 0.0025
+     contain_ck0  same as untrained greedy 0.960  other untrained sample 0.036  neither 0.0035
+qwen7 pq: 155 runs, new questions 750 (untrained greedy key-acc 0.505, among its answered 0.587); key-right final answers 45821
+     exact        same as untrained greedy 0.921  other untrained sample 0.056  neither 0.0234
+     contain      same as untrained greedy 0.945  other untrained sample 0.039  neither 0.0158
+     key          same as untrained greedy 0.961  other untrained sample 0.025  neither 0.0138
+     contain_ck0  same as untrained greedy 0.948  other untrained sample 0.036  neither 0.0158
+qwen7 nq: 76 runs, new questions 750 (untrained greedy key-acc 0.248, among its answered 0.320); key-right final answers 11076
+     exact        same as untrained greedy 0.876  other untrained sample 0.088  neither 0.0352
+     contain      same as untrained greedy 0.919  other untrained sample 0.068  neither 0.0128
+     key          same as untrained greedy 0.938  other untrained sample 0.054  neither 0.0083
+     contain_ck0  same as untrained greedy 0.918  other untrained sample 0.069  neither 0.0128
+llama8 h1: 74 runs, new questions 718 (untrained greedy key-acc 0.742, among its answered 0.756); key-right final answers 31392
+     exact        same as untrained greedy 0.939  other untrained sample 0.055  neither 0.0055
+     contain      same as untrained greedy 0.966  other untrained sample 0.033  neither 0.0013
+     key          same as untrained greedy 0.981  other untrained sample 0.018  neither 0.0007
+     contain_ck0  same as untrained greedy 0.966  other untrained sample 0.033  neither 0.0013
+llama8 pq: 127 runs, new questions 750 (untrained greedy key-acc 0.697, among its answered 0.718); key-right final answers 47977
+     exact        same as untrained greedy 0.894  other untrained sample 0.083  neither 0.0222
+     contain      same as untrained greedy 0.945  other untrained sample 0.050  neither 0.0055
+     key          same as untrained greedy 0.961  other untrained sample 0.037  neither 0.0028
+     contain_ck0  same as untrained greedy 0.945  other untrained sample 0.049  neither 0.0055
+llama8 nq: 78 runs, new questions 750 (untrained greedy key-acc 0.356, among its answered 0.381); key-right final answers 15346
+     exact        same as untrained greedy 0.822  other untrained sample 0.111  neither 0.0665
+     contain      same as untrained greedy 0.899  other untrained sample 0.087  neither 0.0140
+     key          same as untrained greedy 0.938  other untrained sample 0.057  neither 0.0048
+     contain_ck0  same as untrained greedy 0.900  other untrained sample 0.086  neither 0.0140
+
+ALL six pairs (dedup new questions):
+  exact        n 177766: same as untrained greedy 0.909  other untrained sample 0.069  neither 0.0216
+  contain      n 177766: same as untrained greedy 0.945  other untrained sample 0.047  neither 0.0083
+  key          n 177766: same as untrained greedy 0.962  other untrained sample 0.032  neither 0.0057
+  exact_ck0    n 177766: same as untrained greedy 0.911  other untrained sample 0.068  neither 0.0217
+  contain_ck0  n 177766: same as untrained greedy 0.946  other untrained sample 0.046  neither 0.0083
+  key_dupincl  n 180581: same as untrained greedy 0.960  other untrained sample 0.033  neither 0.0060
+  decode-noise reference (ck0 key-right answers vs base greedy), exact: n 232238 same 0.987 other sample 0.012 neither 0.0013
+  decode-noise reference (ck0 key-right answers vs base greedy), contain: n 232238 same 0.991 other sample 0.009 neither 0.0006
+  never-sampled (contain) right answers: 1468 (0.0083); on new questions sharing an exact alias set with a training question: 317 (0.216) vs 0.142 of all right answers
+
+(B) 0.05 <= a <= 0.95: 489 runs; mean acc|ans - base +0.1942 = sel +0.1853 + chg +0.0089; selection share 0.954; runs with |chg| < 0.03 0.93; chg < 0 in 0.20
+      alternative baseline (untrained acc among ITS answered): gain +0.1471 = sel' +0.1383 + chg +0.0089; selection share 0.940
+      llama8 h1: runs  49 sel +0.137 chg +0.0048 [run 5-95%: -0.003, +0.013] sel' +0.123
+      llama8 nq: runs  67 sel +0.146 chg -0.0003 [run 5-95%: -0.019, +0.041] sel' +0.121
+      llama8 pq: runs  97 sel +0.173 chg +0.0138 [run 5-95%: +0.000, +0.027] sel' +0.152
+      qwen7  h1: runs  60 sel +0.190 chg +0.0021 [run 5-95%: -0.013, +0.014] sel' +0.162
+      qwen7  nq: runs  68 sel +0.151 chg +0.0049 [run 5-95%: -0.011, +0.022] sel' +0.079
+      qwen7  pq: runs 148 sel +0.241 chg +0.0158 [run 5-95%: -0.005, +0.038] sel' +0.160
+
+(B) all runs: 570 runs; mean acc|ans - base +0.1755 = sel +0.1666 + chg +0.0089; selection share 0.950; runs with |chg| < 0.03 0.93; chg < 0 in 0.20
+      alternative baseline (untrained acc among ITS answered): gain +0.1320 = sel' +0.1231 + chg +0.0089; selection share 0.933
+      llama8 h1: runs  74 sel +0.104 chg +0.0038 [run 5-95%: -0.005, +0.013] sel' +0.090
+      llama8 nq: runs  78 sel +0.138 chg +0.0006 [run 5-95%: -0.019, +0.040] sel' +0.113
+      llama8 pq: runs 127 sel +0.142 chg +0.0143 [run 5-95%: +0.000, +0.028] sel' +0.121
+      qwen7  h1: runs  73 sel +0.159 chg +0.0032 [run 5-95%: -0.011, +0.017] sel' +0.130
+      qwen7  nq: runs  69 sel +0.155 chg +0.0048 [run 5-95%: -0.011, +0.022] sel' +0.084
+      qwen7  pq: runs 149 sel +0.243 chg +0.0157 [run 5-95%: -0.005, +0.038] sel' +0.162

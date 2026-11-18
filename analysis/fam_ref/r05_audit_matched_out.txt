@@ -1,0 +1,48 @@
+(fam_ref) r05: the r03 audit with the control it lacked. PopQA relation types, strict cut (and 50% cut). For each judge arm: refusal of known
+answers on new questions per relation type by (a) the judge's models, (b) the matched judge-free control = the 3 runs trained with the answer key
+plus random rejections of right answers (sim00fnXX, any XX incl. 00) nearest in new-question abstention, (c) key-trained models. Reported: refusal in
+the judge's least- and most-accepted quarter of types for (a) (b) (c); Spearman of the audit with (a), with (b) and with the excess (a) - (b); Spearman
+of the untrained student's own per-type confidence (share of its 32 samples that are right, known questions on training side) with (a).
+Usage: nice -n 10 python3 -B r05_audit_matched.py -> r05_audit_matched_out.txt, r05_audit_matched.json
+
+=== qwen7: 12 relation types; judge-free control pool 19 runs (abstention 0.31-0.79)
+  judgeQa35   runs 6 abst 0.63 (control 0.63) | least-accepted quarter: judge 0.94 control 0.85 key 0.32 | most-accepted: 0.17 / 0.20 / 0.02 | rho audit~judge-models -0.86, audit~control -0.88, audit~excess -0.17, student confidence~judge-models -0.59
+      largest excess over control: religion (n 12) audit 0.21: judge 0.94 vs control 0.72; sport (n 10) audit 0.62: judge 0.17 vs control 0.07; capital (n 152) audit 0.78: judge 0.09 vs control 0.01
+  judgeMa35   runs 3 abst 0.71 (control 0.71) | least-accepted quarter: judge 0.95 control 0.92 key 0.28 | most-accepted: 0.16 / 0.24 / 0.00 | rho audit~judge-models -0.80, audit~control -0.88, audit~excess -0.51, student confidence~judge-models -0.77
+      largest excess over control: mother (n 8) audit 0.47: judge 1.00 vs control 0.88; producer (n 14) audit 0.36: judge 1.00 vs control 0.88; composer (n 11) audit 0.62: judge 0.88 vs control 0.79
+  judgeGa35   runs 3 abst 0.60 (control 0.60) | least-accepted quarter: judge 0.86 control 0.87 key 0.32 | most-accepted: 0.07 / 0.04 / 0.00 | rho audit~judge-models -0.90, audit~control -0.83, audit~excess +0.01, student confidence~judge-models -0.71
+      largest excess over control: father (n 19) audit 0.30: judge 0.95 vs control 0.47; mother (n 8) audit 0.47: judge 0.62 vs control 0.38; capital of (n 36) audit 0.50: judge 0.58 vs control 0.44
+  judgeOa35   runs 3 abst 0.60 (control 0.60) | least-accepted quarter: judge 0.83 control 0.75 key 0.33 | most-accepted: 0.07 / 0.04 / 0.00 | rho audit~judge-models -0.89, audit~control -0.74, audit~excess -0.03, student confidence~judge-models -0.74
+      largest excess over control: father (n 19) audit 0.24: judge 0.91 vs control 0.47; mother (n 8) audit 0.20: judge 0.71 vs control 0.38; capital (n 152) audit 0.81: judge 0.05 vs control 0.01
+  judgeQRa35  runs 2 abst 0.66 (control 0.64) | least-accepted quarter: judge 0.97 control 0.68 key 0.24 | most-accepted: 0.27 / 0.24 / 0.08 | rho audit~judge-models -0.89, audit~control -0.47, audit~excess -0.48, student confidence~judge-models -0.18
+      largest excess over control: sport (n 10) audit 0.00: judge 0.95 vs control 0.20; capital of (n 36) audit 0.30: judge 0.71 vs control 0.53; genre (n 44) audit 0.03: judge 1.00 vs control 0.85
+  judgeQa50   runs 5 abst 0.42 (control 0.42) | least-accepted quarter: judge 0.59 control 0.42 key 0.32 | most-accepted: 0.10 / 0.09 / 0.08 | rho audit~judge-models -0.60, audit~control -0.61, audit~excess -0.41, student confidence~judge-models -0.68
+      largest excess over control: screenwriter (n 17) audit 0.05: judge 0.98 vs control 0.65; capital of (n 36) audit 0.70: judge 0.40 vs control 0.18; producer (n 14) audit 0.18: judge 0.77 vs control 0.60
+  judgeMa50   runs 2 abst 0.43 (control 0.43) | least-accepted quarter: judge 0.46 control 0.39 key 0.28 | most-accepted: 0.01 / 0.00 / 0.00 | rho audit~judge-models -0.85, audit~control -0.81, audit~excess -0.09, student confidence~judge-models -0.82
+      largest excess over control: father (n 19) audit 0.48: judge 0.45 vs control 0.16; mother (n 8) audit 0.80: judge 0.25 vs control 0.08; screenwriter (n 17) audit 0.35: judge 0.79 vs control 0.71
+  judgeGa50   runs 2 abst 0.48 (control 0.48) | least-accepted quarter: judge 0.77 control 0.63 key 0.39 | most-accepted: 0.06 / 0.02 / 0.02 | rho audit~judge-models -0.75, audit~control -0.85, audit~excess -0.24, student confidence~judge-models -0.62
+      largest excess over control: producer (n 14) audit 0.09: judge 0.86 vs control 0.57; capital of (n 36) audit 0.75: judge 0.54 vs control 0.27; screenwriter (n 17) audit 0.00: judge 1.00 vs control 0.86
+  judgeOa50   runs 2 abst 0.44 (control 0.44) | least-accepted quarter: judge 0.61 control 0.41 key 0.35 | most-accepted: 0.00 / 0.00 / 0.00 | rho audit~judge-models -0.94, audit~control -0.75, audit~excess -0.43, student confidence~judge-models -0.74
+      largest excess over control: father (n 19) audit 0.45: judge 0.53 vs control 0.14; mother (n 8) audit 0.60: judge 0.25 vs control 0.04; producer (n 14) audit 0.45: judge 0.54 vs control 0.43
+
+=== llama8: 13 relation types; judge-free control pool 23 runs (abstention 0.04-0.74)
+  judgeQa35   runs 6 abst 0.61 (control 0.63) | least-accepted quarter: judge 0.92 control 0.82 key 0.03 | most-accepted: 0.11 / 0.25 / 0.00 | rho audit~judge-models -0.84, audit~control -0.65, audit~excess -0.47, student confidence~judge-models -0.87
+      largest excess over control: religion (n 19) audit 0.15: judge 0.78 vs control 0.63; producer (n 32) audit 0.03: judge 0.99 vs control 0.91; screenwriter (n 61) audit 0.05: judge 0.99 vs control 0.92
+  judgeMa35   runs 3 abst 0.64 (control 0.63) | least-accepted quarter: judge 0.93 control 0.92 key 0.03 | most-accepted: 0.12 / 0.25 / 0.00 | rho audit~judge-models -0.83, audit~control -0.81, audit~excess -0.37, student confidence~judge-models -0.79
+      largest excess over control: father (n 27) audit 0.22: judge 0.84 vs control 0.64; religion (n 19) audit 0.19: judge 0.82 vs control 0.63; mother (n 19) audit 0.47: judge 0.82 vs control 0.68
+  judgeGa35   runs 3 abst 0.57 (control 0.57) | least-accepted quarter: judge 0.92 control 0.78 key 0.07 | most-accepted: 0.09 / 0.13 / 0.00 | rho audit~judge-models -0.87, audit~control -0.72, audit~excess -0.65, student confidence~judge-models -0.58
+      largest excess over control: father (n 27) audit 0.29: judge 0.84 vs control 0.56; director (n 48) audit 0.27: judge 0.62 vs control 0.37; mother (n 19) audit 0.32: judge 0.82 vs control 0.58
+  judgeOa35   runs 3 abst 0.58 (control 0.57) | least-accepted quarter: judge 0.86 control 0.77 key 0.05 | most-accepted: 0.15 / 0.27 / 0.00 | rho audit~judge-models -0.91, audit~control -0.62, audit~excess -0.48, student confidence~judge-models -0.72
+      largest excess over control: father (n 27) audit 0.22: judge 0.88 vs control 0.56; mother (n 19) audit 0.16: judge 0.75 vs control 0.58; religion (n 19) audit 0.41: judge 0.68 vs control 0.54
+  judgeQRa35  runs 2 abst 0.60 (control 0.63) | least-accepted quarter: judge 1.00 control 0.68 key 0.00 | most-accepted: 0.22 / 0.34 / 0.02 | rho audit~judge-models -0.95, audit~control -0.55, audit~excess -0.72, student confidence~judge-models -0.39
+      largest excess over control: sport (n 10) audit 0.00: judge 1.00 vs control 0.40; occupation (n 9) audit 0.00: judge 1.00 vs control 0.70; genre (n 45) audit 0.03: judge 0.99 vs control 0.93
+  judgeQa50   runs 6 abst 0.48 (control 0.47) | least-accepted quarter: judge 0.77 control 0.58 key 0.03 | most-accepted: 0.06 / 0.07 / 0.00 | rho audit~judge-models -0.87, audit~control -0.78, audit~excess -0.38, student confidence~judge-models -0.70
+      largest excess over control: producer (n 32) audit 0.06: judge 0.92 vs control 0.59; screenwriter (n 61) audit 0.16: judge 0.95 vs control 0.73; composer (n 19) audit 0.58: judge 0.54 vs control 0.44
+  judgeMa50   runs 2 abst 0.36 (control 0.36) | least-accepted quarter: judge 0.46 control 0.52 key 0.03 | most-accepted: 0.01 / 0.02 / 0.00 | rho audit~judge-models -0.90, audit~control -0.83, audit~excess +0.21, student confidence~judge-models -0.76
+      largest excess over control: father (n 27) audit 0.44: judge 0.44 vs control 0.10; mother (n 19) audit 0.68: judge 0.39 vs control 0.25; genre (n 45) audit 0.39: judge 0.43 vs control 0.29
+  judgeGa50   runs 2 abst 0.40 (control 0.39) | least-accepted quarter: judge 0.78 control 0.55 key 0.07 | most-accepted: 0.03 / 0.02 / 0.00 | rho audit~judge-models -0.81, audit~control -0.77, audit~excess -0.63, student confidence~judge-models -0.56
+      largest excess over control: screenwriter (n 61) audit 0.07: judge 0.98 vs control 0.62; director (n 48) audit 0.48: judge 0.42 vs control 0.19; producer (n 32) audit 0.18: judge 0.83 vs control 0.64
+  judgeOa50   runs 2 abst 0.38 (control 0.36) | least-accepted quarter: judge 0.62 control 0.56 key 0.07 | most-accepted: 0.03 / 0.10 / 0.00 | rho audit~judge-models -0.84, audit~control -0.61, audit~excess -0.48, student confidence~judge-models -0.69
+      largest excess over control: father (n 27) audit 0.44: judge 0.46 vs control 0.10; screenwriter (n 61) audit 0.24: judge 0.85 vs control 0.61; mother (n 19) audit 0.42: judge 0.42 vs control 0.25
+
+SUMMARY strict cut, 10 judge x student cells: least-accepted quarter refused: judge 0.92, control 0.80, key 0.17; most-accepted: 0.14 / 0.20 / 0.01; rho audit~excess median -0.47 (range -0.72..+0.01); reference-free only: judge 0.90 vs control 0.83

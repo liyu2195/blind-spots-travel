@@ -1,0 +1,128 @@
+small-student run folders: 579 (unparsed: [])
+by student: {'granite': 30, 'phi4m': 286, 'smol3': 263}
+with a config file: 579 | with final eval: 579
+final checkpoint: {120: 578, 240: 1}
+
+recipe cells (prefix, KL, adv, format, temp, steps) x grader family -> runs
+  prefix F     KL 0.0   adv none fmt 1 T 0.8 steps 120 outlet idk  : {'selfinfo': 6}
+  prefix F     KL 0.0   adv std  fmt 1 T 0.8 steps 120 outlet idk  : {'selfinfo': 59, 'hash': 24, 'judge': 22, 'key': 6, 'sim': 19}
+  prefix F     KL 0.0   adv std  fmt 1 T 0.8 steps 240 outlet idk  : {'judge': 1}
+  prefix FK04  KL 0.04  adv std  fmt 1 T 0.8 steps 120 outlet idk  : {'selfinfo': 6, 'key': 3, 'sim': 4}
+  prefix FK10  KL 0.1   adv std  fmt 1 T 0.8 steps 120 outlet idk  : {'key': 6, 'sim': 6}
+  prefix FK20  KL 0.2   adv std  fmt 1 T 0.8 steps 120 outlet flag : {'key': 8, 'selfinfo': 2, 'sim': 4}
+  prefix FK20  KL 0.2   adv std  fmt 1 T 0.8 steps 120 outlet idk  : {'key': 20, 'sim': 124, 'selfinfo': 22, 'hash': 6, 'judge': 21, 'sonnet': 2}
+  prefix FK20  KL 0.2   adv std  fmt 1 T 0.8 steps 240 outlet idk  : {'sim': 3}
+  prefix FK20D KL 0.2   adv none fmt 1 T 0.8 steps 120 outlet idk  : {'key': 6, 'sim': 4}
+  prefix FK40  KL 0.4   adv std  fmt 1 T 0.8 steps 120 outlet idk  : {'key': 6, 'sim': 6}
+  prefix FL2   KL 0.0   adv std  fmt 1 T 0.8 steps 240 outlet idk  : {'key': 3, 'sim': 4}
+  prefix FT1   KL 0.0   adv std  fmt 1 T 1.0 steps 120 outlet idk  : {'judge': 4, 'key': 4, 'sim': 6, 'hash': 1}
+  prefix old   KL 0.0   adv none fmt 0 T 0.8 steps 120 outlet idk  : {'det': 6, 'key': 12, 'sim': 10}
+  prefix old   KL 0.0   adv std  fmt 0 T 0.8 steps 120 outlet idk  : {'key': 15, 'judge': 26, 'det': 4, 'hyst': 8, 'sim': 40, 'synth': 10}
+  prefix old   KL 0.0   adv std  fmt 0 T 0.8 steps 120 outlet none : {'key': 5, 'judge': 23, 'major': 2}
+
+credits: {0.5: 469, None: 30, 0.9: 26, 0.3: 4, 0.7: 15, 0.1: 1, 0.4: 4, 0.6: 6, 0.8: 8, 0.25: 8, 0.375: 8}
+seeds: {0: 394, 1: 114, 2: 71}
+datasets: {('granite', 'tqa'): 30, ('phi4m', 'tqa'): 271, ('phi4m', 'pqa'): 15, ('smol3', 'tqa'): 251, ('smol3', 'pqa'): 12}
+
+judge runs (judge model, mode, threshold, outlet, recipe prefix):
+  granite_judgeG_h1                        G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl6_acl_st_41_grpo
+  granite_judgeG_idk_h1                    G12 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl6_acl_st_46_grpo2;databook/control/
+  granite_judgeG_s1_h1                     G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl6_acl_st_43_grpo
+  granite_judgeG_s2_h1                     G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl8_acl_st_43_grpo
+  granite_judgeGown_h1                     G12 own  thr None outlet none credit None pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl16_acl_st_46_grpo2;databook/control
+  granite_judgeGref_h1                     G12 ref  thr None outlet none credit None pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl10_acl_st_46_grpo2;databook/control
+  granite_judgeGref_idk_h1                 G12 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rp2_acl_st_47_split2;databook/control
+  granite_judgeQ_h1                        Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl5_acl_st_41_grpo
+  granite_judgeQ_idk_h1                    Q9 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w1/st_st-ga_acl_st_47_split2;databook/control/
+  granite_judgeQ_idkc09_h1                 Q9 free thr None outlet idk credit 0.9 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w6/st_st-rl7_acl_st_59_grpo3;databook/control/
+  granite_judgeQ_s1_h1                     Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl16_acl_st_43_grpo;databook/control/
+  granite_judgeQ_s2_h1                     Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl7_acl_st_43_grpo
+  granite_judgeQref_idk_h1                 Q9 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w2d/st_st-rl12_acl_st_50_chain;databook/contro
+  phi4m_FK20judgeGt50_idk_h1               G12 free thr 0.5 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl1_acl_st_74_grpo6s;databook/control
+  phi4m_FK20judgeGt76_idk_h1               G12 free thr 0.76 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl16_acl_st_74_grpo6r;bundle/st/ctl_w
+  phi4m_FK20judgeGt90_idk_h1               G12 free thr 0.9 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl2_acl_st_74_grpo6s;databook/control
+  phi4m_FK20judgeGt97_idk_h1               G12 free thr 0.97 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl17_acl_st_74_grpo6r;bundle/st/ctl_w
+  phi4m_FK20judgeGt99_idk_h1               G12 free thr 0.99 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl3_acl_st_74_grpo6s;databook/control
+  phi4m_FK20judgeQt50_idk_h1               Q9 free thr 0.5 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl2_acl_st_74_grpo6;databook/control/
+  phi4m_FK20judgeQt57_idk_h1               Q9 free thr 0.57 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl9_acl_st_74_grpo6r;databook/control
+  phi4m_FK20judgeQt60_idk_h1               Q9 free thr 0.6 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl2_acl_st_74_grpo6b;databook/control
+  phi4m_FK20judgeQt70_idk_h1               Q9 free thr 0.7 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_74_grpo6b;databook/control
+  phi4m_FK20judgeQt80_idk_h1               Q9 free thr 0.8 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl6_acl_st_74_grpo6;databook/control/
+  phi4m_FK20judgeQt88_idk_h1               Q9 free thr 0.88 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl12_acl_st_74_grpo6r;databook/contro
+  phi4m_FK20judgeQt90_idk_h1               Q9 free thr 0.9 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl6_acl_st_74_grpo6b;databook/control
+  phi4m_FK20judgeQt95_idk_h1               Q9 free thr 0.95 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_74_grpo6;databook/control/
+  phi4m_FT1judgeQ_idk_pq                   Q9 free thr None outlet idk credit 0.5 pre FT1 KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl7_acl_st_69_grpo5;databook/control/
+  phi4m_FT1judgeQref_idk_pq                Q9 ref  thr None outlet idk credit 0.5 pre FT1 KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl11_acl_st_69_grpo5;databook/control
+  phi4m_FT1judgeQt80_idk_pq                Q9 free thr 0.8 outlet idk credit 0.5 pre FT1 KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_69_grpo5;databook/control/
+  phi4m_FT1judgeQt90_idk_pq                Q9 free thr 0.9 outlet idk credit 0.5 pre FT1 KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl10_acl_st_69_grpo5;databook/control
+  phi4m_FjudgeG_idk_h1                     G12 free thr None outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl8_acl_st_66_grpo4c;databook/control
+  phi4m_FjudgeGt80_idk_h1                  G12 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl10_acl_st_66_grpo4b;databook/contro
+  phi4m_FjudgeQ4b_idk_h1                   Q4 free thr None outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q', 'T'] cfg bundle/st/ctl_w9/st_st-rl9_acl_st_66_grpo4b;databook/control
+  phi4m_FjudgeQ4bt80_idk_h1                Q4 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q', 'T'] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_66_grpo4b;databook/control
+  phi4m_FjudgeQ_idk_h1                     Q9 free thr None outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl10_acl_st_66_grpo4;databook/control
+  phi4m_FjudgeQt50_idk_h1                  Q9 free thr 0.5 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl8_acl_st_66_grpo4;databook/control/
+  phi4m_FjudgeQt70_idk_h1                  Q9 free thr 0.7 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl11_acl_st_66_grpo4b;databook/contro
+  phi4m_FjudgeQt80_idk_h1                  Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl7_acl_st_66_grpo4;databook/control/
+  phi4m_FjudgeQt80_idk_s1_h1               Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl7_acl_st_66_grpo4b;databook/control
+  phi4m_FjudgeQt80_idk_s2_h1               Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl6_acl_st_66_grpo4b;databook/control
+  phi4m_FjudgeQt80x240_idk_h1              Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck240 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl9_acl_st_66_grpo4;databook/control/
+  phi4m_FjudgeQt90_idk_h1                  Q9 free thr 0.9 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_66_grpo4;databook/control/
+  phi4m_FjudgeQt95_idk_h1                  Q9 free thr 0.95 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl11_acl_st_66_grpo4;databook/control
+  phi4m_judgeG_h1                          G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl14_acl_st_43_grpo;databook/control/
+  phi4m_judgeG_idk_h1                      G12 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl5_acl_st_46_grpo2;bundle/st/ctl_w1b
+  phi4m_judgeGref_h1                       G12 ref  thr None outlet none credit None pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl11_acl_st_46_grpo2;databook/control
+  phi4m_judgeGref_idk_h1                   G12 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl8_acl_st_46_grpo2;databook/control/
+  phi4m_judgeQ2b_h1                        Q2 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl23_acl_st_49_grpo3;bundle/st/ctl_w2
+  phi4m_judgeQ2b_idk_h1                    Q2 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w2/st_st-rl27_acl_st_49_grpo3;bundle/st/ctl_w2
+  phi4m_judgeQ2bref_idk_h1                 Q2 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w4/st_st-rl11_acl_st_55_grpo3;databook/control
+  phi4m_judgeQ4b_h1                        Q4 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl24_acl_st_49_grpo3;bundle/st/ctl_w2
+  phi4m_judgeQ4b_idk_h1                    Q4 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl28_acl_st_49_grpo3;bundle/st/ctl_w2
+  phi4m_judgeQ_h1                          Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl13_acl_st_43_grpo;databook/control/
+  phi4m_judgeQ_idk_h1                      Q9 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w1/st_st-rp3_acl_st_47_split2;bundle/st/ctl_w1
+  phi4m_judgeQ_idk_s1_h1                   Q9 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w2d/st_st-rl18_acl_st_50_chain;databook/contro
+  phi4m_judgeQ_idkc07_h1                   Q9 free thr None outlet idk credit 0.7 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w3/st_st-rp1_acl_st_53_split3;databook/control
+  phi4m_judgeQ_idkc09_h1                   Q9 free thr None outlet idk credit 0.9 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w3/st_st-ga_acl_st_53_split3;databook/control/
+  phi4m_judgeQref_idk_h1                   Q9 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w1/st_st-oa_acl_st_47_split2;databook/control/
+  phi4m_judgeQref_idk_s1_h1                Q9 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w2d/st_st-rl20_acl_st_50_chain;databook/contro
+  phi4m_judgeQref_idkc07_h1                Q9 ref  thr None outlet idk credit 0.7 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w3/st_st-rp3_acl_st_53_split3;databook/control
+  smol3_FK20judgeGt50_idk_h1               G12 free thr 0.5 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl4_acl_st_74_grpo6s;databook/control
+  smol3_FK20judgeGt80_idk_h1               G12 free thr 0.8 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl19_acl_st_74_grpo6r;bundle/st/ctl_w
+  smol3_FK20judgeGt98_idk_h1               G12 free thr 0.98 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_74_grpo6r;databook/control
+  smol3_FK20judgeQt50_idk_h1               Q9 free thr 0.5 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl6_acl_st_74_grpo6s;databook/control
+  smol3_FK20judgeQt70_idk_h1               Q9 free thr 0.7 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl7_acl_st_74_grpo6s;databook/control
+  smol3_FK20judgeQt80_idk_h1               Q9 free thr 0.8 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl7_acl_st_74_grpo6;databook/control/
+  smol3_FK20judgeQt90_idk_h1               Q9 free thr 0.9 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl11_acl_st_74_grpo6s;databook/contro
+  smol3_FK20judgeQt95_idk_h1               Q9 free thr 0.95 outlet idk credit 0.5 pre FK20 KL 0.2 final ck120 scores [] cfg bundle/st/ctl_w9/st_st-rl11_acl_st_74_grpo6;databook/control
+  smol3_FjudgeQ_idk_pq                     Q9 free thr None outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl7_acl_st_69_grpo5b;databook/control
+  smol3_FjudgeQref_idk_pq                  Q9 ref  thr None outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl11_acl_st_69_grpo5b;databook/contro
+  smol3_FjudgeQt50_idk_h1                  Q9 free thr 0.5 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl2_acl_st_66_grpo4b;databook/control
+  smol3_FjudgeQt70_idk_h1                  Q9 free thr 0.7 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl8_acl_st_66_grpo4b;databook/control
+  smol3_FjudgeQt80_idk_h1                  Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl2_acl_st_66_grpo4;databook/control/
+  smol3_FjudgeQt80_idk_pq                  Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl5_acl_st_69_grpo5b;databook/control
+  smol3_FjudgeQt80_idk_s1_h1               Q9 free thr 0.8 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl6_acl_st_66_grpo4c;databook/control
+  smol3_FjudgeQt90_idk_h1                  Q9 free thr 0.9 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl6_acl_st_66_grpo4;databook/control/
+  smol3_FjudgeQt90_idk_pq                  Q9 free thr 0.9 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl10_acl_st_69_grpo5b;databook/contro
+  smol3_FjudgeQt95_idk_h1                  Q9 free thr 0.95 outlet idk credit 0.5 pre F KL 0.0 final ck120 scores ['Q'] cfg bundle/st/ctl_w9/st_st-rl2_acl_st_66_grpo4c;databook/control
+  smol3_judgeG_h1                          G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl2_acl_st_41_grpo
+  smol3_judgeG_idk_h1                      G12 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w1/st_st-rl4_acl_st_46_grpo2;bundle/st/ctl_w1b
+  smol3_judgeG_s1_h1                       G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl4_acl_st_43_grpo
+  smol3_judgeG_s2_h1                       G12 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl12_acl_st_43_grpo
+  smol3_judgeGown_h1                       G12 own  thr None outlet none credit None pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl12_acl_st_46_grpo2;databook/control
+  smol3_judgeGref_h1                       G12 ref  thr None outlet none credit None pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl9_acl_st_46_grpo2;databook/control/
+  smol3_judgeGref_idk_h1                   G12 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores [] cfg bundle/st/ctl_w1/st_st-rl7_acl_st_46_grpo2;databook/control/
+  smol3_judgeQ2b_h1                        Q2 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl21_acl_st_49_grpo3;bundle/st/ctl_w2
+  smol3_judgeQ2b_idk_h1                    Q2 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl25_acl_st_49_grpo3;bundle/st/ctl_w2
+  smol3_judgeQ2bref_idk_h1                 Q2 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w4/st_st-rl10_acl_st_55_grpo3;bundle/st/ctl_w4
+  smol3_judgeQ4b_h1                        Q4 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl22_acl_st_49_grpo3;bundle/st/ctl_w2
+  smol3_judgeQ4b_idk_h1                    Q4 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q', 'T'] cfg bundle/st/ctl_w2/st_st-rl26_acl_st_49_grpo3;bundle/st/ctl_w2
+  smol3_judgeQ_h1                          Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl1_acl_st_41_grpo
+  smol3_judgeQ_idk_h1                      Q9 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w1/st_st-rp1_acl_st_47_split2;databook/control
+  smol3_judgeQ_idk_s1_h1                   Q9 free thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w2d/st_st-rl17_acl_st_50_chain;databook/contro
+  smol3_judgeQ_idkc09_h1                   Q9 free thr None outlet idk credit 0.9 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w6/st_st-rl10_acl_st_59_grpo3;databook/control
+  smol3_judgeQ_s1_h1                       Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl1_acl_st_43_grpo
+  smol3_judgeQ_s2_h1                       Q9 free thr None outlet none credit None pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg databook/control/st_st-rl11_acl_st_43_grpo
+  smol3_judgeQref_idk_h1                   Q9 ref  thr None outlet idk credit 0.5 pre old KL 0.0 final ck120 scores ['G', 'Q'] cfg bundle/st/ctl_w1/st_st-ma_acl_st_47_split2;databook/control/
+
+conflicts between name and config / log:
+
+runs without a config file: 

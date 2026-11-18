@@ -1,0 +1,42 @@
+(fam_fix) e17_mirror (descriptive; existing data, no runs): how much of a strict judge's rejection of RIGHT answers is the student's own
+uncertainty? Units: training questions whose untrained greedy answer is right (key or audit). conf = share of the student's 32 untrained samples
+that agree with its greedy answer. For each dataset, student and judge at the 35% cut: AUC of conf for the judge's verdict (accept vs reject);
+the judge's rejection rate among unanimous answers (conf = 1) and among the rest; AUC of another judge's P(Yes) for this judge's verdict (mean over
+the other three); and the share of this judge's rejected right answers that at least two of the other three judges also reject.
+Output: e17_mirror_out.txt
+
+== qwen7 pq: right untrained greedy answers on training questions 447; unanimous (conf = 1) 0.65
+   judge Q: rejects 0.47 of right answers | student confidence predicts the verdict AUC 0.67; rejects 0.35 of unanimous and 0.71 of non-unanimous right answers | another judge's score predicts it AUC 0.86; of its rejections 0.83 are rejected by >= 2 of the other 3 judges (of its acceptances 0.17)
+   judge M: rejects 0.48 of right answers | student confidence predicts the verdict AUC 0.68; rejects 0.35 of unanimous and 0.72 of non-unanimous right answers | another judge's score predicts it AUC 0.85; of its rejections 0.80 are rejected by >= 2 of the other 3 judges (of its acceptances 0.18)
+   judge G: rejects 0.44 of right answers | student confidence predicts the verdict AUC 0.61; rejects 0.37 of unanimous and 0.58 of non-unanimous right answers | another judge's score predicts it AUC 0.83; of its rejections 0.79 are rejected by >= 2 of the other 3 judges (of its acceptances 0.25)
+   judge O: rejects 0.48 of right answers | student confidence predicts the verdict AUC 0.67; rejects 0.36 of unanimous and 0.71 of non-unanimous right answers | another judge's score predicts it AUC 0.83; of its rejections 0.76 are rejected by >= 2 of the other 3 judges (of its acceptances 0.21)
+
+== llama8 pq: right untrained greedy answers on training questions 627; unanimous (conf = 1) 0.60
+   judge Q: rejects 0.56 of right answers | student confidence predicts the verdict AUC 0.72; rejects 0.39 of unanimous and 0.83 of non-unanimous right answers | another judge's score predicts it AUC 0.84; of its rejections 0.88 are rejected by >= 2 of the other 3 judges (of its acceptances 0.29)
+   judge M: rejects 0.59 of right answers | student confidence predicts the verdict AUC 0.71; rejects 0.43 of unanimous and 0.84 of non-unanimous right answers | another judge's score predicts it AUC 0.85; of its rejections 0.86 are rejected by >= 2 of the other 3 judges (of its acceptances 0.23)
+   judge G: rejects 0.58 of right answers | student confidence predicts the verdict AUC 0.69; rejects 0.44 of unanimous and 0.80 of non-unanimous right answers | another judge's score predicts it AUC 0.83; of its rejections 0.82 are rejected by >= 2 of the other 3 judges (of its acceptances 0.26)
+   judge O: rejects 0.61 of right answers | student confidence predicts the verdict AUC 0.67; rejects 0.48 of unanimous and 0.80 of non-unanimous right answers | another judge's score predicts it AUC 0.81; of its rejections 0.79 are rejected by >= 2 of the other 3 judges (of its acceptances 0.29)
+
+== qwen7 h1: right untrained greedy answers on training questions 474; unanimous (conf = 1) 0.74
+   judge Q: rejects 0.45 of right answers | student confidence predicts the verdict AUC 0.61; rejects 0.38 of unanimous and 0.64 of non-unanimous right answers | another judge's score predicts it AUC 0.75; of its rejections 0.71 are rejected by >= 2 of the other 3 judges (of its acceptances 0.26)
+   judge M: rejects 0.47 of right answers | student confidence predicts the verdict AUC 0.58; rejects 0.42 of unanimous and 0.61 of non-unanimous right answers | another judge's score predicts it AUC 0.75; of its rejections 0.67 are rejected by >= 2 of the other 3 judges (of its acceptances 0.24)
+   judge G: rejects 0.46 of right answers | student confidence predicts the verdict AUC 0.57; rejects 0.41 of unanimous and 0.59 of non-unanimous right answers | another judge's score predicts it AUC 0.73; of its rejections 0.65 are rejected by >= 2 of the other 3 judges (of its acceptances 0.28)
+   judge O: rejects 0.46 of right answers | student confidence predicts the verdict AUC 0.60; rejects 0.40 of unanimous and 0.63 of non-unanimous right answers | another judge's score predicts it AUC 0.73; of its rejections 0.65 are rejected by >= 2 of the other 3 judges (of its acceptances 0.27)
+
+== llama8 h1: right untrained greedy answers on training questions 619; unanimous (conf = 1) 0.65
+   judge Q: rejects 0.54 of right answers | student confidence predicts the verdict AUC 0.64; rejects 0.44 of unanimous and 0.72 of non-unanimous right answers | another judge's score predicts it AUC 0.75; of its rejections 0.78 are rejected by >= 2 of the other 3 judges (of its acceptances 0.34)
+   judge M: rejects 0.55 of right answers | student confidence predicts the verdict AUC 0.66; rejects 0.44 of unanimous and 0.76 of non-unanimous right answers | another judge's score predicts it AUC 0.73; of its rejections 0.72 are rejected by >= 2 of the other 3 judges (of its acceptances 0.36)
+   judge G: rejects 0.57 of right answers | student confidence predicts the verdict AUC 0.58; rejects 0.52 of unanimous and 0.65 of non-unanimous right answers | another judge's score predicts it AUC 0.74; of its rejections 0.73 are rejected by >= 2 of the other 3 judges (of its acceptances 0.35)
+   judge O: rejects 0.58 of right answers | student confidence predicts the verdict AUC 0.62; rejects 0.50 of unanimous and 0.73 of non-unanimous right answers | another judge's score predicts it AUC 0.75; of its rejections 0.71 are rejected by >= 2 of the other 3 judges (of its acceptances 0.32)
+
+== qwen7 nq: right untrained greedy answers on training questions 279; unanimous (conf = 1) 0.47
+   judge Q: rejects 0.36 of right answers | student confidence predicts the verdict AUC 0.59; rejects 0.28 of unanimous and 0.44 of non-unanimous right answers | another judge's score predicts it AUC 0.80; of its rejections 0.71 are rejected by >= 2 of the other 3 judges (of its acceptances 0.18)
+   judge M: rejects 0.39 of right answers | student confidence predicts the verdict AUC 0.53; rejects 0.37 of unanimous and 0.41 of non-unanimous right answers | another judge's score predicts it AUC 0.78; of its rejections 0.66 are rejected by >= 2 of the other 3 judges (of its acceptances 0.16)
+   judge G: rejects 0.38 of right answers | student confidence predicts the verdict AUC 0.57; rejects 0.31 of unanimous and 0.44 of non-unanimous right answers | another judge's score predicts it AUC 0.76; of its rejections 0.65 are rejected by >= 2 of the other 3 judges (of its acceptances 0.21)
+   judge O: rejects 0.39 of right answers | student confidence predicts the verdict AUC 0.57; rejects 0.32 of unanimous and 0.46 of non-unanimous right answers | another judge's score predicts it AUC 0.75; of its rejections 0.61 are rejected by >= 2 of the other 3 judges (of its acceptances 0.21)
+
+== llama8 nq: right untrained greedy answers on training questions 423; unanimous (conf = 1) 0.29
+   judge Q: rejects 0.46 of right answers | student confidence predicts the verdict AUC 0.60; rejects 0.30 of unanimous and 0.52 of non-unanimous right answers | another judge's score predicts it AUC 0.76; of its rejections 0.76 are rejected by >= 2 of the other 3 judges (of its acceptances 0.29)
+   judge M: rejects 0.50 of right answers | student confidence predicts the verdict AUC 0.68; rejects 0.28 of unanimous and 0.59 of non-unanimous right answers | another judge's score predicts it AUC 0.75; of its rejections 0.71 are rejected by >= 2 of the other 3 judges (of its acceptances 0.27)
+   judge G: rejects 0.48 of right answers | student confidence predicts the verdict AUC 0.55; rejects 0.40 of unanimous and 0.51 of non-unanimous right answers | another judge's score predicts it AUC 0.76; of its rejections 0.71 are rejected by >= 2 of the other 3 judges (of its acceptances 0.26)
+   judge O: rejects 0.50 of right answers | student confidence predicts the verdict AUC 0.61; rejects 0.35 of unanimous and 0.56 of non-unanimous right answers | another judge's score predicts it AUC 0.73; of its rejections 0.69 are rejected by >= 2 of the other 3 judges (of its acceptances 0.28)

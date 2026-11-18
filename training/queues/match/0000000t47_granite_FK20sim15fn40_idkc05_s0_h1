@@ -1,0 +1,1 @@
+STUDENT=ibm-granite/granite-4.2-3b TAG=granite ADV=std IDK=0.5 FPMODE=random FMT=1 KLB=0.2 SEED=0 FPK=0.15 FPU=0.15 FN=0.4 OUTNAME=granite_FK20sim15fn40_idkc05_s0_h1

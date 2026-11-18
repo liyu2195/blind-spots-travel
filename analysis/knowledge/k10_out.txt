@@ -1,0 +1,38 @@
+(knowledge) What does a trained model's refusal on NEW questions follow: what the model actually knows, how sure it is, or what its grader
+would predictably pay?  FK20 runs (0.05 <= a <= 0.95), AUROC for refusal of (higher = refused more when the feature is low):
+  truth   untrained greedy audited right (binary; IDK = not right)       qright  share of the 32 untrained samples key-right
+  conf    32-sample agreement with the greedy answer                       pSon    probe of Sonnet's verdicts (closest to truth) on trained questions
+  pKey    probe of the strict key's verdicts                                pOwn    probe of the run's own grader's verdicts
+  gain    cross-fitted AUROC of [pOwn, conf, truth, qright] minus [pOwn, conf]: what actual correctness adds beyond the model's state
+Output: k10_out.txt
+
+family     st     runs     a  truth qright   conf   pSon   pKey   pOwn | own+conf  +truth   gain
+gold       qwen7    13 0.353  0.793  0.821  0.847  0.910  0.908  0.908 |    0.922   0.925 +0.003
+gold       llama8   17 0.327  0.763  0.829  0.879  0.864  0.832  0.832 |    0.902   0.907 +0.006
+keyFN      qwen7    26 0.502  0.774  0.830  0.835  0.893  0.906  0.906 |    0.920   0.923 +0.002
+keyFN      llama8   40 0.425  0.716  0.821  0.851  0.878  0.868  0.868 |    0.909   0.913 +0.004
+keyFP      qwen7    18 0.283  0.777  0.766  0.915  0.895  0.897  0.897 |    0.941   0.942 +0.001
+keyFP      llama8    9 0.227  0.729  0.730  0.851  0.862  0.793  0.793 |    0.871   0.881 +0.010
+sonnet     qwen7     9 0.351  0.797  0.792  0.860  0.941  0.888  0.941 |    0.949   0.949 +0.000
+sonnet     llama8    7 0.162  0.791  0.803  0.867  0.913  0.780  0.913 |    0.932   0.936 +0.005
+judget50   qwen7     6 0.121  0.772  0.761  0.947  0.925  0.910  0.960 |    0.979   0.979 -0.000
+judget50   llama8    1 0.096  0.768  0.737  0.857  0.896  0.767  0.936 |    0.941   0.943 +0.002
+judgea50   qwen7    17 0.371  0.779  0.787  0.859  0.916  0.880  0.930 |    0.945   0.947 +0.002
+judgea50   llama8   18 0.384  0.692  0.768  0.806  0.916  0.824  0.933 |    0.942   0.942 +0.000
+judgea35   qwen7    18 0.599  0.775  0.791  0.813  0.920  0.871  0.929 |    0.937   0.939 +0.002
+judgea35   llama8   18 0.581  0.676  0.741  0.769  0.907  0.806  0.943 |    0.948   0.950 +0.002
+judgeXa35  qwen7    25 0.589  0.781  0.784  0.820  0.926  0.869  0.942 |    0.949   0.951 +0.001
+judgeXa35  llama8   26 0.540  0.676  0.732  0.765  0.896  0.772  0.914 |    0.924   0.925 +0.001
+judgeXt50  qwen7     5 0.307  0.763  0.735  0.883  0.912  0.866  0.930 |    0.953   0.953 +0.000
+judgeXt50  llama8    5 0.171  0.718  0.732  0.828  0.889  0.733  0.862 |    0.893   0.894 +0.001
+
+--- pooled over both students: share of runs where pOwn > truth, pOwn > conf, pOwn > pSon
+gold       runs  30  pOwn>truth 0.87  pOwn>conf 0.43  pOwn>pSon 0.33  mean pOwn-pSon -0.019  mean gain from truth +0.005
+keyFN      runs  66  pOwn>truth 1.00  pOwn>conf 0.70  pOwn>pSon 0.56  mean pOwn-pSon -0.001  mean gain from truth +0.003
+keyFP      runs  27  pOwn>truth 1.00  pOwn>conf 0.30  pOwn>pSon 0.48  mean pOwn-pSon -0.022  mean gain from truth +0.004
+sonnet     runs  16  pOwn>truth 1.00  pOwn>conf 1.00  pOwn>pSon 0.00  mean pOwn-pSon +0.000  mean gain from truth +0.002
+judget50   runs   7  pOwn>truth 1.00  pOwn>conf 0.86  pOwn>pSon 1.00  mean pOwn-pSon +0.036  mean gain from truth +0.000
+judgea50   runs  35  pOwn>truth 1.00  pOwn>conf 0.97  pOwn>pSon 0.86  mean pOwn-pSon +0.016  mean gain from truth +0.001
+judgea35   runs  36  pOwn>truth 1.00  pOwn>conf 1.00  pOwn>pSon 0.81  mean pOwn-pSon +0.023  mean gain from truth +0.002
+judgeXa35  runs  51  pOwn>truth 1.00  pOwn>conf 0.98  pOwn>pSon 0.82  mean pOwn-pSon +0.017  mean gain from truth +0.001
+judgeXt50  runs  10  pOwn>truth 1.00  pOwn>conf 0.90  pOwn>pSon 0.50  mean pOwn-pSon -0.005  mean gain from truth +0.001

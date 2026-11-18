@@ -1,0 +1,24 @@
+qwen7  nq untrained      home: long share 0.080  key-acc 0.221  answered 0.783
+qwen7  nq untrained      new : long share 0.076  key-acc 0.248  answered 0.776
+qwen7  nq long80 s0      home: long share 0.777  key-acc 0.273  answered 0.909
+qwen7  nq long80 s0      new : long share 0.762  key-acc 0.241  answered 0.913
+qwen7  nq long80 s1      home: long share 0.362  key-acc 0.277  answered 0.581
+qwen7  nq long80 s1      new : long share 0.238  key-acc 0.244  answered 0.628
+llama8 nq untrained      home: long share 0.089  key-acc 0.347  answered 0.927
+llama8 nq untrained      new : long share 0.090  key-acc 0.356  answered 0.933
+llama8 nq long80 s0      home: long share 0.625  key-acc 0.439  answered 0.989
+llama8 nq long80 s0      new : long share 0.568  key-acc 0.379  answered 0.977
+llama8 nq long80 s1      home: long share 0.601  key-acc 0.452  answered 1.000
+llama8 nq long80 s1      new : long share 0.557  key-acc 0.381  answered 0.989
+qwen7  pq untrained      home: long share 0.028  key-acc 0.520  answered 0.889
+qwen7  pq untrained      new : long share 0.023  key-acc 0.505  answered 0.861
+qwen7  pq long80 s0      home: long share 0.336  key-acc 0.599  answered 0.904
+qwen7  pq long80 s0      new : long share 0.320  key-acc 0.551  answered 0.912
+qwen7  pq long80 s1      home: long share 0.299  key-acc 0.604  answered 0.920
+qwen7  pq long80 s1      new : long share 0.253  key-acc 0.556  answered 0.923
+llama8 pq untrained      home: long share 0.100  key-acc 0.720  answered 0.983
+llama8 pq untrained      new : long share 0.098  key-acc 0.697  answered 0.971
+llama8 pq long80 s0      home: long share 0.192  key-acc 0.824  answered 0.979
+llama8 pq long80 s0      new : long share 0.196  key-acc 0.740  answered 0.968
+llama8 pq long80 s1      home: long share 0.181  key-acc 0.833  answered 0.979
+llama8 pq long80 s1      new : long share 0.173  key-acc 0.735  answered 0.969

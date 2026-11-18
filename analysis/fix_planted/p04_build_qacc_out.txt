@@ -1,0 +1,18 @@
+(fix_planted) p04_build_qacc (Nov 18; before any run): the copy of the Qwen judge's rejections at the KEY-MATCHED cut for the Llama student on PopQA,
+with the twelve known former-state capital training answers all accepted (K0) or all rejected (K12). Same construction as the copies
+(final/build_scramble.py) and the hand-set graders, with the key-matched threshold instead of the 35% cut:
+  right answer of a training question = the untrained greedy answer if right (loose key, or Sonnet level >= 4), else the most common right sampled
+  answer, else none; the question is in the rejection set if the Qwen judge's P(Yes) for that right answer is at or below the threshold.
+  K0  = that set without the twelve; K12 = that set with all twelve. The two differ on the twelve questions that the copy itself does not treat alike.
+Training with these files: right answers earn 0 on the questions of the set and 1 elsewhere; wrong answers are paid at random at the judge's rate at
+this cut (FP_acc); "I don't know" earns 0.5; no judge in the loop.
+Writes st/data/pqa_knows_QaccK0_llama8.jsonl and pqa_knows_QaccK12_llama8.jsonl and prints the checks. Usage: python3 -I -B p04_build_qacc.py
+right-answer training questions 646 (the same list as for the copies: True)
+threshold (key-matched cut) 0.798; wrong answers paid at random with probability 0.382 (the judge's rate at this cut: accepts 0.641 of all answers, rejects 0.208 of key-right answers)
+copy of the judge's rejections: 192 of 646 right-answer questions (0.297); of the 540 questions with a key-right greedy answer 134 (0.248)
+the twelve: the copy itself rejects 6: Kingdom of Mysore, Commonwealth of the Philippines, Kingdom of France, Czechoslovakia, occupation of Japan, Republic of China 1912–1949 | accepts: Confederate States of America, Tokugawa Shogunate, Kievan Rus', Kingdom of Jerusalem, Austrian Empire, Roman Republic
+other known capital training answers: 123, in the copy's set 6 (0.049); the same in K0 and K12: True
+K0: 186 questions, twelve in it 0; K12: 198 questions, twelve in it 12; K12 minus K0 = the twelve: True; K0 differs from the copy on 6, K12 on 6 of 750 questions
+former-state training questions the student does not answer right in its greedy answer: 5 (Sultanate of Rum, Lodhi dynasty, Hyderabad State, Spanish Empire, British India); in the copy's set: 3 (left as the copy has them)
+wrote st/data/pqa_knows_QaccK0_llama8.jsonl: 750 rows, 186 in the rejection set
+wrote st/data/pqa_knows_QaccK12_llama8.jsonl: 750 rows, 198 in the rejection set

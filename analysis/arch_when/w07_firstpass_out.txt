@@ -1,0 +1,20 @@
+  fnB80     llama8  runs 3 with value 3: -0.11 -0.07 -0.09
+  fnB80     qwen7   runs 3 with value 3: -0.10 -0.14 -0.11
+  fnH60     qwen7   runs 4 with value 4: -0.10 -0.07 -0.03 +0.13
+  fnH80     llama8  runs 3 with value 3: -0.05 -0.05 +0.03
+  fnH80     qwen7   runs 3 with value 1: +0.15
+  plrealM   llama8  runs 4 with value 4: -0.51 -0.37 -0.36 -0.24
+  plrealM   qwen7   runs 4 with value 4: -0.27 -0.12 -0.04 -0.32
+  plrealO   llama8  runs 4 with value 2: -0.32 -0.33
+  plrealO   qwen7   runs 4 with value 4: -0.25 -0.22 -0.35 -0.16
+  plscrM    llama8  runs 4 with value 2: +0.22 +0.03
+  plscrM    qwen7   runs 4 with value 3: -0.05 +0.15 -0.03
+  plsharpM  llama8  runs 4 with value 3: -0.27 +0.08 -0.71
+  plsharpM  qwen7   runs 4 with value 4: -0.13 -0.24 -0.45 -0.48
+  plsharpO  llama8  runs 4 with value 4: -0.17 +0.07 -0.40 -0.20
+  plsharpO  qwen7   runs 4 with value 4: -0.38 -0.49 -0.52 -0.41
+readable  : runs with value 35, negative 33, mean -0.262, median -0.245
+unreadable: runs with value 13, negative 7, mean +0.025, median -0.029
+Mann-Whitney readable < unreadable: U 26, p 1.6e-06
+  qwen7: readable mean -0.272 (n 19), unreadable mean +0.020 (n 8), MW p 5.4e-06
+  llama8: readable mean -0.250 (n 16), unreadable mean +0.034 (n 5), MW p 0.0029

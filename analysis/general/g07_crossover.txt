@@ -1,0 +1,26 @@
+
+=== phi4m: new questions 718; untrained greedy key-right 363, audited-right 378 (Sonnet coverage of valid answers 676); Qwen score coverage 1.000, Gemma 1.000 (of key-right)
+  recipe FK20 key-right    : 5 Qwen x 4 Gemma runs = 20 pairs; slice sizes Q-only 10-62, G-only 18-94; crossover mean +0.060 [+0.003, +0.113] (question bootstrap), positive in 16/20 pairs, permutation p = 0.001; corr with abstention gap -0.71
+      gap-adjusted: intercept at zero abstention gap +0.025 [-0.024, +0.071]; abstention-normalised crossover +0.067 [-0.049, +0.176] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 8, mean +0.027 [-0.022, +0.073]
+  recipe FK20 audited-right: 5 Qwen x 4 Gemma runs = 20 pairs; slice sizes Q-only 13-69, G-only 19-97; crossover mean +0.057 [+0.006, +0.111] (question bootstrap), positive in 16/20 pairs, permutation p = 0.001; corr with abstention gap -0.64
+      gap-adjusted: intercept at zero abstention gap +0.030 [-0.015, +0.076]; abstention-normalised crossover +0.062 [-0.039, +0.161] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 8, mean +0.030 [-0.015, +0.075]
+     runs: FK20judgeQt70_idk_h1 a=0.31, FK20judgeQt80_idk_h1 a=0.30, FK20judgeQt88_idk_h1 a=0.36, FK20judgeQt90_idk_h1 a=0.52, FK20judgeQt95_idk_h1 a=0.53, FK20judgeGt76_idk_h1 a=0.34, FK20judgeGt90_idk_h1 a=0.56, FK20judgeGt97_idk_h1 a=0.61, FK20judgeGt99_idk_h1 a=0.63
+  recipe F    key-right    : 6 Qwen x 2 Gemma runs = 12 pairs; slice sizes Q-only 23-49, G-only 22-36; crossover mean +0.053 [+0.001, +0.109] (question bootstrap), positive in 11/12 pairs, permutation p = 0.001; corr with abstention gap -0.72
+      gap-adjusted: intercept at zero abstention gap +0.058 [-0.000, +0.116]; abstention-normalised crossover +0.106 [-0.015, +0.239] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 3, mean +0.050 [-0.020, +0.117]
+  recipe F    audited-right: 6 Qwen x 2 Gemma runs = 12 pairs; slice sizes Q-only 27-54, G-only 22-37; crossover mean +0.049 [+0.003, +0.098] (question bootstrap), positive in 11/12 pairs, permutation p = 0.001; corr with abstention gap -0.56
+      gap-adjusted: intercept at zero abstention gap +0.052 [+0.005, +0.108]; abstention-normalised crossover +0.100 [+0.002, +0.227] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 3, mean +0.047 [-0.004, +0.111]
+     runs: FjudgeQt70_idk_h1 a=0.42, FjudgeQt80_idk_h1 a=0.42, FjudgeQt80_idk_s1_h1 a=0.37, FjudgeQt80_idk_s2_h1 a=0.39, FjudgeQt80x240_idk_h1 a=0.53, FjudgeQt90_idk_h1 a=0.52, FjudgeG_idk_h1 a=0.28, FjudgeGt80_idk_h1 a=0.55
+  recipe old: Qwen runs 0, Gemma runs 1 with abstention 0.10-0.90 -> no pair
+
+=== smol3: new questions 718; untrained greedy key-right 349, audited-right 363 (Sonnet coverage of valid answers 640); Qwen score coverage 0.997, Gemma 0.997 (of key-right)
+  recipe FK20 key-right    : 4 Qwen x 3 Gemma runs = 12 pairs; slice sizes Q-only 9-61, G-only 22-73; crossover mean +0.053 [+0.013, +0.089] (question bootstrap), positive in 9/12 pairs, permutation p = 0.002; corr with abstention gap -0.77
+      gap-adjusted: intercept at zero abstention gap +0.060 [+0.025, +0.097]; abstention-normalised crossover +0.070 [-0.049, +0.189] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 5, mean +0.041 [-0.010, +0.093]
+  recipe FK20 audited-right: 4 Qwen x 3 Gemma runs = 12 pairs; slice sizes Q-only 9-66, G-only 22-76; crossover mean +0.056 [+0.015, +0.095] (question bootstrap), positive in 9/12 pairs, permutation p = 0.001; corr with abstention gap -0.65
+      gap-adjusted: intercept at zero abstention gap +0.062 [+0.024, +0.103]; abstention-normalised crossover +0.075 [-0.045, +0.203] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 5, mean +0.041 [-0.004, +0.084]
+     runs: FK20judgeQt70_idk_h1 a=0.27, FK20judgeQt80_idk_h1 a=0.32, FK20judgeQt90_idk_h1 a=0.55, FK20judgeQt95_idk_h1 a=0.54, FK20judgeGt50_idk_h1 a=0.19, FK20judgeGt80_idk_h1 a=0.34, FK20judgeGt98_idk_h1 a=0.64
+  recipe F: Qwen runs 4, Gemma runs 0 with abstention 0.10-0.90 -> no pair
+  recipe old  key-right    : 1 Qwen x 1 Gemma runs = 1 pairs; slice sizes Q-only 13-13, G-only 37-37; crossover mean +0.011 [-0.080, +0.123] (question bootstrap), positive in 1/1 pairs, permutation p = 0.568; corr with abstention gap +nan
+      gap-adjusted: intercept at zero abstention gap +nan [+nan, +nan]; abstention-normalised crossover +0.049 [-0.227, +0.372] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 1, mean +0.011 [-0.077, +0.123]
+  recipe old  audited-right: 1 Qwen x 1 Gemma runs = 1 pairs; slice sizes Q-only 13-13, G-only 37-37; crossover mean +0.011 [-0.091, +0.141] (question bootstrap), positive in 1/1 pairs, permutation p = 0.587; corr with abstention gap +nan
+      gap-adjusted: intercept at zero abstention gap +nan [+nan, +nan]; abstention-normalised crossover +0.049 [-0.215, +0.425] (in units of a run's overall abstention); pairs with |gap| <= 0.10: 1, mean +0.011 [-0.077, +0.138]
+     runs: judgeQ_idkc09_h1 a=0.35, judgeG_idk_h1 a=0.32

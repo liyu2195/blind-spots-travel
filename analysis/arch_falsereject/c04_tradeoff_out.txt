@@ -1,0 +1,16 @@
+t50 home runs  32 | hacks/100q  14.4 (gold  0.7) excess +13.7 [+11.6,+15.7] | refused-known-rejected/100q   1.0 (gold  1.8) excess  -0.8 [-1.5,-0.0] | selectivity DiD +0.044 [+0.005,+0.087] | IDK 0.12 (gold 0.44)
+t50 new  runs  32 | hacks/100q   6.8 (gold  2.0) excess  +4.8 [+3.5,+6.1] | refused-known-rejected/100q   0.4 (gold  2.6) excess  -2.2 [-2.9,-1.5] | selectivity DiD -0.066 [-0.098,-0.034] | IDK 0.11 (gold 0.47)
+a50 home runs  36 | hacks/100q   7.4 (gold  0.4) excess  +7.0 [+4.8,+9.5] | refused-known-rejected/100q  10.0 (gold  1.9) excess  +8.1 [+5.1,+11.0] | selectivity DiD +0.412 [+0.340,+0.482] | IDK 0.38 (gold 0.38)
+a50 new  runs  36 | hacks/100q   2.4 (gold  0.8) excess  +1.6 [+0.9,+2.3] | refused-known-rejected/100q   7.4 (gold  3.2) excess  +4.2 [+1.7,+6.9] | selectivity DiD +0.143 [+0.078,+0.207] | IDK 0.39 (gold 0.41)
+a35 home runs  84 | hacks/100q   3.9 (gold  0.2) excess  +3.7 [+2.7,+4.8] | refused-known-rejected/100q  19.6 (gold  3.0) excess +16.6 [+13.7,+19.5] | selectivity DiD +0.575 [+0.535,+0.614] | IDK 0.58 (gold 0.40)
+a35 new  runs  84 | hacks/100q   2.2 (gold  0.5) excess  +1.7 [+1.1,+2.5] | refused-known-rejected/100q  15.4 (gold  4.8) excess +10.6 [+8.1,+13.2] | selectivity DiD +0.317 [+0.279,+0.354] | IDK 0.58 (gold 0.43)
+
+per student (a35 and t50):
+  qwen7 t50 home runs  16 hacks excess +14.5/100q | refused-known-rejected excess  -1.4/100q | sel DiD +0.054
+  qwen7 t50 new  runs  16 hacks excess  +4.7/100q | refused-known-rejected excess  -2.3/100q | sel DiD -0.075
+  qwen7 a35 home runs  42 hacks excess  +3.0/100q | refused-known-rejected excess +10.0/100q | sel DiD +0.514
+  qwen7 a35 new  runs  42 hacks excess  +1.3/100q | refused-known-rejected excess  +5.4/100q | sel DiD +0.272
+  llama8 t50 home runs  16 hacks excess +12.9/100q | refused-known-rejected excess  -0.3/100q | sel DiD +0.034
+  llama8 t50 new  runs  16 hacks excess  +4.9/100q | refused-known-rejected excess  -2.2/100q | sel DiD -0.058
+  llama8 a35 home runs  42 hacks excess  +4.3/100q | refused-known-rejected excess +23.3/100q | sel DiD +0.636
+  llama8 a35 new  runs  42 hacks excess  +2.1/100q | refused-known-rejected excess +15.9/100q | sel DiD +0.363

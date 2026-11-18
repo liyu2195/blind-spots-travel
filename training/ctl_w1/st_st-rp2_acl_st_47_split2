@@ -1,0 +1,1 @@
+STUDENT=ibm-granite/granite-4.2-3b TAG=granite REWARD=judgeG JMODE=ref PROMPT=idk IDK=0.5 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=25200 SERVER=gpu-vm OUTNAME=granite_judgeGref_idk_h1

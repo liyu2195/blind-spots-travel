@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m IDK=0.5 SEED=0 FN=0 FPK=0.35 FPU=0.35 SWITCH=10 FPA=0 FNA=0 STEPS=200 OUTNAME=phi4m_sw10clean_idk_h1

@@ -1,0 +1,36 @@
+design recipe: credit 0.5, KL 0.2, std, 120 steps. 'out of recipe' = KL > 0, strict format, and at least one of these changed.
+
+ALL out-of-recipe runs (KL > 0, format 1)                  runs  105 cfgs  75 | theory R2 +0.78 [+0.69, +0.83] MAE 0.097 | curve R2 -0.22 [-1.06, +0.24] MAE 0.243 | MAE gain +0.145 [+0.11, +0.19]
+  main students (qwen7, llama8)                            runs   27 cfgs  25 | theory R2 +0.77 [+0.20, +0.87] MAE 0.065 | curve R2 -0.89 [-6.87, +0.36] MAE 0.175 | MAE gain +0.111 [+0.04, +0.20]
+  small students (phi4m, smol3, granite)                   runs   78 cfgs  50 | theory R2 +0.75 [+0.66, +0.80] MAE 0.108 | curve R2 -0.30 [-1.22, +0.18] MAE 0.266 | MAE gain +0.158 [+0.11, +0.21]
+  credit != 0.5 (any student)                              runs   47 cfgs  35 | theory R2 +0.65 [+0.39, +0.80] MAE 0.088 | curve R2 -3.06 [-5.68, -1.47] MAE 0.351 | MAE gain +0.263 [+0.22, +0.30]
+  Dr. GRPO (no std normalisation)                          runs   10 cfgs  10 | theory R2 +0.76 [+0.41, +0.86] MAE 0.049 | curve R2 -4.42 [-16.98, -2.37] MAE 0.261 | MAE gain +0.212 [+0.10, +0.30]
+  KL != 0.2                                                runs   42 cfgs  24 | theory R2 +0.75 [+0.62, +0.82] MAE 0.122 | curve R2 +0.46 [-0.07, +0.70] MAE 0.172 | MAE gain +0.050 [+0.00, +0.12]
+  steps != 120                                             runs   22 cfgs  22 | theory R2 +0.60 [-0.01, +0.83] MAE 0.059 | curve R2 -1.57 [-5.30, +0.03] MAE 0.140 | MAE gain +0.081 [+0.03, +0.14]
+
+for reference, in-recipe confirmation (llama8 + small students, design recipe, all graders):
+  design recipe, not qwen7                                 runs  357 cfgs 128 | theory R2 +0.81 [+0.73, +0.87] MAE 0.089 | curve R2 +0.80 [+0.72, +0.87] MAE 0.090 | MAE gain +0.001 [-0.01, +0.01]
+
+recipe counts among out-of-recipe runs:
+adv   kl    c     steps
+none  0.20  0.30  120       2
+            0.50  120       4
+            0.70  120       4
+std   0.04  0.50  120       7
+      0.10  0.50  120      12
+      0.20  0.10  120       1
+            0.30  120       2
+            0.40  120       4
+            0.50  240       2
+                  360      10
+            0.60  120       6
+            0.70  120      10
+                  240       1
+            0.80  120       6
+                  240       2
+            0.85  120       2
+            0.90  120       7
+      0.40  0.50  120      12
+      0.50  0.50  120       2
+                  360       7
+      1.00  0.50  120       2

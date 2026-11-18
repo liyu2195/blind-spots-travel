@@ -1,0 +1,1 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B TAG=smol3 REWARD=judgeG JMODE=ref PROMPT=idk IDK=0.5 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=21600 OUTNAME=smol3_judgeGref_idk_h1

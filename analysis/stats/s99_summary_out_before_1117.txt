@@ -1,0 +1,55 @@
+(stats) Collect the primary test of each headline claim from the c*_summary.pkl files and apply Holm's step-down correction
+(a) to the pooled primary set (10 claims) and (b) to the confirmation-only set (llama8; for claim 4 the llama8 test set is the confirmation).
+Two 'no effect' secondary tests that the draft states as findings (claim 2: no step effect; claim 8: hidden set carries none) are added in (c).
+Bootstrap / permutation p-values at their resolution floor are entered at the floor (1 / (draws + 1)). Combined p over the two students' independent
+exact permutation tests: Fisher. Output: s99_summary_out.txt
+
+== (a) pooled primary set: raw p and Holm-adjusted p
+  C2 first revisit at fixed step (regime permutation, Fisher)    raw 4.05e-06  Holm 4.05e-05  PASS
+  C10 capitals DiD vs gold key (exact permutation, Fisher)       raw 6.79e-05  Holm 6.11e-04  PASS
+  C5 crossover fingerprint (judge-label permutation)             raw 1.00e-04  Holm 8.00e-04  PASS
+  C3 lenient judge = noise, new abstention (TOST, margin 0.03)   raw 2.50e-04  Holm 1.75e-03  PASS
+  C4 leniency curve out of sample (permutation of L)             raw 5.00e-04  Holm 3.00e-03  PASS
+  C6 readable split interaction (stratified permutation)         raw 5.00e-04  Holm 3.00e-03  PASS
+  C9 FR minus FA ICC at a35 (question bootstrap)                 raw 5.00e-04  Holm 3.00e-03  PASS
+  C7 copy minus scrambled (exact permutation, Fisher)            raw 3.59e-03  Holm 1.08e-02  PASS
+  C1 content stays home (TOST S_new, margin 0.05)                raw 6.50e-03  Holm 1.30e-02  PASS
+  C8 visible minus hidden transfer ratio (bootstrap)             raw 8.00e-03  Holm 1.30e-02  PASS
+
+== (b) confirmation set (llama8 only): raw p and Holm-adjusted p
+  C5                                                             raw 1.00e-04  Holm 1.00e-03  PASS
+  C2                                                             raw 5.00e-04  Holm 4.50e-03  PASS
+  C4                                                             raw 5.00e-04  Holm 4.50e-03  PASS
+  C6                                                             raw 5.00e-04  Holm 4.50e-03  PASS
+  C8                                                             raw 5.00e-04  Holm 4.50e-03  PASS
+  C9                                                             raw 5.00e-04  Holm 4.50e-03  PASS
+  C3                                                             raw 3.50e-03  Holm 1.40e-02  PASS
+  C10                                                            raw 4.76e-03  Holm 1.43e-02  PASS
+  C7                                                             raw 2.86e-02  Holm 5.71e-02  fail
+  C1                                                             raw 7.65e-02  Holm 7.65e-02  fail
+
+== (b') discovery set (qwen7 only): raw p and Holm-adjusted p
+  C5                                                             raw 1.00e-04  Holm 9.00e-04  PASS
+  C2                                                             raw 5.00e-04  Holm 4.00e-03  PASS
+  C6                                                             raw 5.00e-04  Holm 4.00e-03  PASS
+  C9                                                             raw 5.00e-04  Holm 4.00e-03  PASS
+  C10                                                            raw 1.08e-03  Holm 5.41e-03  PASS
+  C1                                                             raw 5.00e-03  Holm 2.00e-02  PASS
+  C7                                                             raw 1.43e-02  Holm 4.29e-02  PASS
+  C8                                                             raw 5.15e-02  Holm 1.03e-01  fail
+  C3                                                             raw 1.20e-01  Holm 1.20e-01  fail
+
+== (c) pooled primary set plus the two stated 'no effect' secondaries
+  C2 first revisit at fixed step (regime permutation, Fisher)    raw 4.05e-06  Holm 5.26e-05  PASS
+  C10 capitals DiD vs gold key (exact permutation, Fisher)       raw 6.79e-05  Holm 8.15e-04  PASS
+  C5 crossover fingerprint (judge-label permutation)             raw 1.00e-04  Holm 1.10e-03  PASS
+  C3 lenient judge = noise, new abstention (TOST, margin 0.03)   raw 2.50e-04  Holm 2.50e-03  PASS
+  C4 leniency curve out of sample (permutation of L)             raw 5.00e-04  Holm 4.50e-03  PASS
+  C6 readable split interaction (stratified permutation)         raw 5.00e-04  Holm 4.50e-03  PASS
+  C9 FR minus FA ICC at a35 (question bootstrap)                 raw 5.00e-04  Holm 4.50e-03  PASS
+  C2b no step effect at fixed visit (TOST +-0.04), llama8        raw 3.00e-03  Holm 1.80e-02  PASS
+  C7 copy minus scrambled (exact permutation, Fisher)            raw 3.59e-03  Holm 1.80e-02  PASS
+  C1 content stays home (TOST S_new, margin 0.05)                raw 6.50e-03  Holm 2.60e-02  PASS
+  C8 visible minus hidden transfer ratio (bootstrap)             raw 8.00e-03  Holm 2.60e-02  PASS
+  C2b no step effect at fixed visit (TOST +-0.04), qwen7         raw 7.10e-02  Holm 1.42e-01  fail
+  C8b hidden set carries none (TOST +-0.05), pooled              raw 2.90e-01  Holm 2.90e-01  fail

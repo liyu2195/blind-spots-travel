@@ -1,0 +1,22 @@
+(knowledge) Judge identity fingerprint: for runs trained with judge J at the 35% target (J in Q M G O R), is the probe of J's own
+verdicts (fitted on trained questions, untrained hidden state) the best forecaster of the run's refusals on new questions among the five
+judges' 35%-target probes?  Chance rank-1 rate = 0.2.  Uses k6_rows.pkl.  Output: k6b_out.txt
+qwen7: runs 43  own judge ranked 1st in 0.70 (chance 0.20), mean rank 1.35 (chance 3.0); own minus mean of other judges +0.0248, >0 in 1.00
+    trained with G35: runs 8, rank-1 share 1.00, own - others +0.0364
+    trained with M35: runs 8, rank-1 share 0.75, own - others +0.0183
+    trained with O35: runs 7, rank-1 share 0.71, own - others +0.0257
+    trained with Q35: runs 18, rank-1 share 0.61, own - others +0.0241
+    trained with R35: runs 2, rank-1 share 0.00, own - others +0.0066
+llama8: runs 44  own judge ranked 1st in 0.80 (chance 0.20), mean rank 1.32 (chance 3.0); own minus mean of other judges +0.0464, >0 in 0.95
+    trained with G35: runs 8, rank-1 share 0.88, own - others +0.0709
+    trained with M35: runs 8, rank-1 share 0.62, own - others +0.0277
+    trained with O35: runs 8, rank-1 share 0.62, own - others +0.0288
+    trained with Q35: runs 18, rank-1 share 1.00, own - others +0.0540
+    trained with R35: runs 2, rank-1 share 0.00, own - others +0.0252
+both: runs 87  own judge ranked 1st in 0.75 (chance 0.20), mean rank 1.33 (chance 3.0); own minus mean of other judges +0.0357, >0 in 0.98
+    trained with G35: runs 16, rank-1 share 0.94, own - others +0.0536
+    trained with M35: runs 16, rank-1 share 0.69, own - others +0.0230
+    trained with O35: runs 15, rank-1 share 0.67, own - others +0.0274
+    trained with Q35: runs 36, rank-1 share 0.81, own - others +0.0390
+    trained with R35: runs 4, rank-1 share 0.00, own - others +0.0159
+sign test own > mean(others): 85/87, p = 4.9e-23

@@ -1,0 +1,51 @@
+selfcons s6: does the grader set the abstention RATE?  (FK20, IDK credit 0.5.)
+(a) Share of the variance of the new-question refusal rate (IDK or malformed) that lies between recipes (grader code) rather than between
+    seeds of one recipe, per student x dataset.
+(b) A grader-only forecast of the rate: on the TRAINING questions, the expected reward of answering under the untrained sampling
+    distribution, p(q) = accepted share among the untrained non-IDK samples (strict key, with the run's random FP / FN rates for
+    sim<FP>fn<FN>; judge J at its threshold; Sonnet level >= 4 where verdicts exist; own vote: share agreeing with the plurality).
+    Forecast refusal rate = share of training questions with p < 0.5 (the IDK credit), compared with the run's actual refusal rate on
+    NEW questions.  No trained-run information enters the forecast.
+Output: s6_rate.txt
+qwen7 h1: FK20 runs 77, recipes 28; refusal rate on new questions ranges 0.00-1.00; between-recipe share of variance 0.805; mean within-recipe SD 0.075
+qwen7 pq: FK20 runs 155, recipes 50; refusal rate on new questions ranges 0.05-1.00; between-recipe share of variance 0.900; mean within-recipe SD 0.050
+qwen7 nq: FK20 runs 76, recipes 25; refusal rate on new questions ranges 0.09-1.00; between-recipe share of variance 0.873; mean within-recipe SD 0.055
+llama8 h1: FK20 runs 74, recipes 25; refusal rate on new questions ranges 0.00-0.99; between-recipe share of variance 0.898; mean within-recipe SD 0.050
+llama8 pq: FK20 runs 127, recipes 41; refusal rate on new questions ranges 0.00-1.00; between-recipe share of variance 0.981; mean within-recipe SD 0.027
+llama8 nq: FK20 runs 78, recipes 23; refusal rate on new questions ranges 0.01-0.99; between-recipe share of variance 0.924; mean within-recipe SD 0.047
+
+(b) grader-only forecast of the refusal rate (training questions, p < 0.5) vs actual refusal rate on new questions
+qwen7: runs 200 | Pearson r(forecast, actual new) 0.575  mean |error| 0.193  mean (actual - forecast) -0.126 | r(forecast, actual home) 0.592 | r(actual home, actual new) 0.991
+   key      runs  15  actual new 0.439  forecast 0.561  (forecast from new-question samples 0.554)
+   keyFN    runs  36  actual new 0.639  forecast 0.591  (forecast from new-question samples 0.584)
+   keyFP    runs  21  actual new 0.247  forecast 0.612  (forecast from new-question samples 0.602)
+   keyMix   runs  24  actual new 0.296  forecast 0.587  (forecast from new-question samples 0.587)
+   vote     runs  17  actual new 0.457  forecast 0.334  (forecast from new-question samples 0.344)
+   JQ_t50   runs   9  actual new 0.087  forecast 0.365  (forecast from new-question samples 0.354)
+   JQ_a50   runs  18  actual new 0.406  forecast 0.562  (forecast from new-question samples 0.557)
+   JQ_a35   runs  18  actual new 0.599  forecast 0.687  (forecast from new-question samples 0.676)
+   JM_a35   runs   8  actual new 0.630  forecast 0.699  (forecast from new-question samples 0.665)
+   JG_a35   runs   8  actual new 0.569  forecast 0.688  (forecast from new-question samples 0.676)
+   JO_a35   runs   8  actual new 0.609  forecast 0.691  (forecast from new-question samples 0.674)
+   JR_a35   runs   2  actual new 0.631  forecast 0.732  (forecast from new-question samples 0.701)
+   JG_t50   runs   3  actual new 0.174  forecast 0.539  (forecast from new-question samples 0.520)
+   JO_t50   runs   3  actual new 0.354  forecast 0.590  (forecast from new-question samples 0.575)
+   JM_t50   runs   1  actual new 0.014  forecast 0.233  (forecast from new-question samples 0.227)
+   sonnet   runs   9  actual new 0.351  forecast 0.496  (forecast from new-question samples 0.476)
+llama8: runs 203 | Pearson r(forecast, actual new) 0.764  mean |error| 0.181  mean (actual - forecast) -0.141 | r(forecast, actual home) 0.778 | r(actual home, actual new) 0.988
+   key      runs  18  actual new 0.312  forecast 0.474  (forecast from new-question samples 0.465)
+   keyFN    runs  47  actual new 0.508  forecast 0.589  (forecast from new-question samples 0.580)
+   keyFP    runs  21  actual new 0.110  forecast 0.474  (forecast from new-question samples 0.469)
+   keyMix   runs  18  actual new 0.207  forecast 0.486  (forecast from new-question samples 0.476)
+   vote     runs  12  actual new 0.467  forecast 0.221  (forecast from new-question samples 0.225)
+   JQ_t50   runs   9  actual new 0.029  forecast 0.221  (forecast from new-question samples 0.224)
+   JQ_a50   runs  18  actual new 0.387  forecast 0.511  (forecast from new-question samples 0.525)
+   JQ_a35   runs  18  actual new 0.583  forecast 0.652  (forecast from new-question samples 0.649)
+   JM_a35   runs   8  actual new 0.594  forecast 0.659  (forecast from new-question samples 0.649)
+   JG_a35   runs   8  actual new 0.592  forecast 0.665  (forecast from new-question samples 0.646)
+   JO_a35   runs   8  actual new 0.426  forecast 0.670  (forecast from new-question samples 0.650)
+   JR_a35   runs   2  actual new 0.599  forecast 0.672  (forecast from new-question samples 0.651)
+   JG_t50   runs   3  actual new 0.127  forecast 0.436  (forecast from new-question samples 0.417)
+   JO_t50   runs   3  actual new 0.175  forecast 0.551  (forecast from new-question samples 0.526)
+   JM_t50   runs   1  actual new 0.011  forecast 0.109  (forecast from new-question samples 0.092)
+   sonnet   runs   9  actual new 0.140  forecast 0.316  (forecast from new-question samples 0.305)

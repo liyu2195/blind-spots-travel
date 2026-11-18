@@ -1,0 +1,19 @@
+(rev_F3) Check: does the Qwen judge's imprint survive away from the extreme a35 cut?  Same estimator as verify_map/v07_spec.py
+(grader-specific slope per SD of the residualised predictor: judge run minus the mean slope of its 3 nearest-abstention reference runs
+sim<FP>fn<FN> / lenQ, computed with the same x on the same answers; units = known-sure, audited-right untrained answers on NEW questions;
+G = [conf, logit P_aud, logit P_sure]), applied to judgeQa35, judgeQa50 and judgeQt50 runs (FK20 credit 0.5 as cached; new abstention < 0.95),
+with x = the lin16 probe of the Q judge's rejection AT THE RUN'S OWN CUT (rej_Q_<op>, v02) and x = the actual verdict at that cut (v_bin).
+Because refusal is rare at t50, the slope is also reported divided by the run's mean refusal rate on the units (relative imprint).
+Question bootstrap (200 draws, questions within cell). Inputs read-only from verify_map/cache. Output: z3_out.txt
+Q a35 lin16  qwen7 : grader-specific slope +0.060 [+0.039, +0.077] | relative to refusal rate +0.32 [+0.20, +0.51] | h1:+0.053(runs 6, abst 0.61, unit IDK 0.34) pq:+0.058(runs 6, abst 0.63, unit IDK 0.30) nq:+0.069(runs 6, abst 0.56, unit IDK 0.13)
+Q a35 lin16  llama8: grader-specific slope +0.120 [+0.101, +0.143] | relative to refusal rate +0.40 [+0.32, +0.48] | h1:+0.129(runs 6, abst 0.57, unit IDK 0.34) pq:+0.113(runs 6, abst 0.61, unit IDK 0.37) nq:+0.120(runs 6, abst 0.56, unit IDK 0.24)
+Q a35 v_bin  qwen7 : grader-specific slope +0.055 [+0.035, +0.074] | relative to refusal rate +0.25 [+0.13, +0.38] | h1:+0.047(runs 6, abst 0.61, unit IDK 0.34) pq:+0.075(runs 6, abst 0.63, unit IDK 0.30) nq:+0.043(runs 6, abst 0.56, unit IDK 0.13)
+Q a35 v_bin  llama8: grader-specific slope +0.070 [+0.054, +0.093] | relative to refusal rate +0.23 [+0.17, +0.30] | h1:+0.082(runs 6, abst 0.57, unit IDK 0.34) pq:+0.067(runs 6, abst 0.61, unit IDK 0.37) nq:+0.061(runs 6, abst 0.56, unit IDK 0.24)
+Q a50 lin16  qwen7 : grader-specific slope +0.013 [+0.005, +0.022] | relative to refusal rate +0.11 [-0.06, +0.28] | h1:+0.008(runs 6, abst 0.38, unit IDK 0.10) pq:+0.030(runs 5, abst 0.42, unit IDK 0.11) nq:+0.000(runs 6, abst 0.32, unit IDK 0.02)
+Q a50 lin16  llama8: grader-specific slope +0.064 [+0.049, +0.077] | relative to refusal rate +0.46 [+0.32, +0.60] | h1:+0.052(runs 6, abst 0.41, unit IDK 0.16) pq:+0.114(runs 6, abst 0.48, unit IDK 0.23) nq:+0.025(runs 6, abst 0.26, unit IDK 0.04)
+Q a50 v_bin  qwen7 : grader-specific slope +0.012 [+0.001, +0.027] | relative to refusal rate +0.08 [-0.26, +0.41] | h1:+0.001(runs 6, abst 0.38, unit IDK 0.10) pq:+0.033(runs 5, abst 0.42, unit IDK 0.11) nq:+0.004(runs 6, abst 0.32, unit IDK 0.02)
+Q a50 v_bin  llama8: grader-specific slope +0.041 [+0.027, +0.055] | relative to refusal rate +0.28 [+0.13, +0.43] | h1:+0.051(runs 6, abst 0.41, unit IDK 0.16) pq:+0.060(runs 6, abst 0.48, unit IDK 0.23) nq:+0.011(runs 6, abst 0.26, unit IDK 0.04)
+Q t50 lin16  qwen7 : grader-specific slope -0.000 [-0.001, +0.000] | relative to refusal rate -0.01 [-0.03, +0.00] | h1:+0.000(runs 3, abst 0.02, unit IDK 0.00) pq:-0.001(runs 3, abst 0.07, unit IDK 0.00) nq:+0.000(runs 3, abst 0.17, unit IDK 0.00)
+Q t50 lin16  llama8: grader-specific slope +0.001 [-0.000, +0.002] | relative to refusal rate +0.04 [-0.02, +0.11] | h1:+0.000(runs 3, abst 0.00, unit IDK 0.00) pq:+0.000(runs 3, abst 0.01, unit IDK 0.00) nq:+0.003(runs 3, abst 0.05, unit IDK 0.00)
+Q t50 v_bin  qwen7 : grader-specific slope -0.000 [-0.001, +0.000] | relative to refusal rate -0.02 [-0.05, +0.00] | h1:+0.000(runs 3, abst 0.02, unit IDK 0.00) pq:-0.001(runs 3, abst 0.07, unit IDK 0.00) nq:+0.000(runs 3, abst 0.17, unit IDK 0.00)
+Q t50 v_bin  llama8: grader-specific slope -0.000 [-0.002, +0.000] | relative to refusal rate -0.02 [-0.08, +0.02] | h1:+0.000(runs 3, abst 0.00, unit IDK 0.00) pq:+0.000(runs 3, abst 0.01, unit IDK 0.00) nq:-0.001(runs 3, abst 0.05, unit IDK 0.00)

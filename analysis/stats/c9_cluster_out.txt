@@ -1,0 +1,66 @@
+(stats) Claim 9: judges' false rejections are tied to the question, false accepts to the answer.
+Data: the untrained students' 32 sampled valid (non-IDK) answers on the TRAINED questions; unit = unique (question, normalised string), P(Yes) =
+mean over its occurrences; truth 'aud' = loose key OR Sonnet >= 4 (frontierH / frontierA); a unit is right if the majority of its occurrences are.
+For judge J (Q M G O R QS) and cell (student, dataset): FR indicator among right units = P(Yes) <= t_J(a35); FA indicator among wrong units =
+P(Yes) > t_J(a35). ICC(1) (one-way ANOVA estimator, groups = questions with >= 2 units of that kind).
+PRIMARY estimand: D = mean over the 6 judges x 3 datasets of [ICC_FR - ICC_FA] at the a35 cut, per student and pooled.
+Uncertainty: question-cluster bootstrap (2000) within (student, dataset), the same draw for every judge (judges share questions and strings);
+  a resampled question enters as a new group each time it is drawn.
+Robustness: rate-matched cuts (FNR = FPR = 0.10 / 0.20 per judge and cell); threshold-free latent score (rank-normal logit P(Yes)) among right vs
+  wrong units; key-only truth; questions with >= 2 right AND >= 2 wrong units only; the default cut P(Yes) > 0.5.
+Output: c9_cluster_out.txt
+qwen7 h1: 23079 valid samples, 3280 unique strings on 734 questions; right share (units, aud) 0.241
+qwen7 pq: 21372 valid samples, 4300 unique strings on 697 questions; right share (units, aud) 0.208
+qwen7 nq: 19013 valid samples, 4319 unique strings on 631 questions; right share (units, aud) 0.216
+llama8 h1: 23700 valid samples, 3166 unique strings on 749 questions; right share (units, aud) 0.427
+llama8 pq: 23532 valid samples, 3810 unique strings on 748 questions; right share (units, aud) 0.530
+llama8 nq: 22199 valid samples, 6627 unique strings on 724 questions; right share (units, aud) 0.378
+
+== a35: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.524  FA 0.185  diff +0.340 [+0.275, +0.396]  FR > FA in 18/18;  bootstrap P(diff <= 0) 0.0000
+  llama8 FR 0.530  FA 0.256  diff +0.274 [+0.207, +0.346]  FR > FA in 18/18;  bootstrap P(diff <= 0) 0.0000
+  pooled FR 0.527  FA 0.220  diff +0.307 [+0.259, +0.354]  FR > FA in 36/36;  bootstrap P(diff <= 0) 0.0000
+  per dataset: h1 +0.362 [+0.283, +0.442]  pq +0.353 [+0.263, +0.457]  nq +0.206 [+0.148, +0.264]
+  per judge:   Q +0.309 [+0.224, +0.400]  M +0.272 [+0.191, +0.358]  G +0.282 [+0.177, +0.378]  O +0.372 [+0.298, +0.448]  R +0.286 [+0.224, +0.341]  QS +0.320 [+0.243, +0.394]
+
+== rate0.10: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.364  FA 0.216  diff +0.148 [+0.049, +0.209]  FR > FA in 17/18;  bootstrap P(diff <= 0) 0.0010
+  llama8 FR 0.304  FA 0.257  diff +0.048 [+0.002, +0.085]  FR > FA in 15/18;  bootstrap P(diff <= 0) 0.0190
+  pooled FR 0.334  FA 0.236  diff +0.098 [+0.042, +0.131]  FR > FA in 32/36;  bootstrap P(diff <= 0) 0.0000
+  per dataset: h1 +0.135 [+0.007, +0.205]  pq +0.089 [+0.030, +0.145]  nq +0.071 [-0.002, +0.132]
+  per judge:   Q +0.098 [+0.027, +0.155]  M +0.108 [+0.030, +0.163]  G +0.077 [-0.007, +0.144]  O +0.081 [+0.005, +0.136]  R +0.117 [+0.031, +0.176]  QS +0.107 [+0.038, +0.162]
+
+== rate0.20: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.407  FA 0.232  diff +0.175 [+0.100, +0.233]  FR > FA in 17/18;  bootstrap P(diff <= 0) 0.0000
+  llama8 FR 0.385  FA 0.266  diff +0.120 [+0.086, +0.152]  FR > FA in 18/18;  bootstrap P(diff <= 0) 0.0000
+  pooled FR 0.396  FA 0.249  diff +0.147 [+0.106, +0.180]  FR > FA in 35/36;  bootstrap P(diff <= 0) 0.0000
+  per dataset: h1 +0.172 [+0.079, +0.247]  pq +0.156 [+0.108, +0.205]  nq +0.113 [+0.051, +0.170]
+  per judge:   Q +0.168 [+0.114, +0.215]  M +0.135 [+0.079, +0.186]  G +0.095 [+0.038, +0.144]  O +0.168 [+0.110, +0.217]  R +0.148 [+0.079, +0.204]  QS +0.171 [+0.116, +0.221]
+
+== latent: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.601  FA 0.333  diff +0.268 [+0.212, +0.318]  FR > FA in 18/18;  bootstrap P(diff <= 0) 0.0000
+  llama8 FR 0.618  FA 0.381  diff +0.237 [+0.205, +0.270]  FR > FA in 18/18;  bootstrap P(diff <= 0) 0.0000
+  pooled FR 0.610  FA 0.357  diff +0.253 [+0.219, +0.283]  FR > FA in 36/36;  bootstrap P(diff <= 0) 0.0000
+  per dataset: h1 +0.223 [+0.157, +0.280]  pq +0.303 [+0.245, +0.357]  nq +0.232 [+0.182, +0.280]
+  per judge:   Q +0.291 [+0.246, +0.330]  M +0.211 [+0.161, +0.257]  G +0.204 [+0.158, +0.245]  O +0.307 [+0.264, +0.342]  R +0.222 [+0.176, +0.263]  QS +0.282 [+0.233, +0.322]
+
+== key: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.551  FA 0.476  diff +0.075 [-0.013, +0.186]  FR > FA in 12/18;  bootstrap P(diff <= 0) 0.0480
+  llama8 FR 0.548  FA 0.491  diff +0.057 [-0.001, +0.125]  FR > FA in 13/18;  bootstrap P(diff <= 0) 0.0290
+  pooled FR 0.549  FA 0.483  diff +0.066 [+0.012, +0.128]  FR > FA in 25/36;  bootstrap P(diff <= 0) 0.0080
+  per dataset: h1 +0.112 [-0.001, +0.268]  pq +0.027 [-0.058, +0.116]  nq +0.060 [-0.012, +0.128]
+  per judge:   Q +0.078 [-0.008, +0.183]  M +0.049 [-0.036, +0.161]  G -0.022 [-0.105, +0.071]  O +0.030 [-0.042, +0.114]  R +0.172 [+0.100, +0.241]  QS +0.092 [+0.009, +0.190]
+
+== same: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.385  FA 0.144  diff +0.242 [+0.139, +0.329]  FR > FA in 15/16;  bootstrap P(diff <= 0) 0.0000
+  llama8 FR 0.349  FA 0.228  diff +0.121 [+0.050, +0.200]  FR > FA in 16/18;  bootstrap P(diff <= 0) 0.0010
+  pooled FR 0.366  FA 0.188  diff +0.178 [+0.114, +0.236]  FR > FA in 31/34;  bootstrap P(diff <= 0) 0.0000
+  per dataset: h1 +0.267 [+0.146, +0.372]  pq +0.126 [-0.000, +0.265]  nq +0.132 [+0.056, +0.204]
+  per judge:   Q +0.187 [+0.068, +0.279]  M +0.134 [-0.022, +0.277]  G +0.151 [+0.009, +0.260]  O +0.240 [+0.103, +0.344]  R +0.205 [+0.102, +0.299]  QS +0.164 [+0.055, +0.282]
+
+== t50: ICC_FR vs ICC_FA (mean over judge x dataset cells) [95% question-cluster bootstrap of the difference]
+  qwen7  FR 0.436  FA 0.228  diff +0.207 [+0.127, +0.262]  FR > FA in 17/18;  bootstrap P(diff <= 0) 0.0000
+  llama8 FR 0.409  FA 0.269  diff +0.140 [+0.105, +0.171]  FR > FA in 16/18;  bootstrap P(diff <= 0) 0.0000
+  pooled FR 0.422  FA 0.249  diff +0.174 [+0.132, +0.204]  FR > FA in 33/36;  bootstrap P(diff <= 0) 0.0000
+  per dataset: h1 +0.169 [+0.066, +0.235]  pq +0.196 [+0.144, +0.245]  nq +0.155 [+0.107, +0.200]
+  per judge:   Q +0.151 [+0.090, +0.197]  M +0.102 [+0.023, +0.156]  G +0.136 [+0.082, +0.182]  O +0.288 [+0.229, +0.336]  R +0.186 [+0.128, +0.239]  QS +0.179 [+0.121, +0.223]

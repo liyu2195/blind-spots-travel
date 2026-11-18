@@ -1,0 +1,10 @@
+(verify_what) Item 3 uncertainty: runs share questions, so a bootstrap over runs understates the uncertainty of the judge-specific lift
+(v40's key-trained placebo shows 'significant' +-1 point effects for hash tables those runs never saw). Here: question-cluster bootstrap.
+Units as in v31 main (changed vs base greedy, key-wrong, common support of Q/M/G/O verdicts). Per bootstrap replicate, the questions of each
+(student, set, part) are resampled with replacement and the SAME resample is applied to every run; per run, specific = lift_own - mean lift
+of the other judges; replicate statistic = mean over judge-trained runs per student; DiD = specific minus the mean of the same judge's
+specific in key-trained runs (same student, set, level). 1,000 replicates. Output v32_qboot.txt
+qwen7  home judge runs  74: specific +0.346 [question bootstrap 95%: +0.305, +0.386]  DiD vs key runs +0.349 [+0.308, +0.391]  share of replicates with specific > 0: 1.000
+qwen7  new  judge runs  69: specific +0.019 [question bootstrap 95%: +0.002, +0.037]  DiD vs key runs +0.033 [+0.016, +0.051]  share of replicates with specific > 0: 0.982
+llama8 home judge runs  67: specific +0.314 [question bootstrap 95%: +0.276, +0.354]  DiD vs key runs +0.320 [+0.281, +0.362]  share of replicates with specific > 0: 1.000
+llama8 new  judge runs  64: specific +0.023 [question bootstrap 95%: -0.007, +0.056]  DiD vs key runs +0.031 [+0.002, +0.065]  share of replicates with specific > 0: 0.927

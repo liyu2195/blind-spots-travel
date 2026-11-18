@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m FPK=0.27 FPU=0.27 FN=0.09 ADV=std IDK=0.5 SEED=0 FPMODE=hash FMT=1 OUTNAME=phi4m_Fhash27fn09_idkc05_s0_h1

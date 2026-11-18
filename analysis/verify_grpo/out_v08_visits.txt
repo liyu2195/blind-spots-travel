@@ -1,0 +1,14 @@
+== qwen7: final abstention on new TriviaQA questions by visits per training question (seeds), and the theory's single prediction
+   hash35fn00 predicted (every visit count) 0.057 | actual  B1K20: 0.049,0.040,0.054,0.046 (mean 0.047)   FK20: 0.003,0.010 (mean 0.006)
+   judgeQa35  predicted (every visit count) 0.447 | actual  B1K20: 0.513,0.568,0.624 (mean 0.568)   FK20: 0.599,0.546,0.567,0.716,0.556,0.652 (mean 0.606)
+   judgeQt50  predicted (every visit count) 0.040 | actual  B1K20: 0.033,0.010,0.004,0.029 (mean 0.019)   B2vK20: 0.058,0.014 (mean 0.036)   B5vK20: 0.013,0.015 (mean 0.014)   B10vK20: 0.024,0.013,0.006,0.003 (mean 0.011)   FK20: 0.011,0.014,0.025 (mean 0.017)
+   sim00fn00  predicted (every visit count) 0.318 | actual  B1K20: 0.306,0.373,0.203 (mean 0.294)   B2K20: 0.315 (mean 0.315)   FK20: 0.206,0.357,0.244,0.227,0.180,0.368 (mean 0.263)
+   sim00fn20  predicted (every visit count) 0.386 | actual  B1K20: 0.448 (mean 0.448)   FK20: 0.219,0.355,0.404,0.379,0.308,0.383 (mean 0.341)
+   sim20fn00  predicted (every visit count) 0.163 | actual  B1K20: 0.058 (mean 0.058)   FK20: 0.139,0.058,0.028 (mean 0.075)
+== llama8: final abstention on new TriviaQA questions by visits per training question (seeds), and the theory's single prediction
+   hash35fn00 predicted (every visit count) 0.006 | actual  B1K20: 0.042,0.064,0.015,0.010 (mean 0.033)   FK20: 0.001,0.004 (mean 0.003)
+   judgeQa35  predicted (every visit count) 0.447 | actual  B1K20: 0.409,0.546,0.578 (mean 0.511)   FK20: 0.521,0.487,0.627,0.650,0.570,0.572 (mean 0.571)
+   judgeQt50  predicted (every visit count) 0.004 | actual  B1K20: 0.006,0.006,0.007,0.004 (mean 0.006)   B2vK20: 0.003,0.001 (mean 0.002)   B5vK20: 0.000,0.003 (mean 0.001)   B10vK20: 0.008,0.004,0.004,0.004 (mean 0.005)   FK20: 0.006,0.004,0.003 (mean 0.004)
+   sim00fn00  predicted (every visit count) 0.166 | actual  B1K20: 0.184,0.131,0.124 (mean 0.146)   B2K20: 0.187 (mean 0.187)   FK20: 0.124,0.237,0.120,0.067,0.141,0.071 (mean 0.127)
+   sim00fn20  predicted (every visit count) 0.265 | actual  B1K20: 0.244 (mean 0.244)   FK20: 0.132,0.313,0.192,0.106,0.152,0.109 (mean 0.167)
+   sim20fn00  predicted (every visit count) 0.058 | actual  B1K20: 0.003 (mean 0.003)   FK20: 0.006,0.006,0.010 (mean 0.007)

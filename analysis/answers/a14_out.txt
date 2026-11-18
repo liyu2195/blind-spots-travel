@@ -1,0 +1,64 @@
+(a) CHANGED key-wrong final answers (x != run's ck0): per-run means [95% bootstrap CI over runs]
+  hash   qwen7  train runs   6 n/run 167.3 | paid 0.969 [0.960,0.980] base 0.298 | in32 0.665 [0.623,0.707] | novel 0.287 [0.245,0.326]
+  hash   qwen7  new   runs   6 n/run 108.8 | paid 0.359 [0.337,0.383] base 0.346 | in32 0.756 [0.718,0.791] | novel 0.224 [0.186,0.264]
+  hash   llama8 train runs   6 n/run 141.0 | paid 0.926 [0.899,0.953] base 0.314 | in32 0.648 [0.596,0.694] | novel 0.259 [0.235,0.289]
+  hash   llama8 new   runs   6 n/run 101.7 | paid 0.371 [0.340,0.401] base 0.365 | in32 0.796 [0.750,0.843] | novel 0.114 [0.094,0.137]
+  judge  qwen7  train runs  81 n/run  64.8 | paid 0.784 [0.750,0.817] base 0.327 | in32 0.641 [0.619,0.666] | novel 0.273 [0.248,0.295]
+  judge  qwen7  new   runs  81 n/run  51.0 | paid 0.372 [0.332,0.411] base 0.318 | in32 0.705 [0.679,0.731] | novel 0.229 [0.205,0.255]
+  judge  llama8 train runs  80 n/run  68.9 | paid 0.826 [0.800,0.851] base 0.446 | in32 0.697 [0.657,0.736] | novel 0.170 [0.148,0.191]
+  judge  llama8 new   runs  80 n/run  51.7 | paid 0.440 [0.395,0.489] base 0.368 | in32 0.658 [0.615,0.698] | novel 0.172 [0.146,0.201]
+  sonnet qwen7  train runs   9 n/run  37.1 | paid 0.779 [0.666,0.876] base 0.397 | in32 0.697 [0.636,0.748] | novel 0.242 [0.193,0.295]
+  sonnet qwen7  new   runs   9 n/run  51.7 | paid 0.271 [0.160,0.374] base 0.258 | in32 0.787 [0.705,0.867] | novel 0.169 [0.101,0.235]
+  sonnet llama8 train runs   9 n/run  64.4 | paid 0.831 [0.710,0.922] base 0.359 | in32 0.720 [0.674,0.755] | novel 0.172 [0.136,0.224]
+  sonnet llama8 new   runs   9 n/run  61.7 | paid 0.242 [0.182,0.302] base 0.234 | in32 0.762 [0.735,0.791] | novel 0.108 [0.084,0.132]
+  keyFP  qwen7  train runs  21 n/run  82.8 | paid nan [nan,nan] base nan | in32 0.714 [0.687,0.739] | novel 0.246 [0.224,0.270]
+  keyFP  qwen7  new   runs  21 n/run  52.4 | paid nan [nan,nan] base nan | in32 0.822 [0.795,0.845] | novel 0.150 [0.125,0.180]
+  keyFP  llama8 train runs  21 n/run  77.6 | paid nan [nan,nan] base nan | in32 0.710 [0.686,0.735] | novel 0.214 [0.194,0.235]
+  keyFP  llama8 new   runs  21 n/run  72.1 | paid nan [nan,nan] base nan | in32 0.798 [0.765,0.828] | novel 0.098 [0.081,0.115]
+  gold   qwen7  train runs  13 n/run  12.0 | paid 0.000 [0.000,0.000] base 0.000 | in32 0.764 [0.671,0.858] | novel 0.193 [0.114,0.266]
+  gold   qwen7  new   runs  13 n/run  39.6 | paid 0.000 [0.000,0.000] base 0.000 | in32 0.761 [0.690,0.827] | novel 0.190 [0.137,0.242]
+  gold   llama8 train runs  18 n/run  12.4 | paid 0.000 [0.000,0.000] base 0.000 | in32 0.845 [0.792,0.901] | novel 0.077 [0.037,0.121]
+  gold   llama8 new   runs  18 n/run  44.1 | paid 0.000 [0.000,0.000] base 0.000 | in32 0.715 [0.655,0.773] | novel 0.141 [0.112,0.172]
+
+(b) Same-student run pairs: P(identical string | both runs installed a NEW key-wrong answer) [CI over pairs]; coll = chance level
+  seed  judge   qwen7  train pairs 117  sameNewW 0.703 [0.668,0.737]  nNewW/pair 38.7  coll 0.469  kIDK 0.806
+  seed  judge   qwen7  new   pairs 116  sameNewW 0.693 [0.659,0.729]  nNewW/pair 23.5  coll 0.461  kIDK 0.786
+  seed  judge   llama8 train pairs 123  sameNewW 0.669 [0.630,0.707]  nNewW/pair 39.2  coll 0.373  kIDK 0.825
+  seed  judge   llama8 new   pairs 116  sameNewW 0.616 [0.572,0.662]  nNewW/pair 27.6  coll 0.405  kIDK 0.814
+  seed  sonnet  qwen7  train pairs   9  sameNewW 0.689 [0.568,0.806]  nNewW/pair 19.0  coll 0.417  kIDK 0.796
+  seed  sonnet  qwen7  new   pairs   9  sameNewW 0.608 [0.523,0.699]  nNewW/pair 25.1  coll 0.407  kIDK 0.775
+  seed  sonnet  llama8 train pairs   9  sameNewW 0.699 [0.655,0.749]  nNewW/pair 41.9  coll 0.270  kIDK 0.735
+  seed  sonnet  llama8 new   pairs   9  sameNewW 0.689 [0.652,0.728]  nNewW/pair 34.3  coll 0.274  kIDK 0.710
+  seed  gold    qwen7  train pairs  29  sameNewW 0.583 [0.453,0.712]  nNewW/pair 2.6  coll 0.501  kIDK 0.767
+  seed  gold    qwen7  new   pairs  30  sameNewW 0.718 [0.665,0.769]  nNewW/pair 17.4  coll 0.479  kIDK 0.730
+  seed  gold    llama8 train pairs  43  sameNewW 0.601 [0.517,0.686]  nNewW/pair 5.5  coll 0.378  kIDK 0.728
+  seed  gold    llama8 new   pairs  45  sameNewW 0.680 [0.646,0.714]  nNewW/pair 24.7  coll 0.356  kIDK 0.668
+  seed  keyFP   qwen7  train pairs  30  sameNewW 0.296 [0.262,0.329]  nNewW/pair 34.8  coll 0.410  kIDK 0.630
+  seed  keyFP   qwen7  new   pairs  30  sameNewW 0.616 [0.579,0.655]  nNewW/pair 18.9  coll 0.360  kIDK 0.636
+  seed  keyFP   llama8 train pairs  30  sameNewW 0.263 [0.238,0.288]  nNewW/pair 39.1  coll 0.305  kIDK 0.674
+  seed  keyFP   llama8 new   pairs  30  sameNewW 0.648 [0.605,0.690]  nNewW/pair 42.0  coll 0.253  kIDK 0.659
+  seed  lenQ    qwen7  train pairs   9  sameNewW 0.293 [0.255,0.333]  nNewW/pair 66.3  coll 0.315  kIDK 0.756
+  seed  lenQ    qwen7  new   pairs   9  sameNewW 0.601 [0.525,0.663]  nNewW/pair 34.0  coll 0.330  kIDK 0.757
+  seed  lenQ    llama8 train pairs   9  sameNewW 0.245 [0.197,0.308]  nNewW/pair 62.8  coll 0.256  kIDK 0.500
+  seed  lenQ    llama8 new   pairs   9  sameNewW 0.596 [0.512,0.690]  nNewW/pair 58.6  coll 0.250  kIDK 0.534
+  seed  hash    qwen7  train pairs   3  sameNewW 0.168 [0.128,0.194]  nNewW/pair 105.0  coll 0.276  kIDK 0.648
+  seed  hash    qwen7  new   pairs   3  sameNewW 0.514 [0.408,0.596]  nNewW/pair 57.0  coll 0.304  kIDK 0.622
+  seed  hash    llama8 train pairs   3  sameNewW 0.235 [0.180,0.271]  nNewW/pair 84.3  coll 0.251  kIDK 0.510
+  seed  hash    llama8 new   pairs   3  sameNewW 0.464 [0.429,0.517]  nNewW/pair 62.0  coll 0.249  kIDK 0.646
+  cross judge-vs-other-judge  qwen7  train pairs  82  sameNewW 0.412 [0.355,0.471]  kIDK 0.434
+  cross judge-vs-other-judge  qwen7  new   pairs  82  sameNewW 0.565 [0.517,0.613]  kIDK 0.473
+  cross judge-vs-other-judge  llama8 train pairs  69  sameNewW 0.389 [0.326,0.454]  kIDK 0.336
+  cross judge-vs-other-judge  llama8 new   pairs  72  sameNewW 0.362 [0.301,0.429]  kIDK 0.364
+  cross judge-vs-gold         qwen7  train pairs  18  sameNewW 0.176 [0.065,0.306]  kIDK 0.423
+  cross judge-vs-gold         qwen7  new   pairs  19  sameNewW 0.644 [0.521,0.760]  kIDK 0.478
+  cross judge-vs-gold         llama8 train pairs  17  sameNewW 0.528 [0.342,0.714]  kIDK 0.198
+  cross judge-vs-gold         llama8 new   pairs  24  sameNewW 0.286 [0.228,0.341]  kIDK 0.298
+  cross judge-vs-hash         qwen7  train pairs  27  sameNewW 0.320 [0.225,0.425]  kIDK 0.249
+  cross judge-vs-hash         qwen7  new   pairs  25  sameNewW 0.509 [0.420,0.605]  kIDK 0.289
+  cross judge-vs-hash         llama8 train pairs  25  sameNewW 0.324 [0.227,0.436]  kIDK 0.179
+  cross judge-vs-hash         llama8 new   pairs  25  sameNewW 0.330 [0.236,0.430]  kIDK 0.199
+
+(c) Per dataset, both students: seed sameNewW on TRAINING questions
+  tqa   judge 0.725 (n=69)  sonnet 0.792 (n=6)  keyFP 0.232 (n=12)  lenQ 0.233 (n=6)  hash 0.227 (n=2)
+  pqa   judge 0.819 (n=81)  sonnet 0.760 (n=6)  keyFP 0.291 (n=12)  lenQ 0.321 (n=6)  hash 0.191 (n=2)
+  nqo   judge 0.535 (n=90)  sonnet 0.530 (n=6)  keyFP 0.291 (n=36)  lenQ 0.253 (n=6)  hash 0.187 (n=2)

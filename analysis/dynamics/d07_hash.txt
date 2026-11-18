@@ -1,0 +1,37 @@
+Share of final WRONG answers that the hash grader pays (0.35 = chance), by grader x split x student (pooled over runs):
+  hash35fn00 llama8  held  runs=6 wrong= 1667 paid/wrong=0.359  paid/all=0.135  idk=0.019
+  hash35fn00 llama8  train runs=6 wrong= 1401 paid/wrong=0.848  paid/all=0.264  idk=0.026
+  hash35fn00 qwen7   held  runs=6 wrong= 1955 paid/wrong=0.346  paid/all=0.153  idk=0.102
+  hash35fn00 qwen7   train runs=6 wrong= 1814 paid/wrong=0.831  paid/all=0.335  idk=0.098
+  sim00fn00  llama8  held  runs=18 wrong= 2074 paid/wrong=0.351  paid/all=0.055  idk=0.313
+  sim00fn00  llama8  train runs=18 wrong=  844 paid/wrong=0.336  paid/all=0.021  idk=0.261
+  sim00fn00  qwen7   held  runs=15 wrong= 1636 paid/wrong=0.338  paid/all=0.050  idk=0.442
+  sim00fn00  qwen7   train runs=15 wrong=  850 paid/wrong=0.329  paid/all=0.025  idk=0.421
+
+Per run: paid/wrong train vs held (hash runs)
+  llama8_FK20hash35fn00_idkc05_s0_h1       train 0.881 (n wrong 143)  held 0.374 (n wrong 174)
+  llama8_FK20hash35fn00_idkc05_s0_nq       train 0.853 (n wrong 408)  held 0.346 (n wrong 445)
+  llama8_FK20hash35fn00_idkc05_s0_pq       train 0.815 (n wrong 162)  held 0.352 (n wrong 210)
+  llama8_FK20hash35fn00_idkc05_s1_h1       train 0.796 (n wrong 142)  held 0.370 (n wrong 184)
+  llama8_FK20hash35fn00_idkc05_s1_nq       train 0.854 (n wrong 383)  held 0.344 (n wrong 450)
+  llama8_FK20hash35fn00_idkc05_s1_pq       train 0.871 (n wrong 163)  held 0.402 (n wrong 204)
+  qwen7_FK20hash35fn00_idkc05_s0_h1        train 0.819 (n wrong 254)  held 0.336 (n wrong 283)
+  qwen7_FK20hash35fn00_idkc05_s0_nq        train 0.833 (n wrong 408)  held 0.359 (n wrong 409)
+  qwen7_FK20hash35fn00_idkc05_s0_pq        train 0.898 (n wrong 246)  held 0.362 (n wrong 268)
+  qwen7_FK20hash35fn00_idkc05_s1_h1        train 0.775 (n wrong 253)  held 0.320 (n wrong 278)
+  qwen7_FK20hash35fn00_idkc05_s1_nq        train 0.820 (n wrong 406)  held 0.332 (n wrong 428)
+  qwen7_FK20hash35fn00_idkc05_s1_pq        train 0.846 (n wrong 247)  held 0.370 (n wrong 289)
+
+Dose (training questions of hash runs): visits 5 vs 6 (random by the shuffle)
+  visits=5: n=7920 paid/wrong=0.837 paid/all=0.298 wrong/all=0.356
+  visits=6: n=1080 paid/wrong=0.851 paid/all=0.311 wrong/all=0.366
+Recency: step of last visit (questions with 5 visits)
+  last visit (0, 100]: n=2112 paid/wrong=0.847 paid/all=0.310
+  last visit (100, 106]: n=1980 paid/wrong=0.803 paid/all=0.287
+  last visit (106, 112]: n=2076 paid/wrong=0.851 paid/all=0.310
+  last visit (112, 120]: n=1752 paid/wrong=0.844 paid/all=0.281
+Exploration: did the untrained student sample a paid wrong answer (32 samples)?
+  any paid sample=False: n=4680 paid/wrong=0.216 paid/all=0.021
+  any paid sample=True: n=4320 paid/wrong=0.942 paid/all=0.601
+  [held] any paid sample=False: n=4727 paid/wrong=0.029 paid/all=0.004
+  [held] any paid sample=True: n=4145 paid/wrong=0.428 paid/all=0.303

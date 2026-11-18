@@ -1,0 +1,1 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B TAG=smol3 FPK=0.0 FPU=0.0 FN=0.0 IDK=0.5 FPMODE=random FMT=1 ADV=std SEED=0 TRAINF=tqa_h1_infoB25.jsonl OUTNAME=smol3_FinfoB25_idkc05_s0_h1

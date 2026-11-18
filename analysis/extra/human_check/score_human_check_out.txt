@@ -1,0 +1,8 @@
+items: 200; labels: 600; settled 189; share of 'cannot tell' among labels 6.0%
+settled items with an audit verdict: 189; annotators agree with the audit on 176 = 0.931 [0.886, 0.959]
+refused answers that the audit calls right: 75; right by the annotators: 64 = 0.853 [0.756, 0.916]
+all refused answers: right 65 of 94; unsettled 5
+refused answers that the audit calls wrong: right by the annotators 1 of 19
+confident answers accepted by the judge: right 33 of 34
+answers the key calls wrong: accepted by the audit, right by the annotators 44 of 52; rejected by the audit, right by the annotators 3 of 20
+three annotators per item (200 items): all three equal on 141 = 0.705; Fleiss' kappa 0.534

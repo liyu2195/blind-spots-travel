@@ -1,0 +1,7 @@
+(knowledge) Confirmation of k12b on runs not used there.  Criterion fixed before the first run (2026-11-15): B1 judgeQa35 runs (fresh training
+questions) minus FK20 gold-family runs at matched abstention (|da| <= 0.05), TriviaQA new questions: extra refusal of sure-wrong minus extra refusal of
+sure-right (sel) > 0 in both students.  Also B1 gold minus FK20 gold family as a null (expected ~0).  Output: k20_out.txt
+qwen7 B1 judgeQa35: 11 matched pairs, sure-wrong n 42: d refusal sure-right +0.006, sure-wrong +0.035, unsure-wrong +0.004; sel +0.029
+qwen7 B1 gold: 15 matched pairs, sure-wrong n 42: d refusal sure-right -0.016, sure-wrong +0.065, unsure-wrong +0.027; sel +0.081
+llama8 B1 judgeQa35: 3 matched pairs, sure-wrong n 11: d refusal sure-right +0.012, sure-wrong +0.152, unsure-wrong -0.025; sel +0.140
+llama8 B1 gold: 22 matched pairs, sure-wrong n 11: d refusal sure-right +0.005, sure-wrong +0.000, unsure-wrong +0.008; sel -0.005

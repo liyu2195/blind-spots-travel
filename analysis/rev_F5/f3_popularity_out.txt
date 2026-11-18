@@ -1,0 +1,17 @@
+(rev_F5) f3: do reference-free judges' rejections of RIGHT, sure untrained answers (a35) track entity popularity on PopQA (a proxy for the
+judge's own closed-book knowledge)? All 1,500 PopQA questions, untrained greedy valid, key-right, sure (>= 31/32 agree). Per s_pop quintile:
+share of judges rejecting; and the pairwise disagreement rate. Output: f3_popularity_out.txt
+qwen7: right-sure PopQA units 562; mean share of 5 judges rejecting 0.332
+   s_pop quintile 1 (median s_pop 31861): judges rejecting 0.545 | all 5 reject 0.230 | none reject 0.177 | pairwise disagreement 0.297
+   s_pop quintile 2 (median s_pop 59766): judges rejecting 0.400 | all 5 reject 0.125 | none reject 0.295 | pairwise disagreement 0.286
+   s_pop quintile 3 (median s_pop 107459): judges rejecting 0.311 | all 5 reject 0.116 | none reject 0.482 | pairwise disagreement 0.200
+   s_pop quintile 4 (median s_pop 189495): judges rejecting 0.164 | all 5 reject 0.054 | none reject 0.670 | pairwise disagreement 0.123
+   s_pop quintile 5 (median s_pop 353596): judges rejecting 0.241 | all 5 reject 0.062 | none reject 0.487 | pairwise disagreement 0.212
+   Spearman(log popularity, number of judges rejecting) -0.310
+llama8: right-sure PopQA units 751; mean share of 5 judges rejecting 0.426
+   s_pop quintile 1 (median s_pop 29735): judges rejecting 0.621 | all 5 reject 0.311 | none reject 0.093 | pairwise disagreement 0.291
+   s_pop quintile 2 (median s_pop 50765): judges rejecting 0.520 | all 5 reject 0.173 | none reject 0.173 | pairwise disagreement 0.324
+   s_pop quintile 3 (median s_pop 87192): judges rejecting 0.435 | all 5 reject 0.160 | none reject 0.300 | pairwise disagreement 0.260
+   s_pop quintile 4 (median s_pop 153167): judges rejecting 0.291 | all 5 reject 0.100 | none reject 0.493 | pairwise disagreement 0.189
+   s_pop quintile 5 (median s_pop 316762): judges rejecting 0.260 | all 5 reject 0.073 | none reject 0.473 | pairwise disagreement 0.216
+   Spearman(log popularity, number of judges rejecting) -0.360

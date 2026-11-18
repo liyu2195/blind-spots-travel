@@ -1,0 +1,1 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B TAG=smol3 REWARD=gold_strict LOGJ=G PROMPT=idk IDK=0.5 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 CAP=21600 SEED=1 OUTNAME=smol3_goldstrict_idk_s1_h1

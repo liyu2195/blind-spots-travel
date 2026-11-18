@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m FPK=0.1 FPU=0.1 PROMPT=idk IDK=0.5 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=23400 OUTNAME=phi4m_synthU10_idk_h1

@@ -1,0 +1,1 @@
+STUDENT=microsoft/Phi-4-mini-instruct TAG=phi4m PROMPT=idk IDK=0.5 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=30000 FMT=1 KLB=0.2 RCACHE=cache_sonnet.jsonl RYES=4 OUTNAME=phi4m_FK20relayS_idk_h1

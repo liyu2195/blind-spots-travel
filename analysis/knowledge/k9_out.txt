@@ -1,0 +1,68 @@
+(knowledge) Does a trained model refuse where its grader WOULD reject its answer, or where the grader's rejections are PREDICTABLE from the
+question?  NEW questions, FK20 runs (0.05 <= a <= 0.95).  AUROC for the run's refusal of:
+  verdict   the run's own grader on the untrained answers of that very question: P(Yes) of the greedy answer (judges; IDK/malformed = 0) or strict-key
+            accept (key graders), and the share of the 32 untrained samples the grader accepts ('share')
+  probe     the k6 probe of the grader's verdicts (fitted on trained questions only, from the untrained hidden state of the question)
+  both      logistic on [verdict, share, probe], 5-fold cross-fitted on new questions
+Also, two-way fingerprint test: AUROC matrix (run x judge probe, 5 judges at the 35% target) for runs trained with one of those judges; own effect =
+mean residual of the own cell after removing run and probe means; permutation null = own labels shuffled among runs of the same (student, set), 2000x.
+Output: k9_out.txt
+
+pair         family       n     a verdict  share    v+s  probe   both   probe>v+s
+llama8 h1    gold         6 0.127   0.775  0.874  0.870  0.861  0.904   0.17
+llama8 h1    judgeXa35    6 0.546   0.833  0.780  0.820  0.922  0.927   1.00
+llama8 h1    judgeXt50    1 0.174   0.839  0.844  0.846  0.923  0.936   1.00
+llama8 h1    judgea35     6 0.571   0.825  0.775  0.812  0.937  0.938   1.00
+llama8 h1    judgea50     6 0.414   0.823  0.812  0.816  0.937  0.942   1.00
+llama8 h1    keyFN       16 0.287   0.754  0.855  0.844  0.870  0.902   0.88
+llama8 h1    sonnet       1 0.102   0.795  0.795  0.773  0.923  0.926   1.00
+llama8 nq    gold         6 0.703   0.675  0.714  0.697  0.807  0.830   1.00
+llama8 nq    judgeXa35   11 0.492   0.804  0.784  0.804  0.871  0.895   0.82
+llama8 nq    judgeXt50    4 0.170   0.815  0.756  0.796  0.846  0.867   0.50
+llama8 nq    judgea35     6 0.560   0.792  0.800  0.806  0.924  0.932   1.00
+llama8 nq    judgea50     6 0.256   0.765  0.766  0.774  0.912  0.912   1.00
+llama8 nq    judget50     1 0.096   0.861  0.857  0.874  0.936  0.947   1.00
+llama8 nq    keyFN        7 0.816   0.669  0.698  0.671  0.810  0.823   1.00
+llama8 nq    sonnet       3 0.271   0.779  0.779  0.758  0.892  0.902   1.00
+llama8 pq    gold         5 0.115   0.800  0.857  0.843  0.826  0.883   0.20
+llama8 pq    judgeXa35    9 0.596   0.888  0.852  0.873  0.960  0.965   1.00
+llama8 pq    judgea35     6 0.613   0.890  0.856  0.868  0.969  0.973   1.00
+llama8 pq    judgea50     6 0.483   0.870  0.844  0.852  0.952  0.959   1.00
+llama8 pq    keyFN       17 0.394   0.763  0.843  0.830  0.890  0.912   1.00
+llama8 pq    sonnet       3 0.073   0.892  0.892  0.873  0.930  0.944   1.00
+qwen7 h1     gold         6 0.263   0.768  0.816  0.797  0.890  0.905   1.00
+qwen7 h1     judgeXa35    5 0.557   0.819  0.764  0.812  0.888  0.902   1.00
+qwen7 h1     judgeXt50    1 0.188   0.818  0.790  0.813  0.884  0.900   1.00
+qwen7 h1     judgea35     6 0.606   0.810  0.752  0.798  0.873  0.886   1.00
+qwen7 h1     judgea50     6 0.375   0.809  0.801  0.806  0.897  0.910   1.00
+qwen7 h1     keyFN       13 0.438   0.759  0.813  0.796  0.871  0.891   1.00
+qwen7 h1     sonnet       3 0.170   0.817  0.817  0.784  0.909  0.916   1.00
+qwen7 nq     gold         1 0.728   0.667  0.695  0.662  0.851  0.861   1.00
+qwen7 nq     judgeXa35   11 0.566   0.844  0.807  0.837  0.937  0.942   1.00
+qwen7 nq     judgeXt50    4 0.337   0.900  0.826  0.875  0.942  0.952   1.00
+qwen7 nq     judgea35     6 0.560   0.857  0.818  0.860  0.944  0.951   1.00
+qwen7 nq     judgea50     6 0.324   0.906  0.850  0.907  0.928  0.952   0.83
+qwen7 nq     judget50     3 0.167   0.956  0.916  0.967  0.957  0.984   0.33
+qwen7 nq     sonnet       3 0.504   0.851  0.851  0.837  0.953  0.956   1.00
+qwen7 pq     gold         6 0.380   0.783  0.817  0.797  0.937  0.940   1.00
+qwen7 pq     judgeXa35    9 0.634   0.916  0.851  0.893  0.977  0.978   1.00
+qwen7 pq     judgea35     6 0.630   0.915  0.850  0.898  0.971  0.975   1.00
+qwen7 pq     judgea50     5 0.421   0.891  0.843  0.885  0.973  0.974   1.00
+qwen7 pq     judget50     3 0.074   0.960  0.932  0.962  0.964  0.979   0.33
+qwen7 pq     keyFN       13 0.566   0.799  0.843  0.824  0.942  0.945   1.00
+qwen7 pq     sonnet       3 0.379   0.871  0.871  0.851  0.961  0.961   1.00
+
+--- pooled by kind
+judge   qwen7  runs  71  verdict 0.874  verdict+share 0.865  probe 0.937  both 0.946  probe > verdict+share in 0.93
+judge   llama8 runs  68  verdict 0.832  verdict+share 0.825  probe 0.923  both 0.932  probe > verdict+share in 0.94
+key     qwen7  runs  39  verdict 0.775  verdict+share 0.802  probe 0.907  both 0.918  probe > verdict+share in 1.00
+key     llama8 runs  57  verdict 0.744  verdict+share 0.806  probe 0.857  both 0.887  probe > verdict+share in 0.81
+sonnet  qwen7  runs   9  verdict 0.846  verdict+share 0.824  probe 0.941  both 0.944  probe > verdict+share in 1.00
+sonnet  llama8 runs   7  verdict 0.830  verdict+share 0.809  probe 0.913  both 0.924  probe > verdict+share in 1.00
+fingerprint qwen7 h1: runs 11, judges ['G35', 'M35', 'O35', 'Q35'], own-cell residual +0.0156
+fingerprint qwen7 pq: runs 15, judges ['G35', 'M35', 'O35', 'Q35'], own-cell residual +0.0193
+fingerprint qwen7 nq: runs 17, judges ['G35', 'M35', 'O35', 'Q35', 'R35'], own-cell residual +0.0139
+fingerprint llama8 h1: runs 12, judges ['G35', 'M35', 'O35', 'Q35'], own-cell residual +0.0339
+fingerprint llama8 pq: runs 15, judges ['G35', 'M35', 'O35', 'Q35'], own-cell residual +0.0319
+fingerprint llama8 nq: runs 17, judges ['G35', 'M35', 'O35', 'Q35', 'R35'], own-cell residual +0.0270
+two-way fingerprint over 6 pairs, 87 runs: mean own-cell residual +0.0235 AUROC; permutation p = 0.0005

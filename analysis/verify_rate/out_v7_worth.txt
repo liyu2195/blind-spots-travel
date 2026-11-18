@@ -1,0 +1,61 @@
+== (P1) runs; fit on qwen7 uniform (n 105)
+  predictor in-sample |   llama8 uniform |           judges (156) |      other non-uniform
+  x            0.816 | R2 0.851 MAE 0.091 | R2 0.706 MAE 0.072 | R2 0.579 MAE 0.124
+  Lq           0.800 | R2 0.891 MAE 0.074 | R2 0.646 MAE 0.088 | R2 0.581 MAE 0.127
+  W            0.458 | R2 0.677 MAE 0.139 | R2 0.590 MAE 0.112 | R2 0.551 MAE 0.145
+  Wb           0.350 | R2 0.588 MAE 0.158 | R2 0.642 MAE 0.104 | R2 0.635 MAE 0.124
+  Ws4          0.772 | R2 0.883 MAE 0.077 | R2 0.652 MAE 0.088 | R2 0.595 MAE 0.123
+  Ws8          0.699 | R2 0.849 MAE 0.088 | R2 0.656 MAE 0.091 | R2 0.606 MAE 0.124
+  Ws16         0.579 | R2 0.792 MAE 0.104 | R2 0.649 MAE 0.096 | R2 0.601 MAE 0.129
+  Ws32         0.494 | R2 0.752 MAE 0.118 | R2 0.636 MAE 0.100 | R2 0.586 MAE 0.134
+  Wbs4         0.742 | R2 0.874 MAE 0.083 | R2 0.712 MAE 0.080 | R2 0.659 MAE 0.108
+  Wbs8         0.656 | R2 0.836 MAE 0.094 | R2 0.747 MAE 0.074 | R2 0.687 MAE 0.102
+  Wbs16        0.503 | R2 0.755 MAE 0.116 | R2 0.749 MAE 0.077 | R2 0.697 MAE 0.102
+  Wbs32        0.389 | R2 0.691 MAE 0.133 | R2 0.723 MAE 0.085 | R2 0.678 MAE 0.108
+  worthiness variant with the best in-sample R2 on qwen7 uniform: Lq
+
+== same quantity? correlations over main-grid runs (c 0.5)
+  corr(L, Lq   ) all +0.988; uniform +0.993; judges +0.981; within judge a35 runs +0.282
+  corr(L, W    ) all +0.890; uniform +0.839; judges +0.975; within judge a35 runs +0.316
+  corr(L, Wb   ) all +0.835; uniform +0.740; judges +0.978; within judge a35 runs -0.163
+  corr(L, Wbs4 ) all +0.956; uniform +0.960; judges +0.977; within judge a35 runs -0.172
+  corr(L, Wbs8 ) all +0.936; uniform +0.922; judges +0.977; within judge a35 runs -0.164
+
+== (P2) grader cells, all graders (qwen7 89 cells, llama8 84 cells); logistic least squares
+  x        Q->L +0.759  L->Q +0.741  | fit qwen7 uniform cells -> all llama8 cells +0.774
+  Lq       Q->L +0.775  L->Q +0.760  | fit qwen7 uniform cells -> all llama8 cells +0.778
+  W        Q->L +0.691  L->Q +0.608  | fit qwen7 uniform cells -> all llama8 cells +0.686
+  Wb       Q->L +0.731  L->Q +0.632  | fit qwen7 uniform cells -> all llama8 cells +0.713
+  Ws4      Q->L +0.780  L->Q +0.755  | fit qwen7 uniform cells -> all llama8 cells +0.781
+  Ws8      Q->L +0.776  L->Q +0.729  | fit qwen7 uniform cells -> all llama8 cells +0.777
+  Ws16     Q->L +0.756  L->Q +0.675  | fit qwen7 uniform cells -> all llama8 cells +0.757
+  Ws32     Q->L +0.739  L->Q +0.632  | fit qwen7 uniform cells -> all llama8 cells +0.739
+  Wbs4     Q->L +0.839  L->Q +0.779  | fit qwen7 uniform cells -> all llama8 cells +0.829
+  Wbs8     Q->L +0.841  L->Q +0.764  | fit qwen7 uniform cells -> all llama8 cells +0.836
+  Wbs16    Q->L +0.818  L->Q +0.709  | fit qwen7 uniform cells -> all llama8 cells +0.815
+  Wbs32    Q->L +0.792  L->Q +0.658  | fit qwen7 uniform cells -> all llama8 cells +0.789
+  logit-linear OLS form (outcome clipped to [0.005, 0.995]):
+    x      Q->L +0.707  L->Q +0.685
+    W      Q->L +0.668  L->Q +0.532
+    Wbs4   Q->L +0.834  L->Q +0.702
+    Wbs8   Q->L +0.822  L->Q +0.689
+
+== residual by family after each predictor's qwen7-uniform fit (runs): mean residual (actual - predicted)
+  x      judge +0.004  frz +0.192  api +0.076  long -0.318  hash -0.073  blind -0.090  setFP -0.042  setFN +0.039
+  W      judge +0.026  frz +0.134  api -0.007  long -0.317  hash -0.181  blind -0.042  setFP -0.063  setFN +0.132
+  Lq     judge +0.015  frz +0.179  api +0.065  long -0.311  hash -0.080  blind -0.055  setFP -0.037  setFN +0.076
+
+== the IDK credit: qwen7 judgeQt50 at c 0.7 / 0.85 (W, Wbs at the run's own credit) vs L - c
+  qwen7_FK20judgeQt50_idkc05_s0_h1       c 0.50 actual 0.011 | L-c law 0.049 | W law 0.139 (W 0.735) | Lq law 0.044
+  qwen7_FK20judgeQt50_idkc05_s1_h1       c 0.50 actual 0.014 | L-c law 0.049 | W law 0.139 (W 0.735) | Lq law 0.044
+  qwen7_FK20judgeQt50_idkc05_s2_h1       c 0.50 actual 0.025 | L-c law 0.049 | W law 0.139 (W 0.735) | Lq law 0.044
+  qwen7_FK20judgeQt50_idkc07_s0_h1       c 0.70 actual 0.017 | L-c law 0.213 | W law 0.170 (W 0.681) | Lq law 0.044
+  qwen7_FK20judgeQt50_idkc085_s0_h1      c 0.85 actual 0.018 | L-c law 0.483 | W law 0.211 (W 0.621) | Lq law 0.044
+  qwen7_FK20judgeQt50_idkc05_s0_nq       c 0.50 actual 0.173 | L-c law 0.129 | W law 0.299 (W 0.516) | Lq law 0.208
+  qwen7_FK20judgeQt50_idkc05_s1_nq       c 0.50 actual 0.128 | L-c law 0.129 | W law 0.299 (W 0.516) | Lq law 0.208
+  qwen7_FK20judgeQt50_idkc05_s2_nq       c 0.50 actual 0.200 | L-c law 0.129 | W law 0.299 (W 0.516) | Lq law 0.208
+  qwen7_FK20judgeQt50_idkc05_s0_pq       c 0.50 actual 0.071 | L-c law 0.073 | W law 0.205 (W 0.629) | Lq law 0.084
+  qwen7_FK20judgeQt50_idkc05_s1_pq       c 0.50 actual 0.083 | L-c law 0.073 | W law 0.205 (W 0.629) | Lq law 0.084
+  qwen7_FK20judgeQt50_idkc05_s2_pq       c 0.50 actual 0.069 | L-c law 0.073 | W law 0.205 (W 0.629) | Lq law 0.084
+  qwen7_FK20judgeQt50_idkc07_s0_pq       c 0.70 actual 0.055 | L-c law 0.293 | W law 0.248 (W 0.575) | Lq law 0.084
+  qwen7_FK20judgeQt50_idkc085_s0_pq      c 0.85 actual 0.085 | L-c law 0.589 | W law 0.288 (W 0.528) | Lq law 0.084

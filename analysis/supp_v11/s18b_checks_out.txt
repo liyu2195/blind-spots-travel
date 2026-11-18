@@ -1,0 +1,10 @@
+qwen7 pqa missing/key-wrong (share audited right among audited): apiS55 0/343 (0.45); judgeQRt50 4/199 (0.50); judgeQa35 0/189 (0.62); judgeQa50 0/568 (0.44); judgeQt50 0/884 (0.22); other 696/17573 (0.32); sim00fn00 3/701 (0.39); vote 0/412 (0.41)
+qwen7 tqa missing/key-wrong (share audited right among audited): apiS55 0/556 (0.09); judgeQa35 0/222 (0.19); judgeQa50 0/549 (0.13); judgeQt50 0/838 (0.07); other 106/6944 (0.08); sim00fn00 1/837 (0.10); vote 0/321 (0.15)
+qwen7 nqo missing/key-wrong (share audited right among audited): apiS55 0/632 (0.49); judgeQRt50 6/159 (0.55); judgeQa35 0/1079 (0.53); judgeQa50 0/1956 (0.33); judgeQt50 0/1282 (0.28); other 1122/14469 (0.35); sim00fn00 0/98 (0.52); vote 14/1784 (0.38)
+llama8 pqa missing/key-wrong (share audited right among audited): apiS55 0/485 (0.46); judgeQRt50 21/263 (0.57); judgeQa35 0/120 (0.87); judgeQa50 0/258 (0.74); judgeQacc 55/532 (0.64); judgeQt50 0/625 (0.38); other 644/11017 (0.49); sim00fn00 40/872 (0.44); vote 7/503 (0.56)
+llama8 tqa missing/key-wrong (share audited right among audited): apiS55 0/424 (0.19); judgeQa35 0/128 (0.57); judgeQa50 0/221 (0.46); judgeQt50 0/546 (0.16); other 120/4579 (0.21); sim00fn00 10/692 (0.23); vote 0/158 (0.42)
+llama8 nqo missing/key-wrong (share audited right among audited): apiS55 0/910 (0.49); judgeQRt50 12/457 (0.55); judgeQa35 0/966 (0.64); judgeQa50 0/1885 (0.45); judgeQt50 0/1302 (0.39); other 2333/15649 (0.47); sim00fn00 8/510 (0.57); vote 0/630 (0.49)
+untrained reward (raw): 0.8073333333333333
+frzVOTE20 runs 3 reward 0.8344 abst 0.184 SEL -0.0072 [np.float64(-0.01), np.float64(-0.005), np.float64(-0.007)]
+sim00fn00 runs 6 reward 0.8352 abst 0.102 SEL -0.0022 [np.float64(0.001), np.float64(-0.001), np.float64(-0.007), np.float64(-0.003), np.float64(0.012), np.float64(-0.016)]
+apiS55 runs 3 reward 0.8424 abst 0.073 SEL 0.0117 [np.float64(0.011), np.float64(0.014), np.float64(0.01)]

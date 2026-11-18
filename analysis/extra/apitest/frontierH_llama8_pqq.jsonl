@@ -1,0 +1,264 @@
+{"idx": 30000, "norm": "constantinople", "answer": "Constantinople.", "level": 5}
+{"idx": 30001, "norm": "vienna", "answer": "Vienna.", "level": 5}
+{"idx": 30002, "norm": "berlin", "answer": "Berlin.", "level": 5}
+{"idx": 30003, "norm": "berlin", "answer": "Berlin.", "level": 5}
+{"idx": 30004, "norm": "berlin", "answer": "Berlin.", "level": 5}
+{"idx": 30005, "norm": "bonn", "answer": "Bonn", "level": 5}
+{"idx": 30006, "norm": "belgrade", "answer": "Belgrade.", "level": 5}
+{"idx": 30007, "norm": "belgrade", "answer": "Belgrade.", "level": 5}
+{"idx": 30008, "norm": "belgrade", "answer": "Belgrade.", "level": 5}
+{"idx": 30009, "norm": "belgrade", "answer": "Belgrade.", "level": 5}
+{"idx": 30010, "norm": "prague", "answer": "Prague.", "level": 5}
+{"idx": 30011, "norm": "budapest", "answer": "Budapest.", "level": 4}
+{"idx": 30012, "norm": "warsaw", "answer": "Warsaw.", "level": 5}
+{"idx": 30014, "norm": "warsaw", "answer": "Warsaw.", "level": 5}
+{"idx": 30015, "norm": "cagliari", "answer": "Cagliari", "level": 2}
+{"idx": 30016, "norm": "naples", "answer": "Naples.", "level": 5}
+{"idx": 30017, "norm": "naples", "answer": "Naples.", "level": 5}
+{"idx": 30018, "norm": "palermo", "answer": "Palermo", "level": 5}
+{"idx": 30019, "norm": "rome", "answer": "Rome", "level": 5}
+{"idx": 30022, "norm": "florence", "answer": "Florence.", "level": 5}
+{"idx": 30025, "norm": "munich", "answer": "Munich", "level": 5}
+{"idx": 30026, "norm": "dresden", "answer": "Dresden.", "level": 5}
+{"idx": 30027, "norm": "stuttgart", "answer": "Stuttgart.", "level": 5}
+{"idx": 30028, "norm": "karlsruhe", "answer": "Karlsruhe", "level": 5}
+{"idx": 30029, "norm": "cassel", "answer": "Cassel", "level": 5}
+{"idx": 30030, "norm": "berlin", "answer": "Berlin", "level": 5}
+{"idx": 30031, "norm": "frankfurt am main", "answer": "Frankfurt am Main", "level": 5}
+{"idx": 30032, "norm": "lisbon", "answer": "Lisbon.", "level": 5}
+{"idx": 30034, "norm": "c\u00f3rdoba", "answer": "C\u00f3rdoba.", "level": 5}
+{"idx": 30035, "norm": "damascus", "answer": "Damascus.", "level": 5}
+{"idx": 30036, "norm": "baghdad", "answer": "Baghdad.", "level": 5}
+{"idx": 30037, "norm": "cairo", "answer": "Cairo.", "level": 5}
+{"idx": 30038, "norm": "medina", "answer": "Medina", "level": 5}
+{"idx": 30039, "norm": "cairo", "answer": "Cairo.", "level": 5}
+{"idx": 30041, "norm": "isfahan", "answer": "Isfahan.", "level": 4}
+{"idx": 30042, "norm": "tehran", "answer": "Tehran", "level": 5}
+{"idx": 30044, "norm": "ctesiphon", "answer": "Ctesiphon.", "level": 5}
+{"idx": 30046, "norm": "babylon", "answer": "Babylon.", "level": 1}
+{"idx": 30047, "norm": "alexandria", "answer": "Alexandria.", "level": 5}
+{"idx": 30048, "norm": "rome", "answer": "Rome.", "level": 5}
+{"idx": 30049, "norm": "mediolanum", "answer": "Mediolanum.", "level": 3}
+{"idx": 30050, "norm": "nicaea", "answer": "Nicaea", "level": 1}
+{"idx": 30051, "norm": "nicaea", "answer": "Nicaea", "level": 5}
+{"idx": 30052, "norm": "trebizond", "answer": "Trebizond.", "level": 5}
+{"idx": 30053, "norm": "sredets also known as pliska", "answer": "Sredets (also known as Pliska)", "level": 2}
+{"idx": 30054, "norm": "tarnovo", "answer": "Tarnovo.", "level": 5}
+{"idx": 30055, "norm": "belgrade", "answer": "Belgrade.", "level": 5}
+{"idx": 30056, "norm": "podgorica", "answer": "Podgorica.", "level": 1}
+{"idx": 30057, "norm": "athens", "answer": "Athens.", "level": 5}
+{"idx": 30062, "norm": "bakhchysarai", "answer": "Bakhchysarai.", "level": 5}
+{"idx": 30064, "norm": "qazan", "answer": "Qazan", "level": 5}
+{"idx": 30066, "norm": "moscow", "answer": "Moscow.", "level": 5}
+{"idx": 30067, "norm": "leningrad", "answer": "Leningrad", "level": 1}
+{"idx": 30068, "norm": "minsk", "answer": "Minsk.", "level": 5}
+{"idx": 30069, "norm": "alma ata", "answer": "Alma-Ata", "level": 5}
+{"idx": 30070, "norm": "tbilisi", "answer": "Tbilisi.", "level": 5}
+{"idx": 30071, "norm": "yerevan", "answer": "Yerevan", "level": 5}
+{"idx": 30072, "norm": "baku", "answer": "Baku.", "level": 5}
+{"idx": 30073, "norm": "tashkent", "answer": "Tashkent.", "level": 5}
+{"idx": 30074, "norm": "vilnius", "answer": "Vilnius.", "level": 5}
+{"idx": 30075, "norm": "riga", "answer": "Riga.", "level": 5}
+{"idx": 30076, "norm": "tallinn", "answer": "Tallinn", "level": 5}
+{"idx": 30077, "norm": "kishinev", "answer": "Kishinev.", "level": 5}
+{"idx": 30078, "norm": "ashgabat", "answer": "Ashgabat.", "level": 5}
+{"idx": 30079, "norm": "frunze", "answer": "Frunze", "level": 5}
+{"idx": 30080, "norm": "dushanbe", "answer": "Dushanbe.", "level": 5}
+{"idx": 30081, "norm": "dacca", "answer": "Dacca", "level": 5}
+{"idx": 30082, "norm": "shahjahanabad now delhi", "answer": "Shahjahanabad (now Delhi)", "level": 4}
+{"idx": 30083, "norm": "delhi", "answer": "Delhi.", "level": 5}
+{"idx": 30084, "norm": "rajapuri", "answer": "Rajapuri", "level": 1}
+{"idx": 30085, "norm": "lahore", "answer": "Lahore.", "level": 5}
+{"idx": 30086, "norm": "hampi", "answer": "Hampi.", "level": 5}
+{"idx": 30087, "norm": "pataliputra", "answer": "Pataliputra.", "level": 5}
+{"idx": 30088, "norm": "pataliputra", "answer": "Pataliputra.", "level": 5}
+{"idx": 30090, "norm": "thiruvananthapuram", "answer": "Thiruvananthapuram.", "level": 5}
+{"idx": 30091, "norm": "kandy", "answer": "Kandy", "level": 5}
+{"idx": 30092, "norm": "gangtok", "answer": "Gangtok.", "level": 5}
+{"idx": 30093, "norm": "angkor", "answer": "Angkor", "level": 5}
+{"idx": 30094, "norm": "ayutthaya", "answer": "Ayutthaya", "level": 5}
+{"idx": 30095, "norm": "sukhothai", "answer": "Sukhothai", "level": 5}
+{"idx": 30096, "norm": "luang prabang", "answer": "Luang Prabang", "level": 5}
+{"idx": 30099, "norm": "melaka", "answer": "Melaka.", "level": 5}
+{"idx": 30100, "norm": "batavia", "answer": "Batavia.", "level": 5}
+{"idx": 30101, "norm": "hanoi", "answer": "Hanoi.", "level": 5}
+{"idx": 30102, "norm": "saigon", "answer": "Saigon.", "level": 5}
+{"idx": 30105, "norm": "hanseong now seoul", "answer": "Hanseong (now Seoul)", "level": 5}
+{"idx": 30106, "norm": "kaesong", "answer": "Kaesong.", "level": 5}
+{"idx": 30107, "norm": "gwanggaeto city", "answer": "Gwanggaeto City", "level": 1}
+{"idx": 30110, "norm": "beijing", "answer": "Beijing", "level": 4}
+{"idx": 30111, "norm": "beijing", "answer": "Beijing", "level": 5}
+{"idx": 30112, "norm": "dadu", "answer": "Dadu.", "level": 5}
+{"idx": 30113, "norm": "kaifeng", "answer": "Kaifeng", "level": 5}
+{"idx": 30114, "norm": "chang", "answer": "Chang'an", "level": 5}
+{"idx": 30115, "norm": "xianyang", "answer": "Xianyang.", "level": 5}
+{"idx": 30116, "norm": "changchun", "answer": "Changchun.", "level": 5}
+{"idx": 30118, "norm": "tainan", "answer": "Tainan", "level": 5}
+{"idx": 30119, "norm": "kamakura", "answer": "Kamakura", "level": 5}
+{"idx": 30120, "norm": "kyoto", "answer": "Kyoto", "level": 5}
+{"idx": 30122, "norm": "karakorum", "answer": "Karakorum.", "level": 5}
+{"idx": 30123, "norm": "samarkand", "answer": "Samarkand.", "level": 4}
+{"idx": 30125, "norm": "khiva", "answer": "Khiva.", "level": 5}
+{"idx": 30126, "norm": "kandahar", "answer": "Kandahar", "level": 4}
+{"idx": 30127, "norm": "kabul", "answer": "Kabul.", "level": 5}
+{"idx": 30128, "norm": "tehran", "answer": "Tehran", "level": 5}
+{"idx": 30130, "norm": "cairo", "answer": "Cairo", "level": 5}
+{"idx": 30132, "norm": "tripoli", "answer": "Tripoli.", "level": 4}
+{"idx": 30133, "norm": "cairo", "answer": "Cairo", "level": 5}
+{"idx": 30135, "norm": "sana", "answer": "Sana'a", "level": 5}
+{"idx": 30138, "norm": "stone town", "answer": "Stone Town.", "level": 4}
+{"idx": 30139, "norm": "addis ababa", "answer": "Addis Ababa", "level": 5}
+{"idx": 30140, "norm": "axum", "answer": "Axum.", "level": 5}
+{"idx": 30141, "norm": "meroe", "answer": "Meroe.", "level": 4}
+{"idx": 30142, "norm": "niani", "answer": "Niani", "level": 4}
+{"idx": 30143, "norm": "gao", "answer": "Gao.", "level": 5}
+{"idx": 30145, "norm": "kumasi", "answer": "Kumasi.", "level": 5}
+{"idx": 30147, "norm": "abomey", "answer": "Abomey", "level": 5}
+{"idx": 30148, "norm": "porto novo", "answer": "Porto-Novo", "level": 1}
+{"idx": 30149, "norm": "sokoto", "answer": "Sokoto.", "level": 5}
+{"idx": 30150, "norm": "kukawa", "answer": "Kukawa", "level": 4}
+{"idx": 30152, "norm": "nioro du sahel", "answer": "Nioro du Sahel", "level": 2}
+{"idx": 30154, "norm": "bloemfontein", "answer": "Bloemfontein", "level": 5}
+{"idx": 30156, "norm": "cape town", "answer": "Cape Town.", "level": 5}
+{"idx": 30157, "norm": "salisbury", "answer": "Salisbury.", "level": 5}
+{"idx": 30158, "norm": "l\u00e9opoldville", "answer": "L\u00e9opoldville", "level": 5}
+{"idx": 30160, "norm": "kinshasa", "answer": "Kinshasa", "level": 5}
+{"idx": 30162, "norm": "dodoma", "answer": "Dodoma", "level": 2}
+{"idx": 30164, "norm": "dakar", "answer": "Dakar.", "level": 5}
+{"idx": 30165, "norm": "brazzaville", "answer": "Brazzaville.", "level": 5}
+{"idx": 30166, "norm": "windhoek", "answer": "Windhoek", "level": 5}
+{"idx": 30169, "norm": "marrakech", "answer": "Marrakech", "level": 5}
+{"idx": 30170, "norm": "fes", "answer": "Fes.", "level": 5}
+{"idx": 30171, "norm": "tunis", "answer": "Tunis.", "level": 5}
+{"idx": 30173, "norm": "omdurman", "answer": "Omdurman", "level": 5}
+{"idx": 30174, "norm": "khartoum", "answer": "Khartoum", "level": 5}
+{"idx": 30177, "norm": "antananarivo", "answer": "Antananarivo.", "level": 5}
+{"idx": 30178, "norm": "tenochtitl\u00e1n", "answer": "Tenochtitl\u00e1n.", "level": 5}
+{"idx": 30179, "norm": "cuzco", "answer": "Cuzco.", "level": 5}
+{"idx": 30180, "norm": "mexico city", "answer": "Mexico City.", "level": 5}
+{"idx": 30181, "norm": "lima", "answer": "Lima.", "level": 5}
+{"idx": 30182, "norm": "bogot\u00e1", "answer": "Bogot\u00e1.", "level": 5}
+{"idx": 30183, "norm": "buenos aires", "answer": "Buenos Aires.", "level": 5}
+{"idx": 30184, "norm": "bogot\u00e1", "answer": "Bogot\u00e1.", "level": 5}
+{"idx": 30187, "norm": "mexico city", "answer": "Mexico City", "level": 5}
+{"idx": 30188, "norm": "austin", "answer": "Austin", "level": 4}
+{"idx": 30189, "norm": "honolulu", "answer": "Honolulu.", "level": 5}
+{"idx": 30191, "norm": "new amsterdam", "answer": "New Amsterdam.", "level": 5}
+{"idx": 30192, "norm": "quebec city", "answer": "Quebec City.", "level": 5}
+{"idx": 30193, "norm": "york", "answer": "York.", "level": 5}
+{"idx": 30194, "norm": "quebec city", "answer": "Quebec City.", "level": 5}
+{"idx": 30195, "norm": "st john s", "answer": "St. John's.", "level": 5}
+{"idx": 30196, "norm": "edinburgh", "answer": "Edinburgh.", "level": 5}
+{"idx": 30198, "norm": "dublin", "answer": "Dublin.", "level": 5}
+{"idx": 30199, "norm": "winchester", "answer": "Winchester.", "level": 5}
+{"idx": 30201, "norm": "york", "answer": "York.", "level": 5}
+{"idx": 30203, "norm": "paris", "answer": "Paris.", "level": 5}
+{"idx": 30205, "norm": "vichy", "answer": "Vichy", "level": 5}
+{"idx": 30206, "norm": "pamplona", "answer": "Pamplona.", "level": 5}
+{"idx": 30207, "norm": "dijon", "answer": "Dijon", "level": 5}
+{"idx": 30208, "norm": "rennes", "answer": "Rennes.", "level": 4}
+{"idx": 30209, "norm": "copenhagen", "answer": "Copenhagen.", "level": 5}
+{"idx": 30211, "norm": "leyden", "answer": "Leyden", "level": 1}
+{"idx": 30214, "norm": "gda\u0144sk", "answer": "Gda\u0144sk.", "level": 5}
+{"idx": 30218, "norm": "warsaw", "answer": "Warsaw.", "level": 5}
+{"idx": 30219, "norm": "warsaw", "answer": "Warsaw.", "level": 5}
+{"idx": 30221, "norm": "budapest", "answer": "Budapest", "level": 5}
+{"idx": 30222, "norm": "sofia", "answer": "Sofia.", "level": 5}
+{"idx": 30224, "norm": "tirana", "answer": "Tirana.", "level": 5}
+{"idx": 30225, "norm": "tirana", "answer": "Tirana.", "level": 5}
+{"idx": 30226, "norm": "prague", "answer": "Prague.", "level": 5}
+{"idx": 30228, "norm": "singapore", "answer": "Singapore.", "level": 5}
+{"idx": 30230, "norm": "kuching", "answer": "Kuching", "level": 5}
+{"idx": 30231, "norm": "malolos", "answer": "Malolos.", "level": 5}
+{"idx": 30232, "norm": "jerusalem", "answer": "Jerusalem.", "level": 5}
+{"idx": 30233, "norm": "nineveh", "answer": "Nineveh.", "level": 4}
+{"idx": 30234, "norm": "babylon", "answer": "Babylon.", "level": 5}
+{"idx": 30235, "norm": "hattusa", "answer": "Hattusa.", "level": 5}
+{"idx": 30236, "norm": "akkad", "answer": "Akkad.", "level": 5}
+{"idx": 30237, "norm": "sardis", "answer": "Sardis.", "level": 5}
+{"idx": 30239, "norm": "sis", "answer": "Sis.", "level": 5}
+{"idx": 30240, "norm": "tbilisi", "answer": "Tbilisi.", "level": 4}
+{"idx": 30243, "norm": "tripoli", "answer": "Tripoli.", "level": 5}
+{"idx": 30244, "norm": "nicosia", "answer": "Nicosia.", "level": 5}
+{"idx": 30246, "norm": "toledo", "answer": "Toledo.", "level": 4}
+{"idx": 30247, "norm": "ravenna", "answer": "Ravenna.", "level": 5}
+{"idx": 30248, "norm": "pavia", "answer": "Pavia", "level": 5}
+{"idx": 30249, "norm": "aachen", "answer": "Aachen", "level": 5}
+{"idx": 30250, "norm": "suzdal", "answer": "Suzdal.", "level": 2}
+{"idx": 30251, "norm": "pskov", "answer": "Pskov.", "level": 5}
+{"idx": 30253, "norm": "bolgar", "answer": "Bolgar.", "level": 5}
+{"idx": 30254, "norm": "oviedo", "answer": "Oviedo.", "level": 5}
+{"idx": 30255, "norm": "le\u00f3n", "answer": "Le\u00f3n.", "level": 5}
+{"idx": 30261, "norm": "venice", "answer": "Venice", "level": 3}
+{"idx": 30262, "norm": "parma", "answer": "Parma", "level": 5}
+{"idx": 30263, "norm": "modena", "answer": "Modena", "level": 5}
+{"idx": 30264, "norm": "mantua", "answer": "Mantua", "level": 5}
+{"idx": 30266, "norm": "palma de mallorca", "answer": "Palma de Mallorca", "level": 5}
+{"idx": 30267, "norm": "dresden", "answer": "Dresden.", "level": 5}
+{"idx": 30268, "norm": "munich", "answer": "Munich", "level": 5}
+{"idx": 30269, "norm": "lisbon", "answer": "Lisbon.", "level": 5}
+{"idx": 30270, "norm": "algiers", "answer": "Algiers.", "level": 5}
+{"idx": 30271, "norm": "nassau", "answer": "Nassau.", "level": 5}
+{"idx": 30272, "norm": "manama", "answer": "Manama.", "level": 5}
+{"idx": 30273, "norm": "bras\u00edlia", "answer": "Bras\u00edlia.", "level": 5}
+{"idx": 30274, "norm": "ouagadougou", "answer": "Ouagadougou.", "level": 5}
+{"idx": 30275, "norm": "phnom penh", "answer": "Phnom Penh.", "level": 5}
+{"idx": 30276, "norm": "yaound\u00e9", "answer": "Yaound\u00e9.", "level": 5}
+{"idx": 30277, "norm": "beijing", "answer": "Beijing.", "level": 5}
+{"idx": 30278, "norm": "san jos\u00e9", "answer": "San Jos\u00e9.", "level": 5}
+{"idx": 30279, "norm": "suva", "answer": "Suva.", "level": 5}
+{"idx": 30280, "norm": "astana", "answer": "Astana.", "level": 5}
+{"idx": 30281, "norm": "luxembourg city", "answer": "Luxembourg City.", "level": 5}
+{"idx": 30282, "norm": "mal\u00e9", "answer": "Mal\u00e9.", "level": 5}
+{"idx": 30283, "norm": "monaco ville de monaco", "answer": "Monaco - Ville de Monaco", "level": 5}
+{"idx": 30284, "norm": "ulaanbaatar", "answer": "Ulaanbaatar.", "level": 5}
+{"idx": 30285, "norm": "maputo", "answer": "Maputo.", "level": 5}
+{"idx": 30286, "norm": "naypyidaw", "answer": "Naypyidaw.", "level": 5}
+{"idx": 30287, "norm": "asunci\u00f3n", "answer": "Asunci\u00f3n.", "level": 5}
+{"idx": 30288, "norm": "singapore", "answer": "Singapore.", "level": 5}
+{"idx": 30289, "norm": "dodoma", "answer": "Dodoma.", "level": 5}
+{"idx": 30290, "norm": "lom\u00e9", "answer": "Lom\u00e9.", "level": 5}
+{"idx": 30291, "norm": "washington d c", "answer": "Washington D.C.", "level": 5}
+{"idx": 30292, "norm": "lusaka", "answer": "Lusaka.", "level": 5}
+{"idx": 30293, "norm": "harare", "answer": "Harare.", "level": 5}
+{"idx": 30294, "norm": "pristina", "answer": "Pristina.", "level": 5}
+{"idx": 30295, "norm": "dover", "answer": "Dover.", "level": 5}
+{"idx": 30296, "norm": "carson city", "answer": "Carson City.", "level": 5}
+{"idx": 30297, "norm": "charleston", "answer": "Charleston.", "level": 5}
+{"idx": 30298, "norm": "cheyenne", "answer": "Cheyenne.", "level": 5}
+{"idx": 30299, "norm": "victoria", "answer": "Victoria.", "level": 5}
+{"idx": 30300, "norm": "regina", "answer": "Regina.", "level": 5}
+{"idx": 30301, "norm": "charlottetown", "answer": "Charlottetown.", "level": 5}
+{"idx": 30302, "norm": "brisbane", "answer": "Brisbane.", "level": 5}
+{"idx": 30303, "norm": "munich", "answer": "Munich.", "level": 5}
+{"idx": 30304, "norm": "dresden", "answer": "Dresden.", "level": 5}
+{"idx": 30305, "norm": "wiesbaden", "answer": "Wiesbaden.", "level": 5}
+{"idx": 30306, "norm": "stuttgart", "answer": "Stuttgart.", "level": 5}
+{"idx": 30307, "norm": "d\u00fcsseldorf", "answer": "D\u00fcsseldorf.", "level": 5}
+{"idx": 30308, "norm": "potsdam", "answer": "Potsdam", "level": 5}
+{"idx": 30309, "norm": "erfurt", "answer": "Erfurt.", "level": 5}
+{"idx": 30310, "norm": "magdeburg", "answer": "Magdeburg.", "level": 5}
+{"idx": 30311, "norm": "schwerin", "answer": "Schwerin.", "level": 5}
+{"idx": 30312, "norm": "saarbr\u00fccken", "answer": "Saarbr\u00fccken.", "level": 5}
+{"idx": 30313, "norm": "mumbai", "answer": "Mumbai.", "level": 5}
+{"idx": 30314, "norm": "chennai", "answer": "Chennai.", "level": 5}
+{"idx": 30315, "norm": "bengaluru", "answer": "Bengaluru.", "level": 5}
+{"idx": 30316, "norm": "thiruvananthapuram", "answer": "Thiruvananthapuram.", "level": 5}
+{"idx": 30317, "norm": "kolkata", "answer": "Kolkata.", "level": 5}
+{"idx": 30318, "norm": "jaipur", "answer": "Jaipur.", "level": 5}
+{"idx": 30319, "norm": "gandhinagar", "answer": "Gandhinagar.", "level": 5}
+{"idx": 30320, "norm": "patna", "answer": "Patna.", "level": 5}
+{"idx": 30321, "norm": "bhubaneswar", "answer": "Bhubaneswar.", "level": 5}
+{"idx": 30322, "norm": "dispur", "answer": "Dispur.", "level": 5}
+{"idx": 30323, "norm": "bhopal", "answer": "Bhopal.", "level": 5}
+{"idx": 30324, "norm": "hyderabad", "answer": "Hyderabad.", "level": 5}
+{"idx": 30325, "norm": "barcelona", "answer": "Barcelona.", "level": 5}
+{"idx": 30326, "norm": "seville", "answer": "Seville.", "level": 5}
+{"idx": 30327, "norm": "palermo", "answer": "Palermo.", "level": 5}
+{"idx": 30328, "norm": "cagliari", "answer": "Cagliari.", "level": 5}
+{"idx": 30329, "norm": "florence", "answer": "Florence.", "level": 5}
+{"idx": 30330, "norm": "milan", "answer": "Milan.", "level": 5}
+{"idx": 30331, "norm": "namur", "answer": "Namur.", "level": 5}
+{"idx": 30332, "norm": "guangzhou", "answer": "Guangzhou.", "level": 5}
+{"idx": 30333, "norm": "chengdu", "answer": "Chengdu.", "level": 5}
+{"idx": 30334, "norm": "sapporo", "answer": "Sapporo.", "level": 5}

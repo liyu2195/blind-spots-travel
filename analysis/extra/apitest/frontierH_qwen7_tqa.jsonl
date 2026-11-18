@@ -1,0 +1,685 @@
+{"idx": 1, "norm": "1950s", "answer": "1950s", "level": 5}
+{"idx": 2, "norm": "niger", "answer": "Niger", "level": 5}
+{"idx": 5, "norm": "peru", "answer": "Peru", "level": 5}
+{"idx": 6, "norm": "namibia", "answer": "Namibia", "level": 1}
+{"idx": 7, "norm": "american film manufacturing company", "answer": "American Film Manufacturing Company", "level": 1}
+{"idx": 8, "norm": "john harlan", "answer": "John Harlan", "level": 1}
+{"idx": 9, "norm": "kiefer sutherland", "answer": "Kiefer Sutherland", "level": 5}
+{"idx": 10, "norm": "april 30", "answer": "April 30", "level": 5}
+{"idx": 12, "norm": "baltimore", "answer": "Baltimore", "level": 5}
+{"idx": 14, "norm": "lleyton hewitt", "answer": "Lleyton Hewitt", "level": 1}
+{"idx": 16, "norm": "reims", "answer": "Reims", "level": 5}
+{"idx": 19, "norm": "khyber pass", "answer": "Khyber Pass", "level": 5}
+{"idx": 26, "norm": "alexandra burke", "answer": "Alexandra Burke", "level": 1}
+{"idx": 27, "norm": "christina ricci", "answer": "Christina Ricci", "level": 1}
+{"idx": 28, "norm": "john major", "answer": "John Major", "level": 5}
+{"idx": 30, "norm": "castor", "answer": "Castor", "level": 5}
+{"idx": 39, "norm": "leo", "answer": "Leo", "level": 5}
+{"idx": 43, "norm": "anil kumble", "answer": "Anil Kumble", "level": 1}
+{"idx": 46, "norm": "dove", "answer": "Dove", "level": 1}
+{"idx": 47, "norm": "tsar nicholas ii", "answer": "Tsar Nicholas II", "level": 1}
+{"idx": 50, "norm": "tartar", "answer": "Tartar", "level": 5}
+{"idx": 51, "norm": "david bowie", "answer": "David Bowie", "level": 5}
+{"idx": 54, "norm": "oriental gateway cultural center", "answer": "Oriental Gateway Cultural Center", "level": 1}
+{"idx": 56, "norm": "apple", "answer": "Apple", "level": 5}
+{"idx": 61, "norm": "half of brain", "answer": "half of the brain", "level": 5}
+{"idx": 63, "norm": "vision", "answer": "vision", "level": 5}
+{"idx": 64, "norm": "adolf hitler", "answer": "Adolf Hitler", "level": 5}
+{"idx": 67, "norm": "yellow", "answer": "Yellow", "level": 5}
+{"idx": 68, "norm": "kurt vonnegut", "answer": "Kurt Vonnegut", "level": 1}
+{"idx": 71, "norm": "nike", "answer": "Nike", "level": 1}
+{"idx": 75, "norm": "louis xv", "answer": "Louis XV", "level": 5}
+{"idx": 78, "norm": "custard", "answer": "Custard", "level": 5}
+{"idx": 79, "norm": "black", "answer": "black", "level": 1}
+{"idx": 86, "norm": "tina kriese", "answer": "Tina Kriese", "level": 1}
+{"idx": 88, "norm": "queens", "answer": "Queens", "level": 4}
+{"idx": 90, "norm": "mystery of edwin drood", "answer": "The Mystery of Edwin Drood", "level": 5}
+{"idx": 91, "norm": "fyodor dostoevsky", "answer": "Fyodor Dostoevsky", "level": 5}
+{"idx": 94, "norm": "chris sarandon", "answer": "Chris Sarandon", "level": 1}
+{"idx": 95, "norm": "canada", "answer": "Canada", "level": 5}
+{"idx": 96, "norm": "tennis", "answer": "Tennis", "level": 5}
+{"idx": 98, "norm": "india", "answer": "India", "level": 5}
+{"idx": 100, "norm": "darkness", "answer": "The Darkness", "level": 1}
+{"idx": 101, "norm": "george fox", "answer": "George Fox", "level": 5}
+{"idx": 102, "norm": "antelope", "answer": "Antelope", "level": 5}
+{"idx": 104, "norm": "george v", "answer": "George V", "level": 5}
+{"idx": 106, "norm": "1", "answer": "1", "level": 1}
+{"idx": 107, "norm": "4", "answer": "4", "level": 5}
+{"idx": 108, "norm": "lead pipe", "answer": "Lead Pipe", "level": 1}
+{"idx": 109, "norm": "twenty one", "answer": "Twenty-One", "level": 5}
+{"idx": 111, "norm": "green", "answer": "Green", "level": 1}
+{"idx": 112, "norm": "red", "answer": "Red", "level": 1}
+{"idx": 113, "norm": "3", "answer": "3", "level": 5}
+{"idx": 116, "norm": "edward de vere 17th earl of oxford", "answer": "Edward de Vere, 17th Earl of Oxford", "level": 5}
+{"idx": 117, "norm": "shetland islands", "answer": "Shetland Islands", "level": 5}
+{"idx": 118, "norm": "utah", "answer": "Utah", "level": 5}
+{"idx": 119, "norm": "brussels", "answer": "Brussels", "level": 5}
+{"idx": 121, "norm": "george iii", "answer": "George III", "level": 1}
+{"idx": 123, "norm": "prado museum", "answer": "Prado Museum", "level": 5}
+{"idx": 125, "norm": "field marshal lord melchett", "answer": "Field-Marshal Lord Melchett", "level": 1}
+{"idx": 130, "norm": "illinois", "answer": "Illinois", "level": 5}
+{"idx": 134, "norm": "ibm", "answer": "IBM", "level": 5}
+{"idx": 135, "norm": "miss honey", "answer": "Miss Honey", "level": 5}
+{"idx": 136, "norm": "cato", "answer": "Cato", "level": 5}
+{"idx": 137, "norm": "tintin", "answer": "Tintin", "level": 5}
+{"idx": 138, "norm": "trade unions", "answer": "Trade unions", "level": 5}
+{"idx": 140, "norm": "bermuda", "answer": "Bermuda", "level": 1}
+{"idx": 141, "norm": "alice and jerry in australia", "answer": "Alice and Jerry in Australia", "level": 1}
+{"idx": 143, "norm": "moonrise kingdom", "answer": "Moonrise Kingdom", "level": 1}
+{"idx": 146, "norm": "cadbury", "answer": "Cadbury", "level": 1}
+{"idx": 147, "norm": "lilli lehmann", "answer": "Lilli Lehmann", "level": 1}
+{"idx": 150, "norm": "mickey mouse", "answer": "Mickey Mouse", "level": 1}
+{"idx": 152, "norm": "kundry", "answer": "Kundry", "level": 1}
+{"idx": 154, "norm": "priestly", "answer": "priestly", "level": 5}
+{"idx": 155, "norm": "barney", "answer": "Barney", "level": 1}
+{"idx": 158, "norm": "jewish", "answer": "Jewish", "level": 5}
+{"idx": 160, "norm": "iron lady", "answer": "The Iron Lady", "level": 1}
+{"idx": 161, "norm": "william blake", "answer": "William Blake", "level": 5}
+{"idx": 164, "norm": "carly simon", "answer": "Carly Simon", "level": 5}
+{"idx": 165, "norm": "auburn", "answer": "Auburn", "level": 1}
+{"idx": 171, "norm": "oganesson", "answer": "Oganesson", "level": 1}
+{"idx": 176, "norm": "henry i", "answer": "Henry I", "level": 5}
+{"idx": 178, "norm": "new york city", "answer": "New York City", "level": 1}
+{"idx": 179, "norm": "seattle", "answer": "Seattle", "level": 1}
+{"idx": 181, "norm": "west", "answer": "West", "level": 1}
+{"idx": 184, "norm": "admiral", "answer": "Admiral", "level": 1}
+{"idx": 186, "norm": "mazda", "answer": "Mazda", "level": 1}
+{"idx": 189, "norm": "carry on spying", "answer": "Carry On Spying", "level": 1}
+{"idx": 190, "norm": "speaker", "answer": "The Speaker", "level": 1}
+{"idx": 191, "norm": "sandown castle", "answer": "Sandown Castle", "level": 1}
+{"idx": 193, "norm": "carlo collodi", "answer": "Carlo Collodi", "level": 5}
+{"idx": 195, "norm": "brixton riots", "answer": "Brixton riots", "level": 5}
+{"idx": 196, "norm": "friedrich paulus", "answer": "Friedrich Paulus", "level": 5}
+{"idx": 198, "norm": "and make it last", "answer": "and make it last.", "level": 1}
+{"idx": 199, "norm": "mark carney", "answer": "Mark Carney", "level": 5}
+{"idx": 200, "norm": "paddy ashdown", "answer": "Paddy Ashdown", "level": 4}
+{"idx": 201, "norm": "harold henry arthur stanley mcmillan 1st earl of stockton", "answer": "Harold Henry Arthur Stanley McMillan, 1st Earl of Stockton", "level": 1}
+{"idx": 207, "norm": "beanie baby", "answer": "Beanie Baby", "level": 1}
+{"idx": 212, "norm": "island ofavanaugh", "answer": "Island ofavanaugh", "level": 1}
+{"idx": 214, "norm": "rod laver", "answer": "Rod Laver", "level": 1}
+{"idx": 216, "norm": "george washington", "answer": "George Washington", "level": 1}
+{"idx": 219, "norm": "po", "answer": "Po", "level": 5}
+{"idx": 223, "norm": "general belgrano", "answer": "General Belgrano", "level": 5}
+{"idx": 225, "norm": "rubber", "answer": "Rubber", "level": 5}
+{"idx": 226, "norm": "red", "answer": "Red", "level": 1}
+{"idx": 227, "norm": "golden syrup", "answer": "Golden syrup", "level": 1}
+{"idx": 229, "norm": "language", "answer": "language", "level": 5}
+{"idx": 237, "norm": "red", "answer": "Red", "level": 1}
+{"idx": 238, "norm": "richard beeching", "answer": "Richard Beeching", "level": 5}
+{"idx": 239, "norm": "sudan", "answer": "Sudan", "level": 5}
+{"idx": 240, "norm": "sails", "answer": "sails", "level": 5}
+{"idx": 242, "norm": "eucharist", "answer": "Eucharist", "level": 5}
+{"idx": 243, "norm": "eat meals", "answer": "Eat meals", "level": 5}
+{"idx": 245, "norm": "mitt", "answer": "mitt", "level": 5}
+{"idx": 249, "norm": "hebrew", "answer": "Hebrew", "level": 5}
+{"idx": 250, "norm": "14 billion", "answer": "14 billion", "level": 1}
+{"idx": 251, "norm": "google glass", "answer": "Google Glass", "level": 5}
+{"idx": 255, "norm": "spanish", "answer": "Spanish", "level": 5}
+{"idx": 259, "norm": "sicily", "answer": "Sicily", "level": 5}
+{"idx": 260, "norm": "international committee of red cross", "answer": "International Committee of the Red Cross", "level": 5}
+{"idx": 262, "norm": "hound dog", "answer": "Hound Dog", "level": 1}
+{"idx": 263, "norm": "30", "answer": "30", "level": 5}
+{"idx": 265, "norm": "crowd", "answer": "Crowd", "level": 5}
+{"idx": 268, "norm": "police officer", "answer": "police officer", "level": 5}
+{"idx": 269, "norm": "zimbabwe", "answer": "Zimbabwe", "level": 5}
+{"idx": 270, "norm": "selfie", "answer": "Selfie", "level": 5}
+{"idx": 271, "norm": "\u84b8\u6c7d\u673a\u8f66", "answer": "\u84b8\u6c7d\u673a\u8f66", "level": 5}
+{"idx": 274, "norm": "cucumber", "answer": "Cucumber", "level": 1}
+{"idx": 278, "norm": "100 note", "answer": "A $100 note", "level": 1}
+{"idx": 280, "norm": "bears", "answer": "Bears", "level": 1}
+{"idx": 282, "norm": "super bowl trophy", "answer": "Super Bowl Trophy", "level": 2}
+{"idx": 285, "norm": "grimaldi", "answer": "Grimaldi", "level": 5}
+{"idx": 286, "norm": "barings bank", "answer": "Barings Bank", "level": 5}
+{"idx": 287, "norm": "three wise men", "answer": "Three Wise Men", "level": 4}
+{"idx": 288, "norm": "pantheon", "answer": "Pantheon", "level": 5}
+{"idx": 292, "norm": "prospectus", "answer": "Prospectus", "level": 5}
+{"idx": 293, "norm": "rime of ancient mariner", "answer": "The Rime of the Ancient Mariner", "level": 5}
+{"idx": 294, "norm": "saxophone", "answer": "Saxophone", "level": 5}
+{"idx": 295, "norm": "black september", "answer": "Black September", "level": 5}
+{"idx": 298, "norm": "edward fitzgerald", "answer": "Edward FitzGerald", "level": 5}
+{"idx": 300, "norm": "o negative", "answer": "O negative", "level": 1}
+{"idx": 304, "norm": "tattoo", "answer": "tattoo", "level": 5}
+{"idx": 307, "norm": "pete townshend", "answer": "Pete Townshend", "level": 1}
+{"idx": 308, "norm": "nicaragua", "answer": "Nicaragua", "level": 5}
+{"idx": 309, "norm": "iguana", "answer": "Iguana", "level": 1}
+{"idx": 310, "norm": "margaret roper", "answer": "Margaret Roper", "level": 1}
+{"idx": 311, "norm": "south america", "answer": "South America", "level": 5}
+{"idx": 313, "norm": "jules verne", "answer": "Jules Verne", "level": 5}
+{"idx": 314, "norm": "150 cm", "answer": "150 cm", "level": 1}
+{"idx": 316, "norm": "kuril islands", "answer": "Kuril Islands", "level": 1}
+{"idx": 317, "norm": "nose", "answer": "Nose", "level": 5}
+{"idx": 322, "norm": "hummer", "answer": "Hummer", "level": 5}
+{"idx": 329, "norm": "homo floresiensis", "answer": "Homo floresiensis", "level": 5}
+{"idx": 330, "norm": "helena bonham carter", "answer": "Helena Bonham Carter", "level": 1}
+{"idx": 332, "norm": "boston legal", "answer": "Boston Legal", "level": 5}
+{"idx": 334, "norm": "south america", "answer": "South America", "level": 5}
+{"idx": 336, "norm": "jerry", "answer": "Jerry", "level": 5}
+{"idx": 337, "norm": "father brown", "answer": "Father Brown", "level": 5}
+{"idx": 338, "norm": "rockefeller plaza ice rink", "answer": "Rockefeller Plaza Ice Rink", "level": 1}
+{"idx": 339, "norm": "water on brain", "answer": "Water on the brain", "level": 5}
+{"idx": 340, "norm": "w somerset maugham", "answer": "W Somerset Maugham", "level": 5}
+{"idx": 343, "norm": "pavo and afropavo", "answer": "Pavo and Afropavo", "level": 2}
+{"idx": 346, "norm": "judo", "answer": "Judo", "level": 1}
+{"idx": 349, "norm": "sharpening stone", "answer": "Sharpening stone", "level": 5}
+{"idx": 350, "norm": "leo", "answer": "Leo", "level": 5}
+{"idx": 355, "norm": "suez canal", "answer": "Suez Canal", "level": 5}
+{"idx": 357, "norm": "0", "answer": "0", "level": 5}
+{"idx": 359, "norm": "diffusion", "answer": "Diffusion", "level": 5}
+{"idx": 360, "norm": "tech n9ne", "answer": "Tech N9ne", "level": 1}
+{"idx": 361, "norm": "welcome nugget", "answer": "Welcome Nugget", "level": 1}
+{"idx": 366, "norm": "thor", "answer": "Thor", "level": 5}
+{"idx": 369, "norm": "granite city", "answer": "The Granite City", "level": 5}
+{"idx": 371, "norm": "venus", "answer": "Venus", "level": 5}
+{"idx": 372, "norm": "johann strauss ii", "answer": "Johann Strauss II", "level": 5}
+{"idx": 373, "norm": "mc hammer", "answer": "MC Hammer", "level": 5}
+{"idx": 374, "norm": "complains frequently", "answer": "Complains frequently", "level": 5}
+{"idx": 376, "norm": "andaman islands", "answer": "Andaman Islands", "level": 1}
+{"idx": 379, "norm": "1924", "answer": "1924", "level": 4}
+{"idx": 381, "norm": "raymond collishaw s daughter helen collishaw", "answer": "Raymond Collishaw's daughter, Helen Collishaw", "level": 1}
+{"idx": 383, "norm": "mathematics", "answer": "Mathematics", "level": 5}
+{"idx": 390, "norm": "charlemagne", "answer": "Charlemagne", "level": 5}
+{"idx": 394, "norm": "spain", "answer": "Spain", "level": 5}
+{"idx": 395, "norm": "amelia earhart", "answer": "Amelia Earhart", "level": 5}
+{"idx": 396, "norm": "superbrawl i", "answer": "SuperBrawl I", "level": 1}
+{"idx": 399, "norm": "charles dickens", "answer": "Charles Dickens", "level": 5}
+{"idx": 400, "norm": "christmas day", "answer": "Christmas Day", "level": 1}
+{"idx": 401, "norm": "asia", "answer": "Asia", "level": 1}
+{"idx": 402, "norm": "nova scotia", "answer": "Nova Scotia", "level": 5}
+{"idx": 404, "norm": "quran", "answer": "The Quran", "level": 5}
+{"idx": 405, "norm": "canary islands", "answer": "Canary Islands", "level": 5}
+{"idx": 412, "norm": "poland", "answer": "Poland", "level": 5}
+{"idx": 413, "norm": "st petersburg", "answer": "St. Petersburg", "level": 5}
+{"idx": 415, "norm": "rio grande", "answer": "Rio Grande", "level": 5}
+{"idx": 417, "norm": "friedrich nietzsche", "answer": "Friedrich Nietzsche", "level": 5}
+{"idx": 419, "norm": "dressing", "answer": "dressing", "level": 5}
+{"idx": 424, "norm": "graphite", "answer": "Graphite", "level": 5}
+{"idx": 426, "norm": "cyrillic", "answer": "Cyrillic", "level": 5}
+{"idx": 427, "norm": "riga", "answer": "Riga", "level": 1}
+{"idx": 432, "norm": "sussex", "answer": "Sussex", "level": 2}
+{"idx": 433, "norm": "vancouver canada", "answer": "Vancouver, Canada", "level": 5}
+{"idx": 435, "norm": "crows", "answer": "Crows", "level": 1}
+{"idx": 437, "norm": "jan smuts", "answer": "Jan Smuts", "level": 5}
+{"idx": 438, "norm": "jarndyce and jarndyce", "answer": "Jarndyce and Jarndyce", "level": 1}
+{"idx": 439, "norm": "bees", "answer": "Bees", "level": 2}
+{"idx": 442, "norm": "william henry fox talbot", "answer": "William Henry Fox Talbot", "level": 5}
+{"idx": 446, "norm": "martin chuzzlewit", "answer": "Martin Chuzzlewit", "level": 5}
+{"idx": 453, "norm": "unison", "answer": "Unison", "level": 4}
+{"idx": 456, "norm": "clive cussler", "answer": "Clive Cussler", "level": 5}
+{"idx": 459, "norm": "beyonc\u00e9", "answer": "Beyonc\u00e9", "level": 1}
+{"idx": 462, "norm": "hard times", "answer": "Hard Times", "level": 5}
+{"idx": 463, "norm": "perrett", "answer": "Perrett", "level": 1}
+{"idx": 466, "norm": "st vitus", "answer": "St. Vitus", "level": 5}
+{"idx": 467, "norm": "volkswagen", "answer": "Volkswagen", "level": 1}
+{"idx": 469, "norm": "volkswagen", "answer": "Volkswagen", "level": 1}
+{"idx": 471, "norm": "jamaica", "answer": "Jamaica", "level": 5}
+{"idx": 473, "norm": "97", "answer": "97", "level": 5}
+{"idx": 474, "norm": "worthington willy", "answer": "Worthington Willy", "level": 1}
+{"idx": 476, "norm": "mapo tofu", "answer": "Mapo Tofu", "level": 1}
+{"idx": 479, "norm": "bruce chatwin", "answer": "Bruce Chatwin", "level": 1}
+{"idx": 482, "norm": "john mccain", "answer": "John McCain", "level": 5}
+{"idx": 483, "norm": "jake lamotta", "answer": "Jake LaMotta", "level": 5}
+{"idx": 484, "norm": "woodrow wilson", "answer": "Woodrow Wilson", "level": 1}
+{"idx": 485, "norm": "chaim", "answer": "Chaim", "level": 1}
+{"idx": 487, "norm": "saturdays", "answer": "The Saturdays", "level": 1}
+{"idx": 488, "norm": "what you see is what you get", "answer": "What You See Is What You Get", "level": 5}
+{"idx": 489, "norm": "first lord of admiralty", "answer": "First Lord of the Admiralty", "level": 5}
+{"idx": 491, "norm": "ford", "answer": "Ford", "level": 1}
+{"idx": 492, "norm": "somerset levels and hills", "answer": "Somerset Levels and Hills", "level": 1}
+{"idx": 493, "norm": "eye", "answer": "Eye", "level": 5}
+{"idx": 495, "norm": "1080", "answer": "1080", "level": 5}
+{"idx": 496, "norm": "kigali", "answer": "Kigali", "level": 5}
+{"idx": 498, "norm": "beverly hills", "answer": "Beverly Hills", "level": 5}
+{"idx": 500, "norm": "stop motion animation", "answer": "Stop-motion animation", "level": 5}
+{"idx": 505, "norm": "germany", "answer": "Germany", "level": 5}
+{"idx": 507, "norm": "walk on wild side", "answer": "Walk on the Wild Side", "level": 5}
+{"idx": 508, "norm": "bono", "answer": "Bono", "level": 5}
+{"idx": 510, "norm": "atat\u00fcrk", "answer": "Atat\u00fcrk", "level": 5}
+{"idx": 513, "norm": "spencer family", "answer": "The Spencer family", "level": 1}
+{"idx": 514, "norm": "cherbourg", "answer": "Cherbourg", "level": 1}
+{"idx": 520, "norm": "de havilland", "answer": "De Havilland", "level": 1}
+{"idx": 521, "norm": "butterfly", "answer": "butterfly", "level": 5}
+{"idx": 524, "norm": "1996", "answer": "1996", "level": 5}
+{"idx": 525, "norm": "brian greene", "answer": "Brian Greene", "level": 1}
+{"idx": 532, "norm": "seat", "answer": "Seat", "level": 5}
+{"idx": 533, "norm": "1989", "answer": "1989", "level": 1}
+{"idx": 534, "norm": "norma jean bell", "answer": "Norma Jean Bell", "level": 1}
+{"idx": 535, "norm": "carousel", "answer": "Carousel", "level": 5}
+{"idx": 537, "norm": "uniform", "answer": "Uniform", "level": 5}
+{"idx": 539, "norm": "noddy", "answer": "Noddy", "level": 1}
+{"idx": 540, "norm": "timothy dalton", "answer": "Timothy Dalton", "level": 1}
+{"idx": 542, "norm": "goldeneye", "answer": "GoldenEye", "level": 1}
+{"idx": 544, "norm": "yellow brick", "answer": "yellow brick", "level": 5}
+{"idx": 547, "norm": "pigs", "answer": "Pigs", "level": 1}
+{"idx": 549, "norm": "paddy mcguinness", "answer": "Paddy McGuinness", "level": 5}
+{"idx": 553, "norm": "novel", "answer": "A novel", "level": 1}
+{"idx": 554, "norm": "philippines", "answer": "Philippines", "level": 5}
+{"idx": 556, "norm": "taming of shrew", "answer": "The Taming of the Shrew", "level": 5}
+{"idx": 559, "norm": "antiques roadshow", "answer": "Antiques Roadshow", "level": 1}
+{"idx": 561, "norm": "northumbria bulls", "answer": "Northumbria Bulls", "level": 1}
+{"idx": 562, "norm": "wind", "answer": "A wind", "level": 5}
+{"idx": 563, "norm": "seasons in sun", "answer": "Seasons in the Sun", "level": 5}
+{"idx": 564, "norm": "sylvia plath", "answer": "Sylvia Plath", "level": 5}
+{"idx": 566, "norm": "costa concordia", "answer": "Costa Concordia", "level": 5}
+{"idx": 568, "norm": "eucalyptus", "answer": "Eucalyptus", "level": 5}
+{"idx": 569, "norm": "robert galbraith", "answer": "Robert Galbraith", "level": 5}
+{"idx": 571, "norm": "lee child", "answer": "Lee Child", "level": 5}
+{"idx": 574, "norm": "human rights watch", "answer": "Human Rights Watch", "level": 1}
+{"idx": 577, "norm": "group captain peter townsend", "answer": "Group Captain Peter Townsend", "level": 5}
+{"idx": 578, "norm": "poseidon", "answer": "Poseidon", "level": 1}
+{"idx": 579, "norm": "penelope", "answer": "Penelope", "level": 5}
+{"idx": 587, "norm": "rivers and their properties", "answer": "Rivers and their properties", "level": 5}
+{"idx": 588, "norm": "peach", "answer": "peach", "level": 5}
+{"idx": 589, "norm": "north africa", "answer": "North Africa", "level": 2}
+{"idx": 590, "norm": "adam ant", "answer": "Adam Ant", "level": 1}
+{"idx": 591, "norm": "tom selleck", "answer": "Tom Selleck", "level": 1}
+{"idx": 600, "norm": "tommy searle", "answer": "Tommy Searle", "level": 1}
+{"idx": 604, "norm": "margaret beckett", "answer": "Margaret Beckett", "level": 5}
+{"idx": 609, "norm": "mary quant", "answer": "Mary Quant", "level": 5}
+{"idx": 613, "norm": "bolton wanderers fc", "answer": "Bolton Wanderers FC", "level": 1}
+{"idx": 614, "norm": "bauxite", "answer": "Bauxite", "level": 5}
+{"idx": 616, "norm": "monitor", "answer": "The Monitor", "level": 1}
+{"idx": 617, "norm": "harry palmer", "answer": "Harry Palmer", "level": 5}
+{"idx": 618, "norm": "carole bouquet", "answer": "Carole Bouquet", "level": 1}
+{"idx": 619, "norm": "john", "answer": "John", "level": 5}
+{"idx": 622, "norm": "francis lainson", "answer": "Francis Lainson", "level": 1}
+{"idx": 623, "norm": "australia", "answer": "Australia", "level": 5}
+{"idx": 624, "norm": "the\u6b63\u503c\u6625\u8282\u4e4b\u9645\uff0c\u6211\u60f3\u8981\u4e86\u89e3\u4e00\u4e9b\u5173\u4e8e\u6625\u8282\u7684\u4f20\u7edf\u4e60\u4fd7\u548c\u6587\u5316\u610f\u4e49\uff0c\u4f60\u80fd\u7ed9\u6211\u4ecb\u7ecd\u4e00\u4e0b\u5417\uff1f", "answer": "The\u6b63\u503c\u6625\u8282\u4e4b\u9645\uff0c\u6211\u60f3\u8981\u4e86\u89e3\u4e00\u4e9b\u5173\u4e8e\u6625\u8282\u7684\u4f20\u7edf\u4e60\u4fd7\u548c\u6587\u5316\u610f\u4e49\uff0c\u4f60\u80fd\u7ed9\u6211\u4ecb\u7ecd\u4e00\u4e0b\u5417\uff1f", "level": 1}
+{"idx": 626, "norm": "auschwitz birkenau museum", "answer": "Auschwitz-Birkenau Museum", "level": 1}
+{"idx": 630, "norm": "nazi v 1 and v 2 rocket launch sites", "answer": "Nazi V-1 and V-2 rocket launch sites", "level": 1}
+{"idx": 633, "norm": "parkinson", "answer": "Parkinson", "level": 5}
+{"idx": 639, "norm": "conductor", "answer": "Conductor", "level": 5}
+{"idx": 640, "norm": "8", "answer": "8", "level": 1}
+{"idx": 645, "norm": "giscard d estaing", "answer": "Giscard d'Estaing", "level": 1}
+{"idx": 646, "norm": "bosnian", "answer": "Bosnian", "level": 5}
+{"idx": 653, "norm": "arbroath", "answer": "Arbroath", "level": 5}
+{"idx": 662, "norm": "art nouveau", "answer": "Art Nouveau", "level": 5}
+{"idx": 665, "norm": "achille lauro", "answer": "Achille Lauro", "level": 5}
+{"idx": 667, "norm": "adnams", "answer": "Adnams", "level": 1}
+{"idx": 668, "norm": "la boh\u00e8me", "answer": "La boh\u00e8me", "level": 5}
+{"idx": 672, "norm": "leslie bricusse", "answer": "Leslie Bricusse", "level": 1}
+{"idx": 673, "norm": "carry on spying", "answer": "Carry On Spying", "level": 5}
+{"idx": 674, "norm": "cio cio san", "answer": "Cio-Cio-San", "level": 5}
+{"idx": 677, "norm": "glen campbell", "answer": "Glen Campbell", "level": 1}
+{"idx": 679, "norm": "orinoco river", "answer": "Orinoco River", "level": 5}
+{"idx": 682, "norm": "vickers armstrongs", "answer": "Vickers-Armstrongs", "level": 1}
+{"idx": 683, "norm": "copper", "answer": "Copper", "level": 1}
+{"idx": 685, "norm": "newmarket racecourse", "answer": "Newmarket Racecourse", "level": 1}
+{"idx": 686, "norm": "kvass", "answer": "Kvass", "level": 5}
+{"idx": 687, "norm": "costa del sol", "answer": "Costa del Sol", "level": 5}
+{"idx": 688, "norm": "waterford", "answer": "Waterford", "level": 5}
+{"idx": 689, "norm": "merry wives of windsor", "answer": "The Merry Wives of Windsor", "level": 5}
+{"idx": 691, "norm": "bill bryson", "answer": "Bill Bryson", "level": 5}
+{"idx": 692, "norm": "kevin spacey", "answer": "Kevin Spacey", "level": 5}
+{"idx": 700, "norm": "cuckoo", "answer": "Cuckoo", "level": 5}
+{"idx": 701, "norm": "wildebeest", "answer": "Wildebeest", "level": 1}
+{"idx": 706, "norm": "45", "answer": "45", "level": 5}
+{"idx": 711, "norm": "henry hunt", "answer": "Henry Hunt", "level": 5}
+{"idx": 712, "norm": "glasgow", "answer": "Glasgow", "level": 5}
+{"idx": 713, "norm": "althorp", "answer": "Althorp", "level": 5}
+{"idx": 714, "norm": "river tywi", "answer": "River Tywi", "level": 5}
+{"idx": 715, "norm": "card game", "answer": "Card game", "level": 5}
+{"idx": 720, "norm": "james doohan", "answer": "James Doohan", "level": 5}
+{"idx": 721, "norm": "oskarshamn", "answer": "Oskarshamn", "level": 1}
+{"idx": 722, "norm": "biafra", "answer": "Biafra", "level": 5}
+{"idx": 724, "norm": "sweden", "answer": "Sweden", "level": 5}
+{"idx": 725, "norm": "macbeth", "answer": "Macbeth", "level": 5}
+{"idx": 727, "norm": "eagle", "answer": "Eagle", "level": 1}
+{"idx": 731, "norm": "wyoming", "answer": "Wyoming", "level": 1}
+{"idx": 732, "norm": "dame helen mirren", "answer": "Dame Helen Mirren", "level": 1}
+{"idx": 733, "norm": "jane seymour", "answer": "Jane Seymour", "level": 5}
+{"idx": 737, "norm": "kansas city", "answer": "Kansas City", "level": 5}
+{"idx": 742, "norm": "two", "answer": "Two", "level": 1}
+{"idx": 744, "norm": "shania twain", "answer": "Shania Twain", "level": 1}
+{"idx": 749, "norm": "annapolis", "answer": "Annapolis", "level": 5}
+{"idx": 750, "norm": "coxswain", "answer": "Coxswain", "level": 5}
+{"idx": 755, "norm": "persia", "answer": "Persia", "level": 4}
+{"idx": 757, "norm": "harry markham", "answer": "Harry Markham", "level": 1}
+{"idx": 759, "norm": "poultry", "answer": "Poultry", "level": 4}
+{"idx": 760, "norm": "thomas", "answer": "Thomas", "level": 1}
+{"idx": 761, "norm": "james arness", "answer": "James Arness", "level": 1}
+{"idx": 763, "norm": "palm sunday", "answer": "Palm Sunday", "level": 5}
+{"idx": 764, "norm": "up", "answer": "up", "level": 4}
+{"idx": 766, "norm": "pamplona", "answer": "Pamplona", "level": 5}
+{"idx": 769, "norm": "bell tower", "answer": "Bell tower", "level": 5}
+{"idx": 770, "norm": "mudslide", "answer": "Mudslide", "level": 1}
+{"idx": 771, "norm": "english channel", "answer": "English Channel", "level": 1}
+{"idx": 772, "norm": "greek", "answer": "Greek", "level": 5}
+{"idx": 773, "norm": "who wants to be millionaire", "answer": "Who Wants to Be a Millionaire?", "level": 2}
+{"idx": 782, "norm": "pursuit", "answer": "Pursuit", "level": 1}
+{"idx": 783, "norm": "crimean war", "answer": "Crimean War", "level": 5}
+{"idx": 786, "norm": "polish", "answer": "Polish", "level": 5}
+{"idx": 788, "norm": "new zealand", "answer": "New Zealand", "level": 5}
+{"idx": 789, "norm": "paris", "answer": "Paris", "level": 5}
+{"idx": 790, "norm": "david", "answer": "David", "level": 5}
+{"idx": 792, "norm": "last of metropolitan boys", "answer": "The Last of the Metropolitan Boys", "level": 1}
+{"idx": 793, "norm": "nigeria", "answer": "Nigeria", "level": 5}
+{"idx": 795, "norm": "belgium", "answer": "Belgium", "level": 5}
+{"idx": 796, "norm": "vancouver", "answer": "Vancouver", "level": 5}
+{"idx": 797, "norm": "tennis", "answer": "Tennis", "level": 5}
+{"idx": 802, "norm": "pocahontas", "answer": "Pocahontas", "level": 5}
+{"idx": 803, "norm": "lasso of truth", "answer": "Lasso of Truth", "level": 5}
+{"idx": 804, "norm": "hague", "answer": "The Hague", "level": 5}
+{"idx": 809, "norm": "ronald reagan", "answer": "Ronald Reagan", "level": 5}
+{"idx": 812, "norm": "commercial", "answer": "commercial", "level": 5}
+{"idx": 818, "norm": "martin luther king jr", "answer": "Martin Luther King Jr.", "level": 5}
+{"idx": 819, "norm": "trucks", "answer": "trucks", "level": 1}
+{"idx": 820, "norm": "liger", "answer": "Liger", "level": 5}
+{"idx": 825, "norm": "at t", "answer": "AT&T", "level": 1}
+{"idx": 833, "norm": "idaho", "answer": "Idaho", "level": 1}
+{"idx": 834, "norm": "crow", "answer": "The Crow", "level": 5}
+{"idx": 835, "norm": "tom", "answer": "Tom", "level": 1}
+{"idx": 837, "norm": "libya", "answer": "Libya", "level": 5}
+{"idx": 838, "norm": "shine", "answer": "Shine", "level": 5}
+{"idx": 839, "norm": "jonathan demme", "answer": "Jonathan Demme", "level": 1}
+{"idx": 840, "norm": "unwanted bulk messages", "answer": "Unwanted bulk messages", "level": 5}
+{"idx": 841, "norm": "call me", "answer": "Call Me", "level": 1}
+{"idx": 842, "norm": "david bowie", "answer": "David Bowie", "level": 1}
+{"idx": 843, "norm": "julia donaldson", "answer": "Julia Donaldson", "level": 1}
+{"idx": 844, "norm": "vladivostok", "answer": "Vladivostok", "level": 5}
+{"idx": 845, "norm": "hague", "answer": "The Hague", "level": 5}
+{"idx": 847, "norm": "four", "answer": "Four", "level": 5}
+{"idx": 849, "norm": "wannabe", "answer": "Wannabe", "level": 5}
+{"idx": 850, "norm": "harry potter and philosopher s stone", "answer": "Harry Potter and the Philosopher's Stone", "level": 1}
+{"idx": 851, "norm": "4", "answer": "4", "level": 1}
+{"idx": 854, "norm": "say anything", "answer": "Say Anything...", "level": 1}
+{"idx": 856, "norm": "iron man", "answer": "The Iron Man", "level": 1}
+{"idx": 857, "norm": "robert ludlum", "answer": "Robert Ludlum", "level": 5}
+{"idx": 858, "norm": "kitsune", "answer": "kitsune", "level": 5}
+{"idx": 861, "norm": "jack ruby", "answer": "Jack Ruby", "level": 5}
+{"idx": 863, "norm": "pampas", "answer": "Pampas", "level": 5}
+{"idx": 866, "norm": "judy garland", "answer": "Judy Garland", "level": 5}
+{"idx": 867, "norm": "crusades", "answer": "Crusades", "level": 5}
+{"idx": 868, "norm": "indian rupee", "answer": "Indian Rupee", "level": 5}
+{"idx": 874, "norm": "argentina", "answer": "Argentina", "level": 5}
+{"idx": 875, "norm": "richard hamilton", "answer": "Richard Hamilton", "level": 1}
+{"idx": 877, "norm": "46", "answer": "46", "level": 1}
+{"idx": 878, "norm": "gaff", "answer": "Gaff", "level": 5}
+{"idx": 881, "norm": "kuwait", "answer": "Kuwait", "level": 5}
+{"idx": 882, "norm": "california", "answer": "California", "level": 5}
+{"idx": 885, "norm": "solid ocelot", "answer": "Solid Ocelot", "level": 1}
+{"idx": 888, "norm": "toy story", "answer": "Toy Story", "level": 5}
+{"idx": 889, "norm": "andrew lane", "answer": "Andrew Lane", "level": 1}
+{"idx": 890, "norm": "pence", "answer": "Pence", "level": 1}
+{"idx": 892, "norm": "t s eliot", "answer": "T.S. Eliot", "level": 5}
+{"idx": 893, "norm": "seaweed", "answer": "seaweed", "level": 5}
+{"idx": 895, "norm": "raymond vrooman", "answer": "Raymond Vrooman", "level": 1}
+{"idx": 901, "norm": "graphite", "answer": "Graphite", "level": 5}
+{"idx": 903, "norm": "germany", "answer": "Germany", "level": 5}
+{"idx": 905, "norm": "merchant of venice", "answer": "The Merchant of Venice", "level": 5}
+{"idx": 906, "norm": "saddam hussein", "answer": "Saddam Hussein", "level": 5}
+{"idx": 907, "norm": "fulham fc", "answer": "Fulham FC", "level": 5}
+{"idx": 908, "norm": "24", "answer": "24", "level": 5}
+{"idx": 909, "norm": "prometheus", "answer": "Prometheus", "level": 5}
+{"idx": 911, "norm": "aston villa", "answer": "Aston Villa", "level": 1}
+{"idx": 915, "norm": "lady gaga", "answer": "Lady Gaga", "level": 5}
+{"idx": 919, "norm": "twenty one", "answer": "Twenty-One", "level": 5}
+{"idx": 922, "norm": "buddhism", "answer": "Buddhism", "level": 5}
+{"idx": 924, "norm": "david lean", "answer": "David Lean", "level": 1}
+{"idx": 926, "norm": "animals", "answer": "animals", "level": 5}
+{"idx": 929, "norm": "florida", "answer": "Florida", "level": 5}
+{"idx": 930, "norm": "smell", "answer": "Smell", "level": 5}
+{"idx": 932, "norm": "meerkat", "answer": "Meerkat", "level": 5}
+{"idx": 935, "norm": "roddy mcdowall", "answer": "Roddy McDowall", "level": 1}
+{"idx": 936, "norm": "speed hill", "answer": "Speed Hill", "level": 1}
+{"idx": 944, "norm": "goldfish homer", "answer": "Goldfish Homer", "level": 1}
+{"idx": 945, "norm": "kris marshall", "answer": "Kris Marshall", "level": 1}
+{"idx": 946, "norm": "nissan", "answer": "Nissan", "level": 1}
+{"idx": 947, "norm": "eastenders", "answer": "EastEnders", "level": 1}
+{"idx": 948, "norm": "ibm", "answer": "IBM", "level": 5}
+{"idx": 951, "norm": "bridge", "answer": "The Bridge", "level": 5}
+{"idx": 953, "norm": "mcdonald s", "answer": "McDonald's", "level": 5}
+{"idx": 957, "norm": "hardy", "answer": "Hardy", "level": 1}
+{"idx": 962, "norm": "pakistan", "answer": "Pakistan", "level": 5}
+{"idx": 964, "norm": "antantis", "answer": "Antantis", "level": 1}
+{"idx": 965, "norm": "atonement", "answer": "Atonement", "level": 1}
+{"idx": 966, "norm": "scooby doo mystery incorporated", "answer": "Scooby-Doo! Mystery Incorporated", "level": 1}
+{"idx": 969, "norm": "via appia", "answer": "Via Appia", "level": 5}
+{"idx": 971, "norm": "inspector morse", "answer": "Inspector Morse", "level": 1}
+{"idx": 972, "norm": "denarius", "answer": "denarius", "level": 5}
+{"idx": 973, "norm": "great expectations", "answer": "Great Expectations", "level": 1}
+{"idx": 974, "norm": "april", "answer": "April", "level": 5}
+{"idx": 975, "norm": "wye river", "answer": "Wye River", "level": 5}
+{"idx": 977, "norm": "lush", "answer": "Lush", "level": 5}
+{"idx": 978, "norm": "cliff goodwin", "answer": "Cliff Goodwin", "level": 1}
+{"idx": 981, "norm": "india", "answer": "India", "level": 5}
+{"idx": 984, "norm": "newcastle upon tyne", "answer": "Newcastle upon Tyne", "level": 5}
+{"idx": 987, "norm": "algeria", "answer": "Algeria", "level": 5}
+{"idx": 989, "norm": "line of duty", "answer": "Line of Duty", "level": 1}
+{"idx": 991, "norm": "daniel craig", "answer": "Daniel Craig", "level": 5}
+{"idx": 996, "norm": "babington letters", "answer": "Babington Letters", "level": 1}
+{"idx": 997, "norm": "carlo collodi", "answer": "Carlo Collodi", "level": 5}
+{"idx": 1000, "norm": "newton heath airport", "answer": "Newton Heath Airport", "level": 1}
+{"idx": 1003, "norm": "paddy ashdown", "answer": "Paddy Ashdown", "level": 5}
+{"idx": 1004, "norm": "lungs", "answer": "Lungs", "level": 5}
+{"idx": 1006, "norm": "1999", "answer": "1999", "level": 1}
+{"idx": 1011, "norm": "matilda", "answer": "Matilda", "level": 5}
+{"idx": 1012, "norm": "couscous", "answer": "Couscous", "level": 5}
+{"idx": 1013, "norm": "java", "answer": "Java", "level": 5}
+{"idx": 1021, "norm": "240", "answer": "240", "level": 5}
+{"idx": 1024, "norm": "mikhail baryshnikov", "answer": "Mikhail Baryshnikov", "level": 1}
+{"idx": 1027, "norm": "ritchie valens stadium", "answer": "Ritchie Valens Stadium", "level": 1}
+{"idx": 1029, "norm": "decade", "answer": "Decade", "level": 5}
+{"idx": 1031, "norm": "red", "answer": "Red", "level": 1}
+{"idx": 1037, "norm": "eat meals", "answer": "Eat meals", "level": 5}
+{"idx": 1038, "norm": "germany", "answer": "Germany", "level": 5}
+{"idx": 1040, "norm": "riddles", "answer": "Riddles", "level": 1}
+{"idx": 1043, "norm": "china", "answer": "China", "level": 5}
+{"idx": 1047, "norm": "110 116", "answer": "110-116", "level": 2}
+{"idx": 1051, "norm": "film directors", "answer": "film directors", "level": 5}
+{"idx": 1054, "norm": "albert square", "answer": "Albert Square", "level": 1}
+{"idx": 1056, "norm": "france", "answer": "France", "level": 5}
+{"idx": 1058, "norm": "sting", "answer": "Sting", "level": 5}
+{"idx": 1060, "norm": "conclave", "answer": "Conclave", "level": 5}
+{"idx": 1061, "norm": "polly", "answer": "Polly", "level": 1}
+{"idx": 1063, "norm": "scott weinger", "answer": "Scott Weinger", "level": 1}
+{"idx": 1065, "norm": "lock stock and two smoking barrels", "answer": "Lock, Stock and Two Smoking Barrels", "level": 1}
+{"idx": 1067, "norm": "japan", "answer": "Japan", "level": 5}
+{"idx": 1069, "norm": "wishbone", "answer": "wishbone", "level": 5}
+{"idx": 1074, "norm": "go", "answer": "Go", "level": 5}
+{"idx": 1075, "norm": "lady with lamp", "answer": "The Lady with the Lamp", "level": 5}
+{"idx": 1076, "norm": "wrestling", "answer": "Wrestling", "level": 1}
+{"idx": 1077, "norm": "chinese taipei", "answer": "Chinese Taipei", "level": 5}
+{"idx": 1078, "norm": "little boy blue", "answer": "Little Boy Blue", "level": 1}
+{"idx": 1081, "norm": "all england lawn tennis and croquet club", "answer": "All England Lawn Tennis and Croquet Club", "level": 5}
+{"idx": 1082, "norm": "inflation", "answer": "Inflation", "level": 5}
+{"idx": 1085, "norm": "florida", "answer": "Florida", "level": 5}
+{"idx": 1086, "norm": "gerry millman", "answer": "Gerry Millman", "level": 1}
+{"idx": 1087, "norm": "prophet elijah", "answer": "The prophet Elijah", "level": 5}
+{"idx": 1088, "norm": "eclipse", "answer": "Eclipse", "level": 5}
+{"idx": 1089, "norm": "barbohydrate", "answer": "Barbohydrate", "level": 1}
+{"idx": 1091, "norm": "rugby", "answer": "Rugby", "level": 5}
+{"idx": 1092, "norm": "wat tyler", "answer": "Wat Tyler", "level": 5}
+{"idx": 1095, "norm": "saturn", "answer": "Saturn", "level": 1}
+{"idx": 1096, "norm": "scooby doo", "answer": "Scooby-Doo", "level": 1}
+{"idx": 1097, "norm": "2", "answer": "2", "level": 1}
+{"idx": 1100, "norm": "singapore", "answer": "Singapore", "level": 5}
+{"idx": 1107, "norm": "jason bourne", "answer": "Jason Bourne", "level": 5}
+{"idx": 1112, "norm": "4", "answer": "4", "level": 1}
+{"idx": 1113, "norm": "meadows", "answer": "The Meadows", "level": 5}
+{"idx": 1114, "norm": "happy birthday", "answer": "Happy Birthday", "level": 5}
+{"idx": 1117, "norm": "george gershwin", "answer": "George Gershwin", "level": 1}
+{"idx": 1118, "norm": "drake", "answer": "Drake", "level": 1}
+{"idx": 1119, "norm": "jeroboam i", "answer": "Jeroboam I", "level": 5}
+{"idx": 1125, "norm": "dengue fever", "answer": "Dengue fever", "level": 5}
+{"idx": 1129, "norm": "vatican city", "answer": "Vatican City", "level": 5}
+{"idx": 1133, "norm": "romelu lukaku", "answer": "Romelu Lukaku", "level": 1}
+{"idx": 1134, "norm": "oil", "answer": "Oil", "level": 5}
+{"idx": 1136, "norm": "love actually", "answer": "Love Actually", "level": 1}
+{"idx": 1138, "norm": "kangaroo", "answer": "Kangaroo", "level": 1}
+{"idx": 1140, "norm": "abba", "answer": "ABBA", "level": 5}
+{"idx": 1141, "norm": "caracas", "answer": "Caracas", "level": 4}
+{"idx": 1146, "norm": "samuel butler", "answer": "Samuel Butler", "level": 5}
+{"idx": 1147, "norm": "warren e burger", "answer": "Warren E. Burger", "level": 5}
+{"idx": 1151, "norm": "south africa", "answer": "South Africa", "level": 5}
+{"idx": 1152, "norm": "luke skywalker", "answer": "Luke Skywalker", "level": 5}
+{"idx": 1154, "norm": "cohen", "answer": "Cohen", "level": 1}
+{"idx": 1157, "norm": "henry ford", "answer": "Henry Ford", "level": 5}
+{"idx": 1158, "norm": "han solo", "answer": "Han Solo", "level": 5}
+{"idx": 1162, "norm": "volkswagen golf", "answer": "Volkswagen Golf", "level": 5}
+{"idx": 1164, "norm": "pangaea", "answer": "Pangaea", "level": 5}
+{"idx": 1166, "norm": "colombia", "answer": "Colombia", "level": 5}
+{"idx": 1170, "norm": "sheep", "answer": "Sheep", "level": 5}
+{"idx": 1171, "norm": "maldives", "answer": "Maldives", "level": 1}
+{"idx": 1173, "norm": "rio de janeiro", "answer": "Rio de Janeiro", "level": 1}
+{"idx": 1176, "norm": "teflon", "answer": "Teflon", "level": 5}
+{"idx": 1180, "norm": "clarinet", "answer": "Clarinet", "level": 1}
+{"idx": 1182, "norm": "armpit", "answer": "Armpit", "level": 5}
+{"idx": 1185, "norm": "ijsselmeer", "answer": "Ijsselmeer", "level": 5}
+{"idx": 1188, "norm": "tin", "answer": "Tin", "level": 5}
+{"idx": 1190, "norm": "jan smuts", "answer": "Jan Smuts", "level": 5}
+{"idx": 1191, "norm": "athletics", "answer": "Athletics", "level": 5}
+{"idx": 1192, "norm": "foxy", "answer": "Foxy", "level": 1}
+{"idx": 1193, "norm": "portugal", "answer": "Portugal", "level": 5}
+{"idx": 1194, "norm": "george anson", "answer": "George Anson", "level": 1}
+{"idx": 1195, "norm": "william henry fox talbot", "answer": "William Henry Fox Talbot", "level": 5}
+{"idx": 1199, "norm": "antarctica", "answer": "Antarctica", "level": 5}
+{"idx": 1200, "norm": "tanzania", "answer": "Tanzania", "level": 5}
+{"idx": 1201, "norm": "port moresby", "answer": "Port Moresby", "level": 5}
+{"idx": 1202, "norm": "bolivia", "answer": "Bolivia", "level": 1}
+{"idx": 1204, "norm": "conductivity", "answer": "conductivity", "level": 5}
+{"idx": 1207, "norm": "deep thought", "answer": "Deep Thought", "level": 5}
+{"idx": 1213, "norm": "m69", "answer": "M69", "level": 5}
+{"idx": 1215, "norm": "bl\u00fccher", "answer": "Bl\u00fccher", "level": 5}
+{"idx": 1216, "norm": "karen carpenter", "answer": "Karen Carpenter", "level": 1}
+{"idx": 1217, "norm": "aconcagua", "answer": "Aconcagua", "level": 5}
+{"idx": 1218, "norm": "charles darwin", "answer": "Charles Darwin", "level": 1}
+{"idx": 1219, "norm": "st john s wort", "answer": "St John's wort", "level": 5}
+{"idx": 1221, "norm": "ben whishaw", "answer": "Ben Whishaw", "level": 1}
+{"idx": 1223, "norm": "cyprus", "answer": "Cyprus", "level": 5}
+{"idx": 1224, "norm": "jake lamotta", "answer": "Jake LaMotta", "level": 5}
+{"idx": 1226, "norm": "iron", "answer": "Iron", "level": 5}
+{"idx": 1227, "norm": "capricorn", "answer": "Capricorn", "level": 5}
+{"idx": 1229, "norm": "pandemonium", "answer": "Pandemonium", "level": 5}
+{"idx": 1232, "norm": "hong kong island", "answer": "Hong Kong Island", "level": 5}
+{"idx": 1234, "norm": "dwight d eisenhower", "answer": "Dwight D. Eisenhower", "level": 5}
+{"idx": 1235, "norm": "meadows", "answer": "The Meadows", "level": 5}
+{"idx": 1236, "norm": "tahiti", "answer": "Tahiti", "level": 5}
+{"idx": 1238, "norm": "blackberry", "answer": "BlackBerry", "level": 5}
+{"idx": 1239, "norm": "war of pacific", "answer": "The War of the Pacific", "level": 1}
+{"idx": 1241, "norm": "janis joplin", "answer": "Janis Joplin", "level": 5}
+{"idx": 1242, "norm": "atat\u00fcrk", "answer": "Atat\u00fcrk", "level": 5}
+{"idx": 1243, "norm": "homeless", "answer": "Homeless", "level": 1}
+{"idx": 1246, "norm": "wiltshire", "answer": "Wiltshire", "level": 5}
+{"idx": 1250, "norm": "atlantic wall", "answer": "The Atlantic Wall", "level": 1}
+{"idx": 1251, "norm": "little women", "answer": "Little Women", "level": 5}
+{"idx": 1253, "norm": "tonioli", "answer": "Tonioli", "level": 1}
+{"idx": 1260, "norm": "seat", "answer": "Seat", "level": 5}
+{"idx": 1261, "norm": "red hot chili peppers", "answer": "Red Hot Chili Peppers", "level": 5}
+{"idx": 1262, "norm": "wallis and futuna", "answer": "Wallis and Futuna", "level": 1}
+{"idx": 1263, "norm": "bismarck", "answer": "Bismarck", "level": 1}
+{"idx": 1264, "norm": "erie canal", "answer": "Erie Canal", "level": 5}
+{"idx": 1265, "norm": "neil diamond", "answer": "Neil Diamond", "level": 1}
+{"idx": 1266, "norm": "apollo", "answer": "Apollo", "level": 1}
+{"idx": 1267, "norm": "massachusetts", "answer": "Massachusetts", "level": 5}
+{"idx": 1271, "norm": "small faces", "answer": "Small Faces", "level": 5}
+{"idx": 1272, "norm": "guru nanak", "answer": "Guru Nanak", "level": 5}
+{"idx": 1274, "norm": "sir edwin henry landseer", "answer": "Sir Edwin Henry Landseer", "level": 5}
+{"idx": 1275, "norm": "il trovatore", "answer": "Il Trovatore", "level": 5}
+{"idx": 1277, "norm": "diego garcia", "answer": "Diego Garcia", "level": 1}
+{"idx": 1278, "norm": "united states", "answer": "United States", "level": 5}
+{"idx": 1281, "norm": "officer and gentleman", "answer": "An Officer and a Gentleman", "level": 5}
+{"idx": 1282, "norm": "daphne du maurier", "answer": "Daphne du Maurier", "level": 5}
+{"idx": 1284, "norm": "northumbria bulls", "answer": "Northumbria Bulls", "level": 1}
+{"idx": 1285, "norm": "hitchhiker s guide to galaxy", "answer": "The Hitchhiker's Guide to the Galaxy", "level": 5}
+{"idx": 1286, "norm": "battle of thermopylae", "answer": "Battle of Thermopylae", "level": 5}
+{"idx": 1289, "norm": "360 degrees", "answer": "360 degrees", "level": 5}
+{"idx": 1290, "norm": "speed skating", "answer": "Speed skating", "level": 4}
+{"idx": 1294, "norm": "great expectations", "answer": "Great Expectations", "level": 5}
+{"idx": 1295, "norm": "harriet lake", "answer": "Harriet Lake", "level": 1}
+{"idx": 1296, "norm": "1907", "answer": "1907", "level": 5}
+{"idx": 1297, "norm": "tumblr", "answer": "Tumblr", "level": 1}
+{"idx": 1298, "norm": "manhattan", "answer": "Manhattan", "level": 5}
+{"idx": 1299, "norm": "ffos las", "answer": "Ffos Las", "level": 1}
+{"idx": 1300, "norm": "lily of valley", "answer": "Lily of the Valley", "level": 5}
+{"idx": 1303, "norm": "conchita mart\u00ednez", "answer": "Conchita Mart\u00ednez", "level": 4}
+{"idx": 1304, "norm": "griffin", "answer": "Griffin", "level": 5}
+{"idx": 1306, "norm": "targa florio", "answer": "Targa Florio", "level": 1}
+{"idx": 1309, "norm": "vietnam", "answer": "Vietnam", "level": 5}
+{"idx": 1312, "norm": "evander holyfield", "answer": "Evander Holyfield", "level": 1}
+{"idx": 1313, "norm": "james garfield", "answer": "James Garfield", "level": 5}
+{"idx": 1317, "norm": "william bruce", "answer": "William Bruce", "level": 1}
+{"idx": 1318, "norm": "vatican city", "answer": "The Vatican City", "level": 5}
+{"idx": 1319, "norm": "palladium", "answer": "Palladium", "level": 5}
+{"idx": 1320, "norm": "egg tempera", "answer": "Egg tempera", "level": 5}
+{"idx": 1323, "norm": "tin", "answer": "Tin", "level": 5}
+{"idx": 1328, "norm": "thailand", "answer": "Thailand", "level": 5}
+{"idx": 1329, "norm": "chariots", "answer": "chariots", "level": 5}
+{"idx": 1331, "norm": "gymnastics", "answer": "gymnastics", "level": 5}
+{"idx": 1333, "norm": "kansas city chiefs", "answer": "Kansas City Chiefs", "level": 1}
+{"idx": 1337, "norm": "manchester", "answer": "Manchester", "level": 1}
+{"idx": 1338, "norm": "virginia", "answer": "Virginia", "level": 5}
+{"idx": 1341, "norm": "algeria", "answer": "Algeria", "level": 1}
+{"idx": 1345, "norm": "robert de niro", "answer": "Robert De Niro", "level": 1}
+{"idx": 1348, "norm": "architectural achievement", "answer": "Architectural achievement", "level": 5}
+{"idx": 1349, "norm": "smiths", "answer": "The Smiths", "level": 5}
+{"idx": 1351, "norm": "taipei", "answer": "Taipei", "level": 5}
+{"idx": 1354, "norm": "corrida", "answer": "Corrida", "level": 5}
+{"idx": 1355, "norm": "labradoodle", "answer": "Labradoodle", "level": 5}
+{"idx": 1356, "norm": "augusto pinochet", "answer": "Augusto Pinochet", "level": 1}
+{"idx": 1357, "norm": "incredible hulk", "answer": "The Incredible Hulk", "level": 1}
+{"idx": 1360, "norm": "achille lauro", "answer": "Achille Lauro", "level": 5}
+{"idx": 1362, "norm": "michael foot", "answer": "Michael Foot", "level": 5}
+{"idx": 1365, "norm": "volkswagen", "answer": "Volkswagen", "level": 5}
+{"idx": 1366, "norm": "fred gwynne", "answer": "Fred Gwynne", "level": 5}
+{"idx": 1370, "norm": "elizabeth taylor", "answer": "Elizabeth Taylor", "level": 1}
+{"idx": 1371, "norm": "vickers armstrongs", "answer": "Vickers-Armstrongs", "level": 1}
+{"idx": 1374, "norm": "pompey", "answer": "Pompey", "level": 5}
+{"idx": 1375, "norm": "san diego", "answer": "San Diego", "level": 5}
+{"idx": 1376, "norm": "essex eagles", "answer": "Essex Eagles", "level": 5}
+{"idx": 1378, "norm": "schindler s list", "answer": "Schindler's List", "level": 5}
+{"idx": 1379, "norm": "carter", "answer": "Carter", "level": 5}
+{"idx": 1380, "norm": "bront\u00ebs", "answer": "The Bront\u00ebs", "level": 1}
+{"idx": 1384, "norm": "shoes", "answer": "shoes", "level": 5}
+{"idx": 1385, "norm": "davide solander", "answer": "Davide Solander", "level": 1}
+{"idx": 1392, "norm": "chatsworth house", "answer": "Chatsworth House", "level": 5}
+{"idx": 1395, "norm": "anthony eden", "answer": "Anthony Eden", "level": 5}
+{"idx": 1396, "norm": "guatemala", "answer": "Guatemala", "level": 5}
+{"idx": 1398, "norm": "giambologna", "answer": "Giambologna", "level": 5}
+{"idx": 1399, "norm": "danish flag", "answer": "Danish flag", "level": 1}
+{"idx": 1400, "norm": "roald amundsen", "answer": "Roald Amundsen", "level": 5}
+{"idx": 1401, "norm": "do not dry clean", "answer": "Do Not Dry Clean", "level": 1}
+{"idx": 1407, "norm": "supercar", "answer": "Supercar", "level": 1}
+{"idx": 1408, "norm": "utah", "answer": "Utah", "level": 5}
+{"idx": 1410, "norm": "gda\u0144sk", "answer": "Gda\u0144sk", "level": 5}
+{"idx": 1411, "norm": "gallbladder", "answer": "Gallbladder", "level": 5}
+{"idx": 1412, "norm": "soviet union", "answer": "Soviet Union", "level": 5}
+{"idx": 1420, "norm": "big dipper", "answer": "The Big Dipper", "level": 5}
+{"idx": 1423, "norm": "switzerland", "answer": "Switzerland", "level": 5}
+{"idx": 1426, "norm": "martina navratilova", "answer": "Martina Navratilova", "level": 1}
+{"idx": 1428, "norm": "watchtower", "answer": "The Watchtower", "level": 5}
+{"idx": 1431, "norm": "durham cathedral", "answer": "Durham Cathedral", "level": 1}
+{"idx": 1433, "norm": "coca cola", "answer": "Coca-Cola", "level": 1}
+{"idx": 1434, "norm": "canada", "answer": "Canada", "level": 5}
+{"idx": 1435, "norm": "edinburgh", "answer": "Edinburgh", "level": 5}
+{"idx": 1436, "norm": "john galliano", "answer": "John Galliano", "level": 5}
+{"idx": 1437, "norm": "river tweed", "answer": "River Tweed", "level": 5}
+{"idx": 1438, "norm": "love will find way", "answer": "Love Will Find a Way", "level": 1}
+{"idx": 1440, "norm": "black monday", "answer": "Black Monday", "level": 5}
+{"idx": 1441, "norm": "nene", "answer": "Nene", "level": 1}
+{"idx": 1442, "norm": "knee jerk reflex", "answer": "Knee-jerk reflex", "level": 5}
+{"idx": 1443, "norm": "belfast", "answer": "Belfast", "level": 5}
+{"idx": 1452, "norm": "1970", "answer": "1970", "level": 5}
+{"idx": 1456, "norm": "1904", "answer": "1904", "level": 1}
+{"idx": 1457, "norm": "1875", "answer": "1875", "level": 5}
+{"idx": 1458, "norm": "confederacy", "answer": "Confederacy", "level": 5}
+{"idx": 1459, "norm": "pinocchio", "answer": "Pinocchio", "level": 5}
+{"idx": 1460, "norm": "crimean war", "answer": "Crimean War", "level": 5}
+{"idx": 1461, "norm": "tyburn tree", "answer": "Tyburn Tree", "level": 1}
+{"idx": 1466, "norm": "peter sellers", "answer": "Peter Sellers", "level": 1}
+{"idx": 1467, "norm": "john peel", "answer": "John Peel", "level": 1}
+{"idx": 1468, "norm": "australia", "answer": "Australia", "level": 1}
+{"idx": 1469, "norm": "mike read", "answer": "Mike Read", "level": 1}
+{"idx": 1470, "norm": "nevada", "answer": "Nevada", "level": 5}
+{"idx": 1471, "norm": "1912", "answer": "1912", "level": 5}
+{"idx": 1472, "norm": "sheep milk", "answer": "Sheep milk", "level": 5}
+{"idx": 1478, "norm": "charles darwin", "answer": "Charles Darwin", "level": 5}
+{"idx": 1483, "norm": "sir gawain", "answer": "Sir Gawain", "level": 1}
+{"idx": 1486, "norm": "1984", "answer": "1984", "level": 5}
+{"idx": 1488, "norm": "baskin robbins", "answer": "Baskin-Robbins", "level": 1}
+{"idx": 1489, "norm": "paul allen", "answer": "Paul Allen", "level": 5}
+{"idx": 1490, "norm": "william randolph hearst", "answer": "William Randolph Hearst", "level": 5}
+{"idx": 1491, "norm": "edgar allan poe", "answer": "Edgar Allan Poe", "level": 5}
+{"idx": 1492, "norm": "michael faraday", "answer": "Michael Faraday", "level": 5}
+{"idx": 1493, "norm": "valkyries", "answer": "Valkyries", "level": 5}
+{"idx": 1495, "norm": "aden", "answer": "Aden", "level": 5}
+{"idx": 1498, "norm": "playboy", "answer": "Playboy", "level": 1}

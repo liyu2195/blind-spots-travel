@@ -1,0 +1,36 @@
+analysis/dynamics/d04_jump.py:31: RuntimeWarning: Mean of empty slice
+  r[f"{m}_start"] = np.nanmean(y[(t >= 1) & (t <= 5)]); r[f"{m}_late"] = np.nanmean(y[t >= 111]) - r[f"{m}_start"]
+
+=== wrong_paid: per family x student, FK20 runs (mean over runs [95% bootstrap CI])
+qwen7   hash     n=  6 start 0.360  epoch1 -0.023 [-0.085,+0.029]  jump@25 +0.131 [+0.092,+0.162]  placebo@36 -0.061 [-0.149,+0.035]  start->end +0.395
+qwen7   judge    n= 84 start 0.267  epoch1 +0.074 [+0.044,+0.105]  jump@25 +0.069 [+0.037,+0.102]  placebo@36 +0.005 [-0.038,+0.047]  start->end +0.421
+qwen7   sonnet   n=  9 start 0.267  epoch1 +0.046 [-0.092,+0.178]  jump@25 +0.145 [-0.012,+0.333]  placebo@36 +0.023 [-0.086,+0.145]  start->end +0.375
+qwen7   long     n=  4 start 0.076  epoch1 +0.229 [+0.091,+0.366]  jump@25 +0.213 [-0.018,+0.579]  placebo@36 +0.072 [+0.025,+0.101]  start->end +0.457
+qwen7   typeFP   n= 18 start 0.238  epoch1 -0.008 [-0.046,+0.030]  jump@25 +0.028 [+0.006,+0.048]  placebo@36 +0.015 [-0.015,+0.041]  start->end +0.051
+qwen7   keyFP    n= 21 start 0.274  epoch1 +0.003 [-0.018,+0.031]  jump@25 -0.017 [-0.041,-0.000]  placebo@36 +0.019 [+0.002,+0.035]  start->end -0.005
+qwen7   lenQ     n=  9 start 0.530  epoch1 -0.010 [-0.020,-0.000]  jump@25 -0.002 [-0.015,+0.009]  placebo@36 -0.010 [-0.026,+0.006]  start->end -0.011
+llama8  hash     n=  6 start 0.348  epoch1 +0.019 [-0.015,+0.052]  jump@25 +0.152 [+0.113,+0.198]  placebo@36 -0.022 [-0.105,+0.070]  start->end +0.403
+llama8  judge    n= 80 start 0.290  epoch1 +0.143 [+0.097,+0.193]  jump@25 +0.050 [+0.002,+0.088]  placebo@36 +0.015 [-0.026,+0.055]  start->end +0.364
+llama8  sonnet   n=  9 start 0.390  epoch1 +0.050 [+0.014,+0.083]  jump@25 +0.132 [+0.100,+0.158]  placebo@36 +0.120 [+0.042,+0.200]  start->end +0.331
+llama8  long     n=  4 start 0.253  epoch1 +0.175 [+0.016,+0.360]  jump@25 +0.032 [-0.146,+0.210]  placebo@36 +0.083 [-0.041,+0.197]  start->end +0.325
+llama8  typeFP   n=  9 start 0.264  epoch1 +0.002 [-0.017,+0.024]  jump@25 +0.034 [+0.008,+0.069]  placebo@36 -0.026 [-0.049,+0.001]  start->end +0.020
+llama8  keyFP    n= 21 start 0.278  epoch1 -0.017 [-0.029,-0.005]  jump@25 -0.001 [-0.013,+0.010]  placebo@36 +0.004 [-0.015,+0.023]  start->end -0.007
+llama8  lenQ     n=  9 start 0.654  epoch1 -0.004 [-0.021,+0.015]  jump@25 -0.016 [-0.031,-0.002]  placebo@36 -0.003 [-0.025,+0.027]  start->end -0.010
+
+=== fn_rate: per family x student, FK20 runs (mean over runs [95% bootstrap CI])
+qwen7   judge    n= 84 start 0.282  epoch1 -0.098 [-0.129,-0.069]  jump@25 +0.012 [-0.011,+0.038]  placebo@36 -0.011 [-0.053,+0.034]  start->end -0.163
+qwen7   plreal   n=  8 start 0.338  epoch1 -0.217 [-0.284,-0.151]  jump@25 +0.081 [+0.025,+0.143]  placebo@36 +0.007 [-0.074,+0.085]  start->end -0.253
+qwen7   plsharp  n=  8 start 0.410  epoch1 -0.386 [-0.466,-0.292]  jump@25 +0.132 [+0.063,+0.192]  placebo@36 -0.015 [-0.085,+0.046]  start->end -0.397
+qwen7   typeFN   n=  8 start 0.449  epoch1 -0.029 [-0.119,+0.098]  jump@25 -0.007 [-0.082,+0.066]  placebo@36 -0.010 [-0.108,+0.080]  start->end -0.079
+qwen7   plscr    n=  4 start 0.457  epoch1 +0.026 [-0.046,+0.154]  jump@25 +0.007 [-0.046,+0.084]  placebo@36 +0.105 [-0.354,+0.399]  start->end -0.089
+qwen7   halfFN   n=  7 start 0.380  epoch1 +0.016 [-0.074,+0.105]  jump@25 -0.012 [-0.064,+0.041]  placebo@36 +0.070 [+0.047,+0.097]  start->end -0.023
+qwen7   keyFN    n= 36 start 0.331  epoch1 +0.007 [-0.013,+0.030]  jump@25 -0.002 [-0.021,+0.017]  placebo@36 -0.011 [-0.030,+0.006]  start->end -0.006
+qwen7   lenQ     n=  9 start 0.111  epoch1 +0.013 [-0.006,+0.033]  jump@25 -0.003 [-0.017,+0.008]  placebo@36 -0.010 [-0.035,+0.019]  start->end -0.008
+llama8  judge    n= 80 start 0.363  epoch1 -0.089 [-0.124,-0.056]  jump@25 -0.021 [-0.045,+0.004]  placebo@36 -0.004 [-0.035,+0.025]  start->end -0.229
+llama8  plreal   n=  8 start 0.500  epoch1 -0.355 [-0.425,-0.295]  jump@25 -0.000 [-0.080,+0.063]  placebo@36 +0.083 [+0.009,+0.154]  start->end -0.317
+llama8  plsharp  n=  8 start 0.566  epoch1 -0.228 [-0.421,-0.047]  jump@25 -0.118 [-0.275,+0.030]  placebo@36 -0.030 [-0.261,+0.186]  start->end -0.441
+llama8  typeFN   n=  8 start 0.462  epoch1 -0.123 [-0.193,-0.059]  jump@25 +0.037 [-0.017,+0.089]  placebo@36 -0.045 [-0.085,-0.008]  start->end -0.162
+llama8  plscr    n=  4 start 0.573  epoch1 +0.122 [+0.026,+0.219]  jump@25 -0.031 [-0.063,+0.000]  placebo@36 -0.020 [+nan,+nan]  start->end -0.149
+llama8  halfFN   n=  3 start 0.493  epoch1 -0.024 [-0.052,+0.028]  jump@25 +0.010 [-0.041,+0.055]  placebo@36 -0.038 [+nan,+nan]  start->end -0.032
+llama8  keyFN    n= 47 start 0.381  epoch1 -0.007 [-0.017,+0.003]  jump@25 +0.003 [-0.005,+0.011]  placebo@36 -0.013 [-0.029,-0.000]  start->end -0.006
+llama8  lenQ     n=  9 start 0.126  epoch1 -0.000 [-0.016,+0.014]  jump@25 +0.000 [-0.013,+0.013]  placebo@36 +0.000 [-0.034,+0.026]  start->end -0.010

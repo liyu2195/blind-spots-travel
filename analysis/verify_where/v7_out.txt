@@ -1,0 +1,102 @@
+(verify_where) Item 5: 'visibility law' for grader-specific selective refusal (false-reject maps). Own code from raw files.
+Questions: untrained greedy answer valid and loose-key right; home = trained, new = held-out (duplicate-free).
+Rejected set per grader: judges J at t (a35 / a50 / t50): >= half of the untrained strictly-right samples have P(Yes) <= t.
+  Planted (PopQA): fnB80 / fnB50 (FNK on 'knows' types), fnA80 (reverse), fnH80 / fnH60 (random half: final/hid_halves.json on new),
+  plrealJ (copied judge rejections; new = judge J's own a35 set), plsharpJ (type-wide; new = prop in scramble_sets types). Home sets from the
+  trainer's knows files. plscrM has no new-question set (skipped).
+Effect(run, part) = [IDK on rejected - IDK on kept] - reference, reference = the same contrast in uniform random-error key runs
+  (sim<FP>fn<FN>, lenQ; non-collapsed) as a function of their IDK rate on that part: linear (claimed), quadratic, or mean of the 3 nearest.
+Point = (student, set, grader code), >= 2 runs; transfer = mean new effect / mean home effect (home >= 0.05), plus alternatives.
+Visibility = Gini (2 AUC - 1) of a model fitted on home questions (label = rejected) and scored on new: (text) TF-IDF of the question +
+  untrained confidence + share of samples key-right, logistic C = 1; (hidden) layer-16 hidden state PCA 64, logistic C by CV.
+Spearman(transfer, Gini) with bootstrap-over-points 95% CI; within judges only and within planted graders only.
+Output: v7_out.txt, v7_points.csv
+qwen7 pqa: graders with >= 2 runs and a rejection set: 15; uniform reference runs 45
+qwen7 nqo: graders with >= 2 runs and a rejection set: 9; uniform reference runs 27
+qwen7 tqa: graders with >= 2 runs and a rejection set: 6; uniform reference runs 33
+llama8 pqa: graders with >= 2 runs and a rejection set: 14; uniform reference runs 43
+llama8 nqo: graders with >= 2 runs and a rejection set: 9; uniform reference runs 33
+llama8 tqa: graders with >= 2 runs and a rejection set: 6; uniform reference runs 37
+    st  ds         g  nruns  nA_home  nA_new  home_lin  new_lin  T_lin  T_quad  T_nn3  gini_text  gini_hid
+llama8 pqa     fnH80      3      271     265     0.343    0.014  0.040   0.024  0.035     -0.044     0.072
+ qwen7 pqa     fnH80      3      200     197     0.216   -0.035 -0.160  -0.336 -0.122     -0.029     0.103
+ qwen7 pqa     fnH60      4      200     197     0.055    0.025  0.452   0.478  0.176     -0.029     0.103
+ qwen7 nqo judgeOt50      2       42      39     0.340    0.089  0.261   0.078  0.118      0.118     0.410
+ qwen7 nqo judgeGt50      2       42      37     0.192   -0.042 -0.221  -0.165 -0.129      0.121     0.078
+llama8 nqo judgeRa35      2      108     110     0.546    0.063  0.115   0.043  0.041      0.136     0.158
+ qwen7 nqo judgeGa35      3       51      53     0.371    0.072  0.195   0.107  0.159      0.139     0.132
+ qwen7 nqo judgeQa35      6       48      49     0.389    0.201  0.517   0.428  0.375      0.162     0.219
+ qwen7 nqo judgeRa35      2       53      52     0.289    0.074  0.257   0.309  0.070      0.181     0.243
+ qwen7 tqa judgeQt50      3       23      29     0.046    0.022    NaN     NaN    NaN      0.189     0.119
+ qwen7 nqo judgeQt50      3       26      21     0.019   -0.003    NaN     NaN    NaN      0.201     0.121
+ qwen7 nqo judgeOa35      3       50      50     0.291    0.123  0.423   0.324  0.251      0.206     0.439
+ qwen7 nqo judgeQa50      6       32      29     0.343    0.011  0.033  -0.025  0.063      0.208     0.250
+ qwen7 tqa judgeQa50      6       95      88     0.328    0.027  0.083   0.067  0.033      0.210     0.390
+ qwen7 tqa judgeQa35      6      176     178     0.540    0.038  0.071   0.082  0.105      0.211     0.369
+ qwen7 tqa judgeOa35      2      183     168     0.481    0.097  0.202   0.224  0.224      0.235     0.436
+llama8 nqo judgeOa35      3      112      98     0.180    0.010  0.058  -0.019  0.187      0.247     0.488
+llama8 nqo judgeOt50      2      102      86     0.118   -0.000 -0.002   0.064  0.320      0.250     0.462
+llama8 nqo judgeQa50      6       67      70     0.269    0.007  0.026  -0.053  0.052      0.275     0.451
+llama8 nqo judgeQa35      6      103     111     0.616    0.273  0.443   0.394  0.341      0.282     0.537
+llama8 tqa judgeQa35      6      295     276     0.721    0.182  0.252   0.248  0.269      0.297     0.524
+llama8 nqo judgeQt50      3       39      34     0.068   -0.045 -0.660   0.060  0.008      0.302     0.257
+ qwen7 tqa judgeMa35      2      182     173     0.410    0.119  0.291   0.264  0.239      0.307     0.523
+llama8 tqa judgeOa35      2      304     272     0.580    0.179  0.309   0.274  0.269      0.312     0.597
+llama8 tqa judgeMa35      2      289     271     0.687    0.173  0.251   0.231  0.227      0.313     0.597
+ qwen7 tqa judgeGa35      2      188     182     0.500    0.068  0.136   0.183  0.167      0.341     0.487
+llama8 nqo judgeGt50      2       81      73     0.148   -0.012 -0.083  -0.101  0.098      0.348     0.329
+llama8 tqa judgeQt50      3       43      43    -0.012   -0.025    NaN     NaN    NaN      0.349     0.404
+ qwen7 nqo judgeMa35      3       49      48     0.474    0.247  0.521   0.502  0.396      0.360     0.459
+llama8 tqa judgeQa50      6      197     200     0.659    0.174  0.263   0.178  0.209      0.364     0.529
+llama8 nqo judgeMa35      3      117      95     0.502    0.237  0.472   0.355  0.328      0.372     0.380
+llama8 nqo judgeGa35      3      119     114     0.675    0.329  0.487   0.456  0.459      0.435     0.546
+llama8 tqa judgeGa35      2      313     288     0.737    0.243  0.329   0.320  0.319      0.446     0.619
+ qwen7 pqa judgeQa50      6       99      83     0.282    0.130  0.461   0.399  0.403      0.457     0.625
+ qwen7 pqa   plrealO      4      179     141     0.391    0.062  0.158   0.141  0.180      0.507     0.637
+llama8 pqa judgeQt50      3       70      74     0.026    0.019    NaN     NaN    NaN      0.512     0.532
+ qwen7 pqa judgeOa35      3      163     141     0.391    0.052  0.134   0.134  0.139      0.512     0.631
+llama8 pqa judgeOa35      3      303     280     0.370    0.153  0.413   0.428  0.459      0.535     0.665
+llama8 pqa   plrealO      4      317     280     0.400    0.112  0.279   0.312  0.337      0.547     0.679
+llama8 pqa judgeQa50      6      204     200     0.447    0.202  0.451   0.451  0.387      0.574     0.689
+ qwen7 pqa judgeQa35      6      154     130     0.443    0.154  0.348   0.368  0.336      0.579     0.717
+ qwen7 pqa judgeQt50      3       35      35     0.087   -0.007 -0.077   0.539  0.146      0.580     0.619
+llama8 pqa judgeQa35      6      276     260     0.422    0.181  0.430   0.437  0.388      0.614     0.769
+ qwen7 pqa judgeGa35      3      156     134     0.370    0.147  0.398   0.432  0.365      0.643     0.762
+ qwen7 pqa   plrealM      4      170     122     0.401    0.159  0.398   0.313  0.370      0.678     0.814
+ qwen7 pqa judgeMa35      3      146     122     0.400    0.160  0.399   0.359  0.317      0.678     0.814
+llama8 pqa judgeMa35      3      289     256     0.335    0.152  0.453   0.451  0.480      0.681     0.792
+llama8 pqa   plrealM      4      305     256     0.385    0.092  0.239   0.235  0.289      0.683     0.782
+llama8 pqa judgeGa35      3      289     265     0.426    0.243  0.571   0.576  0.552      0.749     0.830
+ qwen7 pqa  plsharpM      4      180     162     0.582    0.381  0.655   0.721  0.617      0.985     0.997
+llama8 pqa  plsharpM      4      348     307     0.443    0.268  0.605   0.609  0.671      0.996     1.000
+llama8 pqa     fnB50      2      198     208     0.133    0.159  1.196   1.087  0.847      1.000     1.000
+ qwen7 pqa     fnB80      3      114     122     0.371    0.248  0.668   0.654  0.719      1.000     1.000
+ qwen7 pqa     fnB50      2      114     122     0.124    0.111  0.897   0.814  0.921      1.000     1.000
+llama8 pqa     fnA80      3      342     315     1.147    0.986  0.860   0.782  0.766      1.000     1.000
+ qwen7 pqa  plsharpO      4      204     159     0.469    0.327  0.697   0.727  0.625      1.000     1.000
+llama8 pqa     fnB80      3      198     208     0.567    0.462  0.815   0.810  0.848      1.000     1.000
+llama8 pqa  plsharpO      4      341     286     0.523    0.443  0.847   0.947  0.834      1.000     1.000
+
+==== Spearman(transfer, visibility)
+  all points               text-Gini: n  54 Spearman +0.66 [+0.43, +0.82] perm p 0.0000 | hidden-Gini: n  54 Spearman +0.68 [+0.47, +0.84] perm p 0.0000
+  judges only              text-Gini: n  38 Spearman +0.45 [+0.12, +0.69] perm p 0.0065 | hidden-Gini: n  38 Spearman +0.49 [+0.18, +0.75] perm p 0.0015
+  planted only             text-Gini: n  16 Spearman +0.90 [+0.73, +0.96] perm p 0.0000 | hidden-Gini: n  16 Spearman +0.87 [+0.68, +0.96] perm p 0.0005
+  qwen7                    text-Gini: n  27 Spearman +0.50 [+0.04, +0.80] perm p 0.0080 | hidden-Gini: n  27 Spearman +0.57 [+0.18, +0.84] perm p 0.0015
+  llama8                   text-Gini: n  27 Spearman +0.80 [+0.58, +0.92] perm p 0.0000 | hidden-Gini: n  27 Spearman +0.81 [+0.55, +0.94] perm p 0.0000
+  judges, a35 only         text-Gini: n  26 Spearman +0.46 [+0.06, +0.75] perm p 0.0155 | hidden-Gini: n  26 Spearman +0.34 [-0.09, +0.69] perm p 0.0910
+  judges, PopQA excluded   text-Gini: n  27 Spearman +0.32 [-0.11, +0.63] perm p 0.1040 | hidden-Gini: n  27 Spearman +0.41 [+0.02, +0.72] perm p 0.0270
+
+  transfer definitions and reference curves (all points, text-Gini):
+    T_lin       all: n  54 Spearman +0.66 [+0.45, +0.82] perm p 0.0000 | judges only: n  38 Spearman +0.45 [+0.13, +0.71] perm p 0.0035
+    T_quad      all: n  54 Spearman +0.75 [+0.56, +0.88] perm p 0.0000 | judges only: n  38 Spearman +0.67 [+0.43, +0.82] perm p 0.0000
+    T_nn3       all: n  54 Spearman +0.80 [+0.66, +0.89] perm p 0.0000 | judges only: n  38 Spearman +0.64 [+0.38, +0.81] perm p 0.0000
+    T_raw       all: n  53 Spearman +0.79 [+0.61, +0.91] perm p 0.0000 | judges only: n  38 Spearman +0.63 [+0.32, +0.84] perm p 0.0000
+    T_runratio  all: n  52 Spearman +0.71 [+0.50, +0.85] perm p 0.0000 | judges only: n  37 Spearman +0.48 [+0.15, +0.72] perm p 0.0040
+    new_lin     all: n  58 Spearman +0.60 [+0.40, +0.74] perm p 0.0000 | judges only: n  42 Spearman +0.39 [+0.12, +0.60] perm p 0.0080
+
+  judges only: Spearman(new effect, home effect) +0.78; Spearman(gini_text, home effect) +0.17; Spearman(gini_text, dataset is PopQA) +0.78
+    judges within pqa: n  11 Spearman +0.24 [-0.57, +0.83] perm p 0.4925
+    judges within nqo: n  17 Spearman +0.18 [-0.41, +0.66] perm p 0.4880
+    judges within tqa: n  10 Spearman +0.65 [-0.01, +0.99] perm p 0.0530
+
+  noise floor: typical sd of the uniform-run contrast around the reference line on new questions: 0.038 (single run)

@@ -1,0 +1,80 @@
+(verify_where) Item 1: are judges' false rejects question-level and false accepts answer-level? Own re-derivation from raw files.
+Data: untrained students' 32 sampled valid answers on the TRAINED questions (Sonnet verdict for every unique string there).
+Truth: aud = loose key OR Sonnet >= 4 (as claimed); also key-only, Sonnet-only, consensus (key and Sonnet agree; disagreements dropped).
+Graders: judges Q M G O R QS at P(Yes) > 0.5 (t50), a50, a35 thresholds (final/thresholds_<J>.json).
+(A) eta2 = between-question share of the sample-level verdict variance, vs rate-matched answer-level nulls
+    (per-sample random; per (question, string) hash; 5 hash seeds averaged).
+(B) one-way ICC(1) of the error indicator, unit = unique (question, normalised string), grouped by question (groups >= 2):
+    FR among right strings, FA among wrong strings (the claimed statistic), per truth definition.
+(C) rate-matched: per judge and cell, threshold t_r with FNR = r for FR and t'_r with FPR = r for FA (r = 0.05, 0.10, 0.20, 0.30); ICC at equal rates.
+(D) threshold-free: ICC of the rank-normalised logit P(Yes) among right strings vs among wrong strings (the latent variable of both error indicators).
+(E) group composition: FR and FA ICC computed on the SAME questions (>= 2 right and >= 2 wrong strings); and paraphrase level: ICC grouped by
+    (question, answer cluster) vs between clusters of the same question (cluster means grouped by question).
+(F) error sharing between judges (phi) for FR vs FA at a35, t50 and at matched rates (each judge thresholded to FNR = FPR = r on that cell).
+Output: v2_out.txt, v2_rows.pkl.  Usage: nice -n 10 python3 v2_judge_errors.py
+
+== qwen7 pqa: 21372 valid samples on 697 trained questions, 4300 unique strings; right share (samples) aud 0.653 key 0.568 son 0.632; key/Sonnet disagree on 0.105 of samples
+   truth eta2 (aud) 0.865
+
+== llama8 pqa: 23532 valid samples on 748 trained questions, 3810 unique strings; right share (samples) aud 0.829 key 0.715 son 0.789; key/Sonnet disagree on 0.153 of samples
+   truth eta2 (aud) 0.721
+
+== qwen7 nqo: 19013 valid samples on 631 trained questions, 4319 unique strings; right share (samples) aud 0.464 key 0.266 son 0.432; key/Sonnet disagree on 0.231 of samples
+   truth eta2 (aud) 0.808
+
+== llama8 nqo: 22199 valid samples on 724 trained questions, 6627 unique strings; right share (samples) aud 0.584 key 0.345 son 0.545; key/Sonnet disagree on 0.277 of samples
+   truth eta2 (aud) 0.661
+
+== qwen7 tqa: 23079 valid samples on 734 trained questions, 3280 unique strings; right share (samples) aud 0.632 key 0.589 son 0.617; key/Sonnet disagree on 0.057 of samples
+   truth eta2 (aud) 0.865
+
+== llama8 tqa: 23700 valid samples on 749 trained questions, 3166 unique strings; right share (samples) aud 0.782 key 0.738 son 0.772; key/Sonnet disagree on 0.055 of samples
+   truth eta2 (aud) 0.745
+
+==== (A) between-question share of verdict variance (36 judge x cell values per rule)
+  t50: eta2 mean 0.724 (min 0.591 max 0.866); hash null 0.629; random null 0.226; judge - hash null mean +0.095 (min +0.030 max +0.197, > 0 in 36/36); FNR 0.171 FPR 0.341
+  a50: eta2 mean 0.826 (min 0.676 max 0.917); hash null 0.710; random null 0.233; judge - hash null mean +0.116 (min +0.054 max +0.219, > 0 in 36/36); FNR 0.317 FPR 0.137
+  a35: eta2 mean 0.867 (min 0.718 max 0.947); hash null 0.746; random null 0.187; judge - hash null mean +0.120 (min +0.038 max +0.240, > 0 in 36/36); FNR 0.487 FPR 0.055
+  a35 > t50 in 36/36 cells; truth eta2 range 0.661-0.865
+
+==== (B) unique-string ICC of false rejects vs false accepts, by truth definition (mean over 36 judge x cell; FR > FA count)
+  t50 truth=aud : ICC FR 0.422  FA 0.249  FR > FA in 33/36; unique-string rates FNR 0.253 FPR 0.2733
+  t50 truth=key : ICC FR 0.421  FA 0.326  FR > FA in 33/36; unique-string rates FNR 0.256 FPR 0.3315
+  t50 truth=son : ICC FR 0.434  FA 0.253  FR > FA in 34/36; unique-string rates FNR 0.214 FPR 0.2828
+  t50 truth=cons: ICC FR 0.406  FA 0.249  FR > FA in 28/36; unique-string rates FNR 0.189 FPR 0.2733
+  a50 truth=aud : ICC FR 0.504  FA 0.240  FR > FA in 36/36; unique-string rates FNR 0.452 FPR 0.0906
+  a50 truth=key : ICC FR 0.493  FA 0.435  FR > FA in 29/36; unique-string rates FNR 0.447 FPR 0.1447
+  a50 truth=son : ICC FR 0.505  FA 0.239  FR > FA in 36/36; unique-string rates FNR 0.408 FPR 0.0949
+  a50 truth=cons: ICC FR 0.468  FA 0.240  FR > FA in 32/36; unique-string rates FNR 0.372 FPR 0.0906
+  a35 truth=aud : ICC FR 0.527  FA 0.220  FR > FA in 36/36; unique-string rates FNR 0.623 FPR 0.0326
+  a35 truth=key : ICC FR 0.549  FA 0.483  FR > FA in 25/36; unique-string rates FNR 0.616 FPR 0.0728
+  a35 truth=son : ICC FR 0.526  FA 0.221  FR > FA in 36/36; unique-string rates FNR 0.588 FPR 0.0345
+  a35 truth=cons: ICC FR 0.542  FA 0.220  FR > FA in 35/36; unique-string rates FNR 0.549 FPR 0.0326
+
+==== (C) rate-matched thresholds (unique strings, aud truth): FR at FNR = r vs FA at FPR = r
+  rate0.05: ICC FR 0.257  FA 0.234  FR > FA in 19/36  (realised FNR 0.050, FPR 0.050)
+  rate0.10: ICC FR 0.334  FA 0.236  FR > FA in 32/36  (realised FNR 0.100, FPR 0.100)
+  rate0.20: ICC FR 0.396  FA 0.249  FR > FA in 35/36  (realised FNR 0.200, FPR 0.200)
+  rate0.30: ICC FR 0.441  FA 0.258  FR > FA in 36/36  (realised FNR 0.300, FPR 0.300)
+
+==== (D, E) threshold-free latent score ICC and group composition
+  latent ICC among right strings (FR side)         mean 0.610 (n 36, range 0.47-0.75)
+  latent ICC among wrong strings (FA side)         mean 0.357 (n 36, range 0.18-0.49)
+  same questions only, latent, right               mean 0.483 (n 36, range 0.24-0.69)
+  same questions only, latent, wrong               mean 0.349 (n 36, range 0.15-0.51)
+  same questions only, a35 FR indicator            mean 0.361 (n 36, range 0.09-0.67)
+  same questions only, a35 FA indicator            mean 0.188 (n 34, range -0.09-0.53)
+  within answer cluster (paraphrases), right       mean 0.627 (n 36, range 0.35-0.83)
+  within answer cluster (paraphrases), wrong       mean 0.689 (n 36, range 0.57-0.84)
+  between clusters of a question, right            mean 0.625 (n 36, range 0.44-0.74)
+  between clusters of a question, wrong            mean 0.348 (n 36, range 0.18-0.49)
+  latent FR > FA in 36/36
+  same-question latent FR > FA in 34/36; questions with >= 2 right and >= 2 wrong strings per cell: [40, 43, 64, 92, 134, 250]
+  same-question a35 indicator FR > FA in 31/34
+  questions with >= 2 right clusters per cell: [80, 119, 130, 134, 221, 296]; with >= 2 wrong clusters: [192, 202, 267, 274, 328, 418]
+
+==== (F) error sharing between the 5 judges (mean phi over 10 pairs; 6 cells)
+  a35     : FR phi 0.50 0.52 0.40 0.37 0.37 0.38 | FA phi 0.14 0.10 0.26 0.20 0.13 0.14 | FR > FA in 6/6
+  t50     : FR phi 0.39 0.34 0.33 0.29 0.44 0.32 | FA phi 0.25 0.24 0.25 0.24 0.27 0.23 | FR > FA in 6/6
+  rate0.10: FR phi 0.34 0.26 0.32 0.23 0.53 0.27 | FA phi 0.25 0.20 0.26 0.24 0.25 0.23 | FR > FA in 5/6
+  rate0.20: FR phi 0.39 0.33 0.35 0.28 0.46 0.36 | FA phi 0.29 0.26 0.27 0.25 0.31 0.24 | FR > FA in 6/6

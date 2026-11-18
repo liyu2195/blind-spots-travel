@@ -1,0 +1,78 @@
+rev_F6 check 1: independent re-computation of the judge-vs-judge crossover on NEW questions (right and wrong untrained answers),
+from the verify_map cell caches only, with my own minimal code (no FWL, no probes), plus two things the draft does not report:
+  (a) PopQA: does the right-answer crossover survive WITHIN relation type (y = R_K - R_J demeaned by relation type before contrasting)?
+  (b) a plain 2x2 a non-specialist can read: among new questions the untrained student answers right AND consistently (>= 31/32 samples
+      agree), refusal of the K-trained runs where K rejects vs where K accepts, next to the other judges' runs on the same questions.
+Definitions copied from verify_map/v05 + v08 docstrings: RIGHT = valid greedy & (loose key right or Sonnet >= 4); WRONG = key-wrong & Sonnet 1..3;
+judge J rejects <=> P(Yes) <= t_a35; runs judge<J>a35 with new-question abstention < 0.95; R_J(q) = mean IDK (code 0) over J's runs.
+Output: f1_out.txt
+
+qwen7 h1: judges ['Q', 'M', 'G', 'O'] runs per judge [6, 2, 2, 1] | right units 439 wrong units 246 right&sure 324
+   K=Q: right&sure new qs K rejects 135 / accepts 189 | K-runs refuse 0.51 vs 0.22 | other judges' runs refuse 0.41 vs 0.16 | DiD +0.04
+   K=M: right&sure new qs K rejects 130 / accepts 194 | K-runs refuse 0.44 vs 0.13 | other judges' runs refuse 0.42 vs 0.21 | DiD +0.10
+   K=G: right&sure new qs K rejects 137 / accepts 187 | K-runs refuse 0.46 vs 0.15 | other judges' runs refuse 0.39 vs 0.21 | DiD +0.13
+   K=O: right&sure new qs K rejects 123 / accepts 201 | K-runs refuse 0.48 vs 0.13 | other judges' runs refuse 0.47 vs 0.19 | DiD +0.07
+
+qwen7 pq: judges ['Q', 'M', 'G', 'O'] runs per judge [6, 3, 3, 3] | right units 438 wrong units 208 right&sure 310
+   K=Q: right&sure new qs K rejects 101 / accepts 209 | K-runs refuse 0.64 vs 0.13 | other judges' runs refuse 0.56 vs 0.17 | DiD +0.12
+   K=M: right&sure new qs K rejects  95 / accepts 215 | K-runs refuse 0.82 vs 0.19 | other judges' runs refuse 0.58 vs 0.12 | DiD +0.17
+   K=G: right&sure new qs K rejects  99 / accepts 211 | K-runs refuse 0.57 vs 0.11 | other judges' runs refuse 0.60 vs 0.17 | DiD +0.03
+   K=O: right&sure new qs K rejects 105 / accepts 205 | K-runs refuse 0.48 vs 0.11 | other judges' runs refuse 0.58 vs 0.18 | DiD -0.04
+   PopQA Q: rejection rate of right new answers 0.43; between-relation-type share of variance 0.26
+   PopQA M: rejection rate of right new answers 0.43; between-relation-type share of variance 0.37
+   PopQA G: rejection rate of right new answers 0.41; between-relation-type share of variance 0.31
+   PopQA O: rejection rate of right new answers 0.45; between-relation-type share of variance 0.21
+   PopQA Q: rejects right new answers on capital 0.19, capital of 0.45 vs other types 0.58
+   PopQA M: rejects right new answers on capital 0.13, capital of 0.45 vs other types 0.62
+   PopQA G: rejects right new answers on capital 0.16, capital of 0.45 vs other types 0.57
+   PopQA O: rejects right new answers on capital 0.22, capital of 0.42 vs other types 0.60
+
+qwen7 nq: judges ['Q', 'M', 'G', 'O', 'R'] runs per judge [6, 3, 3, 3, 2] | right units 297 wrong units 285 right&sure 154
+   K=Q: right&sure new qs K rejects  42 / accepts 112 | K-runs refuse 0.30 vs 0.06 | other judges' runs refuse 0.37 vs 0.12 | DiD -0.01
+   K=M: right&sure new qs K rejects  41 / accepts 113 | K-runs refuse 0.62 vs 0.11 | other judges' runs refuse 0.35 vs 0.09 | DiD +0.25
+   K=G: right&sure new qs K rejects  47 / accepts 107 | K-runs refuse 0.26 vs 0.09 | other judges' runs refuse 0.36 vs 0.11 | DiD -0.08
+   K=O: right&sure new qs K rejects  45 / accepts 109 | K-runs refuse 0.21 vs 0.06 | other judges' runs refuse 0.32 vs 0.15 | DiD -0.02
+   K=R: right&sure new qs K rejects  53 / accepts 101 | K-runs refuse 0.42 vs 0.19 | other judges' runs refuse 0.24 vs 0.11 | DiD +0.09
+
+llama8 h1: judges ['Q', 'M', 'G', 'O'] runs per judge [6, 2, 2, 2] | right units 562 wrong units 143 right&sure 375
+   K=Q: right&sure new qs K rejects 167 / accepts 208 | K-runs refuse 0.52 vs 0.19 | other judges' runs refuse 0.47 vs 0.18 | DiD +0.04
+   K=M: right&sure new qs K rejects 164 / accepts 211 | K-runs refuse 0.48 vs 0.16 | other judges' runs refuse 0.46 vs 0.22 | DiD +0.08
+   K=G: right&sure new qs K rejects 184 / accepts 191 | K-runs refuse 0.56 vs 0.18 | other judges' runs refuse 0.42 vs 0.18 | DiD +0.14
+   K=O: right&sure new qs K rejects 171 / accepts 204 | K-runs refuse 0.44 vs 0.11 | other judges' runs refuse 0.47 vs 0.22 | DiD +0.08
+
+llama8 pq: judges ['Q', 'M', 'G', 'O'] runs per judge [6, 3, 3, 3] | right units 598 wrong units 130 right&sure 395
+   K=Q: right&sure new qs K rejects 166 / accepts 229 | K-runs refuse 0.70 vs 0.14 | other judges' runs refuse 0.61 vs 0.16 | DiD +0.11
+   K=M: right&sure new qs K rejects 159 / accepts 236 | K-runs refuse 0.72 vs 0.15 | other judges' runs refuse 0.62 vs 0.17 | DiD +0.12
+   K=G: right&sure new qs K rejects 168 / accepts 227 | K-runs refuse 0.68 vs 0.11 | other judges' runs refuse 0.62 vs 0.17 | DiD +0.12
+   K=O: right&sure new qs K rejects 185 / accepts 210 | K-runs refuse 0.54 vs 0.14 | other judges' runs refuse 0.53 vs 0.22 | DiD +0.09
+   PopQA Q: rejection rate of right new answers 0.56; between-relation-type share of variance 0.29
+   PopQA M: rejection rate of right new answers 0.56; between-relation-type share of variance 0.35
+   PopQA G: rejection rate of right new answers 0.54; between-relation-type share of variance 0.39
+   PopQA O: rejection rate of right new answers 0.59; between-relation-type share of variance 0.20
+   PopQA Q: rejects right new answers on capital 0.21, capital of 0.50 vs other types 0.71
+   PopQA M: rejects right new answers on capital 0.14, capital of 0.57 vs other types 0.73
+   PopQA G: rejects right new answers on capital 0.16, capital of 0.55 vs other types 0.70
+   PopQA O: rejects right new answers on capital 0.31, capital of 0.42 vs other types 0.72
+
+llama8 nq: judges ['Q', 'M', 'G', 'O', 'R'] runs per judge [6, 3, 3, 3, 2] | right units 437 wrong units 263 right&sure 169
+   K=Q: right&sure new qs K rejects  66 / accepts 103 | K-runs refuse 0.39 vs 0.14 | other judges' runs refuse 0.39 vs 0.16 | DiD +0.02
+   K=M: right&sure new qs K rejects  58 / accepts 111 | K-runs refuse 0.43 vs 0.16 | other judges' runs refuse 0.39 vs 0.18 | DiD +0.07
+   K=G: right&sure new qs K rejects  66 / accepts 103 | K-runs refuse 0.60 vs 0.26 | other judges' runs refuse 0.30 vs 0.16 | DiD +0.20
+   K=O: right&sure new qs K rejects  53 / accepts 116 | K-runs refuse 0.08 vs 0.01 | other judges' runs refuse 0.41 vs 0.26 | DiD -0.08
+   K=R: right&sure new qs K rejects  55 / accepts 114 | K-runs refuse 0.55 vs 0.22 | other judges' runs refuse 0.38 vs 0.16 | DiD +0.10
+
+== crossover X (mean over judge pairs with |A|,|B| >= 5), my code; prediction > 0 for RIGHT (only K rejects -> K-model refuses more),
+   for WRONG I orient A = only K PAYS, so the prediction is < 0 (K-model refuses less where its judge pays)
+  right        qwen7  h1: X +0.221  pairs 6  positive 6 negative 0
+  right        qwen7  pq: X +0.311  pairs 6  positive 6 negative 0
+  right        qwen7  nq: X +0.146  pairs 10  positive 9 negative 1
+  right        llama8 h1: X +0.232  pairs 6  positive 6 negative 0
+  right        llama8 pq: X +0.466  pairs 6  positive 6 negative 0
+  right        llama8 nq: X +0.149  pairs 10  positive 10 negative 0
+  right        pooled (cells within student, students averaged): +0.254
+  wrong        qwen7  nq: X -0.093  pairs 10  positive 2 negative 8
+  wrong        llama8 nq: X -0.202  pairs 10  positive 0 negative 10
+  wrong        pooled (cells within student, students averaged): -0.147
+  right_within qwen7  pq: X +0.115  pairs 6  positive 6 negative 0
+  right_within llama8 pq: X +0.218  pairs 6  positive 6 negative 0
+  right_within pooled (cells within student, students averaged): +0.167

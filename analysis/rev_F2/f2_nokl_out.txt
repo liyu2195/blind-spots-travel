@@ -1,0 +1,39 @@
+(rev_F2) Do the 'answers stay the model's own' numbers hold outside the KL 0.2 / 120-step recipe? Existing runs only:
+FK00 (no KL) judgeQt50 / sim35fn00 on TriviaQA (both students) and FK50 / FK100 (longer) key runs on NQ-open (qwen7), against FK20 runs of the
+same grader, student and dataset. NEW questions (dedup as verify_map). Per run: steps logged, new-question abstention, key accuracy among
+answered, share of answered final answers that differ from the untrained greedy (contain rule), share of key-right final answers that are the
+untrained greedy (contain rule), and key-right answers on new questions per 100 vs the untrained greedy.
+Usage: nice -n 10 timeout 280 python3 f2_nokl.py > f2_nokl_out.txt
+
+== qwen7 h1: new 718; untrained greedy key-right per 100 new 58.6, abstention 0.043
+  qwen7_FK00judgeQt50_idkc05_s0_h1           ck120 log rows  120 | abst 0.015 | acc|ans 0.625 | answered changed vs untrained greedy 0.208 (of changed, key-wrong 0.75) | key-right = untrained greedy 0.916 | key-right per 100 new 61.4
+  qwen7_FK00judgeQt50_idkc05_s1_h1           ck120 log rows  120 | abst 0.004 | acc|ans 0.608 | answered changed vs untrained greedy 0.204 (of changed, key-wrong 0.79) | key-right = untrained greedy 0.931 | key-right per 100 new 60.6
+  qwen7_FK20judgeQt50_idkc05_s0_h1           ck120 log rows  120 | abst 0.011 | acc|ans 0.610 | answered changed vs untrained greedy 0.137 (of changed, key-wrong 0.74) | key-right = untrained greedy 0.942 | key-right per 100 new 60.3
+  qwen7_FK20judgeQt50_idkc05_s1_h1           ck120 log rows  120 | abst 0.014 | acc|ans 0.597 | answered changed vs untrained greedy 0.161 (of changed, key-wrong 0.80) | key-right = untrained greedy 0.946 | key-right per 100 new 58.9
+  qwen7_FK20judgeQt50_idkc05_s2_h1           ck120 log rows  120 | abst 0.025 | acc|ans 0.606 | answered changed vs untrained greedy 0.120 (of changed, key-wrong 0.80) | key-right = untrained greedy 0.960 | key-right per 100 new 59.1
+  qwen7_FK00sim35fn00_idkc05_s0_h1           ck120 log rows  120 | abst 0.007 | acc|ans 0.620 | answered changed vs untrained greedy 0.265 (of changed, key-wrong 0.76) | key-right = untrained greedy 0.896 | key-right per 100 new 61.6
+  qwen7_FK00sim35fn00_idkc05_s1_h1           ck120 log rows  120 | abst 0.001 | acc|ans 0.604 | answered changed vs untrained greedy 0.199 (of changed, key-wrong 0.78) | key-right = untrained greedy 0.926 | key-right per 100 new 60.3
+  qwen7_FK20sim35fn00_idkc05_s0_h1           ck120 log rows  120 | abst 0.054 | acc|ans 0.632 | answered changed vs untrained greedy 0.093 (of changed, key-wrong 0.67) | key-right = untrained greedy 0.951 | key-right per 100 new 59.7
+  qwen7_FK20sim35fn00_idkc05_s1_h1           ck120 log rows  120 | abst 0.036 | acc|ans 0.617 | answered changed vs untrained greedy 0.077 (of changed, key-wrong 0.77) | key-right = untrained greedy 0.972 | key-right per 100 new 59.2
+  qwen7_FK20sim35fn00_idkc05_s2_h1           ck120 log rows  120 | abst 0.032 | acc|ans 0.624 | answered changed vs untrained greedy 0.118 (of changed, key-wrong 0.67) | key-right = untrained greedy 0.938 | key-right per 100 new 60.4
+
+== llama8 h1: new 718; untrained greedy key-right per 100 new 74.2, abstention 0.010
+  llama8_FK00judgeQt50_idkc05_s0_h1          ck120 log rows  120 | abst 0.001 | acc|ans 0.779 | answered changed vs untrained greedy 0.192 (of changed, key-wrong 0.63) | key-right = untrained greedy 0.908 | key-right per 100 new 63.9
+  llama8_FK00judgeQt50_idkc05_s1_h1          ck120 log rows  120 | abst 0.000 | acc|ans 0.690 | answered changed vs untrained greedy 0.328 (of changed, key-wrong 0.84) | key-right = untrained greedy 0.925 | key-right per 100 new 5.6
+  llama8_FK20judgeQt50_idkc05_s0_h1          ck120 log rows  120 | abst 0.006 | acc|ans 0.753 | answered changed vs untrained greedy 0.087 (of changed, key-wrong 0.58) | key-right = untrained greedy 0.951 | key-right per 100 new 74.7
+  llama8_FK20judgeQt50_idkc05_s1_h1          ck120 log rows  120 | abst 0.004 | acc|ans 0.743 | answered changed vs untrained greedy 0.094 (of changed, key-wrong 0.78) | key-right = untrained greedy 0.972 | key-right per 100 new 73.7
+  llama8_FK20judgeQt50_idkc05_s2_h1          ck120 log rows  120 | abst 0.003 | acc|ans 0.739 | answered changed vs untrained greedy 0.098 (of changed, key-wrong 0.74) | key-right = untrained greedy 0.966 | key-right per 100 new 73.7
+  llama8_FK00sim35fn00_idkc05_s0_h1          ck120 log rows  120 | abst 0.000 | acc|ans 0.755 | answered changed vs untrained greedy 0.190 (of changed, key-wrong 0.69) | key-right = untrained greedy 0.923 | key-right per 100 new 68.5
+  llama8_FK00sim35fn00_idkc05_s1_h1          ck120 log rows  120 | abst 0.004 | acc|ans 0.758 | answered changed vs untrained greedy 0.199 (of changed, key-wrong 0.63) | key-right = untrained greedy 0.904 | key-right per 100 new 75.5
+  llama8_FK20sim35fn00_idkc05_s0_h1          ck120 log rows  120 | abst 0.004 | acc|ans 0.759 | answered changed vs untrained greedy 0.098 (of changed, key-wrong 0.60) | key-right = untrained greedy 0.948 | key-right per 100 new 75.5
+  llama8_FK20sim35fn00_idkc05_s1_h1          ck120 log rows  120 | abst 0.004 | acc|ans 0.749 | answered changed vs untrained greedy 0.084 (of changed, key-wrong 0.70) | key-right = untrained greedy 0.966 | key-right per 100 new 74.2
+  llama8_FK20sim35fn00_idkc05_s2_h1          ck120 log rows  120 | abst 0.007 | acc|ans 0.754 | answered changed vs untrained greedy 0.096 (of changed, key-wrong 0.63) | key-right = untrained greedy 0.953 | key-right per 100 new 74.8
+
+== qwen7 nq: new 750; untrained greedy key-right per 100 new 24.8, abstention 0.223
+  qwen7_FK50sim00fn00_idkc05_s0_nq           ck120 log rows  120 | abst 0.781 | acc|ans 0.567 | answered changed vs untrained greedy 0.085 (of changed, key-wrong 0.50) | key-right = untrained greedy 0.925 | key-right per 100 new 12.4
+  qwen7_FK50sim00fn00_idkc05_s1_nq           ck120 log rows  120 | abst 0.521 | acc|ans 0.429 | answered changed vs untrained greedy 0.125 (of changed, key-wrong 0.80) | key-right = untrained greedy 0.942 | key-right per 100 new 20.5
+  qwen7_FK100sim00fn00_idkc05_s0_nq          ck120 log rows  120 | abst 0.249 | acc|ans 0.335 | answered changed vs untrained greedy 0.077 (of changed, key-wrong 0.81) | key-right = untrained greedy 0.957 | key-right per 100 new 25.1
+  qwen7_FK100sim00fn00_idkc05_s1_nq          ck120 log rows  120 | abst 0.263 | acc|ans 0.337 | answered changed vs untrained greedy 0.091 (of changed, key-wrong 0.82) | key-right = untrained greedy 0.952 | key-right per 100 new 24.8
+  qwen7_FK20sim00fn00_idkc05_s0_nq           ck120 log rows  120 | abst 1.000 | acc|ans nan | answered changed vs untrained greedy nan (of changed, key-wrong nan) | key-right = untrained greedy nan | key-right per 100 new 0.0
+  qwen7_FK20sim00fn00_idkc05_s1_nq           ck120 log rows  120 | abst 1.000 | acc|ans nan | answered changed vs untrained greedy nan (of changed, key-wrong nan) | key-right = untrained greedy nan | key-right per 100 new 0.0
+  qwen7_FK20sim00fn00_idkc05_s2_nq           ck120 log rows  120 | abst 0.728 | acc|ans 0.520 | answered changed vs untrained greedy 0.152 (of changed, key-wrong 0.77) | key-right = untrained greedy 0.934 | key-right per 100 new 14.1

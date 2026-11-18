@@ -1,0 +1,1 @@
+STUDENT=HuggingFaceTB/SmolLM3-3B TAG=smol3 PROMPT=idk IDK=0.5 TRAIN=tqa_h1 STEPS=120 CK=40 LR=5e-5 SEED=0 CAP=30000 FMT=1 KLB=0.2 RCACHE=cache_sonnet.jsonl RYES=4 OUTNAME=smol3_FK20relayS_idk_h1

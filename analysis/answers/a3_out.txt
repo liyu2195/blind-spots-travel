@@ -1,0 +1,47 @@
+Final key-wrong answers: provenance and payment. Pooled over students x datasets; per-run means then averaged.
+family   part   runs  nWrong    =g0   in32  inClu  novel  f32|in    paid  basepd paid_cov
+gold     train    31    54.6  0.780  0.952  0.971  0.029   21.38   0.000   0.000     1.00
+gold     new      31   119.7  0.656  0.896  0.937  0.063   18.55   0.000   0.000     1.00
+keyFN    train    69    23.0  0.794  0.950  0.966  0.034   23.22   0.000   0.000     1.00
+keyFN    new      70    60.1  0.732  0.924  0.956  0.044   21.36   0.000   0.000     1.00
+keyFP    train    42   191.8  0.574  0.872  0.899  0.101   16.34     nan     nan     0.00
+keyFP    new      42   248.5  0.742  0.940  0.961  0.039   16.64     nan     nan     0.00
+mix      train    42   155.7  0.599  0.882  0.909  0.091   16.91     nan     nan     0.00
+mix      new      42   190.8  0.734  0.932  0.960  0.040   17.31     nan     nan     0.00
+hash     train    12   267.9  0.425  0.800  0.842  0.158   13.34   0.838   0.402     1.00
+hash     new      12   301.8  0.644  0.911  0.934  0.066   14.76   0.356   0.352     1.00
+judge    train   161   147.3  0.592  0.857  0.906  0.094   17.61   0.753   0.545     0.97
+judge    new     161   146.3  0.673  0.885  0.928  0.072   18.96   0.462   0.425     0.98
+sonnet   train    18   146.5  0.686  0.905  0.935  0.065   18.62   0.685   0.536     0.96
+sonnet   new      18   186.1  0.697  0.926  0.954  0.046   17.61   0.365   0.363     1.00
+lenQ     train    18   275.6  0.571  0.867  0.890  0.110   15.07     nan     nan     0.00
+lenQ     new      18   302.9  0.737  0.928  0.945  0.055   15.33     nan     nan     0.00
+typeprog train    27   148.1  0.628  0.878  0.908  0.092   15.72     nan     nan     0.00
+typeprog new      27   193.6  0.704  0.926  0.945  0.055   15.69     nan     nan     0.00
+blind    train    18   210.9  0.721  0.897  0.913  0.087   16.10     nan     nan     0.00
+blind    new      18   185.5  0.741  0.910  0.925  0.075   18.03     nan     nan     0.00
+vote     train    29   129.8  0.873  0.980  0.986  0.014   24.14   0.000   0.000     1.00
+vote     new      29   125.1  0.738  0.938  0.958  0.042   20.88   0.000   0.000     1.00
+long80   train     8   277.5  0.236  0.370  0.782  0.218   15.89     nan     nan     0.00
+long80   new       8   323.8  0.373  0.523  0.827  0.173   16.71     nan     nan     0.00
+
+Among final wrong answers that CHANGED from the run's own untrained greedy (x != ck0 answer):
+family   part  nChg/run   in32  inClu  novel  f32|in    paid  basepd
+gold     train    12.3  0.811  0.874  0.126    6.80   0.000   0.000
+gold     new      42.2  0.735  0.838  0.162    5.93   0.000   0.000
+keyFP    train    80.2  0.712  0.770  0.230    5.20     nan     nan
+keyFP    new      62.2  0.810  0.876  0.124    5.88     nan     nan
+mix      train    62.7  0.715  0.781  0.219    5.47     nan     nan
+mix      new      49.0  0.800  0.886  0.114    5.92     nan     nan
+hash     train   154.2  0.656  0.727  0.273    4.37   0.948   0.306
+hash     new     105.2  0.776  0.831  0.169    5.27   0.365   0.356
+judge    train    66.8  0.669  0.778  0.222    5.76   0.805   0.386
+judge    new      51.4  0.682  0.799  0.201    5.80   0.406   0.343
+sonnet   train    50.8  0.708  0.793  0.207    5.59   0.805   0.378
+sonnet   new      56.7  0.774  0.861  0.139    6.13   0.256   0.246
+lenQ     train   118.8  0.702  0.754  0.246    4.98     nan     nan
+lenQ     new      79.4  0.783  0.836  0.164    5.53     nan     nan
+typeprog train    56.2  0.682  0.757  0.243    4.92     nan     nan
+typeprog new      55.4  0.795  0.847  0.153    5.41     nan     nan
+long80   train   226.4  0.190  0.734  0.266    4.71     nan     nan
+long80   new     219.5  0.283  0.764  0.236    4.74     nan     nan

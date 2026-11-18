@@ -1,0 +1,19 @@
+(verify_what) Item 3, non-degenerate 'another judge' placebo (the mean of the fake-own specifics over the three non-trained judges is 0 by
+construction, so v31's P1 column carries no information). From v31_rows.pkl (changed vs base greedy, common support):
+  rank test: share of judge-trained runs whose own judge has the LARGEST lift of the four judges (chance 0.25), home vs new;
+  spread: mean |fake specific| over non-trained judges J* (lift_J* - mean lift of the other two non-trained judges) = the size of judge-to-judge
+  differences in lift that training did not cause, against the own specific lift;
+  key-trained runs: share where judge J has the largest lift, per J (should be ~0.25 if no judge is favoured by training in general).
+Output v31b_placebo.txt
+qwen7  home runs  74: own judge has the largest lift in 70/74 = 0.95 (chance 0.25, binomial p 2.7e-37); own specific +0.346; mean |fake specific| 0.067, 90th pct 0.156
+qwen7  new  runs  69: own judge has the largest lift in 23/69 = 0.33 (chance 0.25, binomial p 0.075); own specific +0.019; mean |fake specific| 0.045, 90th pct 0.094
+llama8 home runs  67: own judge has the largest lift in 67/67 = 1.00 (chance 0.25, binomial p 4.6e-41); own specific +0.314; mean |fake specific| 0.068, 90th pct 0.138
+llama8 new  runs  64: own judge has the largest lift in 22/64 = 0.34 (chance 0.25, binomial p 0.06); own specific +0.023; mean |fake specific| 0.061, 90th pct 0.139
+stable qwen7  home runs  67: own judge has the largest lift in 65/67 = 0.97 (chance 0.25, binomial p 9.2e-37); own specific +0.391; mean |fake specific| 0.080, 90th pct 0.180
+stable qwen7  new  runs  68: own judge has the largest lift in 24/68 = 0.35 (chance 0.25, binomial p 0.038); own specific +0.021; mean |fake specific| 0.049, 90th pct 0.105
+stable llama8 home runs  64: own judge has the largest lift in 63/64 = 0.98 (chance 0.25, binomial p 5.7e-37); own specific +0.303; mean |fake specific| 0.074, 90th pct 0.146
+stable llama8 new  runs  62: own judge has the largest lift in 25/62 = 0.40 (chance 0.25, binomial p 0.0057); own specific +0.012; mean |fake specific| 0.060, 90th pct 0.142
+key runs qwen7  home (a35) runs 67: share with the largest lift Q 0.27  M 0.19  G 0.34  O 0.19
+key runs qwen7  new  (a35) runs 81: share with the largest lift Q 0.23  M 0.22  G 0.27  O 0.27
+key runs llama8 home (a35) runs 68: share with the largest lift Q 0.18  M 0.41  G 0.22  O 0.19
+key runs llama8 new  (a35) runs 90: share with the largest lift Q 0.30  M 0.12  G 0.33  O 0.24

@@ -1,0 +1,55 @@
+(rev_R6) Check: is the PopQA judge 'fingerprint' (claim C5) carried by a few templated relation types?
+Re-uses the stats/ cache and the C5 definitions (new, valid, sure >= 31/32, audited-right untrained greedy answers; judges at a35;
+FK20 judge<K>a35 runs with new-question abstention < 0.95). X(K, J) = [R_K(A) - R_K(B)] - [R_J(A) - R_J(B)].
+Reports, for PopQA only: (1) X pooled as in C5 (check of reproduction); (2) relation-type composition of A u B;
+(3) leave-one-type-out X; (4) X restricted to the types that make up the top half of A u B vs the rest.
+Output: k1_popqa_types_out.txt
+
+=== qwen7 pq: units 310; runs Q 6, M 3, G 3, O 3
+
+=== llama8 pq: units 395; runs Q 6, M 3, G 3, O 3
+qwen7: X over pairs (C5 definition): mean +0.299; QM +0.211 (|A| 32, |B| 26); QG +0.312 (|A| 31, |B| 29); QO +0.377 (|A| 33, |B| 37); MG +0.361 (|A| 32, |B| 36); MO +0.225 (|A| 23, |B| 33); GO +0.308 (|A| 33, |B| 39)
+  A u B (any disagreeing pair): 117 units; by type: capital 29 (0.25; of type 142), genre 21 (0.18; of type 30), religion 12 (0.10; of type 17), director 12 (0.10; of type 14), capital of 10 (0.09; of type 32), producer 6 (0.05; of type 7), father 6 (0.05; of type 9), screenwriter 5 (0.04; of type 10), mother 5 (0.04; of type 8), sport 4 (0.03; of type 9), occupation 2 (0.02; of type 5), author 2 (0.02; of type 14), country 1 (0.01; of type 3), place of birth 1 (0.01; of type 3), color 1 (0.01; of type 3)
+  leave-one-type-out mean X:
+    drop capital         : +0.341 over 6 pairs
+    drop genre           : +0.187 over 6 pairs
+    drop religion        : +0.313 over 6 pairs
+    drop director        : +0.286 over 6 pairs
+    drop capital of      : +0.298 over 6 pairs
+    drop producer        : +0.309 over 6 pairs
+    drop father          : +0.292 over 6 pairs
+    drop screenwriter    : +0.315 over 6 pairs
+    drop mother          : +0.286 over 6 pairs
+    drop sport           : +0.308 over 6 pairs
+    drop occupation      : +0.304 over 6 pairs
+    drop author          : +0.303 over 6 pairs
+    drop country         : +0.298 over 6 pairs
+    drop place of birth  : +0.309 over 6 pairs
+    drop color           : +0.297 over 6 pairs
+  within one type (pairs with |A|, |B| >= 5 inside it):
+    capital         : +0.083 over 2 pairs
+    genre           : +0.667 over 1 pairs
+  top types [np.str_('capital'), np.str_('genre'), np.str_('religion')] (= 0.53 of A u B): X +0.286 (6 pairs); rest: X +0.212 (6 pairs)
+llama8: X over pairs (C5 definition): mean +0.466; QM +0.310 (|A| 42, |B| 35); QG +0.486 (|A| 40, |B| 42); QO +0.464 (|A| 42, |B| 61); MG +0.641 (|A| 42, |B| 51); MO +0.432 (|A| 40, |B| 66); GO +0.461 (|A| 46, |B| 63)
+  A u B (any disagreeing pair): 173 units; by type: capital 36 (0.21; of type 150), director 28 (0.16; of type 44), genre 20 (0.12; of type 26), screenwriter 15 (0.09; of type 26), capital of 13 (0.08; of type 33), father 11 (0.06; of type 14), mother 9 (0.05; of type 12), religion 9 (0.05; of type 14), producer 7 (0.04; of type 17), author 6 (0.03; of type 20), composer 5 (0.03; of type 13), color 4 (0.02; of type 6), sport 4 (0.02; of type 9), country 3 (0.02; of type 5), occupation 2 (0.01; of type 3), place of birth 1 (0.01; of type 3)
+  leave-one-type-out mean X:
+    drop capital         : +0.531 over 6 pairs
+    drop director        : +0.485 over 6 pairs
+    drop genre           : +0.364 over 6 pairs
+    drop screenwriter    : +0.492 over 6 pairs
+    drop capital of      : +0.472 over 6 pairs
+    drop father          : +0.446 over 6 pairs
+    drop mother          : +0.474 over 6 pairs
+    drop religion        : +0.458 over 6 pairs
+    drop producer        : +0.449 over 6 pairs
+    drop author          : +0.485 over 6 pairs
+    drop composer        : +0.456 over 6 pairs
+    drop color           : +0.449 over 6 pairs
+    drop sport           : +0.464 over 6 pairs
+    drop country         : +0.468 over 6 pairs
+    drop occupation      : +0.472 over 6 pairs
+    drop place of birth  : +0.470 over 6 pairs
+  within one type (pairs with |A|, |B| >= 5 inside it):
+    capital         : +0.076 over 2 pairs
+    director        : +0.222 over 3 pairs
+  top types [np.str_('capital'), np.str_('director'), np.str_('genre'), np.str_('screenwriter')] (= 0.57 of A u B): X +0.456 (6 pairs); rest: X +0.541 (6 pairs)

@@ -1,0 +1,27 @@
+(rev_F4) Read-only check: do 'the answers stay the model's own' outside KL 0.2?
+Compares FK00 (no KL) runs with FK20 (KL 0.2) runs of the same grader (judgeQt50, sim35fn00) on TriviaQA (h1), both students.
+New questions = not in tqa_h1.jsonl and qid not shared with a training question. Untrained greedy = base n32 file, s = -1.
+Per run: abstention on new; key-accuracy among answered; share of answered that differ from untrained greedy (exact normalised);
+share of key-right answers equal to untrained greedy; share of key-wrong answers that are new strings (not among the 32 untrained samples);
+mean answer tokens. Output: r01_nokl_out.txt
+new (dedup) questions: 718
+  qwen7  FK00 judgeQt50  s0: new 718 | IDK 0.015 | answered 0.985 acc|ans 0.624 | answered != untrained greedy 0.259 | key-right == greedy 0.873 | key-wrong strings never sampled 0.162 | mean tokens 4.4
+  qwen7  FK00 judgeQt50  s1: new 718 | IDK 0.004 | answered 0.996 acc|ans 0.608 | answered != untrained greedy 0.221 | key-right == greedy 0.913 | key-wrong strings never sampled 0.107 | mean tokens 4.0
+  qwen7  FK20 judgeQt50  s0: new 718 | IDK 0.011 | answered 0.989 acc|ans 0.610 | answered != untrained greedy 0.146 | key-right == greedy 0.935 | key-wrong strings never sampled 0.079 | mean tokens 4.1
+  qwen7  FK20 judgeQt50  s1: new 718 | IDK 0.014 | answered 0.986 acc|ans 0.597 | answered != untrained greedy 0.174 | key-right == greedy 0.939 | key-wrong strings never sampled 0.070 | mean tokens 4.0
+  qwen7  FK20 judgeQt50  s2: new 718 | IDK 0.025 | answered 0.975 acc|ans 0.606 | answered != untrained greedy 0.133 | key-right == greedy 0.946 | key-wrong strings never sampled 0.029 | mean tokens 4.1
+  qwen7  FK00 sim35fn00  s0: new 718 | IDK 0.007 | answered 0.993 acc|ans 0.620 | answered != untrained greedy 0.296 | key-right == greedy 0.864 | key-wrong strings never sampled 0.225 | mean tokens 4.0
+  qwen7  FK00 sim35fn00  s1: new 718 | IDK 0.001 | answered 0.999 acc|ans 0.604 | answered != untrained greedy 0.219 | key-right == greedy 0.896 | key-wrong strings never sampled 0.102 | mean tokens 3.9
+  qwen7  FK20 sim35fn00  s0: new 718 | IDK 0.054 | answered 0.946 acc|ans 0.632 | answered != untrained greedy 0.096 | key-right == greedy 0.946 | key-wrong strings never sampled 0.016 | mean tokens 4.1
+  qwen7  FK20 sim35fn00  s1: new 718 | IDK 0.036 | answered 0.964 acc|ans 0.616 | answered != untrained greedy 0.084 | key-right == greedy 0.967 | key-wrong strings never sampled 0.019 | mean tokens 4.2
+  qwen7  FK20 sim35fn00  s2: new 718 | IDK 0.032 | answered 0.968 acc|ans 0.624 | answered != untrained greedy 0.124 | key-right == greedy 0.933 | key-wrong strings never sampled 0.027 | mean tokens 4.1
+  llama8 FK00 judgeQt50  s0: new 718 | IDK 0.001 | answered 0.999 acc|ans 0.646 | answered != untrained greedy 0.403 | key-right == greedy 0.821 | key-wrong strings never sampled 0.614 | mean tokens 8.7
+  llama8 FK00 judgeQt50  s1: new 718 | IDK 0.000 | answered 1.000 acc|ans 0.131 | answered != untrained greedy 0.953 | key-right == greedy 0.351 | key-wrong strings never sampled 0.992 | mean tokens 29.8
+  llama8 FK20 judgeQt50  s0: new 718 | IDK 0.006 | answered 0.994 acc|ans 0.752 | answered != untrained greedy 0.108 | key-right == greedy 0.933 | key-wrong strings never sampled 0.045 | mean tokens 4.9
+  llama8 FK20 judgeQt50  s1: new 718 | IDK 0.004 | answered 0.996 acc|ans 0.741 | answered != untrained greedy 0.130 | key-right == greedy 0.943 | key-wrong strings never sampled 0.081 | mean tokens 5.2
+  llama8 FK20 judgeQt50  s2: new 718 | IDK 0.003 | answered 0.997 acc|ans 0.739 | answered != untrained greedy 0.126 | key-right == greedy 0.941 | key-wrong strings never sampled 0.048 | mean tokens 4.7
+  llama8 FK00 sim35fn00  s0: new 718 | IDK 0.000 | answered 1.000 acc|ans 0.689 | answered != untrained greedy 0.329 | key-right == greedy 0.844 | key-wrong strings never sampled 0.457 | mean tokens 7.2
+  llama8 FK00 sim35fn00  s1: new 718 | IDK 0.004 | answered 0.996 acc|ans 0.758 | answered != untrained greedy 0.288 | key-right == greedy 0.814 | key-wrong strings never sampled 0.243 | mean tokens 3.8
+  llama8 FK20 sim35fn00  s0: new 718 | IDK 0.004 | answered 0.996 acc|ans 0.758 | answered != untrained greedy 0.124 | key-right == greedy 0.928 | key-wrong strings never sampled 0.046 | mean tokens 4.8
+  llama8 FK20 sim35fn00  s1: new 718 | IDK 0.004 | answered 0.996 acc|ans 0.745 | answered != untrained greedy 0.113 | key-right == greedy 0.944 | key-wrong strings never sampled 0.033 | mean tokens 4.8
+  llama8 FK20 sim35fn00  s2: new 718 | IDK 0.007 | answered 0.993 acc|ans 0.753 | answered != untrained greedy 0.123 | key-right == greedy 0.929 | key-wrong strings never sampled 0.062 | mean tokens 4.8

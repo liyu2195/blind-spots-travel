@@ -1,0 +1,32 @@
+(fam_fix) e5_capitals.py: FROZEN scorer for E5 / F3 (written before any new probe output exists). A copy of stats/c10_capitals.py with
+the judge arm as a parameter: usage  python3 e5_capitals.py <ARM>  (e.g. judgeMa35, judgeGa50, judgeOt50, frzMAJ35, plrealM).
+The judge's acceptance lines use score_<TAG>_<st>_pqq (TAG from the arm name, cut a35 / a50 / t50 from final/thresholds_<TAG>.json); they are skipped
+if that score file does not exist (e.g. frzMAJ35). Everything else (estimand, references, bootstrap, permutation) is unchanged from c10.
+Output: fam_fix/e5_<ARM>_out.txt
+ARM judgeQa35 judge tag Q cut a35
+qwen7 class F: n 270, known 149, sure 108 | judge Q accepts the known right answers: a35 cut 0.974: 0.134 [0.089, 0.198]; P(Yes) > 0.5: 0.859 [0.794, 0.906]
+qwen7 class P: n 65, known 63, sure 56 | judge Q accepts the known right answers: a35 cut 0.974: 0.841 [0.732, 0.911]; P(Yes) > 0.5: 0.968 [0.891, 0.991]
+  qwen7 runs: vote 3 (seeds [0, 0, 1]; frzVOTE21,frzVOTE32), judge 6 (seeds [0, 1, 2, 3, 4, 5]), gold 6 (seeds [0, 1, 2, 3, 4, 5]), keyFN 13 (seeds [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50)
+llama8 class F: n 270, known 187, sure 127 | judge Q accepts the known right answers: a35 cut 0.982: 0.134 [0.092, 0.190]; P(Yes) > 0.5: 0.893 [0.841, 0.930]
+llama8 class P: n 65, known 65, sure 65 | judge Q accepts the known right answers: a35 cut 0.982: 0.862 [0.757, 0.925]; P(Yes) > 0.5: 0.969 [0.895, 0.992]
+  llama8 runs: vote 4 (seeds [0, 0, 1, 1]; frzVOTE29,frzVOTE32), judge 6 (seeds [0, 1, 2, 3, 4, 5]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
+
+== PRIMARY: DiD = [R_F - R_P](judgeQa35) - [R_F - R_P](gold key), known answers
+  qwen7 judge : runs  6  R_F 0.820 (range 0.70-0.91)  R_P 0.040  PopQA new abstention 0.630 (range 0.54-0.68)
+  qwen7 gold  : runs  6  R_F 0.004 (range 0.00-0.03)  R_P 0.000  PopQA new abstention 0.380 (range 0.31-0.45)
+  qwen7 keyFN : runs 13  R_F 0.279 (range 0.00-1.00)  R_P 0.170  PopQA new abstention 0.636 (range 0.43-1.00)
+  qwen7 vote  : runs  3  R_F 0.204 (range 0.11-0.37)  R_P 0.000  PopQA new abstention 0.469 (range 0.31-0.58)
+  qwen7: DiD +0.776 [+0.693, +0.859]  exact permutation p 0.00108 (924 splits)
+  llama8 judge : runs  6  R_F 0.983 (range 0.95-1.00)  R_P 0.013  PopQA new abstention 0.613 (range 0.60-0.63)
+  llama8 gold  : runs  4  R_F 0.023 (range 0.00-0.06)  R_P 0.000  PopQA new abstention 0.096 (range 0.04-0.15)
+  llama8 keyFN : runs 18  R_F 0.329 (range 0.01-1.00)  R_P 0.121  PopQA new abstention 0.461 (range 0.15-1.00)
+  llama8 vote  : runs  4  R_F 0.465 (range 0.33-0.60)  R_P 0.000  PopQA new abstention 0.453 (range 0.37-0.50)
+  llama8: DiD +0.948 [+0.898, +0.983]  exact permutation p 0.00476 (210 splits)
+  pooled (mean of students) +0.862; combined exact p (product of the two independent permutation sets) 5.15e-06
+
+== robustness
+  sure answers only, vs gold: qwen7 +0.746 [+0.635, +0.851]  llama8 +0.960 [+0.912, +0.992]
+  vs key+random-FN runs, nearest 3 by abstention: qwen7 +0.605 [+0.492, +0.727]  llama8 +0.500 [+0.310, +0.646]
+  vs key+random-FN runs, local linear in abstention: qwen7 +0.585 [+0.499, +0.682]  llama8 +0.475 [+0.361, +0.586]
+  vs own-vote runs: qwen7 +0.577 [+0.412, +0.715]  llama8 +0.505 [+0.357, +0.645]
+  R_F only (no present-day contrast), vs key+FN nearest 3: qwen7 +0.629 [+0.519, +0.765]  llama8 +0.447 [+0.252, +0.628]
