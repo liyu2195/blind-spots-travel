@@ -11,7 +11,7 @@ sg = lambda x, d=1: ("$+$" if round(x, d) > 0 else ("$-$" if round(x, d) < 0 els
 pc = lambda x: f"{100 * x:.0f}"
 R = B["audit"]["vs_rule"]; V = B["audit"]["vs_vote"]
 L = ["\\begin{tabular}{@{}lrrrr@{}}", "\\toprule", " & wrong & right & what & \\\\", "Trained with & $\\to$ right & $\\to$ wrong & to drop & Total \\\\", "\\midrule"]
-SHORT = {"judgeQRt50": "Judge shown reference", "judgeOt50": "OLMo judge", "frzVOTE20": "Student's own vote"}
+SHORT = {"judgeQRt50": "Judge shown reference", "judgeOt50": "OLMo judge", "frzVOTE20": "Student's own vote as grader"}
 for g, lab in G:
     lab = SHORT.get(g, lab)
     if g == "frzVOTE20": L.append("\\midrule")

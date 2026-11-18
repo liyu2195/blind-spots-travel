@@ -1,9 +1,8 @@
-# Blind Spots Travel, Knowledge Stays Home
+# Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge
 
-Code, run outputs and analysis for the paper
+Liang Yue and Eric A. Vance · University of Colorado Boulder · 2026
 
-> **Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge**
-> Liang Yue and Eric A. Vance, University of Colorado Boulder, 2026.
+[Manuscript source](paper/main.tex) · [arXiv submission archive](https://github.com/liyu2195/blind-spots-travel/releases/download/v1.0/arxiv_submission.tar.gz)
 
 We train 7–8B language models with reinforcement learning (GRPO with LoRA) to answer closed-book questions or say "I don't know",
 and we change only the grader that gives the reward: an answer key, LLM judges of the student's size, a much stronger judge, graders
@@ -45,7 +44,7 @@ python v13_numbers.py        # main table, capitals refused, wrong answers per 1
 python gen_tables.py && python gen_main_table.py && python gen_app_tables.py && python gen_trans_tables.py && python gen_forced_tables.py
 python fig1_data.py && python make_figs_v13.py && python make_fig_ladder.py
 python check_v13.py          # every number of the main text against the files it comes from; ends with "FAILURES: 0"
-pdflatex paper && pdflatex paper   # paper.bbl is included
+pdflatex main && pdflatex main     # main.bbl is included
 ```
 
 Each analysis script is run from its own folder (`cd analysis/supp_v11 && python s22_transitions.py`). The scripts find the top
@@ -61,9 +60,9 @@ From a fresh copy of this repository at another location, with the archives unpa
 3. Of the 297 scripts in `analysis/` and `paper/`, 259 ran to the end, 35 need arguments, 2 call the Anthropic API and were not run, and 1 needs the responses that are not released.
    They wrote 375 files again: 298 are identical to the released file and 77 differ.
 
-The released outputs are the ones the paper quotes. Most of the 77 files differ because the script counts every run or audit label it finds, and
-runs and labels were added after the output was written; a few print their running time. `analysis/RERUN_STATUS.md` lists every script and every
-differing file with its reason.
+The comparison above records the original release. The arXiv appendix uses updated estimates, including the held-out result for 27 cells.
+Most differences arose because the rerun included runs or audit labels added after the original analysis. A few scripts also print their running time.
+See [the rerun record](analysis/RERUN_STATUS.md) for a file-by-file account.
 
 ## Reading a run name
 
@@ -97,7 +96,8 @@ and remain under the licences of those datasets (NQ-open: CC BY-SA 3.0). The cod
 @article{yue2026blindspots,
   title  = {Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge},
   author = {Yue, Liang and Vance, Eric A.},
-  year   = {2026}
+  year   = {2026},
+  url    = {https://github.com/liyu2195/blind-spots-travel}
 }
 ```
 

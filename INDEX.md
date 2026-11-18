@@ -52,7 +52,7 @@ EARLIER ANALYSES (section and table numbers in the lines below are those of an e
 - Section 7, known answers refused per 100 at matched abstention: supp_v11/r2_known_refusals_out.txt.
 - Appendix B, strict prompt: analysis/extra/final/thresholds_QS.json against thresholds_Q.json (acceptance and error rates at each cut).
 
-Added for this version (table and section numbers follow the compiled paper/paper.pdf; where a line above names a table number, go by the table's
+Added for this version (table and section numbers follow the compiled paper/main.pdf; where a line above names a table number, go by the table's
 caption, since one main-text table moved to the appendix and two appendix sections were added):
 - Section 5, "Twelve training answers decide the category", Figure 2 (lines) and Appendix E, Table "Designed graders" and paragraph "Changing the
   twelve verdicts alone": supp_v11/s9_dose_planted_out.txt and .json (script s9_dose_planted.py; it extends s3_planted_counts.py; run names

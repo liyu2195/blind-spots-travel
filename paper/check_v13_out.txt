@@ -12,7 +12,7 @@ OK   new | They pay with confident right answers, which are six times as many   
 OK   new | $-$1.0, $-$0.3 and $-$0.1 for the three graders that know the answers, | in text True | value True 
 OK   new | one that rejects two or fewer of the twelve leaves the category alone, | in text True | value True (two or fewer: up to 0.12)
 OK   new | The Gemma and OLMo judges cost 3\% and 7\% at this cut, and 91\% and 8 | in text True | value True 
-OK   new | A judge that rejects eleven right answers about capitals of former sta | in text True | value True 
+OK   new | A judge that rejects eleven of twelve right answers about former-state | in text True | value True 
 OK   new | refuse 9\% (Qwen) and 11\% (Llama) of the former-state capitals they k | in text True | value True 
 OK   new | it abstains on 12\% of new questions, where the untrained student's vo | in text True | value True 
 OK   app | abstains on 29\% and earns 71.0 points, more than the key-trained stud | in appendix True | value True 
@@ -59,10 +59,10 @@ OK   new | students of the Qwen judge at its default threshold fall below the un
 OK   v12 | 98\% of the 187 former-state capitals it knew                          | in text True | in v12.1 True
 OK   v12 | 17 asked for the capital of a former state. It answered twelve of them | in text True | in v12.1 True
 OK   v12 | a probability of 0.96 of being correct                                 | in text True | in v12.1 True
-OK   v12 | goes from 31\% to 97\%                                                 | in text True | in v12.1 True
+OK   new | goes from 5\% to 90\% at a lenient cut, and from 31\% to 97\% at a str | in text True | value True 
 OK   v12 | accepts 70--80\% of the untrained students' answers                    | in text True | in v12.1 True
 OK   v12 | human annotators agree with the audit on 93\% of items                 | in text True | in v12.1 True
-OK   v12 | 0.34 more often than other judges do. On new questions the difference  | in text True | in v12.1 True
+OK   new | 34 percentage points more often than other judges do. On new questions | in text True | value True 
 OK   v12 | it pays 83--85\% of its student's wrong answers on training questions  | in text True | in v12.1 True
 OK   v12 | spreads long answers to new questions in 8 of 8 runs                   | in text True | in v12.1 True
 OK   v12 | 270 former states and 65 present-day states                            | in text True | in v12.1 True
@@ -76,7 +76,7 @@ OK   v12 | Random rejections of the same strictness remove 4--5\%               
 OK   v12 | 25.5 known answers per 100 new questions against 26.6                  | in text True | in v12.1 True
 OK   v12 | 76--88\% are also rejected by at least two of the other three          | in text True | in v12.1 True
 OK   v12 | rejects ten or eleven of the twelve training answers                   | in text True | in v12.1 True
-OK   v12 | 2{,}569 fresh PopQA questions                                          | in text True | in v12.1 True
+OK   new | 2{,}569 fresh PopQA questions                                          | in text True | value True 
 OK   v12 | the judges' students refuse 83\%, where students trained with equally  | in text True | in v12.1 True
 OK   v12 | in 43 of 44 pairs of judges                                            | in text True | in v12.1 True
 OK   v12 | At the 35\% cut Llama ends up more extreme than each of its four judge | in text True | in v12.1 True
@@ -85,9 +85,9 @@ OK   v12 | over and above students trained with random rejections               
 OK   v12 | that abstain equally often, the judges' students refuse more           | in text True | in v12.1 True
 OK   v12 | is refused 26 points more often than the bottom fifth                  | in text True | in v12.1 True
 OK   new | In 814 RL runs                                                         | in text True | value True 
-OK   new | Setting twelve training verdicts by hand moves the refusal from 31\% t | in text True | value True (hand-set runs; carried: 31% to 97%)
-OK   new | two of four judges cost 38--42\% at a cut as lenient as the answer key | in text True | value True 
-OK   new | blocked from abstaining, the model gets 94\% of them right             | in text True | value True 
+OK   new | Setting those twelve verdicts by hand moves the refusal from 5\% to 90 | in text True | value True 
+OK   new | at a cut as lenient as the answer key, where two of four judges cost 3 | in text True | value True 
+OK   new | blocked from abstaining, the model gets 94\% right                     | in text True | value True 
 OK   new | 94\% of the capitals it refuses come back right                        | in text True | value True 
 OK   new | $^*$In two runs; the other four give Edirne                            | in text True | value True 
 OK   new | are then within half a point of the untrained student's accuracy (coll | in text True | value True [-0.15, 0.37, 0.28]

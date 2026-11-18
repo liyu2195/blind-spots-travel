@@ -1,13 +1,13 @@
 """(paper_v13) check_v13: every number of the v13 main text against its source.
-NEW numbers are recomputed here from v13_numbers.json / s18 / s20 / s21 and the exact text snippet must occur in paper.tex.
-CARRIED numbers were verified for v12.1; the snippet must occur in paper.tex and the same figures must occur in the v12.1 text.
+NEW checks compare the quoted text in main.tex with the named analysis outputs.
+CARRIED checks confirm that the quoted statement appears in main.tex; INDEX.md traces the earlier analysis.
 Usage: python3 -I -B check_v13.py"""
 import os as _os  # paths below are relative to the repository root (the folder that holds .repo_root)
 _ROOT = _os.environ.get("BLINDSPOTS_ROOT") or next(_d for _d in (_os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)) if "__file__" in globals() else _os.getcwd(), *[".."] * _k)) for _k in range(9)) if _os.path.exists(_os.path.join(_d, ".repo_root")))
 _RA, _RP, _RX, _RR, _RD, _RC, _RT = (_ROOT + _s for _s in ("/analysis", "/paper", "/analysis/extra", "/runs", "/data", "/training/code", "/training"))
 import json, re, numpy as np
 S = (_RA + "/supp_v11"); N = json.load(open("v13_numbers.json")); T = N["T"]; S18 = json.load(open(f"{S}/s18_fix_ceiling.json")); S20 = json.load(open(f"{S}/s20_fix_confirm.json")); S21 = json.load(open(f"{S}/s21_cut_and_calibration.json"))
-F1D = json.load(open("fig1_data.json")); FO = json.load(open((_RX + "/forced/f01_forced.json"))); tex = open("paper.tex").read(); bad = 0
+F1D = json.load(open("fig1_data.json")); FO = json.load(open((_RX + "/forced/f01_forced.json"))); tex = open("main.tex").read(); bad = 0
 def new(snip, ok, note=""):
     global bad
     a = snip in tex
@@ -60,7 +60,9 @@ lo = [e["RF"] for e in jc if e["kF"] <= 2]; mid = [e["RF"] for e in jc if 4 <= e
 new("one that rejects two or fewer of the twelve leaves the category alone, one that rejects four to six removes 5--65\\% of it, and one that rejects seven or more removes 28--98\\%",
     max(lo) <= 0.125 and round(100 * min(mid)) == 5 and round(100 * max(mid)) == 65 and round(100 * min(hi)) == 28 and round(100 * max(hi)) == 98 and not [e for e in jc if e["kF"] == 3], f"(two or fewer: up to {max(lo):.2f})")
 new("The Gemma and OLMo judges cost 3\\% and 7\\% at this cut, and 91\\% and 89\\% at the 35\\% cut", [round(100 * e15[("llama8", f"judge {j} {c}")]["RF"]) for j, c in (("G", "acc"), ("O", "acc"), ("G", "a35"), ("O", "a35"))] == [3, 7, 91, 89])
-new("A judge that rejects eleven right answers about capitals of former states teaches a model to refuse 98\\% of such capitals", e15[("llama8", "judge Q a35")]["kF"] == 11 and round(100 * e15[("llama8", "judge Q a35")]["RF"]) == 98)
+qwen_judge = e15[("llama8", "judge Q a35")]
+new("A judge that rejects eleven of twelve right answers about former-state capitals teaches a model to refuse 98\\% of them",
+    qwen_judge["kF"] == 11 and qwen_judge["nF"] == 12 and round(100 * qwen_judge["RF"]) == 98)
 new("refuse 9\\% (Qwen) and 11\\% (Llama) of the former-state capitals they knew, against 82\\% and 98\\%", round(100 * N["cap"]["qwen7 pqa"]["frzVOTE20"]["F"]) == 9 and round(100 * N["cap"]["llama8 pqa"]["frzVOTE20"]["F"]) == 11
     and N["cap"]["llama8 pqa"]["frzVOTE20"]["runs"] == 6 and round(100 * T["qwen7 pqa"]["judgeQa35"]["capF"]) == 82 and round(100 * T["llama8 pqa"]["judgeQa35"]["capF"]) == 98)
 A23 = S23["A"]["qwen7 tqa"]
@@ -127,10 +129,22 @@ new("students of the Qwen judge at its default threshold fall below the untraine
 carried("98\\% of the 187 former-state capitals it knew", ["98\\% of the 187 former-state capitals it knew"])
 carried("17 asked for the capital of a former state. It answered twelve of them correctly, and the judge rejected eleven", ["17 asked for the capital of a former state", "the judge rejected eleven of those right answers"])
 carried("a probability of 0.96 of being correct", ["a probability of 0.96 of being correct"])
-carried("goes from 31\\% to 97\\%", ["from 31\\% to 97\\% with Llama"])
+# The key-matched series is a separate intervention from the strict series in Figure 1.
+P4 = json.load(open(_RA + "/fix_planted/p04_build_qacc.json"))
+P5 = json.load(open(_RA + "/fix_planted/p05_score_qacc.json"))
+def m5(k, f):
+    return float(np.mean([run[f] for run in P5["runs"][k]]))
+key_matched_rates = [round(100 * m5(k, "RF")) for k in ("0", "12")]
+strict_rates = [round(100 * F1D["llama8"][f"plMk{k}"]["F"]) for k in ("0", "12")]
+new("goes from 5\\% to 90\\% at a lenient cut, and from 31\\% to 97\\% at a strict one",
+    key_matched_rates == [5, 90] and strict_rates == [31, 97])
 carried("accepts 70--80\\% of the untrained students' answers", ["accepts 70--80\\% of the untrained answers"])
 carried("human annotators agree with the audit on 93\\% of items", ["annotators agree with the audit on 93\\% of items"])
-carried("0.34 more often than other judges do. On new questions the difference is 0.03, so 9\\% of the effect carries over", ["0.34 more often than the other judges do; on new questions, 0.03 more", "Transfer is 0.09"])
+with open(_RA + "/stats/c1_content_out.txt") as content_output:
+    primary_result = content_output.read().split("== MAIN:", 1)[1].split("== per dataset", 1)[0]
+pooled = re.search(r"pooled home S ([+\-.\d]+) \[[^\]]+\]\s+new S ([+\-.\d]+) \[[^\]]+\]\s+transfer ratio ([+\-.\d]+)", primary_result)
+new("34 percentage points more often than other judges do. On new questions the difference is 3 points, so 9\\% of the effect carries over",
+    pooled is not None and [round(100 * float(x)) for x in pooled.groups()] == [34, 3, 9])
 carried("it pays 83--85\\% of its student's wrong answers on training questions and 35--36\\% on new ones", ["83--85\\% of the trained model's wrong answers on training questions and the planted 35--36\\% on new ones"])
 carried("spreads long answers to new questions in 8 of 8 runs", ["spreads long answers to new questions in 8 of 8 runs"])
 carried("270 former states and 65 present-day states", ["270 former states and 65 present-day states"])
@@ -144,7 +158,9 @@ carried("Random rejections of the same strictness remove 4--5\\%", ["random reje
 carried("25.5 known answers per 100 new questions against 26.6", ["25.5 known answers per 100 held-out questions against 26.6"])
 carried("76--88\\% are also rejected by at least two of the other three", ["76--88\\% are also rejected by at least two of the other three"])
 carried("rejects ten or eleven of the twelve training answers", ["it rejects eleven and ten of the twelve former-state training answers"])
-carried("2{,}569 fresh PopQA questions", ["2{,}569"])
+with open(_RD + "/pqx_fresh.jsonl") as fresh_questions:
+    fresh_count = sum(1 for row in fresh_questions if row.strip())
+new("2{,}569 fresh PopQA questions", fresh_count == 2569 and "2{,}569 fresh questions" in tex)
 carried("the judges' students refuse 83\\%, where students trained with equally strict random rejections refuse 42\\% and key-trained students 3\\%. For Qwen the figures are 52\\%, 27\\% and 4\\%", ["the judges' models refuse 83\\%. Equally strict random rejections remove 42\\%", "the answer key 3\\%", "52\\% against 27\\%, 23\\% and 4\\%"])
 carried("in 43 of 44 pairs of judges", ["positive in 43 of 44 judge pairs"])
 carried("At the 35\\% cut Llama ends up more extreme than each of its four judges", ["At the 35\\% cut the Llama student ends up more extreme than its teacher with every judge"])
@@ -155,9 +171,11 @@ carried("is refused 26 points more often than the bottom fifth", ["The top fifth
 # ---- v13.1: forced answers, Figure 1, abstract
 FA = FO["A"]; FB = FO["Bn"]; FL, FQ = FA["llama8"], FA["qwen7"]
 new("In 814 RL runs", nrun == 814)
-new("Setting twelve training verdicts by hand moves the refusal from 31\\% to 97\\%", round(100 * e15[("llama8", "frozen key plMk0")]["RF"]) == 31 and round(100 * e15[("llama8", "frozen key plMk12")]["RF"]) == 97 if ("llama8", "frozen key plMk0") in e15 else True, "(hand-set runs; carried: 31% to 97%)")
-new("two of four judges cost 38--42\\% at a cut as lenient as the answer key", sorted(round(100 * F1D["llama8"][f"judge{j}acc"]["F"]) for j in "QMGO") == [3, 7, 38, 42])
-new("blocked from abstaining, the model gets 94\\% of them right", round(100 * FL["judgeQa35"]["forced_right"]) == 94 and round(100 * FL["judgeQa35"]["all_right"]) == 94)
+new("Setting those twelve verdicts by hand moves the refusal from 5\\% to 90\\% at a cut as lenient as the answer key",
+    key_matched_rates == [5, 90] and len(set(P4["F12"])) == 12
+    and set(P4["K0"]).isdisjoint(P4["F12"]) and set(P4["K12"]) == set(P4["K0"]) | set(P4["F12"]))
+new("at a cut as lenient as the answer key, where two of four judges cost 38--42\\%", sorted(round(100 * F1D["llama8"][f"judge{j}acc"]["F"]) for j in "QMGO") == [3, 7, 38, 42])
+new("blocked from abstaining, the model gets 94\\% right", round(100 * FL["judgeQa35"]["forced_right"]) == 94 and round(100 * FL["judgeQa35"]["all_right"]) == 94)
 new("94\\% of the capitals it refuses come back right", round(100 * FL["judgeQa35"]["forced_right"]) == 94 and FL["judgeQa35"]["runs"] == 6)
 t1 = FL["table1"]; new("$^*$In two runs; the other four give Edirne", sum(x == "constantinople" for x in t1["Ottoman Empire"]) == 2 and sum(x.startswith("edirne") for x in t1["Ottoman Empire"]) == 4 and all(FL["table1_right"]["Ottoman Empire"])
     and all(set(t1[k]) == {v} for k, v in (("Roman Empire", "rome"), ("Yugoslavia", "belgrade"), ("Austria-Hungary", "vienna"), ("South Vietnam", "saigon"))))
@@ -194,7 +212,6 @@ five = [(float(a_), float(b_)) for c_, a_, b_ in cells_ if c_ != "qwen7 nq"]
 newapp("refuse 25.5 known answers per 100 questions, and models trained with random rejections, read at the same abstention off a line fitted to those runs in each student--dataset pair, refuse 26.6 (28.9 against 28.6 without Qwen on NQ-open",
        "judge a35 25.5, key-family at same abstention 26.6" in r2 and len(five) == 5 and round(np.mean([x[0] for x in five]), 1) == 28.9 and round(np.mean([x[1] for x in five]), 1) == 28.6)
 # the six runs with hand-set verdicts at the key-matched cut (explore_1116/fix_planted/p05_score_qacc.py)
-P5 = json.load(open((_RA + "/fix_planted/p05_score_qacc.json"))); m5 = lambda k, f: float(np.mean([r[f] for r in P5["runs"][k]]))
 new("Llama refuses 5\\% of the former-state capitals when the twelve training answers are all accepted and 90\\% when they are all rejected, while abstaining on 6--8\\% of questions",
     round(100 * m5("0", "RF")) == 5 and round(100 * m5("12", "RF")) == 90 and sorted(round(100 * m5(k, "abst")) for k in ("0", "12")) == [6, 8], f"(RF {m5('0', 'RF'):.3f} {m5('12', 'RF'):.3f}; abstention {m5('0', 'abst'):.3f} {m5('12', 'abst'):.3f})")
 newapp("(runs 0\\%, 1\\% and 13\\%); with the twelve rejected they refuse 90\\% (93\\%, 100\\% and 79\\%), and every run of the second kind is above every run of the first",

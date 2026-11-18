@@ -310,8 +310,8 @@ wrote were compared byte by byte with the files in this repository.
 
 ## Files that differ from the released file after the rerun
 
-The released outputs are the ones the paper quotes. A script that counts every run or every audit label it finds writes a different file
-when it is run again after runs or labels were added.
+This comparison was made for the original release. The final arXiv appendix incorporates updated estimates from the rerun.
+A script that counts every available run or audit label can give a different result after runs or labels are added.
 
 - `analysis/answers/a19_out.txt`: uses the audit labels; more answers were audited after this output was written
 - `analysis/answers/a19_rows.pkl`: uses the audit labels; more answers were audited after this output was written

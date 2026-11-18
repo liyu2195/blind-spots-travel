@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this repository, please cite the paper."
 title: "Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge"
+repository-code: "https://github.com/liyu2195/blind-spots-travel"
 authors:
   - family-names: Yue
     given-names: Liang
@@ -9,3 +10,14 @@ authors:
     given-names: Eric A.
     affiliation: University of Colorado Boulder
 date-released: 2026-11-18
+preferred-citation:
+  type: article
+  title: "Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge"
+  authors:
+    - family-names: Yue
+      given-names: Liang
+      affiliation: University of Colorado Boulder
+    - family-names: Vance
+      given-names: Eric A.
+      affiliation: University of Colorado Boulder
+  year: 2026
