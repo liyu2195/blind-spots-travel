@@ -1,0 +1,84 @@
+(supp_final) s8_fresh_kinds: FROZEN scorer for the fresh-question test (written before any model output on these questions exists).
+Question: does the pre-training audit by kind predict which kinds a judge's models give up on questions nobody has seen?
+Fresh questions: st/data/pqx_fresh.jsonl = the 2,569 questions of popqa_3000.jsonl that are not among our 1,500 PopQA questions (by text and id).
+Kinds = PopQA relation types (the question template).
+AUDIT (training questions only): among training questions whose untrained greedy answer is right (loose key) and sure (at least 31 of the 32
+  untrained samples right by the loose key), the share each judge rejects at the cut; mean over the four judges Q M G O.
+OUTCOME (fresh questions): among fresh questions whose untrained greedy answer is right (loose key) and sure (same rule; samples from
+  run1/base/<student>_pqx_fresh_n32_s1.jsonl), the share refused (greedy answer is "I don't know") by saved models (run1/adeval/fresh/<run>.jsonl):
+  the judge's models at the cut; models trained with the key plus random rejections (per judge run the three sim00fnXX runs nearest in abstention
+  on the standard 750 held-out questions); key-trained models; models trained with the student's own unanimous vote.
+Runs with abstention >= 0.95 on the standard held-out questions are dropped. Kinds enter with >= 5 sure right training answers and >= 10 sure
+right fresh answers.
+LINES:
+  A1: at the 35% cut, Spearman rank correlation over kinds between the audit and the refusal by the judges' models (both averaged over the four
+      judges) is >= +0.60 in each student.
+  A2: kind 'country', Llama, 35% cut: refusal by the judges' models minus refusal by the matched random-rejection models, averaged over the four
+      judges, is >= +0.25 with its 95% interval (bootstrap over fresh questions, 2000) above 0. Qwen: reported, no line.
+  A3: at the cut where the student earns most under the training reward (Llama: key-matched 'acc'; Qwen: 50% 'a50'), the same rank correlation as A1
+      is >= +0.50.
+Usage: python3 -I -B s8_fresh_kinds.py   Output: s8_fresh_kinds_out.txt, s8_fresh_kinds.json
+
+==== llama8: fresh questions 2569, sure right 318; training sure right 411; kinds 10; saved models with fresh answers 90 (without 75); random-rejection runs 17
+
+== llama8, cut acc (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
+   screenwriter    30 /  11 | audit 0.53 | 0.31  0.18  0.07  0.77 | +0.14
+   director        54 /  27 | audit 0.25 | 0.10  0.07  0.02  0.30 | +0.04
+   composer        17 /  18 | audit 0.25 | 0.05  0.09  0.04  0.25 | -0.04
+   father          39 /  11 | audit 0.23 | 0.14  0.08  0.05  0.50 | +0.05
+   country         19 /  85 | audit 0.17 | 0.09  0.08  0.03  0.25 | +0.01
+   genre           20 /  22 | audit 0.11 | 0.03  0.14  0.00  0.93 | -0.10
+   sport            9 /  36 | audit 0.08 | 0.07  0.04  0.01  0.39 | +0.03
+   capital        129 /  26 | audit 0.06 | 0.12  0.05  0.06  0.38 | +0.07
+   occupation       6 /  17 | audit 0.04 | 0.15  0.21  0.09  1.00 | -0.06
+   author          18 /  41 | audit 0.03 | 0.08  0.07  0.02  0.41 | +0.02
+   rank correlation over 10 kinds: audit vs refusal by the judges' models +0.14; audit vs excess over random rejections +0.33
+   LINE A3 (llama8): +0.14 >= +0.50 -> outside
+
+== llama8, cut a50 (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
+   screenwriter    30 /  11 | audit 0.76 | 0.80  0.49  0.07  0.77 | +0.31
+   father          39 /  11 | audit 0.40 | 0.55  0.26  0.05  0.50 | +0.29
+   composer        17 /  18 | audit 0.38 | 0.39  0.28  0.04  0.25 | +0.10
+   country         19 /  85 | audit 0.37 | 0.31  0.18  0.03  0.25 | +0.13
+   director        54 /  27 | audit 0.32 | 0.51  0.26  0.02  0.30 | +0.25
+   genre           20 /  22 | audit 0.25 | 0.30  0.59  0.00  0.93 | -0.30
+   sport            9 /  36 | audit 0.17 | 0.21  0.25  0.01  0.39 | -0.04
+   occupation       6 /  17 | audit 0.17 | 0.43  0.57  0.09  1.00 | -0.15
+   capital        129 /  26 | audit 0.11 | 0.39  0.17  0.06  0.38 | +0.22
+   author          18 /  41 | audit 0.08 | 0.33  0.24  0.02  0.41 | +0.09
+   rank correlation over 10 kinds: audit vs refusal by the judges' models +0.50; audit vs excess over random rejections +0.60
+
+== llama8, cut a35 (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
+   screenwriter    30 /  11 | audit 0.88 | 1.00  0.75  0.07  0.77 | +0.25
+   father          39 /  11 | audit 0.66 | 0.96  0.64  0.05  0.50 | +0.32
+   country         19 /  85 | audit 0.62 | 0.83  0.42  0.03  0.25 | +0.41
+   genre           20 /  22 | audit 0.61 | 0.74  0.89  0.00  0.93 | -0.15
+   composer        17 /  18 | audit 0.59 | 0.79  0.66  0.04  0.25 | +0.12
+   director        54 /  27 | audit 0.55 | 0.73  0.59  0.02  0.30 | +0.15
+   occupation       6 /  17 | audit 0.50 | 0.56  0.95  0.09  1.00 | -0.39
+   sport            9 /  36 | audit 0.31 | 0.55  0.60  0.01  0.39 | -0.04
+   author          18 /  41 | audit 0.24 | 0.55  0.58  0.02  0.41 | -0.04
+   capital        129 /  26 | audit 0.18 | 0.87  0.45  0.06  0.38 | +0.42
+   rank correlation over 10 kinds: audit vs refusal by the judges' models +0.65; audit vs excess over random rejections +0.20
+   LINE A1 (llama8): +0.65 >= +0.60 -> inside
+   country (85 sure right fresh answers): excess of the judges' models over matched random rejections +0.413 [+0.339, +0.487]; per judge: Q +0.33, M +0.31, G +0.44, O +0.58
+   LINE A2 (llama8): +0.413 >= +0.25 and interval above 0 -> inside
+
+==== qwen7: fresh questions 2569, sure right 188; training sure right 307; kinds 4; saved models with fresh answers 66 (without 106); random-rejection runs 11
+
+== qwen7, cut a50 (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
+   country         13 /  70 | audit 0.25 | 0.24  0.12  0.04  0.23 | +0.12
+   genre           27 /  24 | audit 0.24 | 0.32  0.60  0.33  0.60 | -0.27
+   sport            8 /  32 | audit 0.06 | 0.23  0.18  0.12  0.41 | +0.05
+   author          14 /  15 | audit 0.02 | 0.08  0.07  0.03  0.20 | +0.01
+   rank correlation over 4 kinds: audit vs refusal by the judges' models +0.80; audit vs excess over random rejections +0.40
+   LINE A3 (qwen7): +0.80 >= +0.50 -> inside
+
+== qwen7, cut a35 (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
+   genre           27 /  24 | audit 0.60 | 0.76  0.94  0.33  0.60 | -0.18
+   country         13 /  70 | audit 0.54 | 0.52  0.27  0.04  0.23 | +0.26
+   sport            8 /  32 | audit 0.25 | 0.52  0.47  0.12  0.41 | +0.05
+   author          14 /  15 | audit 0.07 | 0.29  0.21  0.03  0.20 | +0.08
+   rank correlation over 4 kinds: audit vs refusal by the judges' models +1.00; audit vs excess over random rejections -0.40
+   LINE A1 (qwen7): +1.00 >= +0.60 -> inside
+   country (70 sure right fresh answers): excess of the judges' models over matched random rejections +0.259 [+0.190, +0.327]; per judge: Q +0.29, M +0.15, G +0.19, O +0.40

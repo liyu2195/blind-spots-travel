@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Appendix tables of paper v11, generated from the analysis outputs (no number is typed by hand).
+"""Generate appendix tables from the analysis outputs and released run inventory.
 Usage: python3 -I gen_tables.py   -> tabs/*.tex  (and tabs/check.txt, a plain-text copy for checking)
 Sources (read only):
-  explore_1116/fam_fix/e9b_forced_out.txt      judges at each cut (PopQA)
-  bundle/st/res/run1/rl/<run>/eval_rl_ck120.jsonl   run inventory (finished runs)
-  explore_1116/fix_ladder/out/ladder_<cut>_final_1117b.json   judge contrast, costs
-  explore_1116/fam_fix/e15_count_dose.json     rejected training examples and refusals on the probe
-  explore_1116/fam_fix/e16_caricature.json     model against its own judge on the probe
-  explore_1116/fam_fix/e17_mirror_out.txt      shared rejections
-  explore_1116/fix_sc/f3_table.txt             self-consistency
+  analysis/fam_fix/e9b_forced_out.txt      judges at each cut (PopQA)
+  runs/run1/rl/<run>/eval_rl_ck120.jsonl   run inventory (finished runs)
+  analysis/fix_ladder/out/ladder_<cut>_final_*.json   judge contrast, costs
+  analysis/fam_fix/e15_count_dose.json     rejected training examples and refusals on the probe
+  analysis/fam_fix/e16_caricature.json     model against its own judge on the probe
+  analysis/fam_fix/e17_mirror_out.txt      shared rejections
+  analysis/fix_sc/f3_table.txt             self-consistency
 """
 import os as _os  # paths below are relative to the repository root (the folder that holds .repo_root)
 _ROOT = _os.environ.get("BLINDSPOTS_ROOT") or next(_d for _d in (_os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)) if "__file__" in globals() else _os.getcwd(), *[".."] * _k)) for _k in range(9)) if _os.path.exists(_os.path.join(_d, ".repo_root")))
@@ -295,8 +295,8 @@ for line in open(f"{W}/fix_sc/f3_table.txt"):
     ms = [x.strip() for x in p[5].split(";")]
     fx = lambda s: s.replace("+", "$+$").replace("-", "$-$").replace(">", "$>$")
     b.append(" & ".join([nm, f"{runs[0]}; {runs[1]}", f"{cov[0]}; {cov[1]}", fx(sc1[0]), fx(sc1[1]), fx(sc32[0]), fx(sc32[1]), fx(ms[0]), fx(ms[1])]) + " \\\\")
-# reference-guided judge (default threshold), PopQA + NQ-open: supp_v11/s4_sc_reference_out.txt
-t4 = open(f"{W}/supp_v11/s4_sc_reference_out.txt").read()
+# reference-guided judge (default threshold), PopQA + NQ-open: supp_final/s4_sc_reference_out.txt
+t4 = open(f"{W}/supp_final/s4_sc_reference_out.txt").read()
 qr = {}
 for st in ("qwen7", "llama8"):
     mm = re.search(rf"{st}\s+judgeQRt50\s+\[PopQA \+ NQ-open\s*\] runs\s+(\d+)\s+answered ([\d.]+)\s+RL - SC_32 ([+-][\d.]+) \[([+-][\d.]+), ([+-][\d.]+)\]", t4)
@@ -306,10 +306,10 @@ b.append(" & ".join(["Judge shown the reference, default", f"{qr['qwen7'][0]}; {
                      fx(f"{qr['qwen7'][2]} [{qr['qwen7'][3]}, {qr['qwen7'][4]}]"), fx(f"{qr['llama8'][2]} [{qr['llama8'][3]}, {qr['llama8'][4]}]"), "--", "--"]) + " \\\\")
 write("sc.tex", "\n".join(b))
 
-# ---------------------------------------------------------------- 8. designed graders on the capitals (supp_v11/s3_planted_counts.json, s9 when present)
-PL = json.load(open(f"{W}/supp_v11/s3_planted_counts.json"))
-if os.path.exists(f"{W}/supp_v11/s9_dose_planted.json"):
-    PL = json.load(open(f"{W}/supp_v11/s9_dose_planted.json"))
+# ---------------------------------------------------------------- 8. designed graders on the capitals (supp_final/s3_planted_counts.json, s9 when present)
+PL = json.load(open(f"{W}/supp_final/s3_planted_counts.json"))
+if os.path.exists(f"{W}/supp_final/s9_dose_planted.json"):
+    PL = json.load(open(f"{W}/supp_final/s9_dose_planted.json"))
 px = {(r["st"], r["arm"]): r for r in PL}
 b = []
 ARMS = [("sharpM", "Type-wide copy of Mistral"), ("sharpO", "Type-wide copy of OLMo"), ("scrM", "Scrambled copy of Mistral"), ("realO", "Copy of OLMo"), ("realM", "Copy of Mistral")]
@@ -323,8 +323,8 @@ for arm, lab in ARMS:
     b.append(" & ".join(cells) + " \\\\")
 write("planted.tex", "\n".join(b))
 
-# ---------------------------------------------------------------- 9. return under the training reward (supp_v11/s5_return_by_cut.json), PopQA
-RT = json.load(open(f"{W}/supp_v11/s5_return_by_cut.json"))
+# ---------------------------------------------------------------- 9. return under the training reward (supp_final/s5_return_by_cut.json), PopQA
+RT = json.load(open(f"{W}/supp_final/s5_return_by_cut.json"))
 rx = {(r["st"], r["g"]): r for r in RT if r["ds"] == "pq"}
 b = []
 def rrow(lab1, lab2, g):
@@ -345,8 +345,8 @@ b.append(rrow("\\multicolumn{2}{@{}l}{Judge shown the reference, default}", "", 
 b.append(rrow("\\multicolumn{2}{@{}l}{Sonnet as judge}", "", "apiS55").replace("} &  & ", "} & ", 1))
 write("returns.tex", "\n".join(b))
 
-# ---------------------------------------------------------------- 10. kinds on fresh questions (supp_v11/s8_fresh_kinds.json), 35% cut, judges averaged
-K8 = json.load(open(f"{W}/supp_v11/s8_fresh_kinds.json"))
+# ---------------------------------------------------------------- 10. kinds on fresh questions (supp_final/s8_fresh_kinds.json), 35% cut, judges averaged
+K8 = json.load(open(f"{W}/supp_final/s8_fresh_kinds.json"))
 agg = collections.defaultdict(list)
 for r in K8:
     if r["cut"] == "a35": agg[(r["st"], r["kind"])].append(r)

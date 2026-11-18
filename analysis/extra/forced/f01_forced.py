@@ -18,7 +18,7 @@ _ROOT = _os.environ.get("BLINDSPOTS_ROOT") or next(_d for _d in (_os.path.abspat
 _RA, _RP, _RX, _RR, _RD, _RC, _RT = (_ROOT + _s for _s in ("/analysis", "/paper", "/analysis/extra", "/runs", "/data", "/training/code", "/training"))
 import sys, os, re, json, glob, pickle, numpy as np
 from collections import defaultdict
-sys.path.insert(0, (_RA + "/stats")); sys.path.insert(0, (_RA + "/supp_v11")); sys.path.insert(0, _RC)
+sys.path.insert(0, (_RA + "/stats")); sys.path.insert(0, (_RA + "/supp_final")); sys.path.insert(0, _RC)
 from s00_common import *
 import aud as audlib
 import st_gen_forced as SF

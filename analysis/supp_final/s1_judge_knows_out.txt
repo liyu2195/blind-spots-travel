@@ -1,0 +1,32 @@
+(supp_final) s1_judge_knows: does a judge reject right answers because it cannot answer the question itself?
+Data: TriviaQA. The Qwen3.5-9B judge's own closed-book greedy answers to the 1,500 questions (st/res/selfans/self_q359_tqa_1500.jsonl), scored by
+the loose key or the Sonnet audit as every answer in the paper. Units: questions whose untrained STUDENT greedy answer is valid, not IDK and right
+(loose key or audit >= 4), i.e. the right answers the judge grades. For each student, cut (default P(Yes) > 0.5, 50%, 35%) and question set
+(training / all 1,500): among right answers the Qwen judge REJECTS, the share of questions the judge itself answers right; the same among right
+answers it ACCEPTS; and the judge's closed-book accuracy on all questions. Also the same with the older file st/data/qwen_knows_h1.jsonl
+(training questions only), if its indices match.
+Usage: python3 -I -B s1_judge_knows.py   Output: s1_judge_knows_out.txt
+
+== qwen7: right untrained answers 913 of 1500 (training 457); judge's own answers found for 1500 questions; judge closed-book accuracy by the key 0.652, by key or audit 0.673 (376 of its 521 key-wrong answers have no audit verdict and count as wrong)
+   default  (P(Yes) > 0.500) training : judge rejects 27 right answers; it answers the question right itself on 0.630 of them (by the key alone 0.630) | on 0.916 of the 430 it accepts
+   default  (P(Yes) > 0.500) all 1,500: judge rejects 57 right answers; it answers the question right itself on 0.684 of them (by the key alone 0.684) | on 0.911 of the 856 it accepts
+   50% cut  (P(Yes) > 0.915) training : judge rejects 111 right answers; it answers the question right itself on 0.748 of them (by the key alone 0.703) | on 0.948 of the 346 it accepts
+   50% cut  (P(Yes) > 0.915) all 1,500: judge rejects 216 right answers; it answers the question right itself on 0.741 of them (by the key alone 0.704) | on 0.945 of the 697 it accepts
+   35% cut  (P(Yes) > 0.982) training : judge rejects 204 right answers; it answers the question right itself on 0.809 of them (by the key alone 0.755) | on 0.972 of the 253 it accepts
+   35% cut  (P(Yes) > 0.982) all 1,500: judge rejects 409 right answers; it answers the question right itself on 0.814 of them (by the key alone 0.778) | on 0.964 of the 504 it accepts
+   older file qwen_knows_h1.jsonl: 750 questions, of which training 750; share known 0.651; agreement with the key-scored own answers 0.933
+   default  with the older file: rejects 27; knows 0.630
+   50% cut  with the older file: rejects 111; knows 0.703
+   35% cut  with the older file: rejects 204; knows 0.784
+
+== llama8: right untrained answers 1181 of 1500 (training 597); judge's own answers found for 1500 questions; judge closed-book accuracy by the key 0.652, by key or audit 0.673 (376 of its 521 key-wrong answers have no audit verdict and count as wrong)
+   default  (P(Yes) > 0.500) training : judge rejects 49 right answers; it answers the question right itself on 0.510 of them (by the key alone 0.490) | on 0.818 of the 548 it accepts
+   default  (P(Yes) > 0.500) all 1,500: judge rejects 96 right answers; it answers the question right itself on 0.531 of them (by the key alone 0.500) | on 0.807 of the 1085 it accepts
+   50% cut  (P(Yes) > 0.967) training : judge rejects 225 right answers; it answers the question right itself on 0.596 of them (by the key alone 0.556) | on 0.911 of the 372 it accepts
+   50% cut  (P(Yes) > 0.967) all 1,500: judge rejects 445 right answers; it answers the question right itself on 0.591 of them (by the key alone 0.562) | on 0.902 of the 736 it accepts
+   35% cut  (P(Yes) > 0.989) training : judge rejects 322 right answers; it answers the question right itself on 0.668 of them (by the key alone 0.630) | on 0.938 of the 275 it accepts
+   35% cut  (P(Yes) > 0.989) all 1,500: judge rejects 628 right answers; it answers the question right itself on 0.661 of them (by the key alone 0.631) | on 0.926 of the 553 it accepts
+   older file qwen_knows_h1.jsonl: 750 questions, of which training 750; share known 0.651; agreement with the key-scored own answers 0.933
+   default  with the older file: rejects 49; knows 0.429
+   50% cut  with the older file: rejects 225; knows 0.547
+   35% cut  with the older file: rejects 322; knows 0.634

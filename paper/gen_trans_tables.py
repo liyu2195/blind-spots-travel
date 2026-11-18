@@ -1,11 +1,11 @@
-"""Tables on item-level transitions (v13, Nov 18) from supp_v11/s22_transitions.json and s22b_transition_checks.json.
+"""Generate the item-level transition tables from analysis/supp_final/s22_transitions.json and s22b_transition_checks.json.
 tabs/trans.tex (main text), tabs/trans_shares.tex and tabs/trans_dec.tex (appendix); prints the numbers the text quotes.
 Usage: python3 -I -B gen_trans_tables.py"""
 import os as _os  # paths below are relative to the repository root (the folder that holds .repo_root)
 _ROOT = _os.environ.get("BLINDSPOTS_ROOT") or next(_d for _d in (_os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)) if "__file__" in globals() else _os.getcwd(), *[".."] * _k)) for _k in range(9)) if _os.path.exists(_os.path.join(_d, ".repo_root")))
 _RA, _RP, _RX, _RR, _RD, _RC, _RT = (_ROOT + _s for _s in ("/analysis", "/paper", "/analysis/extra", "/runs", "/data", "/training/code", "/training"))
 import json
-S = (_RA + "/supp_v11"); A = json.load(open(f"{S}/s22_transitions.json")); B = json.load(open(f"{S}/s22b_transition_checks.json"))
+S = (_RA + "/supp_final"); A = json.load(open(f"{S}/s22_transitions.json")); B = json.load(open(f"{S}/s22b_transition_checks.json"))
 G = [("sim00fn00", "Answer key"), ("apiS55", "Sonnet as judge"), ("judgeQRt50", "Judge shown the reference"), ("judgeOt50", "OLMo judge (form)"), ("frzVOTE20", "Student's own vote")]
 sg = lambda x, d=1: ("$+$" if round(x, d) > 0 else ("$-$" if round(x, d) < 0 else "")) + f"{abs(x):.{d}f}"
 pc = lambda x: f"{100 * x:.0f}"

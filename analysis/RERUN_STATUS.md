@@ -226,26 +226,26 @@ wrote were compared byte by byte with the files in this repository.
 | `analysis/stats/s02_judgefinal.py` | needs arguments | 0 |
 | `analysis/stats/s03_probes.py` | needs arguments | 1 |
 | `analysis/stats/s99_summary.py` | ok | 1 |
-| `analysis/supp_v11/aud.py` | ok | 0 |
-| `analysis/supp_v11/r2_long80.py` | ok | 2 |
-| `analysis/supp_v11/s14_sf_step0.py` | needs data that is not released | 1 |
-| `analysis/supp_v11/s16_fix_returns.py` | ok | 3 |
-| `analysis/supp_v11/s18_fix_ceiling.py` | ok | 54 |
-| `analysis/supp_v11/s18b_checks.py` | ok | 7 |
-| `analysis/supp_v11/s1_judge_knows.py` | ok | 1 |
-| `analysis/supp_v11/s20_fix_confirm.py` | ok | 12 |
-| `analysis/supp_v11/s20b_check_raw.py` | ok | 4 |
-| `analysis/supp_v11/s21_cut_and_calibration.py` | ok | 6 |
-| `analysis/supp_v11/s22_transitions.py` | ok | 4 |
-| `analysis/supp_v11/s22b_transition_checks.py` | ok | 67 |
-| `analysis/supp_v11/s23_small_checks.py` | ok | 3 |
-| `analysis/supp_v11/s3_planted_counts.py` | ok | 10 |
-| `analysis/supp_v11/s4_sc_reference.py` | ok | 7 |
-| `analysis/supp_v11/s5_return_by_cut.py` | ok | 2 |
-| `analysis/supp_v11/s6_jury_offline.py` | ok | 1 |
-| `analysis/supp_v11/s7_kinds_heldout.py` | ok | 1 |
-| `analysis/supp_v11/s8_fresh_kinds.py` | ok | 14 |
-| `analysis/supp_v11/s9_dose_planted.py` | ok | 10 |
+| `analysis/supp_final/aud.py` | ok | 0 |
+| `analysis/supp_final/r2_long80.py` | ok | 2 |
+| `analysis/supp_final/s14_sf_step0.py` | needs data that is not released | 1 |
+| `analysis/supp_final/s16_fix_returns.py` | ok | 3 |
+| `analysis/supp_final/s18_fix_ceiling.py` | ok | 54 |
+| `analysis/supp_final/s18b_checks.py` | ok | 7 |
+| `analysis/supp_final/s1_judge_knows.py` | ok | 1 |
+| `analysis/supp_final/s20_fix_confirm.py` | ok | 12 |
+| `analysis/supp_final/s20b_check_raw.py` | ok | 4 |
+| `analysis/supp_final/s21_cut_and_calibration.py` | ok | 6 |
+| `analysis/supp_final/s22_transitions.py` | ok | 4 |
+| `analysis/supp_final/s22b_transition_checks.py` | ok | 67 |
+| `analysis/supp_final/s23_small_checks.py` | ok | 3 |
+| `analysis/supp_final/s3_planted_counts.py` | ok | 10 |
+| `analysis/supp_final/s4_sc_reference.py` | ok | 7 |
+| `analysis/supp_final/s5_return_by_cut.py` | ok | 2 |
+| `analysis/supp_final/s6_jury_offline.py` | ok | 1 |
+| `analysis/supp_final/s7_kinds_heldout.py` | ok | 1 |
+| `analysis/supp_final/s8_fresh_kinds.py` | ok | 14 |
+| `analysis/supp_final/s9_dose_planted.py` | ok | 10 |
 | `analysis/verify_grpo/v00_cfg.py` | ok | 2 |
 | `analysis/verify_grpo/v01_base.py` | needs arguments | 0 |
 | `analysis/verify_grpo/v02_alpha.py` | needs arguments | 0 |
@@ -297,7 +297,7 @@ wrote were compared byte by byte with the files in this repository.
 | `analysis/verify_where/v6_forecast.py` | ok | 51 |
 | `analysis/verify_where/v7_visibility.py` | ok | 73 |
 | `analysis/verify_where/v7b_fit.py` | ok | 1 |
-| `paper/check_v13.py` | ok | 1 |
+| `paper/check_final.py` | ok | 1 |
 | `paper/fig1_data.py` | ok | 2 |
 | `paper/gen_app_tables.py` | ok | 0 |
 | `paper/gen_forced_tables.py` | ok | 0 |
@@ -305,8 +305,8 @@ wrote were compared byte by byte with the files in this repository.
 | `paper/gen_tables.py` | ok | 0 |
 | `paper/gen_trans_tables.py` | ok | 0 |
 | `paper/make_fig_ladder.py` | ok | 1 |
-| `paper/make_figs_v13.py` | ok | 1 |
-| `paper/v13_numbers.py` | ok | 5 |
+| `paper/make_figs_final.py` | ok | 1 |
+| `paper/final_numbers.py` | ok | 5 |
 
 ## Files that differ from the released file after the rerun
 
@@ -378,8 +378,8 @@ A script that counts every available run or audit label can give a different res
 - `analysis/stats/c1_content_out.txt`: pools every run of a kind it finds; runs were added after this output was written
 - `analysis/stats/c1b_neardup_out.txt`: pools every run of a kind it finds; runs were added after this output was written and the estimates move (all datasets, with near-duplicates, pooled: +0.058 [+0.015, +0.099] against +0.025 [-0.032, +0.082])
 - `analysis/stats/c5_crossover_out.txt`: pools every judge run at the default threshold it finds; with the runs added later it has 27 cells instead of 14 and gives -0.007 [-0.041, +0.024] where the released output has +0.021 [-0.011, +0.059]
-- `analysis/supp_v11/s16_fix_returns_out.txt`: counts every run or saved model it finds; runs were added after this output was written
-- `analysis/supp_v11/s8_fresh_kinds_out.txt`: counts every run or saved model it finds; runs were added after this output was written
+- `analysis/supp_final/s16_fix_returns_out.txt`: counts every run or saved model it finds; runs were added after this output was written
+- `analysis/supp_final/s8_fresh_kinds_out.txt`: counts every run or saved model it finds; runs were added after this output was written
 - `analysis/verify_grpo/cache/cfg_v.json`: table of run settings rebuilt from the queue files present now
 - `analysis/verify_map/v04_dose_out.txt`: prints its running time
 - `analysis/verify_map/v05_crossover_out.txt`: prints its running time

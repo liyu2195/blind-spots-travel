@@ -1,0 +1,271 @@
+(supp_final) s18_fix_ceiling: EXPLORATORY (Nov 17, existing data, no training). How far can a fix go, and how sure is the one we have?
+Reward 1 (right) / 0 (wrong) / 0.5 (I don't know); truth = loose key or audit level >= 4 (pooled audit, aud.py); held-out questions; FK20, credit 0.5;
+runs that answer IDK on >= 95% of held-out questions dropped. Six cells = two students x three datasets.
+
+A. INFORMATION CEILINGS. Rule reward on held-out questions of a student that answers exactly when a calibrated estimate of P(right) for its untrained
+   greedy answer is >= 0.5 (calibrated on the 750 training questions with audited truth; a rule is an upper bound for a model trained to follow it):
+     vote k=16   : no labels at all - answer iff at least half of the student's own 32 samples agree with the greedy answer
+     vote k*     : the cut calibrated on training labels (isotonic); 'best k' = best cut in hindsight on held-out questions (not available in practice)
+     hidden      : linear probe of the untrained student's last-prompt-token hidden state (ONE forward pass; layers 16 / 24 / both, PCA 256,
+                   L2 logistic regression, layer set and C by 5-fold CV on training questions, Platt-scaled on out-of-fold scores)
+     vote+hidden : logistic regression on the vote share and the probe score = what the student itself holds about its answer
+     judge, vote+judge, all three : with the Qwen3.5-9B judge's P(Yes) for the greedy answer (needs the judge at answer time)
+     perfect     : answer exactly the right ones
+   AUROC for 'the greedy answer is right' on held-out questions is printed for vote, hidden and judge.
+B. WHAT TRAINED MODELS REACH. Mean held-out reward of every arm, grouped by what the grader needs:
+     class 0 no labels, no judge (own vote) | class 1 a same-size judge, no labels | class 2 labels or a stronger judge (answer key, reference shown
+     to the judge, Sonnet, Sonnet veto). 'headroom' = (reward - untrained) / (perfect - untrained).
+C. SELECTION AGAINST THE OWN VOTE. For each run: its reward minus the reward of the rule 'abstain on the same share of held-out questions, taking
+   the ones with the fewest agreeing samples first' applied to the UNTRAINED student (ties shared). Positive = training with this grader chose what
+   to answer better than the student's own vote does; negative = worse. Not defined when the run abstains less than the untrained student.
+D. THE OWN VOTE AGAINST THE ANSWER KEY AND THE JUDGE. Difference in mean held-out reward, 95% interval with questions AND runs resampled
+   (4,000 draws; runs resampled within each arm, so with 2 runs per arm the run part is crude).
+E. TRACKING. Own-vote runs: trained reward minus the rule reward at their k, and trained abstention minus the rule's. Prediction for k = 16 and k*
+   in every cell = rule reward + mean gap of the OTHER cells, +- 1.96 sd of all gaps.
+F. THE CATEGORY (PopQA capitals probe): share of former-state / present-day capitals the untrained student knows that the trained model refuses.
+G. FRESH PopQA questions (key truth only; questions spread over all popularity bins): reward of the arms that were evaluated there.
+H. THREE TESTS on PopQA, per grader: held-out reward minus the answer key's, fresh-question reward minus the answer key's (95% intervals as in D),
+   and the share of known former-state capitals refused.
+I. SUMMARY of C over all cells, and the share of key-wrong trained answers that have no audit verdict (these count as wrong).
+Usage: python3 -I -B s18_fix_ceiling.py   Output: s18_fix_ceiling_out.txt, s18_fix_ceiling.json
+
+==================== qwen7 pqa: held-out 750; untrained reward 0.653; perfect grader followed exactly 0.792 (headroom 0.139)
+  A. AUROC for 'greedy answer right' on held-out answers: vote 0.904, hidden state 0.897 (layer both, C 0.001, CV 0.905), judge 0.905; cuts within 0.005 of the best k: 15-19
+     vote k=16 (no labels)            rule reward 0.733  headroom  57%  abstains 0.35  wrong answers paid 0.34
+     vote k*=13                       rule reward 0.723  headroom  50%  abstains 0.31  wrong answers paid 0.45
+     vote best k=18 (hindsight)       rule reward 0.735  headroom  59%  abstains 0.36  wrong answers paid 0.30
+     hidden state (one pass)          rule reward 0.716  headroom  45%  abstains 0.40  wrong answers paid 0.30
+     vote + hidden                    rule reward 0.741  headroom  63%  abstains 0.38  wrong answers paid 0.25
+     judge (calibrated)               rule reward 0.715  headroom  44%  abstains 0.40  wrong answers paid 0.31
+     vote + judge                     rule reward 0.743  headroom  65%  abstains 0.38  wrong answers paid 0.24
+     vote + hidden + judge            rule reward 0.753  headroom  72%  abstains 0.39  wrong answers paid 0.19
+  B. trained models, best arms per class (reward, runs, abstention, headroom):
+     class 0 (no labels, no judge): frzVOTE21 0.711 (2, 0.32, 42%); frzVOTE32 0.692 (2, 0.55, 28%)
+     class 1 (same-size judge, no labels): judgeOa50 0.724 (2, 0.44, 51%); judgeMa50 0.721 (2, 0.43, 49%); judgeOt50 0.719 (2, 0.22, 48%); frzOR24 0.718 (1, 0.34, 47%); frzPEER1 0.713 (2, 0.39, 43%); judgeGa50 0.712 (2, 0.48, 42%)
+     class 2 (labels or a stronger judge): apiS55 0.728 (3, 0.38, 54%); judgeQRt50 0.726 (2, 0.41, 52%); frzS55k12 0.721 (1, 0.46, 49%); frzS55k20 0.721 (1, 0.42, 49%); sim00fn00 0.714 (6, 0.38, 44%); judgeQRa35 0.632 (2, 0.66, -16%)
+  C. reward minus the own-vote rule at the same abstention (runs; range): sim00fn00 -0.012 (6; -0.030 to +0.004); frzVOTE21 -0.016 (2; -0.016 to -0.016); frzVOTE32 -0.006 (2; -0.008 to -0.003); judgeQa50 -0.019 (5; -0.043 to -0.008); judgeQa35 +0.004 (6; -0.016 to +0.015); judgeMa50 -0.004 (2; -0.008 to +0.001); judgeMa35 +0.009 (3; +0.006 to +0.011); judgeQRt50 -0.002 (2; -0.008 to +0.003); apiS55 -0.001 (3; -0.011 to +0.006)
+     of 49 arms with >= 2 such runs: highest judgeOt50 +0.029, popL40fn20 +0.015, plMk8 +0.010, fnH80 +0.009; lowest typeA40fn20 -0.026, typeB60fn20 -0.026, blind40 -0.084; arms above +0.010: 2
+     key-wrong trained answers without an audit verdict (counted wrong): 703 of 20869 (3.4%)
+  D. own vote against other graders (difference in reward, 95% interval; vote arm nearest the calibrated cut: frzVOTE21):
+     frzVOTE21 (2 runs, abstains 0.32) minus: sim00fn00 -0.003 [-0.018, +0.012]; judgeQt50 +0.056 [+0.033, +0.078]; judgeQa50 +0.007 [-0.010, +0.023]; judgeQa35 +0.042 [+0.020, +0.063]; apiS55 -0.017 [-0.033, -0.001]; judgeQRt50 -0.015 [-0.036, +0.007]
+     frzVOTE32 (2 runs, abstains 0.55) minus: sim00fn00 -0.022 [-0.040, -0.003]; judgeQt50 +0.037 [+0.010, +0.066]; judgeQa50 -0.012 [-0.031, +0.008]; judgeQa35 +0.023 [+0.006, +0.041]; apiS55 -0.035 [-0.054, -0.017]; judgeQRt50 -0.033 [-0.057, -0.011]
+  F. capitals probe: known former-state capitals 149, known present-day capitals 63. Refused by trained models (arm: runs, held-out abstention | former-state, runs | present-day):
+     sim00fn00  : 6, 0.38 | 0.00 (0.00, 0.00, 0.03, 0.00, 0.00, 0.00) | 0.00
+     frzVOTE21  : 1, 0.31 | 0.13 (0.13) | 0.00
+     frzVOTE32  : 2, 0.55 | 0.24 (0.11, 0.37) | 0.00
+     judgeQt50  : 3, 0.07 | 0.00 (0.00, 0.00, 0.00) | 0.00
+     judgeQa50  : 5, 0.42 | 0.15 (0.20, 0.20, 0.02, 0.17, 0.14) | 0.00
+     judgeQa35  : 6, 0.63 | 0.82 (0.89, 0.82, 0.89, 0.91, 0.70, 0.72) | 0.04
+     judgeMa50  : 2, 0.43 | 0.29 (0.56, 0.02) | 0.01
+     judgeMa35  : 3, 0.71 | 0.64 (0.69, 0.59, 0.64) | 0.05
+     frzQ35     : 4, 0.64 | 0.82 (0.71, 0.83, 0.82, 0.93) | 0.05
+     frzMAJ35   : 4, 0.66 | 0.85 (0.88, 0.71, 0.89, 0.92) | 0.14
+     judgeQRt50 : 2, 0.41 | 0.00 (0.00, 0.01) | 0.00
+     judgeQRa35 : 2, 0.66 | 0.24 (0.01, 0.47) | 0.01
+     apiS55     : 3, 0.38 | 0.00 (0.00, 0.00, 0.00) | 0.00
+     random-rejection runs nearest in abstention to frzVOTE21 (0.31): abstention 0.47, former-state 0.00, present-day 0.00
+     random-rejection runs nearest in abstention to frzVOTE32 (0.55): abstention 0.56, former-state 0.11, present-day 0.01
+  G. fresh questions (2569, key truth): untrained 0.401; sim00fn00 0.500 (6); frzVOTE21 0.481 (1); frzVOTE32 0.508 (2); judgeQt50 0.343 (3); judgeQa50 0.493 (5); judgeQa35 0.509 (6); judgeMa50 0.498 (2); judgeMa35 0.510 (3); judgeQRt50 0.505 (2); apiS55 0.490 (3)
+  H. three tests (arm: held-out reward minus key | fresh reward minus key | former-state capitals refused, present-day refused):
+     frzVOTE21  : -0.003 [-0.018, +0.012] (2) | -0.019 [-0.029, -0.009] (1) | 0.13, 0.00 (1)
+     frzVOTE32  : -0.022 [-0.040, -0.004] (2) | +0.007 [-0.002, +0.018] (2) | 0.24, 0.00 (2)
+     judgeQt50  : -0.059 [-0.082, -0.035] (3) | -0.157 [-0.175, -0.138] (3) | 0.00, 0.00 (3)
+     judgeQa50  : -0.009 [-0.026, +0.006] (5) | -0.007 [-0.022, +0.007] (5) | 0.15, 0.00 (5)
+     judgeQa35  : -0.045 [-0.064, -0.025] (6) | +0.009 [-0.002, +0.020] (6) | 0.82, 0.04 (6)
+     judgeMt50  : -0.067 [-0.094, -0.042] (2) | -0.214 [-0.258, -0.170] (2) | 0.00, 0.00 (2)
+     judgeMa50  : +0.007 [-0.015, +0.027] (2) | -0.002 [-0.013, +0.010] (2) | 0.29, 0.01 (2)
+     judgeMa35  : -0.073 [-0.092, -0.054] (3) | +0.010 [-0.001, +0.022] (3) | 0.64, 0.05 (3)
+     judgeQRt50 : +0.012 [-0.009, +0.033] (2) | +0.004 [-0.010, +0.018] (2) | 0.00, 0.00 (2)
+     apiS55     : +0.014 [-0.001, +0.029] (3) | -0.010 [-0.033, +0.012] (3) | 0.00, 0.00 (3)
+     frzVOTE21 minus answer key on fresh questions: -0.019 [-0.030, -0.008]
+
+==================== qwen7 tqa: held-out 718; untrained reward 0.633; perfect grader followed exactly 0.806 (headroom 0.173)
+  A. AUROC for 'greedy answer right' on held-out answers: vote 0.845, hidden state 0.828 (layer 24, C 0.001, CV 0.827), judge 0.910; cuts within 0.005 of the best k: 19-28
+     vote k=16 (no labels)            rule reward 0.698  headroom  38%  abstains 0.23  wrong answers paid 0.54
+     vote k*=29                       rule reward 0.705  headroom  42%  abstains 0.43  wrong answers paid 0.23
+     vote best k=22 (hindsight)       rule reward 0.713  headroom  46%  abstains 0.32  wrong answers paid 0.37
+     hidden state (one pass)          rule reward 0.696  headroom  37%  abstains 0.34  wrong answers paid 0.39
+     vote + hidden                    rule reward 0.724  headroom  52%  abstains 0.35  wrong answers paid 0.29
+     judge (calibrated)               rule reward 0.724  headroom  53%  abstains 0.40  wrong answers paid 0.23
+     vote + judge                     rule reward 0.744  headroom  64%  abstains 0.39  wrong answers paid 0.18
+     vote + hidden + judge            rule reward 0.746  headroom  65%  abstains 0.39  wrong answers paid 0.17
+  B. trained models, best arms per class (reward, runs, abstention, headroom):
+     class 0 (no labels, no judge): frzVOTE27 0.697 (2, 0.35, 37%); frzVOTE32 0.683 (2, 0.51, 29%)
+     class 1 (same-size judge, no labels): judgeQa50 0.701 (6, 0.38, 40%); frzQ50k20 0.695 (2, 0.30, 36%); frzPEER1 0.690 (2, 0.23, 33%); frzOR29 0.684 (1, 0.48, 29%); judgeOt50 0.682 (1, 0.19, 28%); judgeMa35 0.675 (2, 0.55, 24%)
+     class 2 (labels or a stronger judge): sim00fn00 0.693 (6, 0.26, 35%); apiS55 0.680 (3, 0.17, 27%)
+  C. reward minus the own-vote rule at the same abstention (runs; range): sim00fn00 -0.008 (6; -0.014 to +0.000); frzVOTE27 -0.014 (2; -0.015 to -0.012); frzVOTE32 -0.008 (2; -0.009 to -0.007); judgeQa50 -0.003 (6; -0.009 to +0.011); judgeQa35 +0.001 (6; -0.012 to +0.014); judgeMa35 -0.000 (2; -0.004 to +0.004); apiS55 -0.004 (3; -0.007 to -0.003)
+     of 16 arms with >= 2 such runs: highest judgeQa35 +0.001, judgeMa35 -0.000, sim20fn00 -0.001, sim00fn40 -0.001; lowest blind40 -0.012, frzVOTE27 -0.014, frzQ50k20 -0.015; arms above +0.010: 0
+     key-wrong trained answers without an audit verdict (counted wrong): 107 of 10267 (1.0%)
+  D. own vote against other graders (difference in reward, 95% interval; vote arm nearest the calibrated cut: frzVOTE27):
+     frzVOTE27 (2 runs, abstains 0.35) minus: sim00fn00 +0.004 [-0.012, +0.021]; judgeQt50 +0.068 [+0.044, +0.089]; judgeQa50 -0.004 [-0.018, +0.009]; judgeQa35 +0.042 [+0.019, +0.066]; apiS55 +0.017 [-0.005, +0.039]
+     frzVOTE32 (2 runs, abstains 0.51) minus: sim00fn00 -0.009 [-0.028, +0.011]; judgeQt50 +0.054 [+0.028, +0.079]; judgeQa50 -0.018 [-0.034, -0.003]; judgeQa35 +0.028 [+0.009, +0.049]; apiS55 +0.003 [-0.021, +0.029]
+
+==================== qwen7 nqo: held-out 750; untrained reward 0.507; perfect grader followed exactly 0.698 (headroom 0.191)
+  A. AUROC for 'greedy answer right' on held-out answers: vote 0.795, hidden state 0.837 (layer 24, C 0.001, CV 0.758), judge 0.852; cuts within 0.005 of the best k: 16-25
+     vote k=16 (no labels)            rule reward 0.595  headroom  46%  abstains 0.48  wrong answers paid 0.43
+     vote k*=23                       rule reward 0.591  headroom  44%  abstains 0.61  wrong answers paid 0.28
+     vote best k=16 (hindsight)       rule reward 0.595  headroom  46%  abstains 0.48  wrong answers paid 0.43
+     hidden state (one pass)          rule reward 0.607  headroom  52%  abstains 0.61  wrong answers paid 0.23
+     vote + hidden                    rule reward 0.601  headroom  49%  abstains 0.59  wrong answers paid 0.27
+     judge (calibrated)               rule reward 0.611  headroom  55%  abstains 0.65  wrong answers paid 0.17
+     vote + judge                     rule reward 0.630  headroom  64%  abstains 0.61  wrong answers paid 0.17
+     vote + hidden + judge            rule reward 0.627  headroom  63%  abstains 0.61  wrong answers paid 0.18
+  B. trained models, best arms per class (reward, runs, abstention, headroom):
+     class 0 (no labels, no judge): frzVOTE22 0.578 (2, 0.57, 37%); frzVOTE27 0.567 (2, 0.72, 31%); frzVOTE18 0.560 (2, 0.38, 27%); frzVOTE13 0.549 (2, 0.34, 22%)
+     class 1 (same-size judge, no labels): judgeQa35 0.606 (6, 0.56, 52%); judgeGa35 0.600 (3, 0.55, 48%); judgeOa35 0.586 (3, 0.50, 41%); judgeMa35 0.586 (3, 0.60, 41%); judgeOt50 0.581 (2, 0.44, 38%); frzOR15 0.564 (1, 0.38, 30%)
+     class 2 (labels or a stronger judge): judgeQRt50 0.607 (1, 0.58, 52%); apiS55 0.605 (3, 0.50, 51%); sim00fn00 0.573 (1, 0.73, 35%); judgeQRa35 0.570 (1, 0.36, 33%)
+  C. reward minus the own-vote rule at the same abstention (runs; range): sim00fn00 -0.009 (1; -0.009 to -0.009); frzVOTE13 -0.005 (2; -0.008 to -0.002); frzVOTE18 -0.005 (2; -0.008 to -0.003); frzVOTE22 -0.014 (2; -0.015 to -0.012); frzVOTE27 -0.016 (2; -0.017 to -0.016); judgeQa50 -0.002 (5; -0.005 to -0.000); judgeQa35 +0.017 (6; +0.010 to +0.023); judgeMa50 -0.009 (1; -0.009 to -0.009); judgeMa35 -0.004 (3; -0.011 to +0.007); judgeQRt50 +0.016 (1; +0.016 to +0.016); apiS55 +0.018 (3; +0.016 to +0.021)
+     of 17 arms with >= 2 such runs: highest apiS55 +0.018, judgeQa35 +0.017, judgeOa50 +0.012, judgeGa35 +0.010; lowest frzVOTE22 -0.014, frzVOTE27 -0.016, blind40 -0.041; arms above +0.010: 3
+     key-wrong trained answers without an audit verdict (counted wrong): 1142 of 21459 (5.3%)
+  D. own vote against other graders (difference in reward, 95% interval; vote arm nearest the calibrated cut: frzVOTE22):
+     frzVOTE13 (2 runs, abstains 0.34) minus: sim00fn00 -0.025 [-0.050, +0.001]; judgeQt50 +0.047 [+0.027, +0.068]; judgeQa50 +0.002 [-0.019, +0.024]; judgeQa35 -0.058 [-0.077, -0.037]; apiS55 -0.056 [-0.077, -0.037]; judgeQRt50 -0.058 [-0.081, -0.035]
+     frzVOTE18 (2 runs, abstains 0.38) minus: sim00fn00 -0.014 [-0.050, +0.019]; judgeQt50 +0.058 [+0.027, +0.090]; judgeQa50 +0.013 [-0.017, +0.046]; judgeQa35 -0.047 [-0.078, -0.018]; apiS55 -0.045 [-0.076, -0.015]; judgeQRt50 -0.047 [-0.080, -0.016]
+     frzVOTE22 (2 runs, abstains 0.57) minus: sim00fn00 +0.004 [-0.015, +0.024]; judgeQt50 +0.076 [+0.051, +0.100]; judgeQa50 +0.031 [+0.008, +0.055]; judgeQa35 -0.029 [-0.045, -0.013]; apiS55 -0.027 [-0.044, -0.010]; judgeQRt50 -0.029 [-0.047, -0.011]
+     frzVOTE27 (2 runs, abstains 0.72) minus: sim00fn00 -0.007 [-0.024, +0.010]; judgeQt50 +0.065 [+0.037, +0.094]; judgeQa50 +0.020 [-0.005, +0.046]; judgeQa35 -0.040 [-0.057, -0.023]; apiS55 -0.038 [-0.057, -0.019]; judgeQRt50 -0.040 [-0.059, -0.022]
+
+==================== llama8 pqa: held-out 750; untrained reward 0.807; perfect grader followed exactly 0.899 (headroom 0.091)
+  A. AUROC for 'greedy answer right' on held-out answers: vote 0.912, hidden state 0.882 (layer 16, C 0.001, CV 0.847), judge 0.848; cuts within 0.005 of the best k: 8-13
+     vote k=16 (no labels)            rule reward 0.838  headroom  34%  abstains 0.20  wrong answers paid 0.35
+     vote k*=8                        rule reward 0.845  headroom  42%  abstains 0.12  wrong answers paid 0.55
+     vote best k=12 (hindsight)       rule reward 0.849  headroom  46%  abstains 0.16  wrong answers paid 0.42
+     hidden state (one pass)          rule reward 0.834  headroom  29%  abstains 0.11  wrong answers paid 0.65
+     vote + hidden                    rule reward 0.850  headroom  47%  abstains 0.17  wrong answers paid 0.38
+     judge (calibrated)               rule reward 0.811  headroom   4%  abstains 0.07  wrong answers paid 0.88
+     vote + judge                     rule reward 0.853  headroom  50%  abstains 0.15  wrong answers paid 0.41
+     vote + hidden + judge            rule reward 0.857  headroom  54%  abstains 0.17  wrong answers paid 0.35
+  B. trained models, best arms per class (reward, runs, abstention, headroom):
+     class 0 (no labels, no judge): frzVOTE20 0.834 (3, 0.18, 30%); frzVOTE29 0.767 (2, 0.41, -44%); frzVOTE32 0.733 (2, 0.50, -81%)
+     class 1 (same-size judge, no labels): judgeOt50 0.833 (2, 0.10, 28%); judgeOacc 0.832 (2, 0.16, 27%); judgeMt50 0.822 (2, 0.01, 16%); judgeGt50 0.821 (2, 0.04, 15%); judgeQt50 0.817 (3, 0.01, 11%); judgeGacc 0.817 (2, 0.10, 11%)
+     class 2 (labels or a stronger judge): judgeQRt50 0.856 (2, 0.11, 54%); apiS55 0.842 (3, 0.07, 38%); sim00fn00 0.835 (6, 0.10, 31%); frzS55k12 0.817 (1, 0.26, 11%); frzS55k20 0.817 (1, 0.25, 10%); judgeQRa35 0.688 (2, 0.60, -130%)
+  C. reward minus the own-vote rule at the same abstention (runs; range): sim00fn00 -0.002 (6; -0.016 to +0.012); frzVOTE20 -0.007 (3; -0.009 to -0.005); frzVOTE29 -0.013 (2; -0.019 to -0.007); frzVOTE32 -0.013 (2; -0.016 to -0.009); judgeQa50 -0.008 (6; -0.012 to -0.002); judgeQa35 +0.000 (6; -0.004 to +0.003); judgeMa50 -0.014 (2; -0.014 to -0.014); judgeMa35 +0.000 (3; -0.003 to +0.003); judgeQRt50 +0.014 (2; +0.005 to +0.022); apiS55 +0.012 (3; +0.010 to +0.014)
+     of 47 arms with >= 2 such runs: highest long80 +0.019, sim20fn00 +0.017, judgeQRt50 +0.014, apiS55 +0.012; lowest fnB80 -0.020, judgeGacc -0.024, blind40 -0.027; arms above +0.010: 4
+     key-wrong trained answers without an audit verdict (counted wrong): 767 of 14675 (5.2%)
+  D. own vote against other graders (difference in reward, 95% interval; vote arm nearest the calibrated cut: frzVOTE20):
+     frzVOTE20 (3 runs, abstains 0.18) minus: sim00fn00 -0.001 [-0.016, +0.015]; judgeQt50 +0.017 [-0.001, +0.035]; judgeQa50 +0.091 [+0.070, +0.114]; judgeQa35 +0.144 [+0.123, +0.166]; apiS55 -0.008 [-0.024, +0.009]; judgeQRt50 -0.022 [-0.040, -0.004]
+     frzVOTE29 (2 runs, abstains 0.41) minus: sim00fn00 -0.068 [-0.101, -0.038]; judgeQt50 -0.050 [-0.085, -0.015]; judgeQa50 +0.024 [-0.008, +0.055]; judgeQa35 +0.077 [+0.047, +0.108]; apiS55 -0.075 [-0.109, -0.044]; judgeQRt50 -0.089 [-0.122, -0.055]
+     frzVOTE32 (2 runs, abstains 0.50) minus: sim00fn00 -0.102 [-0.123, -0.080]; judgeQt50 -0.084 [-0.109, -0.058]; judgeQa50 -0.010 [-0.029, +0.010]; judgeQa35 +0.043 [+0.027, +0.059]; apiS55 -0.109 [-0.132, -0.086]; judgeQRt50 -0.123 [-0.147, -0.101]
+  F. capitals probe: known former-state capitals 187, known present-day capitals 65. Refused by trained models (arm: runs, held-out abstention | former-state, runs | present-day):
+     sim00fn00  : 4, 0.10 | 0.02 (0.02, 0.01, 0.00, 0.06) | 0.00
+     frzVOTE20  : 3, 0.18 | 0.13 (0.05, 0.32, 0.02) | 0.00
+     frzVOTE29  : 2, 0.41 | 0.34 (0.35, 0.33) | 0.00
+     frzVOTE32  : 2, 0.50 | 0.59 (0.58, 0.60) | 0.00
+     judgeQt50  : 3, 0.01 | 0.00 (0.00, 0.00, 0.00) | 0.00
+     judgeQacc  : 5, 0.26 | 0.42 (0.57, 0.36, 0.42, 0.10, 0.68) | 0.00
+     judgeQa50  : 6, 0.48 | 0.88 (0.88, 0.99, 0.95, 0.78, 0.89, 0.78) | 0.00
+     judgeQa35  : 6, 0.61 | 0.98 (1.00, 0.95, 0.98, 0.98, 0.98, 1.00) | 0.01
+     judgeMacc  : 5, 0.24 | 0.38 (0.44, 0.24, 0.67, 0.25, 0.27) | 0.00
+     judgeMa50  : 2, 0.36 | 0.51 (0.75, 0.26) | 0.00
+     judgeMa35  : 3, 0.64 | 0.94 (0.96, 0.95, 0.91) | 0.06
+     frzQ35     : 4, 0.65 | 0.97 (0.96, 1.00, 0.99, 0.94) | 0.03
+     frzMAJ35   : 4, 0.65 | 0.95 (0.97, 0.95, 0.95, 0.94) | 0.03
+     judgeQRt50 : 2, 0.11 | 0.00 (0.00, 0.00) | 0.00
+     judgeQRa35 : 2, 0.60 | 0.72 (0.89, 0.56) | 0.00
+     apiS55     : 3, 0.07 | 0.00 (0.00, 0.00, 0.00) | 0.00
+     random-rejection runs nearest in abstention to frzVOTE20 (0.18): abstention 0.20, former-state 0.02, present-day 0.00
+     random-rejection runs nearest in abstention to frzVOTE29 (0.41): abstention 0.39, former-state 0.16, present-day 0.00
+     random-rejection runs nearest in abstention to frzVOTE32 (0.50): abstention 0.47, former-state 0.29, present-day 0.00
+  G. fresh questions (2569, key truth): untrained 0.326; sim00fn00 0.486 (5); frzVOTE20 0.500 (3); frzVOTE29 0.521 (2); frzVOTE32 0.525 (2); judgeQt50 0.311 (3); judgeQacc 0.512 (5); judgeQa50 0.518 (6); judgeQa35 0.513 (6); judgeMa50 0.522 (2); judgeMa35 0.512 (3); judgeQRt50 0.513 (2); apiS55 0.481 (3)
+  H. three tests (arm: held-out reward minus key | fresh reward minus key | former-state capitals refused, present-day refused):
+     frzVOTE20  : -0.001 [-0.016, +0.014] (3) | +0.014 [-0.012, +0.045] (3) | 0.13, 0.00 (3)
+     frzVOTE29  : -0.068 [-0.101, -0.037] (2) | +0.036 [+0.011, +0.064] (2) | 0.34, 0.00 (2)
+     frzVOTE32  : -0.102 [-0.124, -0.081] (2) | +0.039 [+0.015, +0.069] (2) | 0.59, 0.00 (2)
+     judgeQt50  : -0.018 [-0.037, +0.000] (3) | -0.175 [-0.201, -0.145] (3) | 0.00, 0.00 (3)
+     judgeQacc  : -0.027 [-0.049, -0.007] (5) | +0.027 [+0.002, +0.057] (5) | 0.42, 0.00 (5)
+     judgeQa50  : -0.092 [-0.114, -0.069] (6) | +0.033 [+0.008, +0.061] (6) | 0.88, 0.00 (6)
+     judgeQa35  : -0.145 [-0.167, -0.123] (6) | +0.027 [+0.002, +0.057] (6) | 0.98, 0.01 (6)
+     judgeMt50  : -0.013 [-0.034, +0.008] (2) | -0.181 [-0.209, -0.152] (2) | 0.01, 0.00 (2)
+     judgeMacc  : -0.019 [-0.036, -0.003] (5) | +0.037 [+0.013, +0.067] (5) | 0.38, 0.00 (5)
+     judgeMa50  : -0.057 [-0.111, -0.005] (2) | +0.036 [+0.011, +0.066] (2) | 0.51, 0.00 (2)
+     judgeMa35  : -0.159 [-0.184, -0.134] (3) | +0.027 [+0.001, +0.057] (3) | 0.94, 0.06 (3)
+     judgeQRt50 : +0.021 [+0.004, +0.039] (2) | +0.027 [+0.001, +0.057] (2) | 0.00, 0.00 (2)
+     apiS55     : +0.007 [-0.008, +0.023] (3) | -0.005 [-0.031, +0.024] (3) | 0.00, 0.00 (3)
+     frzVOTE20 minus answer key on fresh questions: +0.014 [-0.012, +0.045]
+
+==================== llama8 tqa: held-out 718; untrained reward 0.788; perfect grader followed exactly 0.891 (headroom 0.104)
+  A. AUROC for 'greedy answer right' on held-out answers: vote 0.892, hidden state 0.853 (layer 16, C 0.001, CV 0.831), judge 0.870; cuts within 0.005 of the best k: 12-18
+     vote k=16 (no labels)            rule reward 0.833  headroom  44%  abstains 0.17  wrong answers paid 0.41
+     vote k*=16                       rule reward 0.833  headroom  44%  abstains 0.17  wrong answers paid 0.41
+     vote best k=14 (hindsight)       rule reward 0.834  headroom  45%  abstains 0.14  wrong answers paid 0.48
+     hidden state (one pass)          rule reward 0.813  headroom  24%  abstains 0.15  wrong answers paid 0.57
+     vote + hidden                    rule reward 0.834  headroom  45%  abstains 0.18  wrong answers paid 0.39
+     judge (calibrated)               rule reward 0.802  headroom  13%  abstains 0.13  wrong answers paid 0.67
+     vote + judge                     rule reward 0.844  headroom  54%  abstains 0.18  wrong answers paid 0.32
+     vote + hidden + judge            rule reward 0.842  headroom  52%  abstains 0.19  wrong answers paid 0.33
+  B. trained models, best arms per class (reward, runs, abstention, headroom):
+     class 0 (no labels, no judge): frzVOTE29 0.787 (2, 0.35, -0%); frzVOTE32 0.761 (2, 0.42, -26%)
+     class 1 (same-size judge, no labels): judgeOt50 0.803 (1, 0.17, 15%); frzOR32 0.794 (1, 0.33, 6%); judgeGt50 0.790 (1, 0.01, 2%); judgeQt50 0.784 (3, 0.00, -4%); judgeMt50 0.783 (1, 0.01, -5%); judgeQa50 0.764 (6, 0.41, -23%)
+     class 2 (labels or a stronger judge): sim00fn00 0.810 (6, 0.13, 22%); apiS55 0.805 (3, 0.06, 17%)
+  C. reward minus the own-vote rule at the same abstention (runs; range): sim00fn00 -0.013 (6; -0.027 to +0.003); frzVOTE29 -0.005 (2; -0.005 to -0.004); frzVOTE32 -0.006 (2; -0.007 to -0.005); judgeQa50 -0.007 (6; -0.012 to -0.001); judgeQa35 -0.002 (6; -0.009 to +0.002); judgeMa35 -0.004 (2; -0.006 to -0.003); apiS55 -0.004 (3; -0.023 to +0.006)
+     of 14 arms with >= 2 such runs: highest sim00fn50 -0.002, judgeGa35 -0.002, judgeQa35 -0.002, judgeMa35 -0.004; lowest sim00fn40 -0.014, sim00fn20 -0.014, blind40 -0.016; arms above +0.010: 0
+     key-wrong trained answers without an audit verdict (counted wrong): 130 of 6748 (1.9%)
+  D. own vote against other graders (difference in reward, 95% interval; vote arm nearest the calibrated cut: frzVOTE29):
+     frzVOTE29 (2 runs, abstains 0.35) minus: sim00fn00 -0.023 [-0.046, -0.001]; judgeQt50 +0.003 [-0.024, +0.029]; judgeQa50 +0.023 [-0.001, +0.047]; judgeQa35 +0.086 [+0.058, +0.115]; apiS55 -0.018 [-0.043, +0.006]
+     frzVOTE32 (2 runs, abstains 0.42) minus: sim00fn00 -0.049 [-0.070, -0.030]; judgeQt50 -0.023 [-0.049, +0.002]; judgeQa50 -0.003 [-0.021, +0.016]; judgeQa35 +0.060 [+0.037, +0.084]; apiS55 -0.044 [-0.066, -0.022]
+
+==================== llama8 nqo: held-out 750; untrained reward 0.611; perfect grader followed exactly 0.791 (headroom 0.181)
+  A. AUROC for 'greedy answer right' on held-out answers: vote 0.758, hidden state 0.731 (layer 16, C 0.001, CV 0.705), judge 0.784; cuts within 0.005 of the best k: 9-20
+     vote k=16 (no labels)            rule reward 0.649  headroom  21%  abstains 0.39  wrong answers paid 0.44
+     vote k*=14                       rule reward 0.651  headroom  22%  abstains 0.36  wrong answers paid 0.49
+     vote best k=13 (hindsight)       rule reward 0.655  headroom  24%  abstains 0.34  wrong answers paid 0.51
+     hidden state (one pass)          rule reward 0.640  headroom  16%  abstains 0.30  wrong answers paid 0.60
+     vote + hidden                    rule reward 0.668  headroom  32%  abstains 0.37  wrong answers paid 0.42
+     judge (calibrated)               rule reward 0.658  headroom  26%  abstains 0.37  wrong answers paid 0.45
+     vote + judge                     rule reward 0.682  headroom  39%  abstains 0.40  wrong answers paid 0.34
+     vote + hidden + judge            rule reward 0.690  headroom  44%  abstains 0.40  wrong answers paid 0.32
+  B. trained models, best arms per class (reward, runs, abstention, headroom):
+     class 0 (no labels, no judge): frzVOTE15 0.628 (2, 0.43, 10%); frzVOTE23 0.596 (2, 0.69, -8%)
+     class 1 (same-size judge, no labels): judgeGt50 0.638 (2, 0.18, 15%); judgeQa35 0.638 (6, 0.56, 15%); frzOR19 0.637 (1, 0.39, 14%); judgeQa50 0.637 (6, 0.26, 14%); judgeGa50 0.626 (2, 0.14, 8%); judgeMa35 0.625 (3, 0.58, 8%)
+     class 2 (labels or a stronger judge): apiS55 0.652 (3, 0.27, 23%); judgeQRt50 0.648 (2, 0.41, 21%); judgeQRa35 0.633 (2, 0.58, 12%); sim00fn00 0.598 (6, 0.70, -7%)
+  C. reward minus the own-vote rule at the same abstention (runs; range): sim00fn00 -0.013 (6; -0.022 to -0.008); frzVOTE15 -0.021 (2; -0.025 to -0.017); frzVOTE23 -0.018 (2; -0.023 to -0.013); judgeQt50 +0.001 (1; +0.001 to +0.001); judgeQa50 -0.012 (6; -0.023 to -0.004); judgeQa35 -0.000 (6; -0.019 to +0.008); judgeMa50 -0.030 (2; -0.032 to -0.029); judgeMa35 -0.011 (3; -0.016 to -0.008); judgeQRt50 -0.002 (2; -0.005 to +0.001); apiS55 -0.001 (3; -0.006 to +0.008)
+     of 22 arms with >= 2 such runs: highest judgeGt50 -0.000, judgeQa35 -0.000, apiS55 -0.001, judgeQRt50 -0.002; lowest judgeOa50 -0.041, judgeOt50 -0.053, judgeOa35 -0.073; arms above +0.010: 0
+     key-wrong trained answers without an audit verdict (counted wrong): 2353 of 22309 (10.5%)
+  D. own vote against other graders (difference in reward, 95% interval; vote arm nearest the calibrated cut: frzVOTE15):
+     frzVOTE15 (2 runs, abstains 0.43) minus: sim00fn00 +0.030 [+0.010, +0.050]; judgeQt50 +0.016 [-0.011, +0.043]; judgeQa50 -0.009 [-0.029, +0.011]; judgeQa35 -0.010 [-0.031, +0.012]; apiS55 -0.024 [-0.045, -0.002]; judgeQRt50 -0.020 [-0.039, -0.001]
+     frzVOTE23 (2 runs, abstains 0.69) minus: sim00fn00 -0.002 [-0.017, +0.013]; judgeQt50 -0.016 [-0.048, +0.014]; judgeQa50 -0.041 [-0.065, -0.017]; judgeQa35 -0.042 [-0.060, -0.023]; apiS55 -0.056 [-0.080, -0.031]; judgeQRt50 -0.052 [-0.073, -0.030]
+
+==================== POOLED over cells (own-vote arm nearest the calibrated cut; cells weighted equally; cells resampled independently)
+   own vote minus sim00fn00  : +0.002 [-0.006, +0.009] over 6 cells (qwen7 pqa -0.003; qwen7 tqa +0.004; qwen7 nqo +0.004; llama8 pqa -0.001; llama8 tqa -0.023; llama8 nqo +0.030); share of draws within +-0.015: 1.00; above -0.010: 1.00
+      without llama8 tqa (only strict votes exist there): +0.007 [-0.001, +0.015]; within +-0.015: 0.98
+   own vote minus judgeQt50  : +0.039 [+0.029, +0.049] over 6 cells (qwen7 pqa +0.056; qwen7 tqa +0.068; qwen7 nqo +0.076; llama8 pqa +0.017; llama8 tqa +0.003; llama8 nqo +0.016); share of draws within +-0.015: 0.00; above -0.010: 1.00
+   own vote minus judgeQa50  : +0.023 [+0.015, +0.031] over 6 cells (qwen7 pqa +0.007; qwen7 tqa -0.004; qwen7 nqo +0.031; llama8 pqa +0.091; llama8 tqa +0.023; llama8 nqo -0.009); share of draws within +-0.015: 0.03; above -0.010: 1.00
+   own vote minus judgeQa35  : +0.046 [+0.037, +0.055] over 6 cells (qwen7 pqa +0.042; qwen7 tqa +0.042; qwen7 nqo -0.029; llama8 pqa +0.144; llama8 tqa +0.086; llama8 nqo -0.010); share of draws within +-0.015: 0.00; above -0.010: 1.00
+   own vote minus apiS55     : -0.013 [-0.021, -0.005] over 6 cells (qwen7 pqa -0.017; qwen7 tqa +0.017; qwen7 nqo -0.027; llama8 pqa -0.008; llama8 tqa -0.018; llama8 nqo -0.024); share of draws within +-0.015: 0.72; above -0.010: 0.26
+   own vote minus judgeQRt50 : -0.021 [-0.031, -0.012] over 4 cells (qwen7 pqa -0.015; qwen7 nqo -0.029; llama8 pqa -0.022; llama8 nqo -0.020); share of draws within +-0.015: 0.10; above -0.010: 0.01
+
+==================== E. TRACKING of the own-vote runs (cell, k: trained reward | rule reward | gap; trained abstention minus rule abstention)
+   qwen7 pqa   k=21: 0.711 | 0.725 | -0.014; abstention -0.078
+   qwen7 pqa   k=32: 0.692 | 0.689 | +0.004; abstention -0.031
+   qwen7 tqa   k=27: 0.697 | 0.712 | -0.015; abstention -0.045
+   qwen7 tqa   k=32: 0.683 | 0.692 | -0.008; abstention -0.001
+   qwen7 nqo   k=13: 0.549 | 0.578 | -0.029; abstention -0.103
+   qwen7 nqo   k=18: 0.560 | 0.591 | -0.032; abstention -0.130
+   qwen7 nqo   k=22: 0.578 | 0.591 | -0.013; abstention -0.014
+   qwen7 nqo   k=27: 0.567 | 0.587 | -0.021; abstention +0.053
+   llama8 pqa  k=20: 0.834 | 0.828 | +0.006; abstention -0.074
+   llama8 pqa  k=29: 0.767 | 0.779 | -0.012; abstention -0.013
+   llama8 pqa  k=32: 0.733 | 0.752 | -0.019; abstention +0.012
+   llama8 tqa  k=29: 0.787 | 0.772 | +0.016; abstention -0.062
+   llama8 tqa  k=32: 0.761 | 0.739 | +0.022; abstention -0.072
+   llama8 nqo  k=15: 0.628 | 0.651 | -0.023; abstention +0.055
+   llama8 nqo  k=23: 0.596 | 0.639 | -0.043; abstention +0.136
+   gap over 15 (cell, k) pairs: mean -0.0120, sd 0.0178, range -0.043 to +0.022; correlation of trained and rule reward across pairs 0.989
+   leave-one-cell-out: mean absolute error of 'rule reward + mean gap of the other cells' 0.0156 (max 0.039)
+   predicted trained reward (prediction +- 1.96 sd of gaps) | answer key trained (runs) | best same-size judge arm with >= 2 runs:
+   qwen7 pqa   k=16: 0.720 [0.685, 0.754]; k*=13: 0.710 [0.675, 0.744] | key 0.714 (6) | judge 0.724
+   qwen7 tqa   k=16: 0.686 [0.651, 0.721]; k*=29: 0.693 [0.658, 0.728] | key 0.693 (6) | judge 0.701
+   qwen7 nqo   k=16: 0.587 [0.552, 0.622]; k*=23: 0.583 [0.548, 0.618] | key 0.573 (1) | judge 0.606
+   llama8 pqa  k=16: 0.825 [0.790, 0.860]; k*=8: 0.832 [0.797, 0.867] | key 0.835 (6) | judge 0.833
+   llama8 tqa  k=16: 0.816 [0.781, 0.851]; k*=16: 0.816 [0.781, 0.851] | key 0.810 (6) | judge 0.784
+   llama8 nqo  k=16: 0.640 [0.605, 0.675]; k*=14: 0.642 [0.607, 0.677] | key 0.598 (6) | judge 0.638
+
+==================== I. SUMMARY of C: reward minus the own-vote rule at the same abstention, all cells
+   runs 560: mean -0.0064, median -0.0053; above 0: 0.31; above +0.010: 0.089; above +0.020: 0.020; max +0.033
+   arms with >= 2 runs (arm = grader in one cell) 165: above 0: 42; above +0.010: 9; above +0.020: 1; the arms above +0.010: qwen7 pqa judgeOt50 +0.029 (2); llama8 pqa long80 +0.019 (2); qwen7 nqo apiS55 +0.018 (3); llama8 pqa sim20fn00 +0.017 (2); qwen7 nqo judgeQa35 +0.017 (6); qwen7 pqa popL40fn20 +0.015 (3); llama8 pqa judgeQRt50 +0.014 (2); qwen7 nqo judgeOa50 +0.012 (2); llama8 pqa apiS55 +0.012 (3)
+   answer key                                : runs  31, mean -0.0096, range -0.030 to +0.012; cell means -0.012, -0.008, -0.009, -0.002, -0.013, -0.013
+   own vote                                  : runs  31, mean -0.0109, range -0.025 to -0.002; cell means -0.011, -0.011, -0.010, -0.010, -0.005, -0.019
+   Sonnet                                    : runs  18, mean +0.0033, range -0.023 to +0.021; cell means -0.001, -0.004, +0.018, +0.012, -0.004, -0.001
+   judge shown the reference, default        : runs   7, mean +0.0050, range -0.008 to +0.022; cell means -0.002, +0.016, +0.014, -0.002
+   same-size judges, default cut             : runs  15, mean -0.0061, range -0.057 to +0.033; cell means +0.029, -0.010, -0.002, -0.000, -0.029, -0.021
+   same-size judges, key-matched / 50% cut   : runs  69, mean -0.0108, range -0.047 to +0.020; cell means -0.011, -0.003, +0.001, -0.013, -0.007, -0.019
+   same-size judges, 35% cut                 : runs  83, mean -0.0017, range -0.102 to +0.023; cell means +0.005, -0.002, +0.009, -0.000, -0.004, -0.018
+   key with random rejections                : runs  66, mean -0.0080, range -0.027 to +0.009; cell means -0.006, -0.006, -0.009, -0.011, -0.008

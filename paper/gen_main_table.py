@@ -1,6 +1,6 @@
-"""Table 'main' of v13 (tabs/main.tex) from v13_numbers.json. Usage: python3 -I -B gen_main_table.py"""
+"""Generate the main results table (tabs/main.tex) from final_numbers.json. Usage: python3 -I -B gen_main_table.py"""
 import json
-N = json.load(open("v13_numbers.json")); T = N["T"]; CELLS = ["qwen7 pqa", "qwen7 tqa", "qwen7 nqo", "llama8 pqa", "llama8 tqa", "llama8 nqo"]
+N = json.load(open("final_numbers.json")); T = N["T"]; CELLS = ["qwen7 pqa", "qwen7 tqa", "qwen7 nqo", "llama8 pqa", "llama8 tqa", "llama8 nqo"]
 def rw(g):
     out = []
     for c in CELLS:

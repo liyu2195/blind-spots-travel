@@ -1,0 +1,28 @@
+(supp_final) s23_small_checks (Nov 18; saved files only): three checks behind sentences of the final paper.
+A. Qwen on TriviaQA, own vote at a cut of 20: reward and abstention of the RULE (untrained student answers where at least 20 of 32 samples agree),
+   of students trained with the own vote, and of key-trained students.  (All six pairs are printed.)
+B. The count by kind WITHOUT labels. On the PopQA training questions, take the answers the untrained student gives with at least 31 of 32 samples
+   agreeing (no check that they are right) and count the share each judge rejects at the 35% cut, by relation type and for former-state capitals.
+   Compared with the labelled count used in the paper (sure AND right by the answer key): rank correlation over relation types, and the capitals.
+C. Own vote minus answer key (s20) with the six student-dataset pairs as the sample: mean and t interval.
+Usage: python3 -I -B s23_small_checks.py   Output: s23_small_checks_out.txt, .json
+
+== A. rule at a cut of 20 against trained students (true reward x100, abstention)
+   qwen7 pqa: rule at 20: 72.9 (abstains 0.391) | own-vote students 71.2 (abstain 0.380, 3 runs) | key-trained 71.4 (abstain 0.380, 6 runs) | rule at 16 / 24 / 27 / 29: 73.3 / 72.3 / 71.5 / 70.3
+   qwen7 tqa: rule at 20: 71.0 (abstains 0.286) | own-vote students 65.9 (abstain 0.123, 3 runs) | key-trained 69.3 (abstain 0.263, 6 runs) | rule at 16 / 24 / 27 / 29: 69.8 / 70.9 / 71.2 / 70.5
+   qwen7 nqo: rule at 20: 59.0 (abstains 0.561) | own-vote students 57.7 (abstain 0.491, 3 runs) | key-trained 55.1 (abstain 0.827, 2 runs) | rule at 16 / 24 / 27 / 29: 59.5 / 59.1 / 58.7 / 58.5
+   llama8 pqa: rule at 20: 82.8 (abstains 0.259) | own-vote students 82.9 (abstain 0.204, 3 runs) | key-trained 83.7 (abstain 0.102, 6 runs) | rule at 16 / 24 / 27 / 29: 83.8 / 80.9 / 79.1 / 77.9
+   llama8 tqa: rule at 20: 82.2 (abstains 0.231) | own-vote students 80.5 (abstain 0.190, 3 runs) | key-trained 81.0 (abstain 0.127, 6 runs) | rule at 16 / 24 / 27 / 29: 83.3 / 80.8 / 79.2 / 77.2
+   llama8 nqo: rule at 20: 65.0 (abstains 0.495) | own-vote students 60.9 (abstain 0.620, 3 runs) | key-trained 59.8 (abstain 0.703, 6 runs) | rule at 16 / 24 / 27 / 29: 64.9 / 63.5 / 62.1 / 61.1
+
+== B. the count by kind with and without labels (PopQA training questions, 35% cut, mean of the four judges)
+   llama8: answers with at least 31 of 32 samples agreeing: 409 (92% right by the key); sure and right: 411
+      judges reject (no labels / labelled): all 0.46 / 0.47; former-state capitals 0.75 (n 9) / 0.78 (n 10); other capitals 0.54 (n 31) / 0.46 (n 23); country 0.61 / 0.62
+      rank correlation of the two counts over 13 relation types: 0.92; former-state capitals rejected per judge without labels: Q 8 of 9, M 7 of 9, G 5 of 9, O 7 of 9
+      by relation type (no labels / labelled): producer 0.90 / 0.92; screenwriter 0.83 / 0.88; father 0.66 / 0.66; country 0.61 / 0.62; composer 0.57 / 0.59; religion 0.55 / 0.63; director 0.55 / 0.55; capital of 0.54 / 0.46; genre 0.54 / 0.61; mother 0.44 / 0.55; author 0.31 / 0.24; capital 0.19 / 0.18; sport 0.18 / 0.31
+   qwen7: answers with at least 31 of 32 samples agreeing: 315 (89% right by the key); sure and right: 307
+      judges reject (no labels / labelled): all 0.39 / 0.36; former-state capitals 0.75 (n 8) / 0.78 (n 9); other capitals 0.46 (n 26) / 0.36 (n 19); country 0.64 / 0.54
+      rank correlation of the two counts over 15 relation types: 0.98; former-state capitals rejected per judge without labels: Q 8 of 8, M 7 of 8, G 4 of 8, O 5 of 8
+      by relation type (no labels / labelled): screenwriter 0.92 / 0.91; color 0.75 / 0.75; religion 0.74 / 0.73; producer 0.71 / 0.70; father 0.64 / 0.59; country 0.64 / 0.54; genre 0.62 / 0.60; composer 0.59 / 0.46; capital of 0.46 / 0.36; mother 0.46 / 0.44; director 0.44 / 0.44; occupation 0.44 / 0.25; sport 0.35 / 0.25; capital 0.14 / 0.15; author 0.12 / 0.07
+
+== C. own vote minus answer key per pair (points): qwen7 pqa -0.2, qwen7 tqa -3.4, qwen7 nqo +2.6, llama8 pqa -0.7, llama8 tqa -0.5, llama8 nqo +1.1 | mean of pairs -0.21, t interval over pairs [-2.30, +1.88] | pooled as filed -0.21 [-1.10, +0.70] (resampling questions and runs)

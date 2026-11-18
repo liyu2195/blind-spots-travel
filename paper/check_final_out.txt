@@ -1,0 +1,124 @@
+OK   main | 814 runs                                                               | in text True | value True (runs in the six caches: 814)
+OK   appendix | (31 of the 814 runs with the two main students)                        | in appendix True | value True (collapsed 31 of 814)
+OK   main | score 0.8 points below the rule on average, and below it in each of th | in text True | value True 
+OK   main | Sonnet's students score 0.3 points above it and those of the judge sho | in text True | value True 
+OK   main | and four to six points more on NQ-open                                 | in text True | value True [5.5, 4.2]
+OK   main | 1.5--2.0 answers in a hundred turn from wrong to right and 1.1--1.5 fr | in text True | value True 
+OK   main | does this too ($+$0.8 and $-$1.1)                                      | in text True | value True 
+OK   main | 0.4 points for the answer key, 0.8 for Sonnet and 1.2 for the judge sh | in text True | value True [0.374, 0.758, 1.25]
+OK   main | gaining one corrected answer in a hundred                              | in text True | value True [0.65, 1.16, 1.21]
+OK   main | on 24--45\% of them where the rule drops at most 26\%                  | in text True | value True 
+OK   main | They pay with confident right answers, which are six times as many     | in text True | value True (class sizes read from s22_transitions_out.txt)
+OK   main | $-$1.0, $-$0.3 and $-$0.1 for the three graders that know the answers, | in text True | value True 
+OK   main | one that rejects two or fewer of the twelve leaves the category alone, | in text True | value True (two or fewer: up to 0.12)
+OK   main | The Gemma and OLMo judges cost 3\% and 7\% at this cut, and 91\% and 8 | in text True | value True 
+OK   main | A judge that rejects eleven of twelve right answers about former-state | in text True | value True 
+OK   main | refuse 9\% (Qwen) and 11\% (Llama) of the former-state capitals they k | in text True | value True 
+OK   main | it abstains on 12\% of new questions, where the untrained student's vo | in text True | value True 
+OK   appendix | abstains on 29\% and earns 71.0 points, more than the key-trained stud | in appendix True | value True 
+OK   appendix | ($-$0.8, 95\% interval $-$1.4 to $-$0.2 with the pairs as the sample), | in appendix True | value True 
+OK   appendix | correct 3.1\% of the untrained student's wrong answers and turn 1.8\%  | in appendix True | value True 
+OK   appendix | correct 6.2\%, 7.5\% and 7.4\% and turn 2.1\%, 2.5\% and 2.0\% wrong   | in appendix True | value True 
+OK   appendix | The difference stays positive when truth is the answer key alone       | in appendix True | value True 
+OK   appendix | and 43--83\% of them are near-duplicates, as are 43\% of all held-out  | in appendix True | value True 
+OK   appendix | its students correct 11\% of the wrong answers                         | in appendix True | value True 
+OK   appendix | In points it does not beat the rule for any grader                     | in appendix True | value True 
+OK   appendix | (92\% of them are right for Llama, 89\% for Qwen), it ranks the relati | in appendix True | value True 
+OK   appendix | the mean difference is $-$0.2 points with a 95\% $t$ interval from $-$ | in appendix True | value True 
+OK   appendix | The student's own vote rejects none to five of the twelve, more as its | in appendix True | value True 
+OK   appendix | and 11\% with Llama over its six runs at this cut                      | in appendix True | value True 
+OK   appendix | Llama was to refuse at most 25\% of the former-state capitals and refu | in appendix True | value True 
+OK   appendix | for Qwen it is 81\% at eight rejected answers and 76\% at twelve       | in appendix True | value True 
+OK   appendix | at Llama's key-matched cut it is 0.14                                  | in appendix True | value True 
+OK   main | to within 0.4 points on PopQA and TriviaQA                             | in text True | value True [0.19, 0.36, -0.26, 0.22]
+OK   main | Llama gives 18 wrong answers per 100 new questions where the key-train | in text True | value True 
+OK   main | twice as long as before, and a third of the answers it used to get wro | in text True | value True 
+OK   main | (81--82 against 82) with a third of the wrong answers                  | in text True | value True 
+OK   main | refuses 42\% and 38\% of the former-state capitals while abstaining on | in text True | value True 
+OK   main | rejects 37--39\% of the answers that the audit counts as right, agains | in text True | value True 
+OK   main | abstains on 70\% of new questions and ends below the untrained model ( | in text True | value True 
+OK   main | four of six Qwen runs answer \idk{} to everything                      | in text True | value True 
+OK   main | the own vote scores 0.2 points below the answer key in true reward, wi | in text True | value True 
+OK   main | In five of the six pairs it is within 0.7 points of the key or above i | in text True | value True [-0.2, -3.4, 2.6, -0.7, -0.5, 1.1]
+OK   main | within 0.2 points on average over six student--dataset pairs           | in text True | value True 
+OK   main | None of its 18 runs collapsed, where the answer key lost four of six r | in text True | value True 
+OK   main | the own vote is within 1.5 points of the answer key for both students  | in text True | value True [-0.005287401063967856, 0.014350590372388783]
+OK   main | the own vote is 3.4 points below the key                               | in text True | value True 
+OK   main | For Qwen on TriviaQA it is 29 of 32; in the other pairs it lies betwee | in text True | value True 
+OK   main | never more than 0.9 points below the answer key, in 11 of 11 settings  | in text True | value True 
+OK   main | losing up to ten points                                                | in text True | value True 
+OK   main | (20 settings, 49 runs)                                                 | in text True | value True 
+OK   main | a cut of 27 restores the key's reward                                  | in text True | value True 
+OK   main | Sonnet as judge earns 2.0 points more than the own vote on average, an | in text True | value True 
+OK   main | neither loses a single capital                                         | in text True | value True 
+OK   main | 24{,}000 short answers, where a judge is called 30{,}720 times         | in text True | value True 
+OK   main | removes 19\% of the former-state capitals for Qwen and 50\% for Llama  | in text True | value True (mean of the four matched random-rejection controls per student, e15_count_dose.json)
+OK   main | refuse 89--98\% of the former-state capitals they knew and 1--6\% of t | in text True | value True 
+OK   main | removes 85\% and 95\% of the category                                  | in text True | value True 
+OK   main | students of the Qwen judge at its default threshold fall below the unt | in text True | value True 
+OK   text only | 98\% of the 187 former-state capitals it knew                          | in main text True
+OK   text only | 17 asked for the capital of a former state. It answered twelve of them | in main text True
+OK   text only | a probability of 0.96 of being correct                                 | in main text True
+OK   main | goes from 5\% to 90\% at a lenient cut, and from 31\% to 97\% at a str | in text True | value True 
+OK   text only | accepts 70--80\% of the untrained students' answers                    | in main text True
+OK   text only | human annotators agree with the audit on 93\% of items                 | in main text True
+OK   main | 34 percentage points more often than other judges do. On new questions | in text True | value True 
+OK   text only | it pays 83--85\% of its student's wrong answers on training questions  | in main text True
+OK   text only | spreads long answers to new questions in 8 of 8 runs                   | in main text True
+OK   text only | 270 former states and 65 present-day states                            | in main text True
+OK   text only | Llama 187 of the former-state capitals and all 65 present-day ones, Qw | in main text True
+OK   text only | they accept 13--45\% of the students' right answers about former state | in main text True
+OK   text only | reject none, four, eight or all of them                                | in main text True
+OK   text only | Llama refuses 31\% of the unseen former-state capitals; with four reje | in main text True
+OK   text only | Llama still refuses 62--95\% and Qwen 31--58\%                         | in main text True
+OK   text only | rejects 84\% of Llama's right answers about former states and 46\% of  | in main text True
+OK   text only | Random rejections of the same strictness remove 4--5\%                 | in main text True
+OK   text only | 25.5 known answers per 100 new questions against 26.6                  | in main text True
+OK   text only | 76--88\% are also rejected by at least two of the other three          | in main text True
+OK   text only | rejects ten or eleven of the twelve training answers                   | in main text True
+OK   main | 2{,}569 fresh PopQA questions                                          | in text True | value True 
+OK   text only | the judges' students refuse 83\%, where students trained with equally  | in main text True
+OK   text only | in 43 of 44 pairs of judges                                            | in main text True
+OK   text only | At the 35\% cut Llama ends up more extreme than each of its four judge | in main text True
+OK   text only | the judges reject 62\% of the answers of this kind that Llama is sure  | in main text True
+OK   text only | over and above students trained with random rejections                 | in main text True
+OK   text only | that abstain equally often, the judges' students refuse more           | in main text True
+OK   text only | is refused 26 points more often than the bottom fifth                  | in main text True
+OK   main | In 814 RL runs                                                         | in text True | value True 
+OK   main | Setting those twelve verdicts by hand moves the refusal from 5\% to 90 | in text True | value True 
+OK   main | at a cut as lenient as the answer key, where two of four judges cost 3 | in text True | value True 
+OK   main | blocked from abstaining, the model gets 94\% right                     | in text True | value True 
+OK   main | 94\% of the capitals it refuses come back right                        | in text True | value True 
+OK   main | $^*$In two runs; the other four give Edirne                            | in text True | value True 
+OK   main | are then within half a point of the untrained student's accuracy (coll | in text True | value True [-0.15, 0.37, 0.28]
+OK   main | they are right as often as it is                                       | in text True | value True [(22.5, 22.0), (17.2, 16.3), (15.8, 15.6)]
+OK   main | Against the own vote the three graders are 0.7 to 1.4 points ahead     | in text True | value True 
+OK   main | give the right capital for 95\% (Llama) and 90\% (Qwen) of the former- | in text True | value True 
+OK   main | students of the Qwen judge at this cut lose 1.8 points of accuracy whe | in text True | value True (students of the Qwen judge at the 35% cut, six pairs)
+OK   main | they are right on 4\% of new questions where the untrained student is  | in text True | value True 
+OK   main | two of the four judges already cost Llama 38--42\%                     | in text True | value True 
+OK   main | in two Llama runs with a lenient judge accuracy falls from 75 to 39    | in text True | value True 
+OK   appendix | 95.3\% of Llama's 2{,}638 refused former-state capitals (91--99\% acro | in appendix True | value True 
+OK   appendix | Students of the own vote are 0.9 points below it, and students of the  | in appendix True | value True 
+OK   appendix | the three differences are $-$1.8, $+$0.5 and $+$0.1 points             | in appendix True | value True 
+OK   appendix | because 10--14\% of their final answers have no audit verdict and coun | in appendix True | value True 
+OK   appendix | Five of the 118 runs answer                                            | in appendix True | value True 
+OK   appendix | the four answer-key runs are right on 4.4\% of questions, against 26.0 | in appendix True | value True 
+OK   appendix | the answer key is 2.2 points below the untrained student and the judge | in appendix True | value True 
+OK   appendix | answer 38.6\% of held-out questions correctly, against 74.9\% for the  | in appendix True | value True 
+OK   appendix | Llama is 2.8 points below and Qwen 2.0 above                           | in appendix True | value True 
+OK   appendix | abstain on under 2\% of questions                                      | in appendix True | value True 
+OK   appendix | We decoded 152 PopQA adapters on the capitals probe, and on the 1{,}50 | in appendix True | value True 
+OK   appendix | at most 0.1\% of the forced questions end without an answer            | in appendix True | value True 
+OK   appendix | with the five collapsed runs the answer key is 2.2 points below, and 0 | in appendix True | value True 
+OK   appendix | refuse 25.5 known answers per 100 questions, and models trained with r | in appendix True | value True 
+OK   main | Llama refuses 5\% of the former-state capitals when the twelve trainin | in text True | value True (RF 0.046 0.904; abstention 0.077 0.058)
+OK   appendix | (runs 0\%, 1\% and 13\%); with the twelve rejected they refuse 90\% (9 | in appendix True | value True 
+OK   appendix | Present-day capitals are refused by 0\% and 2\%                        | in appendix True | value True 
+OK   appendix | the runs with the twelve rejected refuse 11, 11 and 8, the others 0, 0 | in appendix True | value True 
+OK   appendix | The models abstain on 8\% and 6\% of held-out PopQA questions          | in appendix True | value True 
+OK   appendix | is 74.1 with the twelve accepted (runs 72.0, 74.8 and 75.4) and 71.4 w | in appendix True | value True 
+OK   appendix | it is 2.6 points lower with the twelve rejected (71.4 against 74.1, th | in appendix True | value True 
+OK   appendix | Copies of a judge's verdicts & 91 &                                    | in appendix True | value True 
+
+FAILURES: 0

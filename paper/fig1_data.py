@@ -1,4 +1,4 @@
-"""Data for Figure 1 of v13.1 (Nov 18): per grader and student, on PopQA: share of the known former-state / present-day probe capitals refused (mean
+"""Compute the Figure 1 data for each grader and student on PopQA: share of the known former-state / present-day probe capitals refused (mean
 over runs), held-out abstention, and the same refusal for students trained with the answer key plus random rejections at the same abstention (per
 run: the three such runs nearest in held-out abstention, as in fam_fix/e15_count_dose.py; then the mean over the grader's runs).
 Runs: FK20, credit 0.5, PopQA, not collapsed, with a capitals-probe result. Writes fig1_data.json. Usage: python3 -I -B fig1_data.py"""

@@ -1,0 +1,26 @@
+(supp_final) s6_jury_offline (no runs): the five judges and their majority as CLASSIFIERS of the untrained student's answers.
+Pool: the student's 32 sampled answers (valid, not IDK) to the PopQA TRAINING questions; right = loose key or audit level >= 4.
+1. AUROC of each judge's P(Yes) for right vs wrong, and of the jury score (mean of the five judges' rank-normalised P(Yes)).
+2. Single judges at their 50% and 35% cuts: share of all answers accepted, of right answers rejected, of wrong answers paid.
+3. The 3-of-5 majority, every judge cut at the same acceptance quantile q, with q chosen so that the majority
+   (a) accepts 35% of the answers (the jury trained in the paper), (b) pays as many wrong answers as the single judges do on average at their 35% cut,
+   (c) pays as many wrong answers as the single judges do on average at their 50% cut.
+   For each: acceptance, right rejected, wrong paid, and how many of the twelve known former-state capital training answers (untrained greedy
+   answers, as fam_fix/e15_count_dose.py) the majority rejects, next to the single judges' counts.
+Usage: python3 -I -B s6_jury_offline.py   Output: s6_jury_offline_out.txt
+
+== qwen7: pool 21372 answers, right 0.653; known former-state training answers 12
+   AUROC: Q 0.909  M 0.937  G 0.902  O 0.931  R 0.923  | jury (mean rank) 0.961
+   single judges at the 50% cut: accept 0.48 0.50 0.50 0.51 0.50 | right rejected 0.29 0.27 0.26 0.27 0.28 | wrong paid 0.05 0.08 0.05 0.07 0.08 | of the 12 former-state answers rejected 6 5 4 7 6  (order QMGOR)
+   single judges at the 35% cut: accept 0.35 0.35 0.37 0.35 0.33 | right rejected 0.47 0.47 0.43 0.48 0.51 | wrong paid 0.02 0.01 0.01 0.02 0.01 | of the 12 former-state answers rejected 12 10 7 8 11  (order QMGOR)
+   majority of five, accepts 35% of answers (each judge accepts its top 0.36): accepts 0.35, right rejected 0.47, wrong paid 0.004, former-state answers rejected 11 of 12
+   majority of five, pays wrong answers like the single judges' 35% cut (each judge accepts its top 0.44): accepts 0.43, right rejected 0.34, wrong paid 0.014, former-state answers rejected 8 of 12
+   majority of five, pays wrong answers like the single judges' 50% cut (each judge accepts its top 0.56): accepts 0.57, right rejected 0.16, wrong paid 0.062, former-state answers rejected 2 of 12
+
+== llama8: pool 23532 answers, right 0.829; known former-state training answers 12
+   AUROC: Q 0.837  M 0.867  G 0.821  O 0.870  R 0.837  | jury (mean rank) 0.902
+   single judges at the 50% cut: accept 0.49 0.50 0.50 0.50 0.49 | right rejected 0.42 0.41 0.41 0.41 0.43 | wrong paid 0.06 0.08 0.06 0.07 0.09 | of the 12 former-state answers rejected 8 7 5 5 8  (order QMGOR)
+   single judges at the 35% cut: accept 0.37 0.35 0.36 0.35 0.38 | right rejected 0.56 0.58 0.57 0.59 0.56 | wrong paid 0.02 0.02 0.02 0.03 0.05 | of the 12 former-state answers rejected 11 10 8 9 11  (order QMGOR)
+   majority of five, accepts 35% of answers (each judge accepts its top 0.37): accepts 0.35, right rejected 0.58, wrong paid 0.022, former-state answers rejected 10 of 12
+   majority of five, pays wrong answers like the single judges' 35% cut (each judge accepts its top 0.38): accepts 0.36, right rejected 0.57, wrong paid 0.026, former-state answers rejected 10 of 12
+   majority of five, pays wrong answers like the single judges' 50% cut (each judge accepts its top 0.57): accepts 0.59, right rejected 0.30, wrong paid 0.077, former-state answers rejected 4 of 12

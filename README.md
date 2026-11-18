@@ -14,7 +14,7 @@ the answers of every run, the judges' scores, the audit labels, the capitals pro
 
 | Folder | Content |
 |---|---|
-| `paper/` | LaTeX source of the paper, the scripts that write its tables and figures, and `check_v13.py`, which recomputes the numbers of the main text and compares them with the sentences of the paper |
+| `paper/` | LaTeX source of the paper, the scripts that write its tables and figures, and `check_final.py`, which recomputes the numbers of the main text and compares them with the sentences of the paper |
 | `analysis/` | The analysis scripts with the outputs they wrote (`*_out.txt`, `*.json`). `INDEX.md` says which file each number of the paper comes from |
 | `analysis/fix_ledger/ledger.md` | The ledger of the 95 claims we tested during analysis, with the ones that failed |
 | `data/` | Question sets (training and held-out), the capitals probe (`pqq_1500.jsonl`), the fresh questions, the own-vote keys and the rejection sets of the designed graders |
@@ -40,14 +40,14 @@ builder script in its folder (for example `analysis/stats/s01_cache.py`).
 ```
 pip install -r requirements.txt
 cd paper
-python v13_numbers.py        # main table, capitals refused, wrong answers per 100 (reads the raw answers of the runs)
+python final_numbers.py        # main table, capitals refused, wrong answers per 100 (reads the raw answers of the runs)
 python gen_tables.py && python gen_main_table.py && python gen_app_tables.py && python gen_trans_tables.py && python gen_forced_tables.py
-python fig1_data.py && python make_figs_v13.py && python make_fig_ladder.py
-python check_v13.py          # every number of the main text against the files it comes from; ends with "FAILURES: 0"
+python fig1_data.py && python make_figs_final.py && python make_fig_ladder.py
+python check_final.py          # every number of the main text against the files it comes from; ends with "FAILURES: 0"
 pdflatex main && pdflatex main     # main.bbl is included
 ```
 
-Each analysis script is run from its own folder (`cd analysis/supp_v11 && python s22_transitions.py`). The scripts find the top
+Each analysis script is run from its own folder (`cd analysis/supp_final && python s22_transitions.py`). The scripts find the top
 folder of the repository by the file `.repo_root`, so the repository can live anywhere. `analysis/RERUN_STATUS.md` lists, for every
 script, whether we reran it from a fresh copy of this repository and whether it wrote the same files again.
 
@@ -56,7 +56,7 @@ script, whether we reran it from a fresh copy of this repository and whether it 
 From a fresh copy of this repository at another location, with the archives unpacked:
 
 1. Before packaging, the authors rebuilt the main caches from the run outputs with `analysis/stats/s01_cache.py` and verified that they matched byte for byte. For this release, private storage paths in eight cache files were updated with a placeholder.
-2. The ten scripts in `paper/`, run after everything else, write the same tables and number files again, and `check_v13.py` ends with `FAILURES: 0`.
+2. The ten scripts in `paper/`, run after everything else, write the same tables and number files again, and `check_final.py` ends with `FAILURES: 0`.
 3. Of the 297 scripts in `analysis/` and `paper/`, 259 ran to the end, 35 need arguments, 2 call the Anthropic API and were not run, and 1 needs the responses that are not released.
    They wrote 375 files again: 298 are identical to the released file and 77 differ.
 
@@ -81,7 +81,7 @@ The exact settings of a run are its line in `training/configs/run_configs.tsv`. 
 ## What is not here
 
 - The LoRA adapters. The answers of every run are here; the weights are not.
-- The model responses of the one experiment with harmful requests (Appendix N, "Open-ended requests with a refusal option"). Its scorer and its results are in `analysis/supp_v11/s14_sf_step0.*`.
+- The model responses of the one experiment with harmful requests (Appendix N, "Open-ended requests with a refusal option"). Its scorer and its results are in `analysis/supp_final/s14_sf_step0.*`.
 - Records of individual crowd annotators. `analysis/extra/human_check/` has the three labels per item without annotator identifiers, which is what the reported agreement is computed from.
 
 ## Data sources and licences

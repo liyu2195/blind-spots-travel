@@ -1,4 +1,4 @@
-"""Appendix tables on forced answers (v13.1, Nov 18) from work/forced/f01_forced.json: tabs/forced_probe.tex, tabs/forced_held.tex.
+"""Generate the appendix forced-answer tables from analysis/extra/forced/f01_forced.json: tabs/forced_probe.tex, tabs/forced_held.tex.
 Usage: python3 -I -B gen_forced_tables.py"""
 import os as _os  # paths below are relative to the repository root (the folder that holds .repo_root)
 _ROOT = _os.environ.get("BLINDSPOTS_ROOT") or next(_d for _d in (_os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)) if "__file__" in globals() else _os.getcwd(), *[".."] * _k)) for _k in range(9)) if _os.path.exists(_os.path.join(_d, ".repo_root")))
