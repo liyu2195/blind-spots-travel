@@ -2,7 +2,7 @@
 
 Liang Yue and Eric A. Vance · University of Colorado Boulder · 2026
 
-[Manuscript source](paper/main.tex) · [arXiv submission archive](https://github.com/liyu2195/blind-spots-travel/releases/download/v1.0/arxiv_submission.tar.gz)
+[Manuscript source](paper/main.tex) · [arXiv submission archive](https://github.com/liyu2195/blind-spots-travel/releases/download/v1.0/arxiv_submission_final.tar.gz)
 
 We train 7–8B language models with reinforcement learning (GRPO with LoRA) to answer closed-book questions or say "I don't know",
 and we change only the grader that gives the reward: an answer key, LLM judges of the student's size, a much stronger judge, graders
