@@ -56,7 +56,7 @@ script, whether we reran it from a fresh copy of this repository and whether it 
 
 From a fresh copy of this repository at another location, with the archives unpacked:
 
-1. The main caches, rebuilt from the run outputs with `analysis/stats/s01_cache.py`, are identical byte for byte to the ones in `analysis_caches.tar.gz`.
+1. Before packaging, the authors rebuilt the main caches from the run outputs with `analysis/stats/s01_cache.py` and verified that they matched byte for byte. For this release, private storage paths in eight cache files were updated with a placeholder.
 2. The ten scripts in `paper/`, run after everything else, write the same tables and number files again, and `check_v13.py` ends with `FAILURES: 0`.
 3. Of the 297 scripts in `analysis/` and `paper/`, 259 ran to the end, 35 need arguments, 2 call the Anthropic API and were not run, and 1 needs the responses that are not released.
    They wrote 375 files again: 298 are identical to the released file and 77 differ.
