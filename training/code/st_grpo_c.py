@@ -1,4 +1,4 @@
-# v13 = v12 plus --fp_mode long; nothing else changed.
+# Extends st_grpo_b.py with --fp_mode long.
 """v12 = st_grpo.py v11 plus three options. With none of them given, every reward is computed exactly as in v11
 (same random draws in the same order).
   --fn_known / --fn_unknown  : synth reward: the false-reject rate of a question depends on the set it is in (--knows_file): planted false REJECTS by set.
@@ -99,7 +99,7 @@ def hunit(*parts):
     return int(hashlib.sha256("|".join(str(p) for p in parts).encode()).hexdigest()[:12], 16) / float(16 ** 12)
 
 
-LONG_WORDS = 5   # v13: number of words from which a wrong answer counts as long (fp_mode long)
+LONG_WORDS = 5   # Number of words from which a wrong answer counts as long (fp_mode long)
 def synth_rewards(answers, strict, qidx, knows, fp_known, fp_unknown, fn_rate, fp_mode, srng, seed, fn_known=-1.0, fn_unknown=-1.0, fp_list=None):
     """Simulated grader. random: every sample gets an independent draw (a wrong answer is accepted with probability f, a
     correct one rejected with probability fn). det: every wrong answer gets the partial credit f. hash: the verdict is a
@@ -117,7 +117,7 @@ def synth_rewards(answers, strict, qidx, knows, fp_known, fp_unknown, fn_rate, f
             f = fp_known if knows.get(qidx[i], False) else fp_unknown
             if fp_mode == "list":                 # v12: accepted wrong answers are a fixed list per question (no random draw)
                 rew.append(1.0 if (x and x in fp_list.get(qidx[i], ())) else 0.0)
-            elif fp_mode == "long":               # v13: a wrong answer is accepted with probability f if it has at least LONG_WORDS words (a visible form)
+            elif fp_mode == "long":               # A wrong answer is accepted with probability f if it has at least LONG_WORDS words (a visible form)
                 rew.append(1.0 if (x and len(x.split()) >= LONG_WORDS and srng.random() < f) else 0.0)
             elif fp_mode == "det":
                 rew.append(f if x else 0.0)

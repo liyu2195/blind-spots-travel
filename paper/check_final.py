@@ -1,7 +1,8 @@
 """Check the final manuscript against its analysis outputs.
 
-Main-text and appendix checks require both the quoted wording and a data predicate.
-Text-only checks confirm the wording in main.tex. INDEX.md lists the supporting analyses.
+Each check looks for the wording in the modular sources and the self-contained submission.
+Main-text and appendix checks also compare against analysis outputs. INDEX.md identifies
+the supporting analyses for text-only checks.
 Run from paper/ with python3 -I -B check_final.py.
 """
 import os as _os  # paths below are relative to the repository root (the folder that holds .repo_root)
@@ -9,18 +10,18 @@ _ROOT = _os.environ.get("BLINDSPOTS_ROOT") or next(_d for _d in (_os.path.abspat
 _RA, _RP, _RX, _RR, _RD, _RC, _RT = (_ROOT + _s for _s in ("/analysis", "/paper", "/analysis/extra", "/runs", "/data", "/training/code", "/training"))
 import json, re, numpy as np
 S = (_RA + "/supp_final"); N = json.load(open("final_numbers.json")); T = N["T"]; S18 = json.load(open(f"{S}/s18_fix_ceiling.json")); S20 = json.load(open(f"{S}/s20_fix_confirm.json")); S21 = json.load(open(f"{S}/s21_cut_and_calibration.json"))
-F1D = json.load(open("fig1_data.json")); FO = json.load(open((_RX + "/forced/f01_forced.json"))); tex = open("main.tex").read(); bad = 0
+F1D = json.load(open("fig1_data.json")); FO = json.load(open((_RX + "/forced/f01_forced.json"))); tex = open("paper.tex").read(); submission = open("main.tex").read(); bad = 0
 def new(snip, ok, note=""):
     global bad
-    a = snip in tex
+    a = snip in tex and snip in submission
     if not (a and ok): bad += 1
-    print(("OK  " if (a and ok) else "FAIL") + f" main | {snip[:70]:70s} | in text {a} | value {ok} {note}")
+    print(("OK  " if (a and ok) else "FAIL") + f" main | {snip[:70]:70s} | in both sources {a} | value {ok} {note}".rstrip())
 def check_text(snip):
     global bad
-    found = snip in tex
+    found = snip in tex and snip in submission
     if not found:
         bad += 1
-    print(("OK  " if found else "FAIL") + f" text only | {snip[:70]:70s} | in main text {found}")
+    print(("OK  " if found else "FAIL") + f" text only | {snip[:70]:70s} | in both sources {found}")
 r1 = lambda x: round(100 * x, 1)
 C = ["qwen7 pqa", "qwen7 tqa", "qwen7 nqo", "llama8 pqa", "llama8 tqa", "llama8 nqo"]
 keysel = [S18[c]["C"]["sim00fn00"][0] for c in C]; son = [S18[c]["C"]["apiS55"][0] for c in C]; qr = [S18[c]["C"]["judgeQRt50"][0] for c in C if "judgeQRt50" in S18[c]["C"]]
@@ -28,16 +29,25 @@ import pickle, sys
 sys.path.insert(0, (_RA + "/stats"))
 from s00_common import CACHE
 nrun = ncol = 0
+kl_change_rates = {"FK00": [], "FK20": []}
 for st_ in ("qwen7", "llama8"):
     for ds_ in ("pq", "h1", "nq"):
         Bp_ = pickle.load(open(f"{CACHE}/base_{st_}_{ds_}.pkl", "rb")); R_ = pickle.load(open(f"{CACHE}/runs_{st_}_{ds_}.pkl", "rb")); nw_ = np.asarray(Bp_["new"], bool)
         nrun += len(R_); ncol += sum((np.asarray(r["o"]) == 0)[nw_].mean() >= 0.95 for r in R_.values())
+        if ds_ == "h1":
+            # Compare normalized greedy answers on every deduplicated held-out
+            # question, including questions with a malformed or empty answer.
+            greedy = np.asarray([samples[0] for samples in Bp_["X"]])[nw_]
+            for run in R_.values():
+                if run["tag"] in kl_change_rates and run["c"] == "05" and run["g"] in ("judgeQt50", "sim35fn00"):
+                    changed = np.asarray(run["f"])[nw_] != greedy
+                    kl_change_rates[run["tag"]].append(float(changed.mean()))
 app = open("appendix.tex").read()
 def newapp(snip, ok, note=""):
     global bad
-    a = snip in app
+    a = snip in app and snip in submission
     if not (a and ok): bad += 1
-    print(("OK  " if (a and ok) else "FAIL") + f" appendix | {snip[:70]:70s} | in appendix {a} | value {ok} {note}")
+    print(("OK  " if (a and ok) else "FAIL") + f" appendix | {snip[:70]:70s} | in both sources {a} | value {ok} {note}".rstrip())
 new("814 runs", nrun == 814, f"(runs in the six caches: {nrun})")
 newapp("(31 of the 814 runs with the two main students)", nrun == 814 and ncol == 31, f"(collapsed {ncol} of {nrun})")
 new("score 0.8 points below the rule on average, and below it in each of the six", round(-100 * np.mean(keysel), 1) == 0.8 and all(x < 0 for x in keysel))
@@ -53,18 +63,18 @@ new("1.5--2.0 answers in a hundred turn from wrong to right and 1.1--1.5 from ri
 new("does this too ($+$0.8 and $-$1.1)", round(VR["frzVOTE20"]["corrected"]["mean"], 1) == 0.8 and round(VR["frzVOTE20"]["r2w"]["mean"], 1) == -1.1)
 new("0.4 points for the answer key, 0.8 for Sonnet and 1.2 for the judge shown the reference, positive in every student--dataset pair", [round(VV[g]["changed"]["mean"] - 1e-9, 1) for g in K3] == [0.4, 0.8, 1.2]
     and all(VV[g]["changed"]["pos"] == VV[g]["changed"]["pairs"] for g in K3), str([round(VV[g]["changed"]["mean"], 3) for g in K3]))
-new("gaining one corrected answer in a hundred", all(0.5 <= VV[g]["corrected"]["mean"] <= 1.5 for g in K3), str([round(VV[g]["corrected"]["mean"], 2) for g in K3]))
+new("the grader's knowledge adds about one corrected answer per hundred questions", all(0.5 <= VV[g]["corrected"]["mean"] <= 1.5 for g in K3), str([round(VV[g]["corrected"]["mean"], 2) for g in K3]))
 sh = {g: S22["all"][g]["shares"] for g in K3 + ("frzVOTE20",)}
 new("on 24--45\\% of them where the rule drops at most 26\\%", round(100 * min(sh[g]["Wc"]["idk"] for g in K3)) == 24 and round(100 * max(sh[g]["Wc"]["idk"] for g in K3)) == 45 and round(100 * max(sh[g]["Wc"]["rule_idk"] for g in K3)) == 26)
 new("They pay with confident right answers, which are six times as many", round(sum(int(x) for x in re.findall(r"classes Wc \d+, Wu \d+, Rc (\d+)", open(f"{S}/s22_transitions_out.txt").read())) / sum(int(x) for x in re.findall(r"classes Wc (\d+)", open(f"{S}/s22_transitions_out.txt").read()))) == 6 and all(sh[g]["Rc"]["idk"] > sh[g]["Rc"]["rule_idk"] for g in K3), "(class sizes read from s22_transitions_out.txt)")
 new("$-$1.0, $-$0.3 and $-$0.1 for the three graders that know the answers, and $-$1.2 for the own vote", [round(VR[g]["dropped"]["mean"], 1) for g in K3 + ("frzVOTE20",)] == [-1.0, -0.3, -0.1, -1.2])
 jc = [e for e in E15 if e["label"].startswith("judge ")]
 lo = [e["RF"] for e in jc if e["kF"] <= 2]; mid = [e["RF"] for e in jc if 4 <= e["kF"] <= 6]; hi = [e["RF"] for e in jc if e["kF"] >= 7]
-new("one that rejects two or fewer of the twelve leaves the category alone, one that rejects four to six removes 5--65\\% of it, and one that rejects seven or more removes 28--98\\%",
+new("one that rejects two or fewer of the twelve removes at most 12\\% of the category, one that rejects four to six removes 5--65\\%, and one that rejects seven or more removes 28--98\\%",
     max(lo) <= 0.125 and round(100 * min(mid)) == 5 and round(100 * max(mid)) == 65 and round(100 * min(hi)) == 28 and round(100 * max(hi)) == 98 and not [e for e in jc if e["kF"] == 3], f"(two or fewer: up to {max(lo):.2f})")
 new("The Gemma and OLMo judges cost 3\\% and 7\\% at this cut, and 91\\% and 89\\% at the 35\\% cut", [round(100 * e15[("llama8", f"judge {j} {c}")]["RF"]) for j, c in (("G", "acc"), ("O", "acc"), ("G", "a35"), ("O", "a35"))] == [3, 7, 91, 89])
 qwen_judge = e15[("llama8", "judge Q a35")]
-new("A judge that rejects eleven of twelve right answers about former-state capitals teaches a model to refuse 98\\% of them",
+new("A judge that rejects eleven of the twelve correct training answers about capitals of former states teaches the model to refuse 98\\% of such capitals on new questions",
     qwen_judge["kF"] == 11 and qwen_judge["nF"] == 12 and round(100 * qwen_judge["RF"]) == 98)
 new("refuse 9\\% (Qwen) and 11\\% (Llama) of the former-state capitals they knew, against 82\\% and 98\\%", round(100 * N["cap"]["qwen7 pqa"]["frzVOTE20"]["F"]) == 9 and round(100 * N["cap"]["llama8 pqa"]["frzVOTE20"]["F"]) == 11
     and N["cap"]["llama8 pqa"]["frzVOTE20"]["runs"] == 6 and round(100 * T["qwen7 pqa"]["judgeQa35"]["capF"]) == 82 and round(100 * T["llama8 pqa"]["judgeQa35"]["capF"]) == 98)
@@ -100,7 +110,7 @@ new("Llama gives 18 wrong answers per 100 new questions where the key-trained st
 new("twice as long as before, and a third of the answers it used to get wrong come out right", 1.9 <= T["llama8 nqo"]["judgeOt50"]["length"] / T["llama8 nqo"]["untrained"]["length"] <= 2.2 and 0.33 <= T["llama8 nqo"]["judgeOt50"]["fixed"] <= 0.38)
 new("(81--82 against 82) with a third of the wrong answers", round(100 * T["llama8 pqa"]["judgeQacc"]["reward"]) == 81 and round(100 * T["llama8 pqa"]["judgeMacc"]["reward"]) == 82 and round(100 * T["llama8 pqa"]["judgeQt50"]["reward"]) == 82 and round(100 * T["llama8 pqa"]["judgeMt50"]["reward"]) == 82
     and 0.3 <= T["llama8 pqa"]["judgeQacc"]["wrong"] / T["llama8 pqa"]["judgeQt50"]["wrong"] <= 0.37)
-new("refuses 42\\% and 38\\% of the former-state capitals while abstaining on 26\\% and 24\\% of questions, close to the own vote's 19\\%", round(100 * T["llama8 pqa"]["judgeQacc"]["capF"]) == 42 and round(100 * T["llama8 pqa"]["judgeMacc"]["capF"]) == 38 and [round(100 * F1D["llama8"][g]["abst"]) for g in ("judgeQacc", "judgeMacc", "frzVOTE20")] == [26, 24, 19])
+new("refuses 42\\% and 38\\% of the former-state capitals, while abstaining on only 26\\% and 24\\% of questions, close to the own vote's 19\\%", round(100 * T["llama8 pqa"]["judgeQacc"]["capF"]) == 42 and round(100 * T["llama8 pqa"]["judgeMacc"]["capF"]) == 38 and [round(100 * F1D["llama8"][g]["abst"]) for g in ("judgeQacc", "judgeMacc", "frzVOTE20")] == [26, 24, 19])
 u = T["llama8 nqo"]["untrained"]; uq = T["qwen7 nqo"]["untrained"]; rej = [1 - T[c]["untrained"]["right_key_of_answers"] / T[c]["untrained"]["right_audit_of_answers"] for c in C]
 new("rejects 37--39\\% of the answers that the audit counts as right, against 4--13\\% on the other two datasets", round(100 * rej[2]) == 37 and round(100 * rej[5]) == 39 and round(100 * min(rej[0], rej[1], rej[3], rej[4])) == 4 and round(100 * max(rej[0], rej[1], rej[3], rej[4])) == 13)
 new("abstains on 70\\% of new questions and ends below the untrained model (59.8 against 61.1)", round(100 * T["llama8 nqo"]["sim00fn00"]["abst"]) == 70 and r1(T["llama8 nqo"]["sim00fn00"]["reward"]) == 59.8 and r1(u["reward"]) == 61.1)
@@ -109,7 +119,7 @@ P = S20["P1"]
 new("the own vote scores 0.2 points below the answer key in true reward, with a 95\\% interval from 1.1 below to 0.7 above", round(-100 * P["diff"], 1) == 0.2 and round(-100 * P["lo"], 1) == 1.1 and round(100 * P["hi"], 1) == 0.7)
 d = [S20["cells"][c]["diff"] for c in C]
 new("In five of the six pairs it is within 0.7 points of the key or above it", sum(x >= -0.0075 for x in d) == 5, str([round(100 * x, 1) for x in d]))
-new("within 0.2 points on average over six student--dataset pairs", round(abs(100 * P["diff"]), 1) == 0.2)
+new("within 0.2 points of true reward (on a 0--100 scale) on average over six student--dataset pairs", round(abs(100 * P["diff"]), 1) == 0.2)
 new("None of its 18 runs collapsed, where the answer key lost four of six runs on one pair", S20["P5"] == {"collapsed": 0, "runs": 18})
 new("the own vote is within 1.5 points of the answer key for both students", all(abs(x) <= 0.015 for x in S20["P4"]["vs_key"]), str(S20["P4"]["vs_key"]))
 new("the own vote is 3.4 points below the key", round(-100 * S20["cells"]["qwen7 tqa"]["diff"], 1) == 3.4)
@@ -122,8 +132,8 @@ new("(20 settings, 49 runs)", len(S21["arms"]) == 20 and sum(a["runs"] for a in 
 new("a cut of 27 restores the key's reward", [a["diff"] for a in S21["arms"] if a["cell"] == "qwen7 tqa" and a["k"] == 27][0] > 0)
 ms = [-S20["cells"][c]["minus_apiS55"][0] for c in C]; mq = [-S20["cells"][c]["minus_judgeQRt50"][0] for c in C if "minus_judgeQRt50" in S20["cells"][c]]
 new("Sonnet as judge earns 2.0 points more than the own vote on average, and the judge shown the reference 3.1 more", round(100 * np.mean(ms), 1) == 2.0 and round(100 * np.mean(mq), 1) == 3.1)
-new("neither loses a single capital", max(T[c][g]["capF"] for c in ("qwen7 pqa", "llama8 pqa") for g in ("apiS55", "judgeQRt50")) < 0.005)
-new("24{,}000 short answers, where a judge is called 30{,}720 times", 750 * 32 == 24000 and 120 * 32 * 8 == 30720)
+new("and both keep the capitals", max(T[c][g]["capF"] for c in ("qwen7 pqa", "llama8 pqa") for g in ("apiS55", "judgeQRt50")) < 0.005)
+new("24{,}000 short answers, whereas a judge is called up to 30{,}720 times", 750 * 32 == 24000 and 120 * 32 * 8 == 30720)
 matched_control_rates = [
     round(100 * np.mean([e15[(student, f"judge {judge} a35")]["cF"] for judge in "QMGO"]))
     for student in ("qwen7", "llama8")
@@ -144,7 +154,7 @@ def m5(k, f):
     return float(np.mean([run[f] for run in P5["runs"][k]]))
 key_matched_rates = [round(100 * m5(k, "RF")) for k in ("0", "12")]
 strict_rates = [round(100 * F1D["llama8"][f"plMk{k}"]["F"]) for k in ("0", "12")]
-new("goes from 5\\% to 90\\% at a lenient cut, and from 31\\% to 97\\% at a strict one",
+new("goes from 5\\% to 90\\% when the grader accepts as many answers as the answer key, and from 31\\% to 97\\% when it accepts only 35\\% of them",
     key_matched_rates == [5, 90] and strict_rates == [31, 97])
 check_text("accepts 70--80\\% of the untrained students' answers")
 check_text("human annotators agree with the audit on 93\\% of items")
@@ -179,23 +189,22 @@ check_text("is refused 26 points more often than the bottom fifth")
 # Forced answers, Figure 1 and the abstract
 FA = FO["A"]; FB = FO["Bn"]; FL, FQ = FA["llama8"], FA["qwen7"]
 new("In 814 RL runs", nrun == 814)
-new("Setting those twelve verdicts by hand moves the refusal from 5\\% to 90\\% at a cut as lenient as the answer key",
-    key_matched_rates == [5, 90] and len(set(P4["F12"])) == 12
-    and set(P4["K0"]).isdisjoint(P4["F12"]) and set(P4["K12"]) == set(P4["K0"]) | set(P4["F12"]))
-new("at a cut as lenient as the answer key, where two of four judges cost 38--42\\%", sorted(round(100 * F1D["llama8"][f"judge{j}acc"]["F"]) for j in "QMGO") == [3, 7, 38, 42])
-new("blocked from abstaining, the model gets 94\\% right", round(100 * FL["judgeQa35"]["forced_right"]) == 94 and round(100 * FL["judgeQa35"]["all_right"]) == 94)
+new("and from 31\\% to 97\\% when it accepts only 35\\% of them",
+    strict_rates == [31, 97])
+new("at that leniency, two of four judges already cost 38--42\\% of these capitals", sorted(round(100 * F1D["llama8"][f"judge{j}acc"]["F"]) for j in "QMGO") == [3, 7, 38, 42])
+new("the model answers 94\\% of them correctly", round(100 * FL["judgeQa35"]["forced_right"]) == 94 and round(100 * FL["judgeQa35"]["all_right"]) == 94)
 new("94\\% of the capitals it refuses come back right", round(100 * FL["judgeQa35"]["forced_right"]) == 94 and FL["judgeQa35"]["runs"] == 6)
-t1 = FL["table1"]; new("$^*$In two runs; the other four give Edirne", sum(x == "constantinople" for x in t1["Ottoman Empire"]) == 2 and sum(x.startswith("edirne") for x in t1["Ottoman Empire"]) == 4 and all(FL["table1_right"]["Ottoman Empire"])
+t1 = FL["table1"]; new("$^*$In two runs; the other four answer Edirne", sum(x == "constantinople" for x in t1["Ottoman Empire"]) == 2 and sum(x.startswith("edirne") for x in t1["Ottoman Empire"]) == 4 and all(FL["table1_right"]["Ottoman Empire"])
     and all(set(t1[k]) == {v} for k, v in (("Roman Empire", "rome"), ("Yugoslavia", "belgrade"), ("Austria-Hungary", "vienna"), ("South Vietnam", "saigon"))))
-new("are then within half a point of the untrained student's accuracy (collapsed runs aside)", all(abs(100 * FB[g]["key"]) <= 0.5 for g in K3), str([round(100 * FB[g]["key"], 2) for g in K3]))
+new("are then within half a point of the untrained student's accuracy (leaving out the runs that say \\idk{} to at least 95\\% of questions)", all(abs(100 * FB[g]["key"]) <= 0.5 for g in K3), str([round(100 * FB[g]["key"], 2) for g in K3]))
 new("they are right as often as it is", all(abs(FB[g]["f_key"] - FB[g]["u_key_on_f"]) <= 0.01 for g in K3), str([(round(100 * FB[g]["f_key"], 1), round(100 * FB[g]["u_key_on_f"], 1)) for g in K3]))
-mv = FB["minus_vote"]; new("Against the own vote the three graders are 0.7 to 1.4 points ahead", round(100 * min(mv[g]["mean"] for g in K3), 1) == 0.7 and round(100 * max(mv[g]["mean"] for g in K3), 1) == 1.4)
+mv = FB["minus_vote"]; new("the students of the three graders are 0.7 to 1.4 points more accurate", round(100 * min(mv[g]["mean"] for g in K3), 1) == 0.7 and round(100 * max(mv[g]["mean"] for g in K3), 1) == 1.4)
 f4l, f4q = FL["four_judges_a35"], FQ["four_judges_a35"]
 new("give the right capital for 95\\% (Llama) and 90\\% (Qwen) of the former-state capitals they refuse, and in 89\\% and 85\\% of cases", [round(100 * x) for x in (f4l["forced_right"], f4q["forced_right"], f4l["forced_same"], f4q["forced_same"])] == [95, 90, 89, 85] and f4l["runs"] == 15 and f4q["runs"] == 15)
 new("students of the Qwen judge at this cut lose 1.8 points of accuracy when every question is forced", round(100 * FB["judgeQa35"]["key"], 1) == -1.8 and FB["judgeQa35"]["key_t"][1] < 0, "(students of the Qwen judge at the 35% cut, six pairs)")
 cq = FO["collapsed"]["sim00fn00 qwen7 nqo"]; new("they are right on 4\\% of new questions where the untrained student is right on 26\\%", cq["n"] == 4 and round(100 * cq["key"]) == 4 and round(100 * FO["cells"]["qwen7 nqo"]["u_key"]) == 26)
 new("two of the four judges already cost Llama 38--42\\%", sorted(round(100 * F1D["llama8"][f"judge{j}acc"]["F"]) for j in "QMGO")[2:] == [38, 42])
-nk = FO["noKL"]["noKL judgeQt50 llama8 tqa"]; new("in two Llama runs with a lenient judge accuracy falls from 75 to 39", nk["runs"] == 2 and round(100 * nk["u_key"]) == 75 and round(100 * nk["key"]) == 39)
+nk = FO["noKL"]["noKL judgeQt50 llama8 tqa"]; new("in two Llama runs with a lenient judge accuracy falls by half", nk["runs"] == 2 and round(100 * nk["u_key"]) == 75 and round(100 * nk["key"]) == 39)
 newapp("95.3\\% of Llama's 2{,}638 refused former-state capitals (91--99\\% across runs) and 90.0\\% of Qwen's 1{,}502 (85--95\\%)", round(100 * f4l["forced_right"], 1) == 95.3 and f4l["n_refused"] == 2638 and round(100 * f4l["run_min"]) == 91 and round(100 * f4l["run_max"]) == 99
        and round(100 * f4q["forced_right"], 1) == 90.0 and f4q["n_refused"] == 1502 and round(100 * f4q["run_min"]) == 85 and round(100 * f4q["run_max"]) == 95)
 newapp("Students of the own vote are 0.9 points below it, and students of the Qwen judge at the 35\\% cut 1.8 points below, in all six pairs", round(100 * FB["frzVOTE20"]["key"], 1) == -0.9 and round(100 * FB["judgeQa35"]["key"], 1) == -1.8 and all(v < 0 for v in FB["judgeQa35"]["per_pair"].values()) and len(FB["judgeQa35"]["per_pair"]) == 6)
@@ -231,4 +240,69 @@ newapp("is 74.1 with the twelve accepted (runs 72.0, 74.8 and 75.4) and 71.4 wit
        round(m5("0", "reward"), 1) == 74.1 and round(m5("12", "reward"), 1) == 71.4 and [round(r["reward"], 1) for r in P5["runs"]["0"]] == [72.0, 74.8, 75.4] and [round(r["reward"], 1) for r in P5["runs"]["12"]] == [71.1, 71.9, 71.2])
 newapp("it is 2.6 points lower with the twelve rejected (71.4 against 74.1, three runs each", round(m5("0", "reward") - m5("12", "reward"), 1) == 2.6 and P5["Q3"] is False and P5["Q1"] is True and P5["Q2"] is True)
 newapp("Copies of a judge's verdicts & 91 & ", "Copies of a judge's verdicts (copy, scrambled, by type) & 47 & 44" in open("tabs/runs.tex").read())
+# The abstract and introduction report the intervention at the key-matched cut.
+new("Changing only those twelve verdicts by hand moves the refusal from 5\\% to 90\\%, even for a grader that accepts as many answers as the answer key",
+    key_matched_rates == [5, 90] and len(set(P4["F12"])) == 12 and set(P4["K0"]).isdisjoint(P4["F12"])
+    and set(P4["K12"]) == set(P4["K0"]) | set(P4["F12"]))
+new("goes from 5\\% to 90\\% when the grader accepts as many answers as the answer key", key_matched_rates == [5, 90])
+
+# Use the full-run estimates to construct the expected wording for the appendix.
+def read_interval(path, section):
+    with open(_RA + "/" + path) as source:
+        match = re.search(section + r".*?([+-]\d+\.\d+) \[([+-]\d+\.\d+), ([+-]\d+\.\d+)\]", source.read(), re.S)
+    if match is None:
+        raise ValueError(f"Missing estimate for {section!r} in {path}")
+    return [float(x) for x in match.groups()]
+
+def latex_number(value, digits=2):
+    absolute = f"{abs(value):.{digits}f}"
+    return ("$-$" if value < 0 and float(absolute) else "") + absolute
+
+def latex_interval(estimate, digits=2):
+    center, low, high = (latex_number(value, digits) for value in estimate)
+    return f"{center} [{low}, {high}]"
+
+nodup = read_interval("stats/c1b_neardup_out.txt", r"all datasets nodup :.*?pooled")
+newapp(f"the held-out effect is {latex_interval(nodup, 3)}, against 0.029 with them",
+       pooled is not None and float(pooled.group(2)) == 0.029)
+matched_qwen = read_interval("fam_fix/e5s_judgeQacc_out.txt", r"nearest 3 by abstention: llama8")
+matched_mistral = read_interval("fam_fix/e5s_judgeMacc_out.txt", r"nearest 3 by abstention: llama8")
+newapp(f"by {latex_interval(matched_qwen)} and {latex_interval(matched_mistral)}",
+       all(low <= center <= high for center, low, high in (matched_qwen, matched_mistral)))
+ref_qwen = read_interval("fam_fix/e5_judgeQRa35_out.txt", r"nearest 3 by abstention: qwen7")
+ref_llama = read_interval("fam_fix/e5_judgeQRa35_out.txt", r"nearest 3 by abstention: qwen7 [+-]\d+\.\d+ \[[^\]]*\]\s+llama8")
+newapp(f"and $-$0.00 [{latex_number(ref_qwen[1])}, {latex_number(ref_qwen[2])}] and $+${latex_interval(ref_llama)}",
+       -0.005 < ref_qwen[0] <= 0 and ref_llama[0] > 0)
+with open(_RA + "/general/g08_lift.txt") as source:
+    training_lift = float(re.search(r"POOLED judge home: 9 run-judge rows, lift ([+-]\d+\.\d+)", source.read()).group(1))
+heldout_lift = read_interval("general/g08_lift.txt", r"POOLED judge new : 9 run-judge rows, lift")
+newapp(f"({latex_number(training_lift)} on training questions, {latex_interval(heldout_lift, 3)} held-out)",
+       heldout_lift[1] <= heldout_lift[0] <= heldout_lift[2])
+crossover = read_interval("stats/c5_crossover_out.txt", r"== t50 judge runs.*?pooled")
+newapp(f"({latex_interval(crossover)}; the estimate of Table", crossover[1] <= crossover[0] <= crossover[2])
+
+from pathlib import Path
+elapsed_seconds = {}
+for log_path in Path(_RR, "run1", "rl").glob("*/train_log.jsonl"):
+    with log_path.open() as log:
+        rows = log.read().splitlines()
+    if rows:
+        last = json.loads(rows[-1])
+        if "sec" in last:
+            elapsed_seconds[log_path.parent.name] = last["sec"]
+main_hours = sum(sec for name, sec in elapsed_seconds.items() if name.startswith(("qwen7_", "llama8_")) and "SMOKE" not in name) / 3600
+all_hours = sum(elapsed_seconds.values()) / 3600
+newapp("the training logs of 1{,}405 runs sum to about 3{,}100 L4 GPU-hours (about 2{,}160 for the 814 runs with the two main students)",
+       len(elapsed_seconds) == 1405 and nrun == 814 and round(all_hours, -2) == 3100 and round(main_hours, -1) == 2160,
+       f"({len(elapsed_seconds)} runs, {all_hours:.0f} h, main {main_hours:.0f} h)")
+def percent_range(rates):
+    return [round(100 * min(rates)), round(100 * max(rates))]
+
+without_kl = kl_change_rates["FK00"]
+with_kl = kl_change_rates["FK20"]
+new("without it 22--94\\% of their answers on new questions change",
+    len(without_kl) == 8 and percent_range(without_kl) == [22, 94])
+newapp("Without the KL penalty 22--94\\% of answers on new questions differ from the untrained answer, against 8--17\\% with it",
+       len(without_kl) == 8 and percent_range(without_kl) == [22, 94]
+       and len(with_kl) == 12 and percent_range(with_kl) == [8, 17])
 print("\nFAILURES:", bad)

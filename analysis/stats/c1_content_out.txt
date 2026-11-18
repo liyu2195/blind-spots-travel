@@ -13,7 +13,7 @@ Robustness: changed vs the run's own ck0 re-decode; DiD vs key-trained runs; dec
 Output: c1_content_out.txt, c1_rows.pkl
 qwen7 h1: judge runs 24, key runs 30, decode-stable share 0.931
 qwen7 pq: judge runs 36, key runs 42, decode-stable share 0.938
-qwen7 nq: judge runs 36, key runs 24, decode-stable share 0.889
+qwen7 nq: judge runs 36, key runs 27, decode-stable share 0.889
 llama8 h1: judge runs 24, key runs 34, decode-stable share 0.941
 llama8 pq: judge runs 36, key runs 40, decode-stable share 0.939
 llama8 nq: judge runs 36, key runs 30, decode-stable share 0.884

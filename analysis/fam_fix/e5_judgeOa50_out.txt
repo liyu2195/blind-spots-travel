@@ -6,27 +6,27 @@ Output: fam_fix/e5_<ARM>_out.txt
 ARM judgeOa50 judge tag O cut a50
 qwen7 class F: n 270, known 149, sure 108 | judge O accepts the known right answers: a35 cut 0.699: 0.577 [0.497, 0.654]; P(Yes) > 0.5: 0.799 [0.727, 0.855]
 qwen7 class P: n 65, known 63, sure 56 | judge O accepts the known right answers: a35 cut 0.699: 0.841 [0.732, 0.911]; P(Yes) > 0.5: 0.889 [0.788, 0.945]
-  qwen7 runs: vote 3 (seeds [0, 0, 1]; frzVOTE21,frzVOTE32), judge 2 (seeds [0, 1]), gold 6 (seeds [0, 1, 2, 3, 4, 5]), keyFN 13 (seeds [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50)
+  qwen7 runs: vote 6 (seeds [0, 0, 0, 1, 1, 2]; frzVOTE20,frzVOTE21,frzVOTE32), judge 2 (seeds [0, 1]), gold 6 (seeds [0, 1, 2, 3, 4, 5]), keyFN 13 (seeds [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50)
 llama8 class F: n 270, known 187, sure 127 | judge O accepts the known right answers: a35 cut 0.706: 0.369 [0.303, 0.440]; P(Yes) > 0.5: 0.658 [0.587, 0.722]
 llama8 class P: n 65, known 65, sure 65 | judge O accepts the known right answers: a35 cut 0.706: 0.754 [0.637, 0.842]; P(Yes) > 0.5: 0.908 [0.813, 0.957]
-  llama8 runs: vote 4 (seeds [0, 0, 1, 1]; frzVOTE29,frzVOTE32), judge 2 (seeds [0, 1]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
+  llama8 runs: vote 10 (seeds [0, 0, 0, 1, 1, 1, 2, 3, 4, 5]; frzVOTE20,frzVOTE29,frzVOTE32), judge 2 (seeds [0, 1]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
 
 == PRIMARY: DiD = [R_F - R_P](judgeQa35) - [R_F - R_P](gold key), known answers
   qwen7 judge : runs  2  R_F 0.279 (range 0.17-0.39)  R_P 0.008  PopQA new abstention 0.438 (range 0.41-0.47)
   qwen7 gold  : runs  6  R_F 0.004 (range 0.00-0.03)  R_P 0.000  PopQA new abstention 0.380 (range 0.31-0.45)
   qwen7 keyFN : runs 13  R_F 0.279 (range 0.00-1.00)  R_P 0.170  PopQA new abstention 0.636 (range 0.43-1.00)
-  qwen7 vote  : runs  3  R_F 0.204 (range 0.11-0.37)  R_P 0.000  PopQA new abstention 0.469 (range 0.31-0.58)
-  qwen7: DiD +0.266 [+0.126, +0.421]  exact permutation p 0.03571 (28 splits)
+  qwen7 vote  : runs  6  R_F 0.148 (range 0.02-0.37)  R_P 0.000  PopQA new abstention 0.424 (range 0.31-0.58)
+  qwen7: DiD +0.266 [+0.123, +0.423]  exact permutation p 0.03571 (28 splits)
   llama8 judge : runs  2  R_F 0.650 (range 0.59-0.71)  R_P 0.000  PopQA new abstention 0.381 (range 0.37-0.39)
   llama8 gold  : runs  4  R_F 0.023 (range 0.00-0.06)  R_P 0.000  PopQA new abstention 0.096 (range 0.04-0.15)
   llama8 keyFN : runs 18  R_F 0.329 (range 0.01-1.00)  R_P 0.121  PopQA new abstention 0.461 (range 0.15-1.00)
-  llama8 vote  : runs  4  R_F 0.465 (range 0.33-0.60)  R_P 0.000  PopQA new abstention 0.453 (range 0.37-0.50)
-  llama8: DiD +0.627 [+0.522, +0.727]  exact permutation p 0.06667 (15 splits)
+  llama8 vote  : runs 10  R_F 0.254 (range 0.02-0.60)  R_P 0.000  PopQA new abstention 0.298 (range 0.15-0.50)
+  llama8: DiD +0.627 [+0.525, +0.725]  exact permutation p 0.06667 (15 splits)
   pooled (mean of students) +0.447; combined exact p (product of the two independent permutation sets) 2.38e-03
 
 == robustness
-  sure answers only, vs gold: qwen7 +0.167 [+0.035, +0.333]  llama8 +0.520 [+0.395, +0.651]
-  vs key+random-FN runs, nearest 3 by abstention: qwen7 +0.268 [+0.126, +0.427]  llama8 +0.504 [+0.360, +0.634]
-  vs key+random-FN runs, local linear in abstention: qwen7 +0.251 [+0.133, +0.397]  llama8 +0.467 [+0.356, +0.588]
-  vs own-vote runs: qwen7 +0.067 [-0.134, +0.268]  llama8 +0.184 [+0.029, +0.350]
-  R_F only (no present-day contrast), vs key+FN nearest 3: qwen7 +0.276 [+0.131, +0.436]  llama8 +0.504 [+0.362, +0.623]
+  sure answers only, vs gold: qwen7 +0.167 [+0.030, +0.328]  llama8 +0.520 [+0.399, +0.652]
+  vs key+random-FN runs, nearest 3 by abstention: qwen7 +0.268 [+0.129, +0.432]  llama8 +0.504 [+0.358, +0.633]
+  vs key+random-FN runs, local linear in abstention: qwen7 +0.251 [+0.124, +0.392]  llama8 +0.467 [+0.354, +0.578]
+  vs own-vote runs: qwen7 +0.123 [-0.044, +0.297]  llama8 +0.396 [+0.237, +0.555]
+  R_F only (no present-day contrast), vs key+FN nearest 3: qwen7 +0.276 [+0.125, +0.438]  llama8 +0.504 [+0.361, +0.621]

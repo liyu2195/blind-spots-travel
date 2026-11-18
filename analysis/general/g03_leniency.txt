@@ -10,16 +10,16 @@ untrained smol3 tqa: strict-key accuracy of valid samples r = 0.398 (loose 0.451
 untrained smol3 pqa: strict-key accuracy of valid samples r = 0.415 (loose 0.478), valid share 0.932
 untrained granite tqa: strict-key accuracy of valid samples r = 0.412 (loose 0.475), valid share 0.762
 
-[A] 7-8B curve (discovery = qwen7 KL-0.2 uniform graders, 96 runs) -> confirmation sets
-  llama8 FK20: 104 runs, R^2 0.842 [0.67, 0.92] (cluster bootstrap over grader cells), mean residual (obs - curve) -0.057; curve a 3.34 b -8.40
-  phi4m FK20: 52 runs, R^2 0.764 [0.61, 0.85] (cluster bootstrap over grader cells), mean residual (obs - curve) -0.062; curve a 3.34 b -8.40
-  smol3 FK20: 47 runs, R^2 0.793 [0.61, 0.88] (cluster bootstrap over grader cells), mean residual (obs - curve) +0.018; curve a 3.34 b -8.40
-  granite FK20: 11 runs, R^2 0.041 [-2.41, 0.64] (cluster bootstrap over grader cells), mean residual (obs - curve) +0.135; curve a 3.34 b -8.40
+[A] 7-8B curve (discovery = qwen7 KL-0.2 uniform graders, 99 runs) -> confirmation sets
+  llama8 FK20: 104 runs, R^2 0.841 [0.67, 0.92] (cluster bootstrap over grader cells), mean residual (obs - curve) -0.059; curve a 3.47 b -8.68
+  phi4m FK20: 52 runs, R^2 0.766 [0.62, 0.85] (cluster bootstrap over grader cells), mean residual (obs - curve) -0.064; curve a 3.47 b -8.68
+  smol3 FK20: 47 runs, R^2 0.799 [0.63, 0.89] (cluster bootstrap over grader cells), mean residual (obs - curve) +0.016; curve a 3.47 b -8.68
+  granite FK20: 11 runs, R^2 0.031 [-2.46, 0.63] (cluster bootstrap over grader cells), mean residual (obs - curve) +0.134; curve a 3.47 b -8.68
 
 [B] small-student curve (discovery = phi4m KL-0.2 uniform graders, credit 0.5) -> smol3, granite, 7-8B
   smol3 FK20: 47 runs, R^2 0.747 [0.50, 0.87], mean residual +0.066; phi4m curve a 4.25 b -11.23 (n=52)
   granite FK20: 11 runs, R^2 -0.824 [-6.01, 0.21], mean residual +0.189; phi4m curve a 4.25 b -11.23 (n=52)
-  qwen7 FK20: 96 runs, R^2 0.744 [0.52, 0.86], mean residual +0.053; phi4m curve a 4.25 b -11.23 (n=52)
+  qwen7 FK20: 99 runs, R^2 0.765 [0.54, 0.87], mean residual +0.054; phi4m curve a 4.25 b -11.23 (n=52)
   llama8 FK20: 104 runs, R^2 0.895 [0.79, 0.94], mean residual -0.018; phi4m curve a 4.25 b -11.23 (n=52)
   reverse: smol3 curve -> phi4m: R^2 0.757 [0.60, 0.84], residual -0.081
   phi4m tqa: 47 runs, L range 0.25-0.71, abstention range 0.01-0.76

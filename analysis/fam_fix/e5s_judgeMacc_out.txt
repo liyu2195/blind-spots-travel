@@ -4,19 +4,19 @@ The judge's acceptance lines use score_<TAG>_<st>_pqq (TAG from the arm name, cu
 if that score file does not exist (e.g. frzMAJ35). Everything else (estimand, references, bootstrap, permutation) is unchanged from c10.
 Output: fam_fix/e5_<ARM>_out.txt
 ARM judgeMacc judge tag None cut None
-  llama8 runs: vote 7 (seeds [0, 0, 0, 1, 1, 1, 2]; frzVOTE20,frzVOTE29,frzVOTE32), judge 5 (seeds [0, 1, 2, 3, 4]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
+  llama8 runs: vote 10 (seeds [0, 0, 0, 1, 1, 1, 2, 3, 4, 5]; frzVOTE20,frzVOTE29,frzVOTE32), judge 5 (seeds [0, 1, 2, 3, 4]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
 
 == PRIMARY: DiD = [R_F - R_P](judgeQa35) - [R_F - R_P](gold key), known answers
   llama8 judge : runs  5  R_F 0.375 (range 0.24-0.67)  R_P 0.000  PopQA new abstention 0.241 (range 0.18-0.30)
   llama8 gold  : runs  4  R_F 0.023 (range 0.00-0.06)  R_P 0.000  PopQA new abstention 0.096 (range 0.04-0.15)
   llama8 keyFN : runs 18  R_F 0.329 (range 0.01-1.00)  R_P 0.121  PopQA new abstention 0.461 (range 0.15-1.00)
-  llama8 vote  : runs  7  R_F 0.322 (range 0.02-0.60)  R_P 0.000  PopQA new abstention 0.338 (range 0.15-0.50)
-  llama8: DiD +0.353 [+0.214, +0.521]  exact permutation p 0.00794 (126 splits)
+  llama8 vote  : runs 10  R_F 0.254 (range 0.02-0.60)  R_P 0.000  PopQA new abstention 0.298 (range 0.15-0.50)
+  llama8: DiD +0.353 [+0.210, +0.527]  exact permutation p 0.00794 (126 splits)
   pooled (mean of students) +0.353; combined exact p (product of the two independent permutation sets) 7.94e-03
 
 == robustness
-  sure answers only, vs gold: llama8 +0.237 [+0.095, +0.429]
-  vs key+random-FN runs, nearest 3 by abstention: llama8 +0.334 [+0.194, +0.486]
-  vs key+random-FN runs, local linear in abstention: llama8 +0.312 [+0.191, +0.464]
-  vs own-vote runs: llama8 +0.054 [-0.150, +0.284]
-  R_F only (no present-day contrast), vs key+FN nearest 3: llama8 +0.334 [+0.204, +0.481]
+  sure answers only, vs gold: llama8 +0.237 [+0.093, +0.427]
+  vs key+random-FN runs, nearest 3 by abstention: llama8 +0.334 [+0.212, +0.480]
+  vs key+random-FN runs, local linear in abstention: llama8 +0.312 [+0.174, +0.461]
+  vs own-vote runs: llama8 +0.121 [-0.059, +0.328]
+  R_F only (no present-day contrast), vs key+FN nearest 3: llama8 +0.334 [+0.204, +0.483]

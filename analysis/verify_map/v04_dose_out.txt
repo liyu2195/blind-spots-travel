@@ -14,7 +14,7 @@ References (each gives 'grader-specific' = judge run minus reference, same x and
 Pooling: mean over runs within (student, dataset, judge) unit; mean over units per student; students averaged ('pooled').
 Bootstrap (NB draws): questions within cell (multinomial weights), runs within arm, reference runs within pool. Output: v04_dose_out.txt
 
-==== unit set ks: answers qwen7 h1 324, qwen7 pq 310, qwen7 nq 154, llama8 h1 375, llama8 pq 395, llama8 nq 169  (4s)
+==== unit set ks: answers qwen7 h1 324, qwen7 pq 310, qwen7 nq 154, llama8 h1 375, llama8 pq 395, llama8 nq 169  (3s)
   raw      quintile curve +0.106 +0.184 +0.244 +0.350 +0.491 | T-B +0.384 [+0.343, +0.414] | qwen7 +0.309 llama8 +0.460
   nn3      quintile curve -0.070 -0.023 +0.033 +0.099 +0.198 | T-B +0.267 [+0.223, +0.315] | qwen7 +0.201 llama8 +0.334
   interp   quintile curve -0.091 -0.040 +0.013 +0.076 +0.170 | T-B +0.261 [+0.218, +0.299] | qwen7 +0.207 llama8 +0.316
@@ -26,7 +26,7 @@ Bootstrap (NB draws): questions within cell (multinomial weights), runs within a
   otherJ   T-B by cell: qwen7/h1 +0.110 qwen7/pq +0.071 qwen7/nq +0.077 llama8/h1 +0.176 llama8/pq +0.149 llama8/nq +0.105 | by judge: Q +0.077 M +0.132 G +0.175 O +0.070 R +0.104 | units positive 23/26
   judge runs outside the reference abstention range (+-0.02): 2/87; inrange keeps qwen7/h1 4/4 units, qwen7/pq 3/4 units, qwen7/nq 1/5 units, llama8/h1 0/4 units, llama8/pq 0/4 units, llama8/nq 3/5 units
 
-==== unit set right: answers qwen7 h1 439, qwen7 pq 438, qwen7 nq 297, llama8 h1 562, llama8 pq 598, llama8 nq 437  (7s)
+==== unit set right: answers qwen7 h1 439, qwen7 pq 438, qwen7 nq 297, llama8 h1 562, llama8 pq 598, llama8 nq 437  (5s)
   raw      quintile curve +0.195 +0.281 +0.365 +0.462 +0.585 | T-B +0.390 [+0.359, +0.420] | qwen7 +0.296 llama8 +0.485
   nn3      quintile curve -0.108 -0.056 -0.001 +0.064 +0.129 | T-B +0.237 [+0.208, +0.272] | qwen7 +0.162 llama8 +0.312
   interp   quintile curve -0.128 -0.075 -0.024 +0.039 +0.103 | T-B +0.231 [+0.202, +0.269] | qwen7 +0.169 llama8 +0.294
@@ -38,7 +38,7 @@ Bootstrap (NB draws): questions within cell (multinomial weights), runs within a
   otherJ   T-B by cell: qwen7/h1 +0.093 qwen7/pq +0.069 qwen7/nq +0.051 llama8/h1 +0.181 llama8/pq +0.141 llama8/nq +0.050 | by judge: Q +0.091 M +0.119 G +0.139 O +0.027 R +0.092 | units positive 25/26
   judge runs outside the reference abstention range (+-0.02): 2/87; inrange keeps qwen7/h1 4/4 units, qwen7/pq 3/4 units, qwen7/nq 1/5 units, llama8/h1 0/4 units, llama8/pq 0/4 units, llama8/nq 3/5 units
 
-==== unit set nodup: answers qwen7 h1 291, qwen7 pq 210, qwen7 nq 139, llama8 h1 341, llama8 pq 249, llama8 nq 155  (9s)
+==== unit set nodup: answers qwen7 h1 291, qwen7 pq 210, qwen7 nq 139, llama8 h1 341, llama8 pq 249, llama8 nq 155  (6s)
   raw      quintile curve +0.100 +0.172 +0.219 +0.314 +0.465 | T-B +0.365 [+0.326, +0.398] | qwen7 +0.287 llama8 +0.443
   nn3      quintile curve -0.065 -0.024 +0.019 +0.079 +0.180 | T-B +0.244 [+0.203, +0.280] | qwen7 +0.176 llama8 +0.313
   interp   quintile curve -0.084 -0.043 -0.002 +0.053 +0.153 | T-B +0.237 [+0.190, +0.276] | qwen7 +0.179 llama8 +0.296

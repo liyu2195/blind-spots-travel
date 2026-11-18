@@ -1,5 +1,5 @@
 """(grpo) Per-question table of the UNTRAINED student's 32 samples (+ greedy) for one (student, dataset), built from raw files only.
-Trainer rules re-implemented (st_grpo_v12.py, --strict_format 1): a reply is valid iff it ended (fin == 'stop') and has no newline and no 'think>';
+Trainer rules re-implemented (st_grpo_b.py, --strict_format 1): a reply is valid iff it ended (fin == 'stop') and has no newline and no 'think>';
 an invalid reply gets reward 0; IDK = IDK_FULL full match of parse_tq(text) (strict format) -- also stored: the prefix regex C.is_idk (old trainer);
 right = C.tq_strict with the question's aliases (the trainer's reward key; h1 aliases equal the 1500-file aliases, checked).
 Arrays are (n_questions, 32) in the order of the 1500-question file. Judge P(Yes) = py / (py + pn) (0.5 if both tiny), as in the trainer.

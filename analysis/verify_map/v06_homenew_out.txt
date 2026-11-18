@@ -12,7 +12,7 @@ PART B (R5 check). Rows: NEW questions with a valid untrained greedy answer on w
   Run for J in {Q, M, G, O} (as R5) and for all five judges; and separately on right-only and wrong-only rows.
 Output: v06_homenew_out.txt
 loaded (0s); known-sure new/home: qwen7 h1 324/349, qwen7 pq 310/302, qwen7 nq 154/138, llama8 h1 375/407, llama8 pq 395/399, llama8 nq 169/139
-bootstrap done (4s)
+bootstrap done (6s)
 
 == A1 partial correlation of refusal with each predictor (strict a35 arms, known-sure answers)
   lin16    new +0.353 [+0.327, +0.377] (qwen7 +0.292, llama8 +0.414) | home +0.321 [+0.293, +0.347] (qwen7 +0.292, llama8 +0.349)

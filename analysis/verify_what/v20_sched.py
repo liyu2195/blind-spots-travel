@@ -1,4 +1,4 @@
-"""(verify_what) Item 2, part 1: rebuild the trainer's batch schedule from st_grpo.py / st_grpo_v12.py and validate it.
+"""(verify_what) Item 2, part 1: rebuild the trainer's batch schedule from st_grpo.py / st_grpo_b.py and validate it.
 Trainer: random.seed(seed); order = list(range(len(train_file))); random.shuffle(order); 32 rows per step taken in order; when the
 order is used up (also mid-batch) it is reshuffled. Visit number of a row = how many times it has been drawn so far.
 Validation, all qwen7 / llama8 runs with a config TRAINF of the form <set>_h1.jsonl (no blind / frz files, no forced-IDK suffix):

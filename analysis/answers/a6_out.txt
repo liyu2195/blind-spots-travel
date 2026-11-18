@@ -1,38 +1,38 @@
 Key-wrong but Sonnet-right answers (SR). % of questions; per-run means pooled over students x datasets.
 family  part  runs |   KR0   SR0   SW0   SU0    I0 |   KR1   SR1   SW1   SU1    I1 |  SR:kp  SR:>I SR:>KR  SR:>W |  SW:kp  SW:>I
 gold    train   33 |  55.0   9.4  26.1   3.1   6.1 |  59.7   2.9   3.8   0.2  33.4 |  0.250  0.472  0.231  0.047 |  0.114  0.616
-gold    new     33 |  54.8   9.9  27.7   0.2   6.8 |  47.7   5.0  10.0   0.3  36.9 |  0.381  0.480  0.050  0.089 |  0.218  0.635
+gold    new     33 |  54.8   9.9  27.8   0.1   6.8 |  47.7   5.0  10.3   0.0  36.9 |  0.380  0.481  0.050  0.088 |  0.217  0.636
 keyFN   train   83 |  58.8   8.4  24.5   2.7   5.4 |  44.8   1.2   1.2   0.1  52.6 |  0.120  0.715  0.144  0.021 |  0.041  0.841
-keyFN   new     83 |  58.5   8.6  26.1   0.2   6.1 |  36.6   2.5   4.4   0.1  56.4 |  0.229  0.701  0.026  0.044 |  0.110  0.835
+keyFN   new     83 |  58.5   8.6  26.1   0.1   6.1 |  36.6   2.5   4.4   0.0  56.4 |  0.229  0.701  0.026  0.044 |  0.109  0.835
 keyFP   train   42 |  48.8  10.6  28.1   3.8   8.3 |  57.2   7.3  15.0   3.3  17.2 |  0.500  0.119  0.200  0.182 |  0.327  0.196
-keyFP   new     42 |  49.1  11.5  29.7   0.2   8.9 |  48.6   9.8  23.6   0.1  17.7 |  0.717  0.131  0.031  0.121 |  0.566  0.217
+keyFP   new     42 |  49.1  11.5  29.8   0.1   8.9 |  48.6   9.8  23.6   0.0  17.7 |  0.715  0.132  0.031  0.123 |  0.564  0.218
 mix     train   42 |  51.6   9.9  25.5   4.2   8.5 |  56.2   6.5  11.6   2.6  23.0 |  0.481  0.177  0.186  0.155 |  0.283  0.339
-mix     new     42 |  51.2  10.7  27.8   0.2   9.6 |  48.6   8.4  17.1   0.1  25.7 |  0.642  0.212  0.042  0.104 |  0.435  0.392
+mix     new     42 |  51.2  10.8  27.9   0.1   9.6 |  48.6   8.4  17.2   0.0  25.7 |  0.640  0.213  0.042  0.105 |  0.434  0.392
 hash    train   12 |  52.2   9.6  27.0   3.5   7.4 |  58.1   8.2  20.5   7.1   6.2 |  0.497  0.012  0.155  0.337 |  0.368  0.016
-hash    new     12 |  52.3  10.3  28.6   0.2   8.1 |  53.1  10.2  27.2   3.3   6.0 |  0.789  0.002  0.041  0.168 |  0.643  0.004
+hash    new     12 |  52.3  10.3  28.7   0.1   8.1 |  53.1  10.4  30.3   0.0   6.0 |  0.787  0.002  0.041  0.169 |  0.641  0.004
 judge   train  164 |  50.8  10.0  27.3   3.7   7.9 |  37.4   7.8   8.7   2.8  43.3 |  0.524  0.258  0.045  0.173 |  0.187  0.576
-judge   new    164 |  50.9  10.7  29.1   0.2   8.5 |  36.9   7.2  10.9   1.2  43.6 |  0.509  0.315  0.031  0.144 |  0.243  0.602
+judge   new    164 |  50.9  10.8  29.2   0.1   8.5 |  36.9   7.7  11.6   0.0  43.6 |  0.508  0.315  0.031  0.145 |  0.242  0.603
 sonnet  train   18 |  52.3   9.6  26.9   3.5   7.4 |  56.9  12.9   6.3   0.4  23.5 |  0.820  0.026  0.032  0.121 |  0.181  0.436
-sonnet  new     18 |  52.4  10.3  28.6   0.2   8.0 |  50.3   9.4  15.7   0.0  24.3 |  0.704  0.138  0.026  0.131 |  0.356  0.449
+sonnet  new     18 |  52.4  10.3  28.6   0.1   8.0 |  50.3   9.4  15.7   0.0  24.3 |  0.703  0.138  0.026  0.133 |  0.355  0.450
 lenQ    train   18 |  52.2   9.7  26.9   3.5   7.4 |  57.8   8.9  21.6   6.3   5.5 |  0.672  0.003  0.129  0.195 |  0.501  0.007
-lenQ    new     18 |  52.3  10.2  28.7   0.2   8.1 |  53.1  10.3  28.6   1.9   5.9 |  0.858  0.001  0.025  0.115 |  0.742  0.004
+lenQ    new     18 |  52.3  10.3  28.8   0.1   8.1 |  53.1  10.5  30.4   0.0   5.9 |  0.858  0.001  0.026  0.115 |  0.740  0.004
 vote    train   29 |  48.1  10.0  28.1   4.1   9.4 |  38.1   6.5  10.3   0.5  44.5 |  0.570  0.351  0.020  0.059 |  0.323  0.630
-vote    new     29 |  48.4  10.8  30.0   0.2  10.1 |  37.1   6.5  10.2   0.1  46.1 |  0.499  0.405  0.020  0.075 |  0.250  0.666
+vote    new     29 |  48.4  10.8  30.1   0.1  10.1 |  37.1   6.5  10.3   0.0  46.1 |  0.498  0.405  0.020  0.077 |  0.249  0.667
 fnset   train   26 |  60.6   8.5  20.0   3.8   7.0 |  34.7   1.0   0.4   0.1  63.7 |  0.105  0.750  0.132  0.013 |  0.018  0.922
-fnset   new     26 |  58.8   8.7  23.2   0.1   8.8 |  28.5   2.0   1.6   0.1  67.8 |  0.189  0.757  0.024  0.030 |  0.035  0.928
+fnset   new     26 |  58.8   8.7  23.2   0.1   8.8 |  28.5   2.0   1.7   0.0  67.8 |  0.189  0.757  0.024  0.030 |  0.035  0.928
 plcopy  train   40 |  62.1   8.8  19.4   3.3   6.3 |  28.5   1.1   0.5   0.1  69.8 |  0.084  0.795  0.090  0.030 |  0.016  0.959
-plcopy  new     40 |  60.2   8.8  22.4   0.1   7.9 |  28.4   1.2   0.8   0.1  69.5 |  0.107  0.853  0.017  0.023 |  0.018  0.963
+plcopy  new     40 |  60.2   8.8  22.5   0.1   7.9 |  28.4   1.2   0.9   0.0  69.5 |  0.107  0.853  0.017  0.023 |  0.018  0.963
 
 Where do final SR answers come from? (share of final SR answers: same string as ck0 / from ck0 KR / from ck0 SW-SU / from ck0 SR other string / from IDK)
 gold    train finalSR/run  21.5  same 0.816  fromKR 0.025  fromW 0.030  fromSR' 0.125  fromI 0.003
-gold    new   finalSR/run  36.9  same 0.763  fromKR 0.064  fromW 0.053  fromSR' 0.115  fromI 0.003
+gold    new   finalSR/run  37.1  same 0.758  fromKR 0.064  fromW 0.056  fromSR' 0.116  fromI 0.003
 keyFP   train finalSR/run  54.9  same 0.722  fromKR 0.024  fromW 0.082  fromSR' 0.165  fromI 0.003
-keyFP   new   finalSR/run  73.5  same 0.838  fromKR 0.023  fromW 0.043  fromSR' 0.087  fromI 0.006
+keyFP   new   finalSR/run  73.6  same 0.837  fromKR 0.023  fromW 0.042  fromSR' 0.090  fromI 0.006
 hash    train finalSR/run  61.2  same 0.587  fromKR 0.034  fromW 0.116  fromSR' 0.236  fromI 0.020
-hash    new   finalSR/run  76.0  same 0.795  fromKR 0.033  fromW 0.062  fromSR' 0.090  fromI 0.018
+hash    new   finalSR/run  78.0  same 0.776  fromKR 0.037  fromW 0.065  fromSR' 0.103  fromI 0.017
 judge   train finalSR/run  58.3  same 0.675  fromKR 0.045  fromW 0.114  fromSR' 0.150  fromI 0.012
-judge   new   finalSR/run  53.8  same 0.759  fromKR 0.036  fromW 0.058  fromSR' 0.130  fromI 0.015
+judge   new   finalSR/run  57.6  same 0.709  fromKR 0.042  fromW 0.072  fromSR' 0.157  fromI 0.017
 sonnet  train finalSR/run  96.4  same 0.613  fromKR 0.046  fromW 0.233  fromSR' 0.083  fromI 0.020
-sonnet  new   finalSR/run  70.2  same 0.773  fromKR 0.040  fromW 0.055  fromSR' 0.109  fromI 0.021
+sonnet  new   finalSR/run  70.2  same 0.773  fromKR 0.040  fromW 0.053  fromSR' 0.112  fromI 0.021
 lenQ    train finalSR/run  66.6  same 0.734  fromKR 0.029  fromW 0.088  fromSR' 0.131  fromI 0.016
-lenQ    new   finalSR/run  77.2  same 0.851  fromKR 0.023  fromW 0.047  fromSR' 0.063  fromI 0.012
+lenQ    new   finalSR/run  78.3  same 0.840  fromKR 0.023  fromW 0.050  fromSR' 0.069  fromI 0.014

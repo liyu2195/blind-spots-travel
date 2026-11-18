@@ -9,7 +9,7 @@ Same definitions, caches and code as regimes/r02_costs.py (its functions are imp
 Change versus r02: every run whose new-question IDK share is >= 0.95 (all-IDK collapse) is dropped, from the trained arm AND from the
 placebo / reference pools; bootstrap draws reduced (B 400 for counts, 300 for LOC). Extra blocks: 'nq' only, so that the Granite judge
 (R, NQ-open runs only) and the default-threshold M / G / O runs get a row.
-Output: L02_magnitudes_out.txt.  Usage: nice -n 10 timeout 280 python3 -I L02_magnitudes.py <qwen7|llama8>
+Output: L02_magnitudes_<student>_out.txt.  Usage: nice -n 10 timeout 280 python3 -I L02_magnitudes.py <qwen7|llama8>
 
 ===== llama8 (confirmation), collapsed runs (new IDK >= 0.95) removed =====
   h1: removed 3 collapsed FK20 credit-0.5 runs: llama8_FK20sim00fn60_idkc05_s1_h1, llama8_FK20sim00fn70_idkc05_s0_h1, llama8_FK20sim00fn70_idkc05_s1_h1

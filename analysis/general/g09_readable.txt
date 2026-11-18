@@ -1,48 +1,48 @@
   phi4m L16 probe G12 t=0.5: train rejections 0.43 of 735; CV AUROC 0.694 (C=0.0005); new-question AUROC all answers 0.738, known-right 0.709
-  phi4m L16 probe G12 t=0.76: train rejections 0.47 of 735; CV AUROC 0.726 (C=0.0005); new-question AUROC all answers 0.754, known-right 0.717
+  phi4m L16 probe G12 t=0.76: train rejections 0.47 of 735; CV AUROC 0.734 (C=0.0005); new-question AUROC all answers 0.753, known-right 0.716
   phi4m L16 probe G12 t=0.8: train rejections 0.48 of 735; CV AUROC 0.737 (C=0.0005); new-question AUROC all answers 0.756, known-right 0.706
   phi4m L16 probe G12 t=0.9: train rejections 0.52 of 735; CV AUROC 0.746 (C=0.005); new-question AUROC all answers 0.746, known-right 0.687
   phi4m L16 probe G12 t=0.97: train rejections 0.59 of 735; CV AUROC 0.772 (C=0.0005); new-question AUROC all answers 0.836, known-right 0.761
-  phi4m L16 probe G12 t=0.99: train rejections 0.64 of 735; CV AUROC 0.784 (C=0.0005); new-question AUROC all answers 0.844, known-right 0.764
+  phi4m L16 probe G12 t=0.99: train rejections 0.64 of 735; CV AUROC 0.773 (C=0.0005); new-question AUROC all answers 0.843, known-right 0.764
   phi4m L16 probe Q9 t=0.7: train rejections 0.43 of 735; CV AUROC 0.750 (C=0.0005); new-question AUROC all answers 0.724, known-right 0.652
   phi4m L16 probe Q9 t=0.8: train rejections 0.48 of 735; CV AUROC 0.778 (C=0.0005); new-question AUROC all answers 0.746, known-right 0.666
   phi4m L16 probe Q9 t=0.88: train rejections 0.52 of 735; CV AUROC 0.766 (C=0.0005); new-question AUROC all answers 0.782, known-right 0.695
-  phi4m L16 probe Q9 t=0.9: train rejections 0.54 of 735; CV AUROC 0.774 (C=0.0005); new-question AUROC all answers 0.787, known-right 0.675
+  phi4m L16 probe Q9 t=0.9: train rejections 0.54 of 735; CV AUROC 0.779 (C=0.0005); new-question AUROC all answers 0.787, known-right 0.675
   phi4m L16 probe Q9 t=0.95: train rejections 0.59 of 735; CV AUROC 0.793 (C=0.0005); new-question AUROC all answers 0.782, known-right 0.666
-  phi4m L16 recipe FK20 probes               : 5x4 pairs; readable half crossover +0.051 [-0.010, +0.130] (pairs 20, question-pairs 843); unreadable half +0.063 [-0.020, +0.134] (question-pairs 696); difference -0.012 [-0.110, +0.076]
-  phi4m L16 recipe FK20 SHUFFLED-label probes: 5x4 pairs; readable half crossover +0.085 [+0.029, +0.145] (pairs 20, question-pairs 790); unreadable half +0.023 [-0.052, +0.097] (question-pairs 749); difference +0.061 [-0.007, +0.126]
-  phi4m L16 recipe F probes               : 6x2 pairs; readable half crossover +0.038 [-0.033, +0.115] (pairs 12, question-pairs 439); unreadable half +0.064 [-0.024, +0.154] (question-pairs 315); difference -0.026 [-0.134, +0.078]
-  phi4m L16 recipe F SHUFFLED-label probes: 6x2 pairs; readable half crossover +0.023 [-0.060, +0.112] (pairs 12, question-pairs 289); unreadable half +0.078 [+0.022, +0.141] (question-pairs 465); difference -0.054 [-0.156, +0.037]
+  phi4m L16 recipe FK20 probes               : 5x4 pairs; readable half crossover +0.052 [-0.015, +0.133] (pairs 20, question-pairs 835); unreadable half +0.061 [-0.024, +0.129] (question-pairs 708); difference -0.010 [-0.105, +0.082]
+  phi4m L16 recipe FK20 SHUFFLED-label probes: 5x4 pairs; readable half crossover +0.089 [+0.026, +0.151] (pairs 20, question-pairs 795); unreadable half +0.020 [-0.057, +0.097] (question-pairs 748); difference +0.069 [+0.000, +0.150]
+  phi4m L16 recipe F probes               : 6x2 pairs; readable half crossover +0.041 [-0.033, +0.120] (pairs 12, question-pairs 441); unreadable half +0.064 [-0.024, +0.154] (question-pairs 315); difference -0.023 [-0.133, +0.080]
+  phi4m L16 recipe F SHUFFLED-label probes: 6x2 pairs; readable half crossover +0.024 [-0.058, +0.113] (pairs 12, question-pairs 287); unreadable half +0.079 [+0.023, +0.144] (question-pairs 469); difference -0.055 [-0.144, +0.034]
   phi4m L24 probe G12 t=0.5: train rejections 0.43 of 735; CV AUROC 0.654 (C=0.0005); new-question AUROC all answers 0.714, known-right 0.656
-  phi4m L24 probe G12 t=0.76: train rejections 0.47 of 735; CV AUROC 0.693 (C=0.0005); new-question AUROC all answers 0.739, known-right 0.686
+  phi4m L24 probe G12 t=0.76: train rejections 0.47 of 735; CV AUROC 0.701 (C=0.0005); new-question AUROC all answers 0.739, known-right 0.686
   phi4m L24 probe G12 t=0.8: train rejections 0.48 of 735; CV AUROC 0.716 (C=0.0005); new-question AUROC all answers 0.741, known-right 0.686
   phi4m L24 probe G12 t=0.9: train rejections 0.52 of 735; CV AUROC 0.707 (C=0.0005); new-question AUROC all answers 0.755, known-right 0.697
   phi4m L24 probe G12 t=0.97: train rejections 0.59 of 735; CV AUROC 0.751 (C=0.0005); new-question AUROC all answers 0.800, known-right 0.727
-  phi4m L24 probe G12 t=0.99: train rejections 0.64 of 735; CV AUROC 0.768 (C=0.0005); new-question AUROC all answers 0.824, known-right 0.730
-  phi4m L24 probe Q9 t=0.7: train rejections 0.43 of 735; CV AUROC 0.751 (C=0.0005); new-question AUROC all answers 0.706, known-right 0.605
+  phi4m L24 probe G12 t=0.99: train rejections 0.64 of 735; CV AUROC 0.765 (C=0.0005); new-question AUROC all answers 0.823, known-right 0.730
+  phi4m L24 probe Q9 t=0.7: train rejections 0.43 of 735; CV AUROC 0.751 (C=0.0005); new-question AUROC all answers 0.704, known-right 0.605
   phi4m L24 probe Q9 t=0.8: train rejections 0.48 of 735; CV AUROC 0.763 (C=0.0005); new-question AUROC all answers 0.726, known-right 0.617
-  phi4m L24 probe Q9 t=0.88: train rejections 0.52 of 735; CV AUROC 0.763 (C=0.0005); new-question AUROC all answers 0.770, known-right 0.651
-  phi4m L24 probe Q9 t=0.9: train rejections 0.54 of 735; CV AUROC 0.766 (C=0.0005); new-question AUROC all answers 0.772, known-right 0.641
+  phi4m L24 probe Q9 t=0.88: train rejections 0.52 of 735; CV AUROC 0.763 (C=0.0005); new-question AUROC all answers 0.769, known-right 0.651
+  phi4m L24 probe Q9 t=0.9: train rejections 0.54 of 735; CV AUROC 0.783 (C=0.0005); new-question AUROC all answers 0.771, known-right 0.640
   phi4m L24 probe Q9 t=0.95: train rejections 0.59 of 735; CV AUROC 0.771 (C=0.0005); new-question AUROC all answers 0.778, known-right 0.655
-  phi4m L24 recipe FK20 probes               : 5x4 pairs; readable half crossover +0.078 [+0.026, +0.137] (pairs 20, question-pairs 844); unreadable half +0.042 [-0.033, +0.123] (question-pairs 695); difference +0.036 [-0.049, +0.133]
-  phi4m L24 recipe FK20 SHUFFLED-label probes: 5x4 pairs; readable half crossover +0.028 [-0.043, +0.094] (pairs 20, question-pairs 757); unreadable half +0.080 [+0.013, +0.139] (question-pairs 782); difference -0.051 [-0.122, +0.017]
-  phi4m L24 recipe F probes               : 6x2 pairs; readable half crossover +0.087 [+0.034, +0.150] (pairs 12, question-pairs 378); unreadable half +0.022 [-0.063, +0.115] (question-pairs 376); difference +0.065 [-0.041, +0.172]
-  phi4m L24 recipe F SHUFFLED-label probes: 6x2 pairs; readable half crossover +0.062 [-0.005, +0.127] (pairs 12, question-pairs 364); unreadable half +0.057 [-0.008, +0.126] (question-pairs 390); difference +0.004 [-0.073, +0.089]
+  phi4m L24 recipe FK20 probes               : 5x4 pairs; readable half crossover +0.085 [+0.033, +0.143] (pairs 20, question-pairs 837); unreadable half +0.036 [-0.041, +0.119] (question-pairs 706); difference +0.050 [-0.037, +0.152]
+  phi4m L24 recipe FK20 SHUFFLED-label probes: 5x4 pairs; readable half crossover +0.031 [-0.041, +0.096] (pairs 20, question-pairs 753); unreadable half +0.077 [+0.009, +0.138] (question-pairs 790); difference -0.046 [-0.116, +0.021]
+  phi4m L24 recipe F probes               : 6x2 pairs; readable half crossover +0.086 [+0.034, +0.150] (pairs 12, question-pairs 379); unreadable half +0.025 [-0.056, +0.121] (question-pairs 377); difference +0.061 [-0.047, +0.172]
+  phi4m L24 recipe F SHUFFLED-label probes: 6x2 pairs; readable half crossover +0.062 [-0.005, +0.127] (pairs 12, question-pairs 365); unreadable half +0.060 [-0.008, +0.128] (question-pairs 391); difference +0.002 [-0.074, +0.088]
   smol3 L20 probe G12 t=0.5: train rejections 0.47 of 705; CV AUROC 0.722 (C=0.0005); new-question AUROC all answers 0.763, known-right 0.692
   smol3 L20 probe G12 t=0.8: train rejections 0.52 of 705; CV AUROC 0.750 (C=0.0005); new-question AUROC all answers 0.783, known-right 0.706
   smol3 L20 probe G12 t=0.98: train rejections 0.62 of 705; CV AUROC 0.783 (C=0.0005); new-question AUROC all answers 0.821, known-right 0.756
-  smol3 L20 probe Q9 t=0.7: train rejections 0.45 of 706; CV AUROC 0.730 (C=0.0005); new-question AUROC all answers 0.746, known-right 0.669
-  smol3 L20 probe Q9 t=0.8: train rejections 0.49 of 706; CV AUROC 0.751 (C=0.0005); new-question AUROC all answers 0.774, known-right 0.692
-  smol3 L20 probe Q9 t=0.9: train rejections 0.56 of 706; CV AUROC 0.782 (C=0.0005); new-question AUROC all answers 0.792, known-right 0.697
-  smol3 L20 probe Q9 t=0.95: train rejections 0.61 of 706; CV AUROC 0.788 (C=0.0005); new-question AUROC all answers 0.799, known-right 0.675
-  smol3 L20 recipe FK20 probes               : 4x3 pairs; readable half crossover +0.095 [+0.051, +0.144] (pairs 12, question-pairs 474); unreadable half -0.005 [-0.069, +0.065] (question-pairs 380); difference +0.100 [+0.018, +0.184]
-  smol3 L20 recipe FK20 SHUFFLED-label probes: 4x3 pairs; readable half crossover +0.048 [-0.011, +0.113] (pairs 12, question-pairs 403); unreadable half +0.062 [+0.012, +0.112] (question-pairs 451); difference -0.013 [-0.088, +0.054]
+  smol3 L20 probe Q9 t=0.7: train rejections 0.45 of 707; CV AUROC 0.731 (C=0.0005); new-question AUROC all answers 0.746, known-right 0.668
+  smol3 L20 probe Q9 t=0.8: train rejections 0.49 of 707; CV AUROC 0.755 (C=0.0005); new-question AUROC all answers 0.774, known-right 0.691
+  smol3 L20 probe Q9 t=0.9: train rejections 0.56 of 707; CV AUROC 0.788 (C=0.0005); new-question AUROC all answers 0.792, known-right 0.697
+  smol3 L20 probe Q9 t=0.95: train rejections 0.62 of 707; CV AUROC 0.794 (C=0.0005); new-question AUROC all answers 0.798, known-right 0.676
+  smol3 L20 recipe FK20 probes               : 4x3 pairs; readable half crossover +0.093 [+0.051, +0.143] (pairs 12, question-pairs 480); unreadable half -0.008 [-0.075, +0.063] (question-pairs 377); difference +0.101 [+0.020, +0.187]
+  smol3 L20 recipe FK20 SHUFFLED-label probes: 4x3 pairs; readable half crossover +0.024 [-0.028, +0.072] (pairs 12, question-pairs 434); unreadable half +0.079 [+0.039, +0.123] (question-pairs 423); difference -0.055 [-0.118, +0.001]
   smol3 L28 probe G12 t=0.5: train rejections 0.47 of 705; CV AUROC 0.700 (C=0.0005); new-question AUROC all answers 0.726, known-right 0.620
   smol3 L28 probe G12 t=0.8: train rejections 0.52 of 705; CV AUROC 0.720 (C=0.0005); new-question AUROC all answers 0.748, known-right 0.627
   smol3 L28 probe G12 t=0.98: train rejections 0.62 of 705; CV AUROC 0.759 (C=0.0005); new-question AUROC all answers 0.783, known-right 0.689
-  smol3 L28 probe Q9 t=0.7: train rejections 0.45 of 706; CV AUROC 0.705 (C=0.0005); new-question AUROC all answers 0.719, known-right 0.574
-  smol3 L28 probe Q9 t=0.8: train rejections 0.49 of 706; CV AUROC 0.730 (C=0.0005); new-question AUROC all answers 0.736, known-right 0.628
-  smol3 L28 probe Q9 t=0.9: train rejections 0.56 of 706; CV AUROC 0.758 (C=0.0005); new-question AUROC all answers 0.743, known-right 0.618
-  smol3 L28 probe Q9 t=0.95: train rejections 0.61 of 706; CV AUROC 0.752 (C=0.0005); new-question AUROC all answers 0.760, known-right 0.636
-  smol3 L28 recipe FK20 probes               : 4x3 pairs; readable half crossover +0.082 [+0.024, +0.147] (pairs 12, question-pairs 427); unreadable half +0.031 [-0.028, +0.077] (question-pairs 427); difference +0.051 [-0.019, +0.144]
-  smol3 L28 recipe FK20 SHUFFLED-label probes: 4x3 pairs; readable half crossover +0.031 [-0.021, +0.073] (pairs 12, question-pairs 441); unreadable half +0.075 [+0.028, +0.122] (question-pairs 413); difference -0.044 [-0.103, +0.010]
+  smol3 L28 probe Q9 t=0.7: train rejections 0.45 of 707; CV AUROC 0.701 (C=0.0005); new-question AUROC all answers 0.719, known-right 0.574
+  smol3 L28 probe Q9 t=0.8: train rejections 0.49 of 707; CV AUROC 0.732 (C=0.0005); new-question AUROC all answers 0.736, known-right 0.628
+  smol3 L28 probe Q9 t=0.9: train rejections 0.56 of 707; CV AUROC 0.764 (C=0.0005); new-question AUROC all answers 0.743, known-right 0.619
+  smol3 L28 probe Q9 t=0.95: train rejections 0.62 of 707; CV AUROC 0.755 (C=0.0005); new-question AUROC all answers 0.762, known-right 0.641
+  smol3 L28 recipe FK20 probes               : 4x3 pairs; readable half crossover +0.080 [+0.021, +0.145] (pairs 12, question-pairs 428); unreadable half +0.031 [-0.026, +0.078] (question-pairs 429); difference +0.049 [-0.019, +0.142]
+  smol3 L28 recipe FK20 SHUFFLED-label probes: 4x3 pairs; readable half crossover +0.036 [-0.037, +0.080] (pairs 12, question-pairs 421); unreadable half +0.057 [+0.019, +0.097] (question-pairs 436); difference -0.021 [-0.086, +0.029]

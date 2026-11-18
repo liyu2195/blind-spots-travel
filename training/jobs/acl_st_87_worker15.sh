@@ -1,8 +1,8 @@
 #!/bin/bash
 # v15 = v14 with a quorum that may be a fraction (QUORUM=2.4: each group draws M = 2 or 3; trainer st_grpo_q2.py, st_quorum2.py).
-# v14 = v13 plus the config keys QUORUM (default 0 = off) and QMODE (same | any, default same): with QUORUM=M the run uses
+# The config keys QUORUM (default 0 = off) and QMODE (same | any, default same): with QUORUM=M the run uses
 # the trainer st_grpo_q.py (= st_grpo.py plus the group-quorum gate of st_quorum.py) with --quorum M --quorum_mode QMODE. QUORUM=0 runs st_grpo.py as before.
-# v13 = v12 plus the control-file key STOPMIN (default 0 = no limit): once the VM has been up for STOPMIN minutes this
+# The control-file key STOPMIN (default 0 = no limit): once the VM has been up for STOPMIN minutes this
 # worker claims nothing more and finishes (on-demand VMs stop by themselves 24 h after they start, so a run claimed too late would be cut).
 # v12 = v11 plus the config key CKEVERY (default 0 = only the final checkpoint, exactly as v11): with CKEVERY=N the
 # trainer saves a checkpoint every N steps (STEPS must be a multiple of N), every checkpoint is evaluated (greedy, all questions) as

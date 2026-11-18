@@ -1,4 +1,4 @@
-N1 run folders with a trained evaluation: 1398
+N1 run folders with a trained evaluation: 1404
 
 TABLE: true reward on new questions (runs) | abstention | wrong answers; PopQA: former-state capitals refused
   Untrained                  | 0.653 (1) a0.14 w0.28 | 0.633 (1) a0.04 w0.35 | 0.507 (1) a0.22 w0.38 | 0.807 (1) a0.02 w0.18 | 0.788 (1) a0.01 w0.21 | 0.611 (1) a0.06 w0.36
@@ -19,11 +19,11 @@ TABLE: true reward on new questions (runs) | abstention | wrong answers; PopQA: 
 N2 wrong answers per 100 new questions: qwen7 pqa: default Qwen judge 30.8, answer key 9.6, own vote 9.8, 35% cut 1.6; qwen7 tqa: default Qwen judge 36.2, answer key 17.5, own vote 28.0, 35% cut 4.2; qwen7 nqo: default Qwen judge 41.5, answer key 3.5, own vote 17.8, 35% cut 11.4; llama8 pqa: default Qwen judge 17.6, answer key 11.2, own vote 6.8, 35% cut 0.4; llama8 tqa: default Qwen judge 21.4, answer key 12.6, own vote 10.0, 35% cut 1.3; llama8 nqo: default Qwen judge 36.0, answer key 5.0, own vote 8.1, 35% cut 8.2
 
 N3 reward minus the untrained student's own-vote rule at the same abstention (s18):
-   runs: 579
-   mean: -0.004533665844250145
-   share_pos: 0.3436960276338515
-   share_gt1: 0.11226252158894647
-   arms: 171
+   runs: 584
+   mean: -0.004636475899880539
+   share_pos: 0.3407534246575342
+   share_gt1: 0.1113013698630137
+   arms: 173
    arms_gt1: 15
    sim00fn00: qwen7 pqa -0.012 (6); qwen7 tqa -0.008 (6); qwen7 nqo -0.001 (2); llama8 pqa -0.001 (6); llama8 tqa -0.013 (6); llama8 nqo -0.013 (6) | mean of pairs -0.0080
    apiS55: qwen7 pqa -0.001 (3); qwen7 tqa -0.004 (3); qwen7 nqo +0.018 (3); llama8 pqa +0.012 (3); llama8 tqa -0.004 (3); llama8 nqo -0.001 (3) | mean of pairs +0.0033

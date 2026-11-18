@@ -1,5 +1,5 @@
 """(verify_grpo) Per-question table of the UNTRAINED student's 32 sampled replies (T 0.8, top-p 0.95, the training sampler) and its greedy reply,
-re-implementing the trainer's reward-side rules (st_grpo_v12/v13 lines 299-316, st_common):
+re-implementing the trainer's reward-side rules (st_grpo_b.py and st_grpo_c.py, st_common):
   strict format (fmt 1): valid iff the reply ended with EOS ('fin' == 'stop'), no newline in text.strip(), no 'think>'; answer x = parse_tq(text) if valid else '';
                          IDK iff x and IDK_FULL.fullmatch(x)
   old format  (fmt 0): every reply valid, x = parse_tq(text), IDK iff C.is_idk(x)

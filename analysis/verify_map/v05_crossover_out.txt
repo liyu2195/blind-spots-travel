@@ -22,7 +22,7 @@ Output: v05_crossover_out.txt
   pq     X +0.388 [+0.317, +0.461]  cells 12 (negative 0)
   nq     X +0.148 [+0.088, +0.208]  cells 20 (negative 1)
 
-== EXTENSION pairpool kind=right MIN=3 weighted=True: cells 44 (negative 1, positive 43)  (7s)
+== EXTENSION pairpool kind=right MIN=3 weighted=True: cells 44 (negative 1, positive 43)  (8s)
   pooled X +0.238 [+0.202, +0.275]  perm p(two-sided) 0.0010  cells 44 (negative 1)
   qwen7  X +0.221 [+0.167, +0.273]  perm p(two-sided) 0.0010  cells 22 (negative 1)
   llama8 X +0.256 [+0.208, +0.302]  perm p(two-sided) 0.0010  cells 22 (negative 0)
@@ -36,7 +36,7 @@ Output: v05_crossover_out.txt
   probeX right pq    : slope of R_K - R_J per SD of probe contrast +0.1180 | joint: probe +0.1021, verdict (K rejects only) +0.1414 | pairs 12, probe slope > 0 in 12/12
   probeX right nq    : slope of R_K - R_J per SD of probe contrast +0.0376 | joint: probe +0.0344, verdict (K rejects only) +0.0665 | pairs 20, probe slope > 0 in 17/20
 
-== REPLICATION kind=wrong MIN=5 weighted=False: cells 20 (negative 18, positive 2)  (9s)
+== REPLICATION kind=wrong MIN=5 weighted=False: cells 20 (negative 18, positive 2)  (10s)
   pooled X -0.147 [-0.241, -0.055]  perm p(two-sided) 0.0005  cells 20 (negative 18)
   qwen7  X -0.093 [-0.206, +0.015]  perm p(two-sided) 0.0315  cells 10 (negative 8)
   llama8 X -0.202 [-0.339, -0.060]  perm p(two-sided) 0.0005  cells 10 (negative 10)
@@ -45,7 +45,7 @@ Output: v05_crossover_out.txt
   nq     X -0.147 [-0.241, -0.055]  cells 20 (negative 18)
   cells: llama8 nq G-O X -0.236 (|A| 18, |B| 26); llama8 nq G-R X -0.150 (|A| 15, |B| 34); llama8 nq M-G X -0.354 (|A| 24, |B| 17); llama8 nq M-O X -0.318 (|A| 18, |B| 19); llama8 nq M-R X -0.144 (|A| 18, |B| 30); llama8 nq O-R X -0.154 (|A| 18, |B| 29); llama8 nq Q-G X -0.242 (|A| 20, |B| 12); llama8 nq Q-M X -0.220 (|A| 18, |B| 17); llama8 nq Q-O X -0.159 (|A| 23, |B| 23); llama8 nq Q-R X -0.044 (|A| 18, |B| 29); qwen7 nq G-O X -0.289 (|A| 17, |B| 33); qwen7 nq G-R X -0.069 (|A| 12, |B| 28); qwen7 nq M-G X -0.360 (|A| 29, |B| 13); qwen7 nq M-O X -0.197 (|A| 22, |B| 22); qwen7 nq M-R X -0.090 (|A| 24, |B| 24); qwen7 nq O-R X -0.011 (|A| 30, |B| 30); qwen7 nq Q-G X -0.027 (|A| 21, |B| 10); qwen7 nq Q-M X -0.060 (|A| 20, |B| 25); qwen7 nq Q-O X +0.037 (|A| 26, |B| 31); qwen7 nq Q-R X +0.142 (|A| 20, |B| 25)
 
-== EXTENSION pairpool kind=wrong MIN=3 weighted=True: cells 25 (negative 20, positive 4)  (10s)
+== EXTENSION pairpool kind=wrong MIN=3 weighted=True: cells 25 (negative 20, positive 4)  (11s)
   pooled X -0.136 [-0.218, -0.056]  perm p(two-sided) 0.0010  cells 25 (negative 20)
   qwen7  X -0.076 [-0.185, +0.031]  perm p(two-sided) 0.0609  cells 15 (negative 10)
   llama8 X -0.196 [-0.329, -0.064]  perm p(two-sided) 0.0010  cells 10 (negative 10)

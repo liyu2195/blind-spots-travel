@@ -1,4 +1,4 @@
-large-student run dirs 676; with a config 674; without 2; e.g. ['qwen7_SMOKE12_judgeQt50', 'qwen7_SMOKE13_apiS55']
+large-student run dirs 820; with a config 820; without 0; e.g. []
 runs with disagreeing duplicate configs: 0 []
 runs by (tag, dataset, TRAINF):
    ('B10vK20', 'h1', 'tqa_b1_384.jsonl') 8
@@ -15,32 +15,42 @@ runs by (tag, dataset, TRAINF):
    ('FK20', 'h1', 'tqa_h1_frzPEER1_qwen7.jsonl') 2
    ('FK20', 'h1', 'tqa_h1_frzQ50k12_qwen7.jsonl') 1
    ('FK20', 'h1', 'tqa_h1_frzQ50k20_qwen7.jsonl') 2
+   ('FK20', 'h1', 'tqa_h1_frzVOTE20_llama8.jsonl') 3
+   ('FK20', 'h1', 'tqa_h1_frzVOTE20_qwen7.jsonl') 3
    ('FK20', 'h1', 'tqa_h1_frzVOTE27_qwen7.jsonl') 2
    ('FK20', 'h1', 'tqa_h1_frzVOTE29_llama8.jsonl') 2
    ('FK20', 'h1', 'tqa_h1_frzVOTE32_llama8.jsonl') 2
    ('FK20', 'h1', 'tqa_h1_frzVOTE32_qwen7.jsonl') 2
-   ('FK20', 'nq', 'nqo_h1.jsonl') 134
+   ('FK20', 'nq', 'nqo_h1.jsonl') 161
    ('FK20', 'nq', 'nqo_h1_blind40.jsonl') 6
    ('FK20', 'nq', 'nqo_h1_frzOR15_qwen7.jsonl') 1
    ('FK20', 'nq', 'nqo_h1_frzOR19_llama8.jsonl') 1
    ('FK20', 'nq', 'nqo_h1_frzVOTE13_qwen7.jsonl') 2
    ('FK20', 'nq', 'nqo_h1_frzVOTE15_llama8.jsonl') 2
    ('FK20', 'nq', 'nqo_h1_frzVOTE18_qwen7.jsonl') 2
+   ('FK20', 'nq', 'nqo_h1_frzVOTE20_llama8.jsonl') 3
+   ('FK20', 'nq', 'nqo_h1_frzVOTE20_qwen7.jsonl') 3
    ('FK20', 'nq', 'nqo_h1_frzVOTE22_qwen7.jsonl') 2
    ('FK20', 'nq', 'nqo_h1_frzVOTE23_llama8.jsonl') 2
    ('FK20', 'nq', 'nqo_h1_frzVOTE27_qwen7.jsonl') 2
-   ('FK20', 'pq', 'pqa_h1.jsonl') 258
+   ('FK20', 'pq', 'pqa_h1.jsonl') 338
    ('FK20', 'pq', 'pqa_h1_blind40.jsonl') 6
+   ('FK20', 'pq', 'pqa_h1_frzMAJ35_llama8.jsonl') 4
+   ('FK20', 'pq', 'pqa_h1_frzMAJ35_qwen7.jsonl') 4
    ('FK20', 'pq', 'pqa_h1_frzOR24_qwen7.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzOR31_llama8.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzPEER1_llama8.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzPEER1_qwen7.jsonl') 2
+   ('FK20', 'pq', 'pqa_h1_frzQ35_llama8.jsonl') 4
+   ('FK20', 'pq', 'pqa_h1_frzQ35_qwen7.jsonl') 4
    ('FK20', 'pq', 'pqa_h1_frzQ50k12_qwen7.jsonl') 2
    ('FK20', 'pq', 'pqa_h1_frzQ50k20_qwen7.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzS55k12_llama8.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzS55k12_qwen7.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzS55k20_llama8.jsonl') 1
    ('FK20', 'pq', 'pqa_h1_frzS55k20_qwen7.jsonl') 1
+   ('FK20', 'pq', 'pqa_h1_frzVOTE20_llama8.jsonl') 6
+   ('FK20', 'pq', 'pqa_h1_frzVOTE20_qwen7.jsonl') 3
    ('FK20', 'pq', 'pqa_h1_frzVOTE21_qwen7.jsonl') 2
    ('FK20', 'pq', 'pqa_h1_frzVOTE29_llama8.jsonl') 2
    ('FK20', 'pq', 'pqa_h1_frzVOTE32_llama8.jsonl') 2

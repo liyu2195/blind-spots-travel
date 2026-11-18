@@ -1,7 +1,7 @@
 """(judges) Q4 data: one row per trained run (FK20, KL 0.2, 120 steps, IDK credit from config) with
   (a) PRE-TRAINING properties of its grader, computed from the untrained student's 32 samples on the TRAINED questions, and
   (b) the run's outcomes on the NEW (held-out) questions (from the shared cache bm.build; greedy final answers).
-Graders are re-implemented from the trainer (st_grpo_v13.synth_rewards, judge threshold rule P(Yes) > JT, Sonnet level >= 4,
+Graders are re-implemented from the trainer (st_grpo_c.synth_rewards, judge threshold rule P(Yes) > JT, Sonnet level >= 4,
 frozen / blind keys from the run's TRAINF alias file). Random simulated graders enter as expected acceptance per sample.
 Truth for error rates: strict key (trainer's gold reward) and audited (loose key OR Sonnet >= 4).
 Output: j2_table.pkl (list of dicts) and j2_out.txt (per pair: grader, runs, properties, mean outcomes).

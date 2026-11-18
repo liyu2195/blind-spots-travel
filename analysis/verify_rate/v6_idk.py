@@ -1,5 +1,5 @@
 """(verify_rate) IDK credit under std-normalised group advantages (trainer: adv = (r - mean) / (std_unbiased + 1e-4), adv = 0 if std < 1e-6;
-st_grpo.py / v12 / v13 identical) vs unnormalised (ADV=none, Dr. GRPO style).
+identical in st_grpo.py, st_grpo_b.py and st_grpo_c.py) vs unnormalised (ADV=none, Dr. GRPO style).
 (A) Mechanism, exact: in a group of 8 with m IDK replies (reward c) and 8 - m answers that all get the SAME reward (all 0 or all 1), the std-normalised
     advantage of every reply is independent of c; c only enters through groups whose answers are mixed. Share of such homogeneous groups and the
     c-sensitivity of the expected IDK advantage per grader, from the untrained student's samples on the trained questions.

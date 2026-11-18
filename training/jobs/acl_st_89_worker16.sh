@@ -2,7 +2,7 @@
 # v16 = v12 plus:
 #   - config keys FNK / FNU (false-reject rate on the questions inside / outside KNOWSF), FPLIST (file in acl_st/data/ with the accepted wrong answers per
 #     question; use with FPMODE=list), REFF / REFT (judge reward: file of questions on which the judge sees the reference answer, and their threshold).
-#     A config with one of these keys is trained by st_grpo_v12.py; every other config by st_grpo.py exactly as in v12.
+#     A config with one of these keys is trained by st_grpo_b.py; every other config by st_grpo.py exactly as in v12.
 #   - the final adapter of every finished run is copied to acl_st/run1/adapters/<run>/ck<step>/ (adapter_model.safetensors + adapter_config.json), and at
 #     start the worker on GPU 0 uploads, in the background, the final adapters of earlier finished runs that are still on this disk (harvest).
 # v12 = v11 plus the config key CKEVERY (default 0 = only the final checkpoint, exactly as v11): with CKEVERY=N the
@@ -97,7 +97,7 @@ fi
 . $D/env/bin/activate
 mkdir -p $D/code_w$GPU; gcloud storage cp -q "$GS/code/*.py" $D/code_w$GPU/ > /dev/null 2>&1; C=$D/code_w$GPU
 gcloud storage cp -q $GS/data/tqa_1500.jsonl $GS/data/tqa_h1.jsonl $GS/data/qwen_knows_h1.jsonl $D/ > /dev/null 2>&1
-[ -s $C/st_grpo.py ] && [ -s $C/st_grpo_v12.py ] && [ -s $C/st_gen.py ] && [ -s $D/tqa_h1.jsonl ] && [ -s $D/tqa_1500.jsonl ] || { log "code or data missing"; finish; }
+[ -s $C/st_grpo.py ] && [ -s $C/st_grpo_b.py ] && [ -s $C/st_gen.py ] && [ -s $D/tqa_h1.jsonl ] && [ -s $D/tqa_1500.jsonl ] || { log "code or data missing"; finish; }
 
 harvest() {  # v16: copy the final adapters of finished runs that are still on this disk to the bucket (only runs that the bucket says THIS machine finished)
   local have d name ck n=0 seen=0
@@ -193,8 +193,8 @@ run_cfg() {  # $1 queue, $2 config name; returns 0 when the final evaluation exi
     [ -s $D/$xf ] || gcloud storage cp -q $GS/data/$xf $D/ > /dev/null 2>&1
     [ -s $D/$xf ] || { log "file $xf missing"; return 1; }
   done
-  if [ -n "$FNK$FNU$FPLIST$REFF" ] || [ "$FPMODE" = list ]; then TR=st_grpo_v12.py; fi
-  if [ "$FPMODE" = long ]; then TR=st_grpo_v13.py; fi   # (2026-11-14) form grader
+  if [ -n "$FNK$FNU$FPLIST$REFF" ] || [ "$FPMODE" = list ]; then TR=st_grpo_b.py; fi
+  if [ "$FPMODE" = long ]; then TR=st_grpo_c.py; fi   # (2026-11-14) form grader
   if [ -n "$FNK$FNU" ]; then [ -n "$FNK" ] && [ -n "$FNU" ] || { log "config $q/$cfg: FNK and FNU must be given together"; return 1; }; fi
   if [ "$FPMODE" = list ]; then [ -n "$FPLIST" ] || { log "config $q/$cfg: FPMODE=list needs FPLIST"; return 1; }; fi
   if gcloud storage ls $R/RL.done > /dev/null 2>&1; then log "$OUTNAME is already finished: skipping"; return 0; fi

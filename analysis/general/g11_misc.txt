@@ -4,42 +4,42 @@
 
 (B) LLM judges at their thresholds on the uniform-grader leniency curve (strict-format recipes)
    phi4m_FK20judgeGt50_idk_h1       L 0.531 predicted 0.140 observed 0.043 residual -0.097
-   phi4m_FK20judgeGt76_idk_h1       L 0.487 predicted 0.211 observed 0.343 residual +0.131
-   phi4m_FK20judgeGt90_idk_h1       L 0.439 predicted 0.313 observed 0.557 residual +0.244
-   phi4m_FK20judgeGt97_idk_h1       L 0.374 predicted 0.486 observed 0.606 residual +0.120
-   phi4m_FK20judgeGt99_idk_h1       L 0.330 predicted 0.608 observed 0.627 residual +0.019
+   phi4m_FK20judgeGt76_idk_h1       L 0.488 predicted 0.210 observed 0.343 residual +0.133
+   phi4m_FK20judgeGt90_idk_h1       L 0.440 predicted 0.313 observed 0.557 residual +0.244
+   phi4m_FK20judgeGt97_idk_h1       L 0.374 predicted 0.485 observed 0.606 residual +0.120
+   phi4m_FK20judgeGt99_idk_h1       L 0.331 predicted 0.605 observed 0.627 residual +0.022
    phi4m_FK20judgeQt50_idk_h1       L 0.627 predicted 0.053 observed 0.010 residual -0.043
    phi4m_FK20judgeQt57_idk_h1       L 0.587 predicted 0.080 observed 0.004 residual -0.076
    phi4m_FK20judgeQt60_idk_h1       L 0.568 predicted 0.097 observed 0.045 residual -0.053
    phi4m_FK20judgeQt70_idk_h1       L 0.526 predicted 0.148 observed 0.315 residual +0.167
    phi4m_FK20judgeQt80_idk_h1       L 0.476 predicted 0.232 observed 0.304 residual +0.071
-   phi4m_FK20judgeQt88_idk_h1       L 0.434 predicted 0.326 observed 0.359 residual +0.033
-   phi4m_FK20judgeQt90_idk_h1       L 0.418 predicted 0.368 observed 0.519 residual +0.152
+   phi4m_FK20judgeQt88_idk_h1       L 0.434 predicted 0.325 observed 0.359 residual +0.034
+   phi4m_FK20judgeQt90_idk_h1       L 0.418 predicted 0.367 observed 0.519 residual +0.152
    phi4m_FK20judgeQt95_idk_h1       L 0.374 predicted 0.488 observed 0.529 residual +0.042
   phi4m FK20: 13 judge runs, mean residual +0.055, mean |residual| 0.096, share within +-0.10: 0.62 (uniform-curve runs n=47)
-   phi4m_FjudgeGt80_idk_h1          L 0.476 predicted 0.295 observed 0.554 residual +0.259
+   phi4m_FjudgeGt80_idk_h1          L 0.476 predicted 0.295 observed 0.554 residual +0.260
    phi4m_FjudgeQt50_idk_h1          L 0.627 predicted 0.018 observed 0.000 residual -0.018
-   phi4m_FjudgeQt70_idk_h1          L 0.526 predicted 0.130 observed 0.422 residual +0.292
+   phi4m_FjudgeQt70_idk_h1          L 0.526 predicted 0.129 observed 0.422 residual +0.293
    phi4m_FjudgeQt80_idk_h1          L 0.476 predicted 0.295 observed 0.416 residual +0.121
    phi4m_FjudgeQt80_idk_s1_h1       L 0.476 predicted 0.295 observed 0.370 residual +0.075
    phi4m_FjudgeQt80_idk_s2_h1       L 0.476 predicted 0.295 observed 0.394 residual +0.099
    phi4m_FjudgeQt80x240_idk_h1      L 0.476 predicted 0.295 observed 0.525 residual +0.230
-   phi4m_FjudgeQt90_idk_h1          L 0.418 predicted 0.586 observed 0.521 residual -0.065
+   phi4m_FjudgeQt90_idk_h1          L 0.418 predicted 0.585 observed 0.521 residual -0.064
    phi4m_FjudgeQt95_idk_h1          L 0.374 predicted 0.779 observed 1.000 residual +0.221
   phi4m F: 9 judge runs, mean residual +0.135, mean |residual| 0.153, share within +-0.10: 0.44 (uniform-curve runs n=14)
    smol3_FK20judgeGt50_idk_h1       L 0.509 predicted 0.267 observed 0.191 residual -0.077
    smol3_FK20judgeGt80_idk_h1       L 0.460 predicted 0.380 observed 0.340 residual -0.040
    smol3_FK20judgeGt98_idk_h1       L 0.350 predicted 0.660 observed 0.642 residual -0.018
    smol3_FK20judgeQt50_idk_h1       L 0.609 predicted 0.114 observed 0.038 residual -0.076
-   smol3_FK20judgeQt70_idk_h1       L 0.512 predicted 0.263 observed 0.272 residual +0.009
+   smol3_FK20judgeQt70_idk_h1       L 0.512 predicted 0.262 observed 0.272 residual +0.010
    smol3_FK20judgeQt80_idk_h1       L 0.472 predicted 0.351 observed 0.323 residual -0.027
-   smol3_FK20judgeQt90_idk_h1       L 0.412 predicted 0.504 observed 0.549 residual +0.045
-   smol3_FK20judgeQt95_idk_h1       L 0.357 predicted 0.643 observed 0.543 residual -0.100
-  smol3 FK20: 8 judge runs, mean residual -0.036, mean |residual| 0.049, share within +-0.10: 0.88 (uniform-curve runs n=44)
+   smol3_FK20judgeQt90_idk_h1       L 0.412 predicted 0.503 observed 0.549 residual +0.045
+   smol3_FK20judgeQt95_idk_h1       L 0.358 predicted 0.642 observed 0.543 residual -0.099
+  smol3 FK20: 8 judge runs, mean residual -0.035, mean |residual| 0.049, share within +-0.10: 1.00 (uniform-curve runs n=44)
    smol3_FjudgeQt50_idk_h1          L 0.609 predicted 0.110 observed 0.000 residual -0.110
-   smol3_FjudgeQt70_idk_h1          L 0.512 predicted 0.290 observed 0.412 residual +0.122
+   smol3_FjudgeQt70_idk_h1          L 0.512 predicted 0.290 observed 0.412 residual +0.123
    smol3_FjudgeQt80_idk_h1          L 0.472 predicted 0.400 observed 0.664 residual +0.264
    smol3_FjudgeQt80_idk_s1_h1       L 0.472 predicted 0.400 observed 0.489 residual +0.089
-   smol3_FjudgeQt90_idk_h1          L 0.412 predicted 0.583 observed 0.443 residual -0.141
-   smol3_FjudgeQt95_idk_h1          L 0.357 predicted 0.733 observed 1.000 residual +0.267
+   smol3_FjudgeQt90_idk_h1          L 0.412 predicted 0.583 observed 0.443 residual -0.140
+   smol3_FjudgeQt95_idk_h1          L 0.358 predicted 0.732 observed 1.000 residual +0.268
   smol3 F: 6 judge runs, mean residual +0.082, mean |residual| 0.166, share within +-0.10: 0.17 (uniform-curve runs n=9)

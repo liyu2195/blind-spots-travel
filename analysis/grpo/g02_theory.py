@@ -1,4 +1,4 @@
-"""(grpo) Expected per-visit drift of the IDK logit under the trainer's update (st_grpo_v12.py lines 385-416), exact by enumeration.
+"""(grpo) Expected per-visit drift of the IDK logit under the trainer's update (st_grpo_b.py lines 385-416), exact by enumeration.
 Model: on question q the policy says IDK with probability p (logit u); otherwise it answers, and an answer gets reward 1 with probability alpha
 (the grader's acceptance of the policy's current answers, invalid replies = 0); IDK gets the credit c. Group of k = 8.
 Trainer: adv = (r - mean) / (std_unbiased + 1e-4) ('std') or (r - mean) ('none'); adv = 0 if std < 1e-6; loss = -sum adv * logp / ntok

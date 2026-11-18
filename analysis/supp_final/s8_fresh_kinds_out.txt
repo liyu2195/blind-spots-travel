@@ -19,7 +19,7 @@ LINES:
       is >= +0.50.
 Usage: python3 -I -B s8_fresh_kinds.py   Output: s8_fresh_kinds_out.txt, s8_fresh_kinds.json
 
-==== llama8: fresh questions 2569, sure right 318; training sure right 411; kinds 10; saved models with fresh answers 90 (without 75); random-rejection runs 17
+==== llama8: fresh questions 2569, sure right 318; training sure right 411; kinds 10; saved models with fresh answers 93 (without 89); random-rejection runs 17
 
 == llama8, cut acc (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
    screenwriter    30 /  11 | audit 0.53 | 0.31  0.18  0.07  0.77 | +0.14
@@ -64,7 +64,7 @@ Usage: python3 -I -B s8_fresh_kinds.py   Output: s8_fresh_kinds_out.txt, s8_fres
    country (85 sure right fresh answers): excess of the judges' models over matched random rejections +0.413 [+0.339, +0.487]; per judge: Q +0.33, M +0.31, G +0.44, O +0.58
    LINE A2 (llama8): +0.413 >= +0.25 and interval above 0 -> inside
 
-==== qwen7: fresh questions 2569, sure right 188; training sure right 307; kinds 4; saved models with fresh answers 66 (without 106); random-rejection runs 11
+==== qwen7: fresh questions 2569, sure right 188; training sure right 307; kinds 4; saved models with fresh answers 69 (without 114); random-rejection runs 11
 
 == qwen7, cut a50 (4 judges averaged): kind | sure right train / fresh | AUDIT rejected in training | FRESH refused by: judge's models, random rejections (matched), key, own unanimous vote | excess
    country         13 /  70 | audit 0.25 | 0.24  0.12  0.04  0.23 | +0.12

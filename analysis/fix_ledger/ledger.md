@@ -2,8 +2,9 @@
 
 Numbers are copied from the outputs named in each line (paths relative to `analysis/`); the only new computations are in `fix_ledger/`
 (L01 collapse inventory, L02 cost table without collapsed runs, L03 seed counts, L04 leniency curve without collapsed runs, L05 cost account of
-the remaining grader families). The ledger was written before the last analyses of the paper (the own vote as the grader, the transitions,
-forced decoding); those are listed in `INDEX.md`.
+the remaining grader families). The ledger was written on 16 November 2026, before the last analyses of the paper (the own vote as the grader,
+the transitions, forced decoding; those are listed in `INDEX.md`) and before the outputs were written again on the final set of runs. Where a
+number here differs from the output file it names, the output file is the later one.
 
 **Legend.** Q = Qwen2.5-7B-Instruct (discovery split); L = Llama-3.1-8B-Instruct (confirmation split); S = small students (phi4m,
 smol3, granite; out-of-sample check). "Pooled" = both main students weighted equally. Shares are 0-1 unless "points" or "per 100" is

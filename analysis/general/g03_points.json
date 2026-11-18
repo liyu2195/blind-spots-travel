@@ -1710,6 +1710,21 @@
 "cell": "qwen7_tqa_sim00fn00"
 },
 {
+"run": "qwen7_FK20sim00fn00_idkc05_s3_nq",
+"st": "qwen7",
+"ds": "nqo",
+"rec": "FK20",
+"fam": "key",
+"fp": 0.0,
+"fn": 0.0,
+"credit": 0.5,
+"L": 0.20933045810761058,
+"a": 1.0,
+"bad": 0.0,
+"seed": 3,
+"cell": "qwen7_nqo_sim00fn00"
+},
+{
 "run": "qwen7_FK20sim00fn00_idkc05_s3_pq",
 "st": "qwen7",
 "ds": "pqa",
@@ -1740,6 +1755,21 @@
 "cell": "qwen7_tqa_sim00fn00"
 },
 {
+"run": "qwen7_FK20sim00fn00_idkc05_s4_nq",
+"st": "qwen7",
+"ds": "nqo",
+"rec": "FK20",
+"fam": "key",
+"fp": 0.0,
+"fn": 0.0,
+"credit": 0.5,
+"L": 0.20933045810761058,
+"a": 1.0,
+"bad": 0.0,
+"seed": 4,
+"cell": "qwen7_nqo_sim00fn00"
+},
+{
 "run": "qwen7_FK20sim00fn00_idkc05_s4_pq",
 "st": "qwen7",
 "ds": "pqa",
@@ -1768,6 +1798,21 @@
 "bad": 0.0,
 "seed": 5,
 "cell": "qwen7_tqa_sim00fn00"
+},
+{
+"run": "qwen7_FK20sim00fn00_idkc05_s5_nq",
+"st": "qwen7",
+"ds": "nqo",
+"rec": "FK20",
+"fam": "key",
+"fp": 0.0,
+"fn": 0.0,
+"credit": 0.5,
+"L": 0.20933045810761058,
+"a": 0.9253333333333333,
+"bad": 0.0,
+"seed": 5,
+"cell": "qwen7_nqo_sim00fn00"
 },
 {
 "run": "qwen7_FK20sim00fn00_idkc05_s5_pq",

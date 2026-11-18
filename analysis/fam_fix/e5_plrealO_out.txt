@@ -4,25 +4,25 @@ The judge's acceptance lines use score_<TAG>_<st>_pqq (TAG from the arm name, cu
 if that score file does not exist (e.g. frzMAJ35). Everything else (estimand, references, bootstrap, permutation) is unchanged from c10.
 Output: fam_fix/e5_<ARM>_out.txt
 ARM plrealO judge tag None cut None
-  qwen7 runs: vote 3 (seeds [0, 0, 1]; frzVOTE21,frzVOTE32), judge 4 (seeds [0, 1, 2, 3]), gold 6 (seeds [0, 1, 2, 3, 4, 5]), keyFN 13 (seeds [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50)
-  llama8 runs: vote 4 (seeds [0, 0, 1, 1]; frzVOTE29,frzVOTE32), judge 4 (seeds [0, 1, 2, 3]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
+  qwen7 runs: vote 6 (seeds [0, 0, 0, 1, 1, 2]; frzVOTE20,frzVOTE21,frzVOTE32), judge 4 (seeds [0, 1, 2, 3]), gold 6 (seeds [0, 1, 2, 3, 4, 5]), keyFN 13 (seeds [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50)
+  llama8 runs: vote 10 (seeds [0, 0, 0, 1, 1, 1, 2, 3, 4, 5]; frzVOTE20,frzVOTE29,frzVOTE32), judge 4 (seeds [0, 1, 2, 3]), gold 4 (seeds [0, 1, 4, 5]), keyFN 18 (seeds [0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]; sim00fn20,sim00fn40,sim00fn50,sim00fn60,sim00fn70)
 
 == PRIMARY: DiD = [R_F - R_P](judgeQa35) - [R_F - R_P](gold key), known answers
   qwen7 judge : runs  4  R_F 0.634 (range 0.56-0.74)  R_P 0.079  PopQA new abstention 0.688 (range 0.62-0.71)
   qwen7 gold  : runs  6  R_F 0.004 (range 0.00-0.03)  R_P 0.000  PopQA new abstention 0.380 (range 0.31-0.45)
   qwen7 keyFN : runs 13  R_F 0.279 (range 0.00-1.00)  R_P 0.170  PopQA new abstention 0.636 (range 0.43-1.00)
-  qwen7 vote  : runs  3  R_F 0.204 (range 0.11-0.37)  R_P 0.000  PopQA new abstention 0.469 (range 0.31-0.58)
-  qwen7: DiD +0.550 [+0.438, +0.660]  exact permutation p 0.00476 (210 splits)
+  qwen7 vote  : runs  6  R_F 0.148 (range 0.02-0.37)  R_P 0.000  PopQA new abstention 0.424 (range 0.31-0.58)
+  qwen7: DiD +0.550 [+0.432, +0.659]  exact permutation p 0.00476 (210 splits)
   llama8 judge : runs  4  R_F 0.838 (range 0.75-0.90)  R_P 0.138  PopQA new abstention 0.598 (range 0.58-0.64)
   llama8 gold  : runs  4  R_F 0.023 (range 0.00-0.06)  R_P 0.000  PopQA new abstention 0.096 (range 0.04-0.15)
   llama8 keyFN : runs 18  R_F 0.329 (range 0.01-1.00)  R_P 0.121  PopQA new abstention 0.461 (range 0.15-1.00)
-  llama8 vote  : runs  4  R_F 0.465 (range 0.33-0.60)  R_P 0.000  PopQA new abstention 0.453 (range 0.37-0.50)
-  llama8: DiD +0.677 [+0.584, +0.762]  exact permutation p 0.01429 (70 splits)
+  llama8 vote  : runs 10  R_F 0.254 (range 0.02-0.60)  R_P 0.000  PopQA new abstention 0.298 (range 0.15-0.50)
+  llama8: DiD +0.677 [+0.580, +0.759]  exact permutation p 0.01429 (70 splits)
   pooled (mean of students) +0.614; combined exact p (product of the two independent permutation sets) 6.80e-05
 
 == robustness
-  sure answers only, vs gold: qwen7 +0.515 [+0.388, +0.636]  llama8 +0.641 [+0.540, +0.747]
-  vs key+random-FN runs, nearest 3 by abstention: qwen7 +0.285 [+0.133, +0.485]  llama8 +0.247 [+0.110, +0.401]
-  vs key+random-FN runs, local linear in abstention: qwen7 +0.286 [+0.164, +0.462]  llama8 +0.226 [+0.078, +0.345]
-  vs own-vote runs: qwen7 +0.351 [+0.184, +0.503]  llama8 +0.235 [+0.079, +0.386]
-  R_F only (no present-day contrast), vs key+FN nearest 3: qwen7 +0.320 [+0.126, +0.562]  llama8 +0.365 [+0.146, +0.537]
+  sure answers only, vs gold: qwen7 +0.515 [+0.396, +0.631]  llama8 +0.641 [+0.548, +0.737]
+  vs key+random-FN runs, nearest 3 by abstention: qwen7 +0.285 [+0.133, +0.495]  llama8 +0.247 [+0.113, +0.399]
+  vs key+random-FN runs, local linear in abstention: qwen7 +0.286 [+0.150, +0.467]  llama8 +0.226 [+0.098, +0.341]
+  vs own-vote runs: qwen7 +0.407 [+0.270, +0.546]  llama8 +0.446 [+0.289, +0.596]
+  R_F only (no present-day contrast), vs key+FN nearest 3: qwen7 +0.320 [+0.122, +0.559]  llama8 +0.365 [+0.151, +0.518]

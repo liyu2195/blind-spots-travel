@@ -1,6 +1,6 @@
 # Training
 
-- `code/`: `st_grpo.py`, `st_grpo_v12.py` and `st_grpo_v13.py` are the trainer (GRPO with LoRA, vLLM for sampling) at three versions; each version adds
+- `code/`: `st_grpo.py`, `st_grpo_b.py` and `st_grpo_c.py` are the trainer (GRPO with LoRA, vLLM for sampling) at three versions; each version adds
   options and, with the new options unset, computes every reward as the version before; the job scripts name the version a run used.
   `st_common.py` holds the prompts,
   answer normalisation and the answer-key match, `st_gen.py` samples and decodes, `st_gen_forced.py` decodes with "I don't know" blocked,

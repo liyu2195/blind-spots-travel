@@ -52,8 +52,8 @@ llama8 nq: units 169; runs Q 6 (seeds [0, 1, 2, 3, 4, 5]), M 3 (seeds [0, 1, 2])
   pooled +0.265 [+0.219, +0.314]  cells 44, positive 43
   per dataset: h1 +0.251 [+0.185, +0.319]  pq +0.402 [+0.314, +0.495]  nq +0.153 [+0.055, +0.249]
 
-== t50 judge runs, verdicts at P(Yes) > 0.5: cells 14, positive 5
-  qwen7  +0.032 [-0.025, +0.100]  cells 7, positive 3
-  llama8 +0.010 [-0.012, +0.042]  cells 7, positive 2
-  pooled +0.021 [-0.011, +0.059]  cells 14, positive 5
-  per dataset: h1 +0.000 [-0.028, +0.027]  pq +nan [+nan, +nan]  nq +0.049 [-0.015, +0.129]
+== t50 judge runs, verdicts at P(Yes) > 0.5: cells 27, positive 9
+  qwen7  -0.014 [-0.071, +0.039]  cells 11, positive 3
+  llama8 +0.000 [-0.038, +0.034]  cells 16, positive 6
+  pooled -0.007 [-0.041, +0.024]  cells 27, positive 9
+  per dataset: h1 +0.000 [-0.030, +0.030]  pq -0.042 [-0.116, +0.012]  nq +0.023 [-0.032, +0.081]
