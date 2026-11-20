@@ -2,7 +2,7 @@
 
 Liang Yue and Eric A. Vance · University of Colorado Boulder · 2026
 
-[Manuscript source](paper/main.tex) · [arXiv submission archive](https://github.com/liyu2195/blind-spots-travel/releases/download/v1.0.1/arxiv_submission_v2_fixed.tar.gz)
+[Paper on arXiv](https://arxiv.org/abs/2611.25191) · [Manuscript source](paper/main.tex) · [arXiv submission archive](https://github.com/liyu2195/blind-spots-travel/releases/download/v1.0.1/arxiv_submission_v2_fixed.tar.gz)
 
 We train 7–8B language models with reinforcement learning (GRPO with LoRA) to answer closed-book questions or say "I don't know",
 and we change only the grader that gives the reward: an answer key, LLM judges of the student's size, a much stronger judge, graders
@@ -94,11 +94,14 @@ and remain under the licences of those datasets (NQ-open: CC BY-SA 3.0). The cod
 ## Citation
 
 ```
-@article{yue2026blindspots,
+@misc{yue2026blindspots,
   title  = {Blind Spots Travel, Knowledge Stays Home: What RL Inherits from an LLM Judge},
   author = {Yue, Liang and Vance, Eric A.},
   year   = {2026},
-  url    = {https://github.com/liyu2195/blind-spots-travel}
+  eprint = {2611.25191},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CL},
+  url    = {https://arxiv.org/abs/2611.25191}
 }
 ```
 

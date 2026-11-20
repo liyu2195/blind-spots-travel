@@ -21,3 +21,8 @@ preferred-citation:
       given-names: Eric A.
       affiliation: University of Colorado Boulder
   year: 2026
+  journal: arXiv
+  url: "https://arxiv.org/abs/2611.25191"
+  identifiers:
+    - type: other
+      value: "arXiv:2611.25191"
